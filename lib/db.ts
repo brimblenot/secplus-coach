@@ -13,16 +13,36 @@ function client(): Sql {
   if (_sql) return _sql
   const url = process.env.DATABASE_URL
   if (!url) throw new Error('DATABASE_URL is not set — add your Supabase connection string to .env.local')
-  _sql = postgres(url, { prepare: false, max: 5, idle_timeout: 20 })
+  // max: 1 — each serverless instance handles one request at a time, so a
+  // single connection avoids exhausting the Supabase pooler under many cold
+  // starts. connect_timeout fails fast instead of hanging the whole request.
+  _sql = postgres(url, { prepare: false, max: 1, idle_timeout: 20, connect_timeout: 10 })
   return _sql
 }
 
 // Lazily create tables + seed once per process. Mirrors the old "DB auto-creates
 // on first request" behavior. All DDL is idempotent.
+//
+// On serverless this runs on every cold start before any query, so it must be
+// cheap when the DB is already set up. We first do a single fast check: if the
+// topic_progress table exists and is fully seeded, return immediately and skip
+// all the CREATE TABLE / seed work (which otherwise adds many round-trips to the
+// already-slow pooler connection and causes dashboard timeouts).
 function ready(): Promise<void> {
   if (_ready) return _ready
   _ready = (async () => {
     const sql = client()
+
+    // Fast path: already initialized? (to_regclass returns null if table absent)
+    try {
+      const [row] = await sql<{ seeded: boolean }[]>`
+        SELECT (to_regclass('public.topic_progress') IS NOT NULL
+                AND (SELECT COUNT(*) FROM topic_progress) >= ${ALL_TOPICS.length}) AS seeded`
+      if (row?.seeded) return
+    } catch {
+      // fall through to full init
+    }
+
     await sql.unsafe(`
       CREATE TABLE IF NOT EXISTS profile (
         id INTEGER PRIMARY KEY DEFAULT 1,
@@ -73,11 +93,17 @@ function ready(): Promise<void> {
       );
       INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
     `)
-    // Seed the topic list (idempotent).
-    for (const t of ALL_TOPICS) {
-      await sql`INSERT INTO topic_progress (topic_id, topic_name, domain)
-                VALUES (${t.id}, ${t.name}, ${t.domain})
-                ON CONFLICT (topic_id) DO NOTHING`
+    // Seed the topic list — but only if it isn't already populated. On
+    // serverless this runs on every cold start, so the previous per-row loop
+    // (120 sequential round-trips to the pooler) added several seconds to every
+    // request and caused dashboard timeouts. Skip entirely when already seeded,
+    // and otherwise do it in ONE bulk insert.
+    const [{ count }] = await sql<{ count: number }[]>`
+      SELECT COUNT(*)::int AS count FROM topic_progress`
+    if (count < ALL_TOPICS.length) {
+      await sql`INSERT INTO topic_progress ${sql(ALL_TOPICS.map((t) => ({
+        topic_id: t.id, topic_name: t.name, domain: t.domain,
+      })))} ON CONFLICT (topic_id) DO NOTHING`
     }
   })()
   return _ready
