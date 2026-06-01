@@ -1,10 +1,13 @@
 import postgres from 'postgres'
 
 // ── Connection ───────────────────────────────────────────────────────────────
-// Single pooled client, reused across requests in the same server process.
-// On serverless (Vercel) this is created per cold start. We disable prepared
-// statements because Supabase's transaction pooler (pgBouncer) doesn't support
-// them, and keep the pool small to stay within connection limits.
+// Single pooled client, reused across requests in the same server process
+// (created per cold start on Vercel).
+//
+// IMPORTANT: DATABASE_URL must point at Supabase's SESSION pooler (port 5432),
+// NOT the transaction pooler (6543). Under this app's concurrent dashboard
+// queries the 6543 pooler returned statement-timeout (57014) and the dashboard
+// hung indefinitely; the session pooler runs the same queries in ~1s.
 type Sql = ReturnType<typeof postgres>
 let _sql: Sql | null = null
 
@@ -12,10 +15,10 @@ function client(): Sql {
   if (_sql) return _sql
   const url = process.env.DATABASE_URL
   if (!url) throw new Error('DATABASE_URL is not set — add your Supabase connection string to .env.local')
-  // max: 1 — each serverless instance handles one request at a time, so a
-  // single connection avoids exhausting the Supabase pooler under many cold
-  // starts. connect_timeout fails fast instead of hanging the whole request.
-  _sql = postgres(url, { prepare: false, max: 1, idle_timeout: 20, connect_timeout: 10 })
+  // max: 3 lets the dashboard's parallel queries run concurrently instead of
+  // serializing. prepare: false is kept for safety/portability across poolers.
+  // connect_timeout fails fast instead of hanging a request indefinitely.
+  _sql = postgres(url, { prepare: false, max: 3, idle_timeout: 20, connect_timeout: 10 })
   return _sql
 }
 

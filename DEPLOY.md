@@ -31,12 +31,14 @@ it onto a public URL you can open on your phone.
    | Name | Value |
    |------|-------|
    | `ANTHROPIC_API_KEY` | your Anthropic key (from `.env.local`) |
-   | `DATABASE_URL` | your Supabase **Transaction pooler** URI, port 6543 |
+   | `DATABASE_URL` | your Supabase **Session pooler** URI, port **5432** |
    | `APP_PASSWORD` | the password you'll type to log in |
 
-   ⚠ Use the pooler string (`...pooler.supabase.com:6543`), not the direct
-   `5432` connection — the serverless functions need the pooler, and the code
-   sets `prepare: false` for exactly that reason.
+   ⚠ Use the **Session pooler** string — host `...pooler.supabase.com` ending in
+   port **`5432`**. Do **NOT** use the Transaction pooler (port `6543`): under
+   this app's concurrent dashboard queries it returned statement-timeout errors
+   (`57014`) and the dashboard hung indefinitely. The session pooler runs the
+   same queries in ~1s. (This must match the `DATABASE_URL` in your `.env.local`.)
 
 4. **Deploy.** Vercel builds and gives you a URL like
    `https://your-app.vercel.app`.
