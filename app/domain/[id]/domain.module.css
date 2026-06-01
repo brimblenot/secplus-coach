@@ -1,0 +1,144 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.back {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--text-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.back:hover { color: var(--text); }
+
+.badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border: 1px solid;
+  border-radius: var(--radius);
+}
+
+.domainTitle {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.domainTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.domainTitle h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.finalQuizBtn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border: 1px solid;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+  background: transparent;
+}
+
+.finalQuizBtn:hover { opacity: 0.75; }
+
+.progress {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.loading {
+  color: var(--text-3);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 20px 0;
+}
+
+.topicList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.topicItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.12s, background 0.12s;
+  animation: fadeIn 0.25s ease both;
+}
+
+.topicItem:hover {
+  border-color: var(--border-2);
+  background: var(--bg-3);
+}
+
+.topicItem.passed { opacity: 0.65; }
+
+.topicNum {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  min-width: 30px;
+}
+
+.topicName {
+  font-size: 13px;
+  color: var(--text);
+  flex: 1;
+}
+
+.topicRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+}
+
+.statusIcon {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* ── Mobile ── */
+@media (max-width: 460px) {
+  .page { padding: 0 12px 32px; }
+  .header { padding: 16px 0; margin-bottom: 16px; }
+}

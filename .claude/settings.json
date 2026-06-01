@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/migrate-sqlite-to-pg.js)",
+      "Bash(npm run *)",
+      "Bash(echo \"starting dev server, pid $!\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/login)"
+    ]
+  }
+}
