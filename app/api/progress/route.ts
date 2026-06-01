@@ -32,7 +32,13 @@ export async function GET() {
         getTopicsCompletedOn(today),
       ])
 
-    // ── Ensure all topics have estimates (one-time batch call if cache is cold) ──
+    // ── Ensure all topics have estimates ──
+    // The estimate is an AI (Haiku) call. On serverless it must NOT block the
+    // dashboard response — a cold cache covering ~100 topics would blow past the
+    // function timeout (504). Instead we kick the estimate off in the background
+    // (fire-and-forget) and serve immediately using default minutes; the cache
+    // is populated for subsequent loads. The daily-plan math only uses these for
+    // time totals, so defaults are a safe stand-in.
     const passedIds = new Set(topics.filter((t) => t.status === 'passed').map((t) => t.topic_id))
     const remainingInOrder = STUDY_ORDER.filter((id) => !passedIds.has(id))
 
@@ -41,13 +47,10 @@ export async function GET() {
       const toEstimate = ALL_TOPICS
         .filter((t) => missingIds.includes(t.id))
         .map((t) => ({ topic_id: t.id, topic_name: t.name, domain: t.domain }))
-      try {
-        const newEstimates = await estimateTopicMinutes(toEstimate)
-        await saveTopicEstimates(newEstimates)
-        Object.assign(existingEstimates, newEstimates)
-      } catch (e) {
-        console.error('Estimate call failed, using defaults:', e)
-      }
+      // Don't await — let it run after the response is sent.
+      estimateTopicMinutes(toEstimate)
+        .then((newEstimates) => saveTopicEstimates(newEstimates))
+        .catch((e) => console.error('Background estimate failed, using defaults:', e))
     }
 
     // ── Density metrics ────────────────────────────────────────────────────

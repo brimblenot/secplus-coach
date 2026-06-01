@@ -36,6 +36,12 @@ ${topics.map((t) => `${t.topic_id} - ${t.topic_name} (Domain ${t.domain})`).join
     .map((b) => (b as { type: 'text'; text: string }).text)
     .join('')
   const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
-  const parsed = JSON.parse(clean)
-  return parsed.estimates as Record<string, number>
+  // Be defensive: a malformed/empty model response must not throw — the caller
+  // falls back to default minutes, so just return {} instead of crashing.
+  try {
+    const parsed = JSON.parse(clean)
+    return (parsed?.estimates ?? {}) as Record<string, number>
+  } catch {
+    return {}
+  }
 }
