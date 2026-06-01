@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Select-Object -First 30)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3001/api/progress\" -UseBasicParsing 2>&1 | Select-Object -ExpandProperty Content | ConvertFrom-Json | ConvertTo-Json -Depth 3)",
+      "PowerShell(try { Invoke-WebRequest -Uri \"http://localhost:3001/api/progress\" -UseBasicParsing } catch { $_.Exception.Response.GetResponseStream\\(\\) | % { $reader = New-Object System.IO.StreamReader\\($_\\); $reader.ReadToEnd\\(\\) } })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3002/\" -UseBasicParsing; Write-Output \"Status: $\\($r.StatusCode\\)\"; Write-Output \"Length: $\\($r.Content.Length\\)\" } catch { Write-Output \"Error: $_\" })",
+      "Bash(npx tsc *)",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object -ExpandProperty Count)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "PowerShell($f = \"c:\\\\Users\\\\samka\\\\Desktop\\\\secplus-v2\\\\lib\\\\prompts.ts\"; \\(Get-Content $f | Measure-Object -Line\\).Lines)",
+      "Bash(echo \"EXIT: $?\")",
+      "PowerShell($t = Test-Path \"c:\\\\Users\\\\samka\\\\Desktop\\\\secplus-v2\\\\transcripts\"; \"transcripts exists: $t\"; if\\($t\\){ \\(Get-ChildItem 'c:\\\\Users\\\\samka\\\\Desktop\\\\secplus-v2\\\\transcripts' -File\\).Count })",
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)"
+    ]
+  }
+}

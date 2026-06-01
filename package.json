@@ -1,0 +1,27 @@
+{
+  "name": "secplus-coach",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:init": "node scripts/init-db.js",
+    "db:migrate": "node scripts/migrate-sqlite-to-pg.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.3",
+    "next": "15.3.2",
+    "postgres": "^3.4.7",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
