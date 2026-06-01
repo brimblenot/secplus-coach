@@ -7,7 +7,6 @@ import postgres from 'postgres'
 // them, and keep the pool small to stay within connection limits.
 type Sql = ReturnType<typeof postgres>
 let _sql: Sql | null = null
-let _ready: Promise<void> | null = null
 
 function client(): Sql {
   if (_sql) return _sql
@@ -20,93 +19,71 @@ function client(): Sql {
   return _sql
 }
 
-// Lazily create tables + seed once per process. Mirrors the old "DB auto-creates
-// on first request" behavior. All DDL is idempotent.
-//
-// On serverless this runs on every cold start before any query, so it must be
-// cheap when the DB is already set up. We first do a single fast check: if the
-// topic_progress table exists and is fully seeded, return immediately and skip
-// all the CREATE TABLE / seed work (which otherwise adds many round-trips to the
-// already-slow pooler connection and causes dashboard timeouts).
-function ready(): Promise<void> {
-  if (_ready) return _ready
-  _ready = (async () => {
-    const sql = client()
-
-    // Fast path: already initialized? (to_regclass returns null if table absent)
-    try {
-      const [row] = await sql<{ seeded: boolean }[]>`
-        SELECT (to_regclass('public.topic_progress') IS NOT NULL
-                AND (SELECT COUNT(*) FROM topic_progress) >= ${ALL_TOPICS.length}) AS seeded`
-      if (row?.seeded) return
-    } catch {
-      // fall through to full init
-    }
-
-    await sql.unsafe(`
-      CREATE TABLE IF NOT EXISTS profile (
-        id INTEGER PRIMARY KEY DEFAULT 1,
-        exam_date TEXT NOT NULL DEFAULT '2026-06-18',
-        study_hours_per_day INTEGER DEFAULT 1,
-        last_weak_session TEXT
-      );
-      CREATE TABLE IF NOT EXISTS topic_progress (
-        id SERIAL PRIMARY KEY,
-        topic_id TEXT NOT NULL UNIQUE,
-        topic_name TEXT NOT NULL,
-        domain INTEGER NOT NULL,
-        completed_at TIMESTAMPTZ,
-        quiz_score INTEGER,
-        quiz_attempts INTEGER DEFAULT 0,
-        status TEXT DEFAULT 'pending',
-        study_minutes INTEGER
-      );
-      CREATE TABLE IF NOT EXISTS quiz_attempts (
-        id SERIAL PRIMARY KEY,
-        topic_id TEXT NOT NULL,
-        score INTEGER NOT NULL,
-        questions_json TEXT NOT NULL,
-        wrong_questions TEXT,
-        attempted_at TIMESTAMPTZ DEFAULT now()
-      );
-      CREATE TABLE IF NOT EXISTS weak_areas (
-        id SERIAL PRIMARY KEY,
-        concept TEXT NOT NULL UNIQUE,
-        topic_id TEXT NOT NULL,
-        topic_name TEXT NOT NULL,
-        domain INTEGER NOT NULL,
-        wrong_count INTEGER DEFAULT 1,
-        last_seen TIMESTAMPTZ DEFAULT now(),
-        resolved INTEGER DEFAULT 0
-      );
-      CREATE TABLE IF NOT EXISTS domain_quizzes (
-        domain INTEGER PRIMARY KEY,
-        passed INTEGER DEFAULT 0,
-        best_score INTEGER DEFAULT 0,
-        attempts INTEGER DEFAULT 0,
-        last_attempted TIMESTAMPTZ DEFAULT now()
-      );
-      CREATE TABLE IF NOT EXISTS daily_plan (
-        date TEXT PRIMARY KEY,
-        topic_ids TEXT NOT NULL,
-        created_at TIMESTAMPTZ DEFAULT now()
-      );
-      INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
-    `)
-    // Seed the topic list — but only if it isn't already populated. On
-    // serverless this runs on every cold start, so the previous per-row loop
-    // (120 sequential round-trips to the pooler) added several seconds to every
-    // request and caused dashboard timeouts. Skip entirely when already seeded,
-    // and otherwise do it in ONE bulk insert.
-    const [{ count }] = await sql<{ count: number }[]>`
-      SELECT COUNT(*)::int AS count FROM topic_progress`
-    if (count < ALL_TOPICS.length) {
-      await sql`INSERT INTO topic_progress ${sql(ALL_TOPICS.map((t) => ({
-        topic_id: t.id, topic_name: t.name, domain: t.domain,
-      })))} ON CONFLICT (topic_id) DO NOTHING`
-    }
-  })()
-  return _ready
+// Schema creation + seeding does NOT happen at request time. Running CREATE
+// TABLE / INSERT on every serverless cold start took table locks on the shared
+// Supabase pooler; when Vercel froze a function mid-transaction, the held locks
+// stalled later requests until Postgres' statement timeout fired (the 504s).
+// The schema is created once, out of band, by `npm run db:init` / `db:migrate`.
+// At runtime the app ONLY queries existing tables.
+async function ensureSchema(): Promise<void> {
+  const sql = client()
+  await sql.unsafe(`
+    CREATE TABLE IF NOT EXISTS profile (
+      id INTEGER PRIMARY KEY DEFAULT 1,
+      exam_date TEXT NOT NULL DEFAULT '2026-06-18',
+      study_hours_per_day INTEGER DEFAULT 1,
+      last_weak_session TEXT
+    );
+    CREATE TABLE IF NOT EXISTS topic_progress (
+      id SERIAL PRIMARY KEY,
+      topic_id TEXT NOT NULL UNIQUE,
+      topic_name TEXT NOT NULL,
+      domain INTEGER NOT NULL,
+      completed_at TIMESTAMPTZ,
+      quiz_score INTEGER,
+      quiz_attempts INTEGER DEFAULT 0,
+      status TEXT DEFAULT 'pending',
+      study_minutes INTEGER
+    );
+    CREATE TABLE IF NOT EXISTS quiz_attempts (
+      id SERIAL PRIMARY KEY,
+      topic_id TEXT NOT NULL,
+      score INTEGER NOT NULL,
+      questions_json TEXT NOT NULL,
+      wrong_questions TEXT,
+      attempted_at TIMESTAMPTZ DEFAULT now()
+    );
+    CREATE TABLE IF NOT EXISTS weak_areas (
+      id SERIAL PRIMARY KEY,
+      concept TEXT NOT NULL UNIQUE,
+      topic_id TEXT NOT NULL,
+      topic_name TEXT NOT NULL,
+      domain INTEGER NOT NULL,
+      wrong_count INTEGER DEFAULT 1,
+      last_seen TIMESTAMPTZ DEFAULT now(),
+      resolved INTEGER DEFAULT 0
+    );
+    CREATE TABLE IF NOT EXISTS domain_quizzes (
+      domain INTEGER PRIMARY KEY,
+      passed INTEGER DEFAULT 0,
+      best_score INTEGER DEFAULT 0,
+      attempts INTEGER DEFAULT 0,
+      last_attempted TIMESTAMPTZ DEFAULT now()
+    );
+    CREATE TABLE IF NOT EXISTS daily_plan (
+      date TEXT PRIMARY KEY,
+      topic_ids TEXT NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT now()
+    );
+    INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
+  `)
+  const [{ count }] = await sql<{ count: number }[]>`
+    SELECT COUNT(*)::int AS count FROM topic_progress`
+  if (count < ALL_TOPICS.length) {
+    await sql`INSERT INTO topic_progress ${sql(ALL_TOPICS.map((t) => ({
+      topic_id: t.id, topic_name: t.name, domain: t.domain,
+    })))} ON CONFLICT (topic_id) DO NOTHING`
+  }
 }
 
 // ── Query helpers ────────────────────────────────────────────────────────────
@@ -118,7 +95,6 @@ function toPg(query: string): string {
 }
 
 async function queryAll<T>(query: string, params: (string | number | null)[] = []): Promise<T[]> {
-  await ready()
   const rows = await client().unsafe(toPg(query), params)
   return rows as unknown as T[]
 }
@@ -129,7 +105,6 @@ async function queryOne<T>(query: string, params: (string | number | null)[] = [
 }
 
 async function run(query: string, params: (string | number | null)[] = []): Promise<void> {
-  await ready()
   await client().unsafe(toPg(query), params)
 }
 
@@ -526,7 +501,8 @@ export async function getTopicsCompletedOn(date: string): Promise<string[]> {
   return rows.map((r) => r.topic_id)
 }
 
-// Seeding now happens automatically in ready(); kept for the db:init script.
+// One-off schema creation + topic seeding for the db:init script. NOT called at
+// request time — the deployed app only queries existing tables.
 export async function seedTopics() {
-  await ready()
+  await ensureSchema()
 }
