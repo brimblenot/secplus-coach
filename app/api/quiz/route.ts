@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { getTopic, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
