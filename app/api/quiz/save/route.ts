@@ -4,6 +4,7 @@ import { buildWeakAreaPrompt } from '@/lib/prompts'
 import { saveQuizAttempt, updateTopicStatus, upsertWeakArea, getTopic } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
