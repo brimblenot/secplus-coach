@@ -25,7 +25,7 @@ export function buildStudyGuidePrompt(
 - No prior Security+ study
 
 STUDENT STATUS:
-- Days until exam (June 20, 2026): ${ctx.daysLeft}
+- Days until exam (June 18, 2026): ${ctx.daysLeft}
 - Topics completed: ${ctx.completedTopics}/${ctx.totalTopics}
 - Quiz average: ${ctx.avgScore !== null ? ctx.avgScore + '%' : 'none yet'}
 - Active weak areas: ${ctx.weakAreas.length > 0 ? ctx.weakAreas.map((w) => w.concept).join(', ') : 'none yet'}

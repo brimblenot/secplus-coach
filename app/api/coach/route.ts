@@ -11,11 +11,9 @@ export async function POST(req: NextRequest) {
 
   const {
     daysLeft, effectiveDays, completedCount, totalTopics, courseProgress,
-    avgScore, weakAreas, domainStats, minutesPerDayNeeded, totalRemainingMinutes,
-    catchupTopics, planCompletedCount, planTopics, additionalCompleted,
+    avgScore, weakAreas, domainStats, topicsRemaining, goalPerDay, requiredPerDay,
+    behind, planCompletedCount, planTopics, additionalCompleted,
   } = context
-
-  const topicsRemaining = totalTopics - completedCount
   const weakList = (weakAreas ?? []).map((w: { concept: string; wrong_count: number }) =>
     `${w.concept} (missed ${w.wrong_count}x)`
   ).join(', ') || 'none'
@@ -35,13 +33,13 @@ EXAM & TIME
 
 PROGRESS
 - Topics complete: ${completedCount}/${totalTopics} (${courseProgress}%)
-- Topics remaining: ${topicsRemaining} (~${totalRemainingMinutes} min of estimated study)
+- Topics remaining: ${topicsRemaining}
 - Quiz average: ${avgScore !== null ? avgScore + '%' : 'no data yet'}
 
-PACE
-- Daily budget: 75 min/day
-- Current requirement: ~${minutesPerDayNeeded} min/day to finish in time
-- Catch-up needed: ${catchupTopics > 0 ? `${catchupTopics} extra topics` : 'none — on track'}
+PACE (topic-based — there is no time/minutes budget; only topic counts matter)
+- Goal: ${goalPerDay} topics/day
+- Required to finish by exam (with 3-day buffer, ${effectiveDays} study days left): ${requiredPerDay} topics/day
+- Status: ${behind ? `BEHIND — ${requiredPerDay}/day needed exceeds the ${goalPerDay}/day goal; must do more than ${goalPerDay} topics/day to catch up` : `on track at the ${goalPerDay}/day goal`}
 
 TODAY
 - Plan topics completed: ${planDoneToday}/${planTotal}

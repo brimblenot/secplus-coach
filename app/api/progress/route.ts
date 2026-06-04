@@ -2,21 +2,20 @@ import { NextResponse } from 'next/server'
 import {
   getAllTopics, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore,
   getNextTopic, getCourseProgress, getDomainQuizPending, isWeakAreaSessionDoneToday,
-  getTopicEstimates, saveTopicEstimates, getDailyPlan, saveDailyPlan, getTopicsCompletedOn,
+  getDailyPlan, saveDailyPlan, getTopicsCompletedOn, localToday,
   STUDY_ORDER, ALL_TOPICS,
 } from '@/lib/db'
-import { estimateTopicMinutes } from '@/lib/estimates'
 
 export const dynamic = 'force-dynamic'
 
-const DAILY_BUDGET_MINUTES = 75  // midpoint of 1–1.5h
-const EXAM_BUFFER_DAYS = 3       // finish 3 days before exam
+const GOAL_TOPICS_PER_DAY = 5   // the daily goal
+const EXAM_BUFFER_DAYS = 3      // finish 3 days before exam (leaves review time)
 
 export async function GET() {
   try {
-    const today = new Date().toISOString().split('T')[0]
+    const today = localToday()
 
-    const [topics, weakAreas, daysLeft, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, existingEstimates, savedPlan, completedToday] =
+    const [topics, weakAreas, daysLeft, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, savedPlan, completedToday] =
       await Promise.all([
         getAllTopics(),
         getWeakAreas(),
@@ -27,64 +26,32 @@ export async function GET() {
         getCourseProgress(),
         getDomainQuizPending(),
         isWeakAreaSessionDoneToday(),
-        getTopicEstimates(),
         getDailyPlan(today),
         getTopicsCompletedOn(today),
       ])
 
-    // ── Ensure all topics have estimates ──
-    // The estimate is an AI (Haiku) call. On serverless it must NOT block the
-    // dashboard response — a cold cache covering ~100 topics would blow past the
-    // function timeout (504). Instead we kick the estimate off in the background
-    // (fire-and-forget) and serve immediately using default minutes; the cache
-    // is populated for subsequent loads. The daily-plan math only uses these for
-    // time totals, so defaults are a safe stand-in.
     const passedIds = new Set(topics.filter((t) => t.status === 'passed').map((t) => t.topic_id))
     const remainingInOrder = STUDY_ORDER.filter((id) => !passedIds.has(id))
+    const topicsRemaining = remainingInOrder.length
 
-    const missingIds = remainingInOrder.filter((id) => !(id in existingEstimates))
-    if (missingIds.length > 0) {
-      const toEstimate = ALL_TOPICS
-        .filter((t) => missingIds.includes(t.id))
-        .map((t) => ({ topic_id: t.id, topic_name: t.name, domain: t.domain }))
-      // Don't await — let it run after the response is sent.
-      estimateTopicMinutes(toEstimate)
-        .then((newEstimates) => saveTopicEstimates(newEstimates))
-        .catch((e) => console.error('Background estimate failed, using defaults:', e))
-    }
+    // ── Pace (pure topic-count calculation) ──────────────────────────────────
+    // How many topics/day are required to finish everything by exam day (minus a
+    // small buffer). The goal is GOAL_TOPICS_PER_DAY; if the required pace exceeds
+    // the goal, the student is behind and the plan grows to catch up.
+    const effectiveDays = Math.max(1, daysLeft - EXAM_BUFFER_DAYS)
+    const requiredPerDay = topicsRemaining > 0 ? Math.ceil(topicsRemaining / effectiveDays) : 0
+    const goalPerDay = GOAL_TOPICS_PER_DAY
+    const behind = requiredPerDay > goalPerDay
+    // Recommended count for today: the goal, bumped up to the required pace when
+    // behind, never more than what's actually left.
+    const topicsPerDay = Math.min(topicsRemaining, Math.max(goalPerDay, requiredPerDay))
 
-    // ── Density metrics ────────────────────────────────────────────────────
-    const DEFAULT_MINUTES = 20
-    const effectiveDays = Math.max(0, daysLeft - EXAM_BUFFER_DAYS)
-
-    const totalRemainingMinutes = remainingInOrder.reduce(
-      (sum, id) => sum + (existingEstimates[id] ?? DEFAULT_MINUTES), 0
-    )
-
-    const minutesPerDayNeeded = effectiveDays > 0
-      ? Math.round(totalRemainingMinutes / effectiveDays)
-      : totalRemainingMinutes
-
-    // ── Persist today's plan (generate once, reuse on revisits) ───────────
+    // ── Persist today's plan (generate once, reuse on revisits) ───────────────
     let planIds: string[]
     if (savedPlan) {
       planIds = savedPlan
     } else {
-      // Generate fresh plan: fill up to budget from remaining topics
-      const freshIds: string[] = []
-      let mins = 0
-      for (const id of remainingInOrder) {
-        const m = existingEstimates[id] ?? DEFAULT_MINUTES
-        const meta = ALL_TOPICS.find((t) => t.id === id)
-        if (!meta) continue
-        if (mins === 0 || mins + m <= DAILY_BUDGET_MINUTES) {
-          freshIds.push(id)
-          mins += m
-        } else {
-          break
-        }
-      }
-      planIds = freshIds
+      planIds = remainingInOrder.slice(0, topicsPerDay)
       if (planIds.length > 0) await saveDailyPlan(today, planIds)
     }
 
@@ -95,14 +62,11 @@ export async function GET() {
       return {
         id,
         name: meta?.name ?? id,
-        minutes: existingEstimates[id] ?? DEFAULT_MINUTES,
         completedToday: completedTodaySet.has(id),
       }
     })
 
     const planCompletedCount = planTopics.filter((t) => t.completedToday).length
-    const planTotalMinutes = planTopics.reduce((s, t) => s + t.minutes, 0)
-    const planDoneMinutes = planTopics.filter((t) => t.completedToday).reduce((s, t) => s + t.minutes, 0)
 
     // Topics completed today that weren't in the original plan
     const planSet = new Set(planIds)
@@ -112,20 +76,6 @@ export async function GET() {
         const meta = ALL_TOPICS.find((t) => t.id === id)
         return { id, name: meta?.name ?? id }
       })
-
-    // Legacy todayTopics/todayMinutes fields derived from plan
-    const todayMinutes = planTotalMinutes
-
-    // Catch-up: topics needed to eliminate deficit
-    const totalAvailableMinutes = effectiveDays * DAILY_BUDGET_MINUTES
-    const deficitMinutes = Math.max(0, totalRemainingMinutes - totalAvailableMinutes)
-    let catchupTopics = 0
-    let catchupMinutes = 0
-    for (const id of remainingInOrder) {
-      if (catchupMinutes >= deficitMinutes) break
-      catchupMinutes += existingEstimates[id] ?? DEFAULT_MINUTES
-      catchupTopics++
-    }
 
     // ── Domain stats ───────────────────────────────────────────────────────
     const byDomain: Record<number, typeof topics> = {}
@@ -160,15 +110,13 @@ export async function GET() {
       // Plan tracking
       planTopics,
       planCompletedCount,
-      planTotalMinutes,
-      planDoneMinutes,
       additionalCompleted,
-      // Density-aware fields
-      todayMinutes,
-      totalRemainingMinutes,
-      minutesPerDayNeeded,
-      catchupTopics,
-      catchupMinutes,
+      // Topic-based pace
+      topicsRemaining,
+      goalPerDay,
+      requiredPerDay,
+      topicsPerDay,
+      behind,
     })
   } catch (err) {
     console.error(err)

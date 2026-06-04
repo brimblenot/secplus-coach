@@ -29,7 +29,6 @@ interface NextTopic {
 interface PlanTopic {
   id: string
   name: string
-  minutes: number
   completedToday: boolean
 }
 
@@ -52,14 +51,12 @@ interface ProgressData {
   weakAreaSessionDoneToday: boolean
   planTopics: PlanTopic[]
   planCompletedCount: number
-  planTotalMinutes: number
-  planDoneMinutes: number
   additionalCompleted: AdditionalTopic[]
-  todayMinutes: number
-  totalRemainingMinutes: number
-  minutesPerDayNeeded: number
-  catchupTopics: number
-  catchupMinutes: number
+  topicsRemaining: number
+  goalPerDay: number
+  requiredPerDay: number
+  topicsPerDay: number
+  behind: boolean
 }
 
 type ChatMsg = { role: 'user' | 'assistant'; content: string }
@@ -175,10 +172,10 @@ export default function Dashboard() {
   const hasWeakAreas = (data.weakAreas?.length ?? 0) > 0
   const lessonLocked = hasWeakAreas && !data.weakAreaSessionDoneToday
 
-  const topicsRemaining = data.totalTopics - data.completedCount
+  const topicsRemaining = data.topicsRemaining ?? (data.totalTopics - data.completedCount)
   const effectiveDays = data.effectiveDays ?? Math.max(1, data.daysLeft - 3)
-  const topicsPerDay = effectiveDays > 0 ? Math.ceil(topicsRemaining / effectiveDays) : topicsRemaining
-  const paceColor = topicsPerDay <= 2 ? 'var(--green)' : topicsPerDay <= 4 ? 'var(--amber)' : 'var(--red)'
+  const topicsPerDay = data.topicsPerDay ?? Math.ceil(topicsRemaining / effectiveDays)
+  const paceColor = data.behind ? 'var(--red)' : 'var(--green)'
 
   return (
     <div className={styles.page}>
@@ -257,13 +254,15 @@ export default function Dashboard() {
           <span className={styles.paceTopicsNum} style={{ color: paceColor }}>{topicsPerDay}</span>
           <span className={styles.paceTopicsLabel}>topics/day</span>
           <span className={styles.paceSep}>·</span>
+          <span className={styles.paceMeta}>goal {data.goalPerDay ?? 5}/day</span>
+          <span className={styles.paceSep}>·</span>
           <span className={styles.paceMeta}>{topicsRemaining} remaining</span>
           <span className={styles.paceSep}>·</span>
           <span className={styles.paceMeta}>{effectiveDays}d to Jun 15</span>
-          {data.catchupTopics > 0 && (
+          {data.behind && (
             <>
               <span className={styles.paceSep}>·</span>
-              <span className={styles.paceCatchup}>{data.catchupTopics} to catch up</span>
+              <span className={styles.paceCatchup}>behind — need {data.requiredPerDay}/day to catch up</span>
             </>
           )}
         </div>
@@ -293,10 +292,10 @@ export default function Dashboard() {
           )
         )}
 
-        {/* Additional completed topics */}
-        {(data.additionalCompleted ?? []).length > 0 && (
+        {/* Completed today */}
+        {((data.additionalCompleted?.length ?? 0) + (data.planCompletedCount ?? 0)) > 0 && (
           <div className={styles.additionalCard}>
-            <span className={styles.additionalLabel}>COMPLETED TODAY — {data.additionalCompleted.length + (data.planCompletedCount ?? 0)} topics</span>
+            <span className={styles.additionalLabel}>COMPLETED TODAY — {(data.additionalCompleted?.length ?? 0) + (data.planCompletedCount ?? 0)} topics</span>
             <div className={styles.additionalList}>
               {(data.planTopics ?? []).filter(t => t.completedToday).map((t) => (
                 <div key={t.id} className={styles.additionalItem}>

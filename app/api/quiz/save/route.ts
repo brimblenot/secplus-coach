@@ -26,8 +26,9 @@ export async function POST(req: NextRequest) {
     if (indicesToFlag.length > 0) {
       const wrongQs = indicesToFlag.map((i: number) => ({
         question: questions[i].question,
-        userAnswer: userAnswers[i] || '?',
-        correct: questions[i].correct,
+        userAnswer: userAnswers[i] || '(free response)',
+        // Text questions carry a rubric instead of a single correct letter.
+        correct: questions[i].correct ?? questions[i].rubric ?? '',
         explanation: questions[i].explanation,
       }))
       try {

@@ -49,7 +49,7 @@ Priority: **P1** = correctness/cost risk, **P2** = quality/maintainability, **P3
 - **Study guide format/rules** → `buildStudyGuidePrompt` in `lib/prompts.ts`.
 - **Pass thresholds** → topic 70% / domain 80%, in the session page and domain save logic.
 - **Study order / topic list** → `STUDY_ORDER` and `ALL_TOPICS` in `lib/db.ts`.
-- **Daily workload** → `DAILY_BUDGET_MINUTES` in `app/api/progress/route.ts`.
+- **Daily workload / pace** → `GOAL_TOPICS_PER_DAY` and `EXAM_BUFFER_DAYS` in `app/api/progress/route.ts` (pure topic-count pacing; no time estimates).
 - **DB schema / new columns** → `runMigrations()` in `lib/db.ts` (not `initSchema`).
 - **Models** → currently scattered literals; centralize per the tech-debt table.
 - **Colors / fonts / spacing** → tokens in `app/globals.css`; per-page `*.module.css`.

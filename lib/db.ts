@@ -89,6 +89,19 @@ async function ensureSchema(): Promise<void> {
   }
 }
 
+// ── Local time ───────────────────────────────────────────────────────────────
+// The student is in the US Eastern timezone (JMU, Virginia). Vercel runs in UTC,
+// so a naive `toISOString()` "today" rolls over at 8pm Eastern and splits an
+// evening study session across two calendar days — which is why a day of work
+// showed only the topics finished after UTC midnight. Anchor every "today"
+// comparison to Eastern instead.
+export const APP_TZ = 'America/New_York'
+
+export function localToday(): string {
+  // en-CA formats as YYYY-MM-DD, which matches our stored date strings.
+  return new Date().toLocaleDateString('en-CA', { timeZone: APP_TZ })
+}
+
 // ── Query helpers ────────────────────────────────────────────────────────────
 // The legacy code was written with `?` placeholders. Convert them to Postgres
 // `$1, $2, …` so the existing SQL strings carry over with minimal edits.
@@ -456,30 +469,15 @@ export async function getDomainQuizPending(): Promise<number | null> {
   return null
 }
 
-export async function getTopicEstimates(): Promise<Record<string, number>> {
-  const rows = await queryAll<{ topic_id: string; study_minutes: number }>(
-    'SELECT topic_id, study_minutes FROM topic_progress WHERE study_minutes IS NOT NULL'
-  )
-  return Object.fromEntries(rows.map((r) => [r.topic_id, r.study_minutes]))
-}
-
-export async function saveTopicEstimates(estimates: Record<string, number>): Promise<void> {
-  for (const [topic_id, minutes] of Object.entries(estimates)) {
-    await run('UPDATE topic_progress SET study_minutes = ? WHERE topic_id = ?', [minutes, topic_id])
-  }
-}
-
 export async function markWeakAreaSessionDone(): Promise<void> {
-  const today = new Date().toISOString().split('T')[0]
-  await run("UPDATE profile SET last_weak_session = ? WHERE id = 1", [today])
+  await run("UPDATE profile SET last_weak_session = ? WHERE id = 1", [localToday()])
 }
 
 export async function isWeakAreaSessionDoneToday(): Promise<boolean> {
   const row = await queryOne<{ last_weak_session: string | null }>(
     'SELECT last_weak_session FROM profile WHERE id = 1'
   )
-  const today = new Date().toISOString().split('T')[0]
-  return row?.last_weak_session === today
+  return row?.last_weak_session === localToday()
 }
 
 export async function getDailyPlan(date: string): Promise<string[] | null> {
@@ -497,8 +495,11 @@ export async function saveDailyPlan(date: string, topicIds: string[]): Promise<v
 }
 
 export async function getTopicsCompletedOn(date: string): Promise<string[]> {
+  // Compare against the Eastern calendar date so an evening study session counts
+  // as one day's work instead of splitting across UTC midnight. `date` is
+  // expected to already be an Eastern date string (see localToday()).
   const rows = await queryAll<{ topic_id: string }>(
-    "SELECT topic_id FROM topic_progress WHERE status = 'passed' AND completed_at::date = ?::date",
+    "SELECT topic_id FROM topic_progress WHERE status = 'passed' AND (completed_at AT TIME ZONE '" + APP_TZ + "')::date = ?::date",
     [date]
   )
   return rows.map((r) => r.topic_id)
