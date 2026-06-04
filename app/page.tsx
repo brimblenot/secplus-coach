@@ -56,6 +56,7 @@ interface ProgressData {
   goalPerDay: number
   requiredPerDay: number
   topicsPerDay: number
+  catchupToday: number
   behind: boolean
 }
 
@@ -252,7 +253,7 @@ export default function Dashboard() {
         {/* Topic pace tracker */}
         <div className={styles.paceRow}>
           <span className={styles.paceTopicsNum} style={{ color: paceColor }}>{topicsPerDay}</span>
-          <span className={styles.paceTopicsLabel}>topics/day</span>
+          <span className={styles.paceTopicsLabel}>topics today</span>
           <span className={styles.paceSep}>·</span>
           <span className={styles.paceMeta}>goal {data.goalPerDay ?? 5}/day</span>
           <span className={styles.paceSep}>·</span>
@@ -262,7 +263,7 @@ export default function Dashboard() {
           {data.behind && (
             <>
               <span className={styles.paceSep}>·</span>
-              <span className={styles.paceCatchup}>behind — need {data.requiredPerDay}/day to catch up</span>
+              <span className={styles.paceCatchup}>behind — complete {data.catchupToday} today to get back to {data.goalPerDay ?? 5}/day</span>
             </>
           )}
         </div>

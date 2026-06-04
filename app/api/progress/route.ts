@@ -35,16 +35,25 @@ export async function GET() {
     const topicsRemaining = remainingInOrder.length
 
     // ── Pace (pure topic-count calculation) ──────────────────────────────────
-    // How many topics/day are required to finish everything by exam day (minus a
-    // small buffer). The goal is GOAL_TOPICS_PER_DAY; if the required pace exceeds
-    // the goal, the student is behind and the plan grows to catch up.
+    // Catch-up is front-loaded into TODAY rather than spread as a daily rate:
+    // we tell the student exactly how many topics to finish today so that the
+    // remaining days can run at the manageable GOAL_TOPICS_PER_DAY pace and still
+    // finish by the exam (minus a small buffer).
+    //
+    //   catchupToday = remaining − goal · (daysAfterToday)
+    //
+    // i.e. do this many today, then 5/day clears the rest. When on pace this is
+    // ≤ goal, so today's target is just the goal.
     const effectiveDays = Math.max(1, daysLeft - EXAM_BUFFER_DAYS)
-    const requiredPerDay = topicsRemaining > 0 ? Math.ceil(topicsRemaining / effectiveDays) : 0
     const goalPerDay = GOAL_TOPICS_PER_DAY
-    const behind = requiredPerDay > goalPerDay
-    // Recommended count for today: the goal, bumped up to the required pace when
-    // behind, never more than what's actually left.
-    const topicsPerDay = Math.min(topicsRemaining, Math.max(goalPerDay, requiredPerDay))
+    const daysAfterToday = Math.max(0, effectiveDays - 1)
+    const catchupToday = topicsRemaining - goalPerDay * daysAfterToday
+    // Today's target: the goal, bumped up to the catch-up burst when behind,
+    // never more than what's actually left.
+    const topicsPerDay = Math.min(topicsRemaining, Math.max(goalPerDay, catchupToday))
+    const behind = topicsPerDay > goalPerDay
+    // Even-spread rate, kept for the coach's context only.
+    const requiredPerDay = topicsRemaining > 0 ? Math.ceil(topicsRemaining / effectiveDays) : 0
 
     // ── Persist today's plan (generate once, reuse on revisits) ───────────────
     let planIds: string[]
@@ -116,6 +125,7 @@ export async function GET() {
       goalPerDay,
       requiredPerDay,
       topicsPerDay,
+      catchupToday: topicsPerDay,
       behind,
     })
   } catch (err) {

@@ -104,9 +104,15 @@ Weak areas are grouped by `topic_id` in `app/weak-area-session/page.tsx` (`group
 
 ### Pace & Daily Plan (`app/api/progress/route.ts`)
 
-Pacing is **purely topic-count based** — there are no time estimates or a minutes budget. The goal is `GOAL_TOPICS_PER_DAY` (5). `requiredPerDay = ceil(topicsRemaining / effectiveDays)` where `effectiveDays = daysLeft − EXAM_BUFFER_DAYS` (3-day buffer before the June 18 exam). The student is `behind` when `requiredPerDay > 5`; the recommended `topicsPerDay` is `max(goal, requiredPerDay)` (so the plan grows to catch up), capped at what's left.
+Pacing is **purely topic-count based** — there are no time estimates or a minutes budget. The goal is `GOAL_TOPICS_PER_DAY` (5), and catch-up is **front-loaded into today** rather than spread as a daily rate. With `effectiveDays = daysLeft − EXAM_BUFFER_DAYS` (3-day buffer before the June 18 exam) and `daysAfterToday = effectiveDays − 1`:
 
-On the first load of the day, `getDailyPlan(today)` returns null → the plan is just the next `topicsPerDay` remaining topics in `STUDY_ORDER`, saved via `saveDailyPlan()` and reused on later loads that day.
+```
+catchupToday  = topicsRemaining − goal · daysAfterToday   // do this many today…
+topicsPerDay  = min(remaining, max(goal, catchupToday))   // …then goal/day clears the rest
+behind        = topicsPerDay > goal
+```
+
+So `topicsPerDay` is today's target: the goal (5) when on pace, or a one-day burst when behind. `requiredPerDay = ceil(remaining / effectiveDays)` is the even-spread rate, kept only for the coach's context. On the first load of the day, `getDailyPlan(today)` returns null → the plan is the next `topicsPerDay` remaining topics in `STUDY_ORDER`, saved via `saveDailyPlan()` and reused on later loads that day.
 
 **Timezone:** "today" is anchored to US Eastern (`localToday()` / `APP_TZ = 'America/New_York'` in `lib/db.ts`), not UTC. `getTopicsCompletedOn(date)` compares `(completed_at AT TIME ZONE 'America/New_York')::date` so an evening study session counts as one day's work instead of splitting across UTC midnight (the old UTC-based query under-counted topics finished after ~8pm Eastern).
 
