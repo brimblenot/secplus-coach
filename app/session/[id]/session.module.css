@@ -125,6 +125,12 @@
   font-family: 'IBM Plex Mono', monospace;
 }
 
+.quizError {
+  font-size: 12px;
+  color: var(--red);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
 /* Second-chance banner */
 .scBanner {
   background: var(--amber-dim);

@@ -68,6 +68,7 @@ export default function SessionPage() {
 
   const [retakeKey, setRetakeKey] = useState(0)
   const isRetake = retakeKey > 0
+  const [quizError, setQuizError] = useState('')
 
   // Chat state
   const [chatHistory, setChatHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([])
@@ -127,6 +128,7 @@ export default function SessionPage() {
   }, [topicId, retakeKey])
 
   const startQuiz = async () => {
+    setQuizError('')
     setPhase('loading-quiz')
     setUserAnswers({})
     setCurrentQ(0)
@@ -145,6 +147,7 @@ export default function SessionPage() {
 
     if (!res.ok) {
       setPhase('guide')
+      setQuizError('Quiz generation failed — try again in a moment.')
       return
     }
 
@@ -440,6 +443,9 @@ export default function SessionPage() {
               </button>
               {isRetake && (
                 <span className={styles.retakeNote}>Retake — new questions generated</span>
+              )}
+              {quizError && (
+                <span className={styles.quizError}>{quizError}</span>
               )}
             </div>
           )}
