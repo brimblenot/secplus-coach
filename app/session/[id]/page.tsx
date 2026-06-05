@@ -146,8 +146,10 @@ export default function SessionPage() {
     })
 
     if (!res.ok) {
+      let detail = ''
+      try { const body = await res.json(); detail = body.error ? ` (${body.error})` : '' } catch { /* ignore */ }
       setPhase('guide')
-      setQuizError('Quiz generation failed — try again in a moment.')
+      setQuizError(`Quiz generation failed${detail}`)
       return
     }
 
