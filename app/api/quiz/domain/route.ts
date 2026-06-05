@@ -93,7 +93,7 @@ async function generateMCBatch(
   count: number,
 ): Promise<unknown[]> {
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 2800,
     system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
     messages: [{
@@ -126,7 +126,7 @@ ${buildLecture(topics, PER_TOPIC_CHARS)}`,
 // Generate 3 free-text questions for the whole domain, scoped to a thin slice.
 async function generateTextBatch(domainNum: number, topics: Topic[]): Promise<unknown[]> {
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1800,
     system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
     messages: [{
