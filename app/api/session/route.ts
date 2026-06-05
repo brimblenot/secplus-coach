@@ -20,7 +20,7 @@ const SYSTEM_PROMPT = `You are a Security+ SY0-701 study coach. Your student has
 RULES FOR THIS STUDY GUIDE:
 1. Use ONLY content from the transcript below. Do not add outside information.
 2. Bold every key term using **term** markdown syntax.
-3. Be concise — student reads fast, no hand-holding needed.
+3. Be concise — student reads fast, no hand-holding needed. Keep the whole guide to about 600–800 words and ALWAYS finish every section, including the exam flags, within that length. Do not get cut off mid-section.
 4. Structure with clear H3 sections.
 5. End with a section titled "### EXAM FLAGS" listing exactly 2-3 high-probability exam topics as a bullet list.
 6. If weak areas are listed in the student status, explicitly address them in the guide.
@@ -49,7 +49,10 @@ export async function POST(req: NextRequest) {
     // we can return a clean 500 with the real message.
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2000,
+      // Headroom above the ~600–800 word target so the guide completes its final
+      // section instead of being cut off at the cap (~35–40s end to end, well
+      // under the 60s function limit).
+      max_tokens: 2400,
       system: [
         {
           type: 'text',

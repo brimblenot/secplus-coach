@@ -24,11 +24,7 @@ The study guide below is the ONLY source of testable material. Hard rules:
 ═══════════════════════════════════════
 QUESTION COUNT
 ═══════════════════════════════════════
-Read the guide, count distinct testable concepts, then:
-  3–5 questions   → 2–4 concepts
-  6–9 questions   → 5–7 concepts
-  10–15 questions → 8+ concepts / many subtypes
-Do NOT repeat the same concept across two questions.
+Generate EXACTLY 6–8 questions total — never more than 8. Cover the most important distinct concepts in the guide; prefer fewer high-quality questions over breadth. Do NOT repeat the same concept across two questions.
 
 ═══════════════════════════════════════
 COMPTIA QUESTION STYLE — MANDATORY
@@ -76,6 +72,7 @@ Text questions must ask the student to APPLY or ANALYZE, not just define: "Expla
 OUTPUT FORMAT
 ═══════════════════════════════════════
 Plain prose in all text fields. No bold, no markdown, no bullet points inside any JSON string field.
+Keep every explanation to 1–2 sentences (40 words max). Keep rubrics to 2–3 short bullet points. Brevity is required — long output is truncated and the quiz fails to generate.
 Respond with ONLY valid JSON. No markdown fences, no preamble:
 {
   "questions": [
@@ -107,7 +104,10 @@ export async function POST(req: NextRequest) {
 
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 5000,
+      // Bounded so generation finishes well under Vercel's 60s function limit.
+      // At ~50 tok/s, 5000 tokens took ~98s and timed out every time; 6–8 concise
+      // questions fit comfortably in this budget (~35–45s end to end).
+      max_tokens: 2800,
       system: [
         {
           type: 'text',
