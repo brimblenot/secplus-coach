@@ -69,6 +69,8 @@ export default function SessionPage() {
   const [retakeKey, setRetakeKey] = useState(0)
   const isRetake = retakeKey > 0
   const [quizError, setQuizError] = useState('')
+  const [guideError, setGuideError] = useState('')
+  const [guideReloadKey, setGuideReloadKey] = useState(0)
 
   // Chat state
   const [chatHistory, setChatHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([])
@@ -81,6 +83,7 @@ export default function SessionPage() {
   useEffect(() => {
     setPhase('loading-guide')
     setGuideContent('')
+    setGuideError('')
     streamBufRef.current = ''
 
     const ac = new AbortController()
@@ -93,7 +96,9 @@ export default function SessionPage() {
     })
       .then(async (res) => {
         if (!res.ok) {
-          setGuideContent('Error loading study guide. Check your API key and transcripts folder.')
+          let detail = ''
+          try { const b = await res.json(); detail = b.error ? `: ${b.error}` : '' } catch { /* ignore */ }
+          setGuideError(`Study guide failed to load${detail}`)
           setPhase('guide')
           return
         }
@@ -101,10 +106,14 @@ export default function SessionPage() {
         setTopicName(decodeURIComponent(res.headers.get('X-Topic-Name') || ''))
         setDomain(parseInt(res.headers.get('X-Domain') || '0'))
 
-        // Buffer the full stream silently — no progressive updates
+        // Buffer the full response, then display it all at once
         const reader = res.body?.getReader()
         const decoder = new TextDecoder()
-        if (!reader) return
+        if (!reader) {
+          setGuideError('Study guide failed to load (no response body)')
+          setPhase('guide')
+          return
+        }
 
         while (true) {
           const { done, value } = await reader.read()
@@ -113,21 +122,34 @@ export default function SessionPage() {
         }
         streamBufRef.current += decoder.decode()
 
-        // Display all content at once when generation is complete
+        if (!streamBufRef.current.trim()) {
+          setGuideError('Study guide came back empty — try again')
+          setPhase('guide')
+          return
+        }
+
         setGuideContent(streamBufRef.current)
         setPhase('guide')
       })
       .catch((err) => {
         if (err.name !== 'AbortError') {
-          setGuideContent('Error loading study guide. Check your API key.')
+          setGuideError('Study guide failed to load — check your connection and try again')
           setPhase('guide')
         }
       })
 
     return () => { ac.abort() }
-  }, [topicId, retakeKey])
+  }, [topicId, retakeKey, guideReloadKey])
+
+  const retryGuide = () => setGuideReloadKey((k) => k + 1)
 
   const startQuiz = async () => {
+    // Never generate a quiz from a missing/failed guide — otherwise the quiz
+    // gets scope-locked to whatever placeholder text is on screen.
+    if (!guideContent.trim()) {
+      setQuizError('Load the study guide first.')
+      return
+    }
     setQuizError('')
     setPhase('loading-quiz')
     setUserAnswers({})
@@ -433,7 +455,13 @@ export default function SessionPage() {
               <span className={styles.guideLoadingLabel}>Generating study guide…</span>
             </div>
           )}
-          {phase === 'guide' && (
+          {phase === 'guide' && guideError && (
+            <div className={styles.guideErrorBox}>
+              <div className={styles.guideErrorMsg}>{guideError}</div>
+              <button className={styles.btnPrimary} onClick={retryGuide}>Retry</button>
+            </div>
+          )}
+          {phase === 'guide' && guideContent && (
             <div className={`${styles.guideContent} md-content`}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{guideContent}</ReactMarkdown>
             </div>

@@ -42,7 +42,12 @@ export async function POST(req: NextRequest) {
 
     await updateTopicStatus(topicId, 'studying')
 
-    const stream = await anthropic.messages.stream({
+    // Non-streaming: the client buffers the whole guide before displaying it
+    // anyway, so streaming bought no UX — but an error thrown mid-stream could
+    // not be caught here, surfacing to the user as a generic "failed to load".
+    // Buffering server-side keeps any Anthropic error inside this try/catch so
+    // we can return a clean 500 with the real message.
+    const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 2000,
       system: [
@@ -58,7 +63,7 @@ export async function POST(req: NextRequest) {
           {
             type: 'text',
             text: `STUDENT STATUS:
-- Days until exam (June 20, 2026): ${daysLeft}
+- Days until exam (June 18, 2026): ${daysLeft}
 - Topics completed: ${completedTopics}/121
 - Quiz average: ${avgScore !== null ? avgScore + '%' : 'none yet'}
 - Active weak areas: ${weakAreas.length > 0 ? weakAreas.map((w) => w.concept).join(', ') : 'none yet'}
@@ -76,19 +81,16 @@ TRANSCRIPT:`,
       }],
     })
 
-    const encoder = new TextEncoder()
-    const readable = new ReadableStream({
-      async start(controller) {
-        for await (const chunk of stream) {
-          if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-            controller.enqueue(encoder.encode(chunk.delta.text))
-          }
-        }
-        controller.close()
-      },
-    })
+    const text = message.content
+      .filter((b) => b.type === 'text')
+      .map((b) => (b as { type: 'text'; text: string }).text)
+      .join('')
 
-    return new Response(readable, {
+    if (!text.trim()) {
+      return NextResponse.json({ error: 'Study guide came back empty' }, { status: 502 })
+    }
+
+    return new Response(text, {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'X-Topic-Name': encodeURIComponent(topic.topic_name),
