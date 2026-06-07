@@ -18,12 +18,12 @@ export async function POST(req: NextRequest) {
         content: `Grade this Security+ student's written answer for conceptual understanding.
 
 Question: ${question}
-Correct answer: ${correctAnswer}
+Rubric (a GUIDE to a strong answer, not a checklist): ${correctAnswer}
 Explanation: ${explanation}
 
 Student wrote: "${userText}"
 
-Does the student demonstrate genuine understanding of the core concept? Accept paraphrasing and partial answers that show real comprehension. Penalize vague, off-topic, or incorrect responses.
+Grade for applied reasoning, not exhaustive recall. Pass the answer when the student reaches a correct decision/conclusion AND gives sound justification for it — even if they paraphrase or omit some points the rubric lists. Do NOT fail an answer merely for leaving out rubric terms when the core reasoning is correct. Penalize only vague, off-topic, or genuinely incorrect reasoning.
 
 Respond ONLY with valid JSON (no markdown fences):
 {"passed": true, "feedback": "Specific 1-2 sentence feedback mentioning what they got right or what they missed."}`,

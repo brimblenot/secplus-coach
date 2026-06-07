@@ -96,6 +96,13 @@ ${concepts.map(c => `### ${c}
 Output ONLY the markdown above, starting with the ## heading. Bold only the labels shown above. No other bold text anywhere. Total length: ${250 + concepts.length * 80}-${300 + concepts.length * 100} words.`
 }
 
+// Shared MC quality rules — keeps the correct answer from being guessable by length.
+const MC_BALANCE_RULES = `MC requirements:
+- Scenario-based stem (e.g. "A security analyst discovers...").
+- All four options must be within ±15 words of each other in length. The correct answer must NOT be the longest, most detailed, or most technical-sounding option — balance the choices so it cannot be guessed by picking the longest one without reading the question.
+- Distractors must be plausible and use named wrong-answer strategies (related-but-wrong-scenario, right-concept-wrong-implementation, compound part-right-part-wrong) — never obvious throwaways.
+- No verbatim phrases from the study material; stay at SY0-701 exam depth, no vendor-specific minutiae.`
+
 export function buildWeakAreaQuizPrompt(
   concepts: string[],
   topicName: string,
@@ -111,8 +118,10 @@ Quiz structure:
 - ${mcCount} multiple-choice question${mcCount > 1 ? 's' : ''} (type "mc")
 - 1 free-text question (type "text") placed last
 
-MC requirements: scenario-based, plausible distractors, directly test "${concept}" only.
-Text question: ask the student to explain a key aspect of "${concept}" in their own words. Include a rubric field listing 2-3 key points the answer should cover.
+${MC_BALANCE_RULES}
+- Directly test "${concept}" only.
+
+Text question: present a realistic, APPLIED scenario where the student must make and justify a decision involving "${concept}" — do NOT ask them to "explain", "define", or "describe" the concept. They should apply it to the situation, not recite it. The rubric field should describe what a sound decision plus reasoning looks like (the correct call and why); treat it as a guide to a strong answer, NOT a checklist of terms that must all be named.
 All explanations: plain prose, no bold or markdown.
 
 Respond with ONLY valid JSON, no markdown fences:
@@ -143,7 +152,11 @@ ${concepts.map((c, i) => `${i + 1}. ${c}`).join('\n')}
 
 Quiz structure:
 - ${mcCount} multiple-choice question${mcCount > 1 ? 's' : ''} (type "mc") — distribute across ALL concepts above; each question tests exactly ONE concept; do not test the same concept twice in a row; vary the scenarios so they feel distinct
-- 1 free-text question (type "text") placed last — ask the student to explain how these ${concepts.length} concepts relate or work together in a real Security+ scenario; rubric must reference all ${concepts.length} concepts
+- 1 free-text question (type "text") placed last — see text rules below
+
+${MC_BALANCE_RULES}
+
+Text question: present a realistic, APPLIED scenario where the student must make and justify a decision. Build it around a SINGLE concept applied to a believable situation, OR around TWO of the concepts together ONLY if they genuinely combine in one realistic decision — never force unrelated concepts together, and NEVER ask the student to "explain how these concepts relate" or to list everything they know. Rotate which concept(s) you feature. The rubric should describe the sound decision plus reasoning; treat it as a guide to a strong answer, NOT a checklist requiring every concept to be named.
 
 All explanations: plain prose, no bold or markdown.
 
@@ -161,9 +174,9 @@ Respond with ONLY valid JSON, no markdown fences:
     {
       "id": ${mcCount + 1},
       "type": "text",
-      "question": "Explain how ${concepts.slice(0, 3).join(', ')}${concepts.length > 3 ? ' and the other related concepts' : ''} relate to each other in the context of Security+.",
-      "rubric": "Key points: ${concepts.map((c, i) => `${i + 1}) [key point about ${c}]`).join(' ')}",
-      "explanation": "A complete answer would mention..."
+      "question": "[An applied scenario requiring a justified decision about one of the concepts (or two if they naturally combine)]",
+      "rubric": "What a sound answer decides and why (a guide, not a required term checklist).",
+      "explanation": "A strong answer would decide ... because ..."
     }
   ]
 }`
