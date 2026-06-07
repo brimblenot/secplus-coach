@@ -205,15 +205,23 @@ Respond with ONLY valid JSON, no markdown fences:
 
 export function buildWeakAreaPrompt(
   wrongQuestions: { question: string; userAnswer: string; correct: string; explanation: string }[],
-  topicName: string
+  topicName: string,
+  existingConcepts: string[] = []
 ): string {
+  const existingBlock = existingConcepts.length > 0
+    ? `\nThe student already has these concepts flagged as weak areas:
+${existingConcepts.map((c) => `- ${c}`).join('\n')}
+
+CRITICAL — avoid overlap: If a concept you would flag is the same idea as one already listed above (even if you'd word it differently, e.g. "unpatched CVE risk" vs "unpatched vulnerability risk"), DO NOT create a new entry — reuse the EXACT existing string verbatim so it merges instead of duplicating. Only output a new phrase when the concept is genuinely distinct from every existing one. Never output two items in your own response that are near-duplicates of each other.\n`
+    : ''
+
   return `A Security+ student got these questions wrong on a quiz about ${topicName}:
 
 ${wrongQuestions.map((q, i) => `Q${i + 1}: ${q.question}
 Their answer: ${q.userAnswer}
 Correct: ${q.correct}
 Explanation: ${q.explanation}`).join('\n\n')}
-
+${existingBlock}
 Identify the specific concepts (not broad topics) this student is weak on.
 Each concept should be a short specific phrase like "asymmetric vs symmetric key differences" or "AAA authentication order".
 
