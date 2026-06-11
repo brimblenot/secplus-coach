@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { ALL_TOPICS } from '@/lib/db'
 import { getTranscript } from '@/lib/transcripts'
+import { balanceQuizAnswers } from '@/lib/quiz'
 
 // Per-topic transcript cap for MC batches — keeps each batch's combined lecture
 // payload small so the call finishes well under the Vercel function timeout.
@@ -234,6 +235,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to generate any questions' }, { status: 500 })
     }
 
+    balanceQuizAnswers(questions)
     return NextResponse.json({ questions })
   } catch (err) {
     console.error(err)

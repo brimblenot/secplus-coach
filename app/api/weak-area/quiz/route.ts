@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { buildWeakAreaQuizPrompt } from '@/lib/prompts'
 import { getWeakAreasByIds } from '@/lib/db'
+import { balanceQuizAnswers } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
       .join('')
     const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
     const parsed = JSON.parse(clean)
+    balanceQuizAnswers(parsed.questions)
     return NextResponse.json({ ...parsed, mcCount })
   } catch (err) {
     console.error(err)

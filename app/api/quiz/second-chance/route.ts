@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { balanceQuizAnswers } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -63,7 +64,9 @@ Wrap them as:
       .map((b) => (b as { type: 'text'; text: string }).text)
       .join('')
     const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
-    return NextResponse.json(JSON.parse(clean))
+    const parsed = JSON.parse(clean)
+    balanceQuizAnswers(parsed.questions)
+    return NextResponse.json(parsed)
   } catch (err) {
     console.error(err)
     return NextResponse.json({ error: String(err) }, { status: 500 })
