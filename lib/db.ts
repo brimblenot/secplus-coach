@@ -348,12 +348,63 @@ export async function getWeakAreas(includeResolved = false): Promise<WeakArea[]>
   return queryAll<WeakArea>(sql)
 }
 
+// Significant-word fingerprint of a concept phrase. Drops grammatical filler and
+// light-stems trailing plurals so "exception vs exemption definitional distinction"
+// and "exception vs exemption functional distinction" share most of their tokens.
+const CONCEPT_STOPWORDS = new Set([
+  'the', 'a', 'an', 'and', 'or', 'vs', 'versus', 'of', 'for', 'to', 'in', 'on',
+  'when', 'it', 'its', 'their', 'that', 'this', 'is', 'are', 'be', 'with', 'how',
+  'what', 'between', 'as', 'by', 'at', 'from',
+])
+
+function conceptTokens(concept: string): Set<string> {
+  const tokens = concept
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 2 && !CONCEPT_STOPWORDS.has(w))
+    .map((w) => (w.length > 4 && w.endsWith('s') ? w.slice(0, -1) : w))
+  return new Set(tokens)
+}
+
+// Jaccard overlap of the two token sets (0–1). Two phrases at/above
+// CONCEPT_SIMILARITY_THRESHOLD are treated as the same weak area.
+const CONCEPT_SIMILARITY_THRESHOLD = 0.5
+
+export function conceptsAreSimilar(a: string, b: string): boolean {
+  const ta = conceptTokens(a)
+  const tb = conceptTokens(b)
+  if (ta.size === 0 || tb.size === 0) return false
+  let shared = 0
+  Array.from(ta).forEach((t) => { if (tb.has(t)) shared++ })
+  const union = ta.size + tb.size - shared
+  return union > 0 && shared / union >= CONCEPT_SIMILARITY_THRESHOLD
+}
+
 export async function upsertWeakArea(
   concept: string,
   topicId: string,
   topicName: string,
   domain: number
 ) {
+  // Merge into an existing near-duplicate (same domain) instead of creating a
+  // second row for the same idea worded differently — the prompt-level guard in
+  // buildWeakAreaPrompt is best-effort, so this is the hard gate against dupes.
+  const existing = await queryAll<WeakArea>(
+    'SELECT * FROM weak_areas WHERE domain = ? AND resolved = 0',
+    [domain]
+  )
+  const match = existing.find(
+    (w) => w.concept === concept || conceptsAreSimilar(w.concept, concept)
+  )
+  if (match) {
+    await run(
+      `UPDATE weak_areas SET wrong_count = wrong_count + 1, last_seen = now(), resolved = 0
+       WHERE id = ?`,
+      [match.id]
+    )
+    return
+  }
+
   await run(
     `INSERT INTO weak_areas (concept, topic_id, topic_name, domain, wrong_count)
      VALUES (?, ?, ?, ?, 1)
