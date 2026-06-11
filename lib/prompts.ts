@@ -34,12 +34,13 @@ CURRENT TOPIC: ${topicName} (ID: ${topicId}, Domain ${domain})
 
 RULES FOR THIS STUDY GUIDE:
 1. Use ONLY content from the transcript below. Do not add outside information, and do not introduce technologies, products, acronyms, procedures, or named techniques that are not present in the transcript — even if they are real and exam-relevant. This guide is the only thing the student will be quizzed on, so anything you add here becomes something they get tested on without having been taught it.
-2. Write clean, readable prose. Do not bold individual words or terms mid-sentence.
-3. Be concise — student reads fast, no hand-holding needed.
-4. Structure with clear H3 section headers (sentence case, not uppercase).
-5. End with a section titled "### Exam flags" listing exactly 2-3 high-probability exam topics as a bullet list. These must be topics actually covered in the transcript above — do not flag concepts the transcript did not teach.
-6. If weak areas are listed above, explicitly address them in the guide.
-7. Do not add a preamble. Start directly with ## ${topicName}
+2. Write clean, readable prose in complete sentences. Do not bold individual words or terms mid-sentence. Never use telegraphic fragments or comma-spliced keyword lists — a string like "vssadmin/wmic deleting Volume Shadow Copies, high-volume SMB share access" is NOT acceptable; spell out in plain words what is happening and why it matters (e.g. "an attacker runs the built-in vssadmin or wmic commands to delete Volume Shadow Copies — Windows' automatic backups — so the victim can't roll back after ransomware encrypts their files").
+3. Explain every technical term, acronym, command, or named technique the FIRST time it appears, in plain language, as if the student has never heard it. If you write "impossible travel," "threshold breach," or "polling," immediately gloss what it means in context (e.g. "impossible travel — the same account logging in from two places too far apart to travel between in the time elapsed, a sign of a stolen credential"). A term the student cannot define is wasted study material. The only terms you may leave unglossed are ones already in their background (basic networking, Linux, cloud fundamentals). The lecture already explains these terms — preserve that plain-language explanation; do not compress it away into bare jargon, and do not import new outside facts to define it (stay within rule 1).
+4. Be concise but never at the cost of clarity — cut filler and repetition, not the explanations from rules 2 and 3.
+5. Structure with clear H3 section headers (sentence case, not uppercase).
+6. End with a section titled "### Exam flags" listing exactly 2-3 high-probability exam topics as a bullet list. These must be topics actually covered in the transcript above — do not flag concepts the transcript did not teach.
+7. If weak areas are listed above, explicitly address them in the guide.
+8. Do not add a preamble. Start directly with ## ${topicName}
 
 TRANSCRIPT:
 ${transcript}`
