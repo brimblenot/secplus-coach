@@ -17,9 +17,10 @@ function getMcCount(wrongCount: number): number {
 // Hard cap on MC questions per weak-area quiz. A grouped session passes every
 // flagged concept of a topic at once, so without a cap mcCount grows with the
 // group (1 MC/concept) and generation blows past Vercel's 60s limit or gets
-// truncated mid-JSON — the quiz then never loads. Mirrors the topic quiz route's
-// 6–8 question ceiling. Keep MAX_MC in sync with weak-area-session/page.tsx.
-const MAX_MC = 6
+// truncated mid-JSON — the quiz then never loads. A 9-concept group still timed
+// out at 6, so the cap is 5 (=6 questions with the text item) and the prompt
+// enforces brevity. Keep MAX_MC in sync with weak-area-session/page.tsx.
+const MAX_MC = 5
 
 export async function POST(req: NextRequest) {
   try {

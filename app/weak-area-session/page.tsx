@@ -64,7 +64,7 @@ function getMcCount(wrongCount: number): number {
 
 // Mirror of MAX_MC in app/api/weak-area/quiz/route.ts so the question-count
 // preview and pass thresholds match the quiz the route actually generates.
-const MAX_MC = 6
+const MAX_MC = 5
 function cappedMcCount(areaCount: number, maxWrongCount: number): number {
   return Math.min(MAX_MC, Math.max(areaCount, getMcCount(maxWrongCount)))
 }

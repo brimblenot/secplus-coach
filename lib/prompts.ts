@@ -102,7 +102,8 @@ const MC_BALANCE_RULES = `MC requirements:
 - Scenario-based stem (e.g. "A security analyst discovers...").
 - All four options must be within ±15 words of each other in length. The correct answer must NOT be the longest, most detailed, or most technical-sounding option — balance the choices so it cannot be guessed by picking the longest one without reading the question.
 - Distractors must be plausible and use named wrong-answer strategies (related-but-wrong-scenario, right-concept-wrong-implementation, compound part-right-part-wrong) — never obvious throwaways.
-- No verbatim phrases from the study material; stay at SY0-701 exam depth, no vendor-specific minutiae.`
+- No verbatim phrases from the study material; stay at SY0-701 exam depth, no vendor-specific minutiae.
+- Keep every explanation to 1-2 sentences (40 words max) and every rubric to 2-3 short phrases. This is mandatory: long output is truncated mid-JSON and the quiz fails to generate, so be brief.`
 
 export function buildWeakAreaQuizPrompt(
   concepts: string[],
