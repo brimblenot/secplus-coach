@@ -21,7 +21,11 @@ export async function POST(req: NextRequest) {
 
     const stream = await anthropic.messages.stream({
       model: 'claude-sonnet-4-6',
-      max_tokens: 1200,
+      // buildWeakAreaGuidePrompt scales its word target with concept count
+      // (up to ~900 words for a multi-concept group); 1200 tokens cut larger
+      // guides off mid-sentence. 1800 covers the largest group and still streams
+      // well under the 60s limit.
+      max_tokens: 1800,
       messages: [{ role: 'user', content: prompt }],
     })
 

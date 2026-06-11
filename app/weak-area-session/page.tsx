@@ -62,6 +62,13 @@ function getMcCount(wrongCount: number): number {
   return 1
 }
 
+// Mirror of MAX_MC in app/api/weak-area/quiz/route.ts so the question-count
+// preview and pass thresholds match the quiz the route actually generates.
+const MAX_MC = 6
+function cappedMcCount(areaCount: number, maxWrongCount: number): number {
+  return Math.min(MAX_MC, Math.max(areaCount, getMcCount(maxWrongCount)))
+}
+
 function getPassCount(mcCount: number): number {
   if (mcCount <= 1) return 1
   if (mcCount <= 3) return 2
@@ -86,7 +93,7 @@ function groupByTopic(areas: WeakArea[]): WeakAreaGroup[] {
 }
 
 function estimateMinutes(groups: WeakAreaGroup[]): number {
-  return groups.reduce((total, g) => total + Math.max(g.areas.length, getMcCount(g.maxWrongCount)) + 2 + 3, 0)
+  return groups.reduce((total, g) => total + cappedMcCount(g.areas.length, g.maxWrongCount) + 2 + 3, 0)
 }
 
 const inlineP = { p: ({ children }: { children?: React.ReactNode }) => <>{children}</> }
@@ -103,6 +110,7 @@ export default function WeakAreaSessionPage() {
 
   // Quiz state
   const [questions, setQuestions] = useState<Question[]>([])
+  const [quizError, setQuizError] = useState('')
   const [mcCount, setMcCount] = useState(0)
   const [currentQ, setCurrentQ] = useState(0)
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({})
@@ -161,23 +169,34 @@ export default function WeakAreaSessionPage() {
   // ── Start quiz for current group ──────────────────────────────────────────
   async function startQuiz() {
     setPhase('loading')
+    setQuizError('')
     setUserAnswers({})
     setCurrentQ(0)
     setAnswered(false)
     setTextAnswer('')
     setTextGradeResult(null)
 
-    const res = await fetch('/api/weak-area/quiz', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ weakAreaIds: currentGroup.areas.map((a) => a.id) }),
-    })
-    if (!res.ok) { setPhase('area-guide'); return }
+    try {
+      const res = await fetch('/api/weak-area/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ weakAreaIds: currentGroup.areas.map((a) => a.id) }),
+      })
+      if (!res.ok) throw new Error(`Quiz generation failed (${res.status})`)
 
-    const data = await res.json()
-    setQuestions(data.questions)
-    setMcCount(data.mcCount ?? data.questions.filter((q: Question) => q.type === 'mc').length)
-    setPhase('area-quiz')
+      const data = await res.json()
+      if (!Array.isArray(data.questions) || data.questions.length === 0) {
+        throw new Error('Quiz came back empty')
+      }
+      setQuestions(data.questions)
+      setMcCount(data.mcCount ?? data.questions.filter((q: Question) => q.type === 'mc').length)
+      setPhase('area-quiz')
+    } catch {
+      // Surface the failure on the guide instead of silently bouncing — otherwise
+      // the user just lands back on the guide with no idea the quiz didn't load.
+      setQuizError('Could not generate the quiz. Tap Start Quiz to try again.')
+      setPhase('area-guide')
+    }
   }
 
   // ── MC answer ────────────────────────────────────────────────────────────
@@ -270,7 +289,7 @@ export default function WeakAreaSessionPage() {
   const isTextQ = q?.type === 'text'
   const level = currentGroup ? getWeakLevel(currentGroup.maxWrongCount) : null
   const overallProgress = currentIdx / Math.max(groups.length, 1)
-  const groupMcCount = currentGroup ? Math.max(currentGroup.areas.length, getMcCount(currentGroup.maxWrongCount)) : 1
+  const groupMcCount = currentGroup ? cappedMcCount(currentGroup.areas.length, currentGroup.maxWrongCount) : 1
 
   // ── Loading ──────────────────────────────────────────────────────────────
   if (phase === 'loading') {
@@ -420,6 +439,7 @@ export default function WeakAreaSessionPage() {
               <span className={styles.quizNote}>
                 {groupMcCount + 1} questions · need {getPassCount(groupMcCount)}/{groupMcCount} MC to resolve
               </span>
+              {quizError && <span className={styles.quizError}>{quizError}</span>}
             </div>
           )}
         </div>

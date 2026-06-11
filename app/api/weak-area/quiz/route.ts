@@ -14,6 +14,13 @@ function getMcCount(wrongCount: number): number {
   return 1
 }
 
+// Hard cap on MC questions per weak-area quiz. A grouped session passes every
+// flagged concept of a topic at once, so without a cap mcCount grows with the
+// group (1 MC/concept) and generation blows past Vercel's 60s limit or gets
+// truncated mid-JSON — the quiz then never loads. Mirrors the topic quiz route's
+// 6–8 question ceiling. Keep MAX_MC in sync with weak-area-session/page.tsx.
+const MAX_MC = 6
+
 export async function POST(req: NextRequest) {
   try {
     const { weakAreaIds } = await req.json()
@@ -24,14 +31,17 @@ export async function POST(req: NextRequest) {
     const concepts = areas.map((a) => a.concept)
     const { topic_name, domain } = areas[0]
     const maxWrongCount = Math.max(...areas.map((a) => a.wrong_count))
-    // Cap MC count so we don't over-test: at least 1 per concept, not more than getMcCount allows
-    const mcCount = Math.max(concepts.length, getMcCount(maxWrongCount))
+    // At least 1 MC per concept and scaled by how badly missed, but capped so the
+    // quiz (mcCount MC + 1 text) stays within the token/time budget below.
+    const mcCount = Math.min(MAX_MC, Math.max(concepts.length, getMcCount(maxWrongCount)))
 
     const prompt = buildWeakAreaQuizPrompt(concepts, topic_name, domain, mcCount)
 
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 3000,
+      // Bounded so generation finishes under Vercel's 60s function limit and the
+      // JSON is never truncated mid-object. Matches the topic quiz route's budget.
+      max_tokens: 2800,
       messages: [{ role: 'user', content: prompt }],
     })
 
