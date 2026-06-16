@@ -46,7 +46,7 @@ Priority: **P1** = correctness/cost risk, **P2** = quality/maintainability, **P3
 ## "Where do I change X?" — fast map
 
 - **Quiz question rules / difficulty / scope** → `lib/prompts.ts` and the inline `SYSTEM_PROMPT`s in `app/api/quiz/route.ts`, `app/api/quiz/domain/route.ts`, `app/api/quiz/second-chance/route.ts`. (Consolidating these is on the roadmap above.)
-- **Study guide format/rules** → `buildStudyGuidePrompt` in `lib/prompts.ts`.
+- **Study guide format/rules** → `STUDY_GUIDE_SYSTEM_PROMPT` in `lib/prompts.ts` (the live prompt, imported by `app/api/session/route.ts`).
 - **Pass thresholds** → topic 70% / domain 80%, in the session page and domain save logic.
 - **Study order / topic list** → `STUDY_ORDER` and `ALL_TOPICS` in `lib/db.ts`.
 - **Daily workload / pace** → `GOAL_TOPICS_PER_DAY` and `EXAM_BUFFER_DAYS` in `app/api/progress/route.ts` (pure topic-count pacing; no time estimates).

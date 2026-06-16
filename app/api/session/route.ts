@@ -2,29 +2,17 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getTranscript } from '@/lib/transcripts'
 import { getTopic, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore, updateTopicStatus } from '@/lib/db'
+import { STUDY_GUIDE_SYSTEM_PROMPT } from '@/lib/prompts'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// Stable system prompt — cached across all topic calls within the 5-min TTL window
-const SYSTEM_PROMPT = `You are a Security+ SY0-701 study coach. Your student has this background:
-- CIS degree, cybersecurity concentration, JMU May 2026
-- Completed NIST 800-171 compliance assessment internship
-- Built a full-stack web application
-- Familiar with basic networking, Linux, cloud fundamentals
-- Hands-on lab experience: pen testing, DDoS, phishing, PGP
-- No prior Security+ study
-
-RULES FOR THIS STUDY GUIDE:
-1. Use ONLY content from the transcript below. Do not add outside information.
-2. Bold every key term using **term** markdown syntax.
-3. Be concise — student reads fast, no hand-holding needed. Keep the whole guide to about 600–800 words and ALWAYS finish every section, including the exam flags, within that length. Do not get cut off mid-section.
-4. Structure with clear H3 sections.
-5. End with a section titled "### EXAM FLAGS" listing exactly 2-3 high-probability exam topics as a bullet list.
-6. If weak areas are listed in the student status, explicitly address them in the guide.
-7. Do not add a preamble. Start directly with the H2 topic heading.`
+// Stable system prompt (shared from lib/prompts.ts) — cached across all topic calls
+// within the 5-min TTL window. Per-request student status + transcript go in the
+// user message below.
+const SYSTEM_PROMPT = STUDY_GUIDE_SYSTEM_PROMPT
 
 export async function POST(req: NextRequest) {
   try {
@@ -49,10 +37,10 @@ export async function POST(req: NextRequest) {
     // we can return a clean 500 with the real message.
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
-      // Headroom above the ~600–800 word target so the guide completes its final
-      // section instead of being cut off at the cap (~35–40s end to end, well
-      // under the 60s function limit).
-      max_tokens: 2400,
+      // Headroom above the ~700–900 word target (now denser, since every term is
+      // glossed) so the guide completes its final section instead of being cut off
+      // at the cap (~40–45s end to end, comfortably under the 60s function limit).
+      max_tokens: 2800,
       system: [
         {
           type: 'text',

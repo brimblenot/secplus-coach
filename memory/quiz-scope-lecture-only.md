@@ -11,7 +11,7 @@ Quizzes must test ONLY what the student was actually taught in their lecture tra
 
 **How to apply:** Scope-lock lives in the generation prompts:
 - Topic quiz — CONTENT RULE scope lock in `app/api/quiz/route.ts` (receives `studyGuideContent`).
-- Study guide — `lib/prompts.ts` `buildStudyGuidePrompt` rules 1 & 5 forbid introducing untaught concepts (the guide is the only thing the topic quiz sees, so a leak here propagates).
+- Study guide — `lib/prompts.ts` `STUDY_GUIDE_SYSTEM_PROMPT` (imported by `app/api/session/route.ts`); rule 1 forbids introducing untaught TOPICS (the guide is the only thing the topic quiz sees, so a leak here propagates). Rule 2 is a deliberate carve-out: the guide may add one-clause plain-language glosses for terms the lecture only names (e.g. defining what a TPM is) — glosses are reading aids, NOT new testable scope. Defining a named term ≠ adding a new topic.
 - Second-chance — `app/api/quiz/second-chance/route.ts` only gets the missed questions + topic name (NOT the guide); it re-tests the same concept, so it inherits scope from the now-locked topic quiz, plus a SCOPE LOCK guardrail line.
 - Domain mastery quiz — `app/api/quiz/domain/route.ts` now feeds the actual transcripts (via `getTranscript`, capped `PER_TOPIC_CHARS = 4000` each) for the domain's topics and tells the model those are the only allowed source. User chose "lecture-only (feed transcripts)" over broad exam-scope.
 
