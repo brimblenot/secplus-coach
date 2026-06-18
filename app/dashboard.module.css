@@ -772,6 +772,25 @@
   background: var(--bg-3);
 }
 
+/* Spaced-repetition review CTA */
+.reviewCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-2);
+  border: 1px solid var(--blue-border, rgba(64, 128, 240, 0.35));
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+  animation: fadeIn 0.4s ease forwards;
+}
+.reviewCard:hover {
+  border-color: var(--blue, #4080f0);
+  background: var(--bg-3);
+}
+
 /* Weak area session CTA */
 .weakSessionCard {
   display: flex;

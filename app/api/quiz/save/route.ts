@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { buildWeakAreaPrompt } from '@/lib/prompts'
-import { saveQuizAttempt, updateTopicStatus, upsertWeakArea, getTopic, getWeakAreas } from '@/lib/db'
+import { saveQuizAttempt, updateTopicStatus, upsertWeakArea, getTopic, getWeakAreas, scheduleFirstReview } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -17,6 +17,8 @@ export async function POST(req: NextRequest) {
     await saveQuizAttempt(topicId, score, questions, wrongIndices)
     const passed = score >= 70
     await updateTopicStatus(topicId, passed ? 'passed' : 'failed', score)
+    // On a first pass, enter the topic into the spaced-repetition schedule.
+    if (passed) await scheduleFirstReview(topicId)
 
     // weakAreaIndices: subset of wrongIndices that also failed the second-chance question.
     // Falls back to wrongIndices when no second-chance was attempted.

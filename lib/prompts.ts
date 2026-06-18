@@ -206,6 +206,57 @@ STUDY GUIDE:
 ${guideContent}`
 }
 
+// Spaced-repetition review quiz: a short retrieval check on a topic the student
+// passed earlier, scope-locked to that topic's transcript. Consumed by
+// app/api/review/quiz/route.ts. Pitched at recall/recognition (the point is to
+// refresh memory), a notch lighter than the graded topic quiz.
+export function buildReviewQuizPrompt(topicName: string, domain: number, transcript: string): string {
+  return `Generate a short spaced-repetition REVIEW quiz for a student refreshing a topic they studied earlier: "${topicName}" (Domain ${domain}, CompTIA Security+ SY0-701).
+
+═══════════════════════════════════════
+CONTENT RULE — STRICT SCOPE LOCK
+═══════════════════════════════════════
+The lecture transcript below is the ONLY source of testable material.
+- Test ONLY concepts, technologies, terms, and techniques that explicitly appear in the transcript. If it is not in the transcript, it does not exist for this quiz.
+- Do NOT introduce outside knowledge — no products, acronyms, procedures, or attack/control names absent from the transcript, even if real and exam-relevant.
+- This applies to the correct answer AND the distractors AND the explanations.
+- Stay at SY0-701 exam depth; no vendor-specific or implementation-level minutiae.
+
+Quiz structure:
+- 4 multiple-choice questions (type "mc")
+- 1 free-text question (type "text"), placed last
+- Cover the most important DISTINCT points of the topic; do not test the same point twice.
+
+This is a REVIEW, so favor the core ideas the student most needs to retain for the exam. Keep MC stems scenario-flavored but not tricky; the goal is reliable recall, not trap-spotting.
+
+${MC_BALANCE_RULES}
+
+Text question: a realistic APPLIED scenario where the student makes and justifies a decision about a core concept of this topic — do NOT ask them to "define" or "explain" it. The rubric describes what a sound decision plus reasoning looks like (a guide, not a checklist of required terms).
+All explanations: plain prose, no bold or markdown.
+
+Respond with ONLY valid JSON, no markdown fences:
+{
+  "questions": [
+    { "id": 1, "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "B", "explanation": "Plain prose." },
+    { "id": 5, "type": "text", "question": "An applied scenario requiring a justified decision...", "rubric": "What a sound answer decides and why.", "explanation": "A strong answer would decide ... because ..." }
+  ]
+}
+
+TRANSCRIPT (only test from this content):
+${transcript}`
+}
+
+// Optional "Need a refresher?" recap for a review — a tight TL;DR from the topic's
+// transcript, scope-locked. Consumed by app/api/review/refresher/route.ts (Haiku).
+export function buildRefresherPrompt(topicName: string, transcript: string): string {
+  return `The student is reviewing "${topicName}" (CompTIA Security+ SY0-701) and wants a quick memory refresher before a recall quiz.
+
+Write a tight recap as 4–6 one-line bullets capturing ONLY the must-remember points from the transcript below. Bold the key term in each bullet. No preamble, no heading, no closing line — just the bullets. Use ONLY content present in the transcript; do not add outside facts. Keep it scannable and under 120 words.
+
+TRANSCRIPT:
+${transcript}`
+}
+
 export function buildDomainFinalQuizPrompt(
   domain: number,
   domainName: string,
