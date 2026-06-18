@@ -172,6 +172,48 @@ code, pre {
   line-height: 1.6;
 }
 
+/* GFM tables — used by study guides for comparisons/categories */
+.md-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0 18px;
+  font-size: 14px;
+  display: block;
+  overflow-x: auto;
+}
+
+.md-content thead {
+  border-bottom: 1px solid var(--border);
+}
+
+.md-content th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: left;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+.md-content td {
+  color: var(--text-2);
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  line-height: 1.6;
+  vertical-align: top;
+}
+
+.md-content tbody tr:nth-child(even) {
+  background: var(--bg-2);
+}
+
+.md-content td strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .md-content hr {
   border: none;
   border-top: 1px solid var(--border);
