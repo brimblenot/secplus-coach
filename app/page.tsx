@@ -26,20 +26,13 @@ interface NextTopic {
   domain: number
 }
 
-interface PlanTopic {
-  id: string
-  name: string
-  completedToday: boolean
-}
-
-interface AdditionalTopic {
+interface CompletedTopic {
   id: string
   name: string
 }
 
 interface ProgressData {
   daysLeft: number
-  effectiveDays: number
   completedCount: number
   totalTopics: number
   courseProgress: number
@@ -49,15 +42,8 @@ interface ProgressData {
   domainStats: DomainStat[]
   domainQuizPending: number | null
   weakAreaSessionDoneToday: boolean
-  planTopics: PlanTopic[]
-  planCompletedCount: number
-  additionalCompleted: AdditionalTopic[]
   topicsRemaining: number
-  goalPerDay: number
-  requiredPerDay: number
-  topicsPerDay: number
-  catchupToday: number
-  behind: boolean
+  completedTodayTopics: CompletedTopic[]
 }
 
 type ChatMsg = { role: 'user' | 'assistant'; content: string }
@@ -170,13 +156,8 @@ export default function Dashboard() {
   const urgencyColor =
     data.daysLeft <= 7 ? 'var(--red)' : data.daysLeft <= 14 ? 'var(--amber)' : 'var(--green)'
 
-  const hasWeakAreas = (data.weakAreas?.length ?? 0) > 0
-  const lessonLocked = hasWeakAreas && !data.weakAreaSessionDoneToday
-
   const topicsRemaining = data.topicsRemaining ?? (data.totalTopics - data.completedCount)
-  const effectiveDays = data.effectiveDays ?? Math.max(1, data.daysLeft - 3)
-  const topicsPerDay = data.topicsPerDay ?? Math.ceil(topicsRemaining / effectiveDays)
-  const paceColor = data.behind ? 'var(--red)' : 'var(--green)'
+  const completedToday = data.completedTodayTopics ?? []
 
   return (
     <div className={styles.page}>
@@ -250,61 +231,35 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Topic pace tracker */}
+        {/* Calm status line — informational, no quota or pressure */}
         <div className={styles.paceRow}>
-          <span className={styles.paceTopicsNum} style={{ color: paceColor }}>{topicsPerDay}</span>
-          <span className={styles.paceTopicsLabel}>topics today</span>
+          <span className={styles.paceMeta}>{topicsRemaining} topics remaining</span>
           <span className={styles.paceSep}>·</span>
-          <span className={styles.paceMeta}>goal {data.goalPerDay ?? 5}/day</span>
+          <span className={styles.paceMeta}>{completedToday.length} done today</span>
           <span className={styles.paceSep}>·</span>
-          <span className={styles.paceMeta}>{topicsRemaining} remaining</span>
-          <span className={styles.paceSep}>·</span>
-          <span className={styles.paceMeta}>{effectiveDays}d to Jun 15</span>
-          {data.behind && (
-            <>
-              <span className={styles.paceSep}>·</span>
-              <span className={styles.paceCatchup}>behind — complete {data.catchupToday} today to get back to {data.goalPerDay ?? 5}/day</span>
-            </>
-          )}
+          <span className={styles.paceMeta}>study at your own pace</span>
         </div>
 
-        {/* Next topic CTA */}
+        {/* Next topic CTA — always available, never locked */}
         {data.nextTopic && (
-          lessonLocked ? (
-            <div className={styles.nextTopicLocked}>
-              <div className={styles.nextTopicLeft}>
-                <span className={styles.nextLabel} style={{ color: 'var(--amber)' }}>UP NEXT — LOCKED</span>
-                <span className={styles.nextName} style={{ color: 'var(--text-2)' }}>{data.nextTopic.topic_name}</span>
-                <span className={styles.nextDomain}>Complete the weak area session below to unlock</span>
-              </div>
-              <div className={styles.nextArrow} style={{ color: 'var(--amber)', fontSize: 18 }}>🔒</div>
+          <Link href={`/session/${data.nextTopic.topic_id}`} className={styles.nextTopicCard}>
+            <div className={styles.nextTopicLeft}>
+              <span className={styles.nextLabel}>UP NEXT</span>
+              <span className={styles.nextName}>{data.nextTopic.topic_name}</span>
+              <span className={styles.nextDomain}>
+                Domain {data.nextTopic.domain} — {DOMAIN_NAMES[data.nextTopic.domain]}
+              </span>
             </div>
-          ) : (
-            <Link href={`/session/${data.nextTopic.topic_id}`} className={styles.nextTopicCard}>
-              <div className={styles.nextTopicLeft}>
-                <span className={styles.nextLabel}>UP NEXT</span>
-                <span className={styles.nextName}>{data.nextTopic.topic_name}</span>
-                <span className={styles.nextDomain}>
-                  Domain {data.nextTopic.domain} — {DOMAIN_NAMES[data.nextTopic.domain]}
-                </span>
-              </div>
-              <div className={styles.nextArrow}>→</div>
-            </Link>
-          )
+            <div className={styles.nextArrow}>→</div>
+          </Link>
         )}
 
         {/* Completed today */}
-        {((data.additionalCompleted?.length ?? 0) + (data.planCompletedCount ?? 0)) > 0 && (
+        {completedToday.length > 0 && (
           <div className={styles.additionalCard}>
-            <span className={styles.additionalLabel}>COMPLETED TODAY — {(data.additionalCompleted?.length ?? 0) + (data.planCompletedCount ?? 0)} topics</span>
+            <span className={styles.additionalLabel}>COMPLETED TODAY — {completedToday.length} topic{completedToday.length > 1 ? 's' : ''}</span>
             <div className={styles.additionalList}>
-              {(data.planTopics ?? []).filter(t => t.completedToday).map((t) => (
-                <div key={t.id} className={styles.additionalItem}>
-                  <span className={styles.additionalCheck}>✓</span>
-                  <span className={styles.additionalName}>{t.name}</span>
-                </div>
-              ))}
-              {data.additionalCompleted.map((t) => (
+              {completedToday.map((t) => (
                 <div key={t.id} className={styles.additionalItem}>
                   <span className={styles.additionalCheck}>✓</span>
                   <span className={styles.additionalName}>{t.name}</span>
