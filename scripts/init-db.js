@@ -1,10 +1,16 @@
 // scripts/init-db.js
-// Optional: create the schema + seed topics in your Supabase Postgres DB up front.
-// Seeding also happens automatically on the app's first request (see lib/db.ts
-// ready()), so this script is mainly to verify your DATABASE_URL works.
+// Creates the schema + seeds topics in your Supabase Postgres DB, and applies
+// additive column migrations. This is the ONLY place schema changes reach the
+// database: the deployed app never runs DDL at request time (see lib/db.ts —
+// CREATE/ALTER on serverless cold starts took pooler locks and caused 504s).
+//
+// Run this after pulling any change that adds a table or column, and once after
+// the first deploy:
 //
 //   npm run db:init
 //
+// It is idempotent (CREATE TABLE IF NOT EXISTS / ADD COLUMN IF NOT EXISTS /
+// INSERT ... ON CONFLICT DO NOTHING), so it is safe to re-run.
 // Reads DATABASE_URL from .env.local (or the environment).
 
 const fs = require('fs')
@@ -83,6 +89,10 @@ async function main() {
         topic_ids TEXT NOT NULL,
         created_at TIMESTAMPTZ DEFAULT now()
       );
+      -- Spaced-repetition review schedule (added 2025; keep in sync with lib/db.ts ensureSchema).
+      ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_due TEXT;
+      ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_interval INTEGER;
+      ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_streak INTEGER DEFAULT 0;
       INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
     `)
 
