@@ -105,8 +105,6 @@ export default function WeakAreaSessionPage() {
 
   // Guide state
   const [guideContent, setGuideContent] = useState('')
-  const streamBufRef = useRef('')
-  const rafIdRef = useRef(0)
 
   // Quiz state
   const [questions, setQuestions] = useState<Question[]>([])
@@ -140,11 +138,11 @@ export default function WeakAreaSessionPage() {
   // ── Start guide for current group ─────────────────────────────────────────
   function startGuide() {
     setGuideContent('')
-    streamBufRef.current = ''
     setPhase('area-guide')
 
-    const flush = () => { setGuideContent(streamBufRef.current); rafIdRef.current = 0 }
-
+    // Buffer the whole guide, then render it once. Painting each streamed chunk
+    // as it arrived made the text appear in ugly jerks; the user reads it all at
+    // once anyway, so we wait for the full response and display it complete.
     fetch('/api/weak-area/session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -154,15 +152,14 @@ export default function WeakAreaSessionPage() {
       const reader = res.body?.getReader()
       const decoder = new TextDecoder()
       if (!reader) return
+      let buf = ''
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
-        streamBufRef.current += decoder.decode(value, { stream: true })
-        if (!rafIdRef.current) rafIdRef.current = requestAnimationFrame(flush)
+        buf += decoder.decode(value, { stream: true })
       }
-      if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = 0 }
-      streamBufRef.current += decoder.decode()
-      setGuideContent(streamBufRef.current)
+      buf += decoder.decode()
+      setGuideContent(buf)
     })
   }
 

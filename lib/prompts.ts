@@ -164,6 +164,39 @@ Respond with ONLY valid JSON, no markdown fences:
 }`
 }
 
+// In-lecture "checkpoint" checks: one quick retrieval question per study-guide
+// section, answered right after reading that section (testing effect). Consumed by
+// app/api/session/checkpoints/route.ts. These are low-stakes practice — NOT the
+// graded topic quiz — so they stay simpler and shorter than exam questions.
+// Scope is locked to each section's own text (same rule as every quiz generator).
+export function buildCheckpointsPrompt(guideContent: string, topicName: string): string {
+  return `TOPIC: ${topicName}
+
+Below is a study guide split into "### " sections. For EACH content section, write ONE quick "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
+
+Rules:
+- One question per "### " section, in the order the sections appear. SKIP the "### Exam flags" section entirely (no question for it).
+- SCOPE LOCK: each question tests ONLY what its own section states. Never use facts from another section, and never introduce any term, technology, or concept not written in that section.
+- Pick the type per section: "mc" for a concrete fact/definition/recognition check; "text" for a section whose point is conceptual (a why/how/when-to-use). Aim for a genuine MIX across the guide, not all one type.
+- Keep checkpoints QUICK — a plain recall/understanding check, shorter and simpler than an exam question. No tricky multi-clause scenarios.
+- For "mc": exactly 4 options A–D, all within ±15 words of each other; the correct answer must NOT be the longest. Distractors plausible, no throwaways.
+- For "text": ask the student to state or apply the section's key idea in 1–2 sentences. Put what a sound answer says in "rubric" (a guide, not a checklist of required words).
+- "section" must be the section's heading text copied EXACTLY, without the leading "### ".
+- Plain prose in every field. No markdown, no bold.
+- Keep every explanation to 1–2 sentences. Brevity is mandatory — long output is truncated mid-JSON and generation fails.
+
+Respond with ONLY valid JSON, no markdown fences:
+{
+  "checkpoints": [
+    { "section": "<heading text>", "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "B", "explanation": "Plain prose, 1-2 sentences." },
+    { "section": "<heading text>", "type": "text", "question": "...", "rubric": "What a sound answer states.", "explanation": "Plain prose, 1-2 sentences." }
+  ]
+}
+
+STUDY GUIDE:
+${guideContent}`
+}
+
 export function buildDomainFinalQuizPrompt(
   domain: number,
   domainName: string,

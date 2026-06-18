@@ -26,6 +26,47 @@ interface TextQuestion {
 
 type Question = MCQuestion | TextQuestion
 
+// In-lecture comprehension checks: one per study-guide section, from /api/session/checkpoints
+interface MCCheckpoint {
+  section: string
+  type: 'mc'
+  question: string
+  options: Record<string, string>
+  correct: string
+  explanation: string
+}
+interface TextCheckpoint {
+  section: string
+  type: 'text'
+  question: string
+  rubric: string
+  explanation: string
+}
+type Checkpoint = MCCheckpoint | TextCheckpoint
+
+const normHeading = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]+/g, '')
+
+// Split a study guide into its intro (everything before the first "### ") and its
+// "### " sections (heading + raw markdown, heading line included so it re-renders).
+function parseGuide(md: string): { introMd: string; sections: { heading: string; raw: string }[] } {
+  const sections: { heading: string; raw: string }[] = []
+  const intro: string[] = []
+  let cur: { heading: string; lines: string[] } | null = null
+  for (const line of md.split('\n')) {
+    const m = /^###\s+(.*)$/.exec(line)
+    if (m) {
+      if (cur) sections.push({ heading: cur.heading, raw: cur.lines.join('\n') })
+      cur = { heading: m[1].trim(), lines: [line] }
+    } else if (cur) {
+      cur.lines.push(line)
+    } else {
+      intro.push(line)
+    }
+  }
+  if (cur) sections.push({ heading: cur.heading, raw: cur.lines.join('\n') })
+  return { introMd: intro.join('\n').trim(), sections }
+}
+
 type Phase = 'loading-guide' | 'guide' | 'loading-quiz' | 'quiz' | 'loading-second-chance' | 'second-chance' | 'results'
 
 export default function SessionPage() {
@@ -66,6 +107,16 @@ export default function SessionPage() {
   // Maps second-chance index → original main-quiz wrong index
   const [wrongIdxMap, setWrongIdxMap] = useState<number[]>([])
 
+  // Checkpoint reading — section-by-section comprehension checks while reading the guide
+  const [introMd, setIntroMd] = useState('')
+  const [sections, setSections] = useState<{ heading: string; raw: string }[]>([])
+  const [checkpoints, setCheckpoints] = useState<(Checkpoint | null)[]>([])
+  const [visibleCount, setVisibleCount] = useState(1)
+  const [cpMc, setCpMc] = useState<Record<number, string>>({})
+  const [cpText, setCpText] = useState<Record<number, string>>({})
+  const [cpTextGrading, setCpTextGrading] = useState<number | null>(null)
+  const [cpTextResult, setCpTextResult] = useState<Record<number, { passed: boolean; feedback: string }>>({})
+
   const [retakeKey, setRetakeKey] = useState(0)
   const isRetake = retakeKey > 0
   const [quizError, setQuizError] = useState('')
@@ -85,6 +136,15 @@ export default function SessionPage() {
     setGuideContent('')
     setGuideError('')
     streamBufRef.current = ''
+    // Reset checkpoint reading state for the fresh guide
+    setIntroMd('')
+    setSections([])
+    setCheckpoints([])
+    setVisibleCount(1)
+    setCpMc({})
+    setCpText({})
+    setCpTextResult({})
+    setCpTextGrading(null)
 
     const ac = new AbortController()
 
@@ -103,7 +163,8 @@ export default function SessionPage() {
           return
         }
 
-        setTopicName(decodeURIComponent(res.headers.get('X-Topic-Name') || ''))
+        const name = decodeURIComponent(res.headers.get('X-Topic-Name') || '')
+        setTopicName(name)
         setDomain(parseInt(res.headers.get('X-Domain') || '0'))
 
         // Buffer the full response, then display it all at once
@@ -130,6 +191,7 @@ export default function SessionPage() {
 
         setGuideContent(streamBufRef.current)
         setPhase('guide')
+        loadCheckpoints(streamBufRef.current, name)
       })
       .catch((err) => {
         if (err.name !== 'AbortError') {
@@ -142,6 +204,82 @@ export default function SessionPage() {
   }, [topicId, retakeKey, guideReloadKey])
 
   const retryGuide = () => setGuideReloadKey((k) => k + 1)
+
+  // ── Checkpoint reading ──────────────────────────────────────────────────────
+  // Parse the guide into sections and fetch one comprehension check per section.
+  // On any failure we reveal the whole guide unblocked (checks are practice, not a gate).
+  const loadCheckpoints = async (guideText: string, name: string) => {
+    const { introMd: intro, sections: secs } = parseGuide(guideText)
+    setIntroMd(intro)
+    setSections(secs)
+    setVisibleCount(1)
+    setCpMc({})
+    setCpText({})
+    setCpTextResult({})
+    setCpTextGrading(null)
+    if (secs.length === 0) { setCheckpoints([]); return }
+
+    try {
+      const res = await fetch('/api/session/checkpoints', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ guideContent: guideText, topicName: name }),
+      })
+      if (!res.ok) throw new Error('checkpoints failed')
+      const data = await res.json()
+      const cps: Checkpoint[] = Array.isArray(data.checkpoints) ? data.checkpoints : []
+      // Align one checkpoint to each section by matching the echoed heading.
+      const aligned = secs.map(
+        (s) => cps.find((c) => normHeading(c.section || '') === normHeading(s.heading)) || null
+      )
+      setCheckpoints(aligned)
+    } catch {
+      // Couldn't generate checks — don't trap the reader. Reveal everything, no checks.
+      setCheckpoints(secs.map(() => null))
+      setVisibleCount(secs.length)
+    }
+  }
+
+  const checkpointsReady = sections.length > 0 && checkpoints.length === sections.length
+  const cpFor = (i: number): Checkpoint | null => checkpoints[i] ?? null
+  const cpAnswered = (i: number): boolean => {
+    const cp = cpFor(i)
+    if (!cp) return true
+    return cp.type === 'mc' ? cpMc[i] != null : !!cpTextResult[i]
+  }
+
+  const handleCpMc = (i: number, letter: string) => {
+    if (cpMc[i] != null) return
+    setCpMc((prev) => ({ ...prev, [i]: letter }))
+  }
+
+  const gradeCpText = async (i: number) => {
+    const cp = cpFor(i)
+    if (!cp || cp.type !== 'text') return
+    const ans = (cpText[i] || '').trim()
+    if (!ans) return
+    setCpTextGrading(i)
+    try {
+      const res = await fetch('/api/quiz/grade', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: cp.question,
+          correctAnswer: cp.rubric,
+          explanation: cp.explanation,
+          userText: ans,
+        }),
+      })
+      if (res.ok) {
+        const result = await res.json()
+        setCpTextResult((prev) => ({ ...prev, [i]: result }))
+      }
+    } finally {
+      setCpTextGrading(null)
+    }
+  }
+
+  const advanceSection = () => setVisibleCount((c) => Math.min(c + 1, sections.length))
 
   const startQuiz = async () => {
     // Never generate a quiz from a missing/failed guide — otherwise the quiz
@@ -411,12 +549,120 @@ export default function SessionPage() {
     setTextGradeResult(null)
     setTextResults({})
     setTextAnswers({})
+    setIntroMd('')
+    setSections([])
+    setCheckpoints([])
+    setVisibleCount(1)
+    setCpMc({})
+    setCpText({})
+    setCpTextResult({})
+    setCpTextGrading(null)
     setRetakeKey((k) => k + 1)
   }
 
   const q = questions[currentQ]
   const userAnswerForCurrent = userAnswers[currentQ]
   const isTextQ = q?.type === 'text'
+
+  // One in-lecture comprehension check, rendered under its guide section.
+  const renderCheckpoint = (i: number) => {
+    if (!checkpointsReady) {
+      // Only the current (last visible) section shows the "generating" state.
+      return i === visibleCount - 1 ? (
+        <div className={styles.cpLoading}>
+          <div className={styles.loadingDot} />
+          <span>Preparing a quick check…</span>
+        </div>
+      ) : null
+    }
+    const cp = cpFor(i)
+    if (!cp) return null
+
+    if (cp.type === 'mc') {
+      const chosen = cpMc[i]
+      return (
+        <div className={styles.checkpoint}>
+          <div className={styles.cpLabel}>Quick check</div>
+          <div className={styles.quizCard}>
+            <div className={styles.qText}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ p: ({ children }) => <>{children}</> }}>
+                {cp.question}
+              </ReactMarkdown>
+            </div>
+            <div className={styles.options}>
+              {Object.entries(cp.options).map(([letter, text]) => {
+                let optClass = styles.option
+                if (chosen != null) {
+                  if (letter === cp.correct) optClass = `${styles.option} ${styles.optCorrect}`
+                  else if (letter === chosen) optClass = `${styles.option} ${styles.optWrong}`
+                  else optClass = `${styles.option} ${styles.optDim}`
+                }
+                return (
+                  <button key={letter} className={optClass} onClick={() => handleCpMc(i, letter)} disabled={chosen != null}>
+                    <span className={styles.optLetter}>{letter}</span>
+                    <span className={styles.optText}>{text}</span>
+                  </button>
+                )
+              })}
+            </div>
+            {chosen != null && (
+              <div className={`${styles.explanation} ${chosen === cp.correct ? styles.expCorrect : styles.expWrong}`}>
+                <div className={styles.expLabel}>
+                  {chosen === cp.correct ? '✓ Correct' : `✗ Not quite — answer: ${cp.correct}`}
+                </div>
+                <div className={styles.expText}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{cp.explanation}</ReactMarkdown>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    // Text checkpoint
+    const result = cpTextResult[i]
+    return (
+      <div className={styles.checkpoint}>
+        <div className={styles.cpLabel}>Quick check</div>
+        <div className={styles.quizCard}>
+          <div className={styles.qText}>{cp.question}</div>
+          {!result ? (
+            <>
+              <textarea
+                className={styles.textInput}
+                value={cpText[i] || ''}
+                onChange={(e) => setCpText((prev) => ({ ...prev, [i]: e.target.value }))}
+                placeholder="Write a quick answer…"
+                disabled={cpTextGrading === i}
+                rows={3}
+              />
+              <button
+                className={styles.btnSubmitText}
+                onClick={() => gradeCpText(i)}
+                disabled={!(cpText[i] || '').trim() || cpTextGrading === i}
+              >
+                {cpTextGrading === i ? 'Checking…' : 'Check Answer →'}
+              </button>
+            </>
+          ) : (
+            <div className={`${styles.textFeedback} ${result.passed ? styles.textFeedbackPass : styles.textFeedbackFail}`}>
+              <div className={styles.textFeedbackLabel}>
+                {result.passed ? '✓ Good understanding' : '✗ Review this'}
+              </div>
+              <div className={styles.textFeedbackBody}>{result.feedback}</div>
+              <div className={styles.textFeedbackModel}>
+                <span className={styles.textFeedbackModelLabel}>Model answer:</span> {cp.explanation}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  const allSectionsRevealed = sections.length === 0 || visibleCount >= sections.length
+  const lastSectionAnswered = sections.length === 0 || (checkpointsReady && cpAnswered(sections.length - 1))
 
   return (
     <div className={styles.page}>
@@ -461,17 +707,60 @@ export default function SessionPage() {
               <button className={styles.btnPrimary} onClick={retryGuide}>Retry</button>
             </div>
           )}
+          {/* Section-by-section reading with a comprehension check after each section */}
           {phase === 'guide' && guideContent && (
-            <div className={`${styles.guideContent} md-content`}>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{guideContent}</ReactMarkdown>
+            <>
+              {introMd && (
+                <div className={`${styles.guideContent} md-content`} style={{ marginBottom: 8 }}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{introMd}</ReactMarkdown>
+                </div>
+              )}
+              {sections.length === 0 && (
+                <div className={`${styles.guideContent} md-content`}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{guideContent}</ReactMarkdown>
+                </div>
+              )}
+              {sections.slice(0, visibleCount).map((s, i) => (
+                <div key={i} className={styles.sectionBlock}>
+                  <div className={`${styles.guideContent} md-content`} style={{ marginBottom: 0 }}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.raw}</ReactMarkdown>
+                  </div>
+                  {renderCheckpoint(i)}
+                </div>
+              ))}
+            </>
+          )}
+
+          {/* Advance to next section — gated on answering the current check */}
+          {phase === 'guide' && guideContent && sections.length > 0 && !allSectionsRevealed && (
+            <div className={styles.guideActions}>
+              <button
+                className={styles.btnPrimary}
+                onClick={advanceSection}
+                disabled={!checkpointsReady || !cpAnswered(visibleCount - 1)}
+              >
+                Next section →
+              </button>
+              <span className={styles.retakeNote}>
+                {!checkpointsReady
+                  ? 'Preparing check…'
+                  : !cpAnswered(visibleCount - 1)
+                    ? 'Answer the check to continue'
+                    : `Section ${visibleCount} of ${sections.length}`}
+              </span>
             </div>
           )}
-          {phase === 'guide' && guideContent && (
+
+          {/* Start the graded quiz — only once the last section's check is done */}
+          {phase === 'guide' && guideContent && allSectionsRevealed && (
             <div className={styles.guideActions}>
-              <button className={styles.btnPrimary} onClick={startQuiz}>
+              <button className={styles.btnPrimary} onClick={startQuiz} disabled={!lastSectionAnswered}>
                 Start Quiz →
               </button>
-              {isRetake && (
+              {!lastSectionAnswered && (
+                <span className={styles.retakeNote}>Answer the check to continue</span>
+              )}
+              {isRetake && lastSectionAnswered && (
                 <span className={styles.retakeNote}>Retake — new questions generated</span>
               )}
               {quizError && (
@@ -481,7 +770,7 @@ export default function SessionPage() {
           )}
 
           {/* ── Chat ── */}
-          {phase === 'guide' && guideContent && (
+          {phase === 'guide' && guideContent && allSectionsRevealed && (
             <div className={styles.chatSection}>
               <div className={styles.chatLabel}>ASK A QUESTION</div>
               {chatHistory.length > 0 && (

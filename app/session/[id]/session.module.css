@@ -668,6 +668,40 @@
 .reviewExp p { margin: 0 0 8px; }
 .reviewExp p:last-child { margin-bottom: 0; }
 
+/* Checkpoint reading — per-section in-lecture checks */
+.sectionBlock {
+  margin-bottom: 8px;
+}
+
+.checkpoint {
+  margin: 8px 0 28px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.cpLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.cpLoading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 24px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  color: var(--text-3);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+}
+
 /* ── Mobile ── */
 @media (max-width: 460px) {
   .page { padding: 0 12px 32px; }
