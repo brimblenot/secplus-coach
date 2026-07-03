@@ -66,6 +66,13 @@
 
 .finalQuizBtn:hover { opacity: 0.75; }
 
+.titleBtns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .progress {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
@@ -106,6 +113,16 @@
 
 .topicItem.passed { opacity: 0.65; }
 
+.topicMain {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
 .topicNum {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
@@ -136,6 +153,28 @@
   min-width: 16px;
   text-align: center;
 }
+
+.reviewBtn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border: 1px solid var(--blue-border);
+  color: var(--blue);
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+
+.reviewBtn:hover { background: var(--blue-dim); }
+
+.reviewBtnShaky {
+  border-color: var(--amber-border);
+  color: var(--amber);
+}
+
+.reviewBtnShaky:hover { background: var(--amber-dim); }
 
 /* ── Mobile ── */
 @media (max-width: 460px) {

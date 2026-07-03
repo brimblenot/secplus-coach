@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import {
   getAllTopics, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore,
   getNextTopic, getCourseProgress, getDomainQuizPending, isWeakAreaSessionDoneToday,
-  getTopicsCompletedOn, getDueReviewCount, localToday,
+  getTopicsCompletedOn, localToday,
   STUDY_ORDER, ALL_TOPICS,
 } from '@/lib/db'
 
@@ -12,7 +12,7 @@ export async function GET() {
   try {
     const today = localToday()
 
-    const [topics, weakAreas, daysLeft, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, completedToday, reviewsDue] =
+    const [topics, weakAreas, daysLeft, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, completedToday] =
       await Promise.all([
         getAllTopics(),
         getWeakAreas(),
@@ -24,7 +24,6 @@ export async function GET() {
         getDomainQuizPending(),
         isWeakAreaSessionDoneToday(),
         getTopicsCompletedOn(today),
-        getDueReviewCount(today),
       ])
 
     const passedIds = new Set(topics.filter((t) => t.status === 'passed').map((t) => t.topic_id))
@@ -68,7 +67,6 @@ export async function GET() {
       weakAreaSessionDoneToday,
       topicsRemaining,
       completedTodayTopics,
-      reviewsDue,
     })
   } catch (err) {
     console.error(err)

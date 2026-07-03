@@ -72,9 +72,14 @@ export default function DomainPage() {
       <div className={styles.domainTitle}>
         <div className={styles.domainTitleRow}>
           <h1 style={{ color }}>{DOMAIN_NAMES[domainId]}</h1>
-          <Link href={`/quiz/domain/${domainId}`} className={styles.finalQuizBtn} style={{ borderColor: color, color }}>
-            Final Quiz →
-          </Link>
+          <div className={styles.titleBtns}>
+            <Link href={`/review/domain/${domainId}`} className={styles.finalQuizBtn} style={{ borderColor: 'var(--blue)', color: 'var(--blue)' }}>
+              Review Domain →
+            </Link>
+            <Link href={`/quiz/domain/${domainId}`} className={styles.finalQuizBtn} style={{ borderColor: color, color }}>
+              Final Quiz →
+            </Link>
+          </div>
         </div>
         <span className={styles.progress}>{completed}/{topics.length} complete</span>
       </div>
@@ -83,42 +88,58 @@ export default function DomainPage() {
         <div className={styles.loading}>Loading...</div>
       ) : (
         <div className={styles.topicList}>
-          {topics.map((t, i) => (
-            <Link
-              key={t.topic_id}
-              href={`/session/${t.topic_id}`}
-              className={`${styles.topicItem} ${styles[t.status] || ''}`}
-              style={{ animationDelay: `${i * 0.03}s` }}
-            >
-              <span className={styles.topicNum}>{t.topic_id}</span>
-              <span className={styles.topicName}>{t.topic_name}</span>
-              <div className={styles.topicRight}>
-                {t.quiz_score !== null && (
+          {topics.map((t, i) => {
+            // You can only review what you've studied. Shaky topics (failed, or
+            // passed under 80%) get a highlighted button so reinforcement targets
+            // the weakest material first — no schedule, just a visual hint.
+            const studied = t.status === 'passed' || t.status === 'failed'
+            const shaky = t.status === 'failed' || (t.quiz_score !== null && t.quiz_score < 80)
+            return (
+              <div
+                key={t.topic_id}
+                className={`${styles.topicItem} ${styles[t.status] || ''}`}
+                style={{ animationDelay: `${i * 0.03}s` }}
+              >
+                <Link href={`/session/${t.topic_id}`} className={styles.topicMain}>
+                  <span className={styles.topicNum}>{t.topic_id}</span>
+                  <span className={styles.topicName}>{t.topic_name}</span>
+                </Link>
+                <div className={styles.topicRight}>
+                  {t.quiz_score !== null && (
+                    <span
+                      className={styles.score}
+                      style={{ color: t.quiz_score >= 70 ? 'var(--green)' : 'var(--red)' }}
+                    >
+                      {t.quiz_score}%
+                    </span>
+                  )}
                   <span
-                    className={styles.score}
-                    style={{ color: t.quiz_score >= 70 ? 'var(--green)' : 'var(--red)' }}
+                    className={styles.statusIcon}
+                    style={{
+                      color:
+                        t.status === 'passed'
+                          ? 'var(--green)'
+                          : t.status === 'failed'
+                          ? 'var(--red)'
+                          : t.status === 'studying'
+                          ? 'var(--amber)'
+                          : 'var(--text-3)',
+                    }}
                   >
-                    {t.quiz_score}%
+                    {STATUS_ICONS[t.status]}
                   </span>
-                )}
-                <span
-                  className={styles.statusIcon}
-                  style={{
-                    color:
-                      t.status === 'passed'
-                        ? 'var(--green)'
-                        : t.status === 'failed'
-                        ? 'var(--red)'
-                        : t.status === 'studying'
-                        ? 'var(--amber)'
-                        : 'var(--text-3)',
-                  }}
-                >
-                  {STATUS_ICONS[t.status]}
-                </span>
+                  {studied && (
+                    <Link
+                      href={`/review/topic/${t.topic_id}`}
+                      className={`${styles.reviewBtn} ${shaky ? styles.reviewBtnShaky : ''}`}
+                    >
+                      Review
+                    </Link>
+                  )}
+                </div>
               </div>
-            </Link>
-          ))}
+            )
+          })}
         </div>
       )}
     </div>

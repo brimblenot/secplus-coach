@@ -462,70 +462,16 @@ export async function getCourseProgress(): Promise<number> {
   return Math.round((completed / STUDY_ORDER.length) * 100)
 }
 
-// ── Spaced repetition ──────────────────────────────────────────────────────────
-// A Leitner-style ladder: each successful review pushes the next one further out;
-// a missed review resets to the front. `review_streak` is the index into the ladder.
-// All dates are Eastern YYYY-MM-DD strings (same convention as localToday()).
-const REVIEW_INTERVALS = [1, 3, 7, 16, 35]
-
-// Add `n` days to a YYYY-MM-DD date string, returning a YYYY-MM-DD string. Anchored
-// at noon UTC so daylight-saving shifts can't bump the result to an adjacent day.
-function addDaysStr(dateStr: string, n: number): string {
-  const d = new Date(`${dateStr}T12:00:00Z`)
-  d.setUTCDate(d.getUTCDate() + n)
-  return d.toISOString().slice(0, 10)
-}
-
 export async function getExamDate(): Promise<string> {
   const p = await queryOne<{ exam_date: string }>('SELECT exam_date FROM profile WHERE id = 1')
   return p?.exam_date ?? '2026-06-18'
 }
 
-// Called when a topic is first passed: schedule its first review for tomorrow.
-export async function scheduleFirstReview(topicId: string) {
-  const due = addDaysStr(localToday(), REVIEW_INTERVALS[0])
-  await run(
-    'UPDATE topic_progress SET review_due = ?, review_interval = ?, review_streak = 0 WHERE topic_id = ?',
-    [due, REVIEW_INTERVALS[0], topicId]
-  )
-}
-
-// Called after a review attempt: advance the ladder on pass, reset on miss.
-// The next due date is clamped so it never lands after the exam.
-export async function scheduleReview(topicId: string, passed: boolean) {
-  const row = await queryOne<{ review_streak: number | null }>(
-    'SELECT review_streak FROM topic_progress WHERE topic_id = ?',
-    [topicId]
-  )
-  const prev = row?.review_streak ?? 0
-  const streak = passed ? Math.min(prev + 1, REVIEW_INTERVALS.length - 1) : 0
-  const interval = REVIEW_INTERVALS[streak]
-  let due = addDaysStr(localToday(), interval)
-  const exam = await getExamDate()
-  if (due > exam) due = exam // YYYY-MM-DD strings compare lexically
-  await run(
-    'UPDATE topic_progress SET review_due = ?, review_interval = ?, review_streak = ? WHERE topic_id = ?',
-    [due, interval, streak, topicId]
-  )
-}
-
-export async function getDueReviews(today: string): Promise<TopicProgress[]> {
-  return queryAll<TopicProgress>(
-    `SELECT * FROM topic_progress
-     WHERE status = 'passed' AND review_due IS NOT NULL AND review_due <= ?
-     ORDER BY review_due ASC, domain ASC`,
-    [today]
-  )
-}
-
-export async function getDueReviewCount(today: string): Promise<number> {
-  const r = await queryOne<{ c: number }>(
-    `SELECT COUNT(*)::int AS c FROM topic_progress
-     WHERE status = 'passed' AND review_due IS NOT NULL AND review_due <= ?`,
-    [today]
-  )
-  return r?.c ?? 0
-}
+// NOTE: Reviews are now on-demand and self-paced (per-topic and per-domain), not
+// scheduled. The old Leitner-style spaced-repetition engine has been removed. The
+// `review_due` / `review_interval` / `review_streak` columns on `topic_progress`
+// remain in the schema but are DORMANT — nothing reads or writes them anymore. They
+// are left in place to avoid a destructive migration; drop them only via db:init.
 
 // ── Domain quiz ───────────────────────────────────────────────────────────────
 

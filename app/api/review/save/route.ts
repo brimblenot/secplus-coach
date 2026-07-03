@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { buildWeakAreaPrompt } from '@/lib/prompts'
-import { scheduleReview, getTopic, getWeakAreas, upsertWeakArea } from '@/lib/db'
+import { getTopic, getWeakAreas, upsertWeakArea } from '@/lib/db'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -16,10 +16,8 @@ export async function POST(req: NextRequest) {
     const topic = await getTopic(topicId)
     if (!topic) return NextResponse.json({ error: 'Topic not found' }, { status: 404 })
 
-    // Advance or reset the spaced-repetition schedule for this topic.
-    await scheduleReview(topicId, !!passed)
-
-    // A forgotten topic re-enters the weak-area loop so its specific gaps get drilled.
+    // On-demand review: a missed concept re-enters the weak-area loop so its
+    // specific gaps get drilled. (No scheduling — reviews are self-paced.)
     let newWeakAreas: string[] = []
     const wrongQs: WrongQ[] = Array.isArray(wrongQuestions) ? wrongQuestions : []
     if (!passed && wrongQs.length > 0) {

@@ -44,7 +44,6 @@ interface ProgressData {
   weakAreaSessionDoneToday: boolean
   topicsRemaining: number
   completedTodayTopics: CompletedTopic[]
-  reviewsDue: number
 }
 
 type ChatMsg = { role: 'user' | 'assistant'; content: string }
@@ -240,20 +239,6 @@ export default function Dashboard() {
           <span className={styles.paceSep}>·</span>
           <span className={styles.paceMeta}>study at your own pace</span>
         </div>
-
-        {/* Reviews due — spaced repetition, surfaced first (reviews before new material) */}
-        {(data.reviewsDue ?? 0) > 0 && (
-          <Link href="/review-session" className={styles.reviewCard}>
-            <div className={styles.nextTopicLeft}>
-              <span className={styles.nextLabel} style={{ color: 'var(--blue)' }}>REVIEW DUE</span>
-              <span className={styles.nextName}>
-                {data.reviewsDue} topic{data.reviewsDue > 1 ? 's' : ''} ready to review
-              </span>
-              <span className={styles.nextDomain}>Quick recall check — locks in what you already learned</span>
-            </div>
-            <div className={styles.nextArrow} style={{ color: 'var(--blue)' }}>↻</div>
-          </Link>
-        )}
 
         {/* Next topic CTA — always available, never locked */}
         {data.nextTopic && (

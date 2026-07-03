@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate, exam June 18 2026). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, schedules spaced-repetition reviews, and provides a dashboard coach. Studying is **self-paced** (no daily quota). Not a generic study tool — student context and exam date are hardcoded into system prompts and DB defaults.
+A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate, exam June 18 2026). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, offers on-demand topic and section reviews, and provides a dashboard coach. Studying is **self-paced** (no daily quota). Not a generic study tool — student context and exam date are hardcoded into system prompts and DB defaults.
 
 See [ROADMAP.md](ROADMAP.md) for known issues, planned improvements, and the fastest places to extend the app.
 
@@ -36,10 +36,11 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 **Mobile/PWA:** Viewport + theme color in `app/layout.tsx`; installable manifest in `app/manifest.ts` with generated icons (`app/icon.tsx`, `app/apple-icon.tsx`). Pages have `@media (max-width: 460px)` breakpoints for phone layout.
 
 **File map (pages):**
-- `app/page.tsx` — dashboard (progress, **reviews-due card**, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/review-session`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`.
+- `app/page.tsx` — dashboard (progress, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`.
 - `app/session/[id]/page.tsx` — main study loop: study guide → **section-by-section checkpoint reading** → quiz → second-chance → results.
-- `app/review-session/page.tsx` — spaced-repetition session: due topics → per-topic recall quiz (4 MC + 1 text) with an optional "Need a refresher?" recap → summary. Blue-themed.
-- `app/domain/[id]/page.tsx` — domain detail / topic list; links into per-topic sessions and the domain mastery quiz.
+- `app/review/topic/[id]/page.tsx` — on-demand single-topic review: a 4 MC + 1 text recall quiz (`/api/review/quiz`) with an optional "Need a refresher?" recap; misses flow back to weak areas via `/api/review/save`. Blue-themed, reuses `app/quiz.module.css`.
+- `app/review/domain/[id]/page.tsx` — section review: one mixed quiz across a whole domain (`/api/quiz/domain`), ungated and retakeable (does NOT touch the mastery-quiz gate). Reuses `app/quiz.module.css`.
+- `app/domain/[id]/page.tsx` — domain detail / topic list; each studied topic row has a **Review** button (amber-accented when shaky), plus **Review Domain** (section review) and **Final Quiz** (mastery) buttons in the title row.
 - `app/quiz/domain/[id]/page.tsx` — the 20-question domain mastery quiz UI (calls `/api/quiz/domain` + `/api/quiz/domain/save`).
 - `app/quiz/random/page.tsx` — random/cumulative quiz UI. Builds a multi-domain quiz by calling `/api/quiz/domain` once per domain (5×) and merging the results; there is no dedicated random route. (Has a contract mismatch with the domain route — see ROADMAP.md.)
 - `app/weak-area-session/page.tsx` — grouped weak-area review (all flagged concepts of a topic in one guide + quiz).
@@ -66,7 +67,7 @@ Single file handles connection, schema definition, seeding, and all query functi
 
 **Schema tables:**
 - `profile` — `exam_date` (default `2026-06-18`), `study_hours_per_day`, `last_weak_session` (date string of the last completed weak-area session)
-- `topic_progress` — one row per topic: `status` (pending/studying/passed/failed), `quiz_score`, `quiz_attempts`, `completed_at`, `study_minutes`, plus spaced-repetition fields **`review_due`** (Eastern date string), **`review_interval`** (days), **`review_streak`** (index into the interval ladder)
+- `topic_progress` — one row per topic: `status` (pending/studying/passed/failed), `quiz_score`, `quiz_attempts`, `completed_at`, `study_minutes`. The `review_due` / `review_interval` / `review_streak` columns still exist but are **dormant** — the old scheduled spaced-repetition engine was removed; reviews are now on-demand (nothing reads or writes these columns).
 - `quiz_attempts` — historical topic-quiz records with `questions_json` + `wrong_questions` (review quizzes are NOT logged here, so the quiz average stays a measure of first-time topic performance)
 - `weak_areas` — flagged concepts with `wrong_count`, `resolved` flag, `topic_id`/`topic_name`/`domain` for grouping (`concept` is UNIQUE)
 - `domain_quizzes` — domain mastery quiz results (`passed`/`best_score`/`attempts`)
@@ -117,19 +118,21 @@ Target ~600–850 words. Consumed by `app/api/session/route.ts` (Sonnet, non-str
 2. **Main quiz:** every question scored — MC auto-graded, free-text via `POST /api/quiz/grade` (kept per-index in `textResults`). First-pass score = correct / total.
 3. Any wrong answer of either type → `POST /api/quiz/second-chance` regenerates a same-type makeup question on the same concept (MC→MC, text→text).
 4. **Half credit:** each makeup answered correctly is worth 0.5 of a question (`finalScore = round((firstPassCorrect + 0.5·makeupCorrect) / total · 100)`).
-5. Only concepts wrong on **both** passes get flagged → `POST /api/quiz/save` with `weakAreaIndices`. The save route marks the topic passed/failed, on a first pass **schedules the first spaced review** (`scheduleFirstReview`), and calls Claude to extract concept names → `upsertWeakArea` per concept.
+5. Only concepts wrong on **both** passes get flagged → `POST /api/quiz/save` with `weakAreaIndices`. The save route marks the topic passed/failed and calls Claude to extract concept names → `upsertWeakArea` per concept.
 6. Pass thresholds: **70%** for a topic quiz, **80%** for a domain mastery quiz.
 
 **Gotcha (fixed, watch for regressions):** "Retake Quiz" must reset `phase` back to a loading state in the **same** state batch as it clears `questions`/`wrongIndices`; otherwise the results view renders against an empty `questions` array and crashes. See `handleRetake`.
 
-### Spaced Repetition (the retention engine)
+### On-demand Review (self-paced reinforcement)
 
-A Leitner-style schedule resurfaces passed topics as short retrieval checks (helpers in `lib/db.ts`):
-- **Ladder:** `REVIEW_INTERVALS = [1, 3, 7, 16, 35]` days. `review_streak` is the index into it.
-- **First review:** `scheduleFirstReview(topicId)` (called from `/api/quiz/save` on first pass) sets `review_due = today + 1`.
-- **Subsequent:** `scheduleReview(topicId, passed)` advances one rung on a passed review, resets to rung 0 on a miss; the next `review_due` is clamped to ≤ `exam_date`.
-- **Surfacing:** `getDueReviewCount(today)` feeds the dashboard "Review due: N" card; `getDueReviews(today)` (status=passed, `review_due <= today`) backs `GET /api/review/due`.
-- **A review** (`/review-session`) = a 4 MC + 1 text recall quiz per topic (`/api/review/quiz`), an optional TL;DR recap (`/api/review/refresher`), and `/api/review/save`, which reschedules the topic and — on a miss — feeds the wrong questions to the weak-area extractor so the gap re-enters the weak-area loop. Review pass = ≥60% recalled (`PASS_RATIO`).
+Reviews are **student-triggered, not scheduled** — there is no due date, no queue, and no dashboard "due" card. The model is: learn all the content first, fix misses as you go, then reinforce (weakest-first) as the exam approaches. Two granularities, both reached from the domain page:
+
+- **Per-topic review** (`app/review/topic/[id]`) — the **Review** button on any *studied* topic row (a topic must be `passed`/`failed` before it's reviewable). A 4 MC + 1 text recall quiz (`/api/review/quiz`, scope-locked to the topic transcript) with an optional TL;DR recap (`/api/review/refresher`). On finish it posts to `/api/review/save`, which — on a miss (< 60% recalled, `PASS_RATIO`) — feeds the wrong questions to the weak-area extractor so the gap re-enters the weak-area loop. It does **not** schedule anything.
+- **Section review** (`app/review/domain/[id]`) — the **Review Domain** button on the domain page. One mixed quiz across the whole domain, generated by `/api/quiz/domain` (the same generator as the mastery quiz). It is **ungated and retakeable**: MC-scored for feedback only, no pass threshold, and it deliberately does NOT call `/api/quiz/domain/save`, so it never affects the 80% mastery gate. No weak-area writes (matches mastery-quiz precedent — its questions aren't attributed to a single topic).
+
+**Weakest-first hint:** the domain page marks a topic's Review button amber when it's shaky (`status === 'failed'`, or passed under 80%), so near-exam reinforcement naturally targets what's decayed — the only thing left of the old spacing logic, minus any schedule.
+
+The old Leitner engine (`scheduleFirstReview`/`scheduleReview`/`getDueReviews`/`getDueReviewCount`, `REVIEW_INTERVALS`, `GET /api/review/due`, `/review-session`) has been **removed**. The `review_due`/`review_interval`/`review_streak` columns remain in the schema but are **dormant** (nothing reads or writes them).
 
 ### Weak Area Session Flow
 
@@ -137,7 +140,7 @@ Weak areas are grouped by `topic_id` in `app/weak-area-session/page.tsx` (`group
 
 ### Pace & Self-Paced Dashboard (`app/api/progress/route.ts`)
 
-Studying is **self-paced**: there is no daily topic quota, no "behind" status, and no persisted daily plan. `/api/progress` returns informational fields only — `daysLeft`, `topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, `completedTodayTopics`, and **`reviewsDue`**. The dashboard shows a calm status line ("N remaining · N done today · study at your own pace"), surfaces due reviews first, then the always-open next topic.
+Studying is **self-paced**: there is no daily topic quota, no "behind" status, and no persisted daily plan. `/api/progress` returns informational fields only — `daysLeft`, `topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, and `completedTodayTopics`. The dashboard shows a calm status line ("N remaining · N done today · study at your own pace"), then the always-open next topic. (Review is on-demand from the domain pages, so nothing review-related surfaces here.)
 
 ### Domain Gate
 
@@ -157,21 +160,20 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 
 | Route | Purpose | Model |
 |-------|---------|-------|
-| `GET /api/progress` | Dashboard data (self-paced) + reviewsDue | — |
+| `GET /api/progress` | Dashboard data (self-paced) | — |
 | `POST /api/session` | Study guide (buffered, non-streaming) | Sonnet |
 | `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) | Haiku |
 | `POST /api/session/chat` | In-lecture Q&A | Haiku (streaming) |
 | `POST /api/coach` | Dashboard coach chat | Sonnet (streaming) |
 | `POST /api/quiz` | Generate topic quiz (scope-locked to study guide) | Sonnet |
-| `POST /api/quiz/save` | Grade + schedule first review + flag weak areas | Sonnet |
+| `POST /api/quiz/save` | Grade topic quiz + flag weak areas | Sonnet |
 | `POST /api/quiz/second-chance` | Regenerate questions for misses | Sonnet |
 | `POST /api/quiz/grade` | Grade free-text answer | Sonnet |
-| `POST /api/quiz/domain` | Generate 20-question domain quiz (scope-locked to fed transcripts) | Sonnet |
-| `POST /api/quiz/domain/save` | Save domain quiz result | — |
-| `GET /api/review/due` | List topics due for spaced review today | — |
-| `POST /api/review/quiz` | Generate review recall quiz (4 MC + 1 text, scope-locked) | Sonnet |
-| `POST /api/review/refresher` | Optional TL;DR recap for a review | Haiku |
-| `POST /api/review/save` | Reschedule review + flag weak areas on miss | Sonnet |
+| `POST /api/quiz/domain` | Generate 20-question domain quiz (scope-locked to fed transcripts) — backs both the mastery quiz and the ungated section review | Sonnet |
+| `POST /api/quiz/domain/save` | Save domain **mastery** quiz result (section review does not call this) | — |
+| `POST /api/review/quiz` | Generate on-demand topic review quiz (4 MC + 1 text, scope-locked) | Sonnet |
+| `POST /api/review/refresher` | Optional TL;DR recap for a topic review | Haiku |
+| `POST /api/review/save` | Flag weak areas on miss (no scheduling) | Sonnet |
 | `GET /api/weak-areas` | List unresolved weak areas | — |
 | `PATCH /api/weak-areas` | Mark a weak area resolved | — |
 | `POST /api/weak-areas/complete` | Mark weak area session done today | — |
