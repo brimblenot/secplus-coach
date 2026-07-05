@@ -93,20 +93,21 @@ Transcripts are 121 `.txt` files named `{id}-{topic-name}...en.txt` (Professor M
 
 ### Study Guide Format (`STUDY_GUIDE_SYSTEM_PROMPT` in `lib/prompts.ts`)
 
-Guides are written to be **skimmable and memorable**, not dense prose (an earlier "gloss every term inline, no bold, no lists" version read like a dictionary and caused burnout). The current rules:
+Guides are written to be **skimmable and memorable**, not dense prose (an earlier "gloss every term inline, no bold, no lists" version read like a dictionary and caused burnout) — but they must still **actually explain each concept**, not just analogize it (a later version opened concepts with only an analogy, e.g. "Telnet is a glass phone booth," and never said what Telnet *is*). The current rules:
 - **Rule 1 — scope lock** (see below).
-- **Rule 2 — skimmable structure:** one-line takeaway per section, short bullets, bold key terms on first use, compact Markdown tables for comparisons.
-- **Rule 3 — gloss every term:** define each acronym/command/jargon term as **bold term + short plain definition** (the scope-lock carve-out: glosses are reading aids, NOT new testable scope).
-- **Rule 4 — analogy per concept:** a 1–2 sentence real-world analogy so it sticks.
-- **Rule 6 — structure:** begins with a `### TL;DR` (3–5 bullets, doubles as the review flashback), ends with `### Exam flags` (2–3 transcript-covered topics).
-Target ~600–850 words. Consumed by `app/api/session/route.ts` (Sonnet, non-streaming — the client buffers the full guide then renders it).
+- **Rule 2 — explain first, then skim:** each concept is taught in order — (a) a plain definition of what it IS and DOES (**not** an analogy), (b) key details as short bullets, (c) *then* the analogy. An analogy may never substitute for the definition; a term's first mention may never be an undefined table cell. Bold key terms on first use; compact Markdown tables only for **already-defined** things.
+- **Rule 3 — gloss every term:** define each acronym/command/jargon term as **bold term + short plain definition**, in prose *before* any table it appears in (the scope-lock carve-out: glosses are reading aids, NOT new testable scope).
+- **Rule 4 — analogy per concept:** a 1–2 sentence real-world analogy *after* the explanation, so it sticks.
+- **Rule 6 — opening:** H2 title, then a 1–2 sentence framing intro (plain paragraph, no header) — **no** top-of-guide TL;DR/summary of unread material.
+- **Rule 7 — structure:** H3 sentence-case teaching sections, then a `### Recap` (3–5 bullets, the summary lives at the END now) and `### Exam flags` (2–3 transcript-covered topics).
+Target ~600–900 words. Consumed by `app/api/session/route.ts` (Sonnet, non-streaming — the client buffers the full guide then renders it). `parseGuide` (session page) keeps the pre-first-`###` framing intro always-visible; the `### Recap`/`### Exam flags` sections get no checkpoint and so never gate reading.
 
 ### Scope Lock — quizzes test ONLY taught content
 
 **This is a hard product rule** (see `memory/quiz-scope-lecture-only.md`). Every generator is constrained to the student's actual lecture material; it must never introduce real-but-untaught CompTIA concepts (this caused a complaint where a topic quiz tested cryptographic erasure on SEDs that wasn't in the lecture). Where the lock lives:
 
 - **Study guide** (`STUDY_GUIDE_SYSTEM_PROMPT`, consumed by `app/api/session/route.ts`) — rule 1: only the transcript may be TAUGHT as exam material; the guide is the only source the topic quiz + checkpoints see, so a leak here propagates. Rule 3 glosses are the only carve-out.
-- **Checkpoints** (`buildCheckpointsPrompt`, consumed by `app/api/session/checkpoints/route.ts`) — one question per `### ` section, locked to that section's text; skips `TL;DR` and `Exam flags`.
+- **Checkpoints** (`buildCheckpointsPrompt`, consumed by `app/api/session/checkpoints/route.ts`) — one question per `### ` section, locked to that section's text; skips `Recap` and `Exam flags` (and the header-less framing intro).
 - **Topic quiz** (`app/api/quiz/route.ts`, inline `SYSTEM_PROMPT`) — strict scope lock against `studyGuideContent`.
 - **Second-chance** (`app/api/quiz/second-chance/route.ts`) — receives only the missed questions + topic name; re-tests the same concept with a scope-lock guardrail.
 - **Domain mastery quiz** (`app/api/quiz/domain/route.ts`) — feeds the actual transcripts for the domain's topics (`getTranscript`, capped `PER_TOPIC_CHARS = 4000` each) and locks generation to that content.
@@ -125,7 +126,7 @@ Target ~600–850 words. Consumed by `app/api/session/route.ts` (Sonnet, non-str
 
 ### On-demand Review (self-paced reinforcement)
 
-Reviews are **student-triggered, not scheduled** — there is no due date, no queue, and no dashboard "due" card. The model is: learn all the content first, fix misses as you go, then reinforce (weakest-first) as the exam approaches. Two granularities, both reached from the domain page:
+Reviews are **student-triggered, not scheduled** — there is no due date, no queue, and no dashboard "due" card. The model is: learn all the content first, fix misses as you go, then reinforce (weakest-first) as you get closer to being exam-ready. Two granularities, both reached from the domain page:
 
 - **Per-topic review** (`app/review/topic/[id]`) — the **Review** button on any *studied* topic row (a topic must be `passed`/`failed` before it's reviewable). A 4 MC + 1 text recall quiz (`/api/review/quiz`, scope-locked to the topic transcript) with an optional TL;DR recap (`/api/review/refresher`). On finish it posts to `/api/review/save`, which — on a miss (< 60% recalled, `PASS_RATIO`) — feeds the wrong questions to the weak-area extractor so the gap re-enters the weak-area loop. It does **not** schedule anything.
 - **Section review** (`app/review/domain/[id]`) — the **Review Domain** button on the domain page. One mixed quiz across the whole domain, generated by `/api/quiz/domain` (the same generator as the mastery quiz). It is **ungated and retakeable**: MC-scored for feedback only, no pass threshold, and it deliberately does NOT call `/api/quiz/domain/save`, so it never affects the 80% mastery gate. No weak-area writes (matches mastery-quiz precedent — its questions aren't attributed to a single topic).

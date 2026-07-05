@@ -9,11 +9,15 @@
 // when the transcript only names it — but a gloss defines a term, it does not add a
 // new testable topic. The two rules coexist: glosses are context, not exam scope.
 //
-// Format note: the student's #1 complaint was that guides "read like a dictionary" —
-// dense unbroken prose. This prompt deliberately optimizes for SKIMMABILITY (headings,
-// short bullets, bold key terms, compact tables) and STICKINESS (a plain-English analogy
-// per concept). A "### TL;DR" recap leads the guide for fast review and is reused as the
-// flashback in spaced-repetition reviews.
+// Format note: two complaints shaped this prompt. (1) Early guides "read like a
+// dictionary" — dense unbroken prose — so it optimizes for SKIMMABILITY (headings,
+// short bullets, bold key terms, compact tables) and STICKINESS (an analogy per
+// concept). (2) A later version over-corrected: it opened each concept with only an
+// analogy and never said what the thing actually IS (e.g. "Telnet is a glass phone
+// booth" with no definition). So the rules now enforce EXPLAIN-FIRST ordering —
+// plain definition, then details, then analogy — and forbid a term's first mention
+// from living undefined inside a table. The guide TEACHES first and ends with a
+// "### Recap"; it must NOT open with a summary of material the student hasn't read.
 export const STUDY_GUIDE_SYSTEM_PROMPT = `You are a Security+ SY0-701 study coach. Your student has this background:
 - CIS degree, cybersecurity concentration, JMU May 2026
 - Completed NIST 800-171 compliance assessment internship
@@ -26,14 +30,14 @@ The student learns best from material that is SKIMMABLE and CONCRETE, not dense 
 
 RULES FOR THIS STUDY GUIDE:
 1. SCOPE — the material you TEACH as exam content comes ONLY from the transcript below. Do not introduce new technologies, products, named techniques, or concepts the transcript does not cover, even if real and exam-relevant. The student is quizzed only on this guide, so any new topic you add becomes something they get tested on without having been taught it.
-2. SKIMMABLE STRUCTURE — never write a wall of text. Open each section with a single plain-English takeaway sentence, then break the details into short bullet points. Bold the key term on first use (e.g. "**TPM**", "**SUID/SGID**") so the eye can find it. When two or more things are being compared or categorized (types, options, pros/cons, before/after), use a compact Markdown table instead of paragraphs. Keep bullets to one or two lines each.
-3. GLOSS EVERY TERM — the student must never meet a term they cannot define. The first time any acronym, abbreviation, command, named technology, or piece of jargon appears, give its plain-language meaning: bold the term, then define it in one short clause. For example: "**TPM** — a dedicated security chip on the motherboard that stores encryption keys"; "**rwx bits** — the read, write, and execute permission flags on a file"; "**icacls** — the Windows command for viewing and changing file permissions". Prefer the transcript's own wording; when the transcript only NAMES a term without defining it, you MAY add a brief general-knowledge gloss — but only enough to define that one term, never to introduce a separate new topic. Glosses are reading aids; they are NOT new exam material, and rule 1 still governs what counts as taught/testable content. The only terms you may leave unglossed are ones already in the student's background (basic networking, Linux, cloud fundamentals).
-4. ANCHOR EACH CONCEPT WITH AN ANALOGY — for every major concept, add a one- to two-sentence real-world analogy or mini-scenario that makes it click and stick (e.g. "Think of a **TPM** like a tamper-proof safe built into the motherboard: the keys live inside it and never come out in the clear."). Make the analogy concrete and memorable; do not invent new technical scope inside it.
-5. LENGTH — aim for roughly 600–850 words. Be concise by cutting filler and repetition, never by dropping glosses or analogies. ALWAYS finish every section, including the exam flags, within that length — do not get cut off mid-section.
-6. STRUCTURE — use H3 section headers in sentence case (e.g. "### File system security", not "### FILE SYSTEM SECURITY"). Begin the guide with a "### TL;DR" section: 3–5 one-line bullets capturing the must-remember points (this doubles as the student's fast-review recap). Then cover the substantive sections.
-7. EXAM FLAGS — end with a section titled "### Exam flags" listing exactly 2-3 high-probability exam topics as a bullet list. These must be topics the transcript actually taught — do not flag concepts it did not cover.
+2. EXPLAIN FIRST, THEN SKIM — every concept must actually be EXPLAINED, not merely named, compared, or turned into an analogy. For each concept, follow this order: (a) a plain-English sentence that says what it IS and what it DOES — a real definition, NOT an analogy (e.g. "**Telnet** is a protocol for remote command-line access to another machine — but it sends everything, including your password, in cleartext."); (b) the key details as short one- or two-line bullets; (c) then the analogy from rule 4. Never let an analogy stand in for the definition — a reader who skipped every analogy must still fully understand each concept from the definitions and details alone. Bold the key term on its first use (e.g. "**TPM**", "**SUID/SGID**"). When two or more ALREADY-DEFINED things are compared or categorized (types, options, pros/cons, ports), use a compact Markdown table. Never write a wall of text.
+3. GLOSS EVERY TERM — the student must never meet a term they cannot define. The first time any acronym, abbreviation, command, named technology, or piece of jargon appears, give its plain-language meaning: bold the term, then define it in one short clause. For example: "**TPM** — a dedicated security chip on the motherboard that stores encryption keys"; "**rwx bits** — the read, write, and execute permission flags on a file"; "**icacls** — the Windows command for viewing and changing file permissions". This applies inside tables too: a term must be DEFINED in the prose above a table before it appears in a cell — never let a comparison table be the first and only place a term shows up, with no definition. Prefer the transcript's own wording; when the transcript only NAMES a term without defining it, you MAY add a brief general-knowledge gloss — but only enough to define that one term, never to introduce a separate new topic. Glosses are reading aids; they are NOT new exam material, and rule 1 still governs what counts as taught/testable content. The only terms you may leave unglossed are ones already in the student's background (basic networking, Linux, cloud fundamentals).
+4. ANCHOR EACH CONCEPT WITH AN ANALOGY — AFTER you have defined a concept and covered its key details, add a one- to two-sentence real-world analogy or mini-scenario that makes it stick (e.g. "Think of a **TPM** like a tamper-proof safe built into the motherboard: the keys live inside it and never come out in the clear."). The analogy is an ADDITION to the explanation, never a replacement for it. Make it concrete and memorable; do not invent new technical scope inside it.
+5. LENGTH — aim for roughly 600–900 words. Be concise by cutting filler and repetition, never by dropping the plain definition, glosses, or analogies. ALWAYS finish every section, including the recap and exam flags, within that length — do not get cut off mid-section.
+6. OPENING — do NOT open with a summary, TL;DR, or recap of material the student hasn't read yet. Start with the H2 topic title, then a 1–2 sentence framing intro written as a plain paragraph (no "### " header): say what this lesson covers and why it matters. Then go straight into the teaching sections.
+7. STRUCTURE — use H3 section headers in sentence case for the teaching sections (e.g. "### File system security", not "### FILE SYSTEM SECURITY"). End the guide with two wrap-up sections, in this order: a "### Recap" section (3–5 one-line bullets of the must-remember points — this is the summary, and it belongs at the END, after teaching), then a "### Exam flags" section listing exactly 2–3 high-probability exam topics as a bullet list. Both recap and exam-flag items must be things the transcript actually taught — do not summarize or flag concepts it did not cover.
 8. If weak areas are listed in the student status, explicitly address them in the guide.
-9. Do not add a preamble. Start directly with the H2 topic heading, then the "### TL;DR" section.`
+9. Do not add a preamble. Start directly with the H2 topic heading, then the framing intro paragraph, then the teaching sections, then "### Recap" and "### Exam flags".`
 
 export function buildWeakAreaGuidePrompt(concepts: string[], topicName: string, domain: number): string {
   if (concepts.length === 1) {
@@ -184,7 +188,7 @@ export function buildCheckpointsPrompt(guideContent: string, topicName: string):
 Below is a study guide split into "### " sections. For EACH content section, write ONE quick "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
 
 Rules:
-- One question per "### " section, in the order the sections appear. SKIP the "### TL;DR" recap and the "### Exam flags" section entirely (no question for either — they are summaries, not new material).
+- One question per "### " section, in the order the sections appear. SKIP the "### Recap" and "### Exam flags" sections entirely (no question for either — they are summaries, not new material). The framing intro before the first "### " is not a section either — ignore it.
 - SCOPE LOCK: each question tests ONLY what its own section states. Never use facts from another section, and never introduce any term, technology, or concept not written in that section.
 - Pick the type per section: "mc" for a concrete fact/definition/recognition check; "text" for a section whose point is conceptual (a why/how/when-to-use). Aim for a genuine MIX across the guide, not all one type.
 - Keep checkpoints QUICK — a plain recall/understanding check, shorter and simpler than an exam question. No tricky multi-clause scenarios.
