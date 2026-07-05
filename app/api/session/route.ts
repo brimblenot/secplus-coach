@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getTranscript } from '@/lib/transcripts'
-import { getTopic, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore, updateTopicStatus } from '@/lib/db'
+import { getTopic, getWeakAreas, getCompletedCount, getAverageScore, updateTopicStatus } from '@/lib/db'
 import { STUDY_GUIDE_SYSTEM_PROMPT } from '@/lib/prompts'
 
 export const dynamic = 'force-dynamic'
@@ -20,10 +20,9 @@ export async function POST(req: NextRequest) {
     const topic = await getTopic(topicId)
     if (!topic) return NextResponse.json({ error: 'Topic not found' }, { status: 404 })
 
-    const [transcript, weakAreas, daysLeft, completedTopics, avgScore] = await Promise.all([
+    const [transcript, weakAreas, completedTopics, avgScore] = await Promise.all([
       Promise.resolve(getTranscript(topicId)),
       getWeakAreas(),
-      getDaysUntilExam(),
       getCompletedCount(),
       getAverageScore(),
     ])
@@ -54,7 +53,6 @@ export async function POST(req: NextRequest) {
           {
             type: 'text',
             text: `STUDENT STATUS:
-- Days until exam (June 18, 2026): ${daysLeft}
 - Topics completed: ${completedTopics}/121
 - Quiz average: ${avgScore !== null ? avgScore + '%' : 'none yet'}
 - Active weak areas: ${weakAreas.length > 0 ? weakAreas.map((w) => w.concept).join(', ') : 'none yet'}

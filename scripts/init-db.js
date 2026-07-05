@@ -44,7 +44,6 @@ async function main() {
     await sql.unsafe(`
       CREATE TABLE IF NOT EXISTS profile (
         id INTEGER PRIMARY KEY DEFAULT 1,
-        exam_date TEXT NOT NULL DEFAULT '2026-06-18',
         study_hours_per_day INTEGER DEFAULT 1,
         last_weak_session TEXT
       );
@@ -93,7 +92,7 @@ async function main() {
       ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_due TEXT;
       ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_interval INTEGER;
       ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_streak INTEGER DEFAULT 0;
-      INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
+      INSERT INTO profile (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
     `)
 
     let seeded = 0

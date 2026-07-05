@@ -32,7 +32,6 @@ interface CompletedTopic {
 }
 
 interface ProgressData {
-  daysLeft: number
   completedCount: number
   totalTopics: number
   courseProgress: number
@@ -73,7 +72,6 @@ const DOMAIN_COLORS: Record<number, string> = {
 }
 
 const SUGGESTIONS = [
-  'Am I on pace to pass by June 18?',
   'What should I focus on today?',
   'Where are my weakest areas?',
   'How much do I have left?',
@@ -153,9 +151,6 @@ export default function Dashboard() {
     )
   }
 
-  const urgencyColor =
-    data.daysLeft <= 7 ? 'var(--red)' : data.daysLeft <= 14 ? 'var(--amber)' : 'var(--green)'
-
   const topicsRemaining = data.topicsRemaining ?? (data.totalTopics - data.completedCount)
   const completedToday = data.completedTodayTopics ?? []
 
@@ -168,10 +163,7 @@ export default function Dashboard() {
           <span className={styles.logoSub}>SY0-701 Coach</span>
         </div>
         <div className={styles.headerRight}>
-          <span className={styles.examDate}>Jun 18</span>
-          <span className={styles.daysBadge} style={{ color: urgencyColor, borderColor: urgencyColor }}>
-            {data.daysLeft}d left
-          </span>
+          <span className={styles.selfPacedBadge}>Self-paced</span>
         </div>
       </header>
 

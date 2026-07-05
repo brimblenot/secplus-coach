@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { getTopic, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore } from '@/lib/db'
+import { getTopic, getWeakAreas } from '@/lib/db'
 import { balanceQuizAnswers } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'

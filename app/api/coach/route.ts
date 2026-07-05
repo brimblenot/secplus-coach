@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const { question, history, context } = await req.json()
 
   const {
-    daysLeft, completedCount, totalTopics, courseProgress,
+    completedCount, totalTopics, courseProgress,
     avgScore, weakAreas, domainStats, topicsRemaining, completedTodayTopics,
   } = context
   const weakList = (weakAreas ?? []).map((w: { concept: string; wrong_count: number }) =>
@@ -25,9 +25,6 @@ export async function POST(req: NextRequest) {
 
   const system = `You are a personal CompTIA Security+ SY0-701 study coach. Here is the student's live progress snapshot:
 
-EXAM & TIME
-- Exam date: June 18, 2026 (${daysLeft} calendar days away)
-
 PROGRESS
 - Topics complete: ${completedCount}/${totalTopics} (${courseProgress}%)
 - Topics remaining: ${topicsRemaining}
@@ -35,7 +32,7 @@ PROGRESS
 - Quiz average: ${avgScore !== null ? avgScore + '%' : 'no data yet'}
 
 PACING
-- The student studies SELF-PACED — there is no daily topic quota and no "behind" status. Do NOT pressure them with catch-up targets or daily quotas, and do not invent a required topics/day number. If they ask whether they're on track, you may reason about topics remaining vs. days left as a rough sanity check, but frame it calmly and let them set the pace.
+- The student studies SELF-PACED — there is no exam date, no daily topic quota, and no "behind" status. Do NOT pressure them with catch-up targets, deadlines, or daily quotas, and do not invent a required topics/day number. If they ask whether they're on track, reason about topics remaining and weak areas, but frame it calmly and let them set the pace.
 
 WEAK AREAS
 - ${weakList}

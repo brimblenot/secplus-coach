@@ -33,7 +33,6 @@ async function ensureSchema(): Promise<void> {
   await sql.unsafe(`
     CREATE TABLE IF NOT EXISTS profile (
       id INTEGER PRIMARY KEY DEFAULT 1,
-      exam_date TEXT NOT NULL DEFAULT '2026-06-18',
       study_hours_per_day INTEGER DEFAULT 1,
       last_weak_session TEXT
     );
@@ -82,7 +81,7 @@ async function ensureSchema(): Promise<void> {
     ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_due TEXT;
     ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_interval INTEGER;
     ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_streak INTEGER DEFAULT 0;
-    INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
+    INSERT INTO profile (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
   `)
   const [{ count }] = await sql<{ count: number }[]>`
     SELECT COUNT(*)::int AS count FROM topic_progress`
@@ -437,15 +436,6 @@ export async function resolveWeakArea(id: number) {
   await run('UPDATE weak_areas SET resolved = 1 WHERE id = ?', [id])
 }
 
-export async function getDaysUntilExam(): Promise<number> {
-  const profile = await queryOne<{ exam_date: string }>('SELECT exam_date FROM profile WHERE id = 1')
-  const exam = new Date(profile?.exam_date ?? '2026-06-18')
-  const now = new Date()
-  now.setHours(0, 0, 0, 0)
-  exam.setHours(0, 0, 0, 0)
-  return Math.max(0, Math.ceil((exam.getTime() - now.getTime()) / 86400000))
-}
-
 export async function getNextTopic(): Promise<TopicProgress | null> {
   for (const id of STUDY_ORDER) {
     const t = await queryOne<TopicProgress>(
@@ -460,11 +450,6 @@ export async function getNextTopic(): Promise<TopicProgress | null> {
 export async function getCourseProgress(): Promise<number> {
   const completed = await getCompletedCount()
   return Math.round((completed / STUDY_ORDER.length) * 100)
-}
-
-export async function getExamDate(): Promise<string> {
-  const p = await queryOne<{ exam_date: string }>('SELECT exam_date FROM profile WHERE id = 1')
-  return p?.exam_date ?? '2026-06-18'
 }
 
 // NOTE: Reviews are now on-demand and self-paced (per-topic and per-domain), not

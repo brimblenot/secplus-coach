@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate, exam June 18 2026). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, offers on-demand topic and section reviews, and provides a dashboard coach. Studying is **self-paced** (no daily quota). Not a generic study tool — student context and exam date are hardcoded into system prompts and DB defaults.
+A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, offers on-demand topic and section reviews, and provides a dashboard coach. Studying is **fully self-paced** — there is no exam date, no countdown, and no daily quota anywhere in the app. Not a generic study tool — the student's background context is hardcoded into system prompts.
 
 See [ROADMAP.md](ROADMAP.md) for known issues, planned improvements, and the fastest places to extend the app.
 
@@ -66,7 +66,7 @@ Single file handles connection, schema definition, seeding, and all query functi
 **`npm run db:migrate`** (`scripts/migrate-sqlite-to-pg.js`) is the one-time importer that copied the old local `data/coach.db` (legacy sql.js) into Postgres — kept for reference only. The sql.js path is fully removed; there is no local SQLite file anymore.
 
 **Schema tables:**
-- `profile` — `exam_date` (default `2026-06-18`), `study_hours_per_day`, `last_weak_session` (date string of the last completed weak-area session)
+- `profile` — `study_hours_per_day`, `last_weak_session` (date string of the last completed weak-area session). (The old `exam_date` column was removed when the app went fully self-paced; nothing reads or writes an exam date anymore. Legacy prod DBs may still have a dormant `exam_date` column — it is never queried.)
 - `topic_progress` — one row per topic: `status` (pending/studying/passed/failed), `quiz_score`, `quiz_attempts`, `completed_at`, `study_minutes`. The `review_due` / `review_interval` / `review_streak` columns still exist but are **dormant** — the old scheduled spaced-repetition engine was removed; reviews are now on-demand (nothing reads or writes these columns).
 - `quiz_attempts` — historical topic-quiz records with `questions_json` + `wrong_questions` (review quizzes are NOT logged here, so the quiz average stays a measure of first-time topic performance)
 - `weak_areas` — flagged concepts with `wrong_count`, `resolved` flag, `topic_id`/`topic_name`/`domain` for grouping (`concept` is UNIQUE)
@@ -140,7 +140,7 @@ Weak areas are grouped by `topic_id` in `app/weak-area-session/page.tsx` (`group
 
 ### Pace & Self-Paced Dashboard (`app/api/progress/route.ts`)
 
-Studying is **self-paced**: there is no daily topic quota, no "behind" status, and no persisted daily plan. `/api/progress` returns informational fields only — `daysLeft`, `topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, and `completedTodayTopics`. The dashboard shows a calm status line ("N remaining · N done today · study at your own pace"), then the always-open next topic. (Review is on-demand from the domain pages, so nothing review-related surfaces here.)
+Studying is **self-paced**: there is no exam date, no countdown, no daily topic quota, no "behind" status, and no persisted daily plan. `/api/progress` returns informational fields only — `topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, and `completedTodayTopics`. The dashboard header just shows a "Self-paced" badge, then a calm status line ("N remaining · N done today · study at your own pace"), then the always-open next topic. (Review is on-demand from the domain pages, so nothing review-related surfaces here.)
 
 ### Domain Gate
 
@@ -194,4 +194,4 @@ Key rules baked into the quiz prompts:
 - No verbatim phrases from the study material; stay at SY0-701 exam depth — no vendor-specific or implementation-level minutiae.
 - Keep explanations/rubrics short (long output is truncated mid-JSON and the quiz fails to generate).
 
-The coach (`app/api/coach/route.ts`) receives the `ProgressData` object serialized into its system prompt — days left, topic counts, weak areas, domain breakdown, today's completions — and is explicitly told the student is self-paced (do not nag about quotas or "behind").
+The coach (`app/api/coach/route.ts`) receives the `ProgressData` object serialized into its system prompt — topic counts, weak areas, domain breakdown, today's completions — and is explicitly told the student is self-paced with no exam date (do not nag about deadlines, quotas, or "behind").

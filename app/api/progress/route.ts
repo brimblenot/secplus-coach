@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import {
-  getAllTopics, getWeakAreas, getDaysUntilExam, getCompletedCount, getAverageScore,
+  getAllTopics, getWeakAreas, getCompletedCount, getAverageScore,
   getNextTopic, getCourseProgress, getDomainQuizPending, isWeakAreaSessionDoneToday,
   getTopicsCompletedOn, localToday,
   STUDY_ORDER, ALL_TOPICS,
@@ -12,11 +12,10 @@ export async function GET() {
   try {
     const today = localToday()
 
-    const [topics, weakAreas, daysLeft, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, completedToday] =
+    const [topics, weakAreas, completedCount, avgScore, nextTopic, courseProgress, domainQuizPending, weakAreaSessionDoneToday, completedToday] =
       await Promise.all([
         getAllTopics(),
         getWeakAreas(),
-        getDaysUntilExam(),
         getCompletedCount(),
         getAverageScore(),
         getNextTopic(),
@@ -54,7 +53,6 @@ export async function GET() {
     }))
 
     return NextResponse.json({
-      daysLeft,
       completedCount,
       totalTopics: topics.length,
       courseProgress,

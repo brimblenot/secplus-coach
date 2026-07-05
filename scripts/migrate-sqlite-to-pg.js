@@ -59,7 +59,7 @@ async function main() {
     console.log('Ensuring schema exists…')
     await sql.unsafe(`
       CREATE TABLE IF NOT EXISTS profile (
-        id INTEGER PRIMARY KEY DEFAULT 1, exam_date TEXT NOT NULL DEFAULT '2026-06-18',
+        id INTEGER PRIMARY KEY DEFAULT 1,
         study_hours_per_day INTEGER DEFAULT 1, last_weak_session TEXT );
       CREATE TABLE IF NOT EXISTS topic_progress (
         id SERIAL PRIMARY KEY, topic_id TEXT NOT NULL UNIQUE, topic_name TEXT NOT NULL,
@@ -77,7 +77,7 @@ async function main() {
         attempts INTEGER DEFAULT 0, last_attempted TIMESTAMPTZ DEFAULT now() );
       CREATE TABLE IF NOT EXISTS daily_plan (
         date TEXT PRIMARY KEY, topic_ids TEXT NOT NULL, created_at TIMESTAMPTZ DEFAULT now() );
-      INSERT INTO profile (id, exam_date) VALUES (1, '2026-06-18') ON CONFLICT (id) DO NOTHING;
+      INSERT INTO profile (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
     `)
 
     console.log('Clearing existing dynamic tables (idempotent reload)…')
@@ -85,7 +85,6 @@ async function main() {
 
     // profile (single row, id=1)
     await sql`UPDATE profile SET
-      exam_date = ${profile.exam_date || '2026-06-18'},
       study_hours_per_day = ${profile.study_hours_per_day ?? 1},
       last_weak_session = ${profile.last_weak_session ?? null}
       WHERE id = 1`
