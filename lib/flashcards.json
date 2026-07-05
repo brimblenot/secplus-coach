@@ -1,0 +1,5273 @@
+[
+  {
+    "term": "3DES",
+    "expansion": "Triple DES",
+    "definition": "Symmetric cipher applying DES three times per block, yielding ~112-bit security but now deprecated by NIST.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "802.11w",
+    "expansion": "IEEE 802.11w",
+    "definition": "Amendment providing Management Frame Protection to encrypt and authenticate sensitive wireless frames.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "802.1Q",
+    "expansion": "IEEE 802.1Q",
+    "definition": "Standard that defines VLAN tagging mechanisms for network frames.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "802.1X",
+    "expansion": "IEEE 802.1X",
+    "definition": "Framework for port-based network access control authenticating each user individually with unique credentials.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "AAA",
+    "expansion": "Authentication, Authorization, and Accounting",
+    "definition": "Framework for three distinct functions: verifying identity, controlling access, and maintaining records.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "ABAC",
+    "expansion": "Attribute-Based Access Control",
+    "definition": "Most flexible access control model making decisions based on multiple subject, resource, and environment attributes.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "AC",
+    "expansion": "Alternating Current",
+    "definition": "Electrical current that reverses direction periodically, standard for utility power distribution.",
+    "domain": 3,
+    "topicId": "075"
+  },
+  {
+    "term": "ACK",
+    "expansion": "Acknowledgment",
+    "definition": "TCP packet confirming receipt; attackers spoof sources in SYN floods to prevent legitimate connection completion.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "ACL",
+    "expansion": "Access Control List",
+    "definition": "Authorization mechanism listing subjects and their permitted operations on a specific resource.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "Acronis",
+    "expansion": "Acronis",
+    "definition": "Backup vendor offering cloud backup destinations and disaster recovery solutions.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "ADB",
+    "expansion": "Android Debug Bridge",
+    "definition": "Android debugging mode that must be disabled because it bypasses security protections and enables unauthorized code execution.",
+    "domain": 4,
+    "topicId": "077"
+  },
+  {
+    "term": "AEAD",
+    "expansion": "Authenticated Encryption with Associated Data",
+    "definition": "Encryption scheme providing both confidentiality and data integrity verification in a single cryptographic operation.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "AES",
+    "expansion": "Advanced Encryption Standard",
+    "definition": "Symmetric encryption algorithm with key sizes 128, 192, 256 bits, resistant to quantum attacks with proper key size.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "AES-256",
+    "expansion": "Advanced Encryption Standard with 256-bit key",
+    "definition": "Computationally infeasible encryption standard for sensitive data at rest with current technology.",
+    "domain": 2,
+    "topicId": "043"
+  },
+  {
+    "term": "AES-CCMP",
+    "expansion": "Advanced Encryption Standard – Counter Mode with CBC-MAC Protocol",
+    "definition": "Encryption cipher combining AES with CBC-MAC for authenticated encryption of wireless traffic.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "AES-GCM",
+    "expansion": "Advanced Encryption Standard - Galois/Counter Mode",
+    "definition": "Authenticated encryption mode providing both confidentiality and integrity without padding oracle vulnerability.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "AH",
+    "expansion": "Authentication Header",
+    "definition": "IPsec protocol number 51 providing authentication and integrity without encryption.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "AI",
+    "expansion": "Artificial Intelligence",
+    "definition": "Technology that enables machines to simulate human intelligence and decision-making.",
+    "domain": 2,
+    "topicId": "025"
+  },
+  {
+    "term": "AIC",
+    "expansion": "Availability, Integrity, and Confidentiality",
+    "definition": "Alternative ordering of the CIA Triad used to avoid confusion with Central Intelligence Agency.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "ALE",
+    "expansion": "Annualized Loss Expectancy",
+    "definition": "Metric expressing expected financial loss from a risk over one year, used to evaluate control effectiveness.",
+    "domain": 5,
+    "topicId": "112"
+  },
+  {
+    "term": "AMD",
+    "expansion": "Advanced Micro Devices",
+    "definition": "Processor manufacturer providing Secure Encrypted Virtualization for VM memory protection.",
+    "domain": 3,
+    "topicId": "069"
+  },
+  {
+    "term": "AMSI",
+    "expansion": "Anti-Malware Scan Interface",
+    "definition": "Windows API allowing security products to inspect scripts and code before execution including PowerShell.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "Android",
+    "expansion": "Android",
+    "definition": "Google's mobile operating system with MDM policy controls for managing sideloading and security.",
+    "domain": 4,
+    "topicId": "078"
+  },
+  {
+    "term": "ANT",
+    "expansion": "Access Network Technology",
+    "definition": "NSA program for developing hardware implants and network access capabilities.",
+    "domain": 2,
+    "topicId": "044"
+  },
+  {
+    "term": "APC",
+    "expansion": "Asynchronous Procedure Call",
+    "definition": "Windows mechanism allowing code to be queued for execution in a thread's context when alertable.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "APFS",
+    "expansion": "Apple File System",
+    "definition": "Apple file system supporting journaling for data corruption protection on modern devices.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "API",
+    "expansion": "Application Programming Interface",
+    "definition": "Set of endpoints and methods allowing applications to communicate; requires authentication, validation, and rate limiting.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "APK",
+    "expansion": "Android Package",
+    "definition": "File format used to distribute and install applications on Android devices from sources other than official stores.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "AppArmor",
+    "expansion": "Application Armor",
+    "definition": "Mandatory access control system on Debian and Ubuntu using profile files to define per-application access rules.",
+    "domain": 4,
+    "topicId": "091"
+  },
+  {
+    "term": "APT",
+    "expansion": "Advanced Persistent Threat",
+    "definition": "Organized group conducting prolonged targeted cyber attacks against specific organizations with sophisticated techniques.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "APTs",
+    "expansion": "Advanced Persistent Threats",
+    "definition": "Sophisticated attackers conducting multi-stage operations including access, persistence, lateral movement, and data exfiltration.",
+    "domain": 1,
+    "topicId": "009"
+  },
+  {
+    "term": "Argon2",
+    "expansion": "Argon2",
+    "definition": "Winner of Password Hashing Competition 2015; current state-of-art with tuning for GPU and memory-hard attacks.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "ARO",
+    "expansion": "Annualized Rate of Occurrence",
+    "definition": "The estimated frequency with which a specific threat is expected to occur in a given year.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "ARP",
+    "expansion": "Address Resolution Protocol",
+    "definition": "Network protocol vulnerable to poisoning attacks that redirect traffic through an attacker's machine for credential capture.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "ASCII",
+    "expansion": "American Standard Code for Information Interchange",
+    "definition": "Character encoding standard that represents text using numeric codes, commonly used to define password character sets.",
+    "domain": 2,
+    "topicId": "053"
+  },
+  {
+    "term": "ASHRAE",
+    "expansion": "American Society of Heating, Refrigerating and Air-Conditioning Engineers",
+    "definition": "Professional organization that establishes guidelines for data center environmental conditions and cooling.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "ASLR",
+    "expansion": "Address Space Layout Randomization",
+    "definition": "Security feature randomizing memory addresses where system components load to prevent address prediction by attackers.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "ASV",
+    "expansion": "Approved Scanning Vendor",
+    "definition": "Third-party organization approved to conduct required external vulnerability scans for PCI DSS compliance.",
+    "domain": 4,
+    "topicId": "082"
+  },
+  {
+    "term": "ATM",
+    "expansion": "Automated Teller Machine",
+    "definition": "Bank cash dispensers destroyed by logic bomb malware in 2013 South Korea banking attack.",
+    "domain": 2,
+    "topicId": "042"
+  },
+  {
+    "term": "ATS",
+    "expansion": "Automatic Transfer Switch",
+    "definition": "Device that automatically switches between utility and generator power when utility fails or is restored.",
+    "domain": 3,
+    "topicId": "075"
+  },
+  {
+    "term": "AU",
+    "expansion": "Audit and Accountability",
+    "definition": "Control family addressing logging, monitoring, and accountability for security events.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "auditd",
+    "expansion": "audit daemon",
+    "definition": "Linux service that generates kernel-level audit records of system calls and privileged operations.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "AUP",
+    "expansion": "Acceptable Use Policy",
+    "definition": "Foundational policy document defining permitted and prohibited web usage for organizational users.",
+    "domain": 4,
+    "topicId": "090"
+  },
+  {
+    "term": "AV",
+    "expansion": "Asset Value",
+    "definition": "The monetary value an asset represents to the organization, including revenue, data, and regulatory exposure.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "AWS",
+    "expansion": "Amazon Web Services",
+    "definition": "Cloud computing platform offering elastic scaling and auto-scaling groups for dynamic resource management.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "AWS Config",
+    "expansion": "Amazon Web Services Configuration",
+    "definition": "AWS tool that continuously evaluates cloud resource configurations against compliance standards.",
+    "domain": 5,
+    "topicId": "116"
+  },
+  {
+    "term": "AWS IAM",
+    "expansion": "Amazon Web Services Identity and Access Management",
+    "definition": "Cloud service implementing role-based authorization with policies and roles for access control.",
+    "domain": 4,
+    "topicId": "097"
+  },
+  {
+    "term": "AWS S3",
+    "expansion": "Amazon Web Services Simple Storage Service",
+    "definition": "Cloud storage service providing backup destinations with object lock immutability features.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "AXFR",
+    "expansion": "Authority Transfer",
+    "definition": "DNS query type used for zone transfers that returns all records for a domain.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "Azure",
+    "expansion": "Microsoft Azure",
+    "definition": "Cloud platform providing compute instances and auto-scaling capabilities for elastic resource provisioning.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "Azure AD",
+    "expansion": "Azure Active Directory",
+    "definition": "Microsoft's cloud identity platform providing identity services for Microsoft 365, Azure, and integrated SaaS applications.",
+    "domain": 4,
+    "topicId": "096"
+  },
+  {
+    "term": "Azure Blob Storage",
+    "expansion": "Microsoft Azure Blob Storage",
+    "definition": "Azure cloud storage service providing scalable backup destinations with immutability options.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "Azure Policy",
+    "expansion": "Microsoft Azure Policy",
+    "definition": "Azure tool that continuously evaluates cloud resource configurations against compliance standards.",
+    "domain": 5,
+    "topicId": "116"
+  },
+  {
+    "term": "Azure RBAC",
+    "expansion": "Microsoft Azure Role-Based Access Control",
+    "definition": "Azure service providing role-based access control with built-in and custom role definitions.",
+    "domain": 4,
+    "topicId": "097"
+  },
+  {
+    "term": "B2B",
+    "expansion": "Business to Business",
+    "definition": "Commercial transactions between businesses; OV certificates appropriate for B2B portals.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "Base64",
+    "expansion": "Base64",
+    "definition": "Encoding scheme representing binary data as ASCII text, commonly used to obfuscate malware.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "BCP38",
+    "expansion": "Best Current Practice 38",
+    "definition": "IETF standard recommending ingress filtering to prevent spoofed packets from leaving ISP networks.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "bcrypt",
+    "expansion": "bcrypt",
+    "definition": "Purpose-built password hashing function with adjustable cost factor for intentionally slow hashing; in use since 1999.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "BEAST",
+    "expansion": "Browser Exploit Against SSL and TLS",
+    "definition": "Vulnerability in TLS 1.0 CBC mode allowing chosen-plaintext attacks against sessions.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "BEC",
+    "expansion": "Business Email Compromise",
+    "definition": "Social engineering attack where attackers impersonate executives or trusted partners to fraudulently induce financial transactions or data disclosure.",
+    "domain": 2,
+    "topicId": "025"
+  },
+  {
+    "term": "BeEF",
+    "expansion": "Browser Exploitation Framework",
+    "definition": "Tool enabling attackers to maintain persistent control over compromised browsers remotely.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "BGP",
+    "expansion": "Border Gateway Protocol",
+    "definition": "Internet routing protocol used between autonomous systems to exchange routing information across organizational boundaries.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "BIA",
+    "expansion": "Business Impact Analysis",
+    "definition": "Systematic process identifying and evaluating effects of disruptions to critical business processes.",
+    "domain": 5,
+    "topicId": "113"
+  },
+  {
+    "term": "BIOS",
+    "expansion": "Basic Input/Output System",
+    "definition": "Firmware that initializes hardware and loads the operating system during the boot process.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "BitLocker",
+    "expansion": "BitLocker",
+    "definition": "Windows full-disk encryption technology that renders forensic analysis impossible without decryption keys.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "BMC",
+    "expansion": "Baseboard Management Controller",
+    "definition": "Firmware on server hardware that provides out-of-band remote management capabilities.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "BPDU",
+    "expansion": "Bridge Protocol Data Unit",
+    "definition": "STP protocol message exchanged between switches to calculate network topology and prevent Layer 2 loops.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "BSSID",
+    "expansion": "Basic Service Set Identifier",
+    "definition": "MAC address of a wireless access point that uniquely identifies a specific network instance.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "BYOD",
+    "expansion": "Bring Your Own Device",
+    "definition": "Mobile device deployment model allowing personal devices with limited MDM management and organizational control.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "BYOK",
+    "expansion": "Bring Your Own Key",
+    "definition": "Cloud service model where customers generate and import their own encryption keys into provider's KMS infrastructure.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "BYOVD",
+    "expansion": "Bring Your Own Vulnerable Driver",
+    "definition": "Attacker technique using legitimately signed but vulnerable drivers to gain kernel-level code execution.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "C&C",
+    "expansion": "Command and Control",
+    "definition": "Infrastructure attackers use to communicate with malware, issue commands, receive stolen data, and update behavior.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "C2",
+    "expansion": "Command and Control",
+    "definition": "Infrastructure attackers use to communicate with malware, issue commands, receive stolen data, and update behavior.",
+    "domain": 1,
+    "topicId": "009"
+  },
+  {
+    "term": "CA",
+    "expansion": "Certificate Authority",
+    "definition": "Trusted third party that verifies identities and issues digital certificates binding public keys to entities.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "CAB",
+    "expansion": "Change Advisory Board",
+    "definition": "Committee of technical and business stakeholders who evaluate and approve proposed changes to systems and configurations.",
+    "domain": 1,
+    "topicId": "010"
+  },
+  {
+    "term": "CAC",
+    "expansion": "Common Access Card",
+    "definition": "Military smart card implementing certificate-based authentication combining physical card with PIN.",
+    "domain": 4,
+    "topicId": "098"
+  },
+  {
+    "term": "CAM",
+    "expansion": "Content Addressable Memory",
+    "definition": "Switch's MAC address table that stores learned MAC addresses and associated ports for frame forwarding.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "CAN",
+    "expansion": "Controller Area Network",
+    "definition": "Vehicle communication bus designed without authentication allowing any device to send commands to others.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "CAPTCHA",
+    "expansion": "Completely Automated Public Turing test to tell Computers and Humans Apart",
+    "definition": "Challenge-response test that verifies a user is human to prevent automated attacks on web login forms.",
+    "domain": 2,
+    "topicId": "053"
+  },
+  {
+    "term": "CAS",
+    "expansion": "Compare-And-Swap",
+    "definition": "Hardware atomic operation that reads, compares, and conditionally writes a value in a single instruction.",
+    "domain": 2,
+    "topicId": "028"
+  },
+  {
+    "term": "CASB",
+    "expansion": "Cloud Access Security Broker",
+    "definition": "Intermediary between users and cloud services providing visibility, policy enforcement, and compliance management.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "CBC",
+    "expansion": "Cipher Block Chaining",
+    "definition": "Block cipher mode XORing each plaintext block with prior ciphertext, requiring random initialization vector.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "CBC-MAC",
+    "expansion": "Cipher Block Chaining Message Authentication Code",
+    "definition": "Authentication mechanism using AES in CBC mode for message integrity verification.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "CCMP",
+    "expansion": "Counter Mode with Cipher Block Chaining Message Authentication Code Protocol",
+    "definition": "WPA2 encryption protocol based on AES that includes per-packet sequence numbers for replay protection.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "CCPA",
+    "expansion": "California Consumer Privacy Act",
+    "definition": "California law granting residents rights to know, delete, and opt out of sale of their personal information.",
+    "domain": 5,
+    "topicId": "105"
+  },
+  {
+    "term": "CCTV",
+    "expansion": "Closed-Circuit Television",
+    "definition": "Continuous visual monitoring and recording system for physical areas and security-relevant activity.",
+    "domain": 1,
+    "topicId": "002"
+  },
+  {
+    "term": "CDN",
+    "expansion": "Content Delivery Network",
+    "definition": "Geographically distributed servers that cache and deliver static content closer to users for reduced latency.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "CDP",
+    "expansion": "Cisco Discovery Protocol",
+    "definition": "Protocol that allows Cisco network devices to discover and communicate with each other.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "CEF",
+    "expansion": "Common Event Format",
+    "definition": "Standardized log format used by security products and SIEM systems to represent events in a consistent structure.",
+    "domain": 4,
+    "topicId": "094"
+  },
+  {
+    "term": "CEO",
+    "expansion": "Chief Executive Officer",
+    "definition": "Highest-ranking executive officer responsible for overall management and operations of an organization.",
+    "domain": 2,
+    "topicId": "025"
+  },
+  {
+    "term": "CER",
+    "expansion": "Crossover Error Rate",
+    "definition": "Point where false acceptance rate and false rejection rate are equal; indicates biometric system accuracy.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "CERT/CC",
+    "expansion": "Computer Emergency Response Team Coordination Center",
+    "definition": "Organization providing security expertise; created Basic Fuzzing Framework for discovering application vulnerabilities.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "CFG",
+    "expansion": "Control Flow Guard",
+    "definition": "Windows mitigation that validates indirect call targets at runtime to block ROP chains.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "CFI",
+    "expansion": "Control Flow Integrity",
+    "definition": "Security mechanism that validates program execution follows only compiler-determined control flow paths.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "CFO",
+    "expansion": "Chief Financial Officer",
+    "definition": "Senior executive responsible for managing financial operations, planning, and reporting of an organization.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "CHAP",
+    "expansion": "Challenge Handshake Authentication Protocol",
+    "definition": "Authentication protocol using challenge-response mechanism with hashing for password verification.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "CI/CD",
+    "expansion": "Continuous Integration / Continuous Deployment",
+    "definition": "Automated software development and deployment pipeline; security scanning detects misconfigurations pre-deployment.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "CIA",
+    "expansion": "Confidentiality, Integrity, and Availability",
+    "definition": "Security framework defining three core information security objectives: data privacy, accuracy, and service accessibility.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "CIDR",
+    "expansion": "Classless Inter-Domain Routing",
+    "definition": "Notation expressing IP addresses and network masks using slash notation like 192.168.1.0/24.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "CIEM",
+    "expansion": "Cloud Infrastructure Entitlement Management",
+    "definition": "Tool identifying excessive permissions and optimizing IAM policies to least privilege principles.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "CIO",
+    "expansion": "Chief Information Officer",
+    "definition": "Senior executive with responsibility for information technology systems who can authorize penetration testing.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "CIS",
+    "expansion": "Center for Internet Security",
+    "definition": "Organization that publishes CIS Benchmarks, free vendor-neutral consensus-developed configuration guides for technologies.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "CIS Benchmarks",
+    "expansion": "Center for Internet Security Benchmarks",
+    "definition": "Security baselines used in configuration compliance scans to identify configuration deviations.",
+    "domain": 2,
+    "topicId": "056"
+  },
+  {
+    "term": "CIS Controls",
+    "expansion": "Center for Internet Security Controls",
+    "definition": "Prioritized set of eighteen security controls addressing the most common and impactful attack vectors.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "CIS-CAT",
+    "expansion": "CIS Configuration Assessment Tool",
+    "definition": "Configuration assessment tool measuring compliance with CIS Benchmarks.",
+    "domain": 5,
+    "topicId": "116"
+  },
+  {
+    "term": "CISA",
+    "expansion": "Cybersecurity and Infrastructure Security Agency",
+    "definition": "U.S. federal agency that maintains the Known Exploited Vulnerabilities catalog for remediation prioritization.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "CISO",
+    "expansion": "Chief Information Security Officer",
+    "definition": "Senior executive responsible for information security strategy and authorization of penetration testing within an organization.",
+    "domain": 1,
+    "topicId": "010"
+  },
+  {
+    "term": "CLI",
+    "expansion": "Command Line Interface",
+    "definition": "Text-based interface allowing users to interact with systems through typed commands.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "CloudTrail",
+    "expansion": "CloudTrail",
+    "definition": "AWS audit logging service recording every API call made to an AWS account for compliance and investigation.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "CM",
+    "expansion": "Configuration Management",
+    "definition": "Control family addressing change control, baseline configurations, and inventory management.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "CMDB",
+    "expansion": "Configuration Management Database",
+    "definition": "Centralized repository maintaining accurate records of intended configuration for all systems in environment.",
+    "domain": 1,
+    "topicId": "010"
+  },
+  {
+    "term": "CMMC",
+    "expansion": "Cybersecurity Maturity Model Certification",
+    "definition": "U.S. Department of Defense framework mandating security practices for defense contractors and supply chain partners.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "CMS",
+    "expansion": "Content Management System",
+    "definition": "Software platform for creating and managing website content; vulnerabilities in plugins can provide server access.",
+    "domain": 2,
+    "topicId": "024"
+  },
+  {
+    "term": "CNAME",
+    "expansion": "Canonical Name",
+    "definition": "DNS record type that creates an alias pointing to another domain name.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "CO2",
+    "expansion": "Carbon Dioxide",
+    "definition": "Gas-based fire suppression system that displaces oxygen to extinguish fires in unmanned areas.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "COBO",
+    "expansion": "Corporate-Owned, Business Only",
+    "definition": "Most restrictive deployment model where organization owns device and strictly prohibits personal use.",
+    "domain": 4,
+    "topicId": "078"
+  },
+  {
+    "term": "Cohesity",
+    "expansion": "Cohesity",
+    "definition": "Backup vendor providing cloud backup and data management platforms.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "COM",
+    "expansion": "Component Object Model",
+    "definition": "Windows technology enabling object hijacking to load malicious code in place of legitimate library components.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "COO",
+    "expansion": "Chief Operating Officer",
+    "definition": "Senior executive responsible for overseeing day-to-day operational activities of an organization.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "COOP",
+    "expansion": "Continuity of Operations Planning",
+    "definition": "Documentation of manual, non-technology-dependent processes to continue business during technology outages.",
+    "domain": 3,
+    "topicId": "071"
+  },
+  {
+    "term": "COPE",
+    "expansion": "Corporate-Owned and Personally Enabled",
+    "definition": "Mobile device deployment model where organization fully controls devices that employees use personally.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "COW",
+    "expansion": "Copy-On-Write",
+    "definition": "Memory management technique; Dirty COW was a Linux kernel race condition vulnerability.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "CPA",
+    "expansion": "Certified Public Accountant",
+    "definition": "Licensed professional qualified to audit financial statements and issue attestation reports on controls.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "CPE",
+    "expansion": "Common Platform Enumeration",
+    "definition": "Identifiers in the National Vulnerability Database that link vulnerabilities to affected products.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "CPRA",
+    "expansion": "California Privacy Rights Act",
+    "definition": "Amendment to CCPA imposing similar obligations on businesses collecting personal information of California residents.",
+    "domain": 5,
+    "topicId": "108"
+  },
+  {
+    "term": "CPU",
+    "expansion": "Central Processing Unit",
+    "definition": "Processor that executes instructions; its registers and cache are the most volatile evidence sources.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "CREST",
+    "expansion": "Council of Registered Ethical Security Testers",
+    "definition": "UK-developed international certification framework providing recognized credentials for penetration testers across specializations.",
+    "domain": 5,
+    "topicId": "119"
+  },
+  {
+    "term": "CRIME",
+    "expansion": "Compression Ratio Info-leak Made Easy",
+    "definition": "Chosen-plaintext attack exploiting TLS compression to leak information about encrypted traffic.",
+    "domain": 2,
+    "topicId": "052"
+  },
+  {
+    "term": "CRL",
+    "expansion": "Certificate Revocation List",
+    "definition": "Periodically published list of revoked certificate serial numbers that clients download and check.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "CRYSTALS-Dilithium",
+    "expansion": "CRYSTALS-Dilithium",
+    "definition": "Post-quantum digital signature algorithm based on lattice problems for replacement of RSA and ECDSA.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "CRYSTALS-Kyber",
+    "expansion": "CRYSTALS-Kyber",
+    "definition": "Post-quantum key encapsulation mechanism based on lattice problems intended to replace RSA and ECDH.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "CSF",
+    "expansion": "Cybersecurity Framework",
+    "definition": "NIST framework providing guidelines and practices for managing cybersecurity risk across organizations.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "CSIRT",
+    "expansion": "Computer Security Incident Response Team",
+    "definition": "Designated team responsible for detecting, investigating, and responding to security incidents within an organization.",
+    "domain": 4,
+    "topicId": "101"
+  },
+  {
+    "term": "CSP",
+    "expansion": "Content Security Policy",
+    "definition": "HTTP header defining permitted sources of content, reducing cross-site scripting impact by preventing injected scripts.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "CSPM",
+    "expansion": "Cloud Security Posture Management",
+    "definition": "Tool continuously monitoring cloud configurations against security benchmarks and compliance standards.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "CSR",
+    "expansion": "Certificate Signing Request",
+    "definition": "Structured data file containing public key and identity information submitted to CA for certification.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "CSRF",
+    "expansion": "Cross-Site Request Forgery",
+    "definition": "Attack tricking authenticated users' browsers into submitting unauthorized requests to web applications on their behalf.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "CT",
+    "expansion": "Certificate Transparency",
+    "definition": "System requiring Certificate Authorities to submit TLS certificates to public append-only logs.",
+    "domain": 1,
+    "topicId": "018"
+  },
+  {
+    "term": "CTAP2",
+    "expansion": "Client-to-Authenticator Protocol version 2",
+    "definition": "Protocol component of FIDO2 enabling communication between client devices and authenticators.",
+    "domain": 4,
+    "topicId": "098"
+  },
+  {
+    "term": "CTO",
+    "expansion": "Chief Technology Officer",
+    "definition": "Senior executive responsible for organization's technology strategy and technical operations.",
+    "domain": 1,
+    "topicId": "010"
+  },
+  {
+    "term": "CTR",
+    "expansion": "Counter",
+    "definition": "Block cipher mode transforming cipher into stream cipher by encrypting counter values and XORing with plaintext.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "CUI",
+    "expansion": "Controlled Unclassified Information",
+    "definition": "Non-classified U.S. government information requiring specific protection under federal law and regulation.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "CVE",
+    "expansion": "Common Vulnerabilities and Exposures",
+    "definition": "Standardized identifier assigned to each publicly disclosed cybersecurity vulnerability for tracking and remediation.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "CVE-2014-0160",
+    "expansion": "Common Vulnerabilities and Exposures identifier for Heartbleed",
+    "definition": "Identifier for the Heartbleed vulnerability in OpenSSL's TLS heartbeat protocol implementation.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "CVE-2016-5195",
+    "expansion": "Common Vulnerabilities and Exposures identifier for Dirty COW",
+    "definition": "Identifier for the Dirty COW Linux kernel privilege escalation vulnerability discovered in 2016.",
+    "domain": 2,
+    "topicId": "028"
+  },
+  {
+    "term": "CVE-2017-5715",
+    "expansion": "Common Vulnerabilities and Exposures 2017-5715",
+    "definition": "Identifier for another variant of the Spectre vulnerability affecting branch prediction systems.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "CVE-2017-5753",
+    "expansion": "Common Vulnerabilities and Exposures 2017-5753",
+    "definition": "Identifier for one variant of the Spectre vulnerability affecting multiple processor types.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "CVE-2017-5754",
+    "expansion": "Common Vulnerabilities and Exposures 2017-5754",
+    "definition": "Identifier for the Meltdown vulnerability affecting Intel processors and speculative execution.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "CVSS",
+    "expansion": "Common Vulnerability Scoring System",
+    "definition": "Standardized framework for rating the severity and impact of identified vulnerabilities in penetration test findings.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "CWE",
+    "expansion": "Common Weakness Enumeration",
+    "definition": "Categorization system identifying fundamental types of software weaknesses leading to vulnerabilities.",
+    "domain": 4,
+    "topicId": "085"
+  },
+  {
+    "term": "CYOD",
+    "expansion": "Choose Your Own Device",
+    "definition": "Mobile device deployment model allowing employees to select from approved devices managed as corporate equipment.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "DAC",
+    "expansion": "Discretionary Access Control",
+    "definition": "Common commercial access control model where resource owners have complete control over granting access permissions.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "DAD",
+    "expansion": "Disclosure, Alteration, and Destruction",
+    "definition": "Adversarial counterpart to CIA Triad representing security threats and violations.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "DAI",
+    "expansion": "Dynamic ARP Inspection",
+    "definition": "Switch security feature that validates ARP packets against DHCP snooping binding table to prevent ARP spoofing.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "DAM",
+    "expansion": "Database Activity Monitoring",
+    "definition": "Technology that provides real-time surveillance of all database queries and operations to detect threats.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "DAST",
+    "expansion": "Dynamic Application Security Testing",
+    "definition": "Security testing that executes a running application and observes responses to malicious inputs without requiring source code.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "DBA",
+    "expansion": "Database Administrator",
+    "definition": "Person responsible for managing and maintaining database systems and their security.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "DC",
+    "expansion": "Direct Current",
+    "definition": "Electrical current flowing in one direction, used in battery and UPS internal power conversion.",
+    "domain": 3,
+    "topicId": "075"
+  },
+  {
+    "term": "DCS",
+    "expansion": "Distributed Control Systems",
+    "definition": "Control system for continuous industrial processes where control is distributed across multiple controllers.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "DDoS",
+    "expansion": "Distributed Denial of Service",
+    "definition": "Attack coordinating multiple compromised devices to simultaneously flood a target, overwhelming its resources and blocking legitimate access.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "DEP",
+    "expansion": "Data Execution Prevention",
+    "definition": "Security feature preventing code from executing from data-only memory regions to block exploitation techniques.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "DES",
+    "expansion": "Data Encryption Standard",
+    "definition": "Symmetric encryption algorithm with 56-bit keys, standardized in the 1970s but now cryptographically broken.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "DFIR",
+    "expansion": "Digital Forensics and Incident Response",
+    "definition": "Specialized service combining digital forensics investigation with incident response capabilities for major incidents.",
+    "domain": 4,
+    "topicId": "102"
+  },
+  {
+    "term": "DGA",
+    "expansion": "Domain Generation Algorithm",
+    "definition": "Technique that generates many domains automatically so malware can find active C2 infrastructure.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "DHCP",
+    "expansion": "Dynamic Host Configuration Protocol",
+    "definition": "Service that assigns IP addresses; snooping prevents rogue servers from distributing false configuration.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "DHE",
+    "expansion": "Ephemeral Diffie-Hellman",
+    "definition": "Key exchange method using temporary Diffie-Hellman key pairs for each session to enable forward secrecy.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "DIAMETER",
+    "expansion": "DIAMETER",
+    "definition": "Successor to RADIUS using TCP or SCTP, supporting mobile and carrier-grade authentication scenarios.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "DISA",
+    "expansion": "Defense Information Systems Agency",
+    "definition": "U.S. Department of Defense agency that publishes Security Technical Implementation Guides for system hardening.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "DKIM",
+    "expansion": "DomainKeys Identified Mail",
+    "definition": "Email authentication protocol adding cryptographic signatures to verify message authenticity and integrity.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "DLL",
+    "expansion": "Dynamic Link Library",
+    "definition": "Windows shared library file containing reusable code; can be hijacked via search order manipulation attacks.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "DLP",
+    "expansion": "Data Loss Prevention",
+    "definition": "Technology that identifies, monitors, and controls movement of sensitive data to prevent unauthorized disclosure.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "DMA",
+    "expansion": "Direct Memory Access",
+    "definition": "Technique allowing peripheral devices to read and write system RAM directly without CPU involvement.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "DMARC",
+    "expansion": "Domain-based Message Authentication, Reporting, and Conformance",
+    "definition": "Policy standard built on SPF and DKIM that specifies how receivers handle authentication failures and enforces domain alignment.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "DMZ",
+    "expansion": "Demilitarized Zone",
+    "definition": "Network segment placed between IT and OT networks hosting systems that need to exchange information securely.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "DNAT",
+    "expansion": "Destination Network Address Translation",
+    "definition": "NAT type that redirects inbound traffic to internal servers using port forwarding.",
+    "domain": 4,
+    "topicId": "089"
+  },
+  {
+    "term": "DNP3",
+    "expansion": "Distributed Network Protocol 3",
+    "definition": "Communication protocol designed for industrial control systems on isolated networks without authentication or encryption.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "DNS",
+    "expansion": "Domain Name System",
+    "definition": "Protocol for translating domain names to IP addresses; DNS query logs reveal malware communication and data exfiltration attempts.",
+    "domain": 1,
+    "topicId": "009"
+  },
+  {
+    "term": "DNSSEC",
+    "expansion": "DNS Security Extensions",
+    "definition": "Cryptographic authentication mechanism that adds digital signatures to DNS responses for integrity verification.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "DoD",
+    "expansion": "Department of Defense",
+    "definition": "United States military department that requires STIG compliance for connected systems.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "DoH",
+    "expansion": "DNS over HTTPS",
+    "definition": "DNS queries sent over HTTPS on port 443, encrypting queries and hiding them as web traffic.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "DOM",
+    "expansion": "Document Object Model",
+    "definition": "Programming interface representing HTML document structure as objects in client-side JavaScript.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "DoT",
+    "expansion": "DNS over TLS",
+    "definition": "DNS queries encrypted with TLS on port 853, providing confidentiality while remaining identifiable.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "DPA",
+    "expansion": "Data Processing Agreement",
+    "definition": "Required by GDPR when a data controller shares personal data with a data processor.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "DPI",
+    "expansion": "Deep Packet Inspection",
+    "definition": "Technique of inspecting packet payload content to identify applications, detect malware, and enforce content-based filtering policies.",
+    "domain": 4,
+    "topicId": "094"
+  },
+  {
+    "term": "DPIA",
+    "expansion": "Data Protection Impact Assessment",
+    "definition": "Systematic evaluation of privacy risks posed by new data processing activities before implementation.",
+    "domain": 5,
+    "topicId": "117"
+  },
+  {
+    "term": "DPO",
+    "expansion": "Data Protection Officer",
+    "definition": "GDPR-required role responsible for monitoring compliance with data protection laws and regulations.",
+    "domain": 5,
+    "topicId": "109"
+  },
+  {
+    "term": "DR",
+    "expansion": "Disaster Recovery",
+    "definition": "Plans and processes to restore systems and operations after a disaster or major disruption.",
+    "domain": 3,
+    "topicId": "073"
+  },
+  {
+    "term": "DRAM",
+    "expansion": "Dynamic Random-Access Memory",
+    "definition": "Volatile memory technology used for system RAM where bit flips can be exploited by attacks.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "DRM",
+    "expansion": "Digital Rights Management",
+    "definition": "Technology that restricts access to and use of digital content to protect intellectual property.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "DROWN",
+    "expansion": "Decrypting RSA with Obsolete and Weakened eNcryption",
+    "definition": "Attack allowing TLS decryption by exploiting SSLv2 export-grade key exchange on servers supporting both.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "DSA",
+    "expansion": "Digital Signature Algorithm",
+    "definition": "Federal standard for digital signatures based on discrete logarithm problem, largely superseded by ECDSA.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "DSAR",
+    "expansion": "Data Subject Access Request",
+    "definition": "Individual's request to receive copy of all personal data an organization holds about them.",
+    "domain": 5,
+    "topicId": "117"
+  },
+  {
+    "term": "DTLS",
+    "expansion": "Datagram Transport Layer Security",
+    "definition": "UDP-based variant of TLS that has had historical vulnerabilities related to replay protection gaps.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "DTP",
+    "expansion": "Dynamic Trunking Protocol",
+    "definition": "Cisco protocol that dynamically negotiates VLAN trunking between switches.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "DV",
+    "expansion": "Domain Validated",
+    "definition": "Lowest validation level certificate requiring only proof of domain control, issued in minutes at low cost.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "DynamoDB",
+    "expansion": "DynamoDB",
+    "definition": "AWS managed NoSQL database service for fast and flexible data storage and retrieval.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "E-ISAC",
+    "expansion": "Electricity Information Sharing and Analysis Center",
+    "definition": "ISAC serving the electric power sector for threat intelligence sharing.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "E01",
+    "expansion": "EnCase Image Format",
+    "definition": "Proprietary forensic image format that includes metadata, hashes, and case information; court-accepted.",
+    "domain": 4,
+    "topicId": "103"
+  },
+  {
+    "term": "EAP",
+    "expansion": "Extensible Authentication Protocol",
+    "definition": "Framework that carries authentication information between supplicant and authentication server using authenticator as relay.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "EAP-FAST",
+    "expansion": "Extensible Authentication Protocol with Flexible Authentication via Secure Tunneling",
+    "definition": "Cisco-developed EAP alternative avoiding certificate requirement by using pre-shared Protected Access Credentials.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "EAP-TLS",
+    "expansion": "Extensible Authentication Protocol – Transport Layer Security",
+    "definition": "Strongest EAP method requiring mutual certificate-based authentication between supplicant and authentication server.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "EAP-TTLS",
+    "expansion": "Extensible Authentication Protocol with Tunneled TLS",
+    "definition": "EAP method similar to PEAP but more flexible in supporting various inner authentication methods within TLS tunnel.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "EC2",
+    "expansion": "Elastic Compute Cloud",
+    "definition": "AWS service for provisioning scalable virtual machine instances on demand.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "ECB",
+    "expansion": "Electronic Code Book",
+    "definition": "Simplest block cipher mode where identical plaintext blocks produce identical ciphertext, revealing patterns.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "ECC",
+    "expansion": "Elliptic Curve Cryptography",
+    "definition": "Asymmetric encryption providing RSA-equivalent security with much smaller key sizes for constrained devices.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "ECDH",
+    "expansion": "Elliptic Curve Diffie-Hellman",
+    "definition": "Key agreement protocol using elliptic curve mathematics, achieving high security with smaller key sizes.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "ECDHE",
+    "expansion": "Elliptic Curve Diffie-Hellman Ephemeral",
+    "definition": "Dominant TLS key exchange mechanism combining elliptic curve efficiency with ephemeral temporary keys.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "ECDSA",
+    "expansion": "Elliptic Curve Digital Signature Algorithm",
+    "definition": "Digital signature algorithm providing RSA-equivalent security with shorter keys and better computational efficiency.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "ECS",
+    "expansion": "Elastic Common Schema",
+    "definition": "Normalization standard used by the Elastic Stack for consistent log field naming and structure.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "EDR",
+    "expansion": "Endpoint Detection and Response",
+    "definition": "Security solution with agents on endpoints that produce continuous telemetry on processes, files, network connections, and registry changes.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "EER",
+    "expansion": "Equal Error Rate",
+    "definition": "Point where false acceptance rate and false rejection rate are equal; indicates biometric system accuracy.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "EF",
+    "expansion": "Exposure Factor",
+    "definition": "The percentage of an asset's value lost if a specific threat occurs, expressed as a decimal between zero and one.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "EFI",
+    "expansion": "Extensible Firmware Interface",
+    "definition": "Firmware standard providing interface between operating system and system firmware.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "EFS",
+    "expansion": "Encrypting File System",
+    "definition": "Windows NTFS-integrated file encryption allowing individual files and directories to be marked for transparent encryption.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "EMET",
+    "expansion": "Enhanced Mitigation Experience Toolkit",
+    "definition": "Legacy Windows exploit mitigation tool superseded by Windows Defender Exploit Guard in modern Windows versions.",
+    "domain": 4,
+    "topicId": "091"
+  },
+  {
+    "term": "EMM",
+    "expansion": "Enterprise Mobility Management",
+    "definition": "Comprehensive framework combining MDM, MAM, MCM, and IAM into unified mobile management platform.",
+    "domain": 4,
+    "topicId": "078"
+  },
+  {
+    "term": "EMP",
+    "expansion": "Electromagnetic Pulse",
+    "definition": "A burst of electromagnetic energy capable of destroying unprotected electronic equipment across a wide area.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "EOL",
+    "expansion": "End-of-Life",
+    "definition": "Product lifecycle stage when vendor stops providing support and security patches.",
+    "domain": 4,
+    "topicId": "081"
+  },
+  {
+    "term": "ePHI",
+    "expansion": "electronic Protected Health Information",
+    "definition": "Digital health information protected under HIPAA regulations.",
+    "domain": 5,
+    "topicId": "116"
+  },
+  {
+    "term": "EPSS",
+    "expansion": "Exploit Prediction Scoring System",
+    "definition": "Machine learning-derived probability score predicting likelihood a CVE will be actively exploited within 30 days.",
+    "domain": 4,
+    "topicId": "082"
+  },
+  {
+    "term": "ERM",
+    "expansion": "Enterprise Risk Management",
+    "definition": "Integrated approach that combines cybersecurity risk with all business risks managed by boards and executives.",
+    "domain": 5,
+    "topicId": "112"
+  },
+  {
+    "term": "ESI",
+    "expansion": "Electronically Stored Information",
+    "definition": "Digital data and records that may be relevant to legal proceedings or regulatory investigations.",
+    "domain": 3,
+    "topicId": "068"
+  },
+  {
+    "term": "ESP",
+    "expansion": "Encapsulating Security Payload",
+    "definition": "IPsec protocol number 50 providing encryption and authentication for IP packets.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "ESXi",
+    "expansion": "Elastic Sky X Integrated",
+    "definition": "VMware's Type 1 bare-metal hypervisor for enterprise virtualization in data centers.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "etcd",
+    "expansion": "etcd",
+    "definition": "A distributed key-value store in Kubernetes that persists all cluster state and sensitive configuration data.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "EternalBlue",
+    "expansion": "EternalBlue",
+    "definition": "NSA-developed exploit for Windows SMB vulnerability tracked as MS17-010.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "EU",
+    "expansion": "European Union",
+    "definition": "Political and economic union whose European Economic Area includes GDPR data protection requirements.",
+    "domain": 3,
+    "topicId": "069"
+  },
+  {
+    "term": "EV",
+    "expansion": "Extended Validation",
+    "definition": "Highest certificate validation level requiring rigorous vetting of organization and individual identity.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "exe",
+    "expansion": "executable",
+    "definition": "File format containing machine code that runs as a program on Windows systems.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "Exploit-DB",
+    "expansion": "Exploit Database",
+    "definition": "Public repository of proof-of-concept exploits and vulnerability research shared by security community.",
+    "domain": 4,
+    "topicId": "085"
+  },
+  {
+    "term": "ext4",
+    "expansion": "Fourth Extended File System",
+    "definition": "Linux file system with journaling capability to protect against data corruption.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "FaaS",
+    "expansion": "Function as a Service",
+    "definition": "Cloud consumption model where customers deploy discrete functions executing in response to events; also called serverless computing.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "FAIR",
+    "expansion": "Factor Analysis of Information Risk",
+    "definition": "A specialized quantitative risk framework that measures information risk in financial terms for executive communication.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "FALCON",
+    "expansion": "FALCON",
+    "definition": "Post-quantum digital signature algorithm based on lattice problems with faster signing than Dilithium.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "FAR",
+    "expansion": "False Acceptance Rate",
+    "definition": "Percentage of unauthorized users that a biometric system incorrectly authenticates as valid.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "FBI",
+    "expansion": "Federal Bureau of Investigation",
+    "definition": "U.S. federal law enforcement agency that tracks and reports internet crime statistics including BEC losses.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "FDE",
+    "expansion": "Full Disk Encryption",
+    "definition": "Block-level encryption protecting entire storage volume including all files, directories, and file system structure.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "FDIC",
+    "expansion": "Federal Deposit Insurance Corporation",
+    "definition": "U.S. agency that insures deposits and conducts regulatory examinations of banking organizations.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "FedEx",
+    "expansion": "Federal Express",
+    "definition": "Commercial shipping and delivery company providing courier services domestically and internationally.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "FedRAMP",
+    "expansion": "Federal Risk and Authorization Management Program",
+    "definition": "US government program establishing security requirements and authorization for federal cloud service providers.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "FERPA",
+    "expansion": "Family Educational Rights and Privacy Act",
+    "definition": "US law protecting student education records at institutions receiving federal funding.",
+    "domain": 5,
+    "topicId": "116"
+  },
+  {
+    "term": "FIDO",
+    "expansion": "Fast Identity Online",
+    "definition": "Open authentication standard for phishing-resistant passwordless and multifactor authentication.",
+    "domain": 4,
+    "topicId": "098"
+  },
+  {
+    "term": "FIDO2",
+    "expansion": "Fast Identity Online 2",
+    "definition": "Open authentication standard enabling phishing-resistant multi-factor authentication with hardware keys.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "FileVault",
+    "expansion": "FileVault",
+    "definition": "Full disk encryption implementation on macOS systems to protect stolen or lost devices.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "FIM",
+    "expansion": "File Integrity Monitoring",
+    "definition": "Security tool that detects unauthorized changes to critical files and directories outside approved windows.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "FINRA",
+    "expansion": "Financial Industry Regulatory Authority",
+    "definition": "Financial industry self-regulator requiring non-repudiation and preservation of electronic records.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "FIPS",
+    "expansion": "Federal Information Processing Standard",
+    "definition": "U.S. federal standards for cryptographic algorithms and security levels in hardware devices.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "FIPS 140-2",
+    "expansion": "Federal Information Processing Standards 140-2",
+    "definition": "Security standard defining four levels of hardware cryptographic module certification and tamper resistance requirements.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "FIPS 140-3",
+    "expansion": "Federal Information Processing Standards 140-3",
+    "definition": "Newer security standard replacing FIPS 140-2 for hardware cryptographic module certification and security requirements.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "FISMA",
+    "expansion": "Federal Information Security Management Act",
+    "definition": "Federal law requiring annual risk assessments for information systems used by government agencies.",
+    "domain": 5,
+    "topicId": "110"
+  },
+  {
+    "term": "FM-200",
+    "expansion": "HFC-227ea",
+    "definition": "Clean agent fire suppression system that extinguishes fires without damaging electronic equipment.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "FPE",
+    "expansion": "Format-Preserving Encryption",
+    "definition": "Encryption that produces ciphertext in the same format and length as the original plaintext.",
+    "domain": 1,
+    "topicId": "016"
+  },
+  {
+    "term": "FRR",
+    "expansion": "False Rejection Rate",
+    "definition": "Percentage of authorized users that a biometric system incorrectly rejects or fails to recognize.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "FS-ISAC",
+    "expansion": "Financial Services Information Sharing and Analysis Center",
+    "definition": "ISAC serving the banking and financial services sector for threat intelligence sharing.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "FSA",
+    "expansion": "Financial Supervision Authority",
+    "definition": "Polish regulatory body whose website was compromised in a January 2017 watering hole attack example.",
+    "domain": 2,
+    "topicId": "024"
+  },
+  {
+    "term": "FTK",
+    "expansion": "Forensic Toolkit",
+    "definition": "Commercial forensic platform from Exterro used for disk analysis, evidence recovery, and investigation.",
+    "domain": 4,
+    "topicId": "103"
+  },
+  {
+    "term": "FTP",
+    "expansion": "File Transfer Protocol",
+    "definition": "Legacy unencrypted file transfer protocol that transmits credentials in plaintext; should be replaced by SFTP.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "fTPM",
+    "expansion": "firmware TPM",
+    "definition": "TPM implementation running in protected processor mode rather than on dedicated silicon hardware.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "FTPS",
+    "expansion": "FTP over SSL or TLS",
+    "definition": "FTP protocol protected by TLS layer, operating in explicit mode on port 21 or implicit mode on port 990.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "FWaaS",
+    "expansion": "Firewall as a Service",
+    "definition": "Cloud-delivered firewall service that provides perimeter security without on-premises hardware.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "GCC",
+    "expansion": "GNU Compiler Collection",
+    "definition": "Open-source compiler suite; implements stack canaries via -fstack-protector flag.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "GCM",
+    "expansion": "Galois/Counter Mode",
+    "definition": "Authenticated encryption mode extending CTR with authentication tag for both confidentiality and integrity.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "GCP",
+    "expansion": "Google Cloud Platform",
+    "definition": "Google's comprehensive cloud computing platform offering infrastructure, services, and applications.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "GCP IAM",
+    "expansion": "Google Cloud Platform Identity and Access Management",
+    "definition": "Google Cloud service implementing identity and access management with role-based authorization.",
+    "domain": 4,
+    "topicId": "097"
+  },
+  {
+    "term": "GDPR",
+    "expansion": "General Data Protection Regulation",
+    "definition": "EU regulation imposing comprehensive data protection obligations on organizations processing EU residents' personal data.",
+    "domain": 1,
+    "topicId": "016"
+  },
+  {
+    "term": "GLBA",
+    "expansion": "Gramm-Leach-Bliley Act",
+    "definition": "US law requiring financial institutions to implement information security programs protecting customer financial information.",
+    "domain": 5,
+    "topicId": "108"
+  },
+  {
+    "term": "GPG",
+    "expansion": "GNU Privacy Guard",
+    "definition": "Open-source equivalent of PGP providing file encryption, email encryption, and digital signing functionality.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "GPO",
+    "expansion": "Group Policy Objects",
+    "definition": "Windows Active Directory mechanism for automatically enforcing baseline settings across domain-joined systems.",
+    "domain": 4,
+    "topicId": "076"
+  },
+  {
+    "term": "GPS",
+    "expansion": "Global Positioning System",
+    "definition": "Satellite-based navigation system whose signals can be spoofed to redirect drones or other autonomous vehicles.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "GPU",
+    "expansion": "Graphics Processing Unit",
+    "definition": "Specialized processor optimized for parallel processing, used for AI, machine learning, and graphics workloads.",
+    "domain": 2,
+    "topicId": "043"
+  },
+  {
+    "term": "GRE",
+    "expansion": "Generic Routing Encapsulation",
+    "definition": "Tunneling protocol encapsulating arbitrary network protocols within IP packets for VPN implementations.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "GRU",
+    "expansion": "Glavnoye Razvedyvatelnoye Upravleniye (Russia's Military Intelligence Directorate)",
+    "definition": "Russian military intelligence agency attributed to Fancy Bear APT28 operations.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "GUI",
+    "expansion": "Graphical User Interface",
+    "definition": "Visual interface allowing user interaction with software through windows, menus, and icons.",
+    "domain": 4,
+    "topicId": "103"
+  },
+  {
+    "term": "H-ISAC",
+    "expansion": "Health Information Sharing and Analysis Center",
+    "definition": "ISAC serving healthcare organizations for sector-specific threat intelligence sharing.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "HA",
+    "expansion": "High Availability",
+    "definition": "System design ensuring services continue operating when individual components or nodes fail.",
+    "domain": 3,
+    "topicId": "071"
+  },
+  {
+    "term": "HHS",
+    "expansion": "Department of Health and Human Services",
+    "definition": "US federal agency that must be notified of HIPAA breaches affecting protected health information.",
+    "domain": 4,
+    "topicId": "102"
+  },
+  {
+    "term": "HIBP",
+    "expansion": "HaveIBeenPwned",
+    "definition": "Database of billions of credentials from historical data breaches used to check compromised passwords.",
+    "domain": 4,
+    "topicId": "099"
+  },
+  {
+    "term": "HID",
+    "expansion": "Human Interface Device",
+    "definition": "Device class that includes keyboards; emulated by USB Rubber Ducky to execute rapid automated commands.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "HIDS",
+    "expansion": "Host-based Intrusion Detection System",
+    "definition": "Software agent on endpoints monitoring system-level activity like file changes and process behavior.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "HIPAA",
+    "expansion": "Health Insurance Portability and Accountability Act",
+    "definition": "U.S. regulation that mandates specific security controls for healthcare organizations handling protected health information.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "HIPS",
+    "expansion": "Host-based Intrusion Prevention System",
+    "definition": "Software agent on endpoints that monitors and blocks malicious system-level activity at the host.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "HKDF",
+    "expansion": "HMAC-based Key Derivation Function",
+    "definition": "Standard KDF in TLS 1.3 that derives symmetric keys from shared secrets using HMAC operations.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "HKLM",
+    "expansion": "HKEY_LOCAL_MACHINE",
+    "definition": "Root registry key in Windows containing system-wide configuration and common persistence mechanism locations.",
+    "domain": 4,
+    "topicId": "091"
+  },
+  {
+    "term": "HMAC",
+    "expansion": "Hash-based Message Authentication Code",
+    "definition": "Symmetric authentication method using shared secret and hash; provides integrity but not non-repudiation.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "HOTP",
+    "expansion": "HMAC-based One-Time Password",
+    "definition": "Counter-based one-time password variant invalidated after use rather than expiring by time.",
+    "domain": 4,
+    "topicId": "098"
+  },
+  {
+    "term": "HR",
+    "expansion": "Human Resources",
+    "definition": "Organizational department responsible for employee management, recruitment, and administrative personnel functions.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "HS256",
+    "expansion": "HMAC with SHA-256",
+    "definition": "Symmetric signing algorithm for JWT tokens that attackers may exploit in algorithm confusion attacks.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "HSM",
+    "expansion": "Hardware Security Module",
+    "definition": "Dedicated enterprise hardware appliance designed exclusively for cryptographic operations at scale in organizational environments.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "HSTS",
+    "expansion": "HTTP Strict Transport Security",
+    "definition": "Security header that forces browsers to use HTTPS for all future requests, preventing protocol downgrade attacks.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "HTML",
+    "expansion": "Hypertext Markup Language",
+    "definition": "Markup language used to structure web pages; user data must be HTML-encoded to prevent script execution.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "HTTP",
+    "expansion": "Hypertext Transfer Protocol",
+    "definition": "Web protocol used to deliver requests to servers; targeted by application-layer GET, POST, and Slowloris attacks.",
+    "domain": 2,
+    "topicId": "031"
+  },
+  {
+    "term": "HTTPS",
+    "expansion": "Hypertext Transfer Protocol Secure",
+    "definition": "Encrypted version of HTTP; web proxy logs capture hostname for HTTPS traffic without decrypting encrypted content.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "HVAC",
+    "expansion": "Heating, Ventilation, and Air Conditioning",
+    "definition": "Building climate control system; in the Target breach, vendor had remote access for monitoring and billing.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "HYOK",
+    "expansion": "Hold Your Own Key",
+    "definition": "Cloud encryption model where customer keeps encryption keys entirely on-premises while storing encrypted data in cloud.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "Hyper-V",
+    "expansion": "Hyper-V",
+    "definition": "Microsoft virtualization platform that supports virtual machine snapshots and rollback capability.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "IA",
+    "expansion": "Identification and Authentication",
+    "definition": "Control family addressing user identification and authentication mechanisms and requirements.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "IaaS",
+    "expansion": "Infrastructure as a Service",
+    "definition": "Cloud service model where provider supplies compute, storage, networking, and hypervisor; customer manages OS and above.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "IaC",
+    "expansion": "Infrastructure as Code",
+    "definition": "Practice of defining infrastructure configuration in version-controlled code files for consistent, repeatable deployment.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "IAM",
+    "expansion": "Identity and Access Management",
+    "definition": "Cloud service that manages access credentials; roles with temporary credentials should be preferred over long-lived keys.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "IANA",
+    "expansion": "Internet Assigned Numbers Authority",
+    "definition": "Organization that manages root DNS and top-level domain registries in DNSSEC chain of trust.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "IAST",
+    "expansion": "Interactive Application Security Testing",
+    "definition": "Testing approach that instruments running applications with sensors to observe internal behavior during test execution.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "ICMP",
+    "expansion": "Internet Control Message Protocol",
+    "definition": "Network protocol used for diagnostics and error reporting, exploited in ping floods and Smurf attacks.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "ICS",
+    "expansion": "Industrial Control Systems",
+    "definition": "Automated systems controlling physical manufacturing and utility processes in industrial and critical infrastructure environments.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "IDOR",
+    "expansion": "Insecure Direct Object Reference",
+    "definition": "Vulnerability where applications expose direct references to internal resources without verifying user authorization to access them.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "IdP",
+    "expansion": "Identity Provider",
+    "definition": "Authoritative source for user identity that performs authentication in federated systems.",
+    "domain": 4,
+    "topicId": "096"
+  },
+  {
+    "term": "iDRAC",
+    "expansion": "Integrated Dell Remote Access Controller",
+    "definition": "Dell server management firmware providing out-of-band remote access and monitoring.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "IDS",
+    "expansion": "Intrusion Detection System",
+    "definition": "Passive monitoring system that identifies and alerts on suspicious network or host activity without blocking traffic.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "IDS/IPS",
+    "expansion": "Intrusion Detection System / Intrusion Prevention System",
+    "definition": "Network security systems that detect and prevent malicious traffic and intrusion attempts.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "IEC 62443",
+    "expansion": "International Electrotechnical Commission 62443",
+    "definition": "International standard providing security guidelines and controls specifically designed for operational technology environments.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "IEEE",
+    "expansion": "Institute of Electrical and Electronics Engineers",
+    "definition": "Professional organization developing standards including networking protocols like 802.11 WiFi.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "IEEE 802.1X",
+    "expansion": "Institute of Electrical and Electronics Engineers 802.1X",
+    "definition": "Protocol that enforces authentication at Layer 2 before granting network access to switch ports or wireless access points.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "IEX",
+    "expansion": "Invoke-Expression",
+    "definition": "PowerShell cmdlet that executes code strings directly in memory without writing files to disk.",
+    "domain": 2,
+    "topicId": "050"
+  },
+  {
+    "term": "IIS",
+    "expansion": "Internet Information Services",
+    "definition": "Microsoft web server software that hosted vulnerable services exploited by Code Red.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "IKE",
+    "expansion": "Internet Key Exchange",
+    "definition": "Protocol on UDP ports 500 and 4500 negotiating security associations and managing cryptographic keys.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "iLO",
+    "expansion": "Integrated Lights-Out",
+    "definition": "HPE servers' dedicated management interface for out-of-band administrative access.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "IMAP",
+    "expansion": "Internet Message Access Protocol",
+    "definition": "Email retrieval protocol on port 143 allowing clients to access and manage server-stored messages.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "IMAPS",
+    "expansion": "IMAP over TLS",
+    "definition": "IMAP encrypted with TLS on port 993, preventing credential and message content exposure.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "IMDSv2",
+    "expansion": "Instance Metadata Service version 2",
+    "definition": "AWS security enhancement requiring token-based authentication for metadata service access.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "IoA",
+    "expansion": "Indicator of Attack",
+    "definition": "Behavioral pattern associated with active attack in progress before compromise is fully confirmed.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "IoC",
+    "expansion": "Indicator of Compromise",
+    "definition": "Observable artifact or behavioral pattern providing high confidence that a system has been breached or is under attack.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "IOMMU",
+    "expansion": "Input-Output Memory Management Unit",
+    "definition": "Hardware security feature that restricts which memory regions DMA-capable devices can access.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "iOS",
+    "expansion": "iPhone Operating System",
+    "definition": "Apple mobile operating system for which patches addressed sandbox escape and arbitrary code execution.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "IoT",
+    "expansion": "Internet of Things",
+    "definition": "Network-connected devices that collect data, automate physical processes, or extend digital control into the physical world.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "IP",
+    "expansion": "Internet Protocol",
+    "definition": "Network protocol that identifies devices; attackers configure malicious code to execute only for specific IP ranges.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "iPadOS",
+    "expansion": "iPad Operating System",
+    "definition": "Apple tablet operating system patched for sandbox escape and information disclosure vulnerabilities.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "IPFIX",
+    "expansion": "Internet Protocol Flow Information Export",
+    "definition": "Standards-based vendor-neutral protocol providing the same flow data export functionality as NetFlow.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "IPMI",
+    "expansion": "Intelligent Platform Management Interface",
+    "definition": "Out-of-band management interface providing console access to servers independent of OS state.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "IPS",
+    "expansion": "Intrusion Prevention System",
+    "definition": "Security tool that detects and blocks network attacks; requires throughput capacity matching monitored segments.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "IPsec",
+    "expansion": "Internet Protocol Security",
+    "definition": "Network security protocol that includes sequence numbers to prevent replay of encrypted authentication material.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "IPv4",
+    "expansion": "Internet Protocol version 4",
+    "definition": "32-bit addressing protocol that forms the foundation of current internet communications.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "IPv6",
+    "expansion": "Internet Protocol version 6",
+    "definition": "128-bit addressing protocol providing vastly larger address space eliminating NAT requirement.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "IR",
+    "expansion": "Incident Response",
+    "definition": "Coordinated process of detecting, investigating, containing, and recovering from security incidents.",
+    "domain": 4,
+    "topicId": "102"
+  },
+  {
+    "term": "IRC",
+    "expansion": "Internet Relay Chat",
+    "definition": "Text-based communication protocol enabling real-time messaging and file transfers.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "IRM",
+    "expansion": "Information Rights Management",
+    "definition": "Technology that embeds persistent access controls directly into documents to protect data regardless of location.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "IRP",
+    "expansion": "Incident Response Plan",
+    "definition": "Foundational document defining how an organization responds to security incidents before they occur.",
+    "domain": 4,
+    "topicId": "102"
+  },
+  {
+    "term": "IRS",
+    "expansion": "Internal Revenue Service",
+    "definition": "United States federal agency responsible for tax collection and enforcement of tax laws.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "ISA",
+    "expansion": "Interconnection Security Agreement",
+    "definition": "Documents technical details and security controls for network connections between organizations.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "ISAC",
+    "expansion": "Information Sharing and Analysis Center",
+    "definition": "Sector-specific nonprofit organization facilitating threat intelligence sharing among peer organizations.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "ISACs",
+    "expansion": "Information Sharing and Analysis Centers",
+    "definition": "Sector-specific organizations that facilitate threat intelligence sharing among peer organizations.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "ISAO",
+    "expansion": "Information Sharing and Analysis Organization",
+    "definition": "Flexible sharing community established by executive order for any group of organizations.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "ISMS",
+    "expansion": "Information Security Management System",
+    "definition": "Systematic approach to managing sensitive data through policies, processes, and controls to ensure confidentiality, integrity, and availability.",
+    "domain": 5,
+    "topicId": "119"
+  },
+  {
+    "term": "ISO 27001",
+    "expansion": "International Organization for Standardization 27001",
+    "definition": "International standard for information security management systems requiring technical compliance verification including penetration testing.",
+    "domain": 2,
+    "topicId": "036"
+  },
+  {
+    "term": "ISO 27002",
+    "expansion": "International Organization for Standardization Information Security Controls Code of Practice",
+    "definition": "Best practice guide providing detailed implementation guidance for ISO 27001 controls.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "ISO/IEC 27001",
+    "expansion": "International Organization for Standardization and International Electrotechnical Commission 27001",
+    "definition": "International standard specifying requirements for establishing and maintaining information security management systems.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "ISP",
+    "expansion": "Internet Service Provider",
+    "definition": "Organization that provides connectivity and access to internet services to customers.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "IT",
+    "expansion": "Information Technology",
+    "definition": "Organizational department responsible for managing computer systems, networks, and technology infrastructure.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "ITU-T",
+    "expansion": "International Telecommunication Union - Telecommunication Standardization Sector",
+    "definition": "International standards organization that defined the X.509 certificate format standard.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "IV",
+    "expansion": "Initialization Vector",
+    "definition": "Random value combined with encryption key; WEP's 24-bit IV space causes dangerous reuse on busy networks.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "JavaScript",
+    "expansion": "JavaScript programming language",
+    "definition": "Client-side scripting language; user data in JavaScript contexts must be JavaScript-encoded to prevent execution.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "JIT",
+    "expansion": "Just-In-Time",
+    "definition": "Access provisioning method granting elevated privileges only when needed, then automatically revoking.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "JNDI",
+    "expansion": "Java Naming and Directory Interface",
+    "definition": "Java API that allows applications to access naming and directory services for resource lookup operations.",
+    "domain": 2,
+    "topicId": "036"
+  },
+  {
+    "term": "JSON",
+    "expansion": "JavaScript Object Notation",
+    "definition": "Data format recommended as a safer alternative to XML to prevent XXE vulnerabilities.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "JTAG",
+    "expansion": "Joint Test Action Group",
+    "definition": "Hardware debugging interface built into chips that provides direct access to registers and memory.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "JWT",
+    "expansion": "JSON Web Token",
+    "definition": "Self-contained token format used in web APIs that can be vulnerable to algorithm confusion and replay attacks.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "KDC",
+    "expansion": "Key Distribution Center",
+    "definition": "Kerberos server component that issues Ticket Granting Tickets and validates authentication requests within clock skew windows.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "KDF",
+    "expansion": "Key Derivation Function",
+    "definition": "Cryptographic function that derives one or more secure keys from raw key material or passwords.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "Kerberos",
+    "expansion": "Kerberos Authentication Protocol",
+    "definition": "Authentication protocol that requires accurate time synchronization to function properly in Windows environments.",
+    "domain": 4,
+    "topicId": "077"
+  },
+  {
+    "term": "KEV",
+    "expansion": "Known Exploited Vulnerabilities",
+    "definition": "CISA catalog of CVEs with confirmed real-world active exploitation requiring urgent remediation prioritization.",
+    "domain": 4,
+    "topicId": "086"
+  },
+  {
+    "term": "KMS",
+    "expansion": "Key Management System",
+    "definition": "Centralized system managing cryptographic key lifecycle including creation, expiration, rotation, and usage logging.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "KnowBe4",
+    "expansion": "KnowBe4",
+    "definition": "Platform for delivering security awareness training content and phishing simulation capabilities.",
+    "domain": 5,
+    "topicId": "120"
+  },
+  {
+    "term": "KRACK",
+    "expansion": "Key Reinstallation Attack",
+    "definition": "Vulnerability in WPA2 four-way handshake allowing attackers to decrypt and manipulate wireless traffic.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "KRBTGT",
+    "expansion": "Kerberos Ticket Granting Ticket",
+    "definition": "Special Active Directory account whose NTLM hash is used to sign all TGTs in a Kerberos domain.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "KVM",
+    "expansion": "Kernel-based Virtual Machine",
+    "definition": "A Type 1 hypervisor integrated into the Linux kernel that manages virtual machine execution.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "L2TP",
+    "expansion": "Layer 2 Tunneling Protocol",
+    "definition": "Tunneling protocol often combined with IPsec for VPN connections.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "LDAP",
+    "expansion": "Lightweight Directory Access Protocol",
+    "definition": "Directory service protocol vulnerable to injection attacks when queries are constructed from unsanitized user input.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "LDAPS",
+    "expansion": "LDAP over SSL/TLS",
+    "definition": "LDAP protocol secured with SSL/TLS encryption, using TCP port 636 for confidential directory access.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "LEEF",
+    "expansion": "Log Event Extended Format",
+    "definition": "Standardized log format used by security products and SIEM systems to represent events in a consistent structure.",
+    "domain": 4,
+    "topicId": "094"
+  },
+  {
+    "term": "LLMNR",
+    "expansion": "Link-Local Multicast Name Resolution",
+    "definition": "Network protocol that can be abused for credential capture on local networks.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "LNK",
+    "expansion": "Link",
+    "definition": "Windows shortcut file format that can execute arbitrary commands when opened by attackers.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "LOLBAS",
+    "expansion": "Living Off The Land Binaries and Scripts",
+    "definition": "Legitimate Windows binaries and scripts that attackers abuse for malicious purposes.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "LOLBIN",
+    "expansion": "Living off the Land Binaries",
+    "definition": "Legitimate Windows utilities abused by attackers to download, decode, and execute malicious code entirely in memory.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "LotL",
+    "expansion": "Living off the Land",
+    "definition": "Technique using built-in operating system tools instead of custom malware to evade antivirus detection.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "LSASS",
+    "expansion": "Local Security Authority Subsystem Service",
+    "definition": "Windows process that stores and manages credentials, targeted by Mimikatz for password hash and plaintext credential extraction.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "LSB",
+    "expansion": "Least Significant Bit",
+    "definition": "The lowest-value bit in a binary number, used in LSB steganography to hide data in images.",
+    "domain": 1,
+    "topicId": "016"
+  },
+  {
+    "term": "LTE",
+    "expansion": "Long-Term Evolution",
+    "definition": "Fourth-generation cellular technology providing broadband wireless connectivity for WAN links.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "LTO Ultrium",
+    "expansion": "Linear Tape-Open Ultrium",
+    "definition": "High-capacity magnetic tape cartridge technology for long-term offline backup storage.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "LUKS",
+    "expansion": "Linux Unified Key Setup",
+    "definition": "Standard Linux disk encryption framework supporting multiple encrypted key slots and key rotation without re-encryption.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "MAB",
+    "expansion": "MAC Authentication Bypass",
+    "definition": "Fallback mechanism using device MAC address as username and password for devices unable to support 802.1X.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "MAC",
+    "expansion": "Message Authentication Code",
+    "definition": "Most restrictive access control model using system-assigned security labels to automatically determine access permissions.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "MAM",
+    "expansion": "Mobile Application Management",
+    "definition": "Subset of MDM that manages application security and data without necessarily controlling the entire device.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "Maven",
+    "expansion": "Maven",
+    "definition": "Build automation and package management tool for Java projects.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "MBR",
+    "expansion": "Master Boot Record",
+    "definition": "First sector of boot disk where firmware rootkits and bootkits persist to survive OS reinstallation.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "MCM",
+    "expansion": "Mobile Content Management",
+    "definition": "Component of EMM that manages content distribution and access on mobile devices.",
+    "domain": 4,
+    "topicId": "078"
+  },
+  {
+    "term": "MD5",
+    "expansion": "Message Digest 5",
+    "definition": "Cryptographic hash function producing 128-bit output; deprecated due to practical collision attacks discovered in 2004.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "MDM",
+    "expansion": "Mobile Device Management",
+    "definition": "Software installed on work devices that manages security policies, configuration, and enforcement for mobile devices.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "MDR",
+    "expansion": "Managed Detection and Response",
+    "definition": "Outsourced service providing 24/7 threat detection and incident response by external security professionals.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "MECM",
+    "expansion": "Microsoft Endpoint Configuration Manager",
+    "definition": "Unified platform integrating OS deployment, application management, compliance reporting, and patch deployment for large organizations.",
+    "domain": 4,
+    "topicId": "086"
+  },
+  {
+    "term": "MFA",
+    "expansion": "Multi-Factor Authentication",
+    "definition": "Security method requiring multiple verification factors beyond password to provide substantially stronger account protection.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "MIB",
+    "expansion": "Management Information Base",
+    "definition": "Database containing device-specific operational data organized by Object Identifiers for SNMP retrieval.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "MIC",
+    "expansion": "Message Integrity Check",
+    "definition": "Cryptographic verification that transmitted data has not been altered in transit.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "MIME",
+    "expansion": "Multipurpose Internet Mail Extensions",
+    "definition": "Standard specifying content types; browsers can MIME-sniff unless X-Content-Type-Options header prevents it.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "Mimikatz",
+    "expansion": "Mimikatz",
+    "definition": "Credential extraction tool used by NotPetya to steal passwords for propagation.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "MITRE",
+    "expansion": "MITRE Corporation",
+    "definition": "Organization that maintains the CVE system at cve.mitre.org.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "MITRE ATT&CK",
+    "expansion": "MITRE Adversarial Tactics, Techniques, and Common Knowledge",
+    "definition": "Structured taxonomy of attacker tactics, techniques, and procedures organized by intrusion stages.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "ML-DSA",
+    "expansion": "Module-Lattice-Based Digital Signature Algorithm",
+    "definition": "Post-quantum digital signature algorithm standardized as FIPS 204 to replace RSA and ECC signatures.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "ML-KEM",
+    "expansion": "Module-Lattice-Based Key-Encapsulation Mechanism",
+    "definition": "Post-quantum key encapsulation mechanism standardized as FIPS 203 to replace RSA and ECDH.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "MOA",
+    "expansion": "Memorandum of Agreement",
+    "definition": "Binding agreement between parties committing them to specific actions, responsibilities, or activities.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "MOU",
+    "expansion": "Memorandum of Understanding",
+    "definition": "Non-binding document expressing mutual intent and understanding between two parties without legal obligations.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "MOV",
+    "expansion": "Metal Oxide Varistor",
+    "definition": "Active component in surge suppressors that shunts excess voltage to ground when spikes are detected.",
+    "domain": 3,
+    "topicId": "075"
+  },
+  {
+    "term": "MPLS",
+    "expansion": "Multiprotocol Label Switching",
+    "definition": "Forwarding mechanism that uses labels to direct packets along predetermined paths for efficiency and control.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "MRU",
+    "expansion": "Most Recently Used",
+    "definition": "Registry lists tracking recently opened files and programs, providing evidence of user activity.",
+    "domain": 4,
+    "topicId": "103"
+  },
+  {
+    "term": "MS-ISAC",
+    "expansion": "Multi-State Information Sharing and Analysis Center",
+    "definition": "ISAC sponsored by CISA serving state, local, tribal, and territorial governments.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "MS08-067",
+    "expansion": "Microsoft Security Bulletin 08-067",
+    "definition": "Microsoft patch for Windows Server Service vulnerability exploited by Conficker worm.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "MS17-010",
+    "expansion": "Microsoft Security Bulletin 17-010",
+    "definition": "Microsoft security update identifier for EternalBlue Windows SMBv1 buffer overflow vulnerability.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "MSA",
+    "expansion": "Master Service Agreement",
+    "definition": "Comprehensive legal contract establishing foundational terms governing an ongoing business relationship.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "MSCHAPv2",
+    "expansion": "Microsoft Challenge Handshake Authentication Protocol version 2",
+    "definition": "Password-based authentication mechanism commonly used inside PEAP tunnels in Windows environments.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "MSP",
+    "expansion": "Managed Service Provider",
+    "definition": "Third-party vendor that manages IT infrastructure and services for multiple client organizations simultaneously.",
+    "domain": 2,
+    "topicId": "036"
+  },
+  {
+    "term": "MSRPC",
+    "expansion": "Microsoft Remote Procedure Call",
+    "definition": "Protocol allowing execution of functions on remote Windows systems over the network.",
+    "domain": 2,
+    "topicId": "050"
+  },
+  {
+    "term": "MSSP",
+    "expansion": "Managed Security Service Provider",
+    "definition": "Third-party organization providing trained analysts, tooling, and monitoring to supplement or replace internal security functions.",
+    "domain": 3,
+    "topicId": "072"
+  },
+  {
+    "term": "MSVC",
+    "expansion": "Microsoft Visual C++",
+    "definition": "Microsoft's C++ compiler; implements stack canaries via /GS flag.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "MTBF",
+    "expansion": "Mean Time Between Failures",
+    "definition": "Average time interval between failures for a repairable system; higher values indicate greater reliability.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "MTD",
+    "expansion": "Maximum Tolerable Downtime",
+    "definition": "Maximum time a business process can be unavailable before suffering irreversible organizational harm.",
+    "domain": 5,
+    "topicId": "113"
+  },
+  {
+    "term": "MTPD",
+    "expansion": "Maximum Tolerable Period of Disruption",
+    "definition": "Alternative term for the maximum time a business process can remain unavailable before irreversible harm.",
+    "domain": 5,
+    "topicId": "113"
+  },
+  {
+    "term": "MTTF",
+    "expansion": "Mean Time to Failure",
+    "definition": "Expected operational lifetime before a non-repairable component or system fails permanently.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "MTTR",
+    "expansion": "Mean Time to Repair",
+    "definition": "Security metric measuring the average time from alert generation to incident containment.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "MX",
+    "expansion": "Mail Exchange",
+    "definition": "DNS record type that specifies mail servers for a domain.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "MySQL",
+    "expansion": "My Structured Query Language",
+    "definition": "Relational database system that should not be exposed directly to the internet on port 3306.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "NAC",
+    "expansion": "Network Access Control",
+    "definition": "Security policy enforcement that verifies device compliance before granting network access.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "NACL",
+    "expansion": "Network Access Control List",
+    "definition": "Stateless subnet-level firewall rules that evaluate traffic in both inbound and outbound directions explicitly.",
+    "domain": 3,
+    "topicId": "058"
+  },
+  {
+    "term": "NAT",
+    "expansion": "Network Address Translation",
+    "definition": "Technique translating private IP addresses to public addresses at border routers for internet communication.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "NDA",
+    "expansion": "Non-Disclosure Agreement",
+    "definition": "Creates contractual obligation to maintain confidentiality of information shared between parties.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "NDR",
+    "expansion": "Network Detection and Response",
+    "definition": "Monitors network traffic for anomalous patterns to detect attacks in progress.",
+    "domain": 2,
+    "topicId": "056"
+  },
+  {
+    "term": "NET",
+    "expansion": ".NET Framework",
+    "definition": "Microsoft software framework for building and running web and desktop applications.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "NetApp",
+    "expansion": "NetApp",
+    "definition": "Storage array vendor that supports volume-level snapshots at the storage layer independent of OS.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "NetFlow",
+    "expansion": "NetFlow",
+    "definition": "Cisco-developed protocol that exports IP flow records from routers and switches containing source/destination IPs, ports, protocol, byte/packet counts, and timestamps.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "NFC",
+    "expansion": "Near Field Communication",
+    "definition": "Very short-range wireless communication used for contactless payment vulnerable to relay and card emulation attacks.",
+    "domain": 1,
+    "topicId": "016"
+  },
+  {
+    "term": "NGFW",
+    "expansion": "Next-Generation Firewall",
+    "definition": "Advanced firewall that performs deep packet inspection, application identification, and integrated threat prevention.",
+    "domain": 3,
+    "topicId": "066"
+  },
+  {
+    "term": "NGIPS",
+    "expansion": "Next-Generation Intrusion Prevention System",
+    "definition": "Advanced IPS with application awareness, user identity linking, threat intelligence, and sandbox file analysis.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "NIDS",
+    "expansion": "Network Intrusion Detection System",
+    "definition": "System that matches network traffic against attack signatures and generates alerts when matches occur.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "NIPS",
+    "expansion": "Network Intrusion Prevention System",
+    "definition": "Inline system monitoring network traffic and actively blocking malicious packets at network segments.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "NIST",
+    "expansion": "National Institute of Standards and Technology",
+    "definition": "U.S. government agency that develops security standards and guidelines, including penetration testing requirements in SP 800-53.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "NIST 800-53",
+    "expansion": "National Institute of Standards and Technology 800-53",
+    "definition": "Framework providing catalog of security controls for federal systems and information security programs.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "NIST CSF",
+    "expansion": "National Institute of Standards and Technology Cybersecurity Framework",
+    "definition": "Voluntary framework helping organizations manage and reduce cybersecurity risk across five core functions.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "NIST SP 800-171",
+    "expansion": "NIST Special Publication 800-171",
+    "definition": "Security requirements for contractors protecting Controlled Unclassified Information for the federal government.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "NIST SP 800-38G",
+    "expansion": "National Institute of Standards and Technology Special Publication 800-38G",
+    "definition": "Standard documenting format-preserving encryption modes including FF1 and FF3.",
+    "domain": 1,
+    "topicId": "016"
+  },
+  {
+    "term": "NIST SP 800-53",
+    "expansion": "NIST Special Publication 800-53",
+    "definition": "Comprehensive control catalog organizing security controls into families for federal agencies and private sector.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "Nmap",
+    "expansion": "Network Mapper",
+    "definition": "Network scanning tool for discovering hosts, ports, services, and operating systems.",
+    "domain": 4,
+    "topicId": "084"
+  },
+  {
+    "term": "NOP",
+    "expansion": "No Operation",
+    "definition": "CPU instruction that performs no action; used in exploit payloads to increase landing zone size.",
+    "domain": 2,
+    "topicId": "027"
+  },
+  {
+    "term": "NOPASSWD",
+    "expansion": "No Password",
+    "definition": "Sudo configuration allowing users to run specific programs as root without password authentication.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "npm",
+    "expansion": "Node Package Manager",
+    "definition": "Package manager for JavaScript that retrieves and manages open-source dependencies.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "NS",
+    "expansion": "Name Server",
+    "definition": "DNS record type that identifies authoritative name servers for a domain.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "NSA",
+    "expansion": "National Security Agency",
+    "definition": "US intelligence agency that publishes cybersecurity advisories on nation-state attack techniques.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "NSO",
+    "expansion": "NSO Group",
+    "definition": "Company that developed Pegasus spyware exploiting zero-click iOS vulnerabilities to surveil activists and journalists.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "NTFS",
+    "expansion": "New Technology File System",
+    "definition": "Windows file system providing granular access control through Read, Write, Execute, Modify, and Full Control permissions.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "NTLM",
+    "expansion": "New Technology LAN Manager",
+    "definition": "Windows authentication protocol that uses password hashes directly in challenge-response exchanges for network authentication.",
+    "domain": 2,
+    "topicId": "053"
+  },
+  {
+    "term": "NTP",
+    "expansion": "Network Time Protocol",
+    "definition": "Protocol for time synchronization that can be exploited via monlist command for large amplification attacks.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "NTPsec",
+    "expansion": "NTP Security",
+    "definition": "Security-hardened NTP implementation supporting authenticated NTP to prevent clock manipulation.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "NULL",
+    "expansion": "Null",
+    "definition": "DNS record type sometimes abused for data exfiltration via DNS tunneling.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "NVD",
+    "expansion": "National Vulnerability Database",
+    "definition": "NIST-maintained repository enriching CVE identifiers with detailed vulnerability information and advisories.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "NX",
+    "expansion": "No-Execute",
+    "definition": "Processor bit that marks memory regions as non-executable to prevent code execution in data areas.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "NXDOMAIN",
+    "expansion": "Non-Existent Domain",
+    "definition": "DNS response indicating a queried domain name does not exist; generated by malware testing DGA domains.",
+    "domain": 4,
+    "topicId": "090"
+  },
+  {
+    "term": "O_CREAT",
+    "expansion": "Open Create flag",
+    "definition": "File operation flag that creates a file if it does not exist during the open operation.",
+    "domain": 2,
+    "topicId": "028"
+  },
+  {
+    "term": "O_EXCL",
+    "expansion": "Open Exclusive flag",
+    "definition": "File operation flag that ensures creation only succeeds if the file does not already exist atomically.",
+    "domain": 2,
+    "topicId": "028"
+  },
+  {
+    "term": "OAuth",
+    "expansion": "Open Authorization",
+    "definition": "Authorization framework for delegated access that uses bearer tokens vulnerable to replay attacks in web and API authentication.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "OAuth 2.0",
+    "expansion": "OAuth version 2.0",
+    "definition": "Standard for delegated authorization allowing applications to access user resources without handling user credentials.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "OBD-II",
+    "expansion": "On-Board Diagnostic II",
+    "definition": "Standardized diagnostic port in vehicles providing physical access point that can be exploited by malicious devices.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "OBEX",
+    "expansion": "Object Exchange",
+    "definition": "Protocol exploited in Bluesnarfing attacks to gain unauthorized access to Bluetooth device data.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "OCC",
+    "expansion": "Office of the Comptroller of the Currency",
+    "definition": "U.S. federal agency that charters and supervises national banks.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "OCR",
+    "expansion": "Office for Civil Rights",
+    "definition": "U.S. federal office that enforces HIPAA and conducts healthcare compliance reviews.",
+    "domain": 5,
+    "topicId": "118"
+  },
+  {
+    "term": "OCSP",
+    "expansion": "Online Certificate Status Protocol",
+    "definition": "Real-time protocol providing certificate revocation status without downloading complete revocation lists.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "OECD",
+    "expansion": "Organisation for Economic Co-operation and Development",
+    "definition": "International organization whose Privacy Guidelines establish foundational principles for data protection.",
+    "domain": 5,
+    "topicId": "117"
+  },
+  {
+    "term": "OID",
+    "expansion": "Object Identifier",
+    "definition": "Unique identifier in the Management Information Base that organizes SNMP operational data.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "OIDC",
+    "expansion": "OpenID Connect",
+    "definition": "Authentication layer on top of OAuth 2.0 that introduces ID tokens containing claims about authenticated user identity.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "Opal",
+    "expansion": "Opal",
+    "definition": "Standard for self-encrypting drives implementing AES in firmware for transparent cryptographic erasure.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "Oracle RMAN",
+    "expansion": "Oracle Recovery Manager",
+    "definition": "Database backup and recovery tool supporting application-consistent snapshots for Oracle databases.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "OS",
+    "expansion": "Operating System",
+    "definition": "Core software that manages hardware resources and allows applications and users to interact with computer.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "OSCP",
+    "expansion": "Offensive Security Certified Professional",
+    "definition": "Vendor-specific certification requiring practical hands-on examination to compromise target systems within time limits.",
+    "domain": 5,
+    "topicId": "119"
+  },
+  {
+    "term": "OSI",
+    "expansion": "Open Systems Interconnection",
+    "definition": "Conceptual seven-layer model organizing network communication functions for understanding security controls.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "OSINT",
+    "expansion": "Open Source Intelligence",
+    "definition": "Intelligence gathering from publicly available sources used to discover subdomains and attack surface.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "OSPF",
+    "expansion": "Open Shortest Path First",
+    "definition": "Interior routing protocol that calculates lowest-cost paths using Dijkstra's algorithm based on link costs.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "OSSEC",
+    "expansion": "Open Source Security",
+    "definition": "Open-source host-based intrusion detection platform widely used for endpoint monitoring and log analysis.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "OT",
+    "expansion": "Operational Technology",
+    "definition": "Industrial control systems and equipment managing physical processes in manufacturing, utilities, and critical infrastructure.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "OTP",
+    "expansion": "One-Time Password",
+    "definition": "Single-use credential generated for authentication, typically valid for a limited time or single use.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "OU",
+    "expansion": "Organizational Unit",
+    "definition": "Container in Active Directory for organizing users, groups, and computers hierarchically.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "OV",
+    "expansion": "Organization Validated",
+    "definition": "Certificate validation level requiring manual CA verification of organization identity and applicant authorization.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "OWASP",
+    "expansion": "Open Worldwide Application Security Project",
+    "definition": "Organization that publishes prioritized list of most prevalent and impactful web application vulnerability categories.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "P2P",
+    "expansion": "peer-to-peer",
+    "definition": "Network architecture where computers communicate directly without relying on central servers.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "PaaS",
+    "expansion": "Platform as a Service",
+    "definition": "Cloud service model where provider manages infrastructure and OS; customer manages only application code and data.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "PAM",
+    "expansion": "Privileged Access Management",
+    "definition": "Specialized controls for administrative accounts including just-in-time access, session recording, and password vaulting.",
+    "domain": 2,
+    "topicId": "055"
+  },
+  {
+    "term": "PAN",
+    "expansion": "Primary Account Number",
+    "definition": "Credit card number governed by PCI DSS security standards.",
+    "domain": 3,
+    "topicId": "068"
+  },
+  {
+    "term": "PANs",
+    "expansion": "Primary Account Numbers",
+    "definition": "Credit card numbers or payment card identification numbers used in payment processing.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "PAP",
+    "expansion": "Password Authentication Protocol",
+    "definition": "Simple authentication protocol transmitting username and password; least secure method.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "PASTA",
+    "expansion": "Process for Attack Simulation and Threat Analysis",
+    "definition": "Risk-centric threat modeling framework that aligns business objectives with technical security requirements.",
+    "domain": 5,
+    "topicId": "110"
+  },
+  {
+    "term": "PAT",
+    "expansion": "Port Address Translation",
+    "definition": "Technique allowing multiple internal hosts to share single public IP by tracking connections via source ports.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "PAW",
+    "expansion": "Privileged Access Workstation",
+    "definition": "Dedicated hardened system used exclusively for administrative tasks to protect privileged sessions from common attacks.",
+    "domain": 4,
+    "topicId": "091"
+  },
+  {
+    "term": "PBAC",
+    "expansion": "Policy-Based Access Control",
+    "definition": "Centralized access control policy management combining RBAC and ABAC elements in unified policy engine.",
+    "domain": 4,
+    "topicId": "097"
+  },
+  {
+    "term": "PBKDF2",
+    "expansion": "Password-Based Key Derivation Function 2",
+    "definition": "Key derivation function using pseudorandom function with salt and configurable iterations for password hashing.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "pcap",
+    "expansion": "Packet Capture",
+    "definition": "File format for storing captured network packets for later analysis.",
+    "domain": 4,
+    "topicId": "088"
+  },
+  {
+    "term": "PCI DSS",
+    "expansion": "Payment Card Industry Data Security Standard",
+    "definition": "Compliance framework requiring annual penetration testing and security controls for organizations handling payment card data.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "PCIe",
+    "expansion": "PCI Express",
+    "definition": "High-speed serial bus standard that allows direct memory access by connected peripheral devices.",
+    "domain": 2,
+    "topicId": "033"
+  },
+  {
+    "term": "PCR",
+    "expansion": "Platform Configuration Registers",
+    "definition": "TPM memory locations that accumulate cryptographic hash measurements of boot components throughout system startup.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "PDF",
+    "expansion": "Portable Document Format",
+    "definition": "Document format; outdated PDF readers are exploited as browser plugins to deliver drive-by downloads.",
+    "domain": 2,
+    "topicId": "024"
+  },
+  {
+    "term": "PDU",
+    "expansion": "Power Distribution Unit",
+    "definition": "Rack-mounted device that distributes and monitors electrical power with per-outlet metering and remote control.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "PEAP",
+    "expansion": "Protected EAP",
+    "definition": "EAP method that creates TLS tunnel first, then authenticates user with password-based mechanism inside encrypted tunnel.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "PEP",
+    "expansion": "Policy Enforcement Point",
+    "definition": "Component that intercepts access requests and enforces policy decisions from the Control Plane.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "PFS",
+    "expansion": "Perfect Forward Secrecy",
+    "definition": "Security property where compromise of long-term keys cannot decrypt previously captured encrypted sessions.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "PGP",
+    "expansion": "Pretty Good Privacy",
+    "definition": "Encryption system providing file, email, and digital signature capability using symmetric and asymmetric cryptography.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "PHI",
+    "expansion": "Protected Health Information",
+    "definition": "Healthcare-specific personal data including diagnoses, treatments, and records linked to individuals.",
+    "domain": 3,
+    "topicId": "068"
+  },
+  {
+    "term": "PHP",
+    "expansion": "PHP: Hypertext Preprocessor",
+    "definition": "Server-side scripting language commonly used for web application development.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "PICERL",
+    "expansion": "Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned",
+    "definition": "Standard incident response lifecycle model defining six phases from preparation through post-incident review.",
+    "domain": 4,
+    "topicId": "101"
+  },
+  {
+    "term": "PII",
+    "expansion": "Personally Identifiable Information",
+    "definition": "Any data that can identify a specific individual alone or in combination with other data.",
+    "domain": 3,
+    "topicId": "068"
+  },
+  {
+    "term": "PIM",
+    "expansion": "Privileged Identity Management",
+    "definition": "Specialized controls for administrative accounts providing just-in-time access and session recording capabilities.",
+    "domain": 4,
+    "topicId": "096"
+  },
+  {
+    "term": "PIN",
+    "expansion": "Personal Identification Number",
+    "definition": "A secret numeric code used to authenticate or authorize access to accounts, devices, or physical locations.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "PIV",
+    "expansion": "Personal Identity Verification",
+    "definition": "Government standard hardware card storing private keys for client certificate authentication.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "PKCE",
+    "expansion": "Proof Key for Public Clients Exchange",
+    "definition": "OAuth extension that prevents authorization code interception and replay by adding cryptographic proof to token requests.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "PKI",
+    "expansion": "Public Key Infrastructure",
+    "definition": "System of digital certificates, CAs, and trust relationships enabling secure asymmetric cryptography at scale.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "PLC",
+    "expansion": "programmable logic controller",
+    "definition": "Specialized industrial computer that directly controls equipment like motors, valves, and pumps based on programmed logic.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "POODLE",
+    "expansion": "Padding Oracle On Downgraded Legacy Encryption",
+    "definition": "Vulnerability that exploits SSL 3.0 fallback to decrypt traffic via padding oracle attacks.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "POP3",
+    "expansion": "Post Office Protocol version 3",
+    "definition": "Email retrieval protocol on port 110 that downloads messages from server to client.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "POP3S",
+    "expansion": "POP3 over TLS",
+    "definition": "POP3 encrypted with TLS on port 995 for secure mail retrieval.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "PoS",
+    "expansion": "Proof of Stake",
+    "definition": "Consensus mechanism where validators create blocks based on staked cryptocurrency collateral.",
+    "domain": 1,
+    "topicId": "018"
+  },
+  {
+    "term": "POSIX",
+    "expansion": "Portable Operating System Interface",
+    "definition": "Standard that defines file permissions on Unix and Linux operating systems.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "PostgreSQL",
+    "expansion": "Post Gres Structured Query Language",
+    "definition": "Advanced relational database system that should not be directly accessible from the internet on port 5432.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "PoW",
+    "expansion": "Proof of Work",
+    "definition": "Consensus mechanism where miners solve cryptographic puzzles to add blocks and secure the blockchain.",
+    "domain": 1,
+    "topicId": "018"
+  },
+  {
+    "term": "PowerShell",
+    "expansion": "PowerShell",
+    "definition": "Windows command-line and scripting language abused as Living off the Land tool for malware execution.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "PR",
+    "expansion": "Public Relations",
+    "definition": "Organizational function managing external communications and media statements during incidents.",
+    "domain": 4,
+    "topicId": "102"
+  },
+  {
+    "term": "PsExec",
+    "expansion": "PsExec",
+    "definition": "Legitimate Windows tool that attackers abuse to execute commands remotely for lateral movement.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "PSK",
+    "expansion": "Pre-Shared Key",
+    "definition": "Single passphrase shared among all users; appropriate for home and small business networks.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "PTZ",
+    "expansion": "Pan-Tilt-Zoom",
+    "definition": "Remotely controlled camera capable of adjusting direction and zoom level to cover large areas.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "PUA",
+    "expansion": "Potentially Unwanted Application",
+    "definition": "Application whose behavior falls outside reasonable user consent despite not being overtly malicious.",
+    "domain": 2,
+    "topicId": "042"
+  },
+  {
+    "term": "PUE",
+    "expansion": "Power Usage Effectiveness",
+    "definition": "Ratio of total data center facility power to IT equipment power; measures energy efficiency with lower being better.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "PUP",
+    "expansion": "Potentially Unwanted Program",
+    "definition": "Software whose behavior falls outside reasonable user consent despite not being overtly malicious.",
+    "domain": 2,
+    "topicId": "042"
+  },
+  {
+    "term": "Pure Storage",
+    "expansion": "Pure Storage",
+    "definition": "Storage array vendor providing volume-level snapshots independent of the operating system.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "PyPI",
+    "expansion": "Python Package Index",
+    "definition": "Central repository for Python packages and libraries distributed to developers.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "QA",
+    "expansion": "Quality Assurance",
+    "definition": "Environment and process for formal testing of functionality, integration, and performance before production.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "QEMU",
+    "expansion": "Quick Emulator",
+    "definition": "A hardware emulator and virtualizer that provides device emulation for virtual machines.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "QoS",
+    "expansion": "Quality of Service",
+    "definition": "Network configuration that prioritizes traffic types to ensure critical applications receive necessary bandwidth.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "QR",
+    "expansion": "Quick Response",
+    "definition": "Two-dimensional barcode encoding data readable by smartphone cameras or QR code scanners.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "RA",
+    "expansion": "Registration Authority",
+    "definition": "Component responsible for verifying applicant identity before forwarding certificate signing requests to CA.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "RaaS",
+    "expansion": "Ransomware-as-a-Service",
+    "definition": "Criminal business model where developers provide ransomware platform while affiliates conduct attacks and share proceeds.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "RADIUS",
+    "expansion": "Remote Authentication Dial-In User Service",
+    "definition": "Protocol used for centralized authentication, authorization, and accounting across network access infrastructure.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "RAID",
+    "expansion": "Redundant Array of Independent Disks",
+    "definition": "Storage technology using multiple physical drives to achieve redundancy, improved performance, or both.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "RAM",
+    "expansion": "Random Access Memory",
+    "definition": "System memory containing running processes, credentials, decrypted data, and active network connections.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "RAR",
+    "expansion": "Roshal Archive",
+    "definition": "Proprietary compression format that can contain hundreds of files, concealing single malicious files.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "RAT",
+    "expansion": "Remote Access Trojan",
+    "definition": "Malware that provides attackers full remote control including screen capture, keystroke logging, and file exfiltration.",
+    "domain": 2,
+    "topicId": "043"
+  },
+  {
+    "term": "RBAC",
+    "expansion": "Role-Based Access Control",
+    "definition": "An access control model that restricts permissions based on predefined roles assigned to users or applications.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "RC4",
+    "expansion": "Rivest Cipher 4",
+    "definition": "Stream cipher once widely used in WEP and early TLS, now completely broken and explicitly forbidden.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "RDoS",
+    "expansion": "Ransom Distributed Denial of Service",
+    "definition": "Extortion attack threatening DDoS unless ransom payment is made to the attacker.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "RDP",
+    "expansion": "Remote Desktop Protocol",
+    "definition": "Windows protocol enabling remote desktop access; used by attackers for lateral movement when misconfigured.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "Redis",
+    "expansion": "Remote Dictionary Server",
+    "definition": "In-memory data store designed for internal networks, vulnerable when exposed to internet without authentication.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "REST",
+    "expansion": "Representational State Transfer",
+    "definition": "Architectural style for web APIs that uses HTTP methods to enable programmatic interaction with services.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "RFC",
+    "expansion": "Request for Change",
+    "definition": "Formal submission document that captures proposed change details, justification, risk assessment, testing and rollback plans.",
+    "domain": 1,
+    "topicId": "010"
+  },
+  {
+    "term": "RFC 3164",
+    "expansion": "Request for Comments 3164",
+    "definition": "Earlier standard specification defining the BSD Syslog protocol message format.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "RFC 5424",
+    "expansion": "Request for Comments 5424",
+    "definition": "Standard specification defining the Syslog protocol message format for device logging.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "RFID",
+    "expansion": "Radio Frequency Identification",
+    "definition": "Wireless technology that identifies objects using radio signals, used in badges, fobs, and payment cards.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "RIP",
+    "expansion": "Routing Information Protocol",
+    "definition": "Older distance-vector interior routing protocol largely obsolete in modern enterprise networks.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "ROM",
+    "expansion": "Read-Only Memory",
+    "definition": "Custom replacement operating systems widely available for Android devices, often lacking security patches.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "ROP",
+    "expansion": "Return-Oriented Programming",
+    "definition": "Exploitation technique that chains existing code gadgets to bypass Data Execution Prevention protections.",
+    "domain": 2,
+    "topicId": "026"
+  },
+  {
+    "term": "RPKI",
+    "expansion": "Resource Public Key Infrastructure",
+    "definition": "System that cryptographically associates IP address prefixes with authorized autonomous systems to announce them.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "RPO",
+    "expansion": "Recovery Point Objective",
+    "definition": "Maximum acceptable data loss measured in time; restored system may only miss data from this window.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "RS256",
+    "expansion": "RSA Signature with SHA-256",
+    "definition": "Asymmetric signing algorithm for JWT tokens that can be vulnerable to algorithm confusion attacks.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "RSA",
+    "expansion": "Rivest-Shamir-Adleman",
+    "definition": "Asymmetric encryption algorithm used for confidentiality and digital signatures in security applications.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "RTO",
+    "expansion": "Recovery Time Objective",
+    "definition": "Maximum acceptable duration of service downtime following an incident before restoration is required.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "RTOS",
+    "expansion": "Real-Time Operating System",
+    "definition": "Operating system designed for applications requiring timing determinism where critical tasks execute within defined time constraints.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "RTP",
+    "expansion": "Real-time Transport Protocol",
+    "definition": "Unencrypted protocol carrying actual audio and video data in VoIP communications.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "RUA",
+    "expansion": "Reporting URI for Aggregate reports",
+    "definition": "DMARC record tag specifying the address that receives statistical reports on SPF and DKIM pass/fail rates.",
+    "domain": 4,
+    "topicId": "093"
+  },
+  {
+    "term": "RubyGems",
+    "expansion": "RubyGems",
+    "definition": "Package manager for Ruby that distributes libraries and dependencies.",
+    "domain": 2,
+    "topicId": "029"
+  },
+  {
+    "term": "RUF",
+    "expansion": "Reporting URI for Forensic reports",
+    "definition": "DMARC record tag specifying the address that receives detailed reports on individual authentication failures.",
+    "domain": 4,
+    "topicId": "093"
+  },
+  {
+    "term": "S/MIME",
+    "expansion": "Secure/Multipurpose Internet Mail Extensions",
+    "definition": "Standard for end-to-end email encryption and signing using X.509 certificates for sender authentication and recipient confidentiality.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "S3",
+    "expansion": "Simple Storage Service",
+    "definition": "AWS storage service; Block Public Access settings prevent accidental exposure to public internet access.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "S3 Glacier",
+    "expansion": "Amazon S3 Glacier",
+    "definition": "AWS cloud storage service for long-term data archival and backup with lower cost.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "SA",
+    "expansion": "System and Services Acquisition",
+    "definition": "Control family addressing security requirements for systems and software acquisition processes.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "SaaS",
+    "expansion": "Software as a Service",
+    "definition": "Cloud service model where provider manages everything; customer manages data access, user configuration, and application administration.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "SAE",
+    "expansion": "Simultaneous Authentication of Equals",
+    "definition": "WPA3 handshake replacing Pre-Shared Key exchange with forward secrecy and dictionary attack resistance.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "SAM",
+    "expansion": "Software Asset Management",
+    "definition": "Process tracking licensed software to ensure compliance and identify unauthorized applications.",
+    "domain": 4,
+    "topicId": "081"
+  },
+  {
+    "term": "SAML",
+    "expansion": "Security Assertion Markup Language",
+    "definition": "XML-based standard for exchanging authentication and authorization data between federated organizations.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "SAML 2.0",
+    "expansion": "Security Assertion Markup Language",
+    "definition": "Dominant standard for enterprise federation enabling users to authenticate with home organization and access partner resources.",
+    "domain": 4,
+    "topicId": "096"
+  },
+  {
+    "term": "SAN",
+    "expansion": "Subject Alternative Name",
+    "definition": "Certificate extension listing multiple fully qualified domain names, IP addresses, and other identifiers.",
+    "domain": 1,
+    "topicId": "012"
+  },
+  {
+    "term": "SANS",
+    "expansion": "SANS Institute",
+    "definition": "Organization providing security awareness training platform for organizations.",
+    "domain": 5,
+    "topicId": "120"
+  },
+  {
+    "term": "Sarbanes-Oxley",
+    "expansion": "Sarbanes-Oxley Act",
+    "definition": "U.S. securities regulation requiring seven-year retention of financial records.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "SASE",
+    "expansion": "Secure Access Service Edge",
+    "definition": "Cloud-delivered security architecture converging network security and WAN capabilities at edge locations.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "SAST",
+    "expansion": "Static Application Security Testing",
+    "definition": "Security testing that analyzes source code or binaries without executing them to identify vulnerabilities.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "SBOM",
+    "expansion": "Software Bill of Materials",
+    "definition": "Machine-readable inventory of all software components, dependencies, and libraries within a product.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "SC",
+    "expansion": "System and Communications Protection",
+    "definition": "Control family addressing encryption, network security, and system protection mechanisms.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "SCA",
+    "expansion": "Software Composition Analysis",
+    "definition": "Process scanning application dependencies for known vulnerabilities in third-party libraries and frameworks.",
+    "domain": 1,
+    "topicId": "011"
+  },
+  {
+    "term": "SCADA",
+    "expansion": "Supervisory Control and Data Acquisition",
+    "definition": "System that collects real-time data from sensors and provides centralized monitoring and control for industrial infrastructure.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "SCAP",
+    "expansion": "Security Content Automation Protocol",
+    "definition": "Standardized framework maintained by NIST enabling automated compliance checking using common language.",
+    "domain": 4,
+    "topicId": "076"
+  },
+  {
+    "term": "SCCM",
+    "expansion": "System Center Configuration Manager",
+    "definition": "Older name for Microsoft Endpoint Configuration Manager, a unified management platform for OS and application deployment.",
+    "domain": 4,
+    "topicId": "076"
+  },
+  {
+    "term": "SCIM",
+    "expansion": "System for Cross-domain Identity Management",
+    "definition": "HTTP-based protocol that standardizes API interface for user and group provisioning and deprovisioning.",
+    "domain": 4,
+    "topicId": "096"
+  },
+  {
+    "term": "SCORM",
+    "expansion": "Sharable Content Object Reference Model",
+    "definition": "Standard for tracking completion and assessment scores in learning management systems.",
+    "domain": 5,
+    "topicId": "120"
+  },
+  {
+    "term": "SCP",
+    "expansion": "Secure Copy Protocol",
+    "definition": "SSH-based encrypted file copy protocol for secure file transfers between systems.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "scrypt",
+    "expansion": "scrypt",
+    "definition": "Memory-hard password hashing function designed to resist GPU-based attacks.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SCTP",
+    "expansion": "Stream Control Transmission Protocol",
+    "definition": "Transport protocol combining features of TCP and UDP, providing reliable message-oriented delivery.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "SD-WAN",
+    "expansion": "Software-Defined Wide-Area Network",
+    "definition": "Technology that manages traffic across multiple WAN links with centralized policy control for intelligent routing.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "SDKs",
+    "expansion": "Software Development Kits",
+    "definition": "Collections of tools and libraries enabling developers to build applications for specific platforms.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "SDN",
+    "expansion": "Software-Defined Networking",
+    "definition": "Architectural approach separating network control plane from data plane through centralized software controllers.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "SDP",
+    "expansion": "Software-Defined Perimeter",
+    "definition": "Zero trust architecture making services invisible by default and provisioning access only after verification.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "SEC",
+    "expansion": "Securities and Exchange Commission",
+    "definition": "U.S. federal agency that requires public companies to report material cybersecurity incidents within four business days.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "SED",
+    "expansion": "Self-encrypting Drive",
+    "definition": "Storage device implementing AES-256 encryption in firmware with transparent encryption and cryptographic erasure capability.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "SEG",
+    "expansion": "Secure Email Gateway",
+    "definition": "Enterprise control point that filters inbound and outbound email using multiple scanning and analysis techniques.",
+    "domain": 4,
+    "topicId": "093"
+  },
+  {
+    "term": "SELinux",
+    "expansion": "Security-Enhanced Linux",
+    "definition": "Mandatory access control framework providing kernel-level enforcement of access policies on Red Hat family distributions.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "SEP",
+    "expansion": "Secure Enclave Processor",
+    "definition": "Apple's isolated coprocessor storing biometric templates and encryption keys separate from main CPU access.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "sFlow",
+    "expansion": "sampled Flow",
+    "definition": "Alternative flow monitoring approach that samples one out of every N packets to produce statistical traffic data at lower overhead.",
+    "domain": 3,
+    "topicId": "064"
+  },
+  {
+    "term": "SFTP",
+    "expansion": "SSH File Transfer Protocol",
+    "definition": "Secure file transfer protocol running on port 22 over SSH with encrypted data and public key authentication.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "SGID",
+    "expansion": "Set Group ID",
+    "definition": "Special permission bit causing executables to run with permissions of the file group rather than the executing user.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "SGX",
+    "expansion": "Intel Software Guard Extensions",
+    "definition": "Intel technology allowing applications to create encrypted memory regions protected by CPU hardware against OS or hypervisor access.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "SHA",
+    "expansion": "Secure Hash Algorithm",
+    "definition": "Hash algorithm family; can authenticate dynamic routing protocol updates to prevent route injection attacks.",
+    "domain": 4,
+    "topicId": "077"
+  },
+  {
+    "term": "SHA-1",
+    "expansion": "Secure Hash Algorithm 1",
+    "definition": "Hash function producing 160-bit output; deprecated after practical collision attacks demonstrated in 2017.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SHA-2",
+    "expansion": "Secure Hash Algorithm 2",
+    "definition": "Current standard hash family designed by NSA; includes SHA-256 and SHA-512 variants with no known practical attacks.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SHA-224",
+    "expansion": "Secure Hash Algorithm 224-bit",
+    "definition": "SHA-2 variant producing 224-bit output hash.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SHA-256",
+    "expansion": "Secure Hash Algorithm with a 256-bit output",
+    "definition": "Cryptographic hash function producing a fixed 256-bit output; current standard for integrity verification.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "SHA-3",
+    "expansion": "Secure Hash Algorithm 3",
+    "definition": "Modern cryptographic hash function standard that produces fixed-length output for data integrity verification.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "SHA-384",
+    "expansion": "Secure Hash Algorithm 384-bit",
+    "definition": "SHA-2 variant producing 384-bit output hash.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SHA-512",
+    "expansion": "Secure Hash Algorithm 512-bit",
+    "definition": "Hash function producing 512-bit output; uses 64-bit operations and provides stronger collision resistance.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "SHA1",
+    "expansion": "Secure Hash Algorithm 1",
+    "definition": "Cryptographic hash function used in HMAC-SHA1 for TOTP code generation.",
+    "domain": 4,
+    "topicId": "098"
+  },
+  {
+    "term": "SI",
+    "expansion": "System and Information Integrity",
+    "definition": "Control family addressing malware protection, information integrity, and security monitoring.",
+    "domain": 5,
+    "topicId": "106"
+  },
+  {
+    "term": "SIEM",
+    "expansion": "Security Information and Event Management",
+    "definition": "Central system that aggregates logs, correlates events, and enables automated incident creation for deception system alerts.",
+    "domain": 1,
+    "topicId": "002"
+  },
+  {
+    "term": "SIG",
+    "expansion": "Standardized Information Gathering",
+    "definition": "Comprehensive security questionnaire widely used in financial services industry covering multiple security domains.",
+    "domain": 5,
+    "topicId": "114"
+  },
+  {
+    "term": "SIM",
+    "expansion": "Subscriber Identity Module",
+    "definition": "Card containing subscriber information that attackers fraudulently transfer in SIM swapping social engineering attacks.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "SIP",
+    "expansion": "Session Initiation Protocol",
+    "definition": "Protocol handling call setup and signaling for VoIP communications on port 5060.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "SIPS",
+    "expansion": "Session Initiation Protocol Secure",
+    "definition": "SIP encrypted with TLS on port 5061 for secure VoIP signaling.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "SLA",
+    "expansion": "Service Level Agreement",
+    "definition": "Contract term defining response time commitments and service availability between organization and vendor.",
+    "domain": 4,
+    "topicId": "086"
+  },
+  {
+    "term": "SLAs",
+    "expansion": "Service Level Agreements",
+    "definition": "Contractual commitments specifying minimum guaranteed service availability percentages and uptime.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "SLE",
+    "expansion": "Single Loss Expectancy",
+    "definition": "The expected monetary loss from a single occurrence of a specific threat against a specific asset.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "SLH-DSA",
+    "expansion": "Stateless Hash-Based Digital Signature Algorithm",
+    "definition": "Post-quantum signature scheme based on hash function security providing stateless signature generation.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "SMB",
+    "expansion": "Server Message Block",
+    "definition": "Network protocol used for file sharing, printer sharing, and other network communications commonly exploited during lateral movement attacks.",
+    "domain": 2,
+    "topicId": "039"
+  },
+  {
+    "term": "SMBv1",
+    "expansion": "Server Message Block version 1",
+    "definition": "Legacy Windows network file sharing protocol; contained buffer overflow exploited by EternalBlue.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "SMS",
+    "expansion": "Short Message Service",
+    "definition": "Standard protocol for sending short text messages between mobile phones via cellular networks.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "SMTP",
+    "expansion": "Simple Mail Transfer Protocol",
+    "definition": "Core email protocol that transmits messages between mail servers without inherent sender verification.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "SMTPS",
+    "expansion": "SMTP over TLS",
+    "definition": "SMTP running over TLS from connection start on port 465 for encrypted mail submission.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "SNMP",
+    "expansion": "Simple Network Management Protocol",
+    "definition": "Network management protocol; versions 1 and 2 use plaintext passwords; version 3 adds authentication and encryption.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "SNMPv3",
+    "expansion": "Simple Network Management Protocol version 3",
+    "definition": "Network management protocol with authentication and encryption required for secure device management.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "SOAR",
+    "expansion": "Security Orchestration, Automation and Response",
+    "definition": "Platform that automates incident response workflows by integrating security tools and executing coordinated actions.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "SOC",
+    "expansion": "Security Operations Center",
+    "definition": "Team that monitors systems and responds to security incidents; must coordinate with penetration testing to avoid false alarms.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "SOC 2",
+    "expansion": "Service Organization Control 2",
+    "definition": "Audit framework assessing service providers' security controls; strengthened by including independent penetration test evidence.",
+    "domain": 2,
+    "topicId": "036"
+  },
+  {
+    "term": "SOW",
+    "expansion": "Statement of Work",
+    "definition": "Documents specific details of a particular work engagement or project within an MSA framework.",
+    "domain": 5,
+    "topicId": "115"
+  },
+  {
+    "term": "SOX",
+    "expansion": "Sarbanes-Oxley Act",
+    "definition": "U.S. legislation requiring public companies to document and demonstrate security training compliance for audit purposes.",
+    "domain": 5,
+    "topicId": "108"
+  },
+  {
+    "term": "SP",
+    "expansion": "Special Publication",
+    "definition": "NIST document series containing technical standards and guidelines for information security and control implementation.",
+    "domain": 1,
+    "topicId": "006"
+  },
+  {
+    "term": "SPAN",
+    "expansion": "Switched Port Analyzer",
+    "definition": "Switch feature that copies all traffic from specified interfaces to a designated monitoring port for sensor collection.",
+    "domain": 3,
+    "topicId": "062"
+  },
+  {
+    "term": "SPDX",
+    "expansion": "Software Package Data Exchange",
+    "definition": "Standardized machine-readable format for documenting software components and licenses maintained by Linux Foundation.",
+    "domain": 2,
+    "topicId": "036"
+  },
+  {
+    "term": "SPF",
+    "expansion": "Sender Policy Framework",
+    "definition": "DNS-based email authentication protocol specifying which mail servers authorized to send domain email.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "SPHINCS-plus",
+    "expansion": "SPHINCS-plus",
+    "definition": "Hash-based post-quantum signature scheme relying only on underlying hash function security.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "SPIT",
+    "expansion": "Spam over Internet Telephony",
+    "definition": "Automated VoIP systems used to dial millions of numbers with recorded social engineering scripts.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "SPL",
+    "expansion": "Search Processing Language",
+    "definition": "Proprietary query language used by Splunk for analyzing machine data.",
+    "domain": 4,
+    "topicId": "088"
+  },
+  {
+    "term": "SQL",
+    "expansion": "Structured Query Language",
+    "definition": "Language for database queries; SQL injection vulnerabilities allow attackers to access or manipulate database content.",
+    "domain": 2,
+    "topicId": "024"
+  },
+  {
+    "term": "SQL Server",
+    "expansion": "SQL Server",
+    "definition": "Microsoft database system supporting application-consistent snapshots via Volume Shadow Copy Service.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "SQLi",
+    "expansion": "SQL Injection",
+    "definition": "Code injection attack where malicious SQL commands are inserted into input fields to manipulate database queries.",
+    "domain": 2,
+    "topicId": "031"
+  },
+  {
+    "term": "SQS",
+    "expansion": "Simple Queue Service",
+    "definition": "AWS message queuing service enabling decoupled communication between application components.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "SRTP",
+    "expansion": "Secure Real-time Transport Protocol",
+    "definition": "RTP with encryption and authentication, protecting voice and video media from eavesdropping.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "SS7",
+    "expansion": "Signaling System No. 7",
+    "definition": "Global telecommunications infrastructure protocol with vulnerabilities allowing SMS interception and location tracking.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "SSDLC",
+    "expansion": "Secure Software Development Lifecycle",
+    "definition": "Framework integrating security activities into every phase of software development from requirements through maintenance.",
+    "domain": 4,
+    "topicId": "080"
+  },
+  {
+    "term": "SSDs",
+    "expansion": "Solid State Drives",
+    "definition": "Storage devices using flash memory that use wear-leveling algorithms complicating complete data overwriting.",
+    "domain": 3,
+    "topicId": "070"
+  },
+  {
+    "term": "SSH",
+    "expansion": "Secure Shell",
+    "definition": "Encrypted remote administration protocol on port 22 supporting public key authentication and secure tunneling.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "SSID",
+    "expansion": "Service Set Identifier",
+    "definition": "Network name that attackers duplicate to create evil twin access points and redirect mobile device traffic.",
+    "domain": 2,
+    "topicId": "038"
+  },
+  {
+    "term": "SSL",
+    "expansion": "Secure Sockets Layer",
+    "definition": "Deprecated encryption protocol; version 3.0 and earlier have known vulnerabilities and should not be supported.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "SSL/TLS",
+    "expansion": "Secure Sockets Layer / Transport Layer Security",
+    "definition": "Encryption protocols that secure network traffic; require inspection decryption to analyze encrypted content.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "SSLv2",
+    "expansion": "Secure Sockets Layer version 2",
+    "definition": "Deprecated cryptographic protocol that must be disabled; supports only weak export-grade encryption.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "SSLv3",
+    "expansion": "Secure Sockets Layer version 3",
+    "definition": "Deprecated cryptographic protocol vulnerable to padding oracle attacks; must be disabled.",
+    "domain": 2,
+    "topicId": "048"
+  },
+  {
+    "term": "SSO",
+    "expansion": "Single Sign-On",
+    "definition": "Allows users to authenticate once and access multiple applications without re-authenticating for each one.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "SSRF",
+    "expansion": "Server-Side Request Forgery",
+    "definition": "Vulnerability allowing attackers to cause servers to make HTTP requests to attacker-chosen internal or external destinations.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "STARTTLS",
+    "expansion": "STARTTLS",
+    "definition": "SMTP extension that initiates TLS encryption on an existing plaintext connection between mail servers.",
+    "domain": 4,
+    "topicId": "093"
+  },
+  {
+    "term": "STIG",
+    "expansion": "Security Technical Implementation Guide",
+    "definition": "Configuration baseline standard specifying secure settings for systems and applications.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "STIGs",
+    "expansion": "Security Technical Implementation Guides",
+    "definition": "Detailed configuration standards published by DISA for securing systems and applications against known vulnerabilities.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "STIX",
+    "expansion": "Structured Threat Information eXpression",
+    "definition": "Open standard format for representing threat intelligence including IoCs and attacker tactics in machine-readable way.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "STP",
+    "expansion": "Spanning Tree Protocol",
+    "definition": "Protocol preventing Layer 2 loops in networks with redundant paths by blocking all but one active path.",
+    "domain": 3,
+    "topicId": "065"
+  },
+  {
+    "term": "STRIDE",
+    "expansion": "Spoofing of identity, Tampering with data, Repudiation of actions, Information disclosure, Denial of service, Elevation of privilege",
+    "definition": "Threat categorization framework that organizes threats into six distinct types for systematic analysis.",
+    "domain": 5,
+    "topicId": "110"
+  },
+  {
+    "term": "su",
+    "expansion": "substitute user",
+    "definition": "Linux command for switching to a different user account, typically root, within a session.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "sudo",
+    "expansion": "superuser do",
+    "definition": "Linux command allowing users to execute programs with superuser or another user's privileges.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "SUID",
+    "expansion": "Set User ID",
+    "definition": "Permission bit that allows executables to run with owner permissions, commonly root, causing privilege escalation risks.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "SVG",
+    "expansion": "Scalable Vector Graphics",
+    "definition": "Image format that uses XML to describe graphics mathematically and can contain embedded JavaScript code.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "SVR",
+    "expansion": "Sluzhba Vneshney Razvedki (Russia's Foreign Intelligence Service)",
+    "definition": "Russian foreign intelligence agency attributed to Cozy Bear APT29 cyber operations.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "SWG",
+    "expansion": "Secure Web Gateway",
+    "definition": "Security tool that filters internet traffic and controls access to web-based applications and content.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "SY0-701",
+    "expansion": "CompTIA Security+ Certification Exam",
+    "definition": "CompTIA certification exam testing security knowledge including data governance roles and frameworks.",
+    "domain": 5,
+    "topicId": "109"
+  },
+  {
+    "term": "SYN",
+    "expansion": "Synchronize",
+    "definition": "TCP packet type initiating connection handshake; used in SYN flood attacks to exhaust server connection tables.",
+    "domain": 2,
+    "topicId": "045"
+  },
+  {
+    "term": "T1055",
+    "expansion": "MITRE ATT&CK Technique 1055",
+    "definition": "Process Injection technique for executing code in trusted process context for defense evasion.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "TACACS+",
+    "expansion": "Terminal Access Controller Access-Control System Plus",
+    "definition": "Cisco-proprietary AAA protocol using TCP that encrypts entire packet body for enhanced security.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "TAXII",
+    "expansion": "Trusted Automated eXchange of Intelligence Information",
+    "definition": "Transport protocol using REST API for sharing STIX threat intelligence between organizations.",
+    "domain": 2,
+    "topicId": "054"
+  },
+  {
+    "term": "TCO",
+    "expansion": "Total Cost of Ownership",
+    "definition": "Complete cost of acquiring, deploying, operating, maintaining, and decommissioning a system throughout its lifecycle.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "TCP",
+    "expansion": "Transmission Control Protocol",
+    "definition": "Core transport layer protocol used to describe connection characteristics in detection signatures and scanning patterns.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "TDE",
+    "expansion": "Transparent Data Encryption",
+    "definition": "Database encryption protecting data on disk at storage layer while appearing unencrypted to authorized database connections.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "Telnet",
+    "expansion": "Telnet",
+    "definition": "Unencrypted remote access protocol on port 23 transmitting all traffic including credentials in plaintext.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "TEMPEST",
+    "expansion": "Transient Electromagnetic Pulse Emanation Standard",
+    "definition": "Technique or standard for eavesdropping through electromagnetic emissions from electronic devices.",
+    "domain": 1,
+    "topicId": "008"
+  },
+  {
+    "term": "TGS",
+    "expansion": "Ticket Granting Service",
+    "definition": "Kerberos service that issues service tickets in exchange for a valid Ticket Granting Ticket.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "TGT",
+    "expansion": "Ticket Granting Ticket",
+    "definition": "Kerberos token issued by the Key Distribution Center allowing clients to request service tickets without re-entering credentials.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "TKIP",
+    "expansion": "Temporal Key Integrity Protocol",
+    "definition": "WPA2 encryption protocol that replaced WEP but had known replay vulnerabilities leading to its deprecation.",
+    "domain": 2,
+    "topicId": "049"
+  },
+  {
+    "term": "TLD",
+    "expansion": "Top-Level Domain",
+    "definition": "Domain suffix such as .com, .org, or .gov served by specialized name servers.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "TLS",
+    "expansion": "Transport Layer Security",
+    "definition": "Cryptographic protocol that secures network communications and includes anti-replay mechanisms in versions 1.2 and 1.3.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "TLS 1.0",
+    "expansion": "Transport Layer Security version 1.0",
+    "definition": "Deprecated protocol with CBC mode weaknesses; should be disabled in favor of TLS 1.2 or later.",
+    "domain": 2,
+    "topicId": "052"
+  },
+  {
+    "term": "TLS 1.1",
+    "expansion": "Transport Layer Security version 1.1",
+    "definition": "Deprecated protocol with known weaknesses; should be disabled in favor of TLS 1.2 or later.",
+    "domain": 2,
+    "topicId": "052"
+  },
+  {
+    "term": "TLS 1.2",
+    "expansion": "Transport Layer Security version 1.2",
+    "definition": "Widely-deployed secure protocol that should be the minimum version enabled in production systems.",
+    "domain": 2,
+    "topicId": "052"
+  },
+  {
+    "term": "TLS 1.3",
+    "expansion": "Transport Layer Security version 1.3",
+    "definition": "Latest TLS standard with improved security and performance; the preferred protocol version.",
+    "domain": 2,
+    "topicId": "052"
+  },
+  {
+    "term": "TOCTOU",
+    "expansion": "Time-of-Check to Time-of-Use",
+    "definition": "Vulnerability where a program checks a condition then acts on it without verifying the condition remains valid.",
+    "domain": 2,
+    "topicId": "028"
+  },
+  {
+    "term": "Tor",
+    "expansion": "The Onion Router",
+    "definition": "Anonymizing network used to access the dark web and obscure user identity and location.",
+    "domain": 1,
+    "topicId": "009"
+  },
+  {
+    "term": "TOTP",
+    "expansion": "Time-Based One-Time Password",
+    "definition": "One-time password generated by an algorithm based on current time, typically refreshing every 30 seconds.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "TPM",
+    "expansion": "Trusted Platform Module",
+    "definition": "Standardized security chip embedded on a motherboard that generates keys, stores them protected, and performs cryptographic operations internally.",
+    "domain": 1,
+    "topicId": "015"
+  },
+  {
+    "term": "TSA",
+    "expansion": "Time Stamping Authority",
+    "definition": "Service applying cryptographically signed timestamps to documents proving when signatures were created.",
+    "domain": 1,
+    "topicId": "004"
+  },
+  {
+    "term": "TTL",
+    "expansion": "Time-To-Live",
+    "definition": "Value that specifies how long a DNS record remains cached before expiration and re-query.",
+    "domain": 2,
+    "topicId": "046"
+  },
+  {
+    "term": "TTP",
+    "expansion": "Tactics, Techniques, and Procedures",
+    "definition": "Behavioral patterns of threat actors describing how attackers operate and move through networks.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "TTPs",
+    "expansion": "Tactics, Techniques, and Procedures",
+    "definition": "The specific methods and patterns an attacker employs during reconnaissance, exploitation, and post-compromise activities.",
+    "domain": 1,
+    "topicId": "009"
+  },
+  {
+    "term": "TXT",
+    "expansion": "Text",
+    "definition": "DNS record type often abused for data exfiltration via DNS tunneling.",
+    "domain": 4,
+    "topicId": "087"
+  },
+  {
+    "term": "UAC",
+    "expansion": "User Account Control",
+    "definition": "Windows enforcement mechanism for least privilege that prompts for confirmation when administrative elevation is requested.",
+    "domain": 4,
+    "topicId": "091"
+  },
+  {
+    "term": "UAV",
+    "expansion": "Unmanned Aerial Vehicle",
+    "definition": "Aircraft operated without a human pilot aboard, also known as drones, subject to signal interception and spoofing.",
+    "domain": 3,
+    "topicId": "060"
+  },
+  {
+    "term": "UDP",
+    "expansion": "User Datagram Protocol",
+    "definition": "Connectionless network protocol that sends packets without requiring acknowledgment, used in volumetric flood attacks.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "UEBA",
+    "expansion": "User and Entity Behavior Analytics",
+    "definition": "Machine learning approach that detects anomalous user and system behavior by comparing against established baselines.",
+    "domain": 2,
+    "topicId": "056"
+  },
+  {
+    "term": "UEFI",
+    "expansion": "Unified Extensible Firmware Interface",
+    "definition": "Firmware interface specification that Microsoft patched to prevent self-signed code execution during boot.",
+    "domain": 2,
+    "topicId": "030"
+  },
+  {
+    "term": "UK",
+    "expansion": "United Kingdom",
+    "definition": "Country where WannaCry disrupted the National Health Service in May 2017.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "UPS",
+    "expansion": "Uninterruptible Power Supplies",
+    "definition": "Battery-backed power system that provides temporary power during utility outages until generators start.",
+    "domain": 1,
+    "topicId": "003"
+  },
+  {
+    "term": "URL",
+    "expansion": "Uniform Resource Locator",
+    "definition": "Web address format requiring special encoding when user-supplied data is inserted to prevent injection attacks.",
+    "domain": 2,
+    "topicId": "025"
+  },
+  {
+    "term": "USB",
+    "expansion": "Universal Serial Bus",
+    "definition": "Interface standard; USB storage and debugging ports should be disabled to prevent data exfiltration and malware introduction.",
+    "domain": 1,
+    "topicId": "014"
+  },
+  {
+    "term": "USPS",
+    "expansion": "United States Postal Service",
+    "definition": "Federal agency responsible for mail delivery and postal services throughout the United States.",
+    "domain": 2,
+    "topicId": "022"
+  },
+  {
+    "term": "UTM",
+    "expansion": "Unified Threat Management",
+    "definition": "Single appliance combining firewall, IDS/IPS, VPN, antivirus, and web filtering for simplified management.",
+    "domain": 3,
+    "topicId": "063"
+  },
+  {
+    "term": "VBA",
+    "expansion": "Visual Basic for Applications",
+    "definition": "Scripting language embedded in Microsoft Office documents to automate tasks and enable malicious macros.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "VBR",
+    "expansion": "Volume Boot Record",
+    "definition": "Boot sector of disk volume where bootkits persist to execute before operating system initialization.",
+    "domain": 2,
+    "topicId": "043"
+  },
+  {
+    "term": "VBScript",
+    "expansion": "Visual Basic Script",
+    "definition": "Scripting language based on Visual Basic used in Windows and Office environments.",
+    "domain": 2,
+    "topicId": "041"
+  },
+  {
+    "term": "Veeam",
+    "expansion": "Veeam",
+    "definition": "Backup vendor providing cloud and on-premise backup solutions with recovery capabilities.",
+    "domain": 3,
+    "topicId": "074"
+  },
+  {
+    "term": "VENOM",
+    "expansion": "Virtual Environment Neglected Operations Manipulation",
+    "definition": "A hypervisor vulnerability affecting multiple platforms through flawed virtual floppy disk controller emulation.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "VeraCrypt",
+    "expansion": "VeraCrypt",
+    "definition": "Open-source encryption software creating encrypted volumes that prevent forensic analysis without passwords.",
+    "domain": 4,
+    "topicId": "103"
+  },
+  {
+    "term": "VERIS",
+    "expansion": "Verizon Data Breach Investigations Report database",
+    "definition": "A database providing empirical data on breach frequency and characteristics across many industries.",
+    "domain": 5,
+    "topicId": "111"
+  },
+  {
+    "term": "VGA",
+    "expansion": "Video Graphics Array",
+    "definition": "Standard connector and protocol for transmitting analog video signals from computers to displays.",
+    "domain": 2,
+    "topicId": "044"
+  },
+  {
+    "term": "VirtualBox",
+    "expansion": "VirtualBox",
+    "definition": "Virtual machine platform whose artifacts are detected by malware sandbox evasion techniques.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "VLAN",
+    "expansion": "Virtual Local Area Network",
+    "definition": "Logical network segment allowing different users or devices to be placed on separate networks based on authentication.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "VM",
+    "expansion": "Virtual Machine",
+    "definition": "A software-based emulation of a physical computer that runs its own operating system and applications.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "VMDR",
+    "expansion": "Vulnerability Management, Detection, and Response",
+    "definition": "Qualys tool capability for vulnerability scanning and compliance assessment against baselines.",
+    "domain": 4,
+    "topicId": "076"
+  },
+  {
+    "term": "VMware",
+    "expansion": "VMware",
+    "definition": "Virtualization platform whose process names and identifiers are detected by malware sandbox evasion techniques.",
+    "domain": 2,
+    "topicId": "040"
+  },
+  {
+    "term": "VNC",
+    "expansion": "Virtual Network Computing",
+    "definition": "Remote desktop access protocol running on port 5900; vulnerable when directly exposed to internet.",
+    "domain": 2,
+    "topicId": "037"
+  },
+  {
+    "term": "VoIP",
+    "expansion": "Voice over Internet Protocol",
+    "definition": "Technology that transmits voice communications over internet connections rather than traditional phone lines.",
+    "domain": 2,
+    "topicId": "023"
+  },
+  {
+    "term": "VPC",
+    "expansion": "Virtual Private Cloud",
+    "definition": "Logically isolated network within public cloud environment with configurable IP ranges, subnets, and routing.",
+    "domain": 2,
+    "topicId": "035"
+  },
+  {
+    "term": "VPN",
+    "expansion": "Virtual Private Network",
+    "definition": "Encrypted tunnel for secure data transmission used when accessing organizational data over untrusted networks.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "VSAQ",
+    "expansion": "Vendor Security Assessment Questionnaire",
+    "definition": "Security questionnaire used primarily in the technology sector for vendor risk assessment.",
+    "domain": 5,
+    "topicId": "114"
+  },
+  {
+    "term": "VXLAN",
+    "expansion": "Virtual Extensible LAN",
+    "definition": "Overlay protocol encapsulating Layer 2 Ethernet frames in UDP packets for extended Layer 2 segments.",
+    "domain": 3,
+    "topicId": "059"
+  },
+  {
+    "term": "WAF",
+    "expansion": "Web Application Firewall",
+    "definition": "Application-layer security control that filters and monitors HTTP traffic to protect web applications from attacks.",
+    "domain": 2,
+    "topicId": "031"
+  },
+  {
+    "term": "WAN",
+    "expansion": "Wide Area Network",
+    "definition": "Network connecting geographically distant locations; often relies on ISP connections for connectivity.",
+    "domain": 3,
+    "topicId": "061"
+  },
+  {
+    "term": "WDAC",
+    "expansion": "Windows Defender Application Control",
+    "definition": "Kernel-level application whitelisting technology enforcing code integrity policies to prevent unauthorized code execution.",
+    "domain": 4,
+    "topicId": "077"
+  },
+  {
+    "term": "WebAuthn",
+    "expansion": "Web Authentication",
+    "definition": "Browser API component of FIDO2 providing phishing-resistant authentication for web applications.",
+    "domain": 1,
+    "topicId": "007"
+  },
+  {
+    "term": "WebRTC",
+    "expansion": "Web Real-Time Communication",
+    "definition": "Browser-based real-time communication framework using DTLS to secure media streams.",
+    "domain": 4,
+    "topicId": "092"
+  },
+  {
+    "term": "WEP",
+    "expansion": "Wired Equivalent Privacy",
+    "definition": "Deprecated wireless security protocol with cryptographic weaknesses allowing key recovery in minutes.",
+    "domain": 1,
+    "topicId": "013"
+  },
+  {
+    "term": "WHOIS",
+    "expansion": "WHOIS",
+    "definition": "Service querying domain registration databases to reveal registrant details and contact information.",
+    "domain": 4,
+    "topicId": "084"
+  },
+  {
+    "term": "Wi-Fi",
+    "expansion": "Wireless Fidelity",
+    "definition": "Wireless networking standard enabling devices to connect to networks without wired connections.",
+    "domain": 4,
+    "topicId": "095"
+  },
+  {
+    "term": "WIDS",
+    "expansion": "Wireless Intrusion Detection System",
+    "definition": "System detecting rogue access points, evil twins, and deauthentication attacks.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "WiFi",
+    "expansion": "Wireless Fidelity",
+    "definition": "Wireless networking technology based on IEEE 802.11 standards using radio frequency transmission.",
+    "domain": 2,
+    "topicId": "044"
+  },
+  {
+    "term": "WinRM",
+    "expansion": "Windows Remote Management",
+    "definition": "Microsoft protocol that enables remote management and administration of Windows systems and services.",
+    "domain": 4,
+    "topicId": "100"
+  },
+  {
+    "term": "WIPS",
+    "expansion": "Wireless Intrusion Prevention System",
+    "definition": "System detecting and preventing rogue access points, evil twins, and wireless attacks.",
+    "domain": 4,
+    "topicId": "079"
+  },
+  {
+    "term": "WMI",
+    "expansion": "Windows Management Instrumentation",
+    "definition": "Windows infrastructure providing remote execution capabilities and event subscription-based persistence mechanisms.",
+    "domain": 2,
+    "topicId": "020"
+  },
+  {
+    "term": "WORM",
+    "expansion": "write once read many",
+    "definition": "Storage technology that prevents data modification or deletion after initial write, ensuring log integrity.",
+    "domain": 4,
+    "topicId": "104"
+  },
+  {
+    "term": "WPA",
+    "expansion": "Wi-Fi Protected Access",
+    "definition": "Transitional wireless security standard that improved WEP without requiring complete hardware replacement.",
+    "domain": 2,
+    "topicId": "057"
+  },
+  {
+    "term": "WPA2",
+    "expansion": "Wi-Fi Protected Access 2",
+    "definition": "Wireless security standard offering encryption protocols for protecting Wi-Fi networks from unauthorized access.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "WPA2-Enterprise",
+    "expansion": "Wi-Fi Protected Access 2 – Enterprise",
+    "definition": "Enterprise-grade wireless security standard using 802.1X authentication and per-user credentials.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "WPA3",
+    "expansion": "Wi-Fi Protected Access 3",
+    "definition": "Current wireless security standard providing strong encryption and authentication for network protection.",
+    "domain": 1,
+    "topicId": "017"
+  },
+  {
+    "term": "WPS",
+    "expansion": "Wi-Fi Protected Setup",
+    "definition": "Simplified wireless connection mechanism using PIN or button but vulnerable to brute-force attacks.",
+    "domain": 2,
+    "topicId": "047"
+  },
+  {
+    "term": "WS-Management",
+    "expansion": "Web Services for Management",
+    "definition": "Protocol that enables remote management and command execution across networked Windows systems.",
+    "domain": 2,
+    "topicId": "050"
+  },
+  {
+    "term": "WSUS",
+    "expansion": "Windows Server Update Services",
+    "definition": "Centralized server that downloads Microsoft updates and distributes them internally to enterprise endpoints on a controlled schedule.",
+    "domain": 4,
+    "topicId": "086"
+  },
+  {
+    "term": "X.509",
+    "expansion": "X.509 Standard",
+    "definition": "International standard format for digital certificates defining required and optional fields and structure.",
+    "domain": 1,
+    "topicId": "019"
+  },
+  {
+    "term": "XACML",
+    "expansion": "eXtensible Access Control Markup Language",
+    "definition": "Policy language allowing expression of complex Boolean conditions combining attributes for access decisions.",
+    "domain": 4,
+    "topicId": "097"
+  },
+  {
+    "term": "XDR",
+    "expansion": "Extended Detection and Response",
+    "definition": "Security platform correlating telemetry across endpoints, networks, cloud, and email to detect cross-domain threats.",
+    "domain": 4,
+    "topicId": "095"
+  },
+  {
+    "term": "Xen",
+    "expansion": "Xen",
+    "definition": "A Type 1 hypervisor platform used for virtualization in cloud and enterprise environments.",
+    "domain": 2,
+    "topicId": "034"
+  },
+  {
+    "term": "XML",
+    "expansion": "Extensible Markup Language",
+    "definition": "Data format; external entities vulnerability allows attackers to read files or perform server-side request forgery attacks.",
+    "domain": 1,
+    "topicId": "005"
+  },
+  {
+    "term": "XSRF",
+    "expansion": "Cross-Site Request Forgery",
+    "definition": "Alternative acronym for Cross-Site Request Forgery, pronounced like the word surf.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "XSS",
+    "expansion": "Cross-Site Scripting",
+    "definition": "Vulnerability where attackers inject malicious scripts into web pages executed by other users' browsers.",
+    "domain": 2,
+    "topicId": "032"
+  },
+  {
+    "term": "XXE",
+    "expansion": "XML External Entity injection",
+    "definition": "Vulnerability exploiting XML parsers to fetch and include external file contents or perform SSRF attacks.",
+    "domain": 2,
+    "topicId": "051"
+  },
+  {
+    "term": "YARA",
+    "expansion": "YARA",
+    "definition": "Pattern-matching tool identifying malware by matching byte sequences and structural characteristics.",
+    "domain": 4,
+    "topicId": "083"
+  },
+  {
+    "term": "ZAP",
+    "expansion": "Zed Attack Proxy",
+    "definition": "Open-source web application security scanner for testing and identifying application vulnerabilities.",
+    "domain": 4,
+    "topicId": "082"
+  },
+  {
+    "term": "ZIP",
+    "expansion": "Zone Improvement Plan",
+    "definition": "Archive format that compresses multiple files, allowing malware to hide among legitimate content.",
+    "domain": 2,
+    "topicId": "021"
+  },
+  {
+    "term": "ZTNA",
+    "expansion": "Zero Trust Network Access",
+    "definition": "Architecture granting access only to specific authorized applications rather than full network access.",
+    "domain": 1,
+    "topicId": "007"
+  }
+]

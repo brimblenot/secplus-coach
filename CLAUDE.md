@@ -18,6 +18,7 @@ npm run build      # Production build
 npm run start      # Serve the production build
 npx tsc --noEmit   # Type check (no test suite exists)
 npm run db:init    # Create schema + apply column migrations + seed topics (node scripts/init-db.js)
+npm run flashcards:build  # ONE-TIME/offline: regenerate lib/flashcards.json from transcripts (node scripts/extract-acronyms.cjs)
 ```
 
 Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_PASSWORD` in `.env.local`, then run `npm run db:init` once to create the schema in Supabase. **The app never creates or migrates the schema at request time** (see "Data Layer" below) — `db:init` is the only path that changes the database structure.
@@ -36,7 +37,8 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 **Mobile/PWA:** Viewport + theme color in `app/layout.tsx`; installable manifest in `app/manifest.ts` with generated icons (`app/icon.tsx`, `app/apple-icon.tsx`). Pages have `@media (max-width: 460px)` breakpoints for phone layout.
 
 **File map (pages):**
-- `app/page.tsx` — dashboard (progress, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`.
+- `app/page.tsx` — dashboard (progress, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`, `/flashcards`.
+- `app/flashcards/page.tsx` — acronym flashcard drill (`app/flashcards.module.css`). Fetches `/api/flashcards`, shuffles, and runs a flip + self-rate loop ("Got it" clears the card, "Still learning" resurfaces it later in the session). Domain filter (All + D1–D5). **Entirely client-side, per-session** — no persistence, no DB, no runtime LLM. Reads the static, scope-locked deck built once by `npm run flashcards:build`.
 - `app/session/[id]/page.tsx` — main study loop: study guide → **section-by-section checkpoint reading** → quiz → second-chance → results.
 - `app/review/topic/[id]/page.tsx` — on-demand single-topic review: a 4 MC + 1 text recall quiz (`/api/review/quiz`) with an optional "Need a refresher?" recap; misses flow back to weak areas via `/api/review/save`. Blue-themed, reuses `app/quiz.module.css`.
 - `app/review/domain/[id]/page.tsx` — section review: one mixed quiz across a whole domain (`/api/quiz/domain`), ungated and retakeable (does NOT touch the mastery-quiz gate). Reuses `app/quiz.module.css`.
@@ -50,6 +52,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 - `lib/prompts.ts` — shared prompt builders (study guide, checkpoints, weak-area guide/quiz, domain final quiz, weak-area extraction, review quiz, review refresher)
 - `lib/quiz.ts` — `balanceQuizAnswers()` post-processing (spreads the correct MC option evenly across A/B/C/D)
 - `lib/transcripts.ts` — `getTranscript(topicId)` file loader
+- `lib/flashcards.json` — static acronym deck (`{term, expansion, definition, domain, topicId}`) generated once by `scripts/extract-acronyms.cjs`; served verbatim by `/api/flashcards`. Hand-editable.
 
 There is no `components/` directory — all UI lives in the page files.
 
@@ -90,6 +93,8 @@ Models in use (string literals scattered across routes — see ROADMAP for the "
 ### Content Pipeline (`transcripts/` → `lib/transcripts.ts`)
 
 Transcripts are 121 `.txt` files named `{id}-{topic-name}...en.txt` (Professor Messer SY0-701 captions), e.g. `002-Security Controls - CompTIA Security+ SY0-701 - 1.1.en.txt`. `getTranscript(topicId)` matches by prefix (`{id}-`) and caps content at 12,000 chars. Missing files return a `[Transcript ... not found]` placeholder (the app does not crash, but generated content degrades — keep the folder populated). Review/domain routes further slice the transcript (`PER_TOPIC_CHARS`) to bound tokens.
+
+**Flashcard deck build (`scripts/extract-acronyms.cjs` → `lib/flashcards.json`):** a **one-time, offline** script (`npm run flashcards:build`) reads every transcript, asks Haiku (concurrency 5) to pull the acronyms each lecture actually uses (`{term, expansion, definition}`, scope-locked to that transcript), merges + dedupes by uppercased term across all lectures (first lecture to use it sets the `domain`/`topicId`; the richest definition wins), and writes the sorted static deck. It is NOT a runtime path — the deployed app never calls Claude for flashcards, it just serves the committed JSON. Re-run only to regenerate; the output is hand-reviewable/editable.
 
 ### Study Guide Format (`STUDY_GUIDE_SYSTEM_PROMPT` in `lib/prompts.ts`)
 
@@ -162,6 +167,7 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 | Route | Purpose | Model |
 |-------|---------|-------|
 | `GET /api/progress` | Dashboard data (self-paced) | — |
+| `GET /api/flashcards` | Serve the static acronym deck (`?domain=N` filter); no LLM, no DB | — |
 | `POST /api/session` | Study guide (buffered, non-streaming) | Sonnet |
 | `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) | Haiku |
 | `POST /api/session/chat` | In-lecture Q&A | Haiku (streaming) |

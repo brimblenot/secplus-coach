@@ -271,6 +271,16 @@ export default function Dashboard() {
           <div className={styles.nextArrow}>⚡</div>
         </Link>
 
+        {/* Flashcards */}
+        <Link href="/flashcards" className={styles.randomQuizCard}>
+          <div className={styles.nextTopicLeft}>
+            <span className={styles.nextLabel}>MEMORIZE</span>
+            <span className={styles.nextName}>Acronym Flashcards</span>
+            <span className={styles.nextDomain}>Every abbreviation from your lectures — flip &amp; drill</span>
+          </div>
+          <div className={styles.nextArrow}>🃏</div>
+        </Link>
+
         {/* Metrics strip */}
         <div className={styles.metrics}>
           <div className={styles.metric}>

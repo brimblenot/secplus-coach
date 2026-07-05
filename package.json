@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "db:init": "node scripts/init-db.js",
-    "db:migrate": "node scripts/migrate-sqlite-to-pg.js"
+    "db:migrate": "node scripts/migrate-sqlite-to-pg.js",
+    "flashcards:build": "node scripts/extract-acronyms.cjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.3",
