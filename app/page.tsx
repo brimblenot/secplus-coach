@@ -276,7 +276,7 @@ export default function Dashboard() {
           <div className={styles.nextTopicLeft}>
             <span className={styles.nextLabel}>MEMORIZE</span>
             <span className={styles.nextName}>Acronym Flashcards</span>
-            <span className={styles.nextDomain}>Every abbreviation from your lectures — flip &amp; drill</span>
+            <span className={styles.nextDomain}>Exam acronyms + ports &amp; protocols — flip &amp; drill</span>
           </div>
           <div className={styles.nextArrow}>🃏</div>
         </Link>

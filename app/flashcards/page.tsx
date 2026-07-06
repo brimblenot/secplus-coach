@@ -10,7 +10,10 @@ type Flashcard = {
   definition: string
   domain: number
   topicId: string
+  type?: 'port'
 }
+
+type Filter = 'all' | 1 | 2 | 3 | 4 | 5 | 'ports'
 
 const DOMAIN_NAMES: Record<number, string> = {
   1: 'General Security Concepts',
@@ -42,7 +45,7 @@ export default function FlashcardsPage() {
   const [allCards, setAllCards] = useState<Flashcard[]>([])
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  const [domain, setDomain] = useState<number | 'all'>('all')
+  const [domain, setDomain] = useState<Filter>('all')
 
   // Drill state (client-only, per session).
   const [pile, setPile] = useState<Flashcard[]>([])
@@ -60,10 +63,12 @@ export default function FlashcardsPage() {
       .catch(() => { setFailed(true); setLoading(false) })
   }, [])
 
-  const filtered = useMemo(
-    () => (domain === 'all' ? allCards : allCards.filter((c) => c.domain === domain)),
-    [allCards, domain]
-  )
+  const filtered = useMemo(() => {
+    if (domain === 'all') return allCards
+    if (domain === 'ports') return allCards.filter((c) => c.type === 'port')
+    // Numbered domains: acronym cards only (port cards carry no domain).
+    return allCards.filter((c) => c.type !== 'port' && c.domain === domain)
+  }, [allCards, domain])
 
   // (Re)start a drill whenever the filtered set changes (initial load or domain switch).
   const restart = useCallback(() => {
@@ -88,7 +93,8 @@ export default function FlashcardsPage() {
     setFlipped(false)
   }
 
-  const domains: (number | 'all')[] = ['all', 1, 2, 3, 4, 5]
+  const domains: Filter[] = ['all', 1, 2, 3, 4, 5, 'ports']
+  const chipLabel = (d: Filter) => (d === 'all' ? 'All' : d === 'ports' ? 'Ports' : `D${d}`)
 
   return (
     <div className={styles.page}>
@@ -100,16 +106,19 @@ export default function FlashcardsPage() {
       <main className={styles.main}>
         {/* Domain filter */}
         <div className={styles.filters}>
-          {domains.map((d) => (
-            <button
-              key={d}
-              className={`${styles.filterChip} ${domain === d ? styles.filterActive : ''}`}
-              style={domain === d && d !== 'all' ? { borderColor: DOMAIN_COLORS[d], color: DOMAIN_COLORS[d] } : undefined}
-              onClick={() => setDomain(d)}
-            >
-              {d === 'all' ? 'All' : `D${d}`}
-            </button>
-          ))}
+          {domains.map((d) => {
+            const activeColor = typeof d === 'number' ? DOMAIN_COLORS[d] : d === 'ports' ? 'var(--blue)' : undefined
+            return (
+              <button
+                key={d}
+                className={`${styles.filterChip} ${domain === d ? styles.filterActive : ''}`}
+                style={domain === d && activeColor ? { borderColor: activeColor, color: activeColor } : undefined}
+                onClick={() => setDomain(d)}
+              >
+                {chipLabel(d)}
+              </button>
+            )
+          })}
         </div>
 
         {loading && (
@@ -146,9 +155,11 @@ export default function FlashcardsPage() {
             >
               <span
                 className={styles.cardDomain}
-                style={{ color: DOMAIN_COLORS[current.domain] }}
+                style={{ color: current.type === 'port' ? 'var(--blue)' : DOMAIN_COLORS[current.domain] }}
               >
-                D{current.domain} — {DOMAIN_NAMES[current.domain]}
+                {current.type === 'port'
+                  ? 'PORT / PROTOCOL'
+                  : `D${current.domain} — ${DOMAIN_NAMES[current.domain]}`}
               </span>
 
               {!flipped ? (
@@ -190,7 +201,7 @@ export default function FlashcardsPage() {
             <span className={styles.doneCheck}>✓</span>
             <span className={styles.doneTitle}>Cleared {total} card{total > 1 ? 's' : ''}</span>
             <span className={styles.doneSub}>
-              {domain === 'all' ? 'Every acronym in the deck' : `Domain ${domain}`} — nicely done.
+              {domain === 'all' ? 'The whole deck' : domain === 'ports' ? 'Ports & protocols' : `Domain ${domain}`} — nicely done.
             </span>
             <button className={styles.restart} onClick={restart}>Drill again</button>
           </div>

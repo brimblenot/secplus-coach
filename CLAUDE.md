@@ -38,7 +38,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 
 **File map (pages):**
 - `app/page.tsx` — dashboard (progress, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`, `/flashcards`.
-- `app/flashcards/page.tsx` — acronym flashcard drill (`app/flashcards.module.css`). Fetches `/api/flashcards`, shuffles, and runs a flip + self-rate loop ("Got it" clears the card, "Still learning" resurfaces it later in the session). Domain filter (All + D1–D5). **Entirely client-side, per-session** — no persistence, no DB, no runtime LLM. Reads the static, scope-locked deck built once by `npm run flashcards:build`.
+- `app/flashcards/page.tsx` — acronym flashcard drill (`app/flashcards.module.css`). Fetches `/api/flashcards`, shuffles, and runs a flip + self-rate loop ("Got it" clears the card, "Still learning" resurfaces it later in the session). Filter chips: All + D1–D5 + **Ports** (the last shows only the `type: 'port'` protocol/port cards). **Entirely client-side, per-session** — no persistence, no DB, no runtime LLM.
 - `app/session/[id]/page.tsx` — main study loop: study guide → **section-by-section checkpoint reading** → quiz → second-chance → results.
 - `app/review/topic/[id]/page.tsx` — on-demand single-topic review: a 4 MC + 1 text recall quiz (`/api/review/quiz`) with an optional "Need a refresher?" recap; misses flow back to weak areas via `/api/review/save`. Blue-themed, reuses `app/quiz.module.css`.
 - `app/review/domain/[id]/page.tsx` — section review: one mixed quiz across a whole domain (`/api/quiz/domain`), ungated and retakeable (does NOT touch the mastery-quiz gate). Reuses `app/quiz.module.css`.
@@ -52,7 +52,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 - `lib/prompts.ts` — shared prompt builders (study guide, checkpoints, weak-area guide/quiz, domain final quiz, weak-area extraction, review quiz, review refresher)
 - `lib/quiz.ts` — `balanceQuizAnswers()` post-processing (spreads the correct MC option evenly across A/B/C/D)
 - `lib/transcripts.ts` — `getTranscript(topicId)` file loader
-- `lib/flashcards.json` — static acronym deck (`{term, expansion, definition, domain, topicId}`) generated once by `scripts/extract-acronyms.cjs`; served verbatim by `/api/flashcards`. Hand-editable.
+- `lib/flashcards.json` — static flashcard deck (`{term, expansion, definition, domain, topicId, type?}`) served verbatim by `/api/flashcards`. Two kinds of card: **acronyms** (bootstrapped by `scripts/extract-acronyms.cjs`, then hand-curated down to genuine exam abbreviations — vendor/product/tool names, non-acronym algorithm names, general/non-security abbreviations, and specific IDs were pruned) and **ports** (`type: 'port'`, `domain: 0`, hand-authored: front = protocol, expansion = port number(s), definition = role). Hand-editable; re-running the extract script would re-introduce raw acronyms and need re-curation.
 
 There is no `components/` directory — all UI lives in the page files.
 

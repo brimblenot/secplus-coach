@@ -11,6 +11,7 @@ export type Flashcard = {
   definition: string
   domain: number
   topicId: string
+  type?: 'port'
 }
 
 export async function GET(req: NextRequest) {
