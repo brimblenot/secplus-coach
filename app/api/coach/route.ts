@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
   const {
     completedCount, totalTopics, courseProgress,
-    avgScore, weakAreas, domainStats, topicsRemaining, completedTodayTopics,
+    avgScore, weakAreas, domainStats, topicsRemaining, completedTodayTopics, pace,
   } = context
   const weakList = (weakAreas ?? []).map((w: { concept: string; wrong_count: number }) =>
     `${w.concept} (missed ${w.wrong_count}x)`
@@ -32,7 +32,9 @@ PROGRESS
 - Quiz average: ${avgScore !== null ? avgScore + '%' : 'no data yet'}
 
 PACING
-- The student studies SELF-PACED — there is no exam date, no daily topic quota, and no "behind" status. Do NOT pressure them with catch-up targets, deadlines, or daily quotas, and do not invent a required topics/day number. If they ask whether they're on track, reason about topics remaining and weak areas, but frame it calmly and let them set the pace.
+- The student has set a target: finish all topics by ${pace?.finishTopicsBy ?? 'their finish date'} (${pace?.daysUntilFinish ?? '?'} days away) and take the exam on ${pace?.examDate ?? 'their exam date'} (${pace?.daysUntilExam ?? '?'} days away).
+- To finish the ${topicsRemaining} remaining topics on time they need to average about ${pace?.perDay ?? '?'} topic(s)/day. Today they have done ${doneToday}${pace ? ` of ~${pace.perDay}` : ''}.
+- They are currently ${pace?.onPace ? 'ON pace' : 'a bit BEHIND the pace'}${pace?.finishPastDue ? ' (the finish date is already past)' : ''}. Be honest about pace when asked, and give concrete catch-up math (topics/day, days left), but stay encouraging and practical — never guilt-trip.
 
 WEAK AREAS
 - ${weakList}

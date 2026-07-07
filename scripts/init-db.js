@@ -47,6 +47,9 @@ async function main() {
         study_hours_per_day INTEGER DEFAULT 1,
         last_weak_session TEXT
       );
+      -- Pace target dates (finish-topics-by + exam date). Keep in sync with lib/db.ts ensureSchema.
+      ALTER TABLE profile ADD COLUMN IF NOT EXISTS finish_topics_by TEXT;
+      ALTER TABLE profile ADD COLUMN IF NOT EXISTS exam_date TEXT;
       CREATE TABLE IF NOT EXISTS topic_progress (
         id SERIAL PRIMARY KEY,
         topic_id TEXT NOT NULL UNIQUE,
@@ -93,6 +96,8 @@ async function main() {
       ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_interval INTEGER;
       ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_streak INTEGER DEFAULT 0;
       INSERT INTO profile (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
+      UPDATE profile SET finish_topics_by = '2026-07-28' WHERE id = 1 AND finish_topics_by IS NULL;
+      UPDATE profile SET exam_date = '2026-07-29' WHERE id = 1 AND exam_date IS NULL;
     `)
 
     let seeded = 0

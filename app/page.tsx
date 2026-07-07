@@ -31,6 +31,18 @@ interface CompletedTopic {
   name: string
 }
 
+interface Pace {
+  finishTopicsBy: string
+  examDate: string
+  daysUntilFinish: number
+  daysUntilExam: number
+  finishPastDue: boolean
+  topicsRemaining: number
+  perDay: number
+  doneToday: number
+  onPace: boolean
+}
+
 interface ProgressData {
   completedCount: number
   totalTopics: number
@@ -43,6 +55,7 @@ interface ProgressData {
   weakAreaSessionDoneToday: boolean
   topicsRemaining: number
   completedTodayTopics: CompletedTopic[]
+  pace: Pace | null
 }
 
 type ChatMsg = { role: 'user' | 'assistant'; content: string }
@@ -72,10 +85,16 @@ const DOMAIN_COLORS: Record<number, string> = {
 }
 
 const SUGGESTIONS = [
+  'Am I on pace to finish in time?',
   'What should I focus on today?',
   'Where are my weakest areas?',
-  'How much do I have left?',
 ]
+
+// Format a YYYY-MM-DD string as "Jul 28" without timezone drift (noon avoids
+// the date rolling back a day when parsed as UTC in a western timezone).
+function fmtDate(s: string): string {
+  return new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
 
 export default function Dashboard() {
   const [data, setData] = useState<ProgressData | null>(null)
@@ -86,15 +105,53 @@ export default function Dashboard() {
   const [coachLoading, setCoachLoading] = useState(false)
   const coachEndRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    fetch('/api/progress')
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d)
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
+  // Pace date editor
+  const [editingPace, setEditingPace] = useState(false)
+  const [finishInput, setFinishInput] = useState('')
+  const [examInput, setExamInput] = useState('')
+  const [savingPace, setSavingPace] = useState(false)
+  const [paceError, setPaceError] = useState('')
+
+  const loadProgress = useCallback(async () => {
+    try {
+      const r = await fetch('/api/progress')
+      const d = await r.json()
+      setData(d)
+    } finally {
+      setLoading(false)
+    }
   }, [])
+
+  useEffect(() => { loadProgress() }, [loadProgress])
+
+  const openPaceEditor = useCallback(() => {
+    if (!data?.pace) return
+    setFinishInput(data.pace.finishTopicsBy)
+    setExamInput(data.pace.examDate)
+    setPaceError('')
+    setEditingPace(true)
+  }, [data])
+
+  const savePace = useCallback(async () => {
+    if (!finishInput || !examInput) { setPaceError('Both dates are required.'); return }
+    if (examInput < finishInput) { setPaceError('Exam date should be on or after the finish date.'); return }
+    setSavingPace(true)
+    setPaceError('')
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ finishTopicsBy: finishInput, examDate: examInput }),
+      })
+      if (!res.ok) throw new Error('save failed')
+      await loadProgress()
+      setEditingPace(false)
+    } catch {
+      setPaceError('Could not save. Try again.')
+    } finally {
+      setSavingPace(false)
+    }
+  }, [finishInput, examInput, loadProgress])
 
   useEffect(() => {
     coachEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -153,6 +210,17 @@ export default function Dashboard() {
 
   const topicsRemaining = data.topicsRemaining ?? (data.totalTopics - data.completedCount)
   const completedToday = data.completedTodayTopics ?? []
+  const pace = data.pace
+
+  const examUrgency = !pace
+    ? 'var(--green)'
+    : pace.daysUntilExam <= 7 ? 'var(--red)' : pace.daysUntilExam <= 14 ? 'var(--amber)' : 'var(--green)'
+
+  // Pace headline color: red if the finish date has passed with work left,
+  // green if today's target is met (or nothing left), amber if still behind.
+  const paceColor = !pace || pace.topicsRemaining === 0
+    ? 'var(--green)'
+    : pace.finishPastDue ? 'var(--red)' : pace.onPace ? 'var(--green)' : 'var(--amber)'
 
   return (
     <div className={styles.page}>
@@ -163,7 +231,20 @@ export default function Dashboard() {
           <span className={styles.logoSub}>SY0-701 Coach</span>
         </div>
         <div className={styles.headerRight}>
-          <span className={styles.selfPacedBadge}>Self-paced</span>
+          {data.pace && (
+            <>
+              <span className={styles.examDate}>Exam {fmtDate(data.pace.examDate)}</span>
+              <span
+                className={styles.daysBadge}
+                style={{
+                  color: examUrgency,
+                  borderColor: examUrgency,
+                }}
+              >
+                {data.pace.daysUntilExam}d
+              </span>
+            </>
+          )}
         </div>
       </header>
 
@@ -223,14 +304,86 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Calm status line — informational, no quota or pressure */}
-        <div className={styles.paceRow}>
-          <span className={styles.paceMeta}>{topicsRemaining} topics remaining</span>
-          <span className={styles.paceSep}>·</span>
-          <span className={styles.paceMeta}>{completedToday.length} done today</span>
-          <span className={styles.paceSep}>·</span>
-          <span className={styles.paceMeta}>study at your own pace</span>
-        </div>
+        {/* Pace tracker — required topics/day to finish by the target date */}
+        {pace && (
+          <div className={styles.paceCard}>
+            <div className={styles.paceCardHead}>
+              <span className={styles.paceCardLabel}>PACE</span>
+              {!editingPace && (
+                <button className={styles.paceEditBtn} onClick={openPaceEditor}>Edit dates</button>
+              )}
+            </div>
+
+            {!editingPace ? (
+              <>
+                {pace.topicsRemaining === 0 ? (
+                  <div className={styles.paceHero}>
+                    <span className={styles.paceHeroNum} style={{ color: 'var(--green)' }}>✓</span>
+                    <div className={styles.paceHeroInfo}>
+                      <span className={styles.paceHeroLabel}>All topics complete — you&apos;re ready to review</span>
+                      <span className={styles.paceHeroSub}>Exam in {pace.daysUntilExam} day{pace.daysUntilExam === 1 ? '' : 's'}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={styles.paceHero}>
+                    <span className={styles.paceHeroNum} style={{ color: paceColor }}>{pace.perDay}</span>
+                    <div className={styles.paceHeroInfo}>
+                      <span className={styles.paceHeroLabel}>
+                        topic{pace.perDay === 1 ? '' : 's'}/day to finish {pace.finishPastDue ? 'now' : `by ${fmtDate(pace.finishTopicsBy)}`}
+                      </span>
+                      <span className={styles.paceHeroSub}>
+                        {pace.topicsRemaining} left
+                        {' · '}
+                        {pace.finishPastDue
+                          ? 'finish date passed'
+                          : `${pace.daysUntilFinish} day${pace.daysUntilFinish === 1 ? '' : 's'} left`}
+                        {' · '}
+                        <span style={{ color: pace.doneToday >= pace.perDay ? 'var(--green)' : 'var(--text-3)' }}>
+                          {pace.doneToday}/{pace.perDay} done today
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className={styles.paceFooter}>
+                  <span className={styles.paceFooterItem}>🎯 Finish topics <strong>{fmtDate(pace.finishTopicsBy)}</strong></span>
+                  <span className={styles.paceFooterItem}>📝 Exam <strong>{fmtDate(pace.examDate)}</strong> · {pace.daysUntilExam}d</span>
+                </div>
+              </>
+            ) : (
+              <div className={styles.paceEditor}>
+                <label className={styles.paceField}>
+                  <span className={styles.paceFieldLabel}>Finish all topics by</span>
+                  <input
+                    type="date"
+                    className={styles.paceInput}
+                    value={finishInput}
+                    onChange={(e) => setFinishInput(e.target.value)}
+                  />
+                </label>
+                <label className={styles.paceField}>
+                  <span className={styles.paceFieldLabel}>Exam date</span>
+                  <input
+                    type="date"
+                    className={styles.paceInput}
+                    value={examInput}
+                    onChange={(e) => setExamInput(e.target.value)}
+                  />
+                </label>
+                {paceError && <span className={styles.paceErr}>{paceError}</span>}
+                <div className={styles.paceEditorBtns}>
+                  <button className={styles.paceCancelBtn} onClick={() => setEditingPace(false)} disabled={savingPace}>
+                    Cancel
+                  </button>
+                  <button className={styles.paceSaveBtn} onClick={savePace} disabled={savingPace}>
+                    {savingPace ? 'Saving…' : 'Save'}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Next topic CTA — always available, never locked */}
         {data.nextTopic && (

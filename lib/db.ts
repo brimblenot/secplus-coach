@@ -36,6 +36,10 @@ async function ensureSchema(): Promise<void> {
       study_hours_per_day INTEGER DEFAULT 1,
       last_weak_session TEXT
     );
+    -- Self-paced-with-a-target: the student sets a date to finish all topics by
+    -- and an exam date. Both drive the dashboard pace tracker. Additive/idempotent.
+    ALTER TABLE profile ADD COLUMN IF NOT EXISTS finish_topics_by TEXT;
+    ALTER TABLE profile ADD COLUMN IF NOT EXISTS exam_date TEXT;
     CREATE TABLE IF NOT EXISTS topic_progress (
       id SERIAL PRIMARY KEY,
       topic_id TEXT NOT NULL UNIQUE,
@@ -82,6 +86,8 @@ async function ensureSchema(): Promise<void> {
     ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_interval INTEGER;
     ALTER TABLE topic_progress ADD COLUMN IF NOT EXISTS review_streak INTEGER DEFAULT 0;
     INSERT INTO profile (id) VALUES (1) ON CONFLICT (id) DO NOTHING;
+    UPDATE profile SET finish_topics_by = '${DEFAULT_FINISH_TOPICS_BY}' WHERE id = 1 AND finish_topics_by IS NULL;
+    UPDATE profile SET exam_date = '${DEFAULT_EXAM_DATE}' WHERE id = 1 AND exam_date IS NULL;
   `)
   const [{ count }] = await sql<{ count: number }[]>`
     SELECT COUNT(*)::int AS count FROM topic_progress`
@@ -103,6 +109,46 @@ export const APP_TZ = 'America/New_York'
 export function localToday(): string {
   // en-CA formats as YYYY-MM-DD, which matches our stored date strings.
   return new Date().toLocaleDateString('en-CA', { timeZone: APP_TZ })
+}
+
+// Whole days from today (Eastern) to a YYYY-MM-DD target. Negative if the date
+// is already past. Both dates are pinned to UTC midnight so only the calendar
+// day matters (no clock-time / DST drift).
+export function daysUntil(dateStr: string): number {
+  const start = Date.parse(localToday() + 'T00:00:00Z')
+  const end = Date.parse(dateStr + 'T00:00:00Z')
+  return Math.round((end - start) / 86400000)
+}
+
+// ── Pace / target dates ────────────────────────────────────────────────────
+// Studying is self-paced but goal-anchored: the student picks a date to finish
+// all topics by and an exam date, and the dashboard derives a required
+// topics/day pace from them. Both are editable (PATCH /api/settings). Defaults
+// are used when the column is null (e.g. a legacy DB before the backfill ran).
+export const DEFAULT_FINISH_TOPICS_BY = '2026-07-28'
+export const DEFAULT_EXAM_DATE = '2026-07-29'
+
+export interface PaceSettings {
+  finishTopicsBy: string
+  examDate: string
+}
+
+export async function getPaceSettings(): Promise<PaceSettings> {
+  const row = await queryOne<{ finish_topics_by: string | null; exam_date: string | null }>(
+    'SELECT finish_topics_by, exam_date FROM profile WHERE id = 1'
+  )
+  return {
+    finishTopicsBy: row?.finish_topics_by ?? DEFAULT_FINISH_TOPICS_BY,
+    examDate: row?.exam_date ?? DEFAULT_EXAM_DATE,
+  }
+}
+
+// Accepts either date; updates only the ones provided. Values must already be
+// validated YYYY-MM-DD strings (the route rejects anything else).
+export async function updatePaceSettings(p: { finishTopicsBy?: string; examDate?: string }): Promise<PaceSettings> {
+  if (p.finishTopicsBy) await run('UPDATE profile SET finish_topics_by = ? WHERE id = 1', [p.finishTopicsBy])
+  if (p.examDate) await run('UPDATE profile SET exam_date = ? WHERE id = 1', [p.examDate])
+  return getPaceSettings()
 }
 
 // ── Query helpers ────────────────────────────────────────────────────────────

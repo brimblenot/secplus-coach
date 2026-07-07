@@ -62,14 +62,20 @@
   gap: 8px;
 }
 
-.selfPacedBadge {
+.examDate {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.03em;
+}
+
+.daysBadge {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
-  border: 1px solid var(--green-border);
+  border: 1px solid;
   border-radius: var(--radius);
-  color: var(--green);
   letter-spacing: 0.05em;
 }
 
@@ -322,42 +328,165 @@
   flex-shrink: 0;
 }
 
-/* Pace tracker row */
-.paceRow {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  padding: 0 2px;
-  margin-bottom: 16px;
-  font-family: 'IBM Plex Mono', monospace;
+/* Pace tracker card */
+.paceCard {
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.35s ease forwards;
 }
 
-.paceTopicsNum {
-  font-size: 22px;
+.paceCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.paceCardLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.paceEditBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+.paceEditBtn:hover { color: var(--green); }
+
+.paceHero {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.paceHeroNum {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 40px;
   font-weight: 600;
   line-height: 1;
+  min-width: 52px;
+  text-align: center;
 }
 
-.paceTopicsLabel {
-  font-size: 12px;
-  color: var(--text-2);
-  font-weight: 500;
+.paceHeroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.paceSep {
-  font-size: 11px;
-  color: var(--border-2);
+.paceHeroLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
 }
 
-.paceMeta {
+.paceHeroSub {
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   color: var(--text-3);
 }
 
-.paceCatchup {
-  font-size: 11px;
-  color: var(--amber);
+.paceFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
 }
+
+.paceFooterItem {
+  font-size: 12px;
+  color: var(--text-2);
+}
+.paceFooterItem strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Pace date editor */
+.paceEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.paceField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.paceFieldLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+}
+
+.paceInput {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  color-scheme: dark;
+  transition: border-color 0.15s;
+}
+.paceInput:focus { outline: none; border-color: var(--border-2); }
+
+.paceErr {
+  font-size: 12px;
+  color: var(--red);
+}
+
+.paceEditorBtns {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.paceCancelBtn,
+.paceSaveBtn {
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.paceCancelBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+}
+.paceCancelBtn:hover:not(:disabled) { border-color: var(--border-2); color: var(--text-2); }
+
+.paceSaveBtn {
+  background: var(--green-dim);
+  border: 1px solid var(--green-border);
+  color: var(--green);
+}
+.paceSaveBtn:hover:not(:disabled) { background: rgba(0, 212, 160, 0.18); }
+.paceSaveBtn:disabled,
+.paceCancelBtn:disabled { opacity: 0.5; cursor: default; }
 
 /* Additional completed */
 .additionalCard {

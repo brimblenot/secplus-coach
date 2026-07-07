@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, offers on-demand topic and section reviews, and provides a dashboard coach. Studying is **fully self-paced** — there is no exam date, no countdown, and no daily quota anywhere in the app. Not a generic study tool — the student's background context is hardcoded into system prompts.
+A personal CompTIA Security+ SY0-701 study coach app built for one specific student (CIS degree, cybersecurity concentration, JMU May 2026 graduate). It generates AI-powered study guides from raw lecture transcripts, runs adaptive quizzes, tracks weak areas, offers on-demand topic and section reviews, and provides a dashboard coach. Studying is **self-paced but goal-anchored**: the student sets a date to finish all topics by and an exam date (both editable on the dashboard), and the app derives a required "topics/day" pace and exam countdown from them. There is no per-day *quota lock* — the next topic is never gated by pace, and reviews stay on-demand. Not a generic study tool — the student's background context is hardcoded into system prompts.
 
 See [ROADMAP.md](ROADMAP.md) for known issues, planned improvements, and the fastest places to extend the app.
 
@@ -37,7 +37,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 **Mobile/PWA:** Viewport + theme color in `app/layout.tsx`; installable manifest in `app/manifest.ts` with generated icons (`app/icon.tsx`, `app/apple-icon.tsx`). Pages have `@media (max-width: 460px)` breakpoints for phone layout.
 
 **File map (pages):**
-- `app/page.tsx` — dashboard (progress, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). Self-paced: no quota, the next topic is never locked. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`, `/flashcards`.
+- `app/page.tsx` — dashboard (progress, **pace tracker card**, next-topic CTA, completed-today, coach chat, domain gate, weak-area entry, metrics, domain grid). The header shows an exam countdown badge; the pace card shows required topics/day to finish by the target date, today's progress vs that target, and both dates — with an inline "Edit dates" editor that PATCHes `/api/settings` and refetches. No quota lock: the next topic is never gated. Calls `/api/progress`; links to `/session/[id]`, `/weak-area-session`, `/domain/[id]`, `/quiz/random`, `/flashcards`.
 - `app/flashcards/page.tsx` — acronym flashcard drill (`app/flashcards.module.css`). Fetches `/api/flashcards`, shuffles, and runs a flip + self-rate loop ("Got it" clears the card, "Still learning" resurfaces it later in the session). Filter chips: All + D1–D5 + **Ports** (the last shows only the `type: 'port'` protocol/port cards). **Entirely client-side, per-session** — no persistence, no DB, no runtime LLM.
 - `app/session/[id]/page.tsx` — main study loop: study guide → **section-by-section checkpoint reading** → quiz → second-chance → results.
 - `app/review/topic/[id]/page.tsx` — on-demand single-topic review: a 4 MC + 1 text recall quiz (`/api/review/quiz`) with an optional "Need a refresher?" recap; misses flow back to weak areas via `/api/review/save`. Blue-themed, reuses `app/quiz.module.css`.
@@ -69,7 +69,7 @@ Single file handles connection, schema definition, seeding, and all query functi
 **`npm run db:migrate`** (`scripts/migrate-sqlite-to-pg.js`) is the one-time importer that copied the old local `data/coach.db` (legacy sql.js) into Postgres — kept for reference only. The sql.js path is fully removed; there is no local SQLite file anymore.
 
 **Schema tables:**
-- `profile` — `study_hours_per_day`, `last_weak_session` (date string of the last completed weak-area session). (The old `exam_date` column was removed when the app went fully self-paced; nothing reads or writes an exam date anymore. Legacy prod DBs may still have a dormant `exam_date` column — it is never queried.)
+- `profile` — `study_hours_per_day`, `last_weak_session` (date string of the last completed weak-area session), `finish_topics_by` (YYYY-MM-DD target to finish all topics), `exam_date` (YYYY-MM-DD). The two date columns drive the dashboard pace tracker; both are read by `getPaceSettings()` and written by `updatePaceSettings()` (via `PATCH /api/settings`). Defaults (backfilled by `db:init` when null): finish `2026-07-28`, exam `2026-07-29`. (`exam_date` was previously dropped for the "fully self-paced" era and re-added here; a legacy row may carry a stale value, so `db:init` only backfills when the column is null.)
 - `topic_progress` — one row per topic: `status` (pending/studying/passed/failed), `quiz_score`, `quiz_attempts`, `completed_at`, `study_minutes`. The `review_due` / `review_interval` / `review_streak` columns still exist but are **dormant** — the old scheduled spaced-repetition engine was removed; reviews are now on-demand (nothing reads or writes these columns).
 - `quiz_attempts` — historical topic-quiz records with `questions_json` + `wrong_questions` (review quizzes are NOT logged here, so the quiz average stays a measure of first-time topic performance)
 - `weak_areas` — flagged concepts with `wrong_count`, `resolved` flag, `topic_id`/`topic_name`/`domain` for grouping (`concept` is UNIQUE)
@@ -145,9 +145,16 @@ The old Leitner engine (`scheduleFirstReview`/`scheduleReview`/`getDueReviews`/`
 
 Weak areas are grouped by `topic_id` in `app/weak-area-session/page.tsx` (`groupByTopic()`). Each group gets one combined guide + quiz covering all concepts together (not one session per flag). The guide buffers fully before rendering (no chunky streaming). Weak areas are surfaced on the dashboard as a **nudge card, not a hard lock** — the next topic is always available (`isWeakAreaSessionDoneToday()` / `markWeakAreaSessionDone()` still exist and record the last session date, but no longer gate progression).
 
-### Pace & Self-Paced Dashboard (`app/api/progress/route.ts`)
+### Pace & Goal-Anchored Dashboard (`app/api/progress/route.ts`)
 
-Studying is **self-paced**: there is no exam date, no countdown, no daily topic quota, no "behind" status, and no persisted daily plan. `/api/progress` returns informational fields only — `topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, and `completedTodayTopics`. The dashboard header just shows a "Self-paced" badge, then a calm status line ("N remaining · N done today · study at your own pace"), then the always-open next topic. (Review is on-demand from the domain pages, so nothing review-related surfaces here.)
+Studying is self-paced but **goal-anchored to two dates**: `finish_topics_by` and `exam_date` (see the `profile` schema). There is still no per-day quota *lock* and no persisted daily plan — the next topic is always open regardless of pace. `/api/progress` returns the informational fields (`topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, `completedTodayTopics`) plus a **`pace` object** computed from the target dates:
+- `finishTopicsBy`, `examDate` — the raw target dates.
+- `daysUntilFinish`, `daysUntilExam` — whole days from today (Eastern, via `daysUntil()`), floored at 0.
+- `finishPastDue` — true when the finish date is already in the past.
+- `perDay` — required topics/day = `ceil(topicsRemaining / (daysUntilFinish + 1))` (today counts, so "1 day left" means finish the rest today). Falls back to all remaining when past due, and `0` when nothing is left.
+- `doneToday`, `onPace` (`doneToday >= perDay`, or nothing remaining).
+
+The dashboard header shows an **exam countdown badge** (`Exam Jul 29 · Nd`, colored red ≤7d / amber ≤14d / green otherwise). Below the coach sits the **pace card**: a big required-topics/day number (red if past due, green if today's target met, amber if behind), the "N left · N days left · N/N done today" line, both target dates, and an **Edit dates** toggle that reveals two `<input type="date">` fields → `PATCH /api/settings` → refetch. (Review is on-demand from the domain pages, so nothing review-related surfaces here.)
 
 ### Domain Gate
 
@@ -167,7 +174,9 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 
 | Route | Purpose | Model |
 |-------|---------|-------|
-| `GET /api/progress` | Dashboard data (self-paced) | — |
+| `GET /api/progress` | Dashboard data + computed `pace` object | — |
+| `GET /api/settings` | Read pace target dates (`finishTopicsBy`, `examDate`) | — |
+| `PATCH /api/settings` | Update either/both target dates (validates YYYY-MM-DD) | — |
 | `GET /api/flashcards` | Serve the static acronym deck (`?domain=N` filter); no LLM, no DB | — |
 | `POST /api/session` | Study guide (buffered, non-streaming) | Sonnet |
 | `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) | Haiku |
@@ -202,4 +211,4 @@ Key rules baked into the quiz prompts:
 - No verbatim phrases from the study material; stay at SY0-701 exam depth — no vendor-specific or implementation-level minutiae.
 - Keep explanations/rubrics short (long output is truncated mid-JSON and the quiz fails to generate).
 
-The coach (`app/api/coach/route.ts`) receives the `ProgressData` object serialized into its system prompt — topic counts, weak areas, domain breakdown, today's completions — and is explicitly told the student is self-paced with no exam date (do not nag about deadlines, quotas, or "behind").
+The coach (`app/api/coach/route.ts`) receives the `ProgressData` object serialized into its system prompt — topic counts, weak areas, domain breakdown, today's completions, and the **`pace` object** (target dates, days left, required topics/day, on-pace flag). It is told to give honest, concrete pace/catch-up math when asked but to stay encouraging and never guilt-trip.
