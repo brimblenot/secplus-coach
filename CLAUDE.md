@@ -206,7 +206,7 @@ Shared prompts live in `lib/prompts.ts` (`STUDY_GUIDE_SYSTEM_PROMPT`, `buildChec
 Key rules baked into the quiz prompts:
 - **Scope lock first** — only test content present in the provided lecture material.
 - Scenario-based stems mandatory ("A security analyst discovers...").
-- All four MC options within ±15 words of each other; the correct answer must not be the longest. `balanceQuizAnswers()` (`lib/quiz.ts`) then redistributes the correct slot evenly across A/B/C/D post-generation.
+- All four MC options must be **parallel** — same grammatical shape and level of detail, closely matched in length (longest ≤ ~1.5× the shortest). The correct answer must not be the longest/most-complete/most-specific, and distractors must not be terse throwaways next to a fully-spelled-out answer (the "obvious longest answer sticks out" tell — same rule in both `MC_BALANCE_RULES` for quizzes and `buildCheckpointsPrompt` for quick checks). `balanceQuizAnswers()` (`lib/quiz.ts`) then redistributes the correct slot evenly across A/B/C/D post-generation.
 - Distractors must use named strategies (related-but-wrong-scenario, right-concept-wrong-implementation, compound wrong answers).
 - No verbatim phrases from the study material; stay at SY0-701 exam depth — no vendor-specific or implementation-level minutiae.
 - Keep explanations/rubrics short (long output is truncated mid-JSON and the quiz fails to generate).
