@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getTopic, getWeakAreas } from '@/lib/db'
-import { balanceQuizAnswers } from '@/lib/quiz'
+import { balanceQuizAnswers, enforceMCLengthParity } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -139,6 +139,7 @@ STUDY GUIDE (only test from this content):`,
     const text = response.content.filter((b) => b.type === 'text').map((b) => (b as { type: 'text'; text: string }).text).join('')
     const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
     const parsed = JSON.parse(clean)
+    await enforceMCLengthParity(parsed.questions)
     balanceQuizAnswers(parsed.questions)
     return NextResponse.json(parsed)
   } catch (err) {

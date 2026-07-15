@@ -3,7 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { buildReviewQuizPrompt } from '@/lib/prompts'
 import { getTopic } from '@/lib/db'
 import { getTranscript } from '@/lib/transcripts'
-import { balanceQuizAnswers } from '@/lib/quiz'
+import { balanceQuizAnswers, enforceMCLengthParity } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -40,6 +40,7 @@ export async function POST(req: NextRequest) {
       .join('')
     const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
     const parsed = JSON.parse(clean)
+    await enforceMCLengthParity(parsed.questions)
     balanceQuizAnswers(parsed.questions)
     return NextResponse.json(parsed)
   } catch (err) {

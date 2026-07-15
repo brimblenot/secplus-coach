@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { buildCheckpointsPrompt } from '@/lib/prompts'
-import { balanceQuizAnswers } from '@/lib/quiz'
+import { balanceQuizAnswers, enforceMCLengthParity } from '@/lib/quiz'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -37,7 +37,10 @@ export async function POST(req: NextRequest) {
       .join('')
     const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '').trim()
     const parsed = JSON.parse(clean)
-    if (Array.isArray(parsed.checkpoints)) balanceQuizAnswers(parsed.checkpoints)
+    if (Array.isArray(parsed.checkpoints)) {
+      await enforceMCLengthParity(parsed.checkpoints)
+      balanceQuizAnswers(parsed.checkpoints)
+    }
     return NextResponse.json(parsed)
   } catch (err) {
     console.error(err)

@@ -23,10 +23,14 @@ Explanation: ${explanation}
 
 Student wrote: "${userText}"
 
-Grade for applied reasoning, not exhaustive recall. Pass the answer when the student reaches a correct decision/conclusion AND gives sound justification for it — even if they paraphrase or omit some points the rubric lists. Do NOT fail an answer merely for leaving out rubric terms when the core reasoning is correct. Penalize only vague, off-topic, or genuinely incorrect reasoning.
+Grade for applied reasoning, not exhaustive recall. Pass the answer when the student reaches the correct decision/conclusion AND gives a sound CORE justification for it — even if they paraphrase, omit some points the rubric lists, or get a secondary/peripheral detail wrong. Do NOT fail an answer merely for leaving out rubric terms when the core reasoning is correct.
+
+SCOPE — grade ONLY against the rubric and explanation above. Do NOT import outside knowledge or a more advanced/exact version of the topic to find fault: if a fact is not part of the rubric or explanation, a student is neither required to know it nor penalized for stating it imperfectly. The student was taught at standard SY0-701 depth, not specialist depth.
+
+CORE vs PERIPHERAL — decide the answer on its main claim, not its weakest side claim. If the decision is right and the primary reason is sound, a wrong or fuzzy secondary detail does NOT fail the answer — note it in the feedback instead. Fail ONLY when the decision itself is wrong, the CENTRAL justification is unsound, or the answer is vague/off-topic.
 
 Respond ONLY with valid JSON (no markdown fences):
-{"passed": true, "feedback": "Specific 1-2 sentence feedback mentioning what they got right or what they missed."}`,
+{"passed": true, "feedback": "Specific 1-2 sentence feedback: what they got right, and gently correct any peripheral slip without failing them for it."}`,
       }],
     })
 

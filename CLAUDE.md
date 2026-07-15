@@ -50,7 +50,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 - `app/layout.tsx`, `app/globals.css` — shell + design tokens.
 - `lib/db.ts` — all DB + topic data (see below)
 - `lib/prompts.ts` — shared prompt builders (study guide, checkpoints, weak-area guide/quiz, domain final quiz, weak-area extraction, review quiz, review refresher)
-- `lib/quiz.ts` — `balanceQuizAnswers()` post-processing (spreads the correct MC option evenly across A/B/C/D)
+- `lib/quiz.ts` — MC post-processing: `balanceQuizAnswers()` (spreads the correct option evenly across A/B/C/D) and `enforceMCLengthParity()` (async: detects when the correct option is a length outlier and runs one bounded Haiku "editor" pass to rewrite all four options to matched length/detail without changing which is correct — fixes the "longest answer is the right one" tell). Routes call parity first, then balance.
 - `lib/transcripts.ts` — `getTranscript(topicId)` file loader
 - `lib/flashcards.json` — static flashcard deck (`{term, expansion, definition, domain, topicId, type?}`) served verbatim by `/api/flashcards`. Two kinds of card: **acronyms** (bootstrapped by `scripts/extract-acronyms.cjs`, then hand-curated down to genuine exam abbreviations — vendor/product/tool names, non-acronym algorithm names, general/non-security abbreviations, and specific IDs were pruned) and **ports** (`type: 'port'`, `domain: 0`, hand-authored: front = protocol, expansion = port number(s), definition = role). Hand-editable; re-running the extract script would re-introduce raw acronyms and need re-curation.
 
@@ -84,7 +84,7 @@ Single file handles connection, schema definition, seeding, and all query functi
 
 Models in use (string literals scattered across routes — see ROADMAP for the "centralize model ids" cleanup):
 - **`claude-sonnet-4-6`** (Sonnet): study guide, topic/domain/second-chance/weak-area/review quiz generation, quiz-save + review-save weak-area analysis, free-text grading, coach chat, weak-area guide.
-- **`claude-haiku-4-5-20251001`** (Haiku 4.5): in-session chat Q&A (`/api/session/chat`), per-section checkpoints (`/api/session/checkpoints`), review refresher (`/api/review/refresher`).
+- **`claude-haiku-4-5-20251001`** (Haiku 4.5): in-session chat Q&A (`/api/session/chat`), per-section checkpoints (`/api/session/checkpoints`), review refresher (`/api/review/refresher`), and the MC length-parity editor pass (`enforceMCLengthParity()` in `lib/quiz.ts`, invoked by every quiz/checkpoint route only when a length outlier is detected).
 
 **maxDuration:** every LLM route sets `export const maxDuration = 60`. Generation is bounded with small `max_tokens` (≈2800 for quizzes/guides, 500 for extraction/refresher) so it finishes under Vercel's 60s function limit — exceeding it returns a non-JSON 504.
 
@@ -118,6 +118,7 @@ Target ~600–900 words. Consumed by `app/api/session/route.ts` (Sonnet, non-str
 - **Second-chance** (`app/api/quiz/second-chance/route.ts`) — receives only the missed questions + topic name; re-tests the same concept with a scope-lock guardrail.
 - **Domain mastery quiz** (`app/api/quiz/domain/route.ts`) — feeds the actual transcripts for the domain's topics (`getTranscript`, capped `PER_TOPIC_CHARS = 4000` each) and locks generation to that content.
 - **Review quiz** (`buildReviewQuizPrompt`, consumed by `app/api/review/quiz/route.ts`) — locked to the single topic's transcript (capped 5000 chars).
+- **Free-text grading** (`app/api/quiz/grade/route.ts`) — the scope lock also applies to *grading*: the grader is told to judge ONLY against the provided rubric/explanation and must NOT import outside or more-advanced facts to find fault (this fixed a review answer failed on a HIPAA 500-individual breach-notification nuance never taught in the lecture). It also grades **core vs peripheral**: a correct decision with a sound central justification passes even if a secondary detail is wrong — the slip is noted in feedback, not failed.
 
 ### Session Flow — checkpoint reading + quiz grading (`app/session/[id]/page.tsx`)
 
@@ -206,7 +207,7 @@ Shared prompts live in `lib/prompts.ts` (`STUDY_GUIDE_SYSTEM_PROMPT`, `buildChec
 Key rules baked into the quiz prompts:
 - **Scope lock first** — only test content present in the provided lecture material.
 - Scenario-based stems mandatory ("A security analyst discovers...").
-- All four MC options must be **parallel** — same grammatical shape and level of detail, closely matched in length (longest ≤ ~1.5× the shortest). The correct answer must not be the longest/most-complete/most-specific, and distractors must not be terse throwaways next to a fully-spelled-out answer (the "obvious longest answer sticks out" tell — same rule in both `MC_BALANCE_RULES` for quizzes and `buildCheckpointsPrompt` for quick checks). `balanceQuizAnswers()` (`lib/quiz.ts`) then redistributes the correct slot evenly across A/B/C/D post-generation.
+- All four MC options must be **parallel** — same grammatical shape and level of detail, closely matched in length (longest ≤ ~1.5× the shortest). The correct answer must not be the longest/most-complete/most-specific, and distractors must not be terse throwaways next to a fully-spelled-out answer (the "obvious longest answer sticks out" tell — same rule in both `MC_BALANCE_RULES` for quizzes and `buildCheckpointsPrompt` for quick checks). Because the prompt rule alone leaks, this is also **enforced post-generation**: `enforceMCLengthParity()` (`lib/quiz.ts`) measures word counts and, when the correct option is a length outlier, runs one bounded Haiku pass that rewrites the options to matched length (meaning + correct letter preserved). Then `balanceQuizAnswers()` redistributes the correct slot evenly across A/B/C/D.
 - Distractors must use named strategies (related-but-wrong-scenario, right-concept-wrong-implementation, compound wrong answers).
 - No verbatim phrases from the study material; stay at SY0-701 exam depth — no vendor-specific or implementation-level minutiae.
 - Keep explanations/rubrics short (long output is truncated mid-JSON and the quiz fails to generate).
