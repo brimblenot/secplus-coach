@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import styles from './session.module.css'
+import GuideHelper from '../../components/GuideHelper'
 
 interface MCQuestion {
   id: number
@@ -806,6 +807,11 @@ export default function SessionPage() {
                 </button>
               </div>
             </div>
+          )}
+
+          {/* Floating helper — explain-a-concept popup, available any time while reading */}
+          {phase === 'guide' && guideContent && (
+            <GuideHelper topicName={topicName} domain={domain} guideContent={guideContent} />
           )}
         </div>
       )}

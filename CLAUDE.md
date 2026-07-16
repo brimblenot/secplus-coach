@@ -52,9 +52,10 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 - `lib/prompts.ts` — shared prompt builders (study guide, checkpoints, weak-area guide/quiz, domain final quiz, weak-area extraction, review quiz, review refresher)
 - `lib/quiz.ts` — MC post-processing: `balanceQuizAnswers()` (spreads the correct option evenly across A/B/C/D) and `enforceMCLengthParity()` (async: detects when the correct option is a length outlier and runs one bounded Haiku "editor" pass to rewrite all four options to matched length/detail without changing which is correct — fixes the "longest answer is the right one" tell). Routes call parity first, then balance.
 - `lib/transcripts.ts` — `getTranscript(topicId)` file loader
+- `app/components/GuideHelper.tsx` (+ `GuideHelper.module.css`) — floating **"Explain" helper**: a fixed launcher button that opens a chat popup, available any time a study guide is on screen (main study session + weak-area session). The student pastes/names a concept from the guide they didn't grasp and the helper explains it short-first, then offers to go deeper or re-explain differently. Backed by the low-cost Haiku route `/api/session/helper`. Entirely client-side/per-session (no persistence, like the flashcard drill). Distinct from the end-of-guide inline "ASK A QUESTION" chat, which uses `/api/session/chat` and only appears once all sections are revealed.
 - `lib/flashcards.json` — static flashcard deck (`{term, expansion, definition, domain, topicId, type?}`) served verbatim by `/api/flashcards`. Two kinds of card: **acronyms** (bootstrapped by `scripts/extract-acronyms.cjs`, then hand-curated down to genuine exam abbreviations — vendor/product/tool names, non-acronym algorithm names, general/non-security abbreviations, and specific IDs were pruned) and **ports** (`type: 'port'`, `domain: 0`, hand-authored: front = protocol, expansion = port number(s), definition = role). Hand-editable; re-running the extract script would re-introduce raw acronyms and need re-curation.
 
-There is no `components/` directory — all UI lives in the page files.
+`app/components/` holds the only shared UI component, `GuideHelper` (the floating in-guide "Explain" helper, used by both the main study session and the weak-area session). Everything else lives in its page file.
 
 ### Data Layer (`lib/db.ts`)
 
@@ -84,7 +85,7 @@ Single file handles connection, schema definition, seeding, and all query functi
 
 Models in use (string literals scattered across routes — see ROADMAP for the "centralize model ids" cleanup):
 - **`claude-sonnet-4-6`** (Sonnet): study guide, topic/domain/second-chance/weak-area/review quiz generation, quiz-save + review-save weak-area analysis, free-text grading, coach chat, weak-area guide.
-- **`claude-haiku-4-5-20251001`** (Haiku 4.5): in-session chat Q&A (`/api/session/chat`), per-section checkpoints (`/api/session/checkpoints`), review refresher (`/api/review/refresher`), and the MC length-parity editor pass (`enforceMCLengthParity()` in `lib/quiz.ts`, invoked by every quiz/checkpoint route only when a length outlier is detected).
+- **`claude-haiku-4-5-20251001`** (Haiku 4.5): in-session chat Q&A (`/api/session/chat`), the in-guide "Explain" helper (`/api/session/helper`), per-section checkpoints (`/api/session/checkpoints`), review refresher (`/api/review/refresher`), and the MC length-parity editor pass (`enforceMCLengthParity()` in `lib/quiz.ts`, invoked by every quiz/checkpoint route only when a length outlier is detected).
 
 **maxDuration:** every LLM route sets `export const maxDuration = 60`. Generation is bounded with small `max_tokens` (≈2800 for quizzes/guides, 500 for extraction/refresher) so it finishes under Vercel's 60s function limit — exceeding it returns a non-JSON 504.
 
@@ -185,7 +186,8 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 | `GET /api/flashcards` | Serve the static acronym deck (`?domain=N` filter); no LLM, no DB | — |
 | `POST /api/session` | Study guide (buffered, non-streaming) | Sonnet |
 | `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) | Haiku |
-| `POST /api/session/chat` | In-lecture Q&A | Haiku (streaming) |
+| `POST /api/session/chat` | In-lecture Q&A (end-of-guide inline chat) | Haiku (streaming) |
+| `POST /api/session/helper` | In-guide "Explain" helper popup — short-first concept explanations, offers to go deeper | Haiku (streaming) |
 | `POST /api/coach` | Dashboard coach chat | Sonnet (streaming) |
 | `POST /api/quiz` | Generate topic quiz (scope-locked to study guide) | Sonnet |
 | `POST /api/quiz/save` | Grade topic quiz + flag weak areas | Sonnet |

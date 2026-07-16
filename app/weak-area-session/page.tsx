@@ -5,6 +5,7 @@ import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import styles from './session.module.css'
+import GuideHelper from '../components/GuideHelper'
 
 interface WeakArea {
   id: number
@@ -807,6 +808,11 @@ export default function WeakAreaSessionPage() {
             </>
           )}
         </div>
+
+        {/* Floating helper — explain-a-concept popup, available any time while reading */}
+        {guideContent && currentGroup && (
+          <GuideHelper topicName={currentGroup.topicName} domain={currentGroup.domain} guideContent={guideContent} />
+        )}
       </div>
     )
   }
