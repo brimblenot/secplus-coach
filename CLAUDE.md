@@ -146,6 +146,10 @@ The old Leitner engine (`scheduleFirstReview`/`scheduleReview`/`getDueReviews`/`
 
 Weak areas are grouped by `topic_id` in `app/weak-area-session/page.tsx` (`groupByTopic()`). Each group gets one combined guide + quiz covering all concepts together (not one session per flag). The guide buffers fully before rendering (no chunky streaming). Weak areas are surfaced on the dashboard as a **nudge card, not a hard lock** — the next topic is always available (`isWeakAreaSessionDoneToday()` / `markWeakAreaSessionDone()` still exist and record the last session date, but no longer gate progression).
 
+**Reading + resolution mirror the main study session** (both were ported from `app/session/[id]/page.tsx`):
+- **Section-by-section checkpoint reading.** The weak-area guide is generated in the same format as the main study guide (H2 title + header-less framing intro + `### ` teaching sections — see `buildWeakAreaGuidePrompt`), so the page parses it with `parseGuide` and gates it one section at a time with a per-section comprehension check from `/api/session/checkpoints` (same route as the main session). No more single long readout. If checkpoint generation fails, the whole guide reveals unblocked.
+- **Second-chance makeup instead of all-or-nothing.** The quiz scores **every** question (MC auto + text via `/api/quiz/grade`). Any miss no longer fails the whole group — the wrong questions go to `/api/quiz/second-chance` for a rephrased makeup on the same concept (`phase === 'area-second-chance'`). A group **resolves only if nothing is still wrong after the makeup** (a single corrected slip clears it; a concept missed on both passes keeps the group flagged). Resolution stays group-level (all `currentGroup.areas` resolve together), so the old `getPassCount` MC-threshold is gone.
+
 ### Pace & Goal-Anchored Dashboard (`app/api/progress/route.ts`)
 
 Studying is self-paced but **goal-anchored to two dates**: `finish_topics_by` and `exam_date` (see the `profile` schema). There is still no per-day quota *lock* and no persisted daily plan — the next topic is always open regardless of pace. `/api/progress` returns the informational fields (`topicsRemaining`, `completedCount`/`totalTopics`, `courseProgress`, `avgScore`, `nextTopic`, `domainStats`, `weakAreas`, `domainQuizPending`, `completedTodayTopics`) plus a **`pace` object** computed from the target dates:
@@ -195,7 +199,7 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 | `GET /api/weak-areas` | List unresolved weak areas | — |
 | `PATCH /api/weak-areas` | Mark a weak area resolved | — |
 | `POST /api/weak-areas/complete` | Mark weak area session done today | — |
-| `POST /api/weak-area/session` | Streaming weak area guide | Sonnet (streaming) |
+| `POST /api/weak-area/session` | Streaming weak area guide (sectioned like the study guide; read via `/api/session/checkpoints`) | Sonnet (streaming) |
 | `POST /api/weak-area/quiz` | Generate weak area mini quiz | Sonnet |
 
 **No `/api/quiz/random` route exists** — the random quiz page composes its quiz from 5× `/api/quiz/domain` calls instead. The page and the domain route disagree on shape, so the random quiz has live bugs — see ROADMAP.md.

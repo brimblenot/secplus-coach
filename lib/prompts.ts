@@ -47,55 +47,63 @@ RULES FOR THIS STUDY GUIDE:
 8. If weak areas are listed in the student status, explicitly address them in the guide.
 9. Do not add a preamble. Start directly with the H2 topic heading, then the framing intro paragraph, then the teaching sections, then "### Recap" and "### Exam flags".`
 
+// Weak-area re-explanation guide. Format INTENTIONALLY MIRRORS the main study guide
+// (STUDY_GUIDE_SYSTEM_PROMPT): an H2 title, a header-less framing intro, then "### "
+// teaching sections. That structure is what lets the weak-area session reuse the exact
+// section-by-section checkpoint reading flow (parseGuide + /api/session/checkpoints):
+// each "### " section becomes one comprehension check the student answers before the
+// next section reveals — instead of one long unbroken readout.
 export function buildWeakAreaGuidePrompt(concepts: string[], topicName: string, domain: number): string {
   if (concepts.length === 1) {
     const concept = concepts[0]
-    return `You are a CompTIA Security+ SY0-701 study coach. A student keeps missing questions on this concept.
+    return `You are a CompTIA Security+ SY0-701 study coach. A student keeps missing questions on this concept, so re-teach it clearly and concretely.
 
 WEAK CONCEPT: ${concept}
 PARENT TOPIC: ${topicName} (Domain ${domain})
 
-Using your own security knowledge (not a transcript), write a focused re-explanation with exactly this structure — no preamble, no extra sections:
+Using your own security knowledge (not a transcript), write a focused re-explanation. Write so the student can read it in short "### " sections and check their understanding after each one. Use EXACTLY this structure — no preamble, no extra sections:
 
 ## ${concept}
 
-**What it is:** Plain-language explanation of "${concept}" — what it means and why it matters. 2-3 sentences of plain prose.
+<A 1-2 sentence framing intro as a plain paragraph (NO "### " header): say what "${concept}" is at a high level and why it commonly trips students up.>
 
-**Real-world example:** A concrete scenario where this concept applies. Make it relatable and memorable. 2-3 sentences of plain prose.
+### What it is
+Explain plainly what "${concept}" IS and DOES — a real definition first, then 2-3 short supporting details as a bullet list. If you explain it by contrast with something else, state the other thing's relevant property in plain words too, so this section is self-contained. End with a one-sentence real-world analogy.
 
-**Exam trap:** The most common confusion or trick the Security+ exam uses to test this concept. 1-2 sentences of plain prose.
+### Where it shows up
+A concrete, memorable scenario where "${concept}" applies in practice — 2-3 sentences that make it stick.
+
+### The exam trap
+The most common confusion or trick the Security+ exam uses to test "${concept}", stated so the section itself makes clear what the right understanding is. 2-3 sentences.
 
 **Memory hook:** One short phrase to lock this in for test day.
 
-Output ONLY the markdown above, starting with the ## heading. Bold only the four labels shown above (What it is:, Real-world example:, Exam trap:, Memory hook:). No other bold text anywhere. Total length: 200-250 words.`
+Rules: Output ONLY the markdown above, starting with the "## " heading. Use "### " (sentence case) for the three section headings exactly as shown. Bold key terms on first use and the "Memory hook:" label. Each "### " section must be fully answerable from its own sentences. Total length: 260-340 words.`
   }
 
-  // Multiple overlapping concepts from the same topic
-  return `You are a CompTIA Security+ SY0-701 study coach. A student keeps missing questions on these related concepts from the same topic.
+  // Multiple overlapping concepts from the same topic — one "### " section per concept
+  // so each gets its own checkpoint in the section-by-section reading flow.
+  return `You are a CompTIA Security+ SY0-701 study coach. A student keeps missing questions on these related concepts from the same topic, so re-teach them clearly.
 
 WEAK CONCEPTS:
 ${concepts.map((c, i) => `${i + 1}. ${c}`).join('\n')}
 PARENT TOPIC: ${topicName} (Domain ${domain})
 
-Using your own security knowledge, write a focused re-explanation covering all ${concepts.length} concepts. Use exactly this structure — no preamble, no extra sections:
+Using your own security knowledge, write a focused re-explanation covering all ${concepts.length} concepts. Write so the student reads it in short "### " sections and checks understanding after each. Use EXACTLY this structure — no preamble, no extra sections:
 
-## ${topicName}: Weak Areas Review
+## ${topicName}: weak areas review
 
-One sentence explaining what these concepts have in common.
+<A 1-2 sentence framing intro as a plain paragraph (NO "### " header): what these concepts have in common and why they get confused.>
 
 ${concepts.map(c => `### ${c}
-
-**What it is:** 2-3 sentences of plain prose explaining this specific concept.
-
-**Exam trap:** 1-2 sentences on the most common exam trick for this concept.`).join('\n\n')}
+Explain plainly what this concept IS and DOES (a real definition, not just an analogy), then the one exam trap or confusion the student most likely hit. If you lean on a contrast, state the other side's relevant property too, so the section is self-contained. 3-4 sentences.`).join('\n\n')}
 
 ### How they connect
-
-2-3 sentences explaining how these concepts relate to each other and why the exam tests them together.
+Explain how these concepts relate and why the exam tests them together. 2-3 sentences.
 
 **Memory hooks:** ${concepts.map(c => `${c}: [short phrase]`).join(' · ')}
 
-Output ONLY the markdown above, starting with the ## heading. Bold only the labels shown above. No other bold text anywhere. Total length: ${250 + concepts.length * 80}-${300 + concepts.length * 100} words.`
+Rules: Output ONLY the markdown above, starting with the "## " heading. Use "### " (sentence case) headings exactly as shown — one per concept, plus "How they connect". Bold key terms on first use and the "Memory hooks:" label. Each "### " section must be fully answerable from its own sentences. Total length: ${250 + concepts.length * 80}-${320 + concepts.length * 100} words.`
 }
 
 // Shared MC quality rules — keeps the correct answer from being guessable by length.
