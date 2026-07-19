@@ -1,0 +1,137 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why classification exists",
+      "type": "text",
+      "question": "Explain in 1–2 sentences why data classification is necessary in an organization.",
+      "rubric": "A sound answer states that classification prevents both over-protection of low-sensitivity data (wasting resources) and under-protection of critical data (creating risk), and/or that it is required by regulation before controls can be applied, and/or that it drives downstream decisions about storage, access, transmission, and disposal.",
+      "explanation": "The section explicitly establishes that classification solves the problem of resource mismatch (over-protecting cheap data, under-protecting critical data) and is required by regulation before controls can be applied."
+    },
+    {
+      "section": "Government classification tiers",
+      "type": "mc",
+      "question": "In the U.S. government classification system, what does CUI stand for?",
+      "options": {
+        "A": "Classified Utility Information",
+        "B": "Controlled Unclassified Information",
+        "C": "Confidential Unclassified Intelligence",
+        "D": "Classified Unclassified Information"
+      },
+      "correct": "B",
+      "explanation": "The section defines CUI as 'Controlled Unclassified Information' and describes it as the current standardized federal label for sensitive-but-unclassified data."
+    },
+    {
+      "section": "Government classification tiers",
+      "type": "text",
+      "question": "According to the section, why is a personnel security clearance alone insufficient to access classified information?",
+      "rubric": "A sound answer states that clearance must be combined with documented need-to-know for that specific information, or that need-to-know is an additional requirement beyond clearance.",
+      "explanation": "The section explicitly states that access requires both clearance 'at the right level AND a documented need-to-know for that specific information — clearance alone is not enough.'"
+    },
+    {
+      "section": "Commercial classification tiers",
+      "type": "mc",
+      "question": "In commercial data classification, which tier typically contains trade secrets and crypto keys?",
+      "options": {
+        "A": "Sensitive information",
+        "B": "Public data",
+        "C": "Private or Internal use",
+        "D": "Restricted or Confidential tier"
+      },
+      "correct": "D",
+      "explanation": "The table in the Commercial classification tiers section lists 'Trade secrets, crypto keys, M&A plans, high-sensitivity PII' under the Restricted / Confidential tier."
+    },
+    {
+      "section": "Regulated data categories",
+      "type": "mc",
+      "question": "What are quasi-identifiers in the context of PII?",
+      "options": {
+        "A": "Non-unique data that can re-identify when combined",
+        "B": "Financial account numbers with names",
+        "C": "Identifiers like Social Security or passport numbers",
+        "D": "Biometric data such as fingerprints"
+      },
+      "correct": "A",
+      "explanation": "The section defines quasi-identifiers as 'data elements that are not unique alone but can be combined to re-identify someone' and provides the example that zip code + date of birth + biological sex uniquely identifies approximately 87% of the U.S. population."
+    },
+    {
+      "section": "Regulated data categories",
+      "type": "text",
+      "question": "What is the role of a Business Associate Agreement (BAA) in healthcare data protection?",
+      "rubric": "A sound answer states that a BAA is a legal agreement that binds vendors or third parties who handle PHI to apply appropriate safeguards, or that it ensures vendors meet HIPAA requirements.",
+      "explanation": "The PHI section states that 'Vendors handling PHI on behalf of healthcare organizations must sign BAAs — Business Associate Agreements — legally binding them to apply appropriate safeguards.'"
+    },
+    {
+      "section": "Regulated data categories",
+      "type": "mc",
+      "question": "Which standard specifically governs the protection of credit card Primary Account Numbers (PANs)?",
+      "options": {
+        "A": "GLBA standard",
+        "B": "GDPR standard",
+        "C": "PCI DSS standard",
+        "D": "HIPAA standard"
+      },
+      "correct": "C",
+      "explanation": "The Financial data subsection states that PAN is governed by 'PCI DSS (Payment Card Industry Data Security Standard), which mandates encryption, access controls, network segmentation, and audit logging.'"
+    },
+    {
+      "section": "Regulated data categories",
+      "type": "text",
+      "question": "What is a trade secret, and what must an organization do to keep information protected as a trade secret?",
+      "rubric": "A sound answer states that a trade secret is information deriving economic value from not being publicly known, and the organization must take reasonable steps to keep it secret.",
+      "explanation": "The Intellectual property subsection defines trade secrets as 'information that derives economic value from not being publicly known, protected as long as the organization takes reasonable steps to keep them secret.'"
+    },
+    {
+      "section": "Data ownership roles",
+      "type": "mc",
+      "question": "Who is responsible for making classification decisions and defining handling requirements for data?",
+      "options": {
+        "A": "System administrator",
+        "B": "Data custodian",
+        "C": "Network security manager",
+        "D": "Data owner"
+      },
+      "correct": "D",
+      "explanation": "The Data ownership roles table specifies that the data owner, a senior executive, 'makes classification decisions, defines handling requirements, approves access.'"
+    },
+    {
+      "section": "Data ownership roles",
+      "type": "text",
+      "question": "Describe the difference between what a data owner does and what a data custodian does.",
+      "rubric": "A sound answer states that the data owner makes classification decisions and defines requirements, while the data custodian implements and maintains the technical controls specified by the owner.",
+      "explanation": "The Data ownership roles table clearly assigns decision-making to the data owner and implementation to the data custodian—'IT/security professional; implements and maintains technical controls specified by the data owner.'"
+    },
+    {
+      "section": "Data ownership roles",
+      "type": "mc",
+      "question": "When should classification labels be applied to data?",
+      "options": {
+        "A": "Before the data is archived",
+        "B": "When the data is accessed by a user",
+        "C": "At the time of creation or collection",
+        "D": "During a compliance audit"
+      },
+      "correct": "C",
+      "explanation": "The section states 'Classification labels must be applied at the time of creation or collection,' establishing this as the correct timing."
+    },
+    {
+      "section": "Handling requirements by tier",
+      "type": "mc",
+      "question": "Which of the following is a requirement for storing Restricted/Confidential data?",
+      "options": {
+        "A": "Encryption with strict access controls",
+        "B": "Cloud storage with passwords",
+        "C": "Unencrypted storage with access logs",
+        "D": "Local drives with oversight"
+      },
+      "correct": "A",
+      "explanation": "The Handling requirements section explicitly states that Restricted/Confidential data requires 'Storage on encrypted systems with strict access controls and access logging.'"
+    },
+    {
+      "section": "Handling requirements by tier",
+      "type": "text",
+      "question": "Name two acceptable methods for disposing of Restricted/Confidential data according to the section.",
+      "rubric": "A sound answer names cryptographic erasure and/or physical media destruction, as stated in the section.",
+      "explanation": "The Handling requirements section specifies 'Disposal via cryptographic erasure or physical media destruction' as the required methods for Restricted/Confidential data."
+    }
+  ]
+}

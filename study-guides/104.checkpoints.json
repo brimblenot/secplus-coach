@@ -1,0 +1,109 @@
+{
+  "checkpoints": [
+    {
+      "section": "Windows Event Logs",
+      "type": "mc",
+      "question": "Which Windows Event ID is the strongest indicator that an attacker has attempted to cover their tracks?",
+      "options": {
+        "A": "4688, which captures new process creation with full command line",
+        "B": "4720, which shows when a new user account is created",
+        "C": "4625, which records failed logon attempts and their reasons",
+        "D": "1102, which indicates the Security audit log has been cleared"
+      },
+      "correct": "D",
+      "explanation": "Event ID 1102 specifically records when the Security audit log itself is cleared, described as highly anomalous and evidence of an attacker covering tracks. The others record normal or malicious activities, not log tampering itself."
+    },
+    {
+      "section": "Linux system logs",
+      "type": "mc",
+      "question": "On a Red Hat/CentOS system, which log file would you check to investigate SSH login attempts and sudo command execution?",
+      "options": {
+        "A": "/var/log/kern.log for kernel and hardware events",
+        "B": "/var/log/secure for SSH logins, sudo commands, and PAM authentication",
+        "C": "/var/log/messages for general kernel and daemon events",
+        "D": "/var/log/audit/audit.log for kernel-level syscalls and file access"
+      },
+      "correct": "B",
+      "explanation": "The section states that /var/log/secure on Red Hat/CentOS captures SSH logins, sudo commands, su, and PAM authentication events, making it the primary authentication log."
+    },
+    {
+      "section": "Network device logs and Syslog",
+      "type": "mc",
+      "question": "Which port and protocol combination provides encrypted transmission for Syslog messages?",
+      "options": {
+        "A": "TCP port 6514 with TLS encryption",
+        "B": "UDP port 514 for connectionless, efficient forwarding",
+        "C": "UDP port 6514 for fast encrypted transmission",
+        "D": "TCP port 514 for reliable delivery without encryption"
+      },
+      "correct": "A",
+      "explanation": "The section specifies that TCP port 6514 is used for TLS-encrypted transmission of Syslog messages, while UDP 514 and TCP 514 lack encryption."
+    },
+    {
+      "section": "Web server access logs",
+      "type": "text",
+      "question": "Name one attack pattern that would be visible in Combined Log Format web server logs and describe what attacker activity creates it.",
+      "rubric": "A sound answer identifies one of: SQL injection (unusual characters in query parameters), directory traversal (../ sequences in URL paths), or vulnerability scanning (distinctive User-Agent strings or rapid requests to nonexistent URLs) and connects it to attacker behavior.",
+      "explanation": "The section lists three attack patterns explicitly: SQL injection shows unusual characters, directory traversal shows ../ sequences, and scanning shows distinctive User-Agents or rapid nonexistent requests."
+    },
+    {
+      "section": "Database and application logs",
+      "type": "mc",
+      "question": "Which log type can reveal full-table-scan data-exfiltration attempts alongside legitimate performance issues?",
+      "options": {
+        "A": "Application security logs capturing authentication and authorization failures",
+        "B": "PCI DSS compliance logs for cardholder data systems",
+        "C": "The slow query log recording queries exceeding a defined execution time",
+        "D": "Database query logs recording which query, table, DB user, timestamp, and source IP"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that the slow query log records queries exceeding a defined execution time and can reveal full-table-scan data-exfiltration attempts alongside performance issues."
+    },
+    {
+      "section": "Cloud audit logs",
+      "type": "mc",
+      "question": "In AWS, what does CloudTrail record for every action taken on an account?",
+      "options": {
+        "A": "API calls with action, identity, source IP, timestamp, and resources",
+        "B": "Console login events and API calls from the management dashboard",
+        "C": "Network traffic flows between VPCs and external networks",
+        "D": "Database queries and application errors in EC2 instances"
+      },
+      "correct": "A",
+      "explanation": "The section defines CloudTrail as logging every API call with action, caller identity, source IP, time, and resources affected, described as covering every command issued to the account."
+    },
+    {
+      "section": "SIEM and log normalization",
+      "type": "text",
+      "question": "Explain how UEBA differs from simple correlation rules in detecting suspicious behavior.",
+      "rubric": "A sound answer conveys that UEBA uses statistics or machine learning to baseline normal behavior and detects deviations, whereas simple correlation rules trigger on fixed thresholds, allowing UEBA to catch subtle behavioral drift.",
+      "explanation": "The section contrasts UEBA's statistical/ML baseline approach with simple rules firing on fixed thresholds, emphasizing UEBA's ability to detect subtle drift."
+    },
+    {
+      "section": "Log retention requirements",
+      "type": "mc",
+      "question": "A company handling credit card payments must retain logs for compliance. What is the minimum total retention period and the minimum time for immediate accessibility?",
+      "options": {
+        "A": "24 months total with no specific accessibility tier requirement",
+        "B": "6 years from creation or last use per HIPAA requirements",
+        "C": "12 months total; 3 months immediately accessible per PCI DSS",
+        "D": "7 years for all financial records per Sarbanes-Oxley"
+      },
+      "correct": "C",
+      "explanation": "The section's PCI DSS row specifies 12 months total retention and 3 months immediately accessible; PCI DSS applies to cardholder data systems."
+    },
+    {
+      "section": "Log protection and integrity",
+      "type": "mc",
+      "question": "Which mechanism provides a hardware-enforced guarantee that written log data cannot be modified or deleted?",
+      "options": {
+        "A": "Cryptographic log chaining where each record includes a hash of the previous record",
+        "B": "Centralized forwarding to a SIEM with restricted write access",
+        "C": "Minimal write-access controls allowing only log sources to write",
+        "D": "Write Once Read Many (WORM) storage with no deletion capability"
+      },
+      "correct": "D",
+      "explanation": "The section defines WORM storage as hardware-enforced guarantee that written data cannot be modified or deleted, distinguishing it from software controls like centralized forwarding or cryptographic chaining."
+    }
+  ]
+}

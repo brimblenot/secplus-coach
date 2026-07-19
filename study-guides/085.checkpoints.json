@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Raw scanner output is not a plan",
+      "type": "text",
+      "question": "Why is raw vulnerability scanner output alone insufficient for deciding what to patch first?",
+      "rubric": "A sound answer states that scanners return thousands of findings, and without analysis you cannot tell which ones are actually critical to your environment — you might waste time on low-risk issues while leaving critical internet-facing vulnerabilities unpatched. The key is that risk context must be applied to produce a prioritized remediation list.",
+      "explanation": "This section establishes that raw output needs analysis and prioritization; the checkpoint confirms the student understands why analysis is necessary before action."
+    },
+    {
+      "section": "The CVSS base score",
+      "type": "mc",
+      "question": "Which CVSS Attack Vector rating represents the highest risk?",
+      "options": {
+        "A": "Adjacent — requires same LAN or Wi-Fi range",
+        "B": "Local — requires authenticated session on the machine",
+        "C": "Physical — requires physical contact with the machine",
+        "D": "Network — exploitable from the internet"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states AV:N (Network) is exploitable from the internet and represents highest risk, while AV:P (Physical) is lowest risk."
+    },
+    {
+      "section": "The CVSS base score",
+      "type": "mc",
+      "question": "An attacker exploits a hypervisor vulnerability to break out of a virtual machine and affect the physical host. Which CVSS Scope rating applies?",
+      "options": {
+        "A": "Scope Unchanged — impact stays inside the vulnerable component",
+        "B": "Scope Physical — impact reaches hardware only",
+        "C": "Scope Changed — exploitation escapes to other components",
+        "D": "Scope Network — impact crosses system boundaries"
+      },
+      "correct": "C",
+      "explanation": "The section defines a hypervisor escape as an example of S:C (Scope Changed), where exploitation escapes the vulnerable component to affect the physical host."
+    },
+    {
+      "section": "Severity ranges and remediation timelines",
+      "type": "mc",
+      "question": "A vulnerability receives a CVSS base score of 5.8. What is the target remediation timeline?",
+      "options": {
+        "A": "24–48 hours",
+        "B": "30 days",
+        "C": "7–14 days",
+        "D": "Quarterly patch cycle"
+      },
+      "correct": "B",
+      "explanation": "A score of 5.8 falls in the 4.0–6.9 Medium range, which has a 30-day patch target according to the severity table."
+    },
+    {
+      "section": "Temporal score — current real-world exploitability",
+      "type": "text",
+      "question": "How does Exploit Code Maturity influence which vulnerability you should patch first when two findings have different base scores?",
+      "rubric": "A sound answer explains that a vulnerability with Functional public exploit code (automated, widely available) should be prioritized higher and jump the remediation queue, even if its base score is lower than a vulnerability where exploitation is still only theoretical.",
+      "explanation": "The section states that Functional public exploits are the most impactful temporal factor and should bump a lower-scoring finding above a higher-score one if the higher-score finding lacks public exploit code."
+    },
+    {
+      "section": "Environmental score — your organization's context",
+      "type": "text",
+      "question": "Why would you set Availability Requirements to High for one system but Confidentiality Requirements to Low for another when calculating Environmental Score?",
+      "rubric": "A sound answer states that Environmental Score lets you weight CIA metrics based on what your specific system actually needs — a production database needs high availability, while a public-facing static site with no sensitive data does not require high confidentiality protection.",
+      "explanation": "This section explains that Environmental Score customizes CVSS to organizational priorities; the checkpoint confirms the student understands why different systems get different requirement settings."
+    },
+    {
+      "section": "False positives and false negatives",
+      "type": "mc",
+      "question": "An unauthenticated scanner reports a vulnerability based on version-string detection, but the patch was already installed without changing the version number. Which type of error is this?",
+      "options": {
+        "A": "False positive — a reported vulnerability does not actually exist",
+        "B": "Temporal error — the vulnerability exploit is not yet available",
+        "C": "Zero-day — a vulnerability unknown to security researchers",
+        "D": "False negative — the scanner failed to detect a real vulnerability"
+      },
+      "correct": "A",
+      "explanation": "The section lists version-string detection as a cause of false positives and notes that authenticated scans reduce false positives by reading actual patch records instead of guessing from version numbers."
+    },
+    {
+      "section": "False positives and false negatives",
+      "type": "text",
+      "question": "What is one major source of false negatives that scanner results alone cannot catch?",
+      "rubric": "A sound answer names zero-days, custom application code that scanners do not test, or vulnerabilities appearing only under specific runtime conditions, and notes that penetration testing and threat intelligence are needed to supplement scanner results.",
+      "explanation": "The section identifies these gaps in scanner coverage and emphasizes that scanning must be supplemented with additional testing methods."
+    },
+    {
+      "section": "NVD and CWE",
+      "type": "mc",
+      "question": "What does CWE classify in vulnerability analysis?",
+      "options": {
+        "A": "The temporal exploit code maturity level for a particular CVE",
+        "B": "The root-cause weakness type or class of flaw behind a vulnerability",
+        "C": "The CVSS severity score and patch status from the NVD database",
+        "D": "The specific instance of a vulnerability assigned a unique CVE identifier"
+      },
+      "correct": "B",
+      "explanation": "The section defines CWE as categorizing the root-cause weakness type, not the specific instance; it explains that multiple findings sharing one CWE can be fixed by a single remediation approach."
+    },
+    {
+      "section": "Contextual risk factors beyond CVSS",
+      "type": "mc",
+      "question": "A Critical CVSS vulnerability exists on both a public web server and an isolated internal system. Why does context matter here?",
+      "options": {
+        "A": "The public server faces internet exposure and higher attack likelihood",
+        "B": "Internal systems always require faster remediation than public ones",
+        "C": "The internal system is harder to patch without causing downtime",
+        "D": "CVSS scores automatically adjust for network exposure differences"
+      },
+      "correct": "A",
+      "explanation": "The section states that internet exposure makes a Critical finding on a public web server orders of magnitude more urgent than the same finding on an isolated internal system."
+    }
+  ]
+}

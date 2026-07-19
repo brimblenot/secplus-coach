@@ -1,0 +1,123 @@
+{
+  "checkpoints": [
+    {
+      "section": "Written authorization comes first",
+      "type": "mc",
+      "question": "What happens legally if a penetration tester conducts testing without written authorization?",
+      "options": {
+        "A": "The tester and testing firm face legal exposure under computer fraud and abuse laws regardless of intent",
+        "B": "The organization that hired them becomes solely responsible for any legal consequences",
+        "C": "Only the testing firm is liable; individual testers are protected by their employment contract",
+        "D": "The tester faces no legal liability because their intent was to help the organization"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that without written authorization, testing is illegal under computer fraud and abuse laws and that intent does not matter — both the testing firm and individual testers face legal exposure."
+    },
+    {
+      "section": "Knowledge types define the threat model",
+      "type": "text",
+      "question": "Explain the trade-off between black box and white box penetration testing in terms of realism versus thoroughness.",
+      "rubric": "A sound answer states that black box is more realistic because testers have no insider information (like an external attacker), but white box is more thorough because testers have full access to source code and credentials, though it is less realistic for external attacks.",
+      "explanation": "The section's table directly contrasts these two types: black box simulates an external attacker with zero insider info (most realistic but slowest/most expensive), while white box gives full access and is most thorough but least realistic externally."
+    },
+    {
+      "section": "The engagement follows defined phases",
+      "type": "mc",
+      "question": "Which of the following is an example of passive reconnaissance?",
+      "options": {
+        "A": "Performing web spidering to enumerate all pages on a target web application",
+        "B": "Running vulnerability scanners directly against internal network systems",
+        "C": "Querying DNS to discover subdomains and mail servers without touching target systems",
+        "D": "Scanning open ports on the target network to identify running services"
+      },
+      "correct": "C",
+      "explanation": "The section defines passive reconnaissance as gathering public information without touching target systems and lists DNS queries as an explicit example; all other options describe active reconnaissance that directly interacts with targets."
+    },
+    {
+      "section": "The engagement follows defined phases",
+      "type": "text",
+      "question": "What is the purpose of the post-exploitation phase, and name two activities that occur during it.",
+      "rubric": "A sound answer states that post-exploitation demonstrates the full impact of a compromise and mentions at least two of: privilege escalation, lateral movement, accessing sensitive data, or establishing persistence.",
+      "explanation": "The section explicitly states post-exploitation demonstrates full impact after a foothold and lists these four activities as examples of what occurs during this phase."
+    },
+    {
+      "section": "Rules of Engagement govern every boundary",
+      "type": "mc",
+      "question": "Which element of the Rules of Engagement document specifies which IP ranges and systems testers are permitted to test?",
+      "options": {
+        "A": "Timing restrictions that define when testing must occur",
+        "B": "Scope that identifies in-scope vs. explicitly excluded systems",
+        "C": "Notification contacts for SOC and system owners",
+        "D": "Evidence handling procedures for discovered credentials"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly lists scope as the RoE element defining which IP ranges/systems are in-scope versus excluded; the other options describe different RoE components."
+    },
+    {
+      "section": "Social engineering tests the human layer",
+      "type": "mc",
+      "question": "What is vishing?",
+      "options": {
+        "A": "A simulated email attack that measures click rates and credential submission on fake login pages",
+        "B": "An automated tool that sprays passwords across multiple online services",
+        "C": "Physical impersonation of an employee or delivery person to test access controls",
+        "D": "Voice phishing via telephone where attackers manipulate employees into disclosing information"
+      },
+      "correct": "D",
+      "explanation": "The section defines vishing as voice phishing via telephone and notes it tests whether employees disclose sensitive info or reset credentials for an impersonator; the comparison clarifies it is phishing using a phone call instead of an email."
+    },
+    {
+      "section": "Core tools and what each one does",
+      "type": "mc",
+      "question": "Which tool extracts NTLM hashes and plaintext credentials from LSASS memory on Windows systems?",
+      "options": {
+        "A": "Mimikatz for Windows credential extraction and pass-the-hash attacks",
+        "B": "BloodHound for mapping Active Directory attack paths",
+        "C": "Hashcat for GPU-accelerated offline password cracking",
+        "D": "Nmap for network scanning and service version detection"
+      },
+      "correct": "A",
+      "explanation": "The section's tool table states that Mimikatz extracts NTLM hashes and plaintext credentials from LSASS memory and enables pass-the-hash attacks."
+    },
+    {
+      "section": "Core tools and what each one does",
+      "type": "text",
+      "question": "What is the primary difference in how Hashcat and Hydra perform password attacks?",
+      "rubric": "A sound answer states that Hashcat performs offline cracking against captured password hashes using GPU acceleration, while Hydra performs online attacks against live services such as SSH or HTTP.",
+      "explanation": "The section's tool table explicitly contrasts Hashcat as GPU-accelerated offline cracking and Hydra as online attacks against live services like SSH, FTP, and HTTP."
+    },
+    {
+      "section": "The report turns findings into decisions",
+      "type": "mc",
+      "question": "Who is the primary audience for the executive summary section of a penetration test report?",
+      "options": {
+        "A": "Security engineers who need detailed reproduction steps and technical remediation guidance",
+        "B": "System administrators who require CVE identifiers and affected system lists",
+        "C": "Leadership who need overall risk level and business impact without technical jargon",
+        "D": "External auditors who must verify compliance with industry standards"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states the executive summary is jargon-free and written for leadership, covering overall risk level, top findings, business impact, and remediation priorities."
+    },
+    {
+      "section": "Red, blue, purple, and white team roles",
+      "type": "mc",
+      "question": "In a purple team exercise, what is the primary benefit to the blue team?",
+      "options": {
+        "A": "The blue team executes attacks to evaluate organizational defenses",
+        "B": "The blue team creates Rules of Engagement and resolves testing disputes",
+        "C": "The blue team participates in extended adversarial simulation over weeks or months",
+        "D": "The blue team develops detection rules and response playbooks from real-time red team observations"
+      },
+      "correct": "D",
+      "explanation": "The section defines purple team as collaborative mode where red shares techniques with blue in real time so blue can build detection rules and response playbooks against actual attacks."
+    },
+    {
+      "section": "Bug bounty programs extend coverage continuously",
+      "type": "text",
+      "question": "How does a bug bounty program complement periodic penetration tests?",
+      "rubric": "A sound answer states that bug bounty programs provide continuous, crowd-sourced testing between formal engagements by inviting external researchers to test defined systems.",
+      "explanation": "The section defines bug bounty programs as invitations to external researchers to test systems for pay and notes they complement periodic penetration tests by providing continuous coverage between formal engagements."
+    }
+  ]
+}

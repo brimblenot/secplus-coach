@@ -1,0 +1,77 @@
+{
+  "checkpoints": [
+    {
+      "section": "The policy hierarchy",
+      "type": "mc",
+      "question": "Which tier of the policy hierarchy is advisory and non-mandatory?",
+      "options": {
+        "A": "Guideline",
+        "B": "Standard",
+        "C": "Policy",
+        "D": "Procedure"
+      },
+      "correct": "A",
+      "explanation": "The section states that guidelines are advisory best-practice recommendations and not mandatory — an employee who picks a different approved tool is not in violation. The other three tiers are all mandatory."
+    },
+    {
+      "section": "Approval, communication, and maintenance",
+      "type": "text",
+      "question": "Who must approve a policy before it carries organizational authority, and how often must it be reviewed?",
+      "rubric": "A sound answer identifies senior management level (CISO, executive team, or board) as the approval body and states that policies must be reviewed at least annually.",
+      "explanation": "The section explicitly states policies must be approved at senior management level and reviewed at least annually to stay relevant as threats and technology evolve."
+    },
+    {
+      "section": "Core policy types",
+      "type": "mc",
+      "question": "What is the primary purpose of a clean desk policy?",
+      "options": {
+        "A": "To enforce ergonomic standards for workstations",
+        "B": "To establish protocols for employee desk assignments",
+        "C": "To prevent shoulder surfing by securing sensitive materials and locking screens",
+        "D": "To reduce clutter and improve workplace aesthetics"
+      },
+      "correct": "C",
+      "explanation": "The section states that clean desk policy requires sensitive materials to be locked away and screens locked whenever an employee leaves their desk, and directly mitigates shoulder surfing — unauthorized observation of information on an unattended screen or document."
+    },
+    {
+      "section": "Core policy types",
+      "type": "mc",
+      "question": "Which of the following is a required element of a BYOD policy?",
+      "options": {
+        "A": "Requirement that employees purchase only company-approved devices",
+        "B": "Mandatory enrollment in MDM and device encryption",
+        "C": "Prohibition of personal device use at all times",
+        "D": "Automatic device replacement every two years"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly lists MDM enrollment, minimum OS version, device encryption, and remote wipe consent as BYOD policy requirements. The other options are not stated in the section."
+    },
+    {
+      "section": "Core policy types",
+      "type": "text",
+      "question": "What is the purpose of a remote access policy, and what key requirement does it typically mandate?",
+      "rubric": "A sound answer identifies that the policy governs connections to internal resources and states that VPN use is mandated for all connections over untrusted networks.",
+      "explanation": "The section states the remote access policy mandates VPN use for all connections to internal resources, sets minimum device security requirements, and may prohibit public Wi-Fi without additional controls."
+    },
+    {
+      "section": "Exceptions and enforcement",
+      "type": "mc",
+      "question": "What is required as part of a policy exception process?",
+      "options": {
+        "A": "Written approval from external auditors and indefinite extension",
+        "B": "Approval from the entire security team and mandatory three-year review",
+        "C": "Notification to all employees and automatic policy revision",
+        "D": "Risk acceptance by an authorized manager and compensating controls"
+      },
+      "correct": "D",
+      "explanation": "The section states that a policy exception requires documented risk acceptance by an authorized manager, compensating controls, a defined expiration date, and a review process. The other options introduce requirements not mentioned in the section."
+    },
+    {
+      "section": "Exceptions and enforcement",
+      "type": "text",
+      "question": "Why is technical enforcement of policies generally more reliable than reliance on awareness alone?",
+      "rubric": "A sound answer recognizes that technical enforcement removes human choice and ensures consistent application, whereas awareness-based enforcement depends on individual compliance decisions.",
+      "explanation": "The section states that enforcing policies technically through tools like Group Policy in Active Directory is far more reliable than relying on awareness alone, implying that technical controls guarantee compliance whereas voluntary compliance may not."
+    }
+  ]
+}

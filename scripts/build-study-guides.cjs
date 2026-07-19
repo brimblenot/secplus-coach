@@ -260,10 +260,13 @@ TRANSCRIPT:`,
 }
 
 async function buildCheckpoints(anthropic, topic, guide) {
-  // Mirrors app/api/session/checkpoints/route.ts.
+  // Mirrors app/api/session/checkpoints/route.ts, but with a higher token cap:
+  // the live route keeps max_tokens at 2000 to stay under Vercel's 60s budget,
+  // which truncates the JSON mid-string on many-section guides. Offline there is
+  // no time budget, so we lift it well clear of that ceiling.
   const response = await anthropic.messages.create({
     model: CHECKPOINT_MODEL,
-    max_tokens: 2000,
+    max_tokens: 4000,
     system: [{ type: 'text', text: CHECKPOINTS_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: buildCheckpointsPrompt(guide, topic.name) }],
   })
@@ -320,14 +323,26 @@ async function main() {
 
   async function processTopic(topic) {
     try {
-      const transcript = readTranscript(topic.id)
-      if (!transcript) throw new Error(`transcript for ${topic.id} not found in /transcripts`)
+      // Guide and checkpoints are independent artifacts: persist the guide the
+      // moment it is generated so a later checkpoint failure never discards the
+      // expensive Sonnet call, and on re-run regenerate only the missing piece.
+      const needGuide = force || !fs.existsSync(guidePath(topic.id))
+      const needCp = force || !fs.existsSync(cpPath(topic.id))
 
-      const guide = await buildGuide(anthropic, topic, transcript)
-      const checkpoints = await buildCheckpoints(anthropic, topic, guide)
+      let guide
+      if (needGuide) {
+        const transcript = readTranscript(topic.id)
+        if (!transcript) throw new Error(`transcript for ${topic.id} not found in /transcripts`)
+        guide = await buildGuide(anthropic, topic, transcript)
+        fs.writeFileSync(guidePath(topic.id), guide + '\n', 'utf-8')
+      } else {
+        guide = fs.readFileSync(guidePath(topic.id), 'utf-8')
+      }
 
-      fs.writeFileSync(guidePath(topic.id), guide + '\n', 'utf-8')
-      fs.writeFileSync(cpPath(topic.id), JSON.stringify(checkpoints, null, 2) + '\n', 'utf-8')
+      if (needCp) {
+        const checkpoints = await buildCheckpoints(anthropic, topic, guide)
+        fs.writeFileSync(cpPath(topic.id), JSON.stringify(checkpoints, null, 2) + '\n', 'utf-8')
+      }
     } catch (err) {
       errors.push({ id: topic.id, name: topic.name, error: String(err && err.message ? err.message : err) })
     } finally {

@@ -1,0 +1,129 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why the old model broke down",
+      "type": "mc",
+      "question": "What is lateral movement in the context of perimeter-based security failure?",
+      "options": {
+        "A": "Traffic crossing between the internal network and the internet",
+        "B": "A user moving between physical office locations on a corporate campus",
+        "C": "An attacker's ability to pivot from one compromised internal system to others",
+        "D": "A contractor accessing the network from an external remote site"
+      },
+      "correct": "C",
+      "explanation": "The study guide defines lateral movement as an attacker's ability to pivot from one compromised internal system to others on a flat, implicitly trusting network. This was a key failure mode of the perimeter model."
+    },
+    {
+      "section": "The core principle",
+      "type": "text",
+      "question": "In one or two sentences, explain what zero trust means by 'never trust, always verify.'",
+      "rubric": "A sound answer conveys that no user, device, or connection is granted access based on location or prior authentication alone, and that every request must be explicitly authenticated, authorized, and continuously validated.",
+      "explanation": "The section defines zero trust as not granting access based on network location or prior authentication, requiring instead explicit verification of every request and continuous validation throughout the session."
+    },
+    {
+      "section": "Control Plane vs. Data Plane",
+      "type": "mc",
+      "question": "Which component in the Control Plane evaluates access requests against contextual signals and outputs a grant/deny decision?",
+      "options": {
+        "A": "Access token manager, which issues credentials to approved users",
+        "B": "Policy Enforcement Point, which intercepts every request",
+        "C": "Policy Administrator, which communicates the decision downstream",
+        "D": "Policy Engine, which evaluates requests against contextual signals"
+      },
+      "correct": "D",
+      "explanation": "The section states that the Policy Engine evaluates every access request against contextual signals and outputs a grant/deny/revoke decision. The Policy Administrator then communicates that decision, and the PEP enforces it."
+    },
+    {
+      "section": "Key zero trust controls",
+      "type": "mc",
+      "question": "Which of the following describes how adaptive identity operates in zero trust?",
+      "options": {
+        "A": "It eliminates the need for multi-factor authentication in low-risk scenarios",
+        "B": "It dynamically adjusts authentication strength based on real-time risk signals like device status and location",
+        "C": "It requires the same authentication strength for all users regardless of risk context",
+        "D": "It applies identical security rules to all devices regardless of their health status"
+      },
+      "correct": "B",
+      "explanation": "The section defines adaptive identity as dynamically adjusting authentication strength based on real-time risk signals; a low-risk context receives a lighter challenge while high-risk contexts receive stronger challenges or denial."
+    },
+    {
+      "section": "Key zero trust controls",
+      "type": "mc",
+      "question": "What is the primary advantage of FIDO2/WebAuthn over traditional OTP codes in a zero trust environment?",
+      "options": {
+        "A": "FIDO2 resists phishing because credentials cannot be captured or replayed like OTP codes",
+        "B": "FIDO2 eliminates the need for users to remember passwords",
+        "C": "FIDO2 reduces the number of authentication factors required",
+        "D": "FIDO2 works on all devices without special hardware"
+      },
+      "correct": "A",
+      "explanation": "The section states that FIDO2/WebAuthn is a phishing-resistant hardware-key standard that cannot be captured and replayed the way OTP codes can, making it preferred for zero trust."
+    },
+    {
+      "section": "Key zero trust controls",
+      "type": "text",
+      "question": "Explain how continuous validation differs from traditional session token management.",
+      "rubric": "A sound answer should convey that continuous validation periodically re-evaluates sessions and can terminate access or require re-authentication if risk signals change, whereas traditional tokens remain valid for their full lifetime regardless of changing conditions.",
+      "explanation": "The section contrasts continuous validation—which terminates sessions if risk signals change mid-stream—with traditional tokens that remain valid regardless of changing circumstances."
+    },
+    {
+      "section": "Key zero trust controls",
+      "type": "mc",
+      "question": "What does Network Access Control (NAC) do in the context of device health verification?",
+      "options": {
+        "A": "It monitors behavior anomalies and revokes sessions in real time",
+        "B": "It isolates devices into microsegmented network zones based on user roles",
+        "C": "It provides just-in-time elevation of user privileges to sensitive resources",
+        "D": "It enforces device compliance checks at the network access layer"
+      },
+      "correct": "D",
+      "explanation": "The section identifies NAC as the primary tool for implementing device health verification at scale, enforcing checks that devices have current patches, endpoint protection, disk encryption, MDM enrollment, and are not jailbroken."
+    },
+    {
+      "section": "Security zones in a zero trust world",
+      "type": "mc",
+      "question": "In a zero trust security model, how is inter-zone traffic treated compared to the old perimeter model?",
+      "options": {
+        "A": "Only traffic from untrusted zones requires authentication and verification",
+        "B": "All inter-zone traffic, including internal-to-internal, requires explicit verification",
+        "C": "Traffic between trusted and internal zones bypasses security checks",
+        "D": "Internal-to-internal traffic is trusted and requires no verification"
+      },
+      "correct": "B",
+      "explanation": "The section states that zero trust applies explicit verification to all inter-zone traffic, including internal-to-internal, rather than implicitly trusting internal traffic as the old model did."
+    },
+    {
+      "section": "SASE and ZTNA",
+      "type": "mc",
+      "question": "What is SASE primarily designed to do in a distributed workforce environment?",
+      "options": {
+        "A": "Automate privilege elevation for remote administrators",
+        "B": "Detect malware on distributed employee endpoints",
+        "C": "Combine cloud-based networking and security while applying zero trust to remote workforces",
+        "D": "Replace traditional data center perimeter firewalls"
+      },
+      "correct": "C",
+      "explanation": "The section defines SASE as a cloud-delivered architecture merging SD-WAN with security services, extending zero trust to distributed workforces without backhauling traffic through a central data center."
+    },
+    {
+      "section": "SASE and ZTNA",
+      "type": "text",
+      "question": "How does ZTNA differ from traditional VPN in terms of what access a user receives?",
+      "rubric": "A sound answer should convey that ZTNA grants access only to specific authorized applications, whereas traditional VPN places the entire device on the internal network with broader access.",
+      "explanation": "The section states that ZTNA grants access only to the specific applications a user is authorized for, rather than placing the device on the full internal network as VPN does."
+    },
+    {
+      "section": "Software-Defined Perimeter",
+      "type": "mc",
+      "question": "What does 'dark by default' mean in the context of Software-Defined Perimeter?",
+      "options": {
+        "A": "Services are invisible and unresponsive to unauthenticated probes until verified",
+        "B": "User authentication credentials are hidden from network visibility",
+        "C": "Network administrators cannot see or monitor traffic flows",
+        "D": "Services use dark fiber to transmit encrypted data only at night"
+      },
+      "correct": "A",
+      "explanation": "The section defines dark by default as making all services invisible and unresponsive to unauthenticated probes; only after identity and device are verified does the SDP controller provision access to the specific resource."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "checkpoints": [
+    {
+      "section": "IoT devices and why they're hard to secure",
+      "type": "mc",
+      "question": "Which of the following is a characteristic that makes IoT devices particularly difficult to secure?",
+      "options": {
+        "A": "They require monthly security patches that users always apply",
+        "B": "They have constrained resources and rarely receive firmware updates",
+        "C": "They run full operating systems with built-in endpoint protection",
+        "D": "They use encrypted protocols designed specifically for security"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states IoT devices have limited CPU and memory, cannot run heavy security tools, and manufacturers may not issue updates at all. The other options contradict core IoT security challenges."
+    },
+    {
+      "section": "SCADA, ICS, and OT",
+      "type": "text",
+      "question": "Explain why the priority order for security in OT environments differs from IT environments, and what the OT priority is.",
+      "rubric": "A sound answer states that OT prioritizes availability and safety above confidentiality because unplanned shutdowns or physical malfunction can injure or kill people, whereas IT prioritizes confidentiality first. Standard IT practices like frequent patching or antivirus scans are often unacceptable in OT because they risk interrupting real-time control.",
+      "explanation": "The section directly contrasts IT (Confidentiality → Integrity → Availability) with OT (Availability → Safety), and explains that unexpected shutdowns in OT can cause physical harm, making this priority shift necessary."
+    },
+    {
+      "section": "SCADA, ICS, and OT",
+      "type": "mc",
+      "question": "What is a data diode (unidirectional security gateway) designed to do in an industrial control network?",
+      "options": {
+        "A": "Filter encrypted traffic and log all data exchanges between OT and IT networks",
+        "B": "Monitor industrial protocols and alert when patch cycles are due",
+        "C": "Enforce one-way data flow so OT data flows out but nothing flows back in",
+        "D": "Restrict all external network access by replacing firewall rules permanently"
+      },
+      "correct": "C",
+      "explanation": "The section states data diodes are hardware that physically enforces one-way data flow from OT to IT, making network-based attacks physically impossible because return traffic cannot enter the OT network."
+    },
+    {
+      "section": "Embedded systems and RTOS",
+      "type": "text",
+      "question": "Why do RTOS environments often use reduced active security defenses rather than typical IT security tools?",
+      "rubric": "A sound answer explains that RTOS guarantees task completion within strict time windows (milliseconds or microseconds), and adding security monitoring or patching tools risks disrupting those timing guarantees, so security focuses on reducing attack surface instead.",
+      "explanation": "The section explains RTOS must guarantee precise timing completion for safety-critical applications; any interruption from security tools is unacceptable, forcing a shift from active defense to attack surface reduction."
+    }
+  ]
+}

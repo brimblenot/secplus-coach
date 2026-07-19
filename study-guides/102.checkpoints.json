@@ -1,0 +1,96 @@
+{
+  "checkpoints": [
+    {
+      "section": "The Incident Response Plan (IRP)",
+      "type": "mc",
+      "question": "According to the study guide, what is the minimum frequency at which an IRP must be reviewed?",
+      "options": {
+        "A": "Only when a security incident occurs",
+        "B": "Quarterly or when new threats emerge",
+        "C": "Every six months or after system upgrades",
+        "D": "At least annually or after major changes"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states the IRP 'must exist before any incident occurs and be reviewed at least annually (or after major infrastructure changes, regulatory shifts, or real incidents).'"
+    },
+    {
+      "section": "CSIRT structure options",
+      "type": "text",
+      "question": "Name one strength and one weakness of a virtual CSIRT model.",
+      "rubric": "A sound answer identifies that virtual CSIRTs are cost-effective but slower to mobilize and less practiced because members hold IR as a secondary role.",
+      "explanation": "The section's table directly states the virtual model's strength as cost-effective and its weakness as slower to mobilize and less practiced."
+    },
+    {
+      "section": "Third-party retainer agreements",
+      "type": "mc",
+      "question": "When should a retainer agreement with an external IR firm be signed?",
+      "options": {
+        "A": "Only if the organization lacks internal DFIR expertise",
+        "B": "During the active incident response phase to ensure the vendor understands the current threat",
+        "C": "Before any incident occurs so legal and commercial terms are pre-agreed",
+        "D": "After an incident is resolved so terms can reflect lessons learned"
+      },
+      "correct": "C",
+      "explanation": "The section states the agreement must be 'signed before any incident occurs' and explains that pre-negotiation allows the firm to 'start immediately' without spending time on paperwork during the breach."
+    },
+    {
+      "section": "Playbooks vs. runbooks",
+      "type": "mc",
+      "question": "Which of the following best describes the purpose of a playbook in incident response?",
+      "options": {
+        "A": "Providing decision trees for when to escalate, contain, or notify regulators",
+        "B": "Listing contact information and alternates for CSIRT team members",
+        "C": "Recording exact commands and tool syntax for memory capture and disk imaging",
+        "D": "Documenting all hardware and software assets in the organization"
+      },
+      "correct": "A",
+      "explanation": "The section defines a playbook as operating at the strategic level and containing 'decision trees: when to escalate, when to contain, when to notify leadership or regulators.'"
+    },
+    {
+      "section": "Legal and regulatory obligations",
+      "type": "mc",
+      "question": "Under GDPR, how long do you have to notify the supervisory authority of a data discovery?",
+      "options": {
+        "A": "24 hours",
+        "B": "72 hours",
+        "C": "48 hours",
+        "D": "60 days"
+      },
+      "correct": "B",
+      "explanation": "The section's regulation table explicitly lists GDPR's deadline as '72 hours of discovery' for notification to the supervisory authority."
+    },
+    {
+      "section": "Communication during an incident",
+      "type": "text",
+      "question": "Explain why need-to-know restriction is important during an active incident.",
+      "rubric": "A sound answer states that broadcasting incident details can tip off an insider or alert an attacker still in the environment, causing them to pivot or accelerate before full ejection.",
+      "explanation": "The section directly explains that unrestricted communication 'can tip off an insider or alert an attacker still in the environment to pivot or accelerate.'"
+    },
+    {
+      "section": "Training and exercise types",
+      "type": "mc",
+      "question": "In which type of IR exercise are actual IR procedures tested against real systems end-to-end?",
+      "options": {
+        "A": "Full-scale exercise activating actual IR procedures against test systems",
+        "B": "Annual IR training where CSIRT members review the plan",
+        "C": "Functional exercise isolating one specific component",
+        "D": "Tabletop exercise conducted without activating systems"
+      },
+      "correct": "A",
+      "explanation": "The section's exercise table defines a full-scale exercise as one that 'Activates actual IR procedures against test systems end-to-end.'"
+    },
+    {
+      "section": "Framework references",
+      "type": "mc",
+      "question": "Which document is identified as the authoritative incident planning framework reference for the Security+ exam?",
+      "options": {
+        "A": "NIST SP 800-171 Protecting Controlled Unclassified Information",
+        "B": "NIST SP 800-61 Computer Security Incident Handling Guide",
+        "C": "NIST SP 800-88 Guidelines for Media Sanitization",
+        "D": "NIST SP 800-53 Security and Privacy Controls"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that 'NIST SP 800-61 — NIST Special Publication 800-61, the Computer Security Incident Handling Guide — is the authoritative incident planning framework reference for the Security+ exam.'"
+    }
+  ]
+}

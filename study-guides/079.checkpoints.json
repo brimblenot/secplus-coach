@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
+      "type": "mc",
+      "question": "What is the core cryptographic weakness that makes WEP fatally broken?",
+      "options": {
+        "A": "The Michael MIC fails to detect tampering when the same IV repeats in succession.",
+        "B": "The RC4 cipher uses a 24-bit IV that exhausts quickly, forcing reuse and enabling keystream recovery.",
+        "C": "The 802.11 handshake transmits the passphrase in plaintext over the wireless medium.",
+        "D": "The AES key derives from the SSID, making it predictable on known networks."
+      },
+      "correct": "B",
+      "explanation": "WEP's 24-bit IV space allows only ~16 million unique values; on busy networks this exhausts quickly, forcing IV reuse. When RC4 reuses an IV with the same key, the keystream is leaked, allowing attackers to mathematically recover the pre-shared key."
+    },
+    {
+      "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
+      "type": "text",
+      "question": "Explain why WPA3-SAE makes offline password cracking impossible for an attacker who captures wireless frames, while WPA2 remains vulnerable to this attack.",
+      "rubric": "A sound answer states that WPA3-SAE's session key is never sent over the air—captured frames contain no crackable hash—preventing offline attacks. WPA2, by contrast, transmits a crackable handshake that allows attackers to capture it and then brute-force passwords at full hardware speed offline without lockout.",
+      "explanation": "WPA3 uses SAE (Simultaneous Authentication of Equals) based on Diffie-Hellman, where both sides independently calculate the session key without ever transmitting it. WPA2 handshakes contain a hash that attackers can capture and crack offline via dictionary or brute-force at their own pace."
+    },
+    {
+      "section": "Personal mode vs. Enterprise mode",
+      "type": "mc",
+      "question": "Which authentication model assigns a unique per-user credential and typically leverages a centralized RADIUS server?",
+      "options": {
+        "A": "Personal mode with a pre-shared key shared across all devices on the network.",
+        "B": "Enterprise mode using WEP with individual client MAC address filtering.",
+        "C": "Personal mode with Wi-Fi Protected Setup to simplify credential distribution.",
+        "D": "Enterprise mode using 802.1X and unique per-user credentials validated against a directory."
+      },
+      "correct": "D",
+      "explanation": "Enterprise mode uses 802.1X for port-based network access control, where each user authenticates with their own credentials via a RADIUS server (typically connected to Active Directory or a similar directory service)."
+    },
+    {
+      "section": "802.1X and the three-role framework",
+      "type": "text",
+      "question": "Name the three roles in 802.1X and describe the state of the network port before authentication succeeds.",
+      "rubric": "A sound answer identifies the Supplicant (client), Authenticator (AP/switch), and Authentication Server (RADIUS), and states that the authenticator holds the port in an unauthorized state, passing only 802.1X traffic until credentials are validated.",
+      "explanation": "The Supplicant is the client device, the Authenticator is the access point or switch that enforces access, and the Authentication Server (RADIUS) validates credentials. Before success, the authenticator keeps the port unauthorized."
+    },
+    {
+      "section": "EAP methods inside 802.1X",
+      "type": "mc",
+      "question": "Which EAP method requires a digital certificate on both the client and the authentication server, and uses no passwords?",
+      "options": {
+        "A": "EAP-FAST, which uses a pre-provisioned PAC token to establish a secure tunnel.",
+        "B": "EAP-TTLS, which supports multiple inner methods including CHAP and PAP for flexibility.",
+        "C": "EAP-TLS, where both supplicant and RADIUS server use certificates to authenticate each other.",
+        "D": "PEAP, which tunnels MSCHAPv2 inside a TLS channel for maximum compatibility."
+      },
+      "correct": "C",
+      "explanation": "EAP-TLS is the strongest method because both the client and the authentication server present digital certificates for mutual authentication, eliminating passwords entirely."
+    },
+    {
+      "section": "CCMP and TKIP details",
+      "type": "mc",
+      "question": "What are the two simultaneous modes that CCMP uses to protect wireless data?",
+      "options": {
+        "A": "Encryption via Counter mode and integrity via CBC-MAC.",
+        "B": "Key scheduling via TKIP and packet-level integrity via digital signatures.",
+        "C": "Pre-shared key derivation and per-packet key rotation using the Dragonfly algorithm.",
+        "D": "Stream cipher RC4 for encryption and the Michael algorithm for integrity checking."
+      },
+      "correct": "A",
+      "explanation": "CCMP uses AES in Counter mode for confidentiality (encryption) and CBC-MAC (Cipher Block Chaining Message Authentication Code) for integrity (detecting tampering)."
+    },
+    {
+      "section": "RADIUS and the AAA framework",
+      "type": "text",
+      "question": "What are the three functions that AAA describes, and which one determines what access rights a user receives after successful authentication?",
+      "rubric": "A sound answer lists Authentication (verifying identity), Authorization (determining access rights, often via VLAN assignment), and Accounting (logging activity), and identifies Authorization as the function that determines access rights.",
+      "explanation": "AAA stands for Authentication (credentials/certificates), Authorization (access rights and VLAN assignment based on group membership), and Accounting (logging session activity for auditing and billing)."
+    },
+    {
+      "section": "Additional wireless security best practices",
+      "type": "mc",
+      "question": "Why is disabling WPS considered a security best practice?",
+      "options": {
+        "A": "WPS prevents strong passphrases longer than 20 characters.",
+        "B": "WPS transmits the WiFi password in plaintext during setup.",
+        "C": "WPS uses an 8-digit PIN verified in halves, leaving only about 11,000 combinations for brute-force.",
+        "D": "WPS disables management frame protection against deauthentication attacks."
+      },
+      "correct": "C",
+      "explanation": "Wi-Fi Protected Setup uses an 8-digit PIN that is verified in two halves, reducing the effective search space to roughly 11,000 combinations, which can be brute-forced quickly."
+    }
+  ]
+}

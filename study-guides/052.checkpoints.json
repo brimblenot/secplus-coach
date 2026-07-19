@@ -1,0 +1,116 @@
+{
+  "checkpoints": [
+    {
+      "section": "Brute force and the search space",
+      "type": "mc",
+      "question": "Which factor has the most direct impact on the feasibility of a brute force attack against a password?",
+      "options": {
+        "A": "Whether the attacker has access to a GPU or CPU",
+        "B": "The complexity rules enforced by the password policy",
+        "C": "The length of the password being attacked",
+        "D": "The type of hashing algorithm used to store the password"
+      },
+      "correct": "C",
+      "explanation": "The section states that password length is the single most important factor because each extra character multiplies the search space by the character-set size, directly determining how many possibilities must be tried."
+    },
+    {
+      "section": "Dictionary, hybrid, and spraying attacks",
+      "type": "text",
+      "question": "Explain how password spraying differs from a standard dictionary attack in its approach to avoiding detection.",
+      "rubric": "A sound answer explains that spraying tries one password against many accounts rather than many passwords against one account, and never exceeds the lockout threshold on any single account, making it invisible to lockout-based defenses.",
+      "explanation": "The section contrasts spraying with the typical attack pattern and explicitly states it inverts the usual method to avoid triggering account lockout, which defeats standard lockout-based defenses."
+    },
+    {
+      "section": "Credential stuffing",
+      "type": "mc",
+      "question": "What is the primary reason credential stuffing succeeds even against services that have not themselves been breached?",
+      "options": {
+        "A": "Users reuse the same username and password across multiple services",
+        "B": "Most services do not implement multi-factor authentication",
+        "C": "Attackers can exploit vulnerabilities in the target service's login form",
+        "D": "Users typically choose weak passwords that are easy to guess"
+      },
+      "correct": "A",
+      "explanation": "The section states that credential stuffing exploits widespread password reuse, allowing attackers to replay stolen credential pairs from one breached service against other services without needing a vulnerability in the target itself."
+    },
+    {
+      "section": "Rainbow tables and salting",
+      "type": "mc",
+      "question": "What makes a password salt effective at defeating rainbow table attacks?",
+      "options": {
+        "A": "It increases the computational cost of hashing each password candidate",
+        "B": "It prevents attackers from accessing the hashed password database",
+        "C": "It reduces the number of possible hash outputs the attacker must consider",
+        "D": "It is unique to each user and mixed with the plaintext before hashing"
+      },
+      "correct": "D",
+      "explanation": "The section explains that a salt is a random value unique to each user mixed with plaintext before hashing, so identical passwords produce different hashes; this makes precomputation infeasible because a separate rainbow table would be needed for every possible salt."
+    },
+    {
+      "section": "Birthday attacks and hash collisions",
+      "type": "text",
+      "question": "Why do birthday attacks succeed in finding hash collisions much faster than brute force would for the same hash length?",
+      "rubric": "A sound answer states that collisions become likely after roughly 2^(n/2) attempts for an n-bit hash, which is far fewer than the 2^n attempts required for brute force.",
+      "explanation": "The section explicitly provides the mathematical basis: collisions are likely after 2^(n/2) tries versus 2^n for brute force, exploiting the birthday problem's probabilistic nature."
+    },
+    {
+      "section": "Hash length extension attacks",
+      "type": "mc",
+      "question": "What information must an attacker know to perform a hash length extension attack?",
+      "options": {
+        "A": "The secret key and the hashing algorithm used",
+        "B": "The hash output and the message length",
+        "C": "The hash output and access to the hashing function",
+        "D": "The hash output and the original message content"
+      },
+      "correct": "B",
+      "explanation": "The section states that an attacker who knows a hash output and the message length (but not the message content) can compute a valid hash for the original message with extra data appended."
+    },
+    {
+      "section": "Downgrade attacks",
+      "type": "mc",
+      "question": "Which of the following describes what the POODLE attack exploited?",
+      "options": {
+        "A": "Weak RSA key exchange in TLS 1.0 through a chosen-boundary attack",
+        "B": "SSLv2 export-grade encryption to decrypt modern TLS traffic",
+        "C": "TLS compression to leak information about plaintext through compression ratios",
+        "D": "Fallback to SSLv3 and a CBC padding oracle vulnerability in SSLv3"
+      },
+      "correct": "D",
+      "explanation": "The section's table identifies POODLE as exploiting fallback to SSLv3 and a CBC padding oracle in SSLv3."
+    },
+    {
+      "section": "Padding oracle attacks",
+      "type": "text",
+      "question": "Describe how an attacker uses padding oracle feedback to recover plaintext without the encryption key.",
+      "rubric": "A sound answer explains that the attacker submits modified ciphertext and observes whether decryption produced a padding error or content error, allowing plaintext to be recovered byte by byte based on the error response.",
+      "explanation": "The section states the attacker submits modified ciphertext and learns plaintext by observing padding versus content error messages, revealing information without the key."
+    },
+    {
+      "section": "Side-channel attacks",
+      "type": "mc",
+      "question": "Which of the following is an example of a side-channel attack that uses physical measurement?",
+      "options": {
+        "A": "Comparing hash outputs to find collisions in MD5",
+        "B": "Submitting random ciphertexts to identify padding oracle responses",
+        "C": "Measuring the time variation in decryption operations based on key bits",
+        "D": "Forcing a downgrade from TLS 1.2 to SSLv3 during negotiation"
+      },
+      "correct": "C",
+      "explanation": "The section lists timing attacks as a side-channel attack that observes operation duration variations to reveal key bits based on physical properties of the device."
+    },
+    {
+      "section": "Quantum computing threats",
+      "type": "mc",
+      "question": "What is the security impact of Grover's algorithm on AES-256?",
+      "options": {
+        "A": "It allows attackers to forge digital signatures without the private key",
+        "B": "It reduces AES-256 security to approximately 128-bit strength",
+        "C": "It enables efficient factorization of the RSA modulus",
+        "D": "It completely breaks AES-256 by solving the discrete logarithm problem"
+      },
+      "correct": "B",
+      "explanation": "The section states that Grover's algorithm provides a quadratic speedup that effectively halves symmetric key security, so AES-256 drops to approximately 128-bit strength against a quantum attacker."
+    }
+  ]
+}

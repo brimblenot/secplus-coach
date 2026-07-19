@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Default credentials",
+      "type": "mc",
+      "question": "Which of the following search engines allows attackers to find internet-connected devices and test known default credential pairs at scale?",
+      "options": {
+        "A": "Shodan and Censys",
+        "B": "Metasploit and Burp Suite",
+        "C": "Google and Bing",
+        "D": "Nmap and Wireshark"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly names Shodan and Censys as search engines that index internet-connected devices, allowing attackers to filter for specific types and test defaults at scale. The other options are general search engines or penetration testing tools, not device indexing services."
+    },
+    {
+      "section": "Open permissions",
+      "type": "text",
+      "question": "What is the principle of least privilege, and how does it relate to open permissions?",
+      "rubric": "A sound answer explains that least privilege means granting access only to what is needed, nothing more, and that open permissions violate this by allowing excessive access beyond job requirements.",
+      "explanation": "The section defines least privilege as access only to what is needed, nothing more, and describes open permissions as granting more access than required, making them a direct violation of that principle."
+    },
+    {
+      "section": "Unsecured APIs",
+      "type": "mc",
+      "question": "What is over-fetching in the context of an unsecured API?",
+      "options": {
+        "A": "The API limits the number of requests a single user can make per hour",
+        "B": "The API returns full objects when only a few fields are needed, exposing sensitive data",
+        "C": "The API requires more authentication credentials than necessary for a single request",
+        "D": "The API allows callers to fetch data from multiple endpoints in a single query"
+      },
+      "correct": "B",
+      "explanation": "The section defines over-fetching as the API returning full objects when only a few fields are needed, which exposes sensitive data the application never displays. The other options describe different API or access control concepts not stated in the section."
+    },
+    {
+      "section": "Unnecessary open ports and services",
+      "type": "mc",
+      "question": "Which of the following services transmits everything, including passwords, in cleartext and should be replaced with SSH?",
+      "options": {
+        "A": "SSH on port 22",
+        "B": "RDP on port 3389",
+        "C": "VNC on port 5900",
+        "D": "Telnet on port 23"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that Telnet transmits everything, including passwords, in cleartext and should be replaced with SSH. SSH (port 22) is the secure replacement, RDP and VNC are remote desktop services, not command-line protocols."
+    },
+    {
+      "section": "Misconfigured firewalls",
+      "type": "text",
+      "question": "Explain what a default-deny firewall posture is and why it is preferable to a default-allow posture.",
+      "rubric": "A sound answer states that default-deny blocks all traffic unless explicitly allowed, making the firewall easier to reason about and more secure than default-allow, which permits anything not explicitly blocked.",
+      "explanation": "The section states that the correct posture is deny-all, allow-by-exception, and contrasts it with firewalls that allow anything not explicitly blocked, explaining that default-deny is easier to reason about and more secure."
+    },
+    {
+      "section": "Debug mode in production",
+      "type": "mc",
+      "question": "What information does debug mode expose in HTTP error responses that helps attackers conduct reconnaissance?",
+      "options": {
+        "A": "Only the HTTP status code and a brief error message",
+        "B": "The names of all users currently logged into the application",
+        "C": "Full stack traces, database query text, local variable values, file paths, and sometimes source code",
+        "D": "The IP addresses of all servers connected to the network"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly lists full stack traces, database query text, local variable values, file paths, and sometimes source code as information exposed by debug mode. The other options are either incomplete or unrelated to debug mode output."
+    },
+    {
+      "section": "Missing security headers",
+      "type": "mc",
+      "question": "Which HTTP security header prevents a page from being loaded inside a frame on another domain?",
+      "options": {
+        "A": "Content Security Policy (CSP)",
+        "B": "HTTP Strict Transport Security (HSTS)",
+        "C": "X-Frame-Options",
+        "D": "X-Content-Type-Options"
+      },
+      "correct": "C",
+      "explanation": "The section states that X-Frame-Options prevents the page from being loaded inside a frame on another domain, blocking clickjacking attacks. The other headers address different threats like XSS, protocol downgrade, or MIME sniffing."
+    },
+    {
+      "section": "SSL/TLS misconfigurations",
+      "type": "text",
+      "question": "Why is supporting deprecated TLS versions like TLS 1.0 or TLS 1.1 a misconfiguration, and what should be done instead?",
+      "rubric": "A sound answer states that these versions have known attacks against them and should be disabled, allowing only modern, secure TLS versions.",
+      "explanation": "The section explicitly identifies SSL 3.0, TLS 1.0, and TLS 1.1 as deprecated versions that expose connections to known attacks and should not be supported."
+    },
+    {
+      "section": "Configuration baselines and defenses",
+      "type": "mc",
+      "question": "Which of the following are major sources of security configuration baseline guidance?",
+      "options": {
+        "A": "CIS Benchmarks and DISA STIGs",
+        "B": "NIST Cybersecurity Framework and ISO 27001",
+        "C": "OWASP Top 10 and PCI-DSS requirements",
+        "D": "CompTIA Security+ exam outline and Microsoft security advisories"
+      },
+      "correct": "A",
+      "explanation": "The section names CIS Benchmarks (from the Center for Internet Security) and DISA STIGs (Defense Information Systems Agency Security Technical Implementation Guides) as the two major sources of configuration baseline guidance. The other options reference different security standards or frameworks."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Data owner",
+      "type": "mc",
+      "question": "What is the primary responsibility of a data owner?",
+      "options": {
+        "A": "Documents lawful basis for processing personal data under GDPR",
+        "B": "Installs encryption and configures access control lists",
+        "C": "Monitors access logs and applies data classification labels",
+        "D": "Sets policy on needed protections and delegates implementation"
+      },
+      "correct": "D",
+      "explanation": "The data owner is a senior executive who decides what protections are needed but does not implement them personally; that task goes to the data custodian. The other options describe roles of the custodian, auditor, or GDPR controller."
+    },
+    {
+      "section": "Data custodian (data steward)",
+      "type": "text",
+      "question": "Explain the relationship between the data custodian's technical capabilities and their authority to make policy decisions.",
+      "rubric": "A sound answer states that the custodian has the technical skills to implement controls but lacks authority to override the data owner's policy decisions — they follow the owner's direction rather than make it.",
+      "explanation": "The section emphasizes that the custodian configures security measures but has no authority to override policy; all strategic decisions come from the data owner."
+    },
+    {
+      "section": "Data controller (GDPR)",
+      "type": "mc",
+      "question": "Under GDPR, what makes an organization the data controller?",
+      "options": {
+        "A": "Implements encryption and access controls on personal data",
+        "B": "Decides why data is collected, how it is processed, and holds legal responsibility",
+        "C": "Stores personal data on behalf of another organization per instructions",
+        "D": "Monitors compliance and serves as contact point for data subjects"
+      },
+      "correct": "B",
+      "explanation": "The data controller decides the purpose and processing method, and bears legal accountability for GDPR compliance. Option A describes a processor, C describes a DPO, and D describes a custodian."
+    },
+    {
+      "section": "Data processor (GDPR)",
+      "type": "mc",
+      "question": "Which statement correctly describes a limitation on how a data processor may use personal data?",
+      "options": {
+        "A": "It may use the data only if it has published a privacy policy explaining the processing",
+        "B": "It may not transfer data to any sub-processor without prior written approval",
+        "C": "It may not use the data for its own purposes beyond what the controller authorizes",
+        "D": "It may not retain the data after the end of the contract or engagement period"
+      },
+      "correct": "C",
+      "explanation": "The section states the processor cannot use data for its own purposes beyond controller authorization. Option D is true but is about a post-contract obligation, not a usage limitation; options B and C are not stated as hard limits in this section."
+    },
+    {
+      "section": "Data Protection Officer (DPO)",
+      "type": "text",
+      "question": "What is the significance of the DPO role being legally independent, and when is a DPO mandatory under GDPR?",
+      "rubric": "A sound answer explains that a DPO cannot be dismissed or penalized for performing DPO duties, ensuring they can safely advise on compliance without fear; and that a DPO is mandatory for organizations processing personal data at large scale as a core activity, handling special-category data at scale, or certain public authorities.",
+      "explanation": "The section emphasizes that DPO independence is legally protected, allowing them to flag problems without retaliation, and lists the three triggers for mandatory DPO appointment."
+    },
+    {
+      "section": "Data subject rights (GDPR)",
+      "type": "mc",
+      "question": "A person requests a copy of their data in a machine-readable format so they can transfer it to another service. Which GDPR data subject right are they exercising?",
+      "options": {
+        "A": "Portability",
+        "B": "Erasure",
+        "C": "Access",
+        "D": "Rectification"
+      },
+      "correct": "A",
+      "explanation": "Portability grants the right to receive data in machine-readable format to transfer elsewhere. Access is a copy request without portability intent, rectification is correction, and erasure is deletion."
+    },
+    {
+      "section": "Separation of duties in data governance",
+      "type": "text",
+      "question": "Describe how separation of duties in data governance prevents unchecked control of data security.",
+      "rubric": "A sound answer identifies the three distinct roles — data owner sets policy, custodian implements controls, and auditor verifies both — and explains that this split requires collusion across roles to misuse data.",
+      "explanation": "The section explains that no single person should control every aspect end-to-end; the three-way split ensures that abuse requires coordination between independent parties."
+    },
+    {
+      "section": "Article 30 records of processing activities",
+      "type": "mc",
+      "question": "What is the primary purpose of maintaining Article 30 records of processing activities under GDPR?",
+      "options": {
+        "A": "To ensure that data subjects receive written notification before any personal data is collected",
+        "B": "To establish the lawful basis for every data controller and processor to share data across borders",
+        "C": "To provide evidence of GDPR compliance to regulators and demonstrate what processing occurs",
+        "D": "To document the identity and contact details of all individuals whose data is processed"
+      },
+      "correct": "C",
+      "explanation": "Article 30 records document purpose, data categories, retention, security, and other key details to serve as the primary evidence of compliance shown to regulators. The other options describe different GDPR obligations but not the role of Article 30 records."
+    }
+  ]
+}

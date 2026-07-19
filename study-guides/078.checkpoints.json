@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Mobile device deployment models",
+      "type": "mc",
+      "question": "In which deployment model does the company buy the device but allow employees to choose from a pre-approved list?",
+      "options": {
+        "A": "CYOD",
+        "B": "BYOD",
+        "C": "COBO",
+        "D": "COPE"
+      },
+      "correct": "A",
+      "explanation": "CYOD stands for Choose Your Own Device — the company purchases the device but the employee selects from approved options, balancing standardization with personal preference."
+    },
+    {
+      "section": "Mobile Device Management (MDM)",
+      "type": "text",
+      "question": "Explain what MDM does and why it matters for organizations managing many devices.",
+      "rubric": "A sound answer states that MDM is a centralized platform that enforces security policies, manages apps and configurations, detects compromised devices, and enables remote wipe across enrolled devices without requiring technician intervention on each device.",
+      "explanation": "MDM allows organizations to control and secure a fleet of devices remotely through one platform, applying consistent policy changes instantly across thousands of devices."
+    },
+    {
+      "section": "Mobile Application Management (MAM) and EMM",
+      "type": "mc",
+      "question": "Which approach protects corporate data by securing only specific apps rather than the entire device?",
+      "options": {
+        "A": "MCM",
+        "B": "MAM",
+        "C": "MDM",
+        "D": "EMM"
+      },
+      "correct": "B",
+      "explanation": "MAM (Mobile Application Management) wraps corporate apps with enforced security policies and applies DLP at the app level, making it ideal for BYOD scenarios where full device management is resisted."
+    },
+    {
+      "section": "Application containerization",
+      "type": "text",
+      "question": "Describe how application containerization prevents data leakage between corporate and personal apps.",
+      "rubric": "A sound answer explains that containerization creates an encrypted, isolated container holding corporate apps and data, and blocks clipboard and data-sharing between the container and personal apps through policy.",
+      "explanation": "The container is a sealed, encrypted space that prevents personal apps from accessing corporate data, even through simple actions like copy-paste."
+    },
+    {
+      "section": "Sideloading and application controls",
+      "type": "mc",
+      "question": "What is sideloading and what MDM control prevents it on Android devices?",
+      "options": {
+        "A": "Updating apps without permission; MDM enforces automatic updates",
+        "B": "Downloading apps to an SD card; MDM blocks external storage",
+        "C": "Installing apps from sources outside official stores; MDM disables unknown sources setting",
+        "D": "Installing apps from app stores; MDM blocks the app store app"
+      },
+      "correct": "C",
+      "explanation": "Sideloading is installing apps from outside official app stores and poses a malware risk; MDM prevents it by disabling the 'unknown sources' setting on Android."
+    },
+    {
+      "section": "Remote access controls",
+      "type": "mc",
+      "question": "What is the key difference between per-app VPN and always-on VPN?",
+      "options": {
+        "A": "Per-app VPN applies to employee devices; always-on VPN applies to executive devices",
+        "B": "Per-app VPN requires certificate authentication while always-on VPN uses passwords",
+        "C": "Per-app VPN offers better speed; always-on VPN provides stronger security",
+        "D": "Per-app VPN tunnels specific applications; always-on VPN tunnels all device traffic"
+      },
+      "correct": "D",
+      "explanation": "Per-app VPN balances protection and performance by routing only corporate app traffic through the VPN, while always-on VPN sends all device traffic through the corporate VPN for maximum inspection."
+    },
+    {
+      "section": "Geofencing",
+      "type": "text",
+      "question": "What does geofencing enable MDM to do automatically when a device crosses a boundary?",
+      "rubric": "A sound answer states that geofencing uses GPS or Wi-Fi positioning to define a geographic boundary and automatically trigger policy changes or alerts when a device crosses it, such as disabling camera access or restricting resource access.",
+      "explanation": "Geofencing automatically enforces location-based policy changes without user intervention, such as disabling the camera when entering a sensitive facility."
+    },
+    {
+      "section": "Certificate management via MDM",
+      "type": "mc",
+      "question": "What does MDM accomplish when it pushes a root CA certificate to enrolled devices?",
+      "options": {
+        "A": "It automatically trusts internal TLS certificates without manual user installation",
+        "B": "It blocks the device from using public certificate authorities",
+        "C": "It prevents the device from connecting to any external networks",
+        "D": "It encrypts all data stored on the device permanently"
+      },
+      "correct": "A",
+      "explanation": "Pushing the organization's root CA certificate to the trusted store allows internal TLS, VPN client, Wi-Fi EAP-TLS, and email certificates to be trusted automatically."
+    },
+    {
+      "section": "Wireless site surveys",
+      "type": "mc",
+      "question": "Which tool detects non-802.11 interference sources like microwave ovens and neighboring networks during a wireless site survey?",
+      "options": {
+        "A": "Network scanner",
+        "B": "Heat maps",
+        "C": "Spectrum analyzers",
+        "D": "Signal strength meter"
+      },
+      "correct": "C",
+      "explanation": "Spectrum analyzers detect all signals in a frequency band, including non-Wi-Fi sources that cause interference, whereas heat maps visualize signal strength across physical space."
+    }
+  ]
+}

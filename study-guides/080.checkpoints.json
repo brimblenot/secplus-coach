@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "The Secure Software Development Lifecycle (SSDLC)",
+      "type": "text",
+      "question": "Why is it better to integrate security activities into every phase of the SSDLC rather than adding security after development is complete?",
+      "rubric": "A sound answer should state that building security in from the start is cheaper, more effective, and less disruptive than retrofitting security into finished software.",
+      "explanation": "The section explicitly states that retrofitting security into finished software is more expensive, less effective, and more disruptive than building it in from the start, and uses the house-building analogy to reinforce this principle."
+    },
+    {
+      "section": "Input validation",
+      "type": "mc",
+      "question": "Which input validation approach is considered most secure?",
+      "options": {
+        "A": "Type validation rejects input that cannot be parsed as the expected data type",
+        "B": "Denylist validation rejects known-bad patterns and accepts everything else",
+        "C": "Length validation enforces minimum and maximum length to prevent buffer overflows",
+        "D": "Allowlist validation accepts only input matching a known-good specification"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that allowlist validation is the 'most secure' approach because it defines exactly what is acceptable and rejects everything else, whereas denylist validation is less secure due to encoding tricks and syntax variations."
+    },
+    {
+      "section": "Output encoding",
+      "type": "mc",
+      "question": "What encoding method is required when outputting user-supplied data within a database query?",
+      "options": {
+        "A": "Parameterized queries separate SQL code structure from user-supplied values",
+        "B": "HTML encoding converts special characters to entity equivalents",
+        "C": "URL encoding converts special characters to percent-format notation",
+        "D": "JavaScript encoding protects against script injection in the browser"
+      },
+      "correct": "A",
+      "explanation": "The section's table explicitly lists parameterized queries and prepared statements as the required encoding for database query context, noting they make SQL injection impossible regardless of input."
+    },
+    {
+      "section": "Error handling",
+      "type": "text",
+      "question": "What information should be hidden from users when an error occurs, and where should detailed error information be stored instead?",
+      "rubric": "A sound answer should state that users should see only generic error pages without stack traces, SQL syntax, file paths, server hostnames, or version numbers, and that detailed error information should go to protected log files accessible only to administrators.",
+      "explanation": "The section directly specifies what users should not see and contrasts it with where detailed information belongs — the building-blueprint analogy reinforces why exposing server details is dangerous."
+    },
+    {
+      "section": "Security testing tools",
+      "type": "mc",
+      "question": "Which testing approach can detect authentication weaknesses and session management flaws by sending malicious inputs to a running application without requiring access to source code?",
+      "options": {
+        "A": "Fuzzing sends randomly generated inputs to discover memory corruption vulnerabilities",
+        "B": "SAST analyzes source code without executing it to find injection flaws",
+        "C": "DAST tests a running application by sending malicious inputs and observing responses",
+        "D": "IAST injects a sensor into the runtime and observes internal behavior during test execution"
+      },
+      "correct": "C",
+      "explanation": "The section states that DAST finds authentication weaknesses and session management flaws by testing a running application like an attacker would, and requires no access to source code."
+    },
+    {
+      "section": "Security testing tools",
+      "type": "text",
+      "question": "Explain why IAST has a lower false positive rate than SAST or DAST alone.",
+      "rubric": "A sound answer should indicate that IAST combines the internal code visibility of SAST with the real-execution coverage of DAST, allowing it to confirm whether a flaw is actually reachable during real execution.",
+      "explanation": "The section defines false positive as a reported vulnerability that is not actually exploitable, and explains that IAST's lower rate comes from being able to confirm reachability during actual execution — combining both approaches' strengths."
+    },
+    {
+      "section": "Software Composition Analysis (SCA)",
+      "type": "mc",
+      "question": "What does SCA stand for and what is its primary function?",
+      "options": {
+        "A": "Static Code Analysis scans source code for injection vulnerabilities before compilation",
+        "B": "Software Composition Analysis scans third-party dependencies for known vulnerabilities",
+        "C": "Secure Coding Audit reviews code changes to ensure compliance with security standards",
+        "D": "Source Code Authentication verifies that code changes are signed by authorized developers"
+      },
+      "correct": "B",
+      "explanation": "The section defines SCA as scanning an application's third-party dependencies against vulnerability databases like the NVD to identify known vulnerabilities in libraries and frameworks."
+    },
+    {
+      "section": "Fuzzing",
+      "type": "text",
+      "question": "What types of vulnerabilities is fuzzing particularly effective at discovering, and why?",
+      "rubric": "A sound answer should mention that fuzzing finds memory corruption and format string vulnerabilities through massive automated testing of randomly generated or malformed inputs, catching things code review and structured tests miss.",
+      "explanation": "The section explicitly states that fuzzing discovers crashes and unexpected behavior particularly in memory corruption and format string vulnerabilities, and notes it is almost always automated because finding crash-inducing inputs can require millions of test cases."
+    },
+    {
+      "section": "Secrets management",
+      "type": "mc",
+      "question": "Why is embedding secrets like credentials and API keys directly in source code particularly dangerous?",
+      "options": {
+        "A": "They persist in version control history even after removal from code",
+        "B": "The application cannot properly encrypt them during deployment",
+        "C": "The compiler fails to parse them correctly in the binary",
+        "D": "They may be lost if developers forget to update them in production"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly warns that secrets embedded in code get committed to version control and persist in history even after deletion, making them recoverable by anyone with repo access."
+    },
+    {
+      "section": "HTTP security headers",
+      "type": "mc",
+      "question": "Which HTTP security header tells browsers to use only HTTPS and prevents downgrade attacks to unencrypted HTTP?",
+      "options": {
+        "A": "CSP defines which sources of scripts, styles, and media are trusted",
+        "B": "HSTS enforces HTTPS-only connections and prevents protocol downgrade",
+        "C": "STS restricts server transfer protocols to encrypted channels only",
+        "D": "HTTPS forces all connections through the secure socket layer"
+      },
+      "correct": "B",
+      "explanation": "The section's table explicitly identifies HSTS (HTTP Strict Transport Security) as the header that tells browsers to use only HTTPS and prevents downgrade attacks to unencrypted HTTP."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why awareness programs exist",
+      "type": "text",
+      "question": "According to the section, why do social engineering attacks succeed where technical controls often fail?",
+      "rubric": "A sound answer explains that social engineering targets human instincts (trust, authority, urgency, reciprocity) rather than technical systems, and that when attacks reach an inbox, employee judgment becomes the final defense because technical filters cannot catch everything.",
+      "explanation": "The section states that social engineering manipulates people through psychological pressure and that some attacks always bypass technical controls, placing the burden on human judgment at the inbox."
+    },
+    {
+      "section": "Onboarding training: the knowledge baseline",
+      "type": "mc",
+      "question": "Which of the following is part of onboarding security training coverage?",
+      "options": {
+        "A": "Recognizing phishing threats and reporting procedures",
+        "B": "Third-party vendor risk assessment methods",
+        "C": "Network architecture and design principles",
+        "D": "Advanced penetration testing and exploitation techniques"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly lists phishing recognition and reporting as onboarding content; the other options are not mentioned in the onboarding training coverage list."
+    },
+    {
+      "section": "Annual training: reinforce and update",
+      "type": "mc",
+      "question": "Why must annual security training completion be tracked and documented?",
+      "options": {
+        "A": "To evaluate employee performance for compensation decisions",
+        "B": "To assess employee technical knowledge and aptitude levels",
+        "C": "To meet compliance requirements that auditors verify during assessments",
+        "D": "To identify unpopular security training topics"
+      },
+      "correct": "C",
+      "explanation": "The section states that tracking is required for compliance with specific frameworks and that auditors will request completion records; the other options are not mentioned or supported by the text."
+    },
+    {
+      "section": "Role-specific training",
+      "type": "mc",
+      "question": "Which threat and corresponding training focus are correctly paired?",
+      "options": {
+        "A": "Executives: PAM tools; audit logging",
+        "B": "Developers: Insecure code vulnerabilities; OWASP Top Ten",
+        "C": "Finance: OWASP Top Ten; input validation",
+        "D": "IT/Sysadmins: BEC signs; dual-authorization for payments"
+      },
+      "correct": "B",
+      "explanation": "The section's table pairs developers with OWASP Top Ten and insecure code as the key threat; the other pairings misassign role-threat-training combinations."
+    },
+    {
+      "section": "Phishing simulations",
+      "type": "mc",
+      "question": "What does a credential submission rate of 8% in a phishing simulation primarily indicate?",
+      "options": {
+        "A": "The phishing simulation templates lack realism",
+        "B": "The organization meets the effective threshold benchmark",
+        "C": "The learning management system should be replaced",
+        "D": "The submission rate exceeds the 5% effectiveness threshold"
+      },
+      "correct": "D",
+      "explanation": "The section states that a click rate under 5% is generally considered effective and that credential submission is the most serious failure; a rate of 8% exceeds this threshold and indicates a concern."
+    },
+    {
+      "section": "Delivery methods",
+      "type": "text",
+      "question": "Explain how gamification and security champions each contribute to the effectiveness of a security awareness program.",
+      "rubric": "A sound answer states that gamification uses points, badges, and leaderboards to motivate participation in security behaviors, while security champions are employees embedded in business units who serve as local peer resources and influencers to build culture organically.",
+      "explanation": "The section describes both as delivery methods that engage employees differently—gamification through incentives and competition, champions through peer influence and local accessibility."
+    },
+    {
+      "section": "Reporting infrastructure and culture",
+      "type": "mc",
+      "question": "How does a no-fault reporting culture differ from a blame culture in terms of security outcomes?",
+      "options": {
+        "A": "No-fault culture eliminates reporting button requirements",
+        "B": "Blame culture promotes faster incident reporting",
+        "C": "No-fault culture encourages early reporting through psychological safety",
+        "D": "Blame culture reduces phishing click rates significantly"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly contrasts the two: blame culture causes employees to hide mistakes, while no-fault culture enables early reporting through psychological safety, using the 911 metaphor to illustrate why silence is dangerous."
+    },
+    {
+      "section": "Program metrics beyond completion",
+      "type": "text",
+      "question": "What is the key difference between training completion rate and phishing click rate trend in measuring awareness program effectiveness?",
+      "rubric": "A sound answer explains that completion rate only verifies that compliance requirements were met but says nothing about whether behavior actually changed, whereas click rate trend shows whether real behavior is actually improving over time.",
+      "explanation": "The section explicitly states that completion rate is a compliance measure and provides no insight into behavior change, while click rate trend directly measures real behavioral improvement."
+    }
+  ]
+}

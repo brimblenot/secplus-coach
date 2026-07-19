@@ -1,0 +1,77 @@
+{
+  "checkpoints": [
+    {
+      "section": "Service Level Agreement (SLA)",
+      "type": "mc",
+      "question": "Which of the following is a common remedy when an SLA's minimum performance level is not met?",
+      "options": {
+        "A": "Immediate replacement of the service provider's equipment",
+        "B": "Automatic criminal penalties imposed by regulators",
+        "C": "Mandatory renegotiation of all contract pricing terms",
+        "D": "Service credits applied as discounts on future bills"
+      },
+      "correct": "D",
+      "explanation": "The section states that penalties for SLA breaches are usually service credits (discounts on future bills); severe failures may trigger termination rights, but routine breaches result in credits."
+    },
+    {
+      "section": "Memorandum of Understanding (MOU) vs. Memorandum of Agreement (MOA)",
+      "type": "text",
+      "question": "Explain the key difference between an MOU and an MOA in terms of legal binding.",
+      "rubric": "A sound answer states that an MOU is non-binding and expresses mutual intent without creating enforceable legal obligations, while an MOA is binding and commits each party to specific actions and deliverables.",
+      "explanation": "The section explicitly contrasts MOU as non-binding (expressing intent without legal obligation) against MOA as binding (committing parties to specific actions and creating enforceable obligations)."
+    },
+    {
+      "section": "Master Service Agreement (MSA) and Statement of Work (SOW)",
+      "type": "mc",
+      "question": "What is the primary purpose of a Statement of Work (SOW) within an MSA relationship?",
+      "options": {
+        "A": "To permanently replace the MSA for all future business transactions",
+        "B": "To document the specifics of one project or engagement within the MSA framework",
+        "C": "To establish liability limits that override the parent MSA's terms",
+        "D": "To allow either party to terminate the relationship without cause"
+      },
+      "correct": "B",
+      "explanation": "The section defines SOW as documenting the specifics of one project or engagement within the MSA's framework, including scope, deliverables, timeline, and acceptance criteria."
+    },
+    {
+      "section": "Non-Disclosure Agreement (NDA)",
+      "type": "text",
+      "question": "What does a bilateral NDA require compared to a unilateral NDA?",
+      "rubric": "A sound answer indicates that a bilateral NDA binds both parties to confidentiality obligations, whereas a unilateral NDA imposes obligations on only one party.",
+      "explanation": "The section's table shows unilateral NDA as 'One party only' and bilateral as 'Both parties,' with examples clarifying that unilateral applies to employee hiring and bilateral to two companies in due diligence."
+    },
+    {
+      "section": "Data Processing Agreement (DPA)",
+      "type": "mc",
+      "question": "Under GDPR, which of the following is a required obligation of a data processor in a DPA?",
+      "options": {
+        "A": "Process data only on the controller's documented instructions",
+        "B": "Decide independently how personal data should be processed",
+        "C": "Approve or reject controller requests for data subject access",
+        "D": "Retain all personal data indefinitely for audit purposes"
+      },
+      "correct": "A",
+      "explanation": "The section lists as the first required DPA provision that the processor must process data 'only on the controller's documented instructions'; the controller, not processor, makes processing decisions."
+    },
+    {
+      "section": "Interconnection Security Agreement (ISA)",
+      "type": "mc",
+      "question": "What does an Interconnection Security Agreement (ISA) document?",
+      "options": {
+        "A": "Encryption standards for cloud storage services",
+        "B": "Terms for employee personal device use on the company network",
+        "C": "Security controls for a direct network connection between two organizations",
+        "D": "Annual security training requirements for contractors"
+      },
+      "correct": "C",
+      "explanation": "The section defines an ISA as documenting the security controls and technical details governing a direct network connection between two organizations' systems, covering protocols, ports, controls, data types, and contacts."
+    },
+    {
+      "section": "Security-specific contract clauses",
+      "type": "text",
+      "question": "Name two security-specific contract clauses that can be embedded in any contract and briefly state what each one addresses.",
+      "rubric": "A sound answer names and describes any two of the following: breach notification clause (time to notify after discovery), liability and indemnification (who pays for breach), cyber liability insurance (required coverage), data ownership clause (org owns data), asset return/destruction (vendor handling at termination), or security control requirements (encryption, patches, access, monitoring).",
+      "explanation": "The section lists six specific clauses beyond named agreement types; students should be able to identify and briefly describe any two of them from the bulleted list."
+    }
+  ]
+}

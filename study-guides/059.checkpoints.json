@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "Routers and routing",
+      "type": "mc",
+      "question": "Which defense mechanism cryptographically binds IP prefixes to their authorized autonomous system to prevent BGP hijacking?",
+      "options": {
+        "A": "Resource Public Key Infrastructure (RPKI)",
+        "B": "AS path filtering to reject unexpected paths",
+        "C": "Route filtering using prefix lists",
+        "D": "Dynamic routing protocol updates"
+      },
+      "correct": "A",
+      "explanation": "RPKI is the cryptographic defense that detects and rejects forged prefix announcements by verifying that an announced prefix is legitimately owned by the autonomous system claiming it. Route filtering and AS path filtering are earlier-stage defenses but lack cryptographic verification."
+    },
+    {
+      "section": "Switches, hubs, and bridges",
+      "type": "text",
+      "question": "Explain why a hub creates a passive capture risk that a switch does not.",
+      "rubric": "A sound answer states that hubs repeat signals to every port, so every connected device sees all traffic, making passive eavesdropping trivial. Switches use MAC address tables to forward frames only to the correct port, so devices see only traffic intended for them.",
+      "explanation": "Hubs operate at Layer 1 with no address awareness and broadcast to all ports; switches operate at Layer 2, use MAC tables to isolate traffic to specific ports, preventing passive sniffing."
+    },
+    {
+      "section": "Network topologies and security",
+      "type": "mc",
+      "question": "In a star topology, what is isolated when a single device fails?",
+      "options": {
+        "A": "All devices connected to that switch",
+        "B": "Only that device's connection",
+        "C": "The entire network backbone",
+        "D": "The entire local area network"
+      },
+      "correct": "B",
+      "explanation": "The study guide states that in a star topology, failure is isolated to one device, meaning only that device loses connectivity. Other devices remain connected to the central switch."
+    },
+    {
+      "section": "Physical media",
+      "type": "mc",
+      "question": "Which physical medium is most resistant to electromagnetic interference and very difficult to tap?",
+      "options": {
+        "A": "Wireless 802.11 transmission over radio frequency",
+        "B": "Twisted pair copper cabling with shielding",
+        "C": "Unshielded twisted pair copper cabling",
+        "D": "Fiber optic cable using light signals"
+      },
+      "correct": "D",
+      "explanation": "The study guide identifies fiber optic cable as immune to EMI and very hard to tap, making it preferred for high-security and long-distance runs. Twisted pair copper is susceptible to EMI and can be physically tapped; wireless is inherently broadcast."
+    },
+    {
+      "section": "SDN and the three network planes",
+      "type": "text",
+      "question": "Describe what microsegmentation is and why SDN makes it practical.",
+      "rubric": "A sound answer explains that microsegmentation is granular per-workload traffic control that limits lateral movement after a compromise, and that SDN makes it practical because centralized policy definition can be applied consistently and updated network-wide instantly.",
+      "explanation": "SDN enables microsegmentation by centralizing control logic, allowing administrators to define and enforce fine-grained per-workload policies across the entire network rather than relying on broad VLAN boundaries."
+    },
+    {
+      "section": "SD-WAN and overlay networks",
+      "type": "mc",
+      "question": "Which overlay network encapsulates Layer 2 Ethernet frames inside UDP packets to enable Layer 2 segments to span Layer 3 networks?",
+      "options": {
+        "A": "Software-Defined WAN (SD-WAN)",
+        "B": "Multiprotocol Label Switching (MPLS)",
+        "C": "Virtual Extensible LAN (VXLAN)",
+        "D": "Generic Routing Encapsulation (GRE)"
+      },
+      "correct": "C",
+      "explanation": "VXLAN encapsulates Layer 2 Ethernet frames inside UDP packets, enabling Layer 2 segments to span Layer 3 networks — critical for VM mobility and multi-tenant isolation in data centers. GRE wraps arbitrary protocols in IP packets but is not UDP-based."
+    },
+    {
+      "section": "IPv4, IPv6, and NAT",
+      "type": "mc",
+      "question": "Why does the study guide describe NAT as 'security through obscurity'?",
+      "options": {
+        "A": "It filters malicious packets at boundaries",
+        "B": "It requires strong authentication to function",
+        "C": "It encrypts all internal network traffic",
+        "D": "It hides internal addresses but lacks true security controls"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly states that NAT hides internal IPs but is not a true security control and should never be the primary defense. It provides concealment, not enforcement of a security policy."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why the browser can't tell good scripts from bad",
+      "type": "text",
+      "question": "Explain why the same-origin policy does not protect against XSS attacks.",
+      "rubric": "A sound answer states that the injected script is already inside the trusted domain, so the browser treats it as legitimate and allows it to run. The same-origin policy only blocks scripts from one domain accessing resources on another domain—it cannot stop a script that is already within the trusted origin.",
+      "explanation": "This tests whether the student grasps the fundamental reason XSS bypasses a primary browser security mechanism—the injected code's location within the trusted origin defeats the policy's intended scope."
+    },
+    {
+      "section": "The three XSS types",
+      "type": "mc",
+      "question": "Which XSS type occurs entirely in client-side JavaScript and cannot be caught by server-side filtering?",
+      "options": {
+        "A": "Reflected XSS, because the server never processes the user input",
+        "B": "Persistent XSS, because it affects every visitor to the page",
+        "C": "Stored XSS, because the script is saved in the database permanently",
+        "D": "DOM-based XSS, because the server is not involved in the attack"
+      },
+      "correct": "D",
+      "explanation": "DOM-based XSS reads from browser-controlled sources (like URL fragments) and writes unsanitized data directly into the DOM using client-side JavaScript—the server never sees the malicious input, so server-side filtering cannot catch it. Reflected and stored XSS both involve the server processing input."
+    },
+    {
+      "section": "What attackers do once the script runs",
+      "type": "mc",
+      "question": "Which of the following is a direct consequence of successful XSS that exploits the absence of the HttpOnly cookie flag?",
+      "options": {
+        "A": "The attacker redirects the browser to a malware site",
+        "B": "The attacker injects a fake login form to harvest user credentials",
+        "C": "The attacker reads the session token via document.cookie and replays it",
+        "D": "The attacker captures every keystroke typed on the page"
+      },
+      "correct": "C",
+      "explanation": "Session hijacking via document.cookie is the most common XSS goal; the section explicitly states that stolen session tokens can be replayed to impersonate the victim. The HttpOnly flag prevents JavaScript from reading cookies, directly blocking this attack vector."
+    },
+    {
+      "section": "Defenses",
+      "type": "text",
+      "question": "Why is output encoding the primary defense against XSS, and at what point in the code must it happen?",
+      "rubric": "A sound answer states that output encoding converts special characters (like <, >, &, \", ') to safe HTML entities before rendering, preventing injected code from executing. It must happen at the exact point of output, and the encoding rules differ by context (HTML body vs. attribute vs. JavaScript vs. URL).",
+      "explanation": "This tests whether the student understands both the mechanism and the critical detail that encoding must occur at the right place—not during input—because context determines how to encode safely."
+    }
+  ]
+}

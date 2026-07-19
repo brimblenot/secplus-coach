@@ -1,0 +1,116 @@
+{
+  "checkpoints": [
+    {
+      "section": "Web protocols: HTTP vs. HTTPS",
+      "type": "mc",
+      "question": "Which of the following best describes what HTTPS adds to HTTP?",
+      "options": {
+        "A": "A firewall rule that blocks unencrypted traffic",
+        "B": "Encryption via TLS and server authentication via certificate validation",
+        "C": "A faster connection speed for web browsers",
+        "D": "A requirement that users enter a password on every page"
+      },
+      "correct": "B",
+      "explanation": "HTTPS wraps HTTP in a TLS encryption layer and validates the server's certificate against the client's trusted certificate authority store, providing both confidentiality and server authentication. The other options either describe non-existent features or mischaracterize what HTTPS does."
+    },
+    {
+      "section": "File transfer protocols: FTP, SFTP, FTPS",
+      "type": "text",
+      "question": "Explain the key difference between SFTP and FTPS, even though their names are similar.",
+      "rubric": "A sound answer states that SFTP is a subsystem of SSH (using the SSH protocol family) while FTPS is actual FTP protected by a TLS layer — they are completely different protocols despite similar names.",
+      "explanation": "The section explicitly contrasts these two: SFTP runs inside SSH as an encrypted subsystem, whereas FTPS wraps the FTP protocol itself in TLS encryption. Understanding this distinction is crucial because they achieve security through different mechanisms."
+    },
+    {
+      "section": "Remote access: Telnet vs. SSH",
+      "type": "mc",
+      "question": "What does SSH's public key authentication accomplish that Telnet does not?",
+      "options": {
+        "A": "It encrypts only the password but leaves commands visible",
+        "B": "It automatically logs out the user after five minutes of inactivity",
+        "C": "It prevents the user from typing commands on the remote system",
+        "D": "It allows credentials to be verified without a password crossing the network"
+      },
+      "correct": "D",
+      "explanation": "SSH's public key authentication means the client holds a private key and the server holds the matching public key, so no password crosses the wire at all. Telnet sends credentials in plaintext, making them capturable."
+    },
+    {
+      "section": "Email protocols",
+      "type": "mc",
+      "question": "Which port number indicates that IMAP traffic is encrypted with TLS?",
+      "options": {
+        "A": "110",
+        "B": "143",
+        "C": "993",
+        "D": "995"
+      },
+      "correct": "C",
+      "explanation": "Port 993 is IMAPS (IMAP over TLS), which always uses encryption. Port 143 is plaintext IMAP. Ports 110 and 995 are for POP3 and POP3S respectively."
+    },
+    {
+      "section": "Directory services: LDAP vs. LDAPS",
+      "type": "text",
+      "question": "Why is running plaintext LDAP especially dangerous for an organization using Active Directory?",
+      "rubric": "A sound answer mentions that plaintext LDAP sends authentication credentials (including passwords in bind operations) unencrypted across the network, allowing anyone capturing traffic to harvest them.",
+      "explanation": "The section emphasizes that plaintext LDAP exposes credentials during bind operations (login requests), which is critical because Active Directory is central to identity management. An attacker capturing this traffic gains the ability to impersonate users."
+    },
+    {
+      "section": "Network management: SNMP versions",
+      "type": "mc",
+      "question": "In SNMPv1 and v2c, what security vulnerability is created by the use of a community string?",
+      "options": {
+        "A": "The community string is transmitted in plaintext and acts like a shared password",
+        "B": "The community string is encrypted using a broken cipher",
+        "C": "The community string prevents all read access to network devices",
+        "D": "The community string can only be used once before expiring"
+      },
+      "correct": "A",
+      "explanation": "SNMPv1 and v2c use a community string (essentially a shared password) transmitted in plaintext with every message, allowing attackers who capture traffic to harvest it and gain management access to network devices."
+    },
+    {
+      "section": "Time synchronization: NTP and NTPsec",
+      "type": "mc",
+      "question": "What is the consequence of clock skew exceeding five minutes in a Kerberos environment?",
+      "options": {
+        "A": "Network devices will stop communicating entirely",
+        "B": "Log files will become corrupted and unreadable",
+        "C": "Kerberos authentication will fail between misaligned systems",
+        "D": "Encryption keys will be automatically rotated"
+      },
+      "correct": "C",
+      "explanation": "The section states that Kerberos authentication requires clocks between client and server to be within five minutes of each other; clock skew beyond this threshold causes authentication failures. NTPsec helps prevent this by supporting authenticated NTP to block clock manipulation attacks."
+    },
+    {
+      "section": "VoIP protocols: SIP, RTP, and SRTP",
+      "type": "text",
+      "question": "Why is using SIPS alone (without SRTP) insufficient to fully protect a VoIP call?",
+      "rubric": "A sound answer explains that SIPS encrypts the call setup and signaling, but RTP carries the actual audio/video content unencrypted, leaving the media stream exposed to eavesdropping.",
+      "explanation": "The section clarifies that SIP sets up the call while RTP carries the actual media. Securing only SIP (via SIPS on port 5061) leaves the RTP media stream unencrypted; SRTP is needed to encrypt the audio and video payload itself."
+    },
+    {
+      "section": "DNS security: DNSSEC, DoH, DoT",
+      "type": "mc",
+      "question": "What does DNSSEC protect against but not provide?",
+      "options": {
+        "A": "It blocks DNS queries but does not allow legitimate resolution",
+        "B": "It encrypts queries but does not verify zone signatures",
+        "C": "It authenticates resolvers but does not authenticate clients",
+        "D": "It prevents cache poisoning but does not encrypt queries"
+      },
+      "correct": "D",
+      "explanation": "DNSSEC adds cryptographic signatures to prevent cache poisoning by making forged signed records impossible, but it does not encrypt queries themselves—providing integrity without confidentiality. DoH and DoT provide the encryption that DNSSEC lacks."
+    },
+    {
+      "section": "IPsec: IP-layer security",
+      "type": "mc",
+      "question": "In IPsec, which component provides both encryption and authentication?",
+      "options": {
+        "A": "IKE (Internet Key Exchange)",
+        "B": "ESP (Encapsulating Security Payload)",
+        "C": "AH (Authentication Header)",
+        "D": "L2TP (Layer 2 Tunneling Protocol)"
+      },
+      "correct": "B",
+      "explanation": "ESP (protocol 50) provides encryption plus authentication, while AH (protocol 51) provides authentication and integrity only without encryption. IKE negotiates security associations, and L2TP is a tunneling protocol that pairs with IPsec for encryption."
+    }
+  ]
+}

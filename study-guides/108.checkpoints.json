@@ -1,0 +1,129 @@
+{
+  "checkpoints": [
+    {
+      "section": "Regulatory compliance: why it matters first",
+      "type": "mc",
+      "question": "Which of the following is a consequence of regulatory noncompliance?",
+      "options": {
+        "A": "Requirement to hire external penetration testers",
+        "B": "Automatic revocation of all employee security clearances",
+        "C": "Mandatory appointment of a Chief Information Security Officer",
+        "D": "Loss of ability to operate in a regulated industry"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly lists loss of ability to operate in a regulated industry as a consequence of noncompliance, along with fines, criminal penalties, and civil lawsuits. The other options are not mentioned as consequences."
+    },
+    {
+      "section": "Key regulations you must know",
+      "type": "mc",
+      "question": "Which regulation applies to an organization regardless of where it is located, as long as it processes personal data of EU residents?",
+      "options": {
+        "A": "GDPR",
+        "B": "HIPAA",
+        "C": "GLBA",
+        "D": "SOX"
+      },
+      "correct": "A",
+      "explanation": "The section states GDPR applies to any organization processing personal data of EU residents, regardless of where the org is located. HIPAA, SOX, and GLBA have more limited geographic scopes."
+    },
+    {
+      "section": "Key regulations you must know",
+      "type": "mc",
+      "question": "PCI DSS is best described as a:",
+      "options": {
+        "A": "Industry guideline that is voluntary for most organizations",
+        "B": "Contractual requirement enforced by card brands and vendors",
+        "C": "U.S. federal law enforced by the Department of Justice",
+        "D": "International treaty requiring government approval"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states PCI DSS is not a law but a contractual requirement enforced by card brands like Visa and Mastercard. Noncompliance results in fines and loss of card payment privileges."
+    },
+    {
+      "section": "Key regulations you must know",
+      "type": "mc",
+      "question": "Which regulation requires Business Associate Agreements (BAAs) written contracts with vendors?",
+      "options": {
+        "A": "CCPA requires vendor compliance checklists",
+        "B": "GDPR requires data processing agreements",
+        "C": "HIPAA requires Business Associate Agreements",
+        "D": "SOX requires IT audit attestations"
+      },
+      "correct": "C",
+      "explanation": "The section specifies that HIPAA requires Business Associate Agreements with vendors handling protected health information (PHI), mandating safeguards and breach reporting."
+    },
+    {
+      "section": "Due care vs. due diligence",
+      "type": "text",
+      "question": "In one or two sentences, explain how due care and due diligence differ.",
+      "rubric": "A sound answer states that due care means taking reasonable minimum precautions (like patching and encryption), while due diligence means actively and continuously investigating, verifying, and monitoring security posture over time.",
+      "explanation": "The section contrasts due care as a baseline of foreseeable safeguards with due diligence as ongoing, active verification — neither concept is sufficient alone for legal protection."
+    },
+    {
+      "section": "Intellectual property protections",
+      "type": "mc",
+      "question": "Which measure establishes that work created by an employee during their employment belongs to the organization?",
+      "options": {
+        "A": "Employee IP agreements",
+        "B": "Non-disclosure agreements (NDAs)",
+        "C": "Source code repository encryption",
+        "D": "Trade secret classification policies"
+      },
+      "correct": "A",
+      "explanation": "The section states that employee IP agreements establish that work created on the job belongs to the organization and prevent post-employment disclosure. NDAs protect against unauthorized disclosure but do not establish ownership."
+    },
+    {
+      "section": "Privacy principles beyond compliance",
+      "type": "mc",
+      "question": "What is the purpose of conducting a privacy impact assessment (PIA)?",
+      "options": {
+        "A": "To create a public record of data retention policies",
+        "B": "To identify and mitigate privacy risks before deploying new systems",
+        "C": "To document compliance with annual audit requirements",
+        "D": "To establish employee privacy responsibilities after a breach"
+      },
+      "correct": "B",
+      "explanation": "The section states that PIAs are conducted before deploying new systems involving significant personal data to identify and mitigate risks early. They are proactive, not reactive."
+    },
+    {
+      "section": "Data sovereignty and residency",
+      "type": "mc",
+      "question": "What legal principle does data sovereignty express?",
+      "options": {
+        "A": "Organizations must get consent before transferring data",
+        "B": "Data must be encrypted at rest and in transit",
+        "C": "All data must be hosted domestically within the organization's country",
+        "D": "Data is subject to the laws of its storage location"
+      },
+      "correct": "D",
+      "explanation": "The section defines data sovereignty as the legal principle that data is subject to the laws of the country where it is physically stored, distinct from residency (a requirement) or encryption (a technical control)."
+    },
+    {
+      "section": "Data sovereignty and residency",
+      "type": "text",
+      "question": "What framework did the Schrems II ruling invalidate, and what must organizations use instead for EU-to-U.S. data transfers?",
+      "rubric": "A sound answer states that Schrems II invalidated the Privacy Shield framework, and organizations must now use Standard Contractual Clauses (SCCs) or Binding Corporate Rules (BCRs), along with conducting transfer impact assessments.",
+      "explanation": "The section describes Schrems II as invalidating Privacy Shield and requiring SCCs, BCRs, and transfer impact assessments to ensure adequate legal protection for EU data transferred to the U.S."
+    },
+    {
+      "section": "Cloud and remote work considerations",
+      "type": "mc",
+      "question": "Under the shared responsibility model, who is responsible for implementing access controls on customer data in the cloud?",
+      "options": {
+        "A": "The cloud provider, as they own the infrastructure",
+        "B": "A third-party security auditor",
+        "C": "The customer, as they own the data",
+        "D": "Both the cloud provider and customer jointly"
+      },
+      "correct": "C",
+      "explanation": "The section states the shared responsibility model means cloud providers secure infrastructure while customers are responsible for what they put in it, including access controls and data protection."
+    },
+    {
+      "section": "Organizational culture as a security control",
+      "type": "text",
+      "question": "Why does the section describe a blame-free reporting culture as a security control?",
+      "rubric": "A sound answer explains that blame-free reporting allows employees to report mistakes without fear, giving security teams early-warning visibility before incidents escalate, which improves overall security outcomes.",
+      "explanation": "The section positions blame-free reporting as a control that enables early detection by removing the disincentive for employees to disclose their own errors or suspicious activity."
+    }
+  ]
+}

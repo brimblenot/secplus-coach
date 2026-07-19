@@ -1,0 +1,123 @@
+{
+  "checkpoints": [
+    {
+      "section": "Spoofing: why it's the core problem",
+      "type": "mc",
+      "question": "What does SMTP fail to verify when an email is sent?",
+      "options": {
+        "A": "Whether the message has attachments",
+        "B": "Whether the recipient's mailbox is active",
+        "C": "The user's password validity",
+        "D": "The sender domain's authorization status for the sending server"
+      },
+      "correct": "D",
+      "explanation": "The section states that SMTP does not verify that the sending server is actually allowed to send on behalf of the claimed domain, allowing attackers to write anything in the sender field."
+    },
+    {
+      "section": "SPF: who is allowed to send?",
+      "type": "mc",
+      "question": "What does a hard fail (`-all`) SPF record prevent?",
+      "options": {
+        "A": "Spoofing of the visible sender display name",
+        "B": "Unauthorized servers from sending mail for that domain",
+        "C": "Forwarded mail from reaching recipients",
+        "D": "Attackers from using legitimate mail servers"
+      },
+      "correct": "B",
+      "explanation": "The section explains that if a record ends with `-all` (hard fail), any server not on the list is unauthorized and SPF fails."
+    },
+    {
+      "section": "DKIM: cryptographic proof of authenticity and integrity",
+      "type": "text",
+      "question": "Explain how DKIM's use of an asymmetric key pair enables both sender verification and integrity protection.",
+      "rubric": "A sound answer states that the private key signs the message (creating a hash that is encrypted), and the public key verifies the signature, proving both that an authorized server sent it and that the content was not modified in transit.",
+      "explanation": "The section describes the key pair: the private key signs each message, and the public key verifies the signature, proving origin and that signed content wasn't modified in transit."
+    },
+    {
+      "section": "DMARC: policy + alignment + reporting",
+      "type": "mc",
+      "question": "What does DMARC alignment require?",
+      "options": {
+        "A": "The domain in the From header must match the domain that passed SPF or DKIM",
+        "B": "The sending server's IP must match the receiving server's IP",
+        "C": "All SPF and DKIM records must be identical across subdomains",
+        "D": "Aggregate and forensic reports must be sent to the same email address"
+      },
+      "correct": "A",
+      "explanation": "The section states that alignment means the domain in the visible From header must match the domain that passed SPF or DKIM, closing the loophole where an attacker uses their own valid SPF but spoofs your visible From address."
+    },
+    {
+      "section": "Secure Email Gateway (SEG)",
+      "type": "mc",
+      "question": "Which technique does an SEG use to learn from labeled examples to improve spam filtering accuracy?",
+      "options": {
+        "A": "Behavioral sandboxing that executes unknown attachments",
+        "B": "URL rewriting to detect phishing at time of click",
+        "C": "Bayesian filtering based on statistical analysis of examples",
+        "D": "DLP pattern matching against sensitive data keywords"
+      },
+      "correct": "C",
+      "explanation": "The section defines Bayesian filtering as a statistical technique that learns from labeled examples of spam and legitimate mail to improve accuracy over time."
+    },
+    {
+      "section": "Email sandboxing",
+      "type": "text",
+      "question": "Why does email sandboxing introduce a delivery delay, and what threat does it help catch?",
+      "rubric": "A sound answer notes that detonation (executing the attachment or URL in an isolated environment) takes 2–5 minutes, and this delay is accepted because sandboxing catches sophisticated malware engineered to evade signature-based detection.",
+      "explanation": "The section states that detonation takes 2–5 minutes, introducing an accepted delivery delay, and catches malware designed to evade signature-based detection by observing real behavior rather than static scanning."
+    },
+    {
+      "section": "URL rewriting and time-of-click analysis",
+      "type": "text",
+      "question": "Describe the attack that URL rewriting and time-of-click analysis defend against.",
+      "rubric": "A sound answer explains that a link is benign at delivery time (passes scans) but the attacker changes it to a phishing page after delivery but before the user clicks, and time-of-click analysis catches this by re-analyzing the URL when the user clicks.",
+      "explanation": "The section describes the specific attack where URLs are swapped from benign to malicious after delivery but before user click, and time-of-click analysis rechecks the URL in real time when clicked."
+    },
+    {
+      "section": "Email encryption",
+      "type": "mc",
+      "question": "What is the key difference between TLS transport encryption and end-to-end encryption?",
+      "options": {
+        "A": "TLS uses X.509 certificates; end-to-end uses a web of trust",
+        "B": "TLS requires STARTTLS; end-to-end requires S/MIME or PGP",
+        "C": "TLS encrypts headers only; end-to-end encrypts the full message",
+        "D": "TLS secures transit between servers; end-to-end lets only the recipient decrypt content"
+      },
+      "correct": "D",
+      "explanation": "The section explains that TLS transport encryption (STARTTLS) protects mail between servers but may fall back to plaintext, while end-to-end encryption encrypts the message content itself so only the intended recipient can decrypt it."
+    },
+    {
+      "section": "Email encryption",
+      "type": "mc",
+      "question": "Which end-to-end encryption standard uses X.509 certificates from a central certificate authority?",
+      "options": {
+        "A": "S/MIME with X.509 certificates",
+        "B": "STARTTLS with opportunistic encryption",
+        "C": "GPG with public key infrastructure",
+        "D": "PGP with a web-of-trust model"
+      },
+      "correct": "A",
+      "explanation": "The section's table identifies S/MIME as using X.509 certificates — the same certificate authority hierarchy used by HTTPS — where certificates are issued and validated by a central authority."
+    },
+    {
+      "section": "Email header analysis",
+      "type": "mc",
+      "question": "What do Authentication-Results headers in an email tell you?",
+      "options": {
+        "A": "SPF, DKIM, and DMARC validation results at the receiving server",
+        "B": "Pass or fail outcomes of SPF, DKIM, and DMARC checks",
+        "C": "The IP address of the original message submitter",
+        "D": "The sender's encryption method and certificate issuer"
+      },
+      "correct": "B",
+      "explanation": "The section states that Authentication-Results headers show the pass/fail outcome of SPF, DKIM, and DMARC checks performed at each receiving server."
+    },
+    {
+      "section": "Business Email Compromise (BEC)",
+      "type": "text",
+      "question": "Explain why BEC emails bypass signature-based and reputation-based email filters.",
+      "rubric": "A sound answer states that BEC emails contain no malicious links or attachments — they are only persuasively written requests — so traditional reputation and signature-based tools have nothing to flag.",
+      "explanation": "The section notes that BEC has no malicious payload, so reputation and signature-based tools cannot detect it; defenses must rely on other means like MFA, secondary verification, and approval workflows."
+    }
+  ]
+}

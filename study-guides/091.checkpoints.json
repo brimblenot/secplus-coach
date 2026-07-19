@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "Patch management",
+      "type": "mc",
+      "question": "Which Windows patch tool is a cloud-based SaaS service that automates patching without requiring you to manage an on-premises server?",
+      "options": {
+        "A": "On-premises server for managing patches",
+        "B": "Cloud-based SaaS service for automated patching",
+        "C": "Automatic OS update mechanism built into Windows",
+        "D": "Enterprise tool for patch deployment"
+      },
+      "correct": "B",
+      "explanation": "Windows Autopatch is explicitly described as a cloud-based SaaS service that automates the full patching workflow without managing WSUS, whereas WSUS and MECM/SCCM are server-based tools that require internal management."
+    },
+    {
+      "section": "Least privilege and elevation controls",
+      "type": "text",
+      "question": "Explain why daily work should use a standard user account rather than an admin account, and name the Windows mechanism that enforces this principle at the point of elevation.",
+      "rubric": "A sound answer states that a standard user account limits what malware can do if the account is compromised (minimizes damage), and names UAC (User Account Control) as the mechanism that prompts for confirmation or credentials before granting administrative elevation.",
+      "explanation": "The section establishes least privilege as using minimum permissions needed and describes UAC as the control that blocks silent privilege escalation by requiring confirmation before elevation, directly supporting this question."
+    },
+    {
+      "section": "File system permissions",
+      "type": "mc",
+      "question": "On Linux, what is the purpose of the sticky bit when set on a directory like /tmp?",
+      "options": {
+        "A": "It prevents users from deleting files owned by other users",
+        "B": "It allows any user to execute files within the directory",
+        "C": "It encrypts all files stored in the directory automatically",
+        "D": "It grants the directory owner write access to all files inside"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states the sticky bit is set on directories so users can't delete files owned by others, using /tmp as the example."
+    },
+    {
+      "section": "Disk encryption",
+      "type": "text",
+      "question": "How does BitLocker with TPM protect an encrypted drive when it is physically stolen and placed in another computer?",
+      "rubric": "A sound answer explains that the TPM chip stores the encryption key and validates pre-boot integrity, so the key remains inaccessible when the drive is moved to another machine, rendering the raw disk data unreadable.",
+      "explanation": "The section describes TPM as storing the key and validating pre-boot integrity, and uses the car analogy to illustrate why moving the drive to another machine fails—the key stays with the original hardware."
+    },
+    {
+      "section": "Application control",
+      "type": "mc",
+      "question": "Which Windows application control solution runs at the kernel level and is therefore more tamper-resistant than the older Group Policy-based approach?",
+      "options": {
+        "A": "AppLocker with file hash rules",
+        "B": "Windows Defender antivirus exclusions",
+        "C": "Group Policy executable restrictions",
+        "D": "WDAC (Windows Defender Application Control)"
+      },
+      "correct": "D",
+      "explanation": "The section states WDAC enforces code integrity policies at the kernel level and is tamper-resistant because it runs below user-mode, whereas AppLocker is explicitly called older and user-mode, making it less tamper-resistant."
+    },
+    {
+      "section": "Credential storage security",
+      "type": "mc",
+      "question": "Which Windows security feature uses virtualization-based security to prevent credential extraction from LSASS even if an attacker has administrative access?",
+      "options": {
+        "A": "Protected Users security group",
+        "B": "NTLM authentication restrictions",
+        "C": "Credential Guard",
+        "D": "Kerberos ticket lifetime limits"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that Credential Guard uses virtualization-based security to run a hypervisor-protected LSA instance that the main OS cannot directly access, preventing hash extraction even with admin access."
+    },
+    {
+      "section": "Account management",
+      "type": "text",
+      "question": "What is a Privileged Access Workstation (PAW) and what problem does it solve in terms of administrative work?",
+      "rubric": "A sound answer states that a PAW is a dedicated hardened machine used only for admin tasks, which isolates privileged sessions from email and web browsing risks.",
+      "explanation": "The section defines PAW as dedicated hardened machines used only for admin tasks and explicitly states they isolate privileged sessions from email/web browsing risk."
+    },
+    {
+      "section": "Registry security (Windows)",
+      "type": "mc",
+      "question": "Which registry locations are commonly exploited by attackers to establish persistence mechanisms?",
+      "options": {
+        "A": "HKLM\\System\\CurrentControlSet\\Services",
+        "B": "HKLM\\Software\\Classes\\CLSID",
+        "C": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+        "D": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly identifies autorun keys like HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run as common locations where attackers plant persistence mechanisms."
+    },
+    {
+      "section": "Security audit policies",
+      "type": "text",
+      "question": "Name two categories of events that should be audited on Windows for security monitoring, and explain why auditing both successes and failures matters.",
+      "rubric": "A sound answer names at least two categories (such as account logon, account management, privilege use, process tracking, or system events) and explains that failures reveal attack attempts while successes create a baseline of normal activity.",
+      "explanation": "The section lists key categories to audit and explicitly states that failures reveal attack attempts and successes create a normal-activity baseline."
+    }
+  ]
+}

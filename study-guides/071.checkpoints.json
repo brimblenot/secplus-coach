@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "RAID: disk-level redundancy",
+      "type": "mc",
+      "question": "Which RAID level provides the fastest read and write performance but loses all data if any single drive fails?",
+      "options": {
+        "A": "RAID 5, which uses distributed parity",
+        "B": "RAID 6, which uses double parity",
+        "C": "RAID 0, which stripes data with no redundancy",
+        "D": "RAID 1, which mirrors data across two drives"
+      },
+      "correct": "C",
+      "explanation": "RAID 0 offers best performance with 0% capacity overhead but no redundancy—any single drive failure destroys the entire array. RAID 1, 5, and 6 all provide redundancy."
+    },
+    {
+      "section": "RAID: disk-level redundancy",
+      "type": "text",
+      "question": "Why does RAID 6 solve the rebuild vulnerability that exists in RAID 5 with large drives?",
+      "rubric": "A sound answer states that RAID 5 rebuild takes 12+ hours during which a second drive failure destroys the array, while RAID 6 can survive 2 simultaneous failures so a second failure during rebuild does not destroy the array.",
+      "explanation": "RAID 5 is vulnerable during the long rebuild window on large drives; RAID 6's double parity lets the array tolerate a second failure during that vulnerable period."
+    },
+    {
+      "section": "Geographic dispersion and site models",
+      "type": "mc",
+      "question": "In an active-passive geographic deployment, what is the secondary site doing while the primary site is operating normally?",
+      "options": {
+        "A": "Standing by idle, receiving replicated data but not handling traffic",
+        "B": "Processing read-only requests while the primary handles writes",
+        "C": "Mirroring only critical transactions in real time",
+        "D": "Serving live traffic alongside the primary to share the load"
+      },
+      "correct": "A",
+      "explanation": "Active-passive keeps the secondary in standby mode. Only the primary serves traffic; the secondary becomes active only after failover is triggered."
+    },
+    {
+      "section": "Geographic dispersion and site models",
+      "type": "text",
+      "question": "Explain the difference between synchronous and asynchronous replication in terms of data loss risk and latency.",
+      "rubric": "A sound answer states that synchronous replication requires confirmation at both sites before the app is acknowledged, causing zero data loss but adding latency, while asynchronous replication acknowledges at the primary immediately then sends to secondary, lowering latency but risking data loss if failure occurs during the lag window.",
+      "explanation": "Synchronous waits for both sites to confirm, eliminating data loss but slowing writes; asynchronous acknowledges immediately and replicates later, creating a window where recent data could be lost."
+    },
+    {
+      "section": "Disaster recovery site types",
+      "type": "mc",
+      "question": "An organization needs to recover from total primary site failure in approximately 4 hours. Which disaster recovery site type is most appropriate?",
+      "options": {
+        "A": "Backup storage site requiring manual data restoration process",
+        "B": "Warm site with medium cost that activates in hours to days",
+        "C": "Hot site with highest cost but activates in minutes to hours",
+        "D": "Cold site with lowest cost but requires days to weeks to activate"
+      },
+      "correct": "B",
+      "explanation": "A 4-hour recovery window fits the warm site model: hardware is present and partially configured, allowing activation in hours to days with moderate cost. Hot site is faster but more expensive; cold site is too slow."
+    },
+    {
+      "section": "High availability and load balancing",
+      "type": "text",
+      "question": "How do load balancers minimize user-facing impact when a server fails?",
+      "rubric": "A sound answer states that load balancers run continuous health checks to detect failing servers, automatically remove them from the pool, and reroute traffic to surviving servers, so users experience no noticeable interruption.",
+      "explanation": "Health checks detect failures in real time, the failed server is removed from the pool, and remaining servers absorb the traffic seamlessly."
+    },
+    {
+      "section": "Platform diversity and failover",
+      "type": "mc",
+      "question": "What is the primary security advantage of platform diversity in a resilient system?",
+      "options": {
+        "A": "It reduces the total number of vulnerabilities in the infrastructure",
+        "B": "It prevents administrators from making the same configuration mistake on every system",
+        "C": "It eliminates the need for security updates across all systems",
+        "D": "It ensures a vulnerability specific to one OS or vendor cannot compromise all components"
+      },
+      "correct": "D",
+      "explanation": "Platform diversity limits blast radius by ensuring a vulnerability affecting one OS or vendor does not compromise identical systems running the same technology."
+    },
+    {
+      "section": "Platform diversity and failover",
+      "type": "mc",
+      "question": "What is the main risk associated with automatic failover that manual failover avoids?",
+      "options": {
+        "A": "Manual failover allows better data consistency before switching",
+        "B": "Automatic failover is slower than manual failover in disasters",
+        "C": "Automatic failover uses more bandwidth during transition",
+        "D": "Automatic failover may trigger on false positives from monitoring"
+      },
+      "correct": "D",
+      "explanation": "Automatic failover runs the risk of false positives—health checks incorrectly flagging a healthy primary as failed and triggering unnecessary failover. Manual failover allows human judgment to prevent this."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "Remediation is more than patching",
+      "type": "mc",
+      "question": "Which of the following is a response option that reduces exploitability of a vulnerability without fixing the root cause?",
+      "options": {
+        "A": "Accepting the vulnerability formally with no additional security measures",
+        "B": "Patching the vulnerable software with a vendor-supplied code fix",
+        "C": "Creating a temporary approved deviation from the remediation deadline",
+        "D": "Deploying a compensating control that limits risk without modifying the vulnerable code"
+      },
+      "correct": "D",
+      "explanation": "A compensating control reduces exploitability without fixing the root vulnerability, whereas patching fixes it directly, risk acceptance has no controls, and an exception is a deadline deviation, not a risk reduction."
+    },
+    {
+      "section": "Patch delivery by platform",
+      "type": "text",
+      "question": "Name two tools or services used to deploy patches at scale on Windows systems.",
+      "rubric": "A sound answer names any two of: WSUS (Windows Server Update Services), MECM (Microsoft Endpoint Configuration Manager), or SCCM (System Center Configuration Manager).",
+      "explanation": "The section lists WSUS and MECM/SCCM as enterprise-scale patch distribution tools for Windows fleets."
+    },
+    {
+      "section": "The seven-step patch management process",
+      "type": "mc",
+      "question": "In the seven-step patch management process, which step involves re-scanning affected systems to confirm the vulnerability is gone?",
+      "options": {
+        "A": "Verify — rescanning to confirm the vulnerability has been removed",
+        "B": "Document — updating change management and vulnerability tracking records",
+        "C": "Test — validating the patch in a non-production environment",
+        "D": "Identify — monitoring vendor advisories and scanner reports"
+      },
+      "correct": "A",
+      "explanation": "Verification is the step where you rescan to confirm the vulnerability no longer appears; the other steps address discovery, lab testing, and record-keeping."
+    },
+    {
+      "section": "Remediation SLAs by severity",
+      "type": "text",
+      "question": "What is the maximum SLA timeframe for remediating a Critical vulnerability that is actively being exploited?",
+      "rubric": "A sound answer states 24–48 hours.",
+      "explanation": "The section explicitly defines the SLA target for Critical and actively exploited vulnerabilities as 24–48 hours."
+    },
+    {
+      "section": "Compensating controls when patching isn't possible",
+      "type": "mc",
+      "question": "Which compensating control uses a WAF or IPS to block exploit traffic without modifying the vulnerable application?",
+      "options": {
+        "A": "Enhanced monitoring, which deploys IDS signatures to alert on suspicious patterns",
+        "B": "Virtual patching, which deploys filtering rules to block known exploit traffic",
+        "C": "Disabling the vulnerable feature to eliminate that attack surface entirely",
+        "D": "Network isolation, which moves the vulnerable system to a restricted subnet"
+      },
+      "correct": "B",
+      "explanation": "Virtual patching specifically uses a WAF or IPS to block exploit traffic targeting the unpatched vulnerability; the other options represent different compensating control strategies."
+    },
+    {
+      "section": "Exceptions, exemptions, and risk acceptance",
+      "type": "text",
+      "question": "Explain the key difference between an exception and an exemption in vulnerability remediation.",
+      "rubric": "A sound answer states that an exception is temporary with a documented future remediation date, while an exemption is longer-term or permanent and does not have a fixed closure date.",
+      "explanation": "The section defines exception as temporary and exemption as longer-term or potentially permanent, distinguishing them by timeframe and finality."
+    },
+    {
+      "section": "Prioritization tools: KEV and EPSS",
+      "type": "mc",
+      "question": "A vulnerability has a CVSS score of 6.5 but appears in the CISA KEV catalog. How should it be prioritized?",
+      "options": {
+        "A": "As lower priority because the CVSS score is moderate and not in the Critical range",
+        "B": "As medium priority until the EPSS score is calculated to determine actual risk",
+        "C": "As highest priority because CISA KEV indicates confirmed real-world exploitation",
+        "D": "As lower priority unless the asset is on the critical asset inventory"
+      },
+      "correct": "C",
+      "explanation": "The section states that KEV items must be treated as highest priority regardless of CVSS score, because attackers are already exploiting them in the wild."
+    },
+    {
+      "section": "Configuration remediation",
+      "type": "mc",
+      "question": "Configuration remediation is verified by scanning against which of the following standards?",
+      "options": {
+        "A": "The Common Vulnerability Scoring System to rate severity",
+        "B": "The CISA Known Exploited Vulnerabilities catalog for real-world attacks",
+        "C": "CIS Benchmarks or DISA STIGs followed by rescan confirmation",
+        "D": "The National Vulnerability Database for CVE descriptions and metadata"
+      },
+      "correct": "C",
+      "explanation": "The section states configuration vulnerabilities are identified by scanning against CIS Benchmarks or DISA STIGs, then verified by rescan."
+    },
+    {
+      "section": "Verification and metrics",
+      "type": "text",
+      "question": "What is remediation verification, and why is it an important step?",
+      "rubric": "A sound answer states that remediation verification is re-scanning the patched or reconfigured system to confirm the vulnerability no longer appears, and serves as audit evidence.",
+      "explanation": "The section defines remediation verification as rescanning after remediation and notes that scan results should be retained as audit evidence."
+    }
+  ]
+}

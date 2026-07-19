@@ -1,0 +1,143 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why testing matters",
+      "type": "mc",
+      "question": "Which of the following is a compliance requirement related to disaster recovery testing?",
+      "options": {
+        "A": "SOC 2 requires DR testing only for financial institutions",
+        "B": "HIPAA mandates DR testing at least annually",
+        "C": "PCI DSS requires quarterly DR testing and monthly backup verification",
+        "D": "All compliance frameworks require real-world full cutover tests twice yearly"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that PCI DSS, HIPAA, and SOC 2 all require at least annual DR testing. Option B correctly identifies one framework and the annual frequency mentioned in the text."
+    },
+    {
+      "section": "The testing spectrum",
+      "type": "text",
+      "question": "Why would an immature DR program start with tabletop exercises or simulations rather than jumping directly to full cutover tests?",
+      "rubric": "A sound answer explains that immature programs should start low-disruption because full cutover tests carry high production risk, and confidence should grow through less risky tests before attempting real outages.",
+      "explanation": "The section states tests should be chosen based on DR program maturity and that immature programs should start low and move up as confidence grows. Full cutover carries high production risk if it fails, making it unsuitable for unproven programs."
+    },
+    {
+      "section": "Tabletop exercise",
+      "type": "mc",
+      "question": "What are injects in the context of a tabletop exercise?",
+      "options": {
+        "A": "Escalating scenario developments introduced by a facilitator to drive discussion forward",
+        "B": "Malicious code injected into isolated test environments to test security controls",
+        "C": "Hardware devices inserted into test systems to simulate component failures",
+        "D": "Backup data restored from external storage media during the exercise"
+      },
+      "correct": "A",
+      "explanation": "The section defines injects as escalating developments that a facilitator presents to drive the conversation forward, such as introducing new complications to the disaster scenario."
+    },
+    {
+      "section": "Walkthrough (paper test)",
+      "type": "text",
+      "question": "What is the primary benefit of conducting a walkthrough test after infrastructure changes?",
+      "rubric": "A sound answer states that walkthrough verifies procedures are still accurate and current for redesigned systems, or confirms credentials, IP addresses, and access paths reflect the new infrastructure.",
+      "explanation": "The section notes that walkthroughs are especially valuable after infrastructure changes because old procedures may be wrong for redesigned systems, and they verify credentials and access paths are current."
+    },
+    {
+      "section": "Simulation",
+      "type": "mc",
+      "question": "In what environment does a simulation test execute recovery procedures?",
+      "options": {
+        "A": "Across multiple cloud availability zones simultaneously",
+        "B": "On live production systems during a scheduled maintenance window",
+        "C": "In an isolated test environment that cannot affect production",
+        "D": "On the DR site running parallel to production systems"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that simulation executes procedures in an isolated test environment that cannot affect production, making it more realistic than tabletop but limited in scope."
+    },
+    {
+      "section": "Parallel test",
+      "type": "mc",
+      "question": "What is the key advantage of a parallel test in terms of production risk?",
+      "options": {
+        "A": "Production risk is moderate because some systems must be temporarily shut down",
+        "B": "Production risk is high but acceptable if monitored continuously",
+        "C": "Production risk depends entirely on whether failback procedures are documented",
+        "D": "Production risk is eliminated because the DR site runs alongside production"
+      },
+      "correct": "D",
+      "explanation": "The section states that parallel test has no production risk because if the DR fails, users never notice — both environments run simultaneously and independently."
+    },
+    {
+      "section": "Full cutover test",
+      "type": "text",
+      "question": "Why is full cutover test considered the only test that validates the complete recovery chain?",
+      "rubric": "A sound answer explains that full cutover is the only test that includes failback, which is itself a failure point, and thus validates the entire chain from production to DR and back.",
+      "explanation": "The section states that full cutover is the only test validating the complete recovery chain including failback, which is a failure point itself. This cannot be tested in any lower-disruption test."
+    },
+    {
+      "section": "Functional recovery test",
+      "type": "mc",
+      "question": "What scope does a functional recovery test cover?",
+      "options": {
+        "A": "A single component like one server, database, or application",
+        "B": "The entire DR site and all applications failing over simultaneously",
+        "C": "Multiple interconnected systems and their interdependencies",
+        "D": "Production systems while running chaos engineering attacks"
+      },
+      "correct": "A",
+      "explanation": "The section defines functional recovery test as focusing on a single component: restoring one server, recovering one database, or bringing up one application after simulated failure."
+    },
+    {
+      "section": "Chaos engineering",
+      "type": "mc",
+      "question": "Which statement accurately describes Chaos Monkey's behavior?",
+      "options": {
+        "A": "It detects unauthorized network connections and logs them",
+        "B": "It restores backups to verify data integrity",
+        "C": "It randomly terminates VM instances in production to test resilience",
+        "D": "It simulates phishing emails to measure user awareness"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that Netflix pioneered chaos engineering with Chaos Monkey, which randomly terminates VM instances in production to verify resilience mechanisms hold."
+    },
+    {
+      "section": "Red team DR test",
+      "type": "text",
+      "question": "What does a red team DR test combine, and what unique insight does it provide compared to other test types?",
+      "rubric": "A sound answer states that red team DR combines adversarial attack simulation with disaster recovery, revealing how incident response and DR teams coordinate and testing both processes simultaneously.",
+      "explanation": "The section defines red team DR test as combining attack simulation with DR recovery, testing incident response and DR simultaneously, and revealing how the two teams coordinate under stress."
+    },
+    {
+      "section": "Key metrics to validate",
+      "type": "mc",
+      "question": "What does RPO measure during a recovery test?",
+      "options": {
+        "A": "The number of staff members available during recovery",
+        "B": "The time required to restore a single backup file",
+        "C": "The maximum acceptable downtime allowed before users are impacted",
+        "D": "How much data was lost and whether it falls within acceptable limits"
+      },
+      "correct": "D",
+      "explanation": "The section defines RPO as Recovery Point Objective and states it measures how much data was lost and whether that loss is within acceptable limits."
+    },
+    {
+      "section": "Documentation requirements",
+      "type": "text",
+      "question": "Why is it important that corrective actions from post-test reports have assigned owners and deadlines?",
+      "rubric": "A sound answer explains that without ownership and deadlines, the same gaps may repeat in future tests, diminishing the testing program's value, or that fixes ensure procedures improve before the next test.",
+      "explanation": "The section states that finding the same gap repeatedly without fixing it means the testing program provides diminishing value, implying that ownership and deadlines ensure gaps are actually remediated before future tests."
+    },
+    {
+      "section": "Ransomware-specific recovery drills",
+      "type": "mc",
+      "question": "What critical verification is unique to ransomware recovery testing?",
+      "options": {
+        "A": "Testing that user credentials were reset across the domain",
+        "B": "Verifying restored systems contain no malware and backups remain uncompromised",
+        "C": "Confirming that encryption keys were rotated and archived properly",
+        "D": "Documenting that ransom payment procedures were followed correctly"
+      },
+      "correct": "B",
+      "explanation": "The section specifically states that ransomware testing must verify restored systems are free of the original malware and that backup systems themselves were not compromised by ransomware actors."
+    }
+  ]
+}

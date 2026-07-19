@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Firmware vulnerabilities",
+      "type": "text",
+      "question": "Explain why a rootkit embedded in UEFI firmware is harder to remove than malware on the hard drive.",
+      "rubric": "A sound answer states that firmware runs below the OS and is stored in non-volatile memory on the motherboard, so a full OS reinstall or hard-drive wipe does not touch it — the malicious code persists because it lives in hardware flash memory, not the drive.",
+      "explanation": "The section explicitly states firmware runs below the OS, is non-volatile, and survives a hard-drive wipe because it lives in the motherboard's flash memory, not on the OS drive."
+    },
+    {
+      "section": "End-of-life vs. end-of-service-life hardware",
+      "type": "mc",
+      "question": "What is the key difference between end-of-life and end-of-service-life?",
+      "options": {
+        "A": "End-of-life means sales stop but patches may continue; end-of-service-life means security updates stop permanently.",
+        "B": "End-of-life is announced by retailers; end-of-service-life is announced by manufacturers only.",
+        "C": "End-of-life stops patches immediately; end-of-service-life keeps the product actively sold with support.",
+        "D": "End-of-life applies to embedded systems; end-of-service-life applies to all hardware types."
+      },
+      "correct": "A",
+      "explanation": "The section's table and text explicitly define end-of-life as sales stopping but patches continuing for a period, and end-of-service-life as the manufacturer stopping security updates permanently."
+    },
+    {
+      "section": "Legacy hardware",
+      "type": "mc",
+      "question": "What are compensating controls used for when legacy hardware cannot be replaced?",
+      "options": {
+        "A": "To completely eliminate all security risks from the old equipment.",
+        "B": "To automatically patch hardware security flaws at the firmware level.",
+        "C": "To reduce (not eliminate) risk through network segmentation, firewalls, and intrusion prevention.",
+        "D": "To allow the hardware to run indefinitely without any modern security protocols."
+      },
+      "correct": "C",
+      "explanation": "The section states compensating controls are used to reduce risk when replacement is infeasible, and lists network segmentation, additional firewall rules, and intrusion prevention signatures as examples."
+    },
+    {
+      "section": "Hardware trojans",
+      "type": "text",
+      "question": "Why is a hardware trojan considered impossible to detect or remove for a typical organization?",
+      "rubric": "A sound answer should state that a hardware trojan is physically embedded in the chip or circuit board during manufacturing, not software, so it cannot be removed with a patch and detection requires destructive testing or specialized lab equipment unavailable to most organizations.",
+      "explanation": "The section explicitly states hardware trojans are physically embedded, cannot be patched, and detection without destructive testing or highly specialized equipment is essentially impossible for typical organizations."
+    },
+    {
+      "section": "Side-channel attacks",
+      "type": "mc",
+      "question": "Which side-channel attack extracts secret information by measuring how long cryptographic operations take?",
+      "options": {
+        "A": "Simple power analysis, which observes electrical current draw during a single operation.",
+        "B": "Cache-timing attack, which infers data access patterns from CPU cache hit and miss latency.",
+        "C": "Electromagnetic analysis, which measures RF emissions from the chip without physical contact.",
+        "D": "Timing attack, which observes how key bits cause measurable time differences in operations."
+      },
+      "correct": "D",
+      "explanation": "The table in the section lists timing attack as measuring how long cryptographic operations take, with key bits causing measurable time differences."
+    },
+    {
+      "section": "Spectre and Meltdown",
+      "type": "mc",
+      "question": "Which statement correctly distinguishes what Meltdown and Spectre each allow an attacker to read?",
+      "options": {
+        "A": "Meltdown is eliminated by microcode; Spectre cannot be mitigated in any way.",
+        "B": "Meltdown reads kernel memory; Spectre leaks data via branch prediction and shared cache manipulation.",
+        "C": "Meltdown leaks across processors; Spectre reads kernel memory exclusively.",
+        "D": "Meltdown affects Intel only; Spectre affects AMD and ARM processors only."
+      },
+      "correct": "B",
+      "explanation": "The table in the section explicitly states Meltdown allows reading kernel memory, while Spectre manipulates branch prediction to leak data from other processes via shared cache."
+    },
+    {
+      "section": "JTAG and physical interface attacks",
+      "type": "text",
+      "question": "Describe the primary security risk posed by an enabled JTAG port and state one mitigation.",
+      "rubric": "A sound answer should state that JTAG provides direct access to processor registers and memory, bypassing all software security, allowing read/write of arbitrary memory, key extraction, and firmware modification. Mitigations include disabling, password-protecting, or physically destroying the port.",
+      "explanation": "The section states JTAG provides complete bypass of software security controls and lists disable, password-protect, or physically destroy as mitigations."
+    },
+    {
+      "section": "DMA attacks and Rowhammer",
+      "type": "mc",
+      "question": "What does IOMMU do to mitigate DMA attacks?",
+      "options": {
+        "A": "It logs all DMA transactions for later forensic analysis.",
+        "B": "It restricts which physical memory regions each DMA device can access.",
+        "C": "It encrypts all data transferred by DMA devices to and from RAM.",
+        "D": "It completely disables the DMA feature on all peripheral devices."
+      },
+      "correct": "B",
+      "explanation": "The section states IOMMU mitigates DMA attacks by restricting which physical memory regions each DMA device can access."
+    },
+    {
+      "section": "DMA attacks and Rowhammer",
+      "type": "mc",
+      "question": "What is Rowhammer and what security outcome can it achieve?",
+      "options": {
+        "A": "A firmware vulnerability that writes directly to memory and installs rootkits undetected.",
+        "B": "A cache-timing attack that measures access patterns to extract cryptographic keys from processors.",
+        "C": "A software exploit that overwrites DRAM and corrupts OS files without permission.",
+        "D": "A DRAM attack using rapid row reads to flip bits in adjacent rows; enables privilege escalation."
+      },
+      "correct": "D",
+      "explanation": "The section defines Rowhammer as rapidly reading specific DRAM rows to cause bit flips in adjacent rows, and states that strategic bit flips can achieve privilege escalation with no software vulnerability."
+    }
+  ]
+}

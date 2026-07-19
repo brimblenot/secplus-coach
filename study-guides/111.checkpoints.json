@@ -1,0 +1,50 @@
+{
+  "checkpoints": [
+    {
+      "section": "Qualitative risk analysis",
+      "type": "mc",
+      "question": "In qualitative risk analysis, what is a heat map?",
+      "options": {
+        "A": "A document that tracks all control costs and their financial returns",
+        "B": "A list of threats ranked by their likelihood of occurring each year",
+        "C": "A numerical spreadsheet that calculates asset value and exposure factor",
+        "D": "A color-coded 2D matrix showing likelihood and impact, where red indicates high risk"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly defines a heat map as a color-coded 2D matrix with likelihood on one axis and impact on the other, where red equals high risk, yellow/orange equals medium, and green equals low."
+    },
+    {
+      "section": "Quantitative risk analysis — core formulas",
+      "type": "text",
+      "question": "A company has a database server worth $80,000. If a ransomware attack destroys 50% of recoverable data, what is the Single Loss Expectancy? Show your work and explain what SLE represents.",
+      "rubric": "A sound answer calculates SLE = $80,000 × 0.5 = $40,000 and states that SLE is the expected dollar loss from one occurrence of a threat against one asset.",
+      "explanation": "The section defines Asset Value, Exposure Factor as a decimal, and the formula SLE = AV × EF; students must apply these to a concrete scenario."
+    },
+    {
+      "section": "Types of risk",
+      "type": "mc",
+      "question": "Which term best describes the risk that remains after security controls are in place?",
+      "options": {
+        "A": "Control risk",
+        "B": "Inherent risk",
+        "C": "Residual risk",
+        "D": "Detection risk"
+      },
+      "correct": "C",
+      "explanation": "The study guide defines residual risk as the risk after controls are applied, whereas inherent risk exists before any controls; control risk and detection risk refer to failures within controls themselves."
+    },
+    {
+      "section": "Data sources for quantitative analysis",
+      "type": "mc",
+      "question": "Which data source publishes empirical breach frequency and characteristics data using the VERIS schema?",
+      "options": {
+        "A": "Verizon DBIR / VERIS",
+        "B": "FAIR structured quantitative framework",
+        "C": "Ponemon Institute annual breach cost studies",
+        "D": "Marsh / AON insurance actuarial tables"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that Verizon DBIR provides empirical breach frequency and characteristics data across industries, and that VERIS is the Vocabulary for Event Recording and Incident Sharing schema underlying that data."
+    }
+  ]
+}

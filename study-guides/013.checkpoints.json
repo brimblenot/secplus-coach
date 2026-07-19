@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Symmetric encryption: one key does both jobs",
+      "type": "mc",
+      "question": "Which symmetric encryption algorithm is considered the gold standard today and is used in TLS, BitLocker, and FileVault?",
+      "options": {
+        "A": "DES with a 56-bit key for general-purpose encryption",
+        "B": "AES, which replaced DES in 2001 and is fast and widely deployed",
+        "C": "3DES, which runs the DES algorithm three times per block",
+        "D": "RC4, which is forbidden by RFC 7465 but still used in legacy systems"
+      },
+      "correct": "B",
+      "explanation": "The section states that AES replaced DES in 2001, is today's gold standard, and powers TLS, BitLocker, FileVault, and WPA3. DES is cryptographically broken, 3DES is deprecated, and RC4 is covered in the stream ciphers section, not symmetric encryption."
+    },
+    {
+      "section": "Modes of operation: how AES handles long messages",
+      "type": "text",
+      "question": "Explain why GCM is preferred over CBC for new applications.",
+      "rubric": "A sound answer notes that GCM is an AEAD mode that provides both confidentiality and integrity in one pass via an authentication tag, and that if data is altered, the tag check fails and the data is rejected. It should mention that GCM is used in TLS 1.3, SSH, and IPsec.",
+      "explanation": "The section explicitly defines GCM as an AEAD scheme that adds an authentication tag, describes the consequence of tampering (tag check fails, data rejected), and lists its deployment in modern protocols."
+    },
+    {
+      "section": "Stream ciphers",
+      "type": "mc",
+      "question": "What is the status of RC4 as a cryptographic algorithm?",
+      "options": {
+        "A": "It is a hardware-based encryption device used in embedded systems",
+        "B": "It is still acceptable for legacy TLS implementations",
+        "C": "It is secure and recommended for WEP wireless encryption",
+        "D": "It is forbidden by RFC 7465 due to multiple cryptographic attacks"
+      },
+      "correct": "D",
+      "explanation": "The section states RC4 has been fully broken by multiple cryptographic attacks and is forbidden by RFC 7465. It explicitly instructs not to use RC4."
+    },
+    {
+      "section": "Asymmetric encryption: key pairs",
+      "type": "mc",
+      "question": "Why is a 2048-bit RSA key length considered the minimum acceptable today?",
+      "options": {
+        "A": "Because the section specifies 2048-bit as the minimum acceptable for current use",
+        "B": "Because ECC has made RSA entirely obsolete for all applications",
+        "C": "Because RSA cannot be used in TLS 1.3 at any key length",
+        "D": "Because RSA-1024 was broken and modern brute-force can crack smaller keys"
+      },
+      "correct": "A",
+      "explanation": "The section presents a table stating '2048-bit' has the status 'Minimum acceptable today,' without explaining the underlying cryptanalytic reason. This is a direct recall of the stated standard."
+    },
+    {
+      "section": "Asymmetric encryption: key pairs",
+      "type": "text",
+      "question": "What advantage does ECC have over RSA for use in mobile and IoT devices?",
+      "rubric": "A sound answer states that ECC achieves equivalent security with much smaller keys, resulting in faster computation and less memory usage, making it ideal for resource-constrained devices.",
+      "explanation": "The section explicitly contrasts ECC's smaller key sizes (256-bit ECC ≈ 3072-bit RSA) and notes that smaller keys mean faster computation and less memory, making ECC ideal for smartphones, IoT, and embedded systems."
+    },
+    {
+      "section": "Diffie-Hellman and Perfect Forward Secrecy",
+      "type": "mc",
+      "question": "What does Perfect Forward Secrecy ensure?",
+      "options": {
+        "A": "That the server's long-term private key is never stored on disk",
+        "B": "That all messages are encrypted with the same shared secret indefinitely",
+        "C": "That compromising the server's long-term key does not expose past sessions",
+        "D": "That the discrete logarithm problem becomes computationally easy"
+      },
+      "correct": "C",
+      "explanation": "The section defines PFS as a property where compromising the server's long-term private key does not expose past sessions, achieved by using ephemeral key pairs that are discarded after each session."
+    },
+    {
+      "section": "Diffie-Hellman and Perfect Forward Secrecy",
+      "type": "text",
+      "question": "Explain how ECDHE provides Perfect Forward Secrecy in TLS 1.3.",
+      "rubric": "A sound answer states that ECDHE generates a fresh ephemeral key pair per session, uses it for key agreement, and then discards it. This means that even if the server's long-term key is compromised later, the attacker cannot recover the discarded ephemeral private key needed to decrypt old traffic.",
+      "explanation": "The section explains that ECDHE uses ephemeral (temporary, one-time) keys that are generated per session and then discarded, and states this design prevents past session exposure even if the long-term key is later compromised."
+    },
+    {
+      "section": "Hardware encryption devices",
+      "type": "mc",
+      "question": "What is the primary difference between a TPM and an HSM?",
+      "options": {
+        "A": "TPM is a dedicated appliance validated to FIPS standards",
+        "B": "TPM performs digital signatures; HSM performs encryption",
+        "C": "TPM is used for file encryption; HSM is used for measured boot",
+        "D": "TPM is embedded on a motherboard for a single machine; HSM is an enterprise device handling crypto at scale"
+      },
+      "correct": "D",
+      "explanation": "The section describes TPM as a security chip on a motherboard for one computer and HSM as a dedicated enterprise appliance for high-performance cryptographic operations at scale, contrasting their scope and deployment."
+    },
+    {
+      "section": "Hardware encryption devices",
+      "type": "text",
+      "question": "What role does the Secure Enclave play in protecting data on an Apple device?",
+      "rubric": "A sound answer states that the Secure Enclave is an isolated processor region physically separate from the main CPU that stores sensitive data such as Touch ID/Face ID biometric templates and device encryption keys, preventing the main CPU and OS from accessing them.",
+      "explanation": "The section explains that Apple's Secure Enclave Processor stores biometric templates and encryption keys in isolation, explicitly noting that the main CPU and OS never see this data."
+    },
+    {
+      "section": "Full disk and file-level encryption",
+      "type": "mc",
+      "question": "Which of the following is a full disk encryption solution for Windows that uses TPM?",
+      "options": {
+        "A": "EFS, which encrypts individual files within NTFS",
+        "B": "FileVault, which uses the Secure Enclave on macOS",
+        "C": "LUKS, which is the Linux Unified Key Setup standard",
+        "D": "BitLocker, which uses TPM and optionally a PIN or USB key"
+      },
+      "correct": "C",
+      "explanation": "The section presents a table showing BitLocker as a Windows full-disk encryption solution and states separately that it uses the TPM. EFS is file-level, LUKS is Linux, and FileVault is macOS."
+    }
+  ]
+}

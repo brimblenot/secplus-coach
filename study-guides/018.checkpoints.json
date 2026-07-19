@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a distributed ledger actually is",
+      "type": "mc",
+      "question": "In a distributed ledger, how is agreement reached about which version of the ledger is correct?",
+      "options": {
+        "A": "A central authority reviews all changes and approves them",
+        "B": "An agreed-upon consensus mechanism is used by the network",
+        "C": "Whichever node has the fastest internet connection wins",
+        "D": "The oldest node on the network makes all final decisions"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that 'changes must be approved by the network through a consensus mechanism — an agreed-upon process for deciding which version of the ledger is correct.' No single authority controls it."
+    },
+    {
+      "section": "How blocks chain together",
+      "type": "text",
+      "question": "Explain why changing a single transaction in an old block would be detected by other nodes on the network.",
+      "rubric": "A sound answer explains that altering a transaction changes that block's hash, which breaks the cryptographic pointer stored in the next block, causing that block's hash to change, and cascading through all subsequent blocks until the hashes no longer match other nodes' copies.",
+      "explanation": "The section describes how the hash of the previous block is stored as a cryptographic link in the next block, so any transaction change propagates broken pointers through the entire chain."
+    },
+    {
+      "section": "Consensus mechanisms",
+      "type": "mc",
+      "question": "What percentage of the network's hash rate must an attacker control to execute a 51% attack on a Proof of Work blockchain?",
+      "options": {
+        "A": "More than 50% of the total hash rate",
+        "B": "Approximately 33% of the total hash rate",
+        "C": "Exactly 50% of the total hash rate",
+        "D": "At least 25% of the total hash rate"
+      },
+      "correct": "A",
+      "explanation": "The section states that 'when a single attacker controls more than half of a PoW network's total hash rate, they can rewrite history and double-spend.'"
+    },
+    {
+      "section": "Public vs. private blockchains",
+      "type": "mc",
+      "question": "Why are private blockchains typically faster than public blockchains?",
+      "options": {
+        "A": "They allow administrators to skip consensus entirely",
+        "B": "They do not require any cryptographic hashing",
+        "C": "They require fewer, trusted nodes to reach consensus",
+        "D": "They use more powerful computers than public chains"
+      },
+      "correct": "C",
+      "explanation": "The table indicates that private blockchains are 'faster — fewer, trusted nodes' compared to public blockchains that need 'global consensus.'"
+    },
+    {
+      "section": "Smart contracts",
+      "type": "text",
+      "question": "What is the main security risk of smart contracts, and why is it a concern?",
+      "rubric": "A sound answer states that smart contract code is immutable once deployed, so any bugs or vulnerabilities cannot be patched and become permanent exploits.",
+      "explanation": "The section explicitly warns that smart contract bugs are immutable once deployed and have caused hundreds of millions of dollars in losses."
+    },
+    {
+      "section": "Security applications of blockchain",
+      "type": "mc",
+      "question": "What does Certificate Transparency require all publicly trusted CAs to do?",
+      "options": {
+        "A": "Verify the identity of every website before issuing a certificate",
+        "B": "Keep all certificate data encrypted and private from domain owners",
+        "C": "Delete all issued certificates after one year",
+        "D": "Submit every certificate they issue to public, append-only CT logs"
+      },
+      "correct": "D",
+      "explanation": "The section states that Certificate Transparency requires 'all publicly trusted Certificate Authorities to submit every certificate they issue to public, append-only CT logs built on Merkle trees.'"
+    },
+    {
+      "section": "Ransomware and cryptocurrency",
+      "type": "mc",
+      "question": "What privacy technique does Monero use to prevent linking transactions to a recipient's public address?",
+      "options": {
+        "A": "Ring signatures that mix multiple transactions",
+        "B": "One-time stealth addresses per transaction",
+        "C": "Blockchain confirmations before finality",
+        "D": "Encrypted wallet names for sender viewing"
+      },
+      "correct": "B",
+      "explanation": "The section defines stealth addresses as 'one-time addresses that prevent linking transactions to a recipient's public address' as part of Monero's anonymity features."
+    },
+    {
+      "section": "What blockchain does NOT fix",
+      "type": "text",
+      "question": "If a user's private key is stolen, why cannot the blockchain itself prevent the attacker from using it?",
+      "rubric": "A sound answer explains that the blockchain cannot distinguish between the legitimate owner and an attacker using a stolen key, so endpoint security is still required to prevent key theft.",
+      "explanation": "The section states 'the blockchain can't tell the difference between you and an attacker using your stolen key,' making endpoint security the real defense."
+    }
+  ]
+}

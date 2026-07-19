@@ -1,0 +1,149 @@
+{
+  "checkpoints": [
+    {
+      "section": "The guiding principle: minimal footprint",
+      "type": "text",
+      "question": "In your own words, what does 'minimal footprint' mean and why does it matter for security?",
+      "rubric": "A sound answer explains that minimal footprint means keeping only what is needed to do the system's job, with nothing extra. It should note that extra services, ports, accounts, or features are potential attack vectors.",
+      "explanation": "The section defines minimal footprint as running only what a system's role demands and explicitly states that every extra service, port, account, or feature is a door an attacker can try."
+    },
+    {
+      "section": "OS hardening",
+      "type": "mc",
+      "question": "What is the primary difference between a host-based firewall and a perimeter firewall?",
+      "options": {
+        "A": "A perimeter firewall uses deny-all-inbound rules, while a host-based firewall uses allow-all-inbound rules.",
+        "B": "A host-based firewall protects a single machine regardless of network, while a perimeter firewall filters traffic at the network edge.",
+        "C": "A perimeter firewall protects a single machine regardless of network, while a host-based firewall filters traffic at the network edge.",
+        "D": "A host-based firewall protects only Windows systems, while a perimeter firewall protects both Windows and Linux systems."
+      },
+      "correct": "B",
+      "explanation": "The section explicitly contrasts the two: a host-based firewall 'controls traffic to and from a single machine, enforcing its rules no matter which network the machine is on,' while a perimeter firewall 'sits at the edge of a network and only filters traffic crossing that boundary' and offers no protection once a device leaves the office."
+    },
+    {
+      "section": "Endpoint Detection and Response",
+      "type": "text",
+      "question": "How does EDR differ from traditional antivirus in the types of threats it can detect?",
+      "rubric": "A sound answer should note that EDR watches process behavior, detects injection, and uses machine learning to spot attack patterns without needing a known signature, whereas traditional antivirus only matches file hashes against a database of known signatures.",
+      "explanation": "The section states that antivirus 'only compares file hashes against a database of known-bad signatures' and 'cannot catch novel threats,' while EDR detects process injection, tracks connections, and applies machine learning to spot 'attack patterns without needing a matching signature.'"
+    },
+    {
+      "section": "Data encryption",
+      "type": "mc",
+      "question": "Which of the following best describes the relationship between full disk encryption and EFS?",
+      "options": {
+        "A": "FDE encrypts the entire volume including the OS, while EFS encrypts only individual files or folders without encrypting the whole volume.",
+        "B": "Both FDE and EFS encrypt the entire volume, but FDE is used on Windows and EFS is used on Linux.",
+        "C": "Both FDE and EFS encrypt individual files only, but FDE uses TPM and EFS uses passwords.",
+        "D": "EFS encrypts the entire volume including the OS, while FDE encrypts only individual files or folders without encrypting the whole volume."
+      },
+      "correct": "A",
+      "explanation": "The section defines FDE as 'encrypt[ing] an entire storage volume — OS, files, everything' and EFS as encrypting 'individual files/folders without encrypting the whole volume.'"
+    },
+    {
+      "section": "Host-based IDS and IPS",
+      "type": "mc",
+      "question": "What is the key difference between a host-based IDS and a host-based IPS?",
+      "options": {
+        "A": "A host-based IDS monitors network traffic, while a host-based IPS monitors system calls and file changes.",
+        "B": "A host-based IPS generates alerts when attack patterns are detected, while a host-based IDS takes automated blocking action.",
+        "C": "A host-based IDS generates alerts when attack patterns are detected, while a host-based IPS takes automated blocking action.",
+        "D": "A host-based IPS only works on Windows, while a host-based IDS works on all operating systems."
+      },
+      "correct": "C",
+      "explanation": "The section defines IDS as monitoring and generating alerts, and IPS as taking 'automated blocking action, such as terminating a process trying to modify a protected registry key.'"
+    },
+    {
+      "section": "Application hardening",
+      "type": "mc",
+      "question": "Why should applications return generic error messages to users rather than detailed ones?",
+      "options": {
+        "A": "Generic messages prevent database corruption, while detailed errors increase the risk of data loss.",
+        "B": "Generic messages make the application run faster, while detailed errors slow down processing.",
+        "C": "Detailed messages are required by law, but generic ones bypass compliance requirements.",
+        "D": "Generic messages prevent attackers from mapping the application, while detailed errors should be logged locally for troubleshooting."
+      },
+      "correct": "D",
+      "explanation": "The section states: 'Return generic error messages to users; log detailed errors locally (prevents attackers from mapping the app).'"
+    },
+    {
+      "section": "Application hardening",
+      "type": "mc",
+      "question": "What does the X-Frame-Options header prevent?",
+      "options": {
+        "A": "Connections from unencrypted HTTP protocols to a domain that supports HTTPS.",
+        "B": "Clickjacking attacks where a hidden frame tricks users into clicking something they cannot see.",
+        "C": "Requests using HTTP methods like TRACE, PUT, and DELETE on the web server.",
+        "D": "MIME-sniffing where browsers guess a file type instead of trusting the declared content type."
+      },
+      "correct": "B",
+      "explanation": "The section directly states that X-Frame-Options 'Prevents the page from loading inside an iframe, blocking clickjacking — an attack where a hidden frame tricks users into clicking something they can't see.'"
+    },
+    {
+      "section": "Network device hardening",
+      "type": "text",
+      "question": "Why is changing default passwords the first priority when hardening network devices?",
+      "rubric": "A sound answer should indicate that vendor-default credentials are publicly documented and are among the first things attackers try.",
+      "explanation": "The section explicitly states: 'First priority: change all default passwords. Vendor-default credentials are publicly documented and are among the first things attackers try.'"
+    },
+    {
+      "section": "Network device hardening",
+      "type": "mc",
+      "question": "What is the purpose of BPDU Guard on switch access ports?",
+      "options": {
+        "A": "It blocks unauthorized switches from joining the STP topology, preventing network loops.",
+        "B": "It validates ARP packets to prevent attackers from redirecting traffic through their machine.",
+        "C": "It restricts management access to only specific trusted IP addresses.",
+        "D": "It prevents rogue DHCP servers from handing out false IP configuration."
+      },
+      "correct": "A",
+      "explanation": "The section defines BPDU Guard as blocking 'unauthorized switches from joining the STP topology on access ports,' where BPDU messages are used by STP 'to prevent network loops.'"
+    },
+    {
+      "section": "Wireless hardening",
+      "type": "mc",
+      "question": "Which wireless protocol uses the SAE handshake to resist offline dictionary attacks?",
+      "options": {
+        "A": "WPA2, which is acceptable with a 20+ character passphrase.",
+        "B": "WEP, which remains secure with modern encryption methods.",
+        "C": "WPA3, the current standard for wireless security.",
+        "D": "WPA, which was sufficient for early wireless networks."
+      },
+      "correct": "C",
+      "explanation": "The section states that WPA3 is the 'Current standard; uses SAE — Simultaneous Authentication of Equals — handshake that resists offline dictionary attacks.'"
+    },
+    {
+      "section": "Wireless hardening",
+      "type": "text",
+      "question": "How does WPA2/WPA3-Enterprise with 802.1X differ from standard WPA2/WPA3 in terms of user management?",
+      "rubric": "A sound answer should explain that Enterprise uses per-user credentials via a RADIUS server, so revoking one user does not affect everyone else, whereas standard WPA2/WPA3 uses a shared passphrase.",
+      "explanation": "The section states that Enterprise 'uses 802.1X with a RADIUS server — a centralized authentication server — for per-user credentials; revoking one user doesn't affect everyone else,' contrasting the shared-passphrase model."
+    },
+    {
+      "section": "Mobile device hardening",
+      "type": "mc",
+      "question": "What does disabling USB debugging prevent on mobile devices?",
+      "options": {
+        "A": "The device from connecting to Wi-Fi networks and cellular data.",
+        "B": "Users from backing up their data to cloud storage services.",
+        "C": "Mobile Device Management platforms from pushing security policies to the device.",
+        "D": "Granting privileged low-level access to the device, which is a security risk."
+      },
+      "correct": "D",
+      "explanation": "The section lists USB debugging as 'settings that grant privileged low-level access to the device' and recommends disabling it as part of hardening."
+    },
+    {
+      "section": "Hardening standards",
+      "type": "mc",
+      "question": "What is the main difference between CIS Benchmarks Level 1 and Level 2?",
+      "options": {
+        "A": "Level 1 balances strong security with minimal usability impact, while Level 2 prioritizes high security for sensitive environments with potential compatibility effects.",
+        "B": "Level 2 balances strong security with minimal usability impact, while Level 1 prioritizes high security for sensitive environments.",
+        "C": "Level 1 is for U.S. Department of Defense systems, while Level 2 is for commercial organizations.",
+        "D": "Level 1 is published by DISA, while Level 2 is published by the Center for Internet Security."
+      },
+      "correct": "A",
+      "explanation": "The section defines Level 1 as 'Balanced — strong security with minimal usability/performance impact' and Level 2 as 'High security — for the most sensitive environments; some settings may affect compatibility.'"
+    }
+  ]
+}

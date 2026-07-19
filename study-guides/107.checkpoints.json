@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Policies vs. standards vs. procedures",
+      "type": "mc",
+      "question": "Which of the following is the primary purpose of documenting security procedures?",
+      "options": {
+        "A": "To communicate organizational values to external stakeholders",
+        "B": "To specify measurable requirements and answer what must be configured",
+        "C": "To state management's intent and answer what must be done",
+        "D": "To ensure consistency, enable training, and provide audit evidence"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that procedures matter for three reasons: consistency, training new hires, and providing audit evidence that a policy is followed. The other options describe policies (A), standards (C), and are not stated in the section (D)."
+    },
+    {
+      "section": "Change management procedures",
+      "type": "text",
+      "question": "Describe the sequence of steps that occurs after an RFC is submitted in a change management procedure.",
+      "rubric": "A sound answer names the CAB review and approval, implementation during a maintenance window, and verification that the change worked and caused no problems. The answer should reflect the order presented in the section.",
+      "explanation": "The section lists the steps in order: CAB reviews and approves, change is implemented during a maintenance window, then verification confirms the change worked without new problems, and finally everything is logged."
+    },
+    {
+      "section": "Onboarding procedures",
+      "type": "mc",
+      "question": "Which principle determines how much access a new employee should receive during onboarding?",
+      "options": {
+        "A": "Principle of shared access to promote collaboration",
+        "B": "Principle of maximum availability to enable fast productivity",
+        "C": "Principle of least privilege, granting only what the job requires",
+        "D": "Principle of administrative parity with existing staff"
+      },
+      "correct": "C",
+      "explanation": "The section states that the principle of least privilege governs access during onboarding, giving the new hire only what their specific job requires and nothing more."
+    },
+    {
+      "section": "Offboarding and termination procedures",
+      "type": "text",
+      "question": "Why is the timing of access revocation different between voluntary and involuntary terminations, and what is the security risk of delaying revocation?",
+      "rubric": "A sound answer states that involuntary termination requires immediate revocation before or at notification, while voluntary departure allows revocation on or after the last day. It should identify that unrevoked access is a direct attack surface or security risk.",
+      "explanation": "The section explains that voluntary departure is initiated on or before the last day, but involuntary termination access is revoked immediately. It emphasizes that unrevoked access is a direct attack surface, making the timing difference critical."
+    },
+    {
+      "section": "Patch management procedures",
+      "type": "mc",
+      "question": "What is the remediation deadline for a vulnerability rated as Critical severity in a typical patch management SLA?",
+      "options": {
+        "A": "90 days",
+        "B": "15 days",
+        "C": "180 days",
+        "D": "30 days"
+      },
+      "correct": "B",
+      "explanation": "The section provides an SLA table showing Critical severity patches must be remediated within 15 days; High is 30 days, Medium is 90 days, and Low is 180 days."
+    },
+    {
+      "section": "Password reset procedures",
+      "type": "mc",
+      "question": "Which of the following is an acceptable identity verification method before resetting a user's password?",
+      "options": {
+        "A": "Calling back on a phone number already in the HR/IT system",
+        "B": "Asking the user to answer a security question they created themselves",
+        "C": "Granting the reset based on an email request from any domain",
+        "D": "Accepting the user's email address without further confirmation"
+      },
+      "correct": "A",
+      "explanation": "The section lists three acceptable verification methods: callback on a registered phone number, manager confirmation, or in-person photo ID verification. Callback on a registered number directly defeats social engineering by verifying the requester's identity independently."
+    },
+    {
+      "section": "Backup and recovery procedures",
+      "type": "text",
+      "question": "What is the difference between a backup procedure and a recovery procedure, and why is restore testing necessary?",
+      "rubric": "A sound answer states that backup procedures specify how and when data is backed up, while recovery procedures specify how it is restored and who authorizes recovery. Restore testing is necessary to confirm the backup is complete and functional, not just assumed to work.",
+      "explanation": "The section defines backup procedures as covering backup type, schedule, retention, and storage, while recovery procedures cover authority to declare disaster, restoration order by business criticality, and communication. Restore testing actually restores to a test environment to confirm functionality, catching hidden failures."
+    },
+    {
+      "section": "Vulnerability management procedures",
+      "type": "mc",
+      "question": "When a system cannot be patched within the required SLA deadline, what must be documented as part of the exception process?",
+      "options": {
+        "A": "A business reason, residual risk assessment, and compensating controls",
+        "B": "A brief note explaining why IT was unable to complete the work",
+        "C": "The vendor name and patch version number",
+        "D": "Only the name of the system and the date the patch was requested"
+      },
+      "correct": "A",
+      "explanation": "The section states that patches that cannot be applied must be documented as exceptions with a business reason, residual risk assessment, and compensating controls that reduce risk when the primary control cannot be applied."
+    },
+    {
+      "section": "Access review procedures",
+      "type": "text",
+      "question": "What is the purpose of periodic access certification reviews, and what happens to access that cannot be confirmed as appropriate?",
+      "rubric": "A sound answer states that access reviews confirm current access rights are still appropriate and relevant. Access that cannot be confirmed as still appropriate is revoked promptly.",
+      "explanation": "The section defines access review procedures as a periodic process where system owners or managers review and confirm each access entry, revoking any that cannot be justified as still necessary."
+    },
+    {
+      "section": "Physical security procedures",
+      "type": "mc",
+      "question": "Which physical security procedure requirement addresses the risk of someone following an authorized employee through a controlled entry without using their own credential?",
+      "options": {
+        "A": "Clean desk inspections during business hours",
+        "B": "Regular reporting of physical incident trends",
+        "C": "Badge issuance and replacement processes",
+        "D": "Visitor management and escort policies"
+      },
+      "correct": "D",
+      "explanation": "The section defines tailgating as an unauthorized person following an authorized person through a controlled entry, and states that visitor management requires mandatory escort policies — visitors must be accompanied in restricted areas, which directly prevents tailgating."
+    }
+  ]
+}

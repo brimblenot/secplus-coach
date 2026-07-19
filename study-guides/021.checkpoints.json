@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Message-based vectors",
+      "type": "mc",
+      "question": "Which of the following best describes why smishing is particularly effective?",
+      "options": {
+        "A": "SMS messages can carry larger file attachments than email",
+        "B": "Text messages bypass email security filters entirely",
+        "C": "SMS requires the recipient to enable macros before running code",
+        "D": "Small screens make URL inspection difficult and texts feel urgent"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that smishing is effective because small screens make URL inspection hard and texts feel urgent. The other options either introduce facts not in the section or contradict it."
+    },
+    {
+      "section": "Image-based vectors",
+      "type": "text",
+      "question": "Explain how SVG files can be weaponized as an attack vector.",
+      "rubric": "A sound answer states that SVG is an XML-based image format that can contain embedded JavaScript, which a browser may execute when rendering the image, enabling XSS attacks.",
+      "explanation": "The section defines SVG as an XML document format capable of embedding JavaScript that browsers execute during rendering, making it suitable for injecting malicious scripts into web content."
+    },
+    {
+      "section": "File-based vectors",
+      "type": "mc",
+      "question": "What trick do polyglot files use to evade detection?",
+      "options": {
+        "A": "They function as both valid images and executable code simultaneously",
+        "B": "They split payloads across multiple file extensions",
+        "C": "They embed macros in PDF documents",
+        "D": "They hide in ZIP archives with legitimate files"
+      },
+      "correct": "A",
+      "explanation": "The section defines polyglot files as files valid as both image and executable code simultaneously, tricking format parsers that assume a file is only one type. Other options describe different file-based vectors."
+    },
+    {
+      "section": "Voice-based vectors",
+      "type": "mc",
+      "question": "Which statement accurately describes caller ID spoofing?",
+      "options": {
+        "A": "It exploits modem vulnerabilities in legacy systems",
+        "B": "It makes VoIP calls appear from any attacker-chosen number",
+        "C": "It uses recorded scripts to dial numbers automatically",
+        "D": "It requires physical access to the victim's phone line"
+      },
+      "correct": "B",
+      "explanation": "The section states that caller ID spoofing via VoIP makes calls appear to come from any number. Option A describes SPIT, option D describes war dialing, and option B is not stated in the section."
+    },
+    {
+      "section": "Removable media vectors",
+      "type": "text",
+      "question": "Why does the USB Rubber Ducky bypass software controls that protect a system?",
+      "rubric": "A sound answer states that the Rubber Ducky disguises itself as a keyboard to the operating system, which trusts keyboard input, allowing pre-programmed keystrokes to execute commands that software controls cannot block.",
+      "explanation": "The section explains that HID emulation makes the device appear as a trusted keyboard, so the OS accepts its keystrokes as legitimate user input, bypassing software controls designed to block other attack vectors."
+    },
+    {
+      "section": "Vulnerable and unsupported software",
+      "type": "mc",
+      "question": "What does end-of-life (EOL) status mean for a software system?",
+      "options": {
+        "A": "All users must uninstall the software immediately",
+        "B": "The software can no longer connect to the internet",
+        "C": "The vendor releases no more security patches for that product",
+        "D": "The software automatically deletes itself from the system"
+      },
+      "correct": "C",
+      "explanation": "The section defines EOL as the point when the vendor releases no more security patches, making systems permanently vulnerable. The other options are not supported by the section text."
+    },
+    {
+      "section": "Unsecured network vectors",
+      "type": "mc",
+      "question": "What security advantage does WPA3 provide over WEP?",
+      "options": {
+        "A": "WPA3 monitors Bluetooth devices for unauthorized use",
+        "B": "WPA3 prevents WEP's cryptographic weaknesses allowing quick key recovery",
+        "C": "WPA3 encrypts traffic while WEP does not",
+        "D": "WPA3 blocks evil twin access points mimicking network names"
+      },
+      "correct": "B",
+      "explanation": "The section states WEP has cryptographic weaknesses allowing key recovery in minutes and identifies WPA3 as the current strongest Wi-Fi encryption standard, making it superior to WEP. The other options either misstate WEP's capabilities or describe different controls."
+    },
+    {
+      "section": "Open ports and default credentials",
+      "type": "text",
+      "question": "Describe how an attacker might use Shodan and a default credential list together.",
+      "rubric": "A sound answer states that an attacker uses Shodan to find internet-connected devices running vulnerable software versions, then uses publicly available default credentials to gain administrative access with minimal effort.",
+      "explanation": "The section explicitly explains that combining a Shodan search with a default credential list allows attackers to gain administrative access to thousands of devices, and notes that default credentials are publicly documented."
+    },
+    {
+      "section": "Supply chain vectors",
+      "type": "mc",
+      "question": "How did the 2013 Target breach begin?",
+      "options": {
+        "A": "Target employees were compromised through social media phishing",
+        "B": "Malicious code was inserted into Target's software build system",
+        "C": "Counterfeit networking equipment was installed during hardware delivery",
+        "D": "HVAC contractors with network access were pivoted through to reach point-of-sale systems"
+      },
+      "correct": "D",
+      "explanation": "The section states the 2013 Target breach began through HVAC contractors with network access, who were pivoted through to reach point-of-sale systems. Option A describes SolarWinds, not Target."
+    },
+    {
+      "section": "Social media vectors",
+      "type": "text",
+      "question": "How do attackers use social media to prepare for a spear-phishing attack?",
+      "rubric": "A sound answer states that attackers mine social media platforms to identify employees, map organizational structure, and gather personal details that make spear-phishing more convincing.",
+      "explanation": "The section explains that attackers gather reconnaissance from LinkedIn, Facebook, Instagram, and Twitter to identify targets and collect personal information that enhances the credibility of targeted phishing."
+    }
+  ]
+}

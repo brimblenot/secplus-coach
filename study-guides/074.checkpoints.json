@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Backup methods compared",
+      "type": "mc",
+      "question": "What is the key difference in what an incremental backup and a differential backup each copy?",
+      "options": {
+        "A": "Incremental copies everything on disk; differential copies only today's changes",
+        "B": "Incremental copies all changes since the last full backup; differential copies only changes since the most recent backup",
+        "C": "Incremental copies changes since any prior backup; differential copies changes since the last full backup",
+        "D": "Incremental uses copy-on-write snapshots; differential requires multiple backup sets"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly defines incremental as changes since the last backup of any kind, and differential as all changes since the most recent full backup — the defining distinction between the two methods."
+    },
+    {
+      "section": "Backup methods compared",
+      "type": "text",
+      "question": "Explain why a snapshot stored on the same storage array as production data is not an independent backup.",
+      "rubric": "A sound answer states that snapshots on the same array are destroyed if that array fails or is hit by ransomware, so they do not protect against site-level disasters or ransomware affecting the production storage.",
+      "explanation": "The section explicitly warns that snapshots on the same storage array as production are destroyed in the same disaster, making them dependent on that array rather than independent."
+    },
+    {
+      "section": "Replication",
+      "type": "mc",
+      "question": "Why does replication fail to protect against ransomware encryption of backup data?",
+      "options": {
+        "A": "Replication is limited to asynchronous mode, which introduces too much lag",
+        "B": "Replication faithfully copies everything, including ransomware encryption and corruption",
+        "C": "Replication only works synchronously and cannot keep up with encryption speed",
+        "D": "Replication requires a separate key management system that ransomware can access"
+      },
+      "correct": "B",
+      "explanation": "The section states that replication faithfully copies everything, including ransomware encryption and corruption, making it useless as a recovery point for those scenarios."
+    },
+    {
+      "section": "Backup media and destinations",
+      "type": "mc",
+      "question": "Which backup media is offline and immune to ransomware but has slower restore times and physical media overhead?",
+      "options": {
+        "A": "LTO Ultrium tape",
+        "B": "Local disk / NAS",
+        "C": "Cloud object storage with S3 compliance mode",
+        "D": "VMware snapshots with copy-on-write"
+      },
+      "correct": "A",
+      "explanation": "The table in this section identifies LTO Ultrium tape as offline and ransomware-immune with the tradeoff of slower restore and physical media management overhead."
+    },
+    {
+      "section": "Backup media and destinations",
+      "type": "text",
+      "question": "What is object lock / immutability, and what ransomware threat does it address?",
+      "rubric": "A sound answer explains that object lock is a cloud feature preventing deletion or modification of backup objects during a retention period, and it prevents ransomware from destroying backups even with compromised administrative credentials.",
+      "explanation": "The section defines object lock as preventing any account, including admins, from deleting or modifying backups during a set retention period, directly addressing ransomware destruction of backups."
+    },
+    {
+      "section": "The 3-2-1 and 3-2-1-1-0 rules",
+      "type": "mc",
+      "question": "In the 3-2-1-1-0 rule, what does the additional '1' copy offline specifically protect against?",
+      "options": {
+        "A": "Protection against hardware failure of primary storage",
+        "B": "Protection against replication lag between sites",
+        "C": "Protection against backup software corruption bugs",
+        "D": "Protection against ransomware with network access only"
+      },
+      "correct": "D",
+      "explanation": "The section explains that the offline copy is physically disconnected from any network, preventing ransomware from reaching it, making it immune to network-based encryption attacks."
+    },
+    {
+      "section": "Backup encryption",
+      "type": "mc",
+      "question": "Where must encryption keys for backup data be stored according to this section?",
+      "options": {
+        "A": "On the same NAS volume as the backup data",
+        "B": "Inside the backup files with the encrypted data",
+        "C": "Separately in an HSM or key management system",
+        "D": "In AWS S3 with compliance mode enabled"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that encryption keys must be stored separately from the encrypted backups, either in a key management system or HSM, comparing it to leaving a key under the mat."
+    },
+    {
+      "section": "Backup verification",
+      "type": "text",
+      "question": "What does the section mean when it says 'an untested backup is no more reliable than no backup at all'?",
+      "rubric": "A sound answer explains that verification requires actually restoring data — not just confirming the backup job reported success — because backups can appear successful yet be unrestorable due to bit rot, software bugs, file locks, or misconfigured scope.",
+      "explanation": "The section lists multiple silent failure modes (bit rot, bugs, locks, scope issues) that make backups unrestorable despite appearing successful, emphasizing that only actual restore testing confirms reliability."
+    }
+  ]
+}

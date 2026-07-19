@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Network intrusion detection and prevention",
+      "type": "mc",
+      "question": "What is the primary difference between how Snort detects threats and how Zeek detects threats?",
+      "options": {
+        "A": "Snort uses signature matching while Zeek extracts metadata and logs",
+        "B": "Snort is host-based while Zeek is network-based",
+        "C": "Snort captures full packets while Zeek does not",
+        "D": "Snort is open-source while Zeek is commercial"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that Snort matches traffic to known attack patterns while Zeek extracts metadata and writes structured logs instead of comparing to signatures. This is their fundamental methodological difference."
+    },
+    {
+      "section": "Vulnerability scanners",
+      "type": "text",
+      "question": "What is SCAP and why does Tenable Nessus's support for it matter?",
+      "rubric": "A sound answer explains that SCAP is a standard protocol that lets different tools consistently describe and check vulnerabilities and configurations, and that Nessus's support for SCAP (including standards like CIS Benchmarks and DISA STIGs) allows it to conduct standardized compliance and security configuration assessments.",
+      "explanation": "The section defines SCAP as a NIST-maintained standard enabling consistent vulnerability and configuration description across tools, and states that Nessus supports it along with CIS Benchmarks and DISA STIGs, making it valuable for compliance work."
+    },
+    {
+      "section": "Network analysis tools",
+      "type": "mc",
+      "question": "Which of the following best describes what tcpdump does?",
+      "options": {
+        "A": "Decodes protocols and extracts files from HTTP sessions",
+        "B": "Aggregates NetFlow data for traffic analysis",
+        "C": "Captures network traffic and saves it to pcap files",
+        "D": "Performs port scanning and version detection on targets"
+      },
+      "correct": "C",
+      "explanation": "The section identifies tcpdump as the command-line packet capture equivalent to Wireshark, capable of writing captures to pcap files—such as the example `tcpdump -i eth0 -w capture.pcap`."
+    },
+    {
+      "section": "Password and credential tools",
+      "type": "text",
+      "question": "Explain the difference between how Hashcat and Hydra attack passwords.",
+      "rubric": "A sound answer states that Hashcat cracks offline password hashes using GPU acceleration to test candidate passwords against captured hash databases, while Hydra performs online password attacks by sending live authentication attempts over the network to running services.",
+      "explanation": "The section clearly distinguishes that Hashcat works on offline hashes (supporting dictionary, rules-based, brute force, and hybrid attacks), while Hydra sends live authentication attempts against running services like SSH or FTP."
+    },
+    {
+      "section": "Web application security tools",
+      "type": "mc",
+      "question": "Which tool is specifically designed to detect and exploit SQL injection vulnerabilities automatically?",
+      "options": {
+        "A": "Nikto for checking web servers for outdated software and missing headers",
+        "B": "OWASP ZAP for integrating security into development pipelines",
+        "C": "Burp Suite's Intruder module for payload injection",
+        "D": "Sqlmap for finding injection points and extracting database contents"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that Sqlmap automates detection and exploitation of SQL injection vulnerabilities, identifies the database type, and extracts database contents automatically."
+    },
+    {
+      "section": "Exploitation frameworks",
+      "type": "mc",
+      "question": "What is a key feature that distinguishes Cobalt Strike from Metasploit?",
+      "options": {
+        "A": "Offers post-exploitation modules for privilege escalation",
+        "B": "Includes malleable C2 profiles mimicking legitimate protocols",
+        "C": "Provides exploit modules for hundreds of CVEs",
+        "D": "Is an open-source framework available free"
+      },
+      "correct": "B",
+      "explanation": "The section identifies malleable C2 profiles as Cobalt Strike's key differentiator—they allow command-and-control traffic to mimic legitimate protocols to evade detection, making it the stated distinguishing feature over Metasploit."
+    },
+    {
+      "section": "Digital forensics tools",
+      "type": "text",
+      "question": "Why is Volatility particularly valuable for analyzing a system suspected of running fileless malware?",
+      "rubric": "A sound answer explains that Volatility analyzes memory dumps to extract processes and artifacts from RAM, which is critical because fileless malware runs entirely in memory without writing to disk—so traditional disk forensics would miss it entirely.",
+      "explanation": "The section states that Volatility is essential for fileless malware because such malware runs entirely in memory and writes nothing to disk, meaning disk forensics cannot detect it, but memory analysis can."
+    },
+    {
+      "section": "Endpoint Detection and Response platforms",
+      "type": "mc",
+      "question": "What is the primary operational advantage EDR platforms provide compared to traditional antivirus?",
+      "options": {
+        "A": "EDR records behavioral timelines for threat hunting while antivirus only alerts at execution",
+        "B": "EDR scans files faster using GPU acceleration",
+        "C": "EDR detects viruses on network devices",
+        "D": "EDR uses AI to predict future attacks"
+      },
+      "correct": "A",
+      "explanation": "The section contrasts EDR's continuous monitoring and historical timeline capability with traditional antivirus, which only performs signature matching at execution time and keeps no record—making threat hunting impossible with antivirus alone."
+    }
+  ]
+}

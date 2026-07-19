@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "What counts as an asset",
+      "type": "mc",
+      "question": "Which of the following is classified as a software asset?",
+      "options": {
+        "A": "A licensed operating system installed on a company workstation",
+        "B": "A compute instance running in Amazon Web Services",
+        "C": "A network switch that routes traffic between office subnets",
+        "D": "A database containing customer transaction records"
+      },
+      "correct": "A",
+      "explanation": "Software assets include licensed apps, operating systems, VM images, firmware, and dev tools. The switch is hardware, the database is data, and the AWS instance is a cloud asset."
+    },
+    {
+      "section": "Asset inventory and discovery",
+      "type": "text",
+      "question": "Explain the key difference between agent-based and agentless discovery methods and name one advantage of agentless discovery.",
+      "rubric": "A sound answer states that agent-based installs software on devices to report details, while agentless uses network scanning without installation, and identifies that agentless can discover unauthorized devices IT did not know were connected.",
+      "explanation": "The section contrasts the two methods directly: agent-based requires installation but gives deep detail; agentless sends probe packets and catches devices the organization forgot to register, including unauthorized ones."
+    },
+    {
+      "section": "The CMDB",
+      "type": "mc",
+      "question": "What is the primary value a CMDB adds beyond a simple asset list?",
+      "options": {
+        "A": "It encrypts data on network-connected devices",
+        "B": "It tracks hardware specifications of all devices",
+        "C": "It automatically patches software to current versions",
+        "D": "It stores asset relationships for impact analysis during incidents"
+      },
+      "correct": "D",
+      "explanation": "The CMDB stores not just what assets exist, but the relationships between them — which apps run on which servers, which servers support which business processes — enabling impact analysis when incidents or CVEs occur."
+    },
+    {
+      "section": "Asset classification",
+      "type": "mc",
+      "question": "An asset that stores customer financial information would most likely receive which classification?",
+      "options": {
+        "A": "Regulated, subject only to industry-specific compliance rules",
+        "B": "Sensitive, with enhanced monitoring and tight change control",
+        "C": "Critical, because it always halts core operations if it fails",
+        "D": "General, with standard baseline controls"
+      },
+      "correct": "B",
+      "explanation": "Customer financial data is confidential information, so the asset storing it receives a Sensitive classification with enhanced monitoring and tight change control. Critical refers to operational impact, not data sensitivity alone."
+    },
+    {
+      "section": "Hardware lifecycle phases",
+      "type": "text",
+      "question": "Name the hardware lifecycle phase in which configuration drift is detected, and briefly explain what drift means.",
+      "rubric": "A sound answer identifies the Operations phase and explains that drift is a deviation from the approved security baseline.",
+      "explanation": "The section states that during Operations, regular patching, vulnerability scanning, and configuration management detect drift — deviation from the approved security baseline."
+    },
+    {
+      "section": "Software license management and end-of-life tracking",
+      "type": "mc",
+      "question": "Which statement correctly describes end-of-life (EOL) software and the appropriate response?",
+      "options": {
+        "A": "EOL software may receive patches for one more year; continue using it until then",
+        "B": "EOL software is automatically uninstalled by the vendor to force upgrades",
+        "C": "EOL software stops receiving patches; migrate to supported alternatives or apply compensating controls",
+        "D": "EOL software requires application allowlisting to prevent unauthorized execution"
+      },
+      "correct": "C",
+      "explanation": "The section defines EOL as the point the vendor stops releasing security patches, making vulnerabilities permanently unpatched. Organizations must either migrate or apply compensating controls like network isolation and enhanced monitoring."
+    },
+    {
+      "section": "BYOD and mobile device management",
+      "type": "mc",
+      "question": "What is the primary purpose of the selective wipe feature in MDM?",
+      "options": {
+        "A": "To completely erase all data and settings on a lost device so it cannot be misused",
+        "B": "To encrypt all files so they cannot be read without a company-issued key",
+        "C": "To prevent unauthorized apps from executing on the personal device",
+        "D": "To remove only corporate data while leaving the employee's personal data untouched"
+      },
+      "correct": "D",
+      "explanation": "Selective wipe removes only corporate data when a device is lost or an employee departs, preserving the personal data the employee owns while protecting the organization's assets."
+    },
+    {
+      "section": "Cloud asset management",
+      "type": "text",
+      "question": "Why is resource tagging important for cloud asset management, and what is one use it enables?",
+      "rubric": "A sound answer explains that tagging attaches standardized metadata to cloud resources and enables automatic policy application, cost allocation, or compliance reporting based on those tags.",
+      "explanation": "The section states that resource tagging allows security policies, cost allocation, and compliance reports to be applied automatically based on standardized metadata fields like owner, environment, and data classification."
+    },
+    {
+      "section": "Physical tracking and data destruction",
+      "type": "mc",
+      "question": "When should cryptographic erasure be used instead of clearing as a data destruction method?",
+      "options": {
+        "A": "When sensitive data must be destroyed before external transfer or reuse",
+        "B": "When the data is not sensitive enough to warrant hardware techniques",
+        "C": "When the asset will be reused internally and recovery risk is acceptable",
+        "D": "When the asset is physically being shredded or incinerated"
+      },
+      "correct": "A",
+      "explanation": "According to NIST SP 800-88, purging methods like cryptographic erasure render recovery infeasible even with lab equipment and are used for sensitive data before external transfer or reuse; clearing is adequate for lower-sensitivity data reused internally."
+    },
+    {
+      "section": "Asset management and vulnerability management",
+      "type": "text",
+      "question": "Explain how an accurate asset inventory directly supports vulnerability management when a new CVE is published.",
+      "rubric": "A sound answer states that an accurate software inventory allows teams to instantly identify which systems are affected by the CVE so they can be remediated.",
+      "explanation": "The section explains that vulnerability scanners can only target systems known to exist, and when a CVE is published, an accurate inventory lets teams immediately identify affected systems and close the loop between knowing what you have and fixing what is broken."
+    }
+  ]
+}

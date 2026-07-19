@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Shell scripts as malicious code",
+      "type": "mc",
+      "question": "Why do plain-text shell scripts often evade traditional antivirus detection?",
+      "options": {
+        "A": "They run only in memory and leave no trace on disk",
+        "B": "They have no fixed binary signature to match against known hashes",
+        "C": "They are encrypted by default when stored on the filesystem",
+        "D": "They require administrative privileges that block scanner access"
+      },
+      "correct": "B",
+      "explanation": "The section states that shell scripts leave 'no binary signature' because antivirus traditionally matches file hashes, but a text file has no fixed binary pattern to match. Options A, C, and D describe other evasion concepts not mentioned in this section."
+    },
+    {
+      "section": "PowerShell abuse and fileless attacks",
+      "type": "text",
+      "question": "Explain how the combination of IEX and System.Net.WebClient DownloadString enables a fileless attack.",
+      "rubric": "A sound answer states that DownloadString fetches a script from a URL and IEX executes that script content entirely in memory without writing it to disk, preventing antivirus from scanning a file hash.",
+      "explanation": "The section explicitly describes IEX running a string as code and DownloadString fetching text from a URL, with the result that the script runs 'entirely in memory, never writing a file to disk' — the core mechanism of fileless execution."
+    },
+    {
+      "section": "WMI persistence and remote execution",
+      "type": "mc",
+      "question": "Where are WMI event subscriptions stored, and why does this make them effective for persistence?",
+      "options": {
+        "A": "In the registry Run key for startup execution",
+        "B": "In scheduled task files for automatic reboot persistence",
+        "C": "In the WMI repository, evading typical registry-based persistence checks",
+        "D": "In startup folders before firewall initialization"
+      },
+      "correct": "C",
+      "explanation": "The section states WMI subscriptions are 'stored in the WMI repository, not the registry, so they hide from typical persistence hunts.' The other options describe different persistence mechanisms not mentioned in this section."
+    },
+    {
+      "section": "Python offensive tooling",
+      "type": "mc",
+      "question": "Which Python library provides implementations of Windows protocols like SMB, MSRPC, and Kerberos?",
+      "options": {
+        "A": "Impacket, for Windows protocol implementations",
+        "B": "Socket, for raw network connections",
+        "C": "Scapy, for building network packets",
+        "D": "Requests, for HTTP communication"
+      },
+      "correct": "A",
+      "explanation": "The section identifies Impacket as providing 'pure-Python implementations of Windows protocols (SMB, MSRPC, Kerberos),' while Scapy is described as a library for building and injecting network packets, not Windows protocols."
+    },
+    {
+      "section": "JavaScript, VBScript, and HTA files",
+      "type": "mc",
+      "question": "Which executable hosts and runs HTA files with elevated permissions?",
+      "options": {
+        "A": "wscript.exe, which interprets VBScript",
+        "B": "rundll32.exe, which executes DLL functions",
+        "C": "powershell.exe, which manages system scripts",
+        "D": "mshta.exe, Microsoft's HTA host process"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that HTA files are 'executed by mshta.exe (Microsoft's HTA host process)' and 'run with elevated permissions that bypass browser sandboxing.' wscript.exe is mentioned for VBScript, not HTA files."
+    },
+    {
+      "section": "Office macros (VBA)",
+      "type": "text",
+      "question": "What is the purpose of the Document_Open and Workbook_Open event hooks in a malicious macro?",
+      "rubric": "A sound answer states that these hooks fire automatically when the document opens, causing the macro code to run without requiring any further user interaction.",
+      "explanation": "The section defines these hooks as firing 'automatically on open, requiring no further user interaction,' which explains their value in establishing immediate execution on document load."
+    },
+    {
+      "section": "Staged vs. stageless payloads",
+      "type": "mc",
+      "question": "What is the key difference between a staged and stageless payload in terms of delivery?",
+      "options": {
+        "A": "Staged payloads use a small loader then fetch the full payload; stageless includes everything upfront",
+        "B": "Staged payloads are larger; stageless payloads are compressed",
+        "C": "Staged payloads use PowerShell; stageless use binaries",
+        "D": "Staged payloads encrypt transit data; stageless transmit unencrypted"
+      },
+      "correct": "A",
+      "explanation": "The section defines staged as a small 'loader/dropper' that 'downloads full payload from a C2 server into memory at runtime,' while stageless is when the 'full payload bundled in one artifact.' The other options introduce concepts not mentioned in this section."
+    },
+    {
+      "section": "Living-off-the-land binaries (LOLBins)",
+      "type": "mc",
+      "question": "What is the primary advantage of using LOLBins for malicious activity?",
+      "options": {
+        "A": "They require fewer system resources than third-party attack frameworks",
+        "B": "They are legitimate, signed Microsoft binaries that application allowlists typically permit",
+        "C": "They run faster than custom malware tools on compromised systems",
+        "D": "They automatically bypass antivirus software without additional configuration"
+      },
+      "correct": "B",
+      "explanation": "The section states that 'because these are signed Microsoft binaries, application allowlisting rules typically permit them,' making evasion of allowlist controls possible. The other options are not supported by the section text."
+    },
+    {
+      "section": "Defense-in-depth overview",
+      "type": "text",
+      "question": "Name two of the five defense layers described and explain why defense-in-depth is necessary.",
+      "rubric": "A sound answer names two layers from the list (AMSI, Script Block Logging, AppLocker/WDAC, EDR, or email filtering) and states that no single control stops all malicious code, so multiple layers are needed.",
+      "explanation": "The section opens with 'No single control stops all malicious code' and then lists five specific controls, making clear that layered defense is essential and providing the rationale for depth."
+    }
+  ]
+}

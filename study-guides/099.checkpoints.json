@@ -1,0 +1,123 @@
+{
+  "checkpoints": [
+    {
+      "section": "Password policy: length over complexity",
+      "type": "mc",
+      "question": "According to NIST SP 800-63B, what is the recommended minimum password length?",
+      "options": {
+        "A": "6 characters",
+        "B": "8 characters",
+        "C": "12 characters",
+        "D": "15 characters"
+      },
+      "correct": "B",
+      "explanation": "The section states that NIST SP 800-63B recommends a minimum of 8 characters and allowing up to at least 64."
+    },
+    {
+      "section": "Why complexity requirements backfire",
+      "type": "text",
+      "question": "Explain why mandatory complexity requirements like uppercase, lowercase, numbers, and special characters are considered ineffective for password security.",
+      "rubric": "A sound answer notes that users develop predictable patterns in response to complexity mandates (e.g., capitalize first letter, append number, add special character), making passwords easier to crack once attackers model those patterns. Screening against compromised passwords is more effective.",
+      "explanation": "The section explains that complexity mandates produce predictable patterns users follow, undermining their security value, while HIBP screening directly prevents use of known-breached passwords."
+    },
+    {
+      "section": "Password expiration: stop the 90-day treadmill",
+      "type": "mc",
+      "question": "Under NIST 800-63B guidance, when should users be required to change their password?",
+      "options": {
+        "A": "At the discretion of the user with no requirement",
+        "B": "Every 30 days regardless of circumstances",
+        "C": "Every 90 days on a fixed schedule",
+        "D": "Only when compromise is known or suspected"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that NIST 800-63B recommends: do NOT force periodic expiration — only require immediate change when compromise is known or suspected."
+    },
+    {
+      "section": "Account lockout: slowing online attacks",
+      "type": "text",
+      "question": "Describe what password history and minimum password age accomplish together in an account lockout policy.",
+      "rubric": "A sound answer explains that password history prevents reuse by storing hashes of prior passwords and rejecting matches, while minimum password age prevents users from immediately cycling through that history to revert to an old password.",
+      "explanation": "The section states that password history stores hashes of the last 10–24 passwords to reject reuse, and minimum password age stops users from cycling through history immediately."
+    },
+    {
+      "section": "Password managers: the practical fix for humans",
+      "type": "mc",
+      "question": "Which anti-phishing benefit does a password manager's autofill function provide?",
+      "options": {
+        "A": "It verifies the domain matches before filling credentials on the page",
+        "B": "It encrypts passwords during transmission to servers",
+        "C": "It alerts users when a master password expires",
+        "D": "It syncs passwords across multiple user devices"
+      },
+      "correct": "A",
+      "explanation": "The section states that the autofill function checks the actual domain and will not fill credentials on a lookalike phishing page with a different domain."
+    },
+    {
+      "section": "Password hashing and storage",
+      "type": "mc",
+      "question": "Why are MD5 and SHA-1 unsuitable for password storage despite being cryptographic functions?",
+      "options": {
+        "A": "They require salts to be effective",
+        "B": "They are open-source algorithms",
+        "C": "They prioritize speed over collision resistance, enabling fast brute force attacks",
+        "D": "They store passwords in plaintext"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that MD5 and SHA-1 are general-purpose hash functions designed for speed, which lets attackers test billions of guesses per second with GPU hardware."
+    },
+    {
+      "section": "Password hashing and storage",
+      "type": "text",
+      "question": "Explain how a salt defeats rainbow table attacks.",
+      "rubric": "A sound answer notes that a salt is a unique random value added to each password before hashing, stored alongside the hash. Because each user's salt differs, identical passwords produce different hashes, rendering precomputed tables useless.",
+      "explanation": "The section defines salt as a unique random value per user that makes identical passwords hash differently, eliminating the advantage of precomputed rainbow tables."
+    },
+    {
+      "section": "Password hashing and storage",
+      "type": "mc",
+      "question": "What is the key security advantage of memory-hard password hashing algorithms like Scrypt?",
+      "options": {
+        "A": "They can be decrypted if the attacker knows the original password",
+        "B": "They can be run much faster than general-purpose hash functions",
+        "C": "They eliminate the need for salting during the hashing process",
+        "D": "They require large RAM per attempt, limiting GPU parallelism due to little per-core memory"
+      },
+      "correct": "D",
+      "explanation": "The section states that Scrypt is memory-hard, requiring large RAM per attempt and limiting GPU parallelism because GPUs have little per-core memory."
+    },
+    {
+      "section": "Password hashing and storage",
+      "type": "mc",
+      "question": "Which password hashing algorithm is described as the winner of the 2015 Password Hashing Competition and is recommended for new systems?",
+      "options": {
+        "A": "Scrypt",
+        "B": "SHA-256",
+        "C": "Argon2id",
+        "D": "Bcrypt"
+      },
+      "correct": "C",
+      "explanation": "The section identifies Argon2id as the winner of the 2015 Password Hashing Competition, combines GPU resistance and side-channel resistance, and is recommended for new systems."
+    },
+    {
+      "section": "Passwordless and privileged account management",
+      "type": "mc",
+      "question": "What security property makes FIDO2 passkeys resistant to phishing attacks?",
+      "options": {
+        "A": "They automatically log users out after 30 minutes",
+        "B": "The cryptographic key is bound to the legitimate domain",
+        "C": "They send a confirmation email to the user's backup address",
+        "D": "They require the user to enter a second PIN after login"
+      },
+      "correct": "B",
+      "explanation": "The section states that FIDO2 passkeys are phishing-resistant because the key is bound to the legitimate domain, preventing use on impostor sites."
+    },
+    {
+      "section": "Passwordless and privileged account management",
+      "type": "text",
+      "question": "How does PAM (Privileged Access Management) prevent the reuse of harvested privileged credentials?",
+      "rubric": "A sound answer notes that PAM rotates passwords automatically after each use, so no individual ever knows the current credential, preventing attackers who have harvested an old credential from reusing it.",
+      "explanation": "The section explains that PAM rotates passwords automatically after each use and no individual ever knows the current credential, preventing reuse of harvested credentials."
+    }
+  ]
+}

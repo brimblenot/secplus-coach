@@ -1,0 +1,70 @@
+{
+  "checkpoints": [
+    {
+      "section": "What the BIA actually answers",
+      "type": "text",
+      "question": "In your own words, explain what irreversible harm means in the context of a BIA and why it matters to setting recovery targets.",
+      "rubric": "A sound answer recognizes that irreversible harm is the point at which a disruption causes permanent damage — such as regulatory violations, permanent customer loss, or financial failure — that cannot be undone, and that identifying this threshold helps the organization set realistic and appropriately aggressive recovery targets.",
+      "explanation": "The section explicitly states that MTD is the time before 'irreversible harm' occurs (regulatory violations, permanent customer loss, financial failure) and frames this as the basis for setting recovery priorities. The student must connect the concept to its practical role in planning."
+    },
+    {
+      "section": "The five BIA steps",
+      "type": "mc",
+      "question": "In Step 3 of the BIA, who is primarily responsible for defining the Maximum Tolerable Downtime for a critical process?",
+      "options": {
+        "A": "The disaster recovery vendor selected for the organization",
+        "B": "Process owners, validated by financial modeling",
+        "C": "The IT infrastructure team based on hardware specifications",
+        "D": "Regulatory compliance officers based on legal requirements alone"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that 'Process owners define this; financial modeling validates it.' This places primary responsibility with business process owners, not IT or external vendors."
+    },
+    {
+      "section": "RTO — how fast you must recover",
+      "type": "mc",
+      "question": "Which recovery approach is appropriate for an RTO target of 4 to 24 hours?",
+      "options": {
+        "A": "Hot standby with continuous real-time data mirroring to multiple sites",
+        "B": "Active-active instances with synchronous replication and automated failover",
+        "C": "Cold site with tape restoration and offline backup media",
+        "D": "Warm standby with asynchronous replication and manual failover"
+      },
+      "correct": "D",
+      "explanation": "The RTO table in the section directly maps the 4–24 hour range to 'Warm standby with asynchronous replication + manual failover' with moderate cost."
+    },
+    {
+      "section": "RPO — how much data loss is acceptable",
+      "type": "text",
+      "question": "Explain why an RPO of zero requires synchronous replication and why that approach is more expensive than periodic backups.",
+      "rubric": "A sound answer states that RPO = 0 means no data loss is tolerated, so every write must be simultaneously written to a secondary site (synchronous replication) in real-time, whereas periodic backups only need to run at set intervals — the continuous synchronous approach requires more infrastructure and bandwidth, making it costlier.",
+      "explanation": "The section defines RPO = 0 as requiring synchronous replication and notes it is 'most expensive,' reserved for critical systems. It contrasts this implicitly with 'larger RPO' where 'periodic backups are sufficient' and 'cost drops significantly.'"
+    },
+    {
+      "section": "MTBF and MTTR — reliability metrics",
+      "type": "mc",
+      "question": "Which statement correctly distinguishes MTBF from MTTR?",
+      "options": {
+        "A": "MTBF measures downtime duration; MTTR measures the time between successive outages",
+        "B": "MTBF is improved by buying spare parts; MTTR is improved by buying better hardware",
+        "C": "MTBF measures reliability—how often things break; MTTR measures recovery speed—how fast you fix it",
+        "D": "MTBF measures how fast you repair hardware; MTTR measures how often hardware fails"
+      },
+      "correct": "C",
+      "explanation": "The section's comparison table explicitly states MTBF 'Measures Reliability (how often things break)' and MTTR 'Measures Recovery speed (how fast you fix it),' and rows clearly separate what improves each metric."
+    },
+    {
+      "section": "Impact categories beyond financial loss",
+      "type": "mc",
+      "question": "Which impact category is described as the hardest to quantify but often the biggest long-term harm?",
+      "options": {
+        "A": "Reputational impact including customer loss and brand damage",
+        "B": "Life and safety impact in healthcare or utility sectors",
+        "C": "Legal and regulatory impact from contract failures",
+        "D": "Operational impact from inability to deliver services"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that reputational harm—'Customer loss, brand damage, negative media'—is 'hardest to quantify, often the biggest long-term harm.'"
+    }
+  ]
+}

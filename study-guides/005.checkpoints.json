@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Identification vs. authentication",
+      "type": "mc",
+      "question": "Which statement correctly distinguishes identification from authentication?",
+      "options": {
+        "A": "Identification is a declaration of identity, while authentication is proof of that claim.",
+        "B": "Authentication is typing your username into a login screen, and identification is verifying the password.",
+        "C": "Identification and authentication are the same process, just called different names in different systems.",
+        "D": "Identification proves a user's claimed identity through a password or biometric scan."
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that identification is claiming an identity (a declaration) and authentication is proving the claim (supplying proof such as password or fingerprint)."
+    },
+    {
+      "section": "The five authentication factors",
+      "type": "text",
+      "question": "Why does combining two passwords not satisfy MFA requirements, even though passwords are used twice?",
+      "rubric": "A sound answer explains that MFA requires credentials from at least two different categories, and two passwords both belong to the 'something you know' category, so they do not meet the requirement.",
+      "explanation": "The section defines MFA as requiring credentials from at least two different categories and explicitly states that two passwords is not MFA because they are the same category."
+    },
+    {
+      "section": "Authorization: what you're allowed to do",
+      "type": "mc",
+      "question": "In role-based access control, where are permissions stored?",
+      "options": {
+        "A": "Attached directly to each individual user account in the system.",
+        "B": "Assigned to roles, and users inherit all permissions when added to a role.",
+        "C": "Configured separately for each resource with a list of which users can access it.",
+        "D": "Determined by asking the user's manager each time access is requested."
+      },
+      "correct": "B",
+      "explanation": "RBAC assigns permissions to roles, not individuals, so adding a user to a role automatically grants all permissions associated with that role without manual per-resource configuration."
+    },
+    {
+      "section": "Accounting: the audit trail",
+      "type": "text",
+      "question": "Describe the path that accounting records follow from a network device to analysis and incident response.",
+      "rubric": "A sound answer explains that logs are collected and shipped via syslog to a central location, then aggregated and analyzed by a SIEM system to correlate events and surface threats.",
+      "explanation": "The section states that accounting is collected via syslog, aggregated by a SIEM system for correlation and threat analysis, and retained for incident response and forensics."
+    },
+    {
+      "section": "AAA protocols",
+      "type": "mc",
+      "question": "Which protocol encrypts only the password field, not the entire packet, and uses UDP?",
+      "options": {
+        "A": "DIAMETER on TCP or SCTP with full session encryption.",
+        "B": "TACACS+ on TCP port 49 with full packet encryption.",
+        "C": "RADIUS on UDP ports 1812 and 1813 with password-only encryption.",
+        "D": "Kerberos on TCP/UDP port 88 with ticket-based encryption."
+      },
+      "correct": "C",
+      "explanation": "The table shows RADIUS uses UDP on ports 1812 and 1813 and encrypts the password only, whereas TACACS+ encrypts the entire packet body."
+    },
+    {
+      "section": "Directory services and LDAP",
+      "type": "mc",
+      "question": "What is the primary difference between plain LDAP and LDAPS?",
+      "options": {
+        "A": "LDAP encrypts passwords; LDAPS encrypts only authentication traffic.",
+        "B": "LDAP is read-only; LDAPS allows write operations to directory data.",
+        "C": "LDAP connects to Active Directory; LDAPS connects to Kerberos services.",
+        "D": "LDAP uses port 389 without encryption; LDAPS uses port 636 with TLS encryption."
+      },
+      "correct": "D",
+      "explanation": "The section states plain LDAP runs on TCP 389 unencrypted, while LDAPS (LDAP over SSL/TLS) runs on TCP 636 with full session encryption."
+    },
+    {
+      "section": "Kerberos and SSO",
+      "type": "text",
+      "question": "Explain why Kerberos prevents a user's password from traveling across the network after the initial login.",
+      "rubric": "A sound answer explains that the user proves themselves once to the KDC to obtain a TGT, and then uses that ticket to request service tickets from the TGS, so the password is never sent after the first authentication.",
+      "explanation": "The section describes how Kerberos issues a TGT after initial authentication, then the TGS exchanges the TGT for service tickets, ensuring the password never travels the network again after login."
+    },
+    {
+      "section": "Federation and federated identity protocols",
+      "type": "mc",
+      "question": "Which federation protocol is specifically designed to handle delegated authorization, allowing an app to act on a user's behalf without receiving the user's credentials?",
+      "options": {
+        "A": "SAML, which exchanges authentication and authorization data in XML between IdP and SP.",
+        "B": "Kerberos, which uses tickets to delegate access across networked systems.",
+        "C": "OAuth, which is a framework for delegated authorization without sharing credentials.",
+        "D": "OIDC, which adds an identity layer on top of OAuth 2.0 for SSO across web apps."
+      },
+      "correct": "C",
+      "explanation": "The table explicitly identifies OAuth as the framework for delegated authorization, allowing an app to act on a user's behalf without the user's credentials, exemplified by 'Login with Google'."
+    }
+  ]
+}

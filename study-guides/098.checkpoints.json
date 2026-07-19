@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Authentication factor categories",
+      "type": "mc",
+      "question": "Which of the following combinations qualifies as true MFA?",
+      "options": {
+        "A": "PIN and numeric keypad entry",
+        "B": "Password and security question",
+        "C": "Password and TOTP code",
+        "D": "Fingerprint and facial recognition"
+      },
+      "correct": "C",
+      "explanation": "True MFA requires factors from different categories. A password and TOTP code represent knowledge and possession factors. The other options pair factors from the same category (both knowledge, or both inherence)."
+    },
+    {
+      "section": "Why knowledge factors are the weakest",
+      "type": "text",
+      "question": "Why are passwords and PINs vulnerable as a sole authentication method? Name two attack vectors the section mentions.",
+      "rubric": "A sound answer identifies at least two of: brute force, password spraying, phishing, keylogging, data breaches, or social engineering. The section explains that passwords are duplicated and distributed widely, making them easy to compromise.",
+      "explanation": "The section explicitly lists six attack vectors and uses the analogy of keys handed to strangers to illustrate why passwords fail as a sole factor."
+    },
+    {
+      "section": "TOTP and HOTP",
+      "type": "mc",
+      "question": "What is the critical weakness of TOTP that makes it vulnerable to phishing relay attacks?",
+      "options": {
+        "A": "HMAC-SHA1 is cryptographically broken",
+        "B": "The code remains valid for 30 seconds, enabling capture and replay",
+        "C": "Client and server counter synchronization fails",
+        "D": "The shared secret travels over unencrypted channels"
+      },
+      "correct": "B",
+      "explanation": "TOTP codes expire after 30 seconds, but an attacker proxying the login can capture and replay the code before expiration. HOTP uses counters instead to avoid this vulnerability."
+    },
+    {
+      "section": "SMS OTP — the weakest MFA",
+      "type": "mc",
+      "question": "Which vulnerability in SMS OTP allows an attacker to intercept text messages across the global phone network?",
+      "options": {
+        "A": "Number porting attacks using legitimate carrier processes",
+        "B": "SIM swapping via social engineering",
+        "C": "Brute-force guessing of six-digit numeric codes",
+        "D": "SS7 vulnerabilities in telephone signaling infrastructure"
+      },
+      "correct": "D",
+      "explanation": "SS7 flaws enable remote interception of SMS. SIM swapping and number porting are separate attacks. The section states NIST 800-63B deprecated SMS OTP specifically because of these infrastructure vulnerabilities."
+    },
+    {
+      "section": "Push notification authentication",
+      "type": "text",
+      "question": "Explain what MFA fatigue is and what defense the section recommends against it.",
+      "rubric": "A sound answer states that MFA fatigue (or MFA bombing) is flooding the user with push notifications until one is accidentally approved, and that number matching mitigates this by requiring the user to type a number displayed on the login screen that must match the push notification.",
+      "explanation": "The section defines the attack and introduces number matching as a defense that requires active engagement with a specific login attempt, preventing passive notification approvals."
+    },
+    {
+      "section": "Hardware tokens",
+      "type": "mc",
+      "question": "Which hardware token type is described as the most phishing-resistant?",
+      "options": {
+        "A": "FIDO hardware keys resistant to phishing",
+        "B": "Counter-based OTP tokens",
+        "C": "USB tokens with symmetric encryption",
+        "D": "RSA SecurID with time-based code generation"
+      },
+      "correct": "A",
+      "explanation": "The section identifies FIDO hardware security keys as the most phishing-resistant hardware token type. RSA SecurID is described as historically prominent but not called phishing-resistant."
+    },
+    {
+      "section": "FIDO2, WebAuthn, and passkeys",
+      "type": "text",
+      "question": "What is origin binding and why does it make FIDO2 phishing-resistant in a way that TOTP is not?",
+      "rubric": "A sound answer states that origin binding means the authenticator generates unique key pairs per website origin (scheme + hostname + port) and signs challenges mathematically bound to that origin, so a phishing site at a different origin cannot receive a valid response. TOTP lacks this binding and can be relayed as plain numbers.",
+      "explanation": "The section explicitly contrasts FIDO2's origin binding with TOTP's vulnerability to real-time relay, calling FIDO2 the only common mechanism truly phishing-resistant."
+    },
+    {
+      "section": "Smart cards",
+      "type": "mc",
+      "question": "What does an X.509 certificate stored on a smart card require as a second factor for authentication?",
+      "options": {
+        "A": "A PIN entered by the user",
+        "B": "A second smart card physically inserted",
+        "C": "A one-time password from an external token",
+        "D": "A biometric fingerprint scan"
+      },
+      "correct": "A",
+      "explanation": "The section states that smart cards inherently require the card (something you have) plus a PIN (something you know), making them two-factor. The authentication uses certificate-based mutual TLS with the private key never leaving the card."
+    },
+    {
+      "section": "Biometric authentication",
+      "type": "mc",
+      "question": "Which biometric modality is specifically vulnerable to deepfake audio attacks?",
+      "options": {
+        "A": "Fingerprint recognition via latent lifting",
+        "B": "Facial recognition defeated by 3D mapping",
+        "C": "Retinal scan requiring expensive close-proximity hardware",
+        "D": "Voice recognition vulnerable to synthetic audio"
+      },
+      "correct": "D",
+      "explanation": "The table explicitly lists deepfake audio as a notable weakness of voice recognition, defined as synthetic audio generated to mimic the user's voice."
+    },
+    {
+      "section": "Adaptive MFA",
+      "type": "text",
+      "question": "What is impossible travel and how does it function as a risk signal in adaptive MFA?",
+      "rubric": "A sound answer states that impossible travel flags logins from two geographically distant locations within a time window that makes physical travel impossible, triggering step-up authentication when detected.",
+      "explanation": "The section defines impossible travel as one of the key contextual risk signals and explains it as a geographic/temporal indicator that prompts additional factor requirements."
+    }
+  ]
+}

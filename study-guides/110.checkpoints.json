@@ -1,0 +1,70 @@
+{
+  "checkpoints": [
+    {
+      "section": "Core vocabulary",
+      "type": "mc",
+      "question": "According to the lesson, what is the relationship between threat, vulnerability, and risk?",
+      "options": {
+        "A": "Risk is the product of threat and vulnerability, along with asset value",
+        "B": "Threat and vulnerability are types of risk that must be eliminated entirely",
+        "C": "Risk exists only when a threat is present, regardless of vulnerabilities",
+        "D": "Vulnerability is a measure of how much damage a threat can cause to an asset"
+      },
+      "correct": "A",
+      "explanation": "The section defines risk conceptually as the combination of likelihood a threat exploits a vulnerability AND the impact if it does, expressed as Risk = Threat × Vulnerability × Asset Value. The other options misstate the relationship or omit key components."
+    },
+    {
+      "section": "Risk appetite vs. risk tolerance",
+      "type": "text",
+      "question": "Explain the difference between risk appetite and risk tolerance using the highway speed limit analogy from the section.",
+      "rubric": "A sound answer distinguishes risk appetite as the strategic limit set by leadership (the posted speed limit) and risk tolerance as the acceptable operational variation around that limit (the ~5 mph band before enforcement) where exceptions may be allowed.",
+      "explanation": "The section uses the speed limit analogy to clarify that appetite is the policy while tolerance is the real-world wiggle room before enforcement kicks in. Risk appetite sets the direction; tolerance defines the band within which operations can flex."
+    },
+    {
+      "section": "The risk register",
+      "type": "mc",
+      "question": "Which two risk scores are tracked separately in the risk register?",
+      "options": {
+        "A": "Assessed risk and approved risk",
+        "B": "Initial risk and final risk",
+        "C": "Inherent risk score and residual risk score",
+        "D": "Identified risk and reported risk"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that the risk register tracks inherent risk score (before any controls are applied) and residual risk score (after current controls are accounted for) as two distinct metrics for each entry."
+    },
+    {
+      "section": "Risk identification techniques",
+      "type": "mc",
+      "question": "Which of the following threat modeling frameworks is described as risk-centric and aligns business objectives with technical requirements?",
+      "options": {
+        "A": "Attack trees, which diagram how an attacker could reach a goal",
+        "B": "PASTA, which is a Process for Attack Simulation and Threat Analysis",
+        "C": "Vulnerability assessments, which use automated scans to find weaknesses",
+        "D": "STRIDE, which categorizes threats into six distinct types"
+      },
+      "correct": "B",
+      "explanation": "The section identifies PASTA as a risk-centric framework that aligns business objectives with technical requirements. STRIDE categorizes threat types, attack trees map attacker paths, and vulnerability assessments are a separate identification input."
+    },
+    {
+      "section": "Risk assessment sequence",
+      "type": "text",
+      "question": "What are the first three steps in the risk assessment sequence described in the section?",
+      "rubric": "A sound answer identifies: first, identify and value assets; second, identify threats; and third, identify vulnerabilities. These must be in order.",
+      "explanation": "The section lists the complete sequence beginning with asset identification and valuation, followed by threat identification, then vulnerability identification. These foundational steps precede likelihood and impact estimation."
+    },
+    {
+      "section": "Risk communication",
+      "type": "mc",
+      "question": "What is the primary purpose of a risk heat map in communicating risk to executives?",
+      "options": {
+        "A": "To list all threats and vulnerabilities from testing",
+        "B": "To document the specific controls applied to each risk",
+        "C": "To calculate expected annual losses in dollars for each risk",
+        "D": "To display risks visually on a matrix by likelihood and impact"
+      },
+      "correct": "D",
+      "explanation": "The section describes risk heat maps as two-dimensional matrices with likelihood and impact on the axes, color-coded to give executives an instant visual of where the worst risks cluster. Quantitative metrics like ALE serve the dollar-amount purpose, and the heat map is separate from control documentation."
+    }
+  ]
+}

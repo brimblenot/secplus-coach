@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Legal hold and spoliation",
+      "type": "mc",
+      "question": "What is the primary consequence of spoliation in a legal proceeding?",
+      "options": {
+        "A": "The litigation hold notice becomes invalid automatically.",
+        "B": "The organization must pay fines to opposing counsel.",
+        "C": "The court may assume missing evidence was unfavorable through adverse inference.",
+        "D": "All stored information must be encrypted immediately."
+      },
+      "correct": "C",
+      "explanation": "The study guide explicitly states that spoliation can result in adverse inference instructions, where the court assumes missing evidence was bad for the spoliating party. A fine or encryption requirement is not mentioned, and a litigation hold becoming invalid contradicts the definition of spoliation."
+    },
+    {
+      "section": "Chain of custody",
+      "type": "text",
+      "question": "Explain how cryptographic hashing serves the same function as a tamper-evident seal in the chain of custody for digital evidence.",
+      "rubric": "A sound answer states that a hash is computed at collection; any later modification changes the hash value, proving tampering mathematically — similar to how a broken wax seal proves a physical letter was opened.",
+      "explanation": "The section explicitly compares the hash to a wax seal: if the seal is broken (hash doesn't match), you know the evidence was tampered with. The hash proves tampering mathematically rather than visually."
+    },
+    {
+      "section": "Order of volatility",
+      "type": "mc",
+      "question": "Which data source is prioritized first in the order of volatility and why?",
+      "options": {
+        "A": "CPU registers and cache, because they are gone the instant power cuts.",
+        "B": "RAM, because it is lost on shutdown and may hold attacker tools and credentials.",
+        "C": "Disk contents, because they survive reboot but can be overwritten.",
+        "D": "Swap and paging files, because they overflow from RAM onto disk."
+      },
+      "correct": "A",
+      "explanation": "The priority table clearly lists CPU registers and cache as priority 1 with the explanation that they are lost the instant power cuts. RAM is priority 2, and the other options represent lower priorities."
+    },
+    {
+      "section": "Forensic disk imaging and tools",
+      "type": "mc",
+      "question": "What is the primary advantage of a hardware write blocker over a software write blocker?",
+      "options": {
+        "A": "It is less expensive and easier to deploy across multiple devices.",
+        "B": "It operates below the OS level and cannot be bypassed by software.",
+        "C": "It supports the E01 format and embeds metadata into the image file.",
+        "D": "It automatically calculates MD5 and SHA-256 hashes during imaging."
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that hardware write blockers operate below the OS and cannot be bypassed by software, whereas the preference for hardware is specifically based on this advantage. The other options describe features of imaging tools, not write blockers themselves."
+    },
+    {
+      "section": "Memory forensics",
+      "type": "mc",
+      "question": "Which Volatility Framework plugin would you use to detect code injected into legitimate processes?",
+      "options": {
+        "A": "`pslist`, because it shows all running processes and their relationships.",
+        "B": "`netscan`, because it reveals active network connections including C2.",
+        "C": "`dlllist`, because it shows which DLLs are loaded per process.",
+        "D": "`malfind`, because it heuristically detects injected code in legitimate processes."
+      },
+      "correct": "D",
+      "explanation": "The plugin table explicitly states that `malfind` heuristically detects code injected into legitimate processes. The other plugins show processes, connections, and loaded DLLs but do not specifically detect injection."
+    },
+    {
+      "section": "File system forensics",
+      "type": "text",
+      "question": "Why are Prefetch files valuable artifacts in Windows forensic analysis, and what information do they provide?",
+      "rubric": "A sound answer states that Prefetch files prove program execution even if the program was deleted, and they provide program name, run count, last run time, and file paths.",
+      "explanation": "The artifact table describes Prefetch files (`.pf` extension) as showing program name, run count, last run time, and file paths — and explicitly notes they prove execution even if the program was deleted, making them valuable for reconstructing what ran on the system."
+    },
+    {
+      "section": "Anti-forensics techniques",
+      "type": "mc",
+      "question": "Which Windows Event ID indicates that the Security log has been cleared?",
+      "options": {
+        "A": "Event ID 1104, which is flagged when other logs are cleared.",
+        "B": "Event ID 1102, which is flagged when the Security log is cleared.",
+        "C": "Event ID 4663, which is flagged when file access is modified.",
+        "D": "Event ID 4688, which is flagged when process execution occurs."
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that Event ID 1102 is flagged for Security log clearing and Event ID 1104 for other logs. The other event IDs are not mentioned in this section."
+    },
+    {
+      "section": "E-discovery vs. forensics",
+      "type": "text",
+      "question": "What is the key difference between the goal of e-discovery and the goal of forensic analysis?",
+      "rubric": "A sound answer states that e-discovery focuses on complete and accurate collection of specified data in response to a legal proceeding, while forensic analysis focuses on deep technical analysis. The legal team defines what e-discovery must produce.",
+      "explanation": "The section explicitly contrasts the two: e-discovery's goal is complete and accurate collection of specified data, not deep technical analysis, and the legal team — not the forensic analyst — defines what must be produced."
+    }
+  ]
+}

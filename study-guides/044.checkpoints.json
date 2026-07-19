@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Brute force physical entry",
+      "type": "mc",
+      "question": "What is the primary function of a mantrap vestibule in physical security?",
+      "options": {
+        "A": "It records video of all people entering the facility for later review",
+        "B": "It alerts security staff when an unauthorized person attempts entry",
+        "C": "It physically prevents tailgating by admitting only one person at a time",
+        "D": "It requires all visitors to scan an ID badge before proceeding"
+      },
+      "correct": "C",
+      "explanation": "A mantrap vestibule is a double-door airlock that blocks tailgating mechanically, regardless of social pressure or badge status — it is a physical control, not a detection or monitoring system."
+    },
+    {
+      "section": "Card Skimming",
+      "type": "text",
+      "question": "Explain the difference between what a standard ATM skimmer captures and what a shimmer device captures.",
+      "rubric": "A sound answer states that a skimmer captures magnetic stripe data (via overlay on the card slot), while a shimmer is inserted inside the chip slot and captures chip data — and that shimmer data enables card-not-present fraud because no physical chip is needed for online purchases.",
+      "explanation": "The section explicitly states that an ATM skimmer overlay reads the magnetic stripe, while a shimmer device reads chip data and enables card-not-present fraud where no physical chip is required."
+    },
+    {
+      "section": "RFID cloning",
+      "type": "mc",
+      "question": "Why does cloning a contactless payment card fail to complete a transaction, but cloning an HID proximity badge succeeds in granting access?",
+      "options": {
+        "A": "Payment cards require biometric confirmation, while badges only need the card ID",
+        "B": "Payment cards use dynamic cryptograms per transaction, while proximity badges broadcast a static ID",
+        "C": "Payment cards are encrypted end-to-end, while badges transmit in plaintext",
+        "D": "Payment cards use multi-factor authentication, while badges use single-factor only"
+      },
+      "correct": "B",
+      "explanation": "The section states that contactless payment cards generate a dynamic cryptogram (one-time code) per transaction, so a static clone cannot work; older cards lack this protection and remain vulnerable."
+    },
+    {
+      "section": "USB-based attacks",
+      "type": "text",
+      "question": "Why do USB Rubber Ducky and O.MG Cable attacks bypass both antivirus and application allowlisting?",
+      "rubric": "A sound answer states that these devices emulate a keyboard and fire pre-programmed keystrokes, invoking legitimate OS utilities (like PowerShell) by typing commands — no malicious file is written to disk, so antivirus and allowlisting (which control files and programs) do not detect or block them.",
+      "explanation": "The section explicitly notes that these attacks bypass antivirus and allowlisting because they invoke legitimate utilities through keystroke injection, not file execution or program launch."
+    },
+    {
+      "section": "Juice jacking",
+      "type": "mc",
+      "question": "Which defense prevents data theft at a compromised public USB charging station while still allowing the device to charge?",
+      "options": {
+        "A": "A password prompt on the charging device",
+        "B": "A VPN connection active during charging",
+        "C": "An antivirus scan before connecting to the station",
+        "D": "A power-only USB cable with data lines physically absent"
+      },
+      "correct": "D",
+      "explanation": "A power-only USB cable has no data lines, so it cannot carry stolen data to or from the charging station — power still flows to the device."
+    },
+    {
+      "section": "Cold boot attacks",
+      "type": "text",
+      "question": "Why is full disk encryption alone insufficient to prevent a cold boot attack?",
+      "rubric": "A sound answer states that encryption keys are stored in DRAM while the system is powered on, and DRAM retains its contents for seconds to minutes after power is cut — so an attacker can recover the keys from RAM before they are erased, even if the stored disk data is encrypted.",
+      "explanation": "The section explains that DRAM retains contents after power-off and that full disk encryption protects stored data but not keys already loaded in RAM, which a cold boot attack targets directly."
+    },
+    {
+      "section": "Hardware implants",
+      "type": "mc",
+      "question": "Which of the following is a defense against hardware implants?",
+      "options": {
+        "A": "Tamper-evident chassis seals and hardware chain of custody",
+        "B": "Frequent patching of the operating system",
+        "C": "Strong passwords on all user accounts",
+        "D": "Regular antivirus scans of the hard drive"
+      },
+      "correct": "A",
+      "explanation": "The section lists tamper-evident seals and chain of custody as defenses; antivirus, passwords, and OS patches operate at the software level and do not detect or prevent hardware implants below the OS."
+    },
+    {
+      "section": "Environmental attacks",
+      "type": "mc",
+      "question": "Which of the following is an example of an environmental attack?",
+      "options": {
+        "A": "Cutting external electrical panels to cause a facility-wide power outage",
+        "B": "Sending a phishing email to trick an employee into revealing credentials",
+        "C": "Installing malware on a web server to steal customer data",
+        "D": "Exploiting a buffer overflow vulnerability in application code"
+      },
+      "correct": "A",
+      "explanation": "Environmental attacks target infrastructure that computing equipment depends on — power, cooling, fire suppression, and plumbing — not the equipment itself; the other options are software or network attacks."
+    }
+  ]
+}

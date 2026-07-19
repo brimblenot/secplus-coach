@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "Compliance ≠ security",
+      "type": "text",
+      "question": "Why is it possible for an organization to be compliant but not secure? Explain in one sentence.",
+      "rubric": "A sound answer states that compliance sets only minimum baselines or floors, so an organization can meet those minimum requirements without implementing additional controls needed for true security.",
+      "explanation": "The section explicitly states that frameworks set minimums, not maximums, and that compliance is a floor, not a ceiling — so meeting compliance does not guarantee security beyond that baseline."
+    },
+    {
+      "section": "Four categories of compliance obligations",
+      "type": "mc",
+      "question": "Which of the following is an example of a contractual compliance obligation?",
+      "options": {
+        "A": "FISMA security requirements mandated for federal agencies by statute",
+        "B": "FERPA rules governing how states manage student education records",
+        "C": "PCI DSS enforced by payment card brands as part of merchant agreements",
+        "D": "HIPAA safeguards required by U.S. law for healthcare organizations"
+      },
+      "correct": "C",
+      "explanation": "The section defines contractual obligations as security requirements written into business contracts and explicitly lists PCI DSS as a contractual standard enforced by card brands, not a law."
+    },
+    {
+      "section": "PCI DSS 12 requirements (organized in six categories)",
+      "type": "mc",
+      "question": "According to the PCI DSS requirements, which of the following addresses the protection of cardholder data while it is being transmitted over a public network?",
+      "options": {
+        "A": "Requirement 6: Develop and maintain secure systems and applications",
+        "B": "Requirement 4: Encrypt cardholder data in transit over public networks",
+        "C": "Requirement 10: Track and monitor all access to network resources and cardholder data",
+        "D": "Requirement 3: Protect stored cardholder data"
+      },
+      "correct": "B",
+      "explanation": "Requirement 4 explicitly addresses encryption of cardholder data in transit over public networks; Requirement 3 covers stored data, not data in motion."
+    },
+    {
+      "section": "HIPAA Security Rule: three safeguard categories",
+      "type": "mc",
+      "question": "A hospital implements workstation use policies and installs badge readers to control physical access to server rooms. Under HIPAA, which safeguard category do these controls fall into?",
+      "options": {
+        "A": "Physical safeguards including facility access controls and workstation policies",
+        "B": "Administrative safeguards focused on designated security officials",
+        "C": "Technical safeguards such as encryption and authentication systems",
+        "D": "Audit safeguards designed to monitor system access logs"
+      },
+      "correct": "A",
+      "explanation": "The section lists workstation use policies and facility access controls (badge readers) as examples of physical safeguards, not administrative or technical safeguards."
+    },
+    {
+      "section": "Due care vs. due diligence",
+      "type": "text",
+      "question": "Describe the difference between due care and due diligence in one or two sentences.",
+      "rubric": "A sound answer explains that due care means implementing appropriate controls to protect against foreseeable harm, while due diligence means actively testing, monitoring, and verifying that those controls work and that third parties meet their obligations.",
+      "explanation": "The section explicitly contrasts these terms: due care is taking reasonable steps and implementing controls; due diligence goes further by actively testing and verifying controls work."
+    },
+    {
+      "section": "Compliance monitoring tools",
+      "type": "mc",
+      "question": "Which tool measures compliance with CIS Benchmarks using real-time configuration assessment?",
+      "options": {
+        "A": "Azure Policy, which monitors compliance in Microsoft cloud environments",
+        "B": "SCAP, which standardizes how compliance requirements are expressed and measured",
+        "C": "AWS Config, which continuously checks cloud resource configurations",
+        "D": "CIS-CAT, which evaluates configurations against CIS Benchmarks"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly identifies CIS-CAT (Center for Internet Security Configuration Assessment Tool) as the tool that measures compliance with CIS Benchmarks."
+    },
+    {
+      "section": "Penalties for noncompliance",
+      "type": "mc",
+      "question": "Under GDPR, what is the maximum financial penalty for a noncompliance violation?",
+      "options": {
+        "A": "Up to $100,000 per month from card brands",
+        "B": "$100 to $50,000 per individual violation with an annual category cap",
+        "C": "Up to 4% of annual global revenue or €20M, whichever is greater",
+        "D": "Up to 20 years imprisonment for executives who knowingly violate rules"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that GDPR penalties are up to 4% of annual global revenue or €20M, whichever is greater — the other options reference PCI DSS, HIPAA, and SOX penalties."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Data Loss Prevention (DLP)",
+      "type": "mc",
+      "question": "Which DLP deployment mode runs as an agent on individual user devices and monitors actions like USB copies and print jobs?",
+      "options": {
+        "A": "Cloud DLP, which protects data stored in cloud provider buckets",
+        "B": "Endpoint DLP, which detects sensitive data movement on the local machine",
+        "C": "Regex DLP, which uses pattern matching to identify credit card numbers",
+        "D": "Network DLP, which inspects traffic at email gateways and web proxies"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that endpoint DLP 'runs as an agent on each device' and 'monitors USB copies, email attachments, browser uploads, print jobs, screenshots.' The other modes and components describe different layers."
+    },
+    {
+      "section": "Information Rights Management (IRM)",
+      "type": "text",
+      "question": "Explain the key difference between how IRM protects data and how traditional access controls protect data.",
+      "rubric": "A sound answer states that access controls protect the container or storage location (folder, server), so once a file is copied out, those controls no longer apply; IRM protects the file itself with persistent rules embedded inside it, so restrictions remain regardless of where the file is moved or shared.",
+      "explanation": "The section directly contrasts the two approaches: 'Traditional access controls protect the container (folder, server) — once a file is copied out, those controls are gone' while 'IRM protects the file itself regardless of location.' This distinction is highlighted as a key exam point."
+    },
+    {
+      "section": "Access controls for data",
+      "type": "mc",
+      "question": "In which access control model are permissions determined by the data owner, such as an individual user setting permissions on NTFS files?",
+      "options": {
+        "A": "DAC, where the data owner sets permissions directly",
+        "B": "ABAC, where context attributes like department and time of day determine access",
+        "C": "MAC, where classification labels and user clearance control access",
+        "D": "RBAC, where permissions are tied to the user's assigned job role"
+      },
+      "correct": "A",
+      "explanation": "The section defines DAC as 'Data owner sets permissions (NTFS on Windows, POSIX on Linux),' which matches the scenario. The other models describe role-based, attribute-based, and mandatory classification-driven approaches."
+    },
+    {
+      "section": "Encryption and key management",
+      "type": "text",
+      "question": "Why is key management as important as the encryption algorithm itself? Name one key management practice mentioned in the section.",
+      "rubric": "A sound answer indicates that even a strong algorithm like AES-256 is only effective if the keys are properly protected and managed, then names at least one practice such as key rotation, key escrow, or use of an HSM to prevent key extraction or compromise.",
+      "explanation": "The section states 'Key management matters as much as the algorithm' and then provides three practices (HSM, key rotation, key escrow) as examples of why it is critical."
+    },
+    {
+      "section": "Database security",
+      "type": "mc",
+      "question": "What does TDE (Transparent Data Encryption) protect, and at what layer does it operate?",
+      "options": {
+        "A": "All queries in real time to detect anomalous bulk data retrieval",
+        "B": "Database user accounts and requires MFA for administrator access",
+        "C": "Entire database files at the storage layer to prevent reading stolen files",
+        "D": "Individual sensitive columns at the application query layer"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that TDE 'encrypts the entire database file on disk at the storage layer; someone who steals the raw files can't read them without going through the database engine.' The other options describe column-level encryption, account controls, and DAM respectively."
+    },
+    {
+      "section": "Data masking and tokenization",
+      "type": "mc",
+      "question": "In tokenization, what is stored in the token vault, and what does the token itself contain?",
+      "options": {
+        "A": "Vault stores aggregate statistics; token is used in development only",
+        "B": "Both token and vault store masked fake data for compliance",
+        "C": "Token contains the original value; vault stores a recovery copy",
+        "D": "Vault stores the real sensitive value; token is a random string"
+      },
+      "correct": "D",
+      "explanation": "The section states that tokenization 'replaces a sensitive value (e.g., a credit card number) with a randomly generated token, with the real value stored only in a secure token vault' and 'The token has no mathematical relationship to the original — useless if stolen.'"
+    },
+    {
+      "section": "Privacy-enhancing technologies",
+      "type": "mc",
+      "question": "Which privacy-enhancing technology ensures that any record in a dataset is indistinguishable from at least k-1 other records on quasi-identifier fields?",
+      "options": {
+        "A": "Differential privacy, which adds calibrated noise to query results",
+        "B": "Federated learning, which trains models without moving raw data",
+        "C": "K-anonymity, which makes records indistinguishable based on quasi-identifier fields",
+        "D": "Data minimization, which limits collection to only necessary personal data"
+      },
+      "correct": "C",
+      "explanation": "The section defines K-anonymity as 'ensures any record in a dataset is indistinguishable from at least k−1 other records on quasi-identifier fields.' The other technologies serve different privacy purposes."
+    },
+    {
+      "section": "Data minimization",
+      "type": "text",
+      "question": "What is the core principle of data minimization, and what security benefit does it provide?",
+      "rubric": "A sound answer states that data minimization means collecting only personal data strictly necessary for a specific purpose and retaining it only as long as needed, then deleting it; the security benefit is that data not held cannot be breached.",
+      "explanation": "The section directly defines the principle and notes that it is 'enshrined in GDPR as a core requirement' while stating the security benefit: 'data you don't hold can't be breached.'"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "checkpoints": [
+    {
+      "section": "Evil twin attacks",
+      "type": "mc",
+      "question": "What is the primary defense against an evil twin attack?",
+      "options": {
+        "A": "Manually configuring the BSSID whitelist on every client device",
+        "B": "Disabling SSID broadcast to hide the network name",
+        "C": "Using EAP-TLS within WPA2-Enterprise so the client can verify the AP's certificate",
+        "D": "Increasing the AP's transmit power to override the attacker's signal strength"
+      },
+      "correct": "C",
+      "explanation": "The section states that EAP-TLS within WPA2-Enterprise allows the client to check the AP's certificate, and a rogue AP cannot forge a valid one. The other options are not presented as effective defenses in this section."
+    },
+    {
+      "section": "Deauthentication attacks",
+      "type": "text",
+      "question": "Why are deauthentication attacks possible, and what does 802.11w do to prevent them?",
+      "rubric": "A sound answer explains that deauthentication frames were sent in cleartext with no verification in the original 802.11 standard, allowing attackers to spoof them; 802.11w (Management Frame Protection) encrypts and authenticates these frames to fix the problem.",
+      "explanation": "The section explicitly states that the original standard failed to authenticate management frames, and 802.11w fixes this by encrypting and authenticating sensitive management frames under WPA2/WPA3."
+    },
+    {
+      "section": "WPA2 KRACK",
+      "type": "mc",
+      "question": "What does KRACK force a WPA2 client to do during the four-way handshake?",
+      "options": {
+        "A": "Downgrade from AES-CCMP to a weaker cipher suite",
+        "B": "Reinstall an already-used key while resetting the nonce counter",
+        "C": "Broadcast the session key in plaintext to the attacker",
+        "D": "Disable encryption temporarily to allow the AP to verify the client's identity"
+      },
+      "correct": "B",
+      "explanation": "The section describes KRACK forcing the client to reinstall an already-used key while resetting the nonce, which breaks AES-CCMP's security guarantees. The other options are not part of the KRACK attack mechanism."
+    },
+    {
+      "section": "WPA3 and Dragonblood",
+      "type": "text",
+      "question": "What security property does WPA3's SAE provide that WPA2's PSK does not, and what type of attack is Dragonblood?",
+      "rubric": "A sound answer states that SAE provides forward secrecy so past sessions cannot be decrypted even if the passphrase is later compromised, and that Dragonblood is a side-channel attack exploiting timing and cache behavior in SAE implementations to enable offline dictionary attacks.",
+      "explanation": "The section explicitly states SAE provides forward secrecy and is resistant to offline dictionary attacks by design, then defines Dragonblood as a side-channel attack using timing and cache techniques."
+    },
+    {
+      "section": "WPS PIN brute-force and Pixie Dust",
+      "type": "mc",
+      "question": "How many PIN combinations must an attacker brute-force because WPS validates the PIN in two independent halves?",
+      "options": {
+        "A": "Approximately 100 million combinations",
+        "B": "Approximately 256 combinations",
+        "C": "Approximately 1,000 combinations",
+        "D": "Approximately 11,000 combinations"
+      },
+      "correct": "D",
+      "explanation": "The section states that the PIN is split into two independent halves (first 4 digits and last 4 with checksum), reducing the brute-force space from 100 million to approximately 11,000 combinations."
+    },
+    {
+      "section": "Wireless eavesdropping",
+      "type": "mc",
+      "question": "Why is WEP encryption completely broken for wireless eavesdropping protection?",
+      "options": {
+        "A": "The 24-bit IV repeats frequently, allowing statistical analysis to recover the key within minutes using tools like aircrack-ng",
+        "B": "It downgrades to plaintext after many packets",
+        "C": "It requires cracking the WPA2 handshake first",
+        "D": "The encryption key is only 8 bits long"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that WEP's 24-bit IV is reused so often that statistical analysis recovers the key in minutes, and that tools like aircrack-ng need only thousands of packets."
+    },
+    {
+      "section": "War driving and war chalking",
+      "type": "text",
+      "question": "What does war driving accomplish, and what mode must a wireless adapter operate in to perform it?",
+      "rubric": "A sound answer states that war driving is scanning for wireless networks while mobile to record SSIDs, signal strength, encryption type, and GPS location, and that the adapter must operate in monitor mode to passively capture without associating.",
+      "explanation": "The section defines war driving as scanning for networks while mobile and specifically states that the adapter uses monitor mode to passively capture without associating."
+    },
+    {
+      "section": "Rogue access points",
+      "type": "mc",
+      "question": "Why does a rogue access point plugged into a corporate network pose a significant security risk?",
+      "options": {
+        "A": "It broadcasts the same SSID as the legitimate AP",
+        "B": "It forces devices to use WEP encryption",
+        "C": "It performs deauthentication attacks on connected devices",
+        "D": "It circumvents perimeter controls and grants radio-range access to the internal network"
+      },
+      "correct": "D",
+      "explanation": "The section states that a rogue AP bypasses perimeter security controls and anyone within radio range gets a path into the internal network."
+    },
+    {
+      "section": "Wireless jamming",
+      "type": "mc",
+      "question": "What method is used to locate the physical source of a wireless jamming signal?",
+      "options": {
+        "A": "Analyzing packet metadata to determine the signal source location",
+        "B": "Tracking the MAC address of the jamming device through network logs",
+        "C": "Physical triangulation using a directional antenna in a radio fox hunt",
+        "D": "Using a WIDS to create a heat map of the affected RF environment"
+      },
+      "correct": "C",
+      "explanation": "The section states that jamming can be located physically via triangulation using a directional antenna, which radio operators call a fox hunt."
+    },
+    {
+      "section": "Bluetooth and NFC attacks",
+      "type": "mc",
+      "question": "What distinguishes BlueBorne from other Bluetooth attacks like bluejacking and bluesnarfing?",
+      "options": {
+        "A": "It provides full remote control including the ability to make calls and send messages",
+        "B": "It exploited Bluetooth stack flaws in multiple OSes without requiring pairing or user interaction",
+        "C": "It gains unauthorized access to a device's contacts, messages, and calendar data",
+        "D": "It sends unsolicited messages to nearby devices via the discovery process"
+      },
+      "correct": "B",
+      "explanation": "The section specifically describes BlueBorne as a 2017 vulnerability set that exploited Bluetooth stack flaws and required no pairing or user interaction, distinguishing it from the other named attacks."
+    }
+  ]
+}

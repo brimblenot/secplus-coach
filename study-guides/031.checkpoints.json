@@ -1,0 +1,57 @@
+{
+  "checkpoints": [
+    {
+      "section": "How SQLi works at its core",
+      "type": "mc",
+      "question": "In a SQL injection attack, what does the `--` symbol accomplish when included in user input?",
+      "options": {
+        "A": "It encrypts the input to hide malicious code",
+        "B": "It closes the current statement and starts a new one",
+        "C": "It marks everything after it as a comment to the database",
+        "D": "It escapes special characters to block query execution"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that `--` is a SQL comment delimiter that causes the database engine to ignore everything after it, allowing attackers to bypass subsequent conditions like password checks."
+    },
+    {
+      "section": "The three SQLi families",
+      "type": "text",
+      "question": "Explain the core difference between in-band SQLi and blind SQLi in terms of how an attacker receives feedback.",
+      "rubric": "A sound answer states that in-band SQLi returns results directly over the same connection, while blind SQLi provides no direct database output and requires the attacker to infer data indirectly through behavioral differences or timing side channels.",
+      "explanation": "The section defines in-band as results traveling directly back over the same HTTP channel and blind as providing no direct output that must be inferred indirectly, making this the key distinguishing characteristic."
+    },
+    {
+      "section": "Authentication bypass",
+      "type": "mc",
+      "question": "When an attacker submits the username `admin --` during login, what portion of the original WHERE clause is eliminated?",
+      "options": {
+        "A": "The password check is commented out and ignored",
+        "B": "The entire SELECT statement becomes invalid",
+        "C": "The username comparison is removed entirely",
+        "D": "The database rejects the query as malformed"
+      },
+      "correct": "A",
+      "explanation": "The section explains that the `--` comment delimiter causes the password check (`AND password = '...'`) to be commented out, leaving only the username authentication."
+    },
+    {
+      "section": "Beyond reading data",
+      "type": "mc",
+      "question": "What is the defining characteristic of second-order SQL injection?",
+      "options": {
+        "A": "It injects code into two user input fields at the same time",
+        "B": "It bypasses authentication, then modifies database records",
+        "C": "It requires two separate database servers to work",
+        "D": "Malicious input is stored safely, then runs later when retrieved"
+      },
+      "correct": "D",
+      "explanation": "The section defines second-order SQLi as malicious input safely stored on first insertion, then later executed when reused in a different query without sanitization, making the timing and location of execution the key feature."
+    },
+    {
+      "section": "Defenses",
+      "type": "text",
+      "question": "Why is input sanitization alone insufficient as a defense against SQL injection, and what structural advantage do parameterized queries provide instead?",
+      "rubric": "A sound answer explains that sanitization attempts to scrub dangerous characters but can be bypassed through edge cases and encoding tricks, whereas parameterized queries structurally prevent user data from becoming executable SQL by separating code compilation from user input binding.",
+      "explanation": "The section contrasts sanitization as pattern-scrubbing that can be bypassed with parameterized queries, which compile the SQL structure before user input is considered, preventing input from ever being interpreted as syntax."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a zero-day actually is",
+      "type": "mc",
+      "question": "What is the defining characteristic of a zero-day vulnerability?",
+      "options": {
+        "A": "The vendor knows about it but has chosen not to release a patch",
+        "B": "The vendor is unaware the flaw exists, so no patch or advisory is available",
+        "C": "The vulnerability was discovered on the first day of the year",
+        "D": "Attackers have zero ways to exploit it because defenses are in place"
+      },
+      "correct": "B",
+      "explanation": "A zero-day is defined by the vendor having zero days to develop a fix because they don't know the flaw exists. This means no patch, no advisory, and no signature for defenses to match against."
+    },
+    {
+      "section": "Who discovers zero-days — and why it matters",
+      "type": "text",
+      "question": "Name two different parties that might discover a zero-day and briefly describe what they typically do with it.",
+      "rubric": "A sound answer names two discoverers from the table (researchers, bounty hunters, nation-states, or criminals) and states what each does: researchers report via coordinated disclosure, bounty hunters submit to platforms for rewards, nation-states stockpile for operations, criminals use or sell to brokers.",
+      "explanation": "The section lists four distinct discoverer types with different intentions; a student should pick any two and state their corresponding action from the table."
+    },
+    {
+      "section": "The zero-day lifecycle",
+      "type": "mc",
+      "question": "During which period is the zero-day threat window most dangerous?",
+      "options": {
+        "A": "Between CVE assignment and CVSS score publication",
+        "B": "Between discovery and the vendor receiving notification",
+        "C": "Between first exploitation in the wild and successful patch deployment",
+        "D": "Between the patch release and when the vendor publishes an advisory"
+      },
+      "correct": "C",
+      "explanation": "The section states that the most dangerous period is the window between first exploitation and successful patch deployment, because during this time no standard defense addresses the specific flaw."
+    },
+    {
+      "section": "The CVE system",
+      "type": "mc",
+      "question": "What is the primary purpose of the CVE naming system?",
+      "options": {
+        "A": "To measure vulnerability severity using a numerical scale",
+        "B": "To document which nation-state created an exploit",
+        "C": "To record how long vendors have known about a flaw",
+        "D": "To standardize vulnerability identification across all parties"
+      },
+      "correct": "D",
+      "explanation": "The CVE system is a standardized naming framework maintained by MITRE; the section explains that it gives every flaw a single unambiguous ID so vendors, security tools, and organizations all refer to the same thing."
+    },
+    {
+      "section": "The CVSS scoring system",
+      "type": "mc",
+      "question": "Which CVSS Base Score metric measures whether a flaw can affect components beyond the vulnerable component itself?",
+      "options": {
+        "A": "Scope",
+        "B": "User Interaction",
+        "C": "Attack Vector",
+        "D": "Privileges Required"
+      },
+      "correct": "A",
+      "explanation": "The Scope metric specifically measures whether exploitation can affect components beyond the vulnerable one; a score of 10.0 includes cross-component impact."
+    },
+    {
+      "section": "Disclosure models",
+      "type": "text",
+      "question": "Explain the key difference in timing between responsible disclosure and full immediate disclosure.",
+      "rubric": "A sound answer states that responsible disclosure withholds public details for a set period (the section specifies 90 days) to give the vendor time to patch, while full immediate disclosure publishes everything right away with no waiting period.",
+      "explanation": "The section contrasts the two models explicitly: responsible disclosure gives the vendor 90 days (Project Zero standard) before public release, while full immediate disclosure publishes with no notification or waiting period."
+    },
+    {
+      "section": "Nation-state risk: the EternalBlue lesson",
+      "type": "mc",
+      "question": "What protocol did the EternalBlue exploit target?",
+      "options": {
+        "A": "SMB (Server Message Block)",
+        "B": "DNS (Domain Name System)",
+        "C": "HTTP (Hypertext Transfer Protocol)",
+        "D": "SSH (Secure Shell)"
+      },
+      "correct": "A",
+      "explanation": "The section states that EternalBlue targeted a flaw in Windows SMB, which is the Windows file-sharing protocol."
+    },
+    {
+      "section": "Defending without a patch",
+      "type": "mc",
+      "question": "How does EDR differ from traditional antivirus in defending against zero-days?",
+      "options": {
+        "A": "EDR prevents all malware from running by blocking the file system",
+        "B": "EDR matches files against known-bad signatures at execution time",
+        "C": "EDR only works on Windows systems while antivirus works on all platforms",
+        "D": "EDR detects exploitation behaviors without needing to know the specific vulnerability"
+      },
+      "correct": "D",
+      "explanation": "The section contrasts the two: traditional antivirus only matches files against a known-bad signature list, while EDR records ongoing activity and can catch novel exploit behavior without knowing the specific flaw."
+    }
+  ]
+}

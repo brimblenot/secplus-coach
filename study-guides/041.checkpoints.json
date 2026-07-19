@@ -1,0 +1,44 @@
+{
+  "checkpoints": [
+    {
+      "section": "The one difference that matters: propagation",
+      "type": "mc",
+      "question": "What is the key difference in how a virus and a worm spread?",
+      "options": {
+        "A": "A virus requires a host file and user action to spread; a worm self-replicates across networks autonomously.",
+        "B": "A virus spreads through email attachments only; a worm spreads through network services.",
+        "C": "A virus uses encryption to hide; a worm uses polymorphic code.",
+        "D": "A virus targets boot sectors; a worm targets executable files."
+      },
+      "correct": "A",
+      "explanation": "The defining distinction in the section is that viruses need a host file and user activation, while worms propagate autonomously by exploiting network vulnerabilities without either requirement."
+    },
+    {
+      "section": "Virus subtypes",
+      "type": "text",
+      "question": "Explain why polymorphic and metamorphic viruses defeat traditional signature-based antivirus.",
+      "rubric": "A sound answer states that polymorphic viruses encrypt their payload with a different key on each infection (producing different byte patterns each time), and metamorphic viruses rewrite their entire code on each infection using equivalent transformations. Signature matching relies on fixed known byte patterns, so when the malware's byte sequence changes every infection, the fixed signatures no longer match.",
+      "explanation": "Both virus types ensure no two copies have the same byte sequence, making static signature libraries useless; detection requires heuristic or behavioral analysis instead."
+    },
+    {
+      "section": "Worms and landmark incidents",
+      "type": "mc",
+      "question": "Which exploit was used by both WannaCry and NotPetya?",
+      "options": {
+        "A": "MS08-067 Windows Server Service vulnerability",
+        "B": "fingerd and sendmail vulnerabilities on Unix systems",
+        "C": "IIS web server vulnerability that defaced websites",
+        "D": "EternalBlue SMB exploit identified as MS17-010"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that both WannaCry and NotPetya exploited EternalBlue (the NSA-developed exploit targeting SMB, identified as MS17-010)."
+    },
+    {
+      "section": "Defenses",
+      "type": "text",
+      "question": "What is identified as the single most important control against worms, and why was it relevant to WannaCry and NotPetya?",
+      "rubric": "A sound answer states that patch management is the single most important control, and that WannaCry and NotPetya both exploited the MS17-010 vulnerability that Microsoft had already patched two months before the attacks occurred.",
+      "explanation": "The section emphasizes patch management as the primary worm defense and notes that both incidents exploited a known, already-patched vulnerability—demonstrating that timely patching could have prevented widespread infection."
+    }
+  ]
+}

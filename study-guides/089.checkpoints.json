@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "How firewalls evolved: stateless → stateful → NGFW",
+      "type": "mc",
+      "question": "What is the key difference between a stateless firewall and a stateful firewall?",
+      "options": {
+        "A": "Stateless firewalls block all incoming traffic; stateful ones allow all outgoing",
+        "B": "Stateless firewalls are faster due to minimal session tracking overhead",
+        "C": "Stateless firewalls inspect only headers; stateful firewalls track connection states",
+        "D": "Stateless firewalls perform deep packet inspection; stateful firewalls do not"
+      },
+      "correct": "C",
+      "explanation": "Stateless firewalls judge each packet alone based on header fields; stateful firewalls remember active sessions in a connection state table, making them faster and more secure. The state table allows later packets to be validated against the session rather than the full rule base."
+    },
+    {
+      "section": "How firewalls evolved: stateless → stateful → NGFW",
+      "type": "text",
+      "question": "Explain how an NGFW's use of deep packet inspection enables different policy than a stateful firewall, using a specific example.",
+      "rubric": "A sound answer identifies that DPI allows NGFWs to see the actual application inside the packet payload (not just the port), enabling application-based policy. For example, a stateful firewall sees port 443 as web traffic and allows it; an NGFW can identify SharePoint or a gambling site on port 443 and apply different policies to each.",
+      "explanation": "NGFWs read inside the packet payload to identify the real application, regardless of port. This lets them block file-sharing apps while allowing HTTPS browsing, even though both use port 443 — a stateful firewall cannot make that distinction."
+    },
+    {
+      "section": "How firewall rules are structured",
+      "type": "mc",
+      "question": "In a top-down, first-match firewall rule set, what happens if a general 'allow all' rule is placed above a specific 'deny HR server' rule?",
+      "options": {
+        "A": "The deny rule takes precedence over the allow rule",
+        "B": "The allow rule matches first, so the deny rule is never evaluated",
+        "C": "The firewall throws an error and requires rule reordering",
+        "D": "Both rules execute together and the most specific rule wins"
+      },
+      "correct": "B",
+      "explanation": "Firewalls evaluate rules top-down and stop at the first match. If 'allow all' is above 'deny HR server,' the allow rule matches and evaluation stops, so the deny rule is never checked. This is why specific rules must come before general ones."
+    },
+    {
+      "section": "How firewall rules are structured",
+      "type": "text",
+      "question": "What is the implicit deny rule, and what role does it play in firewall security?",
+      "rubric": "A sound answer states that the implicit deny is a built-in rule that automatically drops any traffic not matched by a permit rule, even without an explicit deny-all at the end. It ensures that only explicitly allowed traffic passes.",
+      "explanation": "Every firewall has an implicit deny built in — any traffic not matched by a permit rule is automatically dropped. This is a core security principle: deny by default unless explicitly allowed."
+    },
+    {
+      "section": "NAT: hiding private addresses",
+      "type": "mc",
+      "question": "Which NAT type maps many internal hosts to a single public IP by tracking unique source ports?",
+      "options": {
+        "A": "Port forwarding redirects traffic from one port to another",
+        "B": "Static NAT maps one internal host to one public IP",
+        "C": "DNAT translates destination addresses on incoming packets",
+        "D": "PAT maps many internal hosts to one public IP using source ports"
+      },
+      "correct": "D",
+      "explanation": "PAT (Port Address Translation) / IP masquerade allows many internal private IPs to share one public IP. The firewall tracks which internal host sent each packet by remembering the unique source port it assigned, so replies reach the correct internal host."
+    },
+    {
+      "section": "DMZ architecture",
+      "type": "mc",
+      "question": "In a three-interface DMZ firewall, which traffic rule is identified as most critical for preventing attackers from reaching the internal network?",
+      "options": {
+        "A": "DMZ to inside traffic must be explicitly denied",
+        "B": "Inside to DMZ traffic must be denied for security reasons",
+        "C": "DMZ to internet traffic must be allowed without restrictions",
+        "D": "Internet to DMZ traffic must be denied for all services"
+      },
+      "correct": "A",
+      "explanation": "The most important DMZ rule explicitly denies DMZ-to-inside traffic. This stops an attacker who compromises a DMZ server from pivoting into the trusted internal network."
+    },
+    {
+      "section": "High availability: no single point of failure",
+      "type": "text",
+      "question": "Describe the difference between active-passive and active-active firewall HA setups.",
+      "rubric": "A sound answer explains that active-passive has one firewall handling all traffic while the secondary monitors via heartbeat and takes over on failure, while active-active has both firewalls processing traffic simultaneously and requires session synchronization.",
+      "explanation": "In active-passive, the secondary firewall is on standby and takes over only if the primary fails via heartbeat monitoring. In active-active, both firewalls process traffic at once, requiring session state to be synchronized between them so either can handle stateful connections correctly."
+    },
+    {
+      "section": "Firewalls in cloud and virtual environments",
+      "type": "mc",
+      "question": "What do AWS Security Groups and Azure NSGs provide in a cloud environment?",
+      "options": {
+        "A": "Web application firewalls protecting HTTP and HTTPS only",
+        "B": "Virtual firewalls that filter traffic by protocol, port, and IP address",
+        "C": "Physical firewall hardware requiring purchase and installation",
+        "D": "Intrusion prevention systems that inspect packet payloads for threats"
+      },
+      "correct": "B",
+      "explanation": "Security groups are virtual firewalls native to cloud platforms that control traffic per instance based on protocol, port, and source/destination — similar to traditional firewall rules but applied at the instance level."
+    },
+    {
+      "section": "IPS integration",
+      "type": "text",
+      "question": "How do firewalls and IPSs work together as layers of defense, and what does each layer focus on?",
+      "rubric": "A sound answer states that the firewall decides who can talk to whom (access control), while the IPS inspects the content of permitted traffic for attack signatures (intrusion detection/prevention). The IPS blocks specific attack sessions while allowing legitimate traffic through.",
+      "explanation": "The firewall is the first gatekeeper, using rules to permit or deny traffic based on source, destination, and port. The IPS inspects the content within traffic the firewall already allowed through, looking for attack signatures like SQL injection and blocking malicious sessions while legitimate traffic continues."
+    }
+  ]
+}

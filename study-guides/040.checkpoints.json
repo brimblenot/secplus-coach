@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Malware anatomy: dropper, payload, and C2",
+      "type": "mc",
+      "question": "In a malware infection, what is the primary purpose of the dropper?",
+      "options": {
+        "A": "To steal credentials and exfiltrate data from the compromised system",
+        "B": "To plant the main payload on the target system",
+        "C": "To establish a communication channel for attackers to send commands",
+        "D": "To encrypt files and demand ransom from the victim"
+      },
+      "correct": "B",
+      "explanation": "The dropper or loader is the delivery vehicle whose only job is to plant the main payload on the target; the other functions belong to the payload and C2 components respectively."
+    },
+    {
+      "section": "Persistence mechanisms",
+      "type": "text",
+      "question": "Explain why a malware author would use multiple persistence mechanisms like Run registry keys, scheduled tasks, and WMI subscriptions on a single compromised host.",
+      "rubric": "A sound answer recognizes that multiple persistence mechanisms act as redundancy or backups — if one is discovered and removed, others remain active, ensuring the malware survives even partial cleanup or a single persistence vector being eliminated.",
+      "explanation": "The study guide uses the metaphor of leaving spare keys under multiple doormats; the point is that multiple mechanisms provide defense-in-depth so removal of one does not fully eradicate malware."
+    },
+    {
+      "section": "Propagation vectors",
+      "type": "mc",
+      "question": "Which propagation vector requires zero user action to install malware?",
+      "options": {
+        "A": "Worms that exploit network service vulnerabilities autonomously",
+        "B": "Drive-by downloads triggered only when a user visits a page",
+        "C": "Trojans disguised as useful software users voluntarily run",
+        "D": "Malicious email attachments that users must open"
+      },
+      "correct": "A",
+      "explanation": "Worms spread autonomously by exploiting network service vulnerabilities, requiring zero user action; all other vectors depend on user interaction or presence."
+    },
+    {
+      "section": "Evasion techniques",
+      "type": "text",
+      "question": "Why does polymorphic malware succeed in evading signature-based detection despite carrying the same malicious functionality on each infection?",
+      "rubric": "A sound answer explains that polymorphic malware encrypts its code with a different key on each infection, changing the binary's byte pattern each time, so the antivirus signature database has no stable pattern to match against.",
+      "explanation": "Signature-based detection relies on matching byte patterns; since polymorphic malware looks different every time, no single signature can detect all variants."
+    },
+    {
+      "section": "Anti-analysis techniques",
+      "type": "mc",
+      "question": "What does malware that performs sandbox detection check for?",
+      "options": {
+        "A": "Whether behavioral monitoring tools like EDR are actively running",
+        "B": "Whether the system lacks recent Windows security patches",
+        "C": "Whether the user has opened a network connection to a C2 server",
+        "D": "VMware or VirtualBox process names and virtual hardware IDs"
+      },
+      "correct": "D",
+      "explanation": "Sandbox detection looks for signs that the malware is running in a virtual analysis environment, such as VMware/VirtualBox artifacts and virtual hardware indicators, so it can behave benignly during analysis."
+    },
+    {
+      "section": "Fileless malware and living off the land",
+      "type": "mc",
+      "question": "Why does traditional antivirus fail to detect fileless malware?",
+      "options": {
+        "A": "Fileless malware disables antivirus before activation",
+        "B": "Fileless malware obfuscates code to evade signature-based detection",
+        "C": "Fileless malware runs in memory without writing executable files to disk",
+        "D": "Fileless malware encrypts itself with a new key each time it runs"
+      },
+      "correct": "C",
+      "explanation": "Traditional antivirus scans files on disk and matches signatures; fileless malware stays entirely in system memory using legitimate tools, leaving nothing on disk to scan."
+    },
+    {
+      "section": "Malware category quick reference",
+      "type": "mc",
+      "question": "Which malware type disguises itself as legitimate software to trick users into voluntarily running it?",
+      "options": {
+        "A": "Trojan that induces execution through deception",
+        "B": "Logic bomb that executes only when triggered",
+        "C": "Rootkit that hides itself from the operating system",
+        "D": "Worm that self-replicates across networks"
+      },
+      "correct": "A",
+      "explanation": "A Trojan disguises itself as legitimate software to induce the user to run it; the other types operate through different mechanisms."
+    },
+    {
+      "section": "Defensive controls",
+      "type": "text",
+      "question": "Given that fileless malware runs in memory using legitimate Windows tools, why is EDR monitoring more effective than traditional antivirus against this threat?",
+      "rubric": "A sound answer explains that EDR performs behavioral monitoring and records what processes do rather than matching files against signatures, enabling detection of in-memory threats and suspicious execution patterns that file-based scanning cannot see.",
+      "explanation": "EDR watches system behavior and activity; traditional antivirus only scans files on disk, so it cannot detect activity that never touches the filesystem."
+    }
+  ]
+}

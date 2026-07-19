@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Training vs. awareness: not the same thing",
+      "type": "text",
+      "question": "In your own words, explain why an organization needs both security awareness and user training, rather than just one or the other.",
+      "rubric": "A sound answer distinguishes awareness as building mindset/motivation to care about security, while training builds the specific knowledge and skills to act securely in one's role. Both are necessary because motivation without capability, or capability without motivation, leaves gaps.",
+      "explanation": "The section explicitly states awareness creates mindset and training builds knowledge/skills, and that both are necessary and neither alone is sufficient. The driver's ed analogy reinforces this."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "Which of the following best describes what BEC attackers typically aim to accomplish when targeting finance staff?",
+      "options": {
+        "A": "Intercepting encrypted communications between finance executives and auditors",
+        "B": "Leveraging SQL injection flaws in financial reporting applications",
+        "C": "Deceiving finance staff into transferring funds or modifying vendor payment information",
+        "D": "Deploying malware on accounting systems to extract tax return data"
+      },
+      "correct": "C",
+      "explanation": "The section defines BEC as a social engineering attack where attackers impersonate executives or vendors to trick finance employees into wiring money or changing vendor payment details. Options B, C, and D describe different attack types not part of the BEC definition for finance staff training."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "For IT administrators, what is the primary security risk of a compromised admin account?",
+      "options": {
+        "A": "The attacker can perform lateral movement, escalate privileges, and cover tracks organization-wide",
+        "B": "The attacker is able to install unauthorized software on a single workstation",
+        "C": "The attacker can send phishing emails to end users using the admin's trusted reputation",
+        "D": "The attacker gains read-only access to the help desk ticketing system"
+      },
+      "correct": "A",
+      "explanation": "The section states that a compromised admin account lets an attacker move laterally, escalate privileges, and cover tracks organization-wide. This describes the core privilege-escalation risk specific to admin accounts, unlike the other options."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "Which technique do developers use to prevent SQL injection attacks?",
+      "options": {
+        "A": "Input validation that rejects malformed or malicious data before application logic processes it",
+        "B": "Output encoding that neutralizes untrusted data before rendering it in HTML",
+        "C": "Secrets management tools like HashiCorp Vault to store and serve credentials securely",
+        "D": "Parameterized queries that separate query structure from user-supplied data"
+      },
+      "correct": "D",
+      "explanation": "The section defines parameterized queries as a coding technique that prevents SQL injection by separating query structure from user-supplied data. While B, C, and D are legitimate developer security practices in the section, they do not specifically prevent SQL injection."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "text",
+      "question": "Explain why offboarding timing for involuntary terminations is a critical security concern, based on what the section states about access revocation and insider threat risk.",
+      "rubric": "A sound answer identifies that access must be revoked at or before the moment the employee is informed, and explains that a disgruntled employee with active access is an immediate insider threat. The urgency stems from the employee's emotional state and motivation after learning of termination.",
+      "explanation": "The section explicitly states that for involuntary terminations, access must be revoked at or before the moment the employee is informed, and describes a disgruntled employee with active access as an immediate insider threat—establishing both the timing requirement and the rationale."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What does the section describe as whaling?",
+      "options": {
+        "A": "An insider threat where an executive abuses their access privileges",
+        "B": "Phishing attacks crafted specifically for executive targets, using personalized details from LinkedIn and public sources",
+        "C": "A technique that uses synthetic audio or video to impersonate an executive",
+        "D": "A social engineering attack targeting multiple high-ranking officers in the same organization"
+      },
+      "correct": "B",
+      "explanation": "The section defines whaling as phishing attacks crafted specifically for executive targets, using personalized details from LinkedIn, public speeches, and filings to build convincing pretexts. Option B describes deepfake technology (a separate threat), and C and D are not the section's definition."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "According to the section, what is juice jacking and how should employees protect themselves?",
+      "options": {
+        "A": "A technique where attackers overclock a mobile device's battery to drain power faster; disable background apps to prevent it",
+        "B": "A risk where public USB charging stations transfer malware to connected devices; use AC adapters or data-blocking cables instead",
+        "C": "A malware strain that steals payment card data from mobile wallet applications; use VPN on public Wi-Fi",
+        "D": "A Wi-Fi eavesdropping attack that intercepts unencrypted traffic; connect only to WPA3-secured networks"
+      },
+      "correct": "B",
+      "explanation": "The section defines juice jacking as a risk where public USB charging stations are rigged to transfer malware to connected devices, and recommends using AC adapters or data-blocking cables. Options B, C, and D describe different threats not covered in the juice jacking definition."
+    },
+    {
+      "section": "Training delivery: how it works matters as much as what's taught",
+      "type": "text",
+      "question": "According to the section, what is the main reason phishing simulations are a better measure of training effectiveness than a written quiz alone?",
+      "rubric": "A sound answer explains that phishing simulations measure whether knowledge translates to actual behavior change—the real goal—rather than just whether people can recall facts. The section's fire drill analogy reinforces that the test is *action* in a realistic scenario, not theoretical knowledge.",
+      "explanation": "The section states that phishing simulations measure whether knowledge translates to behavior change, the real goal, and contrasts this with quiz scores. The fire drill analogy emphasizes testing actual response, not theory knowledge."
+    }
+  ]
+}

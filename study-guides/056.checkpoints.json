@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "Patching",
+      "type": "mc",
+      "question": "When should the normal patch management schedule be skipped?",
+      "options": {
+        "A": "When the organization lacks automated patching tools",
+        "B": "When the patch has not yet been tested in production",
+        "C": "When a critical vulnerability with active exploits poses greater risk than patching",
+        "D": "When the patch is for a non-critical application"
+      },
+      "correct": "C",
+      "explanation": "The section states that critical/zero-day vulns require emergency patching with expedited or skipped testing when exploit risk outweighs stability risk, contrasting with the normal schedule."
+    },
+    {
+      "section": "Encryption",
+      "type": "text",
+      "question": "Name one layer at which encryption protects data and describe what threat it defends against.",
+      "rubric": "A sound answer identifies one layer (full disk, file-level, in transit, or application-level) and states what it protects (e.g., stolen/lost device, specific files, network interception, data within an app).",
+      "explanation": "The section presents a table mapping encryption layers to their protective scope; students should recognize that encryption applies at multiple points and each blocks a different attack vector."
+    },
+    {
+      "section": "Monitoring",
+      "type": "mc",
+      "question": "Which monitoring tool is most effective at detecting when a compromised account is used normally because it baselines individual user behavior?",
+      "options": {
+        "A": "EDR, which monitors process execution and file changes",
+        "B": "NDR, which detects anomalous network traffic patterns",
+        "C": "SIEM, which correlates logs from multiple sources",
+        "D": "UEBA, which alerts when user behavior deviates from baseline"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states UEBA baselines normal behavior per user and alerts on significant deviation, making it effective against compromised accounts using valid credentials."
+    },
+    {
+      "section": "Isolation, containment, and quarantine",
+      "type": "text",
+      "question": "Explain the difference between isolation and quarantine in incident response.",
+      "rubric": "A sound answer states that isolation is a manual process removing network access while preserving controlled access for investigation, whereas quarantine is the automated version performed by EDR when a suspicious host is detected.",
+      "explanation": "The section explicitly contrasts these two: isolation stops C2 and lateral movement but is manual (firewall rules or unplugging); quarantine achieves the same goal automatically via EDR detection."
+    },
+    {
+      "section": "Compensating controls and exceptions",
+      "type": "mc",
+      "question": "What must be documented when an exception to a security control is formally approved?",
+      "options": {
+        "A": "Business owner acknowledgment, residual risk, entry in the risk register, review date, and ideally compensating controls",
+        "B": "A list of all systems affected and the names of staff responsible for monitoring",
+        "C": "The compensating control and a plan to reach full compliance within one year",
+        "D": "Only the business owner acknowledgment and the reason the control cannot be applied"
+      },
+      "correct": "A",
+      "explanation": "The section lists all required elements: business owner acknowledgment, residual risk, risk register entry, review date, and compensating controls; exceptions should also be time-limited."
+    },
+    {
+      "section": "Application removal and isolation",
+      "type": "mc",
+      "question": "Why is application removal more complete than simply disabling a service?",
+      "options": {
+        "A": "Removal requires administrator approval while disabling does not",
+        "B": "Removal deletes configuration files and scheduled tasks attackers could exploit",
+        "C": "Removal prevents the application from running in the future",
+        "D": "Removal frees up disk space more efficiently than disabling"
+      },
+      "correct": "B",
+      "explanation": "The section states that removal eliminates binaries, config files, open ports, and scheduled tasks entirely, whereas disabling leaves these artifacts in place that attackers could leverage."
+    },
+    {
+      "section": "Deny listing vs. allow listing",
+      "type": "text",
+      "question": "Explain why allow listing is considered proactive while deny listing is reactive.",
+      "rubric": "A sound answer states that allow listing blocks unknown and novel threats by default because only approved items are permitted, whereas deny listing only blocks known-bad items and cannot block zero-days or threats not yet identified.",
+      "explanation": "The section directly contrasts the two stances: deny listing is reactive because it requires the threat to be identified first; allow listing is proactive because novel malware is blocked automatically simply by not being on the approved list."
+    },
+    {
+      "section": "Scanning",
+      "type": "mc",
+      "question": "What is the main advantage of a credentialed scan over an uncredentialed scan?",
+      "options": {
+        "A": "It requires fewer resources and completes faster",
+        "B": "It can be run remotely without network access to the target",
+        "C": "It can probe for SQLi and XSS vulnerabilities",
+        "D": "It authenticates and directly inspects software versions and configurations"
+      },
+      "correct": "D",
+      "explanation": "The section states credentialed scans authenticate and inspect directly, yielding greater accuracy, while uncredentialed scans only observe network exposure and are less accurate."
+    },
+    {
+      "section": "Least privilege and access creep",
+      "type": "text",
+      "question": "What is access creep and how does access recertification help prevent it?",
+      "rubric": "A sound answer identifies access creep as the gradual accumulation of excess permissions as users change roles and old access is not removed, and states that access recertification campaigns require managers to review and confirm permissions are still needed, revoking those that aren't.",
+      "explanation": "The section defines access creep as the accumulation of unneeded permissions and presents access recertification as the mechanism to periodically validate and remove stale permissions."
+    }
+  ]
+}

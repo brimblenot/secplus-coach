@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why third-party risk matters",
+      "type": "mc",
+      "question": "In the Target 2013 breach, what was the primary path attackers used to reach the point-of-sale systems?",
+      "options": {
+        "A": "Social engineering of Target's internal security personnel",
+        "B": "A zero-day exploit against Target's perimeter firewall",
+        "C": "A malicious insider at Target's corporate headquarters",
+        "D": "Stolen credentials from a third-party HVAC vendor with network access"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly states that attackers stole credentials from an HVAC vendor with remote access for billing purposes, and that access was the path into Target's point-of-sale systems."
+    },
+    {
+      "section": "Categories of third-party risk",
+      "type": "text",
+      "question": "Describe what concentration risk means in the context of third-party relationships.",
+      "rubric": "A sound answer states that concentration risk refers to over-reliance on a single vendor, creating a single point of failure for the organization.",
+      "explanation": "The table defines concentration risk as over-reliance on one vendor resulting in a single point of failure; the student should capture the dependency and failure concept."
+    },
+    {
+      "section": "The vendor risk management lifecycle",
+      "type": "mc",
+      "question": "Which tier of vendor requires the most rigorous and ongoing monitoring according to the tiering framework?",
+      "options": {
+        "A": "Tier 3 vendors with limited access and low-sensitivity data",
+        "B": "All tiers require identical levels of assessment intensity",
+        "C": "Tier 1 vendors with sensitive data or broad system access",
+        "D": "Tier 2 vendors with moderate access and moderate sensitivity"
+      },
+      "correct": "C",
+      "explanation": "The tiering table explicitly assigns Tier 1 the most rigorous and ongoing monitoring due to high risk from sensitive data or broad system access."
+    },
+    {
+      "section": "Vendor assessment methods",
+      "type": "mc",
+      "question": "What is the key limitation of security questionnaires like SIG and VSAQ?",
+      "options": {
+        "A": "They only apply to vendors in the financial services industry",
+        "B": "They rely on vendor self-reporting, which may be inaccurate or overly optimistic",
+        "C": "They require on-site audits that are expensive and time-consuming",
+        "D": "They cannot be used for any vendor tier below Tier 1"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that all questionnaires rely on vendor self-reporting, which may be inaccurate or overly optimistic, as their key limitation."
+    },
+    {
+      "section": "Vendor assessment methods",
+      "type": "text",
+      "question": "When reviewing a vendor's SOC 2 Type 2 report, what four elements should you check?",
+      "rubric": "A sound answer identifies scope (whether it covers the specific systems you'll use), time period (is it less than 12 months old), exceptions (any auditor-noted failures), and trust service categories (Security must be included at minimum).",
+      "explanation": "The section lists these four specific review criteria for SOC 2 Type 2 reports in a bulleted checklist; the student should recall all four."
+    },
+    {
+      "section": "Vendor assessment methods",
+      "type": "mc",
+      "question": "Which assessment method involves an independent auditing firm reviewing actual control operation over 6–12 months?",
+      "options": {
+        "A": "SOC 2 Type 2 independent audit report",
+        "B": "ISO 27001 certification audit conducted annually",
+        "C": "Right-to-audit clause invoked by the customer organization",
+        "D": "Security questionnaire self-assessment by the vendor"
+      },
+      "correct": "A",
+      "explanation": "The section defines SOC 2 Type 2 as an independent audit report covering 6–12 months of actual control operation, performed by an external auditing firm."
+    },
+    {
+      "section": "Contractual security provisions",
+      "type": "mc",
+      "question": "Under GDPR, which contractual document is required to specify data handling, breach notification, deletion, and sub-processors?",
+      "options": {
+        "A": "Service Level Agreement (SLA)",
+        "B": "Non-Disclosure Agreement (NDA)",
+        "C": "Data Processing Agreement (DPA)",
+        "D": "Statement of Work (SOW)"
+      },
+      "correct": "C",
+      "explanation": "The table explicitly states that the DPA is required under GDPR and specifies data handling, breach notification, deletion, and sub-processors."
+    },
+    {
+      "section": "Contractual security provisions",
+      "type": "text",
+      "question": "Why is a right-to-audit clause particularly important for Tier 1 vendors?",
+      "rubric": "A sound answer states that the right-to-audit clause gives the organization direct control to assess vendor controls beyond what vendors voluntarily disclose, which is critical for high-risk vendors with sensitive or broad access.",
+      "explanation": "The section notes the clause is critical for Tier 1 vendors and explains it goes beyond what vendors voluntarily disclose, allowing direct assessment via questionnaire, document review, or on-site inspection."
+    },
+    {
+      "section": "Ongoing monitoring and termination",
+      "type": "mc",
+      "question": "What do continuous monitoring services like BitSight and SecurityScorecard collect to assess vendor security?",
+      "options": {
+        "A": "Annual compliance certifications and management attestations",
+        "B": "Open vulnerabilities, botnet activity, and patching frequency",
+        "C": "Internal audit reports and vendor financial statements",
+        "D": "Customer satisfaction surveys and vendor marketing materials"
+      },
+      "correct": "B",
+      "explanation": "The section states these services collect external signals including open vulnerabilities, botnet activity, and patching cadence to translate into a security rating."
+    },
+    {
+      "section": "Ongoing monitoring and termination",
+      "type": "text",
+      "question": "What steps must be completed when a vendor relationship ends?",
+      "rubric": "A sound answer includes revoking all access, retrieving or destroying organizational data the vendor holds, and documenting the offboarding process.",
+      "explanation": "The section defines secure termination as three actions: revoke all access, retrieve or destroy organizational data held by the vendor, and document the offboarding."
+    }
+  ]
+}

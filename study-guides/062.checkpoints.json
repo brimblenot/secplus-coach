@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Defense in depth",
+      "type": "text",
+      "question": "Explain what defense in depth means and why no single control is relied upon to stop all attacks.",
+      "rubric": "A sound answer states that defense in depth stacks multiple independent security controls across layers so that if an attacker bypasses one, they immediately face another; no single control is trusted to stop everything.",
+      "explanation": "The section defines defense in depth as stacking multiple independent controls and explicitly states that no single control is trusted to stop everything. The student should recognize this foundational principle."
+    },
+    {
+      "section": "Network segmentation and the DMZ",
+      "type": "mc",
+      "question": "Which direction of traffic between the DMZ and internal network is blocked by firewall rules?",
+      "options": {
+        "A": "Internet to DMZ is blocked to prevent external attackers from reaching public services",
+        "B": "Internal to DMZ is blocked to prevent internal users from accessing public servers",
+        "C": "DMZ to internal is blocked to prevent a compromised DMZ server from pivoting deeper",
+        "D": "DMZ to internet is blocked to prevent data exfiltration from public servers"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that DMZ → Internal is BLOCKED and explains this prevents a compromised web server from pivoting deeper into the network."
+    },
+    {
+      "section": "Screened subnets",
+      "type": "mc",
+      "question": "What is the key security benefit of a screened subnet design?",
+      "options": {
+        "A": "Removes the requirement for network segmentation",
+        "B": "Uses a single firewall to filter all traffic",
+        "C": "Encrypts data between network segments",
+        "D": "Forces attackers to breach multiple firewalls to reach internal systems"
+      },
+      "correct": "D",
+      "explanation": "The section states that a screened subnet uses two firewalls (outer and inner) and notes that an attacker must compromise both to reach internal systems."
+    },
+    {
+      "section": "Implicit deny and least privilege",
+      "type": "text",
+      "question": "What does implicit deny mean for firewall behavior, and how does it differ from a default allow approach?",
+      "rubric": "A sound answer states that implicit deny blocks all traffic by default unless explicitly permitted, whereas default allow would permit traffic unless explicitly blocked. This prevents unknown attack types from slipping through.",
+      "explanation": "The section defines implicit deny as blocking by default unless explicitly permitted and contrasts it with allow all/block known bad. It also explains the security benefit: preventing unknown attack types from bypassing unchecked rules."
+    },
+    {
+      "section": "Security zones",
+      "type": "mc",
+      "question": "Which of the following is described as a common security zone with typically poor built-in security?",
+      "options": {
+        "A": "IoT zone",
+        "B": "Management zone",
+        "C": "Database zone",
+        "D": "Internal zone"
+      },
+      "correct": "A",
+      "explanation": "The section lists common zones and specifically notes that IoT (Internet of Things) is a zone for connected devices with poor built-in security."
+    },
+    {
+      "section": "Bastion hosts and privileged access",
+      "type": "mc",
+      "question": "What is the primary function of a bastion host in a protected network?",
+      "options": {
+        "A": "To route all user internet traffic through a central proxy server",
+        "B": "To act as a single hardened, controlled entry point for administrative access with logging",
+        "C": "To block all external users from accessing the internal network permanently",
+        "D": "To encrypt all traffic between network segments using VPN protocols"
+      },
+      "correct": "B",
+      "explanation": "The section defines a bastion host as a hardened, minimal system that acts as the single controlled entry point for administrative access, with session logging and MFA requirements."
+    },
+    {
+      "section": "Zero trust",
+      "type": "text",
+      "question": "How does zero trust differ from traditional network models in terms of when trust is granted?",
+      "rubric": "A sound answer states that zero trust evaluates every access request per-request regardless of network location and continuously re-evaluates, rather than granting trust once to anything inside the perimeter.",
+      "explanation": "The section explains that zero trust removes implicit trust given to devices inside the perimeter and instead evaluates authorization per-request. It contrasts this with VPN, which grants broad access after one authentication."
+    },
+    {
+      "section": "Cloud VPC design",
+      "type": "mc",
+      "question": "Which VPC component is described as a stateful firewall operating at the instance level?",
+      "options": {
+        "A": "Network ACL",
+        "B": "Internet gateway",
+        "C": "Security group",
+        "D": "VPC Flow Logs"
+      },
+      "correct": "C",
+      "explanation": "The table in the section explicitly identifies security group as a stateful firewall at the instance level, while Network ACL is described as stateless filtering at the subnet level."
+    },
+    {
+      "section": "Layer 2 switch security",
+      "type": "mc",
+      "question": "Which Layer 2 control validates DHCP messages and blocks offers from untrusted ports to prevent rogue DHCP servers?",
+      "options": {
+        "A": "Port security",
+        "B": "Sticky MAC learning",
+        "C": "Dynamic ARP Inspection",
+        "D": "DHCP snooping"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that DHCP snooping validates DHCP messages and blocks offers from untrusted ports, preventing rogue DHCP servers from redirecting traffic."
+    },
+    {
+      "section": "Physical and out-of-band management",
+      "type": "text",
+      "question": "What is out-of-band management and why is it valuable during a network compromise?",
+      "rubric": "A sound answer states that out-of-band management uses a dedicated, separate network independent of production, allowing admins to reach devices even if the production network is compromised or down.",
+      "explanation": "The section defines out-of-band management as dedicated and separate from production, and explains it allows admin access when the primary network is down or compromised."
+    }
+  ]
+}

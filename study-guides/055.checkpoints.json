@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Physical segmentation",
+      "type": "mc",
+      "question": "What is the primary characteristic that distinguishes physical segmentation from other segmentation approaches?",
+      "options": {
+        "A": "It relies on software-configured virtual boundaries between network zones",
+        "B": "It requires a router to manage traffic between segments",
+        "C": "It applies classification labels to control data access",
+        "D": "It uses separate physical hardware and cables for each segment"
+      },
+      "correct": "D",
+      "explanation": "Physical segmentation divides networks using genuinely separate hardware such as distinct cables, switches, and ports. Other approaches like VLANs use logical division on shared hardware."
+    },
+    {
+      "section": "VLANs and VLAN attacks",
+      "type": "text",
+      "question": "Explain how double-tagging works as a VLAN hopping attack.",
+      "rubric": "A sound answer states that the attack crafts a frame with two 802.1Q tags; the first switch strips the outer tag, and the inner tag then directs the frame to the target VLAN on the second switch.",
+      "explanation": "Double-tagging exploits how switches process VLAN tags in sequence. By nesting two tags, an attacker causes the first switch to remove the outer tag and inadvertently allow the inner tag to reach the target VLAN."
+    },
+    {
+      "section": "DMZ architecture",
+      "type": "mc",
+      "question": "What is the primary benefit of a dual-firewall DMZ architecture over a single-firewall DMZ?",
+      "options": {
+        "A": "It removes the need for inbound internet connections to DMZ servers",
+        "B": "It eliminates the need for access control lists on firewalls",
+        "C": "It forces attackers to breach two firewalls to reach internal systems after compromising a DMZ server",
+        "D": "It prevents all outbound traffic from the DMZ to the internet"
+      },
+      "correct": "C",
+      "explanation": "A dual-firewall DMZ places one firewall between the internet and DMZ and a second between the DMZ and the internal network, so an attacker who compromises a public-facing server must still defeat the second firewall to reach internal systems."
+    },
+    {
+      "section": "Microsegmentation and east-west vs. north-south traffic",
+      "type": "text",
+      "question": "Why does microsegmentation reduce the blast radius of a compromised host?",
+      "rubric": "A sound answer explains that microsegmentation isolates individual workloads so each server or container can only communicate with specific legitimate workloads, dramatically limiting lateral movement after compromise.",
+      "explanation": "Microsegmentation locks down each workload individually rather than just creating broad network zones. This prevents a compromised host from laterally spreading to other systems it has no legitimate reason to reach."
+    },
+    {
+      "section": "Air gaps",
+      "type": "mc",
+      "question": "What does the Stuxnet example demonstrate about air-gapped networks?",
+      "options": {
+        "A": "They are completely immune to malware and insider attacks",
+        "B": "They block network attacks but remain vulnerable to supply chain or physical media compromise",
+        "C": "They require classified security clearance to operate effectively",
+        "D": "They eliminate the need for access control or authentication"
+      },
+      "correct": "B",
+      "explanation": "Stuxnet showed that air gaps successfully block network-based attacks but cannot protect against infected USB drives or other physical media introduced by insiders or supply chain compromise."
+    },
+    {
+      "section": "Jump servers",
+      "type": "mc",
+      "question": "What is the primary control function of a jump server?",
+      "options": {
+        "A": "It serves as a single controlled access point requiring authentication and session logging",
+        "B": "It assigns VLAN tags based on user roles and clearance levels",
+        "C": "It automatically patches all connected systems on the network segment",
+        "D": "It encrypts all network traffic between external and internal networks"
+      },
+      "correct": "A",
+      "explanation": "A jump server acts as a hardened chokepoint where administrators authenticate first and all administrative traffic is logged, ensuring a single monitored entry path into protected segments."
+    },
+    {
+      "section": "Access control models",
+      "type": "mc",
+      "question": "In MAC, what determines whether access is granted or denied?",
+      "options": {
+        "A": "The resource owner's discretionary permissions",
+        "B": "User department, device posture, and time of day combined",
+        "C": "Organizational roles assigned to each user",
+        "D": "Classification labels assigned by the OS to subjects and objects"
+      },
+      "correct": "D",
+      "explanation": "MAC — Mandatory Access Control — uses classification labels assigned by the security kernel; access decisions are absolute and based on those labels, not owner choice or other factors."
+    },
+    {
+      "section": "Need-to-know, separation of duties, and least privilege",
+      "type": "text",
+      "question": "How does separation of duties reduce insider threat and fraud risk?",
+      "rubric": "A sound answer explains that separation of duties divides critical transactions between two or more people so no single person can complete a transaction alone, reducing fraud and insider threat.",
+      "explanation": "By requiring multiple individuals to participate in sensitive actions, separation of duties prevents any one person — even if compromised or malicious — from unilaterally performing critical functions."
+    }
+  ]
+}

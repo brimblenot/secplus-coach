@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Scanning vs. penetration testing",
+      "type": "mc",
+      "question": "What is the key difference between vulnerability scanning and penetration testing?",
+      "options": {
+        "A": "Scanning is done by vendors; penetration testing is done by in-house staff",
+        "B": "Scanning requires credentials; penetration testing does not require credentials",
+        "C": "Scanning finds vulnerabilities and reports them; penetration testing finds, exploits, and demonstrates impact",
+        "D": "Scanning tests networks only; penetration testing tests applications only"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states scanning identifies and reports weaknesses without exploiting them, while pen testing exploits vulnerabilities to demonstrate real-world impact."
+    },
+    {
+      "section": "Why organizations scan",
+      "type": "text",
+      "question": "Name two compliance frameworks that require or assess vulnerability scanning.",
+      "rubric": "A sound answer names any two of PCI DSS, HIPAA, SOC 2, or FedRAMP as stated in the framework table.",
+      "explanation": "The section lists four compliance mandates (PCI DSS, HIPAA, SOC 2, FedRAMP) that all require or assess scanning."
+    },
+    {
+      "section": "Types of vulnerability scans",
+      "type": "mc",
+      "question": "Which scan type compares a system's settings against a security baseline like a CIS Benchmark or DISA STIG?",
+      "options": {
+        "A": "Database scanning",
+        "B": "Network vulnerability scanning",
+        "C": "Web application scanning",
+        "D": "Configuration compliance scanning"
+      },
+      "correct": "D",
+      "explanation": "The section defines configuration compliance scanning as comparing actual system settings against a security baseline such as CIS Benchmark or DISA STIG."
+    },
+    {
+      "section": "Authenticated vs. unauthenticated scanning",
+      "type": "text",
+      "question": "Why does unauthenticated scanning produce more false positives than authenticated scanning?",
+      "rubric": "A sound answer explains that unauthenticated scanning must guess software versions from banners rather than read patch status and software inventory directly from the system.",
+      "explanation": "The section states unauthenticated scanners observe only external visibility and must guess versions from banners, while authenticated scans read actual software and patch data directly."
+    },
+    {
+      "section": "Agent-based vs. agentless scanning",
+      "type": "mc",
+      "question": "Which scanning approach installs a small background program on each target system to provide continuous, always-current data?",
+      "options": {
+        "A": "Agent-based scanning that deploys a lightweight program for continuous monitoring",
+        "B": "Unauthenticated banner-based scanning of network services",
+        "C": "Configuration compliance scanning to verify settings",
+        "D": "Agentless scanning using network credentials to assess systems"
+      },
+      "correct": "A",
+      "explanation": "The section defines agent-based scanning as installing a lightweight agent that runs continuously and reports findings to a central console for always-current data."
+    },
+    {
+      "section": "Scan tools to know",
+      "type": "mc",
+      "question": "Which of these is a cloud-based vulnerability management platform that combines agentless, agent-based, and CSPM scanning?",
+      "options": {
+        "A": "OpenVAS as a free open-source network scanner",
+        "B": "Qualys VMDR with combined scanning capabilities",
+        "C": "Tenable Nessus with the largest plugin database",
+        "D": "Rapid7 InsightVM with exploit awareness features"
+      },
+      "correct": "B",
+      "explanation": "The section identifies Qualys VMDR as a cloud-based platform that combines agentless, agent-based, and CSPM capabilities."
+    },
+    {
+      "section": "Scan frequency",
+      "type": "mc",
+      "question": "What is the minimum scanning frequency for internal authenticated scans according to the section?",
+      "options": {
+        "A": "Monthly for internal assets",
+        "B": "Continuous for external systems only",
+        "C": "Weekly for all internal systems",
+        "D": "Quarterly for all systems"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states 'Monthly authenticated scans — internal assets minimum' as a frequency guideline."
+    },
+    {
+      "section": "Reading scan results: false positives and false negatives",
+      "type": "text",
+      "question": "What is a false positive in vulnerability scanning, and which scan type is more prone to them?",
+      "rubric": "A sound answer defines a false positive as a reported vulnerability that does not actually exist, and notes that unauthenticated scans are more prone to them.",
+      "explanation": "The section defines false positive as the scanner reporting a vulnerability that doesn't exist and states they are more common in unauthenticated scans."
+    },
+    {
+      "section": "CVSS scoring",
+      "type": "mc",
+      "question": "A vulnerability has a CVSS score of 8.5. What severity rating and typical patch window does this represent?",
+      "options": {
+        "A": "Low severity with a quarterly patch cycle",
+        "B": "Medium severity with a ~30 day patch window",
+        "C": "High severity with a 7–14 day patch window",
+        "D": "Critical severity with a 24–48 hour patch window"
+      },
+      "correct": "C",
+      "explanation": "The section severity table shows scores 7.0–8.9 are rated High with a typical 7–14 day patch window."
+    },
+    {
+      "section": "Vulnerability prioritization",
+      "type": "text",
+      "question": "Besides CVSS score, name three other factors that should be considered when prioritizing vulnerabilities for remediation.",
+      "rubric": "A sound answer names any three of: exploitability, asset criticality, or exposure (internet-facing vs. isolated).",
+      "explanation": "The section lists four prioritization factors: CVSS severity, exploitability, asset criticality, and exposure; the answer requires three of the non-CVSS ones."
+    }
+  ]
+}

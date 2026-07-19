@@ -1,0 +1,123 @@
+{
+  "checkpoints": [
+    {
+      "section": "How DNS works (the foundation)",
+      "type": "mc",
+      "question": "Which DNS server component holds the actual records for a specific domain?",
+      "options": {
+        "A": "Root name server",
+        "B": "Authoritative name server",
+        "C": "TLD server",
+        "D": "Recursive resolver"
+      },
+      "correct": "B",
+      "explanation": "The study guide explicitly defines the authoritative name server as the component that holds the actual records for a specific domain, distinguishing it from the other roles that either point toward servers or handle suffixes."
+    },
+    {
+      "section": "DNS cache poisoning (DNS spoofing)",
+      "type": "text",
+      "question": "Explain how DNS cache poisoning works and why the Kaminsky attack made it easier to execute.",
+      "rubric": "A sound answer should state that cache poisoning injects a forged DNS answer into a resolver's cache, and that the Kaminsky attack exploited predictable transaction IDs and UDP source ports, making it easier for an attacker's forged reply to win the race against the legitimate server.",
+      "explanation": "The section describes cache poisoning as injecting forged answers into a resolver's cache and explains that Kaminsky's innovation was exposing how predictable transaction IDs and source ports made the race to reply easier to win with a flood of forgeries."
+    },
+    {
+      "section": "DNS hijacking",
+      "type": "mc",
+      "question": "Which mechanism for DNS hijacking involves changing DNS server settings pushed to clients via DHCP?",
+      "options": {
+        "A": "Attacker stealing registrar credentials and changing authoritative name servers",
+        "B": "Malware editing the hosts file on infected systems",
+        "C": "Man-in-the-middle attack on recursive resolver queries",
+        "D": "Router compromise to alter DHCP-assigned DNS settings"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly lists router compromise as the vector that changes DNS server settings pushed via DHCP to point to a rogue resolver, distinguishing it from malware/hosts file changes and registrar-level hijacking."
+    },
+    {
+      "section": "DNS tunneling",
+      "type": "text",
+      "question": "Describe how DNS tunneling encodes data and what type of DNS records are commonly used to carry more data than standard A records.",
+      "rubric": "A sound answer should explain that data is encoded (often in Base64) into subdomain strings and that TXT records can carry more data than standard A records and are commonly used for this purpose.",
+      "explanation": "The section explains that subdomain strings are encoded and specifically notes that TXT records carry more data than standard A records, identifying them as detection signals in tunneling attacks."
+    },
+    {
+      "section": "Domain generation algorithms (DGA)",
+      "type": "mc",
+      "question": "What seed value do DGA malware typically use to generate candidate C2 domain names?",
+      "options": {
+        "A": "The current date",
+        "B": "Random entropy from the system's hardware RNG",
+        "C": "A hardcoded list provided by the attacker at infection time",
+        "D": "The victim's IP address and MAC address combined"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that a DGA uses a seed value, often the current date, to algorithmically produce hundreds of candidate C2 domain names daily."
+    },
+    {
+      "section": "Subdomain enumeration",
+      "type": "mc",
+      "question": "Which discovery method for subdomain enumeration relies on public records of every TLS certificate ever issued?",
+      "options": {
+        "A": "Zone transfer abuse of misconfigured servers",
+        "B": "Brute force against common subdomain names",
+        "C": "Certificate transparency logs",
+        "D": "OSINT tools like Amass and Sublist3r"
+      },
+      "correct": "C",
+      "explanation": "The study guide identifies certificate transparency logs as public records of every TLS certificate issued, which reveal every subdomain that ever got a certificate as a discovery method."
+    },
+    {
+      "section": "DNS zone transfer abuse",
+      "type": "text",
+      "question": "What information does an unrestricted zone transfer response contain, and what is the primary defense against this vulnerability?",
+      "rubric": "A sound answer should state that a zone transfer contains every DNS record for the domain (A, MX, NS, CNAME records and others) and that the defense is to configure ACLs on authoritative servers to restrict AXFR requests to explicitly listed secondary server IPs.",
+      "explanation": "The section explains that zone transfer responses include every DNS record and identifies unrestricted access as a reconnaissance risk, then prescribes ACL-based restrictions on authoritative servers as the defense."
+    },
+    {
+      "section": "Typosquatting and homograph attacks",
+      "type": "mc",
+      "question": "Which attack type uses visually identical Unicode characters from non-Latin scripts to create a domain that looks identical in the browser bar?",
+      "options": {
+        "A": "Zone transfer misconfiguration exposing subdomain names",
+        "B": "Fast flux DNS rotating authoritative name servers",
+        "C": "Typosquatting with deliberate misspellings of the legitimate domain name",
+        "D": "Homograph attack using Unicode character substitution"
+      },
+      "correct": "D",
+      "explanation": "The study guide defines a homograph attack as a variant that uses visually identical Unicode characters from non-Latin scripts to register a domain that looks identical in the browser bar but resolves to a different IP."
+    },
+    {
+      "section": "Fast flux DNS",
+      "type": "mc",
+      "question": "In double-flux fast flux DNS, what rotates in addition to A record IP addresses?",
+      "options": {
+        "A": "The query source port and transaction ID",
+        "B": "The authoritative name servers themselves",
+        "C": "The TTL value on all cached records",
+        "D": "The resolver's cache memory allocation"
+      },
+      "correct": "B",
+      "explanation": "The study guide explicitly defines double-flux as rotating both A records and authoritative name servers, making infrastructure harder to disrupt at the DNS level."
+    },
+    {
+      "section": "DNSSEC",
+      "type": "text",
+      "question": "What security properties does DNSSEC provide, and what does it not provide?",
+      "rubric": "A sound answer should state that DNSSEC provides authentication and integrity through digital signatures, and that it does not encrypt DNS traffic or provide confidentiality.",
+      "explanation": "The section explicitly states that DNSSEC adds digital signatures for authentication and integrity but does not encrypt DNS traffic, making clear what it protects and what it does not."
+    },
+    {
+      "section": "DNS over HTTPS and DNS over TLS",
+      "type": "mc",
+      "question": "Which DNS encryption protocol uses TCP port 443 and blends with normal HTTPS traffic, making it impossible to block by filtering port 53 alone?",
+      "options": {
+        "A": "DNS over HTTPS on port 443 with traffic blending into normal HTTPS",
+        "B": "Fast flux DNS with rotating resolver addresses",
+        "C": "DNS over TLS on port 853 with a dedicated port for easier boundary control",
+        "D": "DNSSEC with encrypted query payloads over UDP port 53"
+      },
+      "correct": "A",
+      "explanation": "The study guide identifies DoH as using TCP port 443 with traffic that blends into normal HTTPS, and notes this makes it impossible to block by filtering port 53 alone."
+    }
+  ]
+}

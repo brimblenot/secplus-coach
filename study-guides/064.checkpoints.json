@@ -1,0 +1,44 @@
+{
+  "checkpoints": [
+    {
+      "section": "Jump servers",
+      "type": "mc",
+      "question": "What does a jump server enable that reduces direct access to internal servers?",
+      "options": {
+        "A": "Routing admin traffic through a hardened gateway with MFA and logging",
+        "B": "Encrypting traffic between workstations and internal servers",
+        "C": "Automatically patching servers on protected network segments",
+        "D": "Balancing admin requests across multiple hardened servers"
+      },
+      "correct": "A",
+      "explanation": "The section defines a jump server as the single authorized gateway through which admin traffic funnels, protected by MFA and session recording. The other options describe different security mechanisms not central to jump server design."
+    },
+    {
+      "section": "Load balancers",
+      "type": "text",
+      "question": "Explain why a Layer 7 load balancer can route requests based on URL path but a Layer 4 load balancer cannot.",
+      "rubric": "A sound answer states that Layer 7 operates at the application (HTTP/HTTPS) layer and inspects HTTP content like URLs and headers, whereas Layer 4 operates only at the transport (TCP/UDP) layer and sees only IP addresses and ports, not application-level details.",
+      "explanation": "The section's comparison table shows Layer 4 uses only IP address and port for routing, while Layer 7 routes by URL path, hostname, and headers. This difference directly follows from which OSI layer each operates at."
+    },
+    {
+      "section": "Proxy servers",
+      "type": "mc",
+      "question": "Which type of proxy sits between internal clients and external internet resources and can operate without explicit client configuration?",
+      "options": {
+        "A": "Explicit forward proxy requiring clients to point at the proxy address",
+        "B": "Transparent forward proxy using intercepting rules with no client configuration",
+        "C": "Open proxy available to any internet user without authentication",
+        "D": "Reverse proxy using transparent interception via firewall rules"
+      },
+      "correct": "B",
+      "explanation": "The section describes a transparent (intercepting) forward proxy that intercepts traffic via firewall rules with no client configuration, sitting on the client side. Option A describes a reverse proxy, option C describes an explicit proxy, and option D describes a different security risk."
+    },
+    {
+      "section": "Web Application Firewalls",
+      "type": "text",
+      "question": "Why does a negative-model WAF require constant updates while a positive-model WAF does not?",
+      "rubric": "A sound answer states that a negative model maintains a list of known-bad patterns and must be updated each time a new attack is discovered, whereas a positive model defines only what is valid and blocks everything else by default, so it does not need updates for novel attacks.",
+      "explanation": "The section's comparison table explicitly states the negative model needs constant updates and can be bypassed by novel attacks, while the positive model blocks everything not explicitly allowed. The metaphor of the bouncer illustrates this difference."
+    }
+  ]
+}

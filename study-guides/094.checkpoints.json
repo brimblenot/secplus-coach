@@ -1,0 +1,123 @@
+{
+  "checkpoints": [
+    {
+      "section": "Network flow data",
+      "type": "mc",
+      "question": "What does a NetFlow record capture about traffic?",
+      "options": {
+        "A": "Source and destination IP, ports, protocol, bytes, packet count, and timestamps, but not payload content",
+        "B": "Only sampled packets at a ratio of 1 out of every N to reduce overhead on high-speed links",
+        "C": "Complete packet payloads along with header information for forensic reconstruction",
+        "D": "Packet headers and payload content from a subset of flows selected by the router"
+      },
+      "correct": "A",
+      "explanation": "NetFlow captures metadata about flows—IPs, ports, protocol, bytes, packet count, and timestamps—but explicitly does not capture payload content. This distinguishes it from full packet capture and sFlow, which samples instead of capturing all flows."
+    },
+    {
+      "section": "Full packet capture",
+      "type": "text",
+      "question": "What does full packet capture record, and what is its main storage tradeoff?",
+      "rubric": "A sound answer states that full packet capture records every packet including both headers and payload, enabling session reconstruction and file extraction, but requires enormous storage.",
+      "explanation": "The section defines full packet capture as recording every packet in its entirety—headers and payload—and explicitly identifies the tradeoff as enormous storage requirements."
+    },
+    {
+      "section": "Deep packet inspection (DPI)",
+      "type": "mc",
+      "question": "Which capability does DPI enable that depends on reading packet payload content?",
+      "options": {
+        "A": "Sampling traffic at 1 out of every N packets for low overhead",
+        "B": "Recording source and destination IP addresses across flows",
+        "C": "Detecting applications even when they use non-standard ports",
+        "D": "Exporting NetFlow records to a central SIEM system"
+      },
+      "correct": "C",
+      "explanation": "DPI works by reading payload content and is used to identify applications running on non-standard ports, detect malware signatures inside files, and enforce content policies. The other options describe flow data or sampling, not deep packet inspection."
+    },
+    {
+      "section": "Log data: network devices",
+      "type": "mc",
+      "question": "What port and protocol combination is used for encrypted syslog transmission?",
+      "options": {
+        "A": "Port 443 with HTTPS encryption",
+        "B": "Port 6514 with TLS encryption",
+        "C": "Port 389 with LDAP encryption",
+        "D": "Port 514 with UDP unencrypted"
+      },
+      "correct": "B",
+      "explanation": "The section states that syslog uses port 514 for unencrypted transport (UDP or TCP) and port 6514 for encrypted transport via TLS."
+    },
+    {
+      "section": "Log data: Windows Event Logs",
+      "type": "mc",
+      "question": "Which Event ID indicates that a new process was created on a Windows system?",
+      "options": {
+        "A": "4624 indicating successful logon",
+        "B": "4698 indicating scheduled task created",
+        "C": "4720 indicating user account created",
+        "D": "4688 indicating new process created"
+      },
+      "correct": "D",
+      "explanation": "Event ID 4688 specifically means a new process was created. The other Event IDs track logon success, account creation, and task creation respectively."
+    },
+    {
+      "section": "Log data: Linux logs",
+      "type": "text",
+      "question": "Where do SSH logins and sudo commands get recorded in a standard Linux system, and what does auditd provide?",
+      "rubric": "A sound answer states that SSH logins and sudo commands are logged to auth.log or secure, and auditd provides detailed kernel-level audit events when configured.",
+      "explanation": "The section specifies that auth.log or secure logs SSH and sudo activity, while audit.log contains kernel-level events from the auditd daemon."
+    },
+    {
+      "section": "Application and cloud logs",
+      "type": "mc",
+      "question": "What information does a web server log in Combined Log Format include?",
+      "options": {
+        "A": "Client IP, timestamp, HTTP method, URL, response code, bytes, Referer header, and User-Agent string",
+        "B": "TCP flow data including source and destination ports and packet counts",
+        "C": "AWS CloudTrail API calls and the identity of the caller making each request",
+        "D": "Only the client IP address and the requested URL without response codes"
+      },
+      "correct": "A",
+      "explanation": "Combined Log Format records client IP, timestamp, HTTP method, URL, response code, bytes, Referer header, and User-Agent string, enabling reconstruction of every request to spot scanning or exploitation attempts."
+    },
+    {
+      "section": "Security-specific telemetry",
+      "type": "text",
+      "question": "How does EDR differ from traditional antivirus in terms of what security data it captures and how it enables detection?",
+      "rubric": "A sound answer explains that EDR records continuous endpoint telemetry enabling threat hunting through historical queries, whereas traditional antivirus only matches known signatures at execution time and keeps no ongoing record.",
+      "explanation": "The section contrasts EDR's continuous recording of process trees, file operations, and network connections (supporting threat hunting) against antivirus's signature-matching-only approach with no historical record."
+    },
+    {
+      "section": "SIEM aggregation and log storage",
+      "type": "mc",
+      "question": "Which storage tier in a SIEM would be appropriate for logs needed for active investigations and real-time queries?",
+      "options": {
+        "A": "Warm storage with slower access and 6–12 month window",
+        "B": "Hot storage with immediate access and 30–90 day window",
+        "C": "Archive storage with quarterly retrieval for compliance audits",
+        "D": "Cold storage with slowest access for years-long regulatory archival"
+      },
+      "correct": "B",
+      "explanation": "Hot storage provides immediate access over a 30–90 day window and is used for active SIEM queries and ongoing investigations, whereas warm and cold tiers trade access speed for longer retention."
+    },
+    {
+      "section": "Metadata analysis",
+      "type": "text",
+      "question": "Why is metadata alone often as revealing as the actual content of encrypted communications?",
+      "rubric": "A sound answer states that metadata captures who communicated, when, how long, how often, and how much data transferred, which can reveal suspicious behavior patterns even when payload content is encrypted.",
+      "explanation": "The section illustrates that timing, volume, frequency, and direction of communications expose intent and anomalies independently of what is actually said, using the analogy that an envelope reveals secrets even when the letter is sealed."
+    },
+    {
+      "section": "Sensor placement",
+      "type": "mc",
+      "question": "Which sensor placement method can actively block malicious traffic but introduces a single point of failure risk?",
+      "options": {
+        "A": "Remote syslog server that collects logs from all monitored devices",
+        "B": "Network tap that physically splits the signal for passive monitoring",
+        "C": "Inline sensor positioned directly in the network path",
+        "D": "SPAN port that copies traffic passively to a monitoring interface"
+      },
+      "correct": "C",
+      "explanation": "An inline sensor sits in the network forwarding path, allowing it to block traffic like an IPS does, but if it malfunctions it causes a network outage, making it a single point of failure."
+    }
+  ]
+}

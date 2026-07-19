@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "Power threats and why they differ",
+      "type": "mc",
+      "question": "Which power threat is characterized by a brief dip in voltage lasting milliseconds to seconds?",
+      "options": {
+        "A": "Complete utility outage",
+        "B": "Voltage sag",
+        "C": "Brownout",
+        "D": "Power spike"
+      },
+      "correct": "B",
+      "explanation": "A voltage sag is explicitly defined as a brief dip in voltage with short duration (milliseconds to seconds), distinguishing it from a brownout, which is sustained."
+    },
+    {
+      "section": "UPS architecture: three tiers of protection",
+      "type": "text",
+      "question": "Why does a double-conversion UPS have zero transfer time during a power outage, and what does that mean for the connected equipment?",
+      "rubric": "A sound answer explains that equipment always runs from the inverter (never directly from utility), so no transfer switch or gap occurs when utility power fails — the transition is instant and invisible to devices.",
+      "explanation": "The section states that double-conversion UPS runs equipment always from the inverter, with utility AC converted to battery-backed DC and back to AC continuously; this eliminates any transfer gap."
+    },
+    {
+      "section": "UPS sizing and battery considerations",
+      "type": "mc",
+      "question": "What is the typical service lifespan of a VRLA battery before capacity degradation requires replacement?",
+      "options": {
+        "A": "10–12 years",
+        "B": "1–2 years",
+        "C": "6–8 years",
+        "D": "3–5 years"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that VRLA batteries have a service life of 3–5 years, after which capacity degrades and replacement is required."
+    },
+    {
+      "section": "UPS management features",
+      "type": "mc",
+      "question": "What does a graceful shutdown initiated by the UPS prevent?",
+      "options": {
+        "A": "Data corruption from abrupt power loss",
+        "B": "Transfer to battery mode from occurring",
+        "C": "Battery replacement alerts from being ignored",
+        "D": "Overload on the power distribution system"
+      },
+      "correct": "A",
+      "explanation": "The section defines graceful shutdown as sending shutdown commands when battery runs low so servers can flush caches and close files cleanly, preventing data corruption from abrupt power loss."
+    },
+    {
+      "section": "Generators: extending runtime from minutes to days",
+      "type": "text",
+      "question": "Explain what an ATS does and why it is essential for production systems.",
+      "rubric": "A sound answer states that an ATS automatically switches the building to generator power within seconds of a utility outage and back when power restores, eliminating the need for manual technician intervention, which would cause unacceptable delay.",
+      "explanation": "The section explains the ATS monitors utility power and switches automatically, contrasting this with manual operation, which would require technician presence — an unacceptable delay for production."
+    },
+    {
+      "section": "Redundant power distribution and data center tiers",
+      "type": "mc",
+      "question": "In a dual power feed configuration, what does connecting each server power supply to a separate PDU and circuit protect against?",
+      "options": {
+        "A": "Voltage surges during normal utility operations",
+        "B": "Generator fuel degradation and environmental contamination",
+        "C": "A single point of failure in the power distribution chain",
+        "D": "Multiple simultaneous failures across different power paths"
+      },
+      "correct": "C",
+      "explanation": "The section states that dual power feeds with separate supplies, PDUs, circuits, and panels ensure any single failure in the chain does not interrupt the device."
+    },
+    {
+      "section": "Redundant power distribution and data center tiers",
+      "type": "mc",
+      "question": "Which Uptime Institute Tier classification achieves approximately 99.995% availability?",
+      "options": {
+        "A": "Tier III",
+        "B": "Tier II",
+        "C": "Tier IV",
+        "D": "Tier I"
+      },
+      "correct": "C",
+      "explanation": "The section's tier classification table explicitly shows Tier IV achieves 99.995% availability with fully fault-tolerant, multiple simultaneous active paths."
+    }
+  ]
+}

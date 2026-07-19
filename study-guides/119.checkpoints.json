@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "Assessment types: how pen tests compare",
+      "type": "mc",
+      "question": "Which assessment type actively exploits vulnerabilities to demonstrate real-world impact?",
+      "options": {
+        "A": "Penetration test, performed annually by skilled testers to prove impact",
+        "B": "Red team exercise, performed continuously to test detection capability",
+        "C": "Vulnerability assessment, performed monthly to identify theoretical risks",
+        "D": "Bug bounty program, performed by independent researchers to find findings"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that penetration tests actively exploit vulnerabilities to prove real-world impact, are more costly, and are appropriate for annual comprehensive assessment — unlike vulnerability assessments which only identify but never exploit."
+    },
+    {
+      "section": "Compliance frameworks that require pen testing",
+      "type": "text",
+      "question": "What is segmentation testing and which compliance framework specifically requires it?",
+      "rubric": "A sound answer states that segmentation testing verifies network segments isolate the cardholder data environment and prevent attackers on one segment from reaching card data on another, and that PCI DSS requires it.",
+      "explanation": "The section defines segmentation testing as verification that network segments actually prevent cross-segment attack, and explicitly attributes this as a PCI DSS requirement not mentioned in the other frameworks."
+    },
+    {
+      "section": "Authorization: the most legally critical step",
+      "type": "mc",
+      "question": "What federal law is violated by conducting a penetration test without written authorization?",
+      "options": {
+        "A": "The Gramm-Leach-Bliley Act, which governs financial data privacy",
+        "B": "The Computer Fraud and Abuse Act, which criminalizes unauthorized system access",
+        "C": "The Digital Millennium Copyright Act, which protects intellectual property",
+        "D": "The Health Insurance Portability and Accountability Act, which protects health records"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly names the Computer Fraud and Abuse Act (CFAA) as the U.S. federal law that criminalizes unauthorized access to computer systems."
+    },
+    {
+      "section": "Rules of engagement: scoping the test",
+      "type": "text",
+      "question": "Why must the rules of engagement document explicitly list both in-scope and out-of-scope systems?",
+      "rubric": "A sound answer states that testers must never assume a system is implicitly in scope and should not treat it as in-scope without explicit definition.",
+      "explanation": "The section warns that testers must never assume a system is implicitly in scope, so both in-scope and out-of-scope systems must be explicitly identified to prevent unintended testing of excluded resources."
+    },
+    {
+      "section": "SOC coordination: to notify or not",
+      "type": "mc",
+      "question": "What is the trade-off between notifying the SOC before a pen test and not notifying them?",
+      "options": {
+        "A": "Notifying prevents interference with the test, not notifying costs more money to resolve incidents",
+        "B": "Notifying improves the accuracy of findings, not notifying tests both networks and applications",
+        "C": "Notifying speeds up remediation, not notifying provides more evidence for the final report",
+        "D": "Notifying tests detection, not notifying tests response; not notifying requires tight coordination to prevent damage"
+      },
+      "correct": "D",
+      "explanation": "The section states that notifying the SOC tests detection capability but not real-world response, while not notifying tests both detection and response but requires tight coordination to prevent defensive actions from causing unintended damage."
+    },
+    {
+      "section": "Pen test reports: two audiences",
+      "type": "mc",
+      "question": "What type of language should the executive summary section of a pen test report use?",
+      "options": {
+        "A": "Technical jargon and reproduction steps to demonstrate tester expertise",
+        "B": "Detailed CVE identifiers and CVSS scores for each vulnerability found",
+        "C": "Business-risk language with overall rating, top findings, and business impact",
+        "D": "Proof-of-concept code and command output for internal security team validation"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that the executive summary uses business-risk language only, with overall rating, top findings, and business impact, with no technical jargon."
+    },
+    {
+      "section": "Credentials and responsible disclosure",
+      "type": "mc",
+      "question": "Under responsible disclosure, how long should a tester allow a vendor to patch a vulnerability before public disclosure?",
+      "options": {
+        "A": "Approximately 180 days to ensure comprehensive testing and patch deployment",
+        "B": "Approximately 90 days to balance user protection with the vendor's patching time",
+        "C": "Approximately 30 days to maintain rapid vulnerability awareness",
+        "D": "Immediately upon discovery to maximize transparency to all users"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that responsible disclosure gives approximately 90 days to the vendor before public disclosure, balancing user protection with the vendor's need for time to fix the issue properly."
+    }
+  ]
+}

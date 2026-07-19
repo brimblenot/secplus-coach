@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why monitoring speed matters",
+      "type": "text",
+      "question": "Why is continuous monitoring more effective than periodic checking at catching attacks?",
+      "rubric": "A sound answer explains that continuous monitoring detects threats in minutes rather than months, preventing attackers from escalating privileges, moving laterally, or entrenching themselves.",
+      "explanation": "The section states the average breach goes undetected for nine months, during which attackers escalate and move laterally; continuous monitoring compresses detection from months to minutes."
+    },
+    {
+      "section": "SIEM — the central platform",
+      "type": "mc",
+      "question": "What does log normalization accomplish in a SIEM?",
+      "options": {
+        "A": "Routes log data from multiple sources to a central repository using standard protocols",
+        "B": "Identifies suspicious patterns across sources and triggers alerts when thresholds are met",
+        "C": "Converts log messages into a common schema with consistent fields for comparison",
+        "D": "Automatically executes response workflows when specific alerts are generated"
+      },
+      "correct": "C",
+      "explanation": "The section defines log normalization as extracting common fields from inconsistent formats and mapping them to a single schema; the other options describe log aggregation, correlation, and SOAR respectively."
+    },
+    {
+      "section": "Correlation rules and alerting",
+      "type": "text",
+      "question": "Give one example of a multi-source pattern that a correlation rule might detect, and explain why a single event alone would not raise an alarm.",
+      "rubric": "A sound answer provides a concrete pattern (e.g., 100 failed logins from one IP across 10 accounts in 5 minutes followed by a success, or privilege escalation after authentication failure) and explains that a single event is noise but the combination signals attack.",
+      "explanation": "The section explains that a single failed login is noise but the same pattern repeated across multiple sources (e.g., many failed logins followed by success) indicates credential stuffing or password spraying."
+    },
+    {
+      "section": "SOAR — automated response",
+      "type": "mc",
+      "question": "What is the primary advantage of SOAR in reducing response time?",
+      "options": {
+        "A": "It executes predefined automated response playbooks in seconds without human intervention for common incidents",
+        "B": "It applies machine learning to detect network anomalies that signature-based tools cannot identify",
+        "C": "It extracts common fields from different log sources and maps them to a single schema for comparison",
+        "D": "It collects logs from firewalls, IDS/IPS, and servers into one central location for analysts to review"
+      },
+      "correct": "A",
+      "explanation": "The section states SOAR executes automated playbooks when alerts fire and reduces mean time to respond from hours to minutes; the other options describe SIEM, log normalization, and NDR respectively."
+    },
+    {
+      "section": "Log sources and what each reveals",
+      "type": "mc",
+      "question": "Which Windows Event ID should you examine to detect pass-the-hash attacks?",
+      "options": {
+        "A": "Event ID 4624, which records successful logon with source IP and logon type",
+        "B": "Event ID 4648, which detects explicit credential use without requiring a password",
+        "C": "Event ID 4672, which indicates special privileges have been assigned to an account",
+        "D": "Event ID 4688, which captures process creation with command line arguments"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that Event ID 4648 detects pass-the-hash, which uses a stolen password hash directly without cracking it."
+    },
+    {
+      "section": "Network monitoring",
+      "type": "text",
+      "question": "Explain the difference between NetFlow/IPFIX and full packet capture in terms of what data is stored and why.",
+      "rubric": "A sound answer states that NetFlow/IPFIX captures only metadata (IPs, ports, bytes, duration) and is cheaper and scalable, while full packet capture stores complete traffic content for forensic analysis but requires significant storage and is typically deployed only at key chokepoints.",
+      "explanation": "The section contrasts the two: NetFlow captures metadata cheaply, while full packet capture is storage-intensive and deployed selectively at network boundaries."
+    },
+    {
+      "section": "UEBA — behavioral analytics",
+      "type": "mc",
+      "question": "What does the impossible travel indicator in UEBA detect?",
+      "options": {
+        "A": "Repeated authentication failures followed by a successful login, indicating brute force activity",
+        "B": "A user accessing files at unusual times or from unusual locations inconsistent with their role",
+        "C": "A standard user account suddenly executing administrative tools or privilege escalation commands",
+        "D": "An account logging in from geographically distant locations in a timeframe that makes physical travel impossible"
+      },
+      "correct": "D",
+      "explanation": "The section defines impossible travel as an account logging in from New York then London 30 minutes later, which is physically impossible and signals compromise."
+    },
+    {
+      "section": "High-priority threat patterns to monitor",
+      "type": "text",
+      "question": "Name two indicators a security team should monitor to detect ransomware activity.",
+      "rubric": "A sound answer mentions two of: mass file renames or extension changes, or deletion of Volume Shadow Copies via vssadmin or wmic.",
+      "explanation": "The section lists mass file renames/extension changes and deletion of Volume Shadow Copies as key ransomware indicators."
+    },
+    {
+      "section": "SNMP — device health monitoring",
+      "type": "mc",
+      "question": "What is the security risk with SNMPv1 and SNMPv2 that SNMPv3 addresses?",
+      "options": {
+        "A": "They cannot send unsolicited alerts called traps when threshold conditions are met",
+        "B": "They lack a structured database of device metrics organized by Object Identifiers",
+        "C": "They do not support polling agents on routers and switches for operational metrics",
+        "D": "They transmit community strings in plaintext, exposing shared authentication credentials"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that earlier SNMP versions transmit community strings in plaintext and that SNMPv3 is the only acceptable version for production because it addresses this vulnerability."
+    }
+  ]
+}

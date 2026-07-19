@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "The shared responsibility model",
+      "type": "mc",
+      "question": "In the shared responsibility model, which of the following is the customer's responsibility rather than the cloud provider's?",
+      "options": {
+        "A": "Managing the global cloud network and hypervisors",
+        "B": "Maintaining the physical data center and hardware infrastructure",
+        "C": "Configuring identity and access management (IAM) and network rules",
+        "D": "Providing foundational cloud services and APIs"
+      },
+      "correct": "C",
+      "explanation": "The study guide explicitly states the customer is responsible for IAM config, network rules, OS patching, and app security, while the provider handles infrastructure, hardware, and foundational services."
+    },
+    {
+      "section": "Misconfigured cloud storage",
+      "type": "text",
+      "question": "Describe how a storage bucket becomes misconfigured and why this is a serious vulnerability.",
+      "rubric": "A sound answer explains that a single permission change can make a bucket publicly accessible to the internet, exposing all data inside it to anyone.",
+      "explanation": "The section states that misconfigured cloud storage means a bucket has been set to allow public internet access, and that a single permission change can open it to the entire internet."
+    },
+    {
+      "section": "Insecure cloud APIs",
+      "type": "mc",
+      "question": "What makes a cloud API vulnerable when an attacker obtains an API key?",
+      "options": {
+        "A": "The key with excessive permissions gives the attacker full account control if leaked",
+        "B": "The key expires automatically after one hour of use",
+        "C": "The key is specific to a single resource and cannot affect other resources",
+        "D": "The key can only be used to view resource names but not modify them"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that keys with excessive permissions give an attacker full account control if leaked, making this the core API vulnerability."
+    },
+    {
+      "section": "Insufficient IAM access controls",
+      "type": "text",
+      "question": "What is permission chaining and how does it allow an attacker to escalate their privileges?",
+      "rubric": "A sound answer explains that an attacker who compromises a low-privilege identity can assume a more privileged role that the first identity is authorized to use, escalating to admin access.",
+      "explanation": "The section defines permission chaining as allowing an attacker with a low-privilege identity to assume a more privileged role they are authorized to use, resulting in privilege escalation."
+    },
+    {
+      "section": "Serverless and event injection",
+      "type": "mc",
+      "question": "What type of vulnerability occurs in serverless functions when malicious data is submitted through function parameters or event sources without validation?",
+      "options": {
+        "A": "Insecure dependency scanning",
+        "B": "Runtime timeout exploitation",
+        "C": "IAM role misconfiguration",
+        "D": "Function/event injection"
+      },
+      "correct": "D",
+      "explanation": "The section defines function/event injection as malicious data submitted through function parameters or event sources that the function processes without validation."
+    },
+    {
+      "section": "Cloud metadata API abuse via SSRF",
+      "type": "mc",
+      "question": "At what internal IP address do major cloud providers expose an instance metadata service that returns IAM role credentials?",
+      "options": {
+        "A": "192.168.1.1",
+        "B": "169.254.169.254",
+        "C": "127.0.0.1",
+        "D": "10.0.0.1"
+      },
+      "correct": "B",
+      "explanation": "The section states that all major cloud providers expose an instance metadata service at the internal IP address 169.254.169.254, which returns IAM role credentials and other sensitive data."
+    },
+    {
+      "section": "Shadow IT and Infrastructure as Code risks",
+      "type": "text",
+      "question": "Explain how Infrastructure as Code templates can introduce cloud security risks at scale.",
+      "rubric": "A sound answer indicates that IaC templates can deploy insecure configurations at scale if they contain hardcoded credentials, overly open security groups, or unencrypted storage.",
+      "explanation": "The section explains that IaC tools like Terraform can deploy insecure configurations at scale if templates contain hardcoded credentials, overly open security groups, or unencrypted storage."
+    },
+    {
+      "section": "Cloud security tooling",
+      "type": "mc",
+      "question": "Which tool category is designed to identify excessive permissions and recommend least-privilege IAM right-sizing?",
+      "options": {
+        "A": "CASB provides visibility over cloud service use and data movement",
+        "B": "CWPP protects running workloads against active threats",
+        "C": "CIEM identifies excessive permissions and detects unused access",
+        "D": "CSPM scans resource configs against security benchmarks"
+      },
+      "correct": "C",
+      "explanation": "The study guide table defines CIEM as Cloud Infrastructure Entitlement Management, which identifies excessive permissions, detects unused access, and recommends least-privilege IAM right-sizing."
+    }
+  ]
+}

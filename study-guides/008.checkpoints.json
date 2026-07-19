@@ -1,0 +1,96 @@
+{
+  "checkpoints": [
+    {
+      "section": "Defense-in-depth: layers from outside in",
+      "type": "mc",
+      "question": "Physical security controls are organized in concentric zones. Which of the following lists those zones in the correct order from outermost to innermost?",
+      "options": {
+        "A": "Device, room, building, perimeter",
+        "B": "Room, device, perimeter, building",
+        "C": "Perimeter, building, room, device",
+        "D": "Building, perimeter, device, room"
+      },
+      "correct": "C",
+      "explanation": "The study guide explicitly orders the zones as perimeter (outer boundary), building (structure entry), room (sensitive areas), and device (individual hardware) from outside in."
+    },
+    {
+      "section": "Perimeter controls",
+      "type": "mc",
+      "question": "A facility wants to prevent unauthorized people from climbing the perimeter fence while allowing security cameras to see outside the perimeter clearly. Which two fencing characteristics should they prioritize?",
+      "options": {
+        "A": "Chain-link fencing without razor wire",
+        "B": "Transparent fencing with razor wire on top",
+        "C": "Steel palisade fencing without additional height",
+        "D": "Opaque fencing with razor wire on top"
+      },
+      "correct": "B",
+      "explanation": "Transparent fencing allows cameras to see out and makes climbers visible, while razor wire on top increases climb difficulty; the section states transparent fencing supports camera functionality and visibility of intruders."
+    },
+    {
+      "section": "Building entry controls",
+      "type": "text",
+      "question": "Explain the difference between tailgating and piggybacking, and describe how a vestibule prevents both.",
+      "rubric": "A sound answer states that tailgating is unauthorized following without the authorized person's knowledge while piggybacking is following with their knowledge/consent, and that a vestibule prevents both by requiring each person to authenticate individually through interlocking doors that open only one at a time.",
+      "explanation": "The section defines both terms with their key difference being the authorized person's awareness, and explains that vestibules force individual authentication via interlocking single-open-door design."
+    },
+    {
+      "section": "Biometric access control",
+      "type": "mc",
+      "question": "When comparing two biometric systems for accuracy, which metric should you use as the standard benchmark?",
+      "options": {
+        "A": "Crossover Error Rate, because it represents the point where FAR equals FRR",
+        "B": "False Rejection Rate, because operational disruption is unacceptable",
+        "C": "False Acceptance Rate, because security failures are the greatest concern",
+        "D": "Average of FAR and FRR, because it balances both types of errors equally"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that CER/EER is 'the standard comparison metric' for biometric system accuracy and identifies it as the point where FAR equals FRR."
+    },
+    {
+      "section": "Surveillance: CCTV",
+      "type": "mc",
+      "question": "What is the typical footage retention period for CCTV systems in a data center?",
+      "options": {
+        "A": "180 to 365 days for archival purposes",
+        "B": "7 to 14 days for routine monitoring",
+        "C": "90 to 180 days for long-term compliance",
+        "D": "30 to 90 days for standard retention"
+      },
+      "correct": "D",
+      "explanation": "The section directly states that CCTV footage retention is 'typically 30–90 days' and notes that regulated industries may require more."
+    },
+    {
+      "section": "Environmental controls",
+      "type": "text",
+      "question": "Why is a hot aisle/cold aisle layout important for data center efficiency, and what flow does it create?",
+      "rubric": "A sound answer explains that the layout maximizes cooling efficiency by preventing hot exhaust air from recirculating back into server intakes, with cool air feeding server fronts on one side (cold aisle) and hot exhaust returning on the opposite side (hot aisle).",
+      "explanation": "The section describes both the efficiency benefit and the specific directional flow: cold aisle receives cool supply air feeding server intakes, while hot aisle receives exhaust returning to HVAC."
+    },
+    {
+      "section": "Fire suppression systems",
+      "type": "mc",
+      "question": "Why is Halon 1301 no longer used as a fire suppression agent in data centers?",
+      "options": {
+        "A": "It is lethal to humans and can only be used in unmanned facilities",
+        "B": "It requires both fire detector and sprinkler activation, causing deployment delays",
+        "C": "It was banned under the Montreal Protocol due to ozone depletion concerns",
+        "D": "It leaves residue that damages electronic equipment and is difficult to clean"
+      },
+      "correct": "C",
+      "explanation": "The study guide states that Halon 1301 'was formerly the standard clean agent but is now banned under the Montreal Protocol for ozone depletion' and that FM-200 and Novec 1230 replaced it."
+    },
+    {
+      "section": "Physical device security",
+      "type": "mc",
+      "question": "What is a Kensington security slot, and what is it used for?",
+      "options": {
+        "A": "A USB port on laptops that accepts encrypted security dongles for authentication",
+        "B": "A physical compartment on servers where encryption keys are stored securely",
+        "C": "A card reader slot on workstations that accepts badge-based access credentials",
+        "D": "A standardized lock port built into laptops that cable locks can thread through"
+      },
+      "correct": "D",
+      "explanation": "The section defines a Kensington security slot as 'a standardized lock port built into most laptops' and explains it is used with cable locks to anchor laptops to fixed furniture."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Privacy vs. security",
+      "type": "text",
+      "question": "Explain why an organization with strong security controls can still have a privacy problem.",
+      "rubric": "A sound answer states that security alone does not ensure privacy — an org can properly protect data (security) while still misusing it, such as by retaining it longer than needed, sharing it without consent, or using it for purposes beyond its original collection.",
+      "explanation": "The section establishes that security is necessary but not sufficient for privacy; the example of retaining data too long or sharing without consent illustrates how proper locks (security) don't prevent rule violations (privacy)."
+    },
+    {
+      "section": "Core privacy principles",
+      "type": "mc",
+      "question": "Which principle requires an organization to delete or anonymize personal data once its original purpose has been fulfilled?",
+      "options": {
+        "A": "Ensuring personal data is correct and up to date",
+        "B": "Deleting or anonymizing data once its purpose is fulfilled",
+        "C": "Collecting only the minimum data needed for a purpose",
+        "D": "Using data only for the original stated purpose"
+      },
+      "correct": "B",
+      "explanation": "Storage limitation specifically requires deletion or anonymization once the purpose is fulfilled; the other principles address different stages (minimization at collection, purpose limitation during use, accuracy during retention)."
+    },
+    {
+      "section": "Personal data categories",
+      "type": "mc",
+      "question": "Which of the following is an example of a quasi-identifier under data protection law?",
+      "options": {
+        "A": "ZIP code, birthdate, and gender combined",
+        "B": "A Social Security number",
+        "C": "A passport number",
+        "D": "A biometric fingerprint"
+      },
+      "correct": "A",
+      "explanation": "Quasi-identifiers identify an individual only in combination; the other options are direct identifiers that uniquely ID someone on their own."
+    },
+    {
+      "section": "Privacy by Design — seven principles",
+      "type": "text",
+      "question": "According to Privacy by Design, at what stage should privacy be considered in system development?",
+      "rubric": "A sound answer states that privacy must be built in from the start, proactively designed into the architecture from the beginning, not added later as an afterthought or patch.",
+      "explanation": "Principle 1 (proactive) and Principle 3 (embedded into design) both emphasize that privacy must be part of the initial architecture, not bolted on afterward."
+    },
+    {
+      "section": "GDPR data subject rights",
+      "type": "mc",
+      "question": "Under GDPR, what is the standard response timeframe for a Data Subject Access Request?",
+      "options": {
+        "A": "15 calendar days",
+        "B": "60 calendar days",
+        "C": "30 calendar days",
+        "D": "45 calendar days"
+      },
+      "correct": "C",
+      "explanation": "GDPR specifies 30 calendar days as the standard response timeframe, with a possible 2-month extension for complex requests; CCPA allows 45 days."
+    },
+    {
+      "section": "Privacy Impact Assessment (PIA / DPIA)",
+      "type": "mc",
+      "question": "A Privacy Impact Assessment is required when processing personal data poses which of the following?",
+      "options": {
+        "A": "Routine customer transactions stored in encrypted databases",
+        "B": "Collection of employee contact information for company communications",
+        "C": "Any minor data collection from three or more individuals",
+        "D": "Large-scale sensitive data, public surveillance, or extensive automated profiling"
+      },
+      "correct": "D",
+      "explanation": "The section states a DPIA is required for high-risk processing: large-scale sensitive data, public surveillance, or extensive automated profiling; routine or low-risk processing does not trigger this requirement."
+    },
+    {
+      "section": "Consent requirements",
+      "type": "mc",
+      "question": "Under GDPR, which of the following invalidates consent as a legal basis for processing?",
+      "options": {
+        "A": "An individual receives an easy mechanism to withdraw consent",
+        "B": "Separate consents are required for different processing purposes",
+        "C": "A pre-ticked checkbox is used to obtain consent",
+        "D": "The individual receives clear notice before consenting"
+      },
+      "correct": "C",
+      "explanation": "The section states consent must be given by a clear affirmative action and that silence, pre-ticked boxes, or inactivity do not count; pre-ticked boxes explicitly invalidate consent."
+    },
+    {
+      "section": "Cross-border data transfers",
+      "type": "text",
+      "question": "Name one mechanism that allows EU personal data to be transferred outside the EEA legally.",
+      "rubric": "A sound answer names any one of: adequacy decision, Standard Contractual Clauses (SCCs), or Binding Corporate Rules (BCRs), and briefly states how it works.",
+      "explanation": "The section lists three approved mechanisms; naming any one with a brief explanation demonstrates understanding of legal cross-border transfer safeguards."
+    }
+  ]
+}

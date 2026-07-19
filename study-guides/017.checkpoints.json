@@ -1,0 +1,70 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a cryptographic hash function is",
+      "type": "mc",
+      "question": "Which property of a cryptographic hash function means that changing a single bit in the input produces a completely different output?",
+      "options": {
+        "A": "Collision-resistant",
+        "B": "Deterministic",
+        "C": "One-way / preimage resistant",
+        "D": "Avalanche effect"
+      },
+      "correct": "D",
+      "explanation": "The avalanche effect is defined in the section as the property where changing even one bit in the input produces a completely different output. The other properties describe different security characteristics."
+    },
+    {
+      "section": "The hash algorithms: what's safe and what's broken",
+      "type": "mc",
+      "question": "Which of the following hash algorithms is approved for current security-critical purposes like TLS and code signing?",
+      "options": {
+        "A": "SHA-3 with a Merkle–Damgård construction",
+        "B": "SHA-256 from the SHA-2 family",
+        "C": "SHA-1 following Google's SHAttered collision",
+        "D": "MD5 with a 128-bit output"
+      },
+      "correct": "B",
+      "explanation": "The section marks SHA-256 (SHA-2 family) as secure and most widely deployed for TLS and code signing. MD5 and SHA-1 are broken, and SHA-3 uses sponge construction, not Merkle–Damgård."
+    },
+    {
+      "section": "How hashing is used in practice",
+      "type": "text",
+      "question": "Explain how hashing is used to verify file integrity during a download.",
+      "rubric": "A sound answer states that a vendor publishes a hash of the file, the user computes the hash of the downloaded file themselves, and a matching hash confirms the file is unaltered and unchanged.",
+      "explanation": "The section describes file integrity verification: comparing a vendor's published hash to the hash computed by the user after download to detect tampering or corruption."
+    },
+    {
+      "section": "Why fast hashes are dangerous for passwords — and how salting fixes it",
+      "type": "mc",
+      "question": "What does a salt accomplish in password storage?",
+      "options": {
+        "A": "It makes each user's password hash unique even if passwords are identical",
+        "B": "It slows down the hashing process to prevent offline attacks",
+        "C": "It replaces the need for a work factor in password hashing",
+        "D": "It stores the plaintext password securely in the database"
+      },
+      "correct": "A",
+      "explanation": "The section explains that salt is a unique random value per user that, when concatenated with the password before hashing, ensures different hashes even for identical passwords and destroys the value of precomputed rainbow tables."
+    },
+    {
+      "section": "HMAC: integrity + authentication with a shared key",
+      "type": "text",
+      "question": "Why does HMAC not provide non-repudiation, even though it provides integrity and authentication?",
+      "rubric": "A sound answer states that both sender and receiver share the same key, so either party could have generated the HMAC, making it impossible for one to prove the other created it.",
+      "explanation": "The section explicitly states that HMAC does not provide non-repudiation because both parties share the same key, so neither can prove which one generated the code."
+    },
+    {
+      "section": "Digital signatures: authentication + integrity + non-repudiation",
+      "type": "mc",
+      "question": "In the digital signature verification process, what does decrypting the signature with the sender's public key recover?",
+      "options": {
+        "A": "The original plaintext message",
+        "B": "The sender's private key",
+        "C": "The original hash of the message",
+        "D": "The certificate authority's signature"
+      },
+      "correct": "C",
+      "explanation": "The section's verification process states that decrypting the signature with the sender's public key recovers the original hash, which is then compared to an independently computed hash of the received message."
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "The identity lifecycle: joiner, mover, leaver",
+      "type": "mc",
+      "question": "What is privilege creep and when does it occur?",
+      "options": {
+        "A": "The process of granting temporary access to resources for a specific maintenance window",
+        "B": "The gradual accumulation of excess permissions when a user changes roles and old access is not removed",
+        "C": "The practice of reviewing manager access to ensure subordinates have appropriate permissions",
+        "D": "The automatic deletion of all accounts when an employee leaves the organization"
+      },
+      "correct": "B",
+      "explanation": "Privilege creep is defined in the section as the gradual accumulation of excess permissions over time, occurring specifically during the mover phase when old role access is not removed."
+    },
+    {
+      "section": "Just-in-time provisioning",
+      "type": "text",
+      "question": "Explain how JIT provisioning limits security risk and name the protocol that automates it.",
+      "rubric": "A sound answer states that JIT provisioning grants temporary, on-demand access that is automatically revoked when the task is done, eliminating standing privilege and limiting the window of exposure if credentials are compromised, and identifies SCIM as the protocol that automates account creation and deletion.",
+      "explanation": "The section explicitly states that JIT grants temporary access and auto-revokes it, limiting exposure if credentials are breached, and that SCIM automates account provisioning and deprovisioning."
+    },
+    {
+      "section": "User identity governance",
+      "type": "mc",
+      "question": "What is the purpose of access recertification campaigns?",
+      "options": {
+        "A": "Managers periodically review and confirm their subordinates' current access remains appropriate and uncertified access is revoked",
+        "B": "Credentials are stored in an encrypted vault and rotated after each privileged session",
+        "C": "Temporary admin credentials are requested, approved for a time window, then automatically revoked",
+        "D": "Automated systems detect when a user holds permissions that violate separation of duties"
+      },
+      "correct": "A",
+      "explanation": "The section defines access recertification campaigns as periodic manager reviews where managers confirm each subordinate's current access is still appropriate and uncertified access is revoked."
+    },
+    {
+      "section": "Privileged Identity Management and Privileged Access Management",
+      "type": "text",
+      "question": "Describe what password vaulting does and why it prevents credential reuse and exposure.",
+      "rubric": "A sound answer explains that password vaulting stores credentials in an encrypted vault so users never see the actual password, the vault checks out credentials on behalf of the user, and the password is automatically rotated after each session, preventing reuse and exposure.",
+      "explanation": "The section states that password vaulting stores encrypted credentials that users never access directly, the vault dispenses them on behalf of the user, and rotates the password after each session."
+    },
+    {
+      "section": "Single sign-on",
+      "type": "mc",
+      "question": "Why is MFA particularly critical for an SSO identity provider?",
+      "options": {
+        "A": "MFA is required to verify the identity provider's digital certificate during federation",
+        "B": "MFA allows the identity provider to record sessions for audit and forensics purposes",
+        "C": "MFA prevents users from accessing multiple applications with a single token",
+        "D": "A single compromised SSO credential opens all connected applications, making MFA essential for protection"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that one compromised SSO credential opens all connected apps, making MFA on the IdP critical."
+    },
+    {
+      "section": "Federation and its protocols",
+      "type": "mc",
+      "question": "What is the role of the Identity Provider in a SAML 2.0 federation flow?",
+      "options": {
+        "A": "Receives the user's request and redirects them to authenticate with their home organization",
+        "B": "Verifies the service provider's public certificate before granting access to protected resources",
+        "C": "Validates the user's credentials and issues a digitally signed assertion containing identity and attributes",
+        "D": "Stores encrypted credentials and dispenses them to authorized applications on demand"
+      },
+      "correct": "C",
+      "explanation": "The section defines the IdP as the authoritative source that performs authentication and issues signed SAML assertions containing claims about the user's identity and attributes."
+    },
+    {
+      "section": "Federation and its protocols",
+      "type": "text",
+      "question": "Explain the key difference between OAuth 2.0 and OIDC and what layer OIDC adds.",
+      "rubric": "A sound answer states that OAuth 2.0 is an authorization framework only, while OIDC adds an authentication layer on top of OAuth 2.0 by introducing the ID token, a cryptographically signed JWT containing claims about who the user is.",
+      "explanation": "The section explicitly contrasts OAuth 2.0 as authorization-only with OIDC as adding authentication via the ID token, a JWT containing identity claims."
+    },
+    {
+      "section": "Directory services",
+      "type": "mc",
+      "question": "What is the primary purpose of Conditional Access policies in Azure Active Directory?",
+      "options": {
+        "A": "Require stronger authentication based on risk factors such as location, device, or operation",
+        "B": "Enforce separation of duties across multiple Azure AD administrative roles",
+        "C": "Automatically rotate credentials after each privileged session in Azure resources",
+        "D": "Store and audit all administrative session activity across the cloud environment"
+      },
+      "correct": "A",
+      "explanation": "The section defines Conditional Access policies as risk-based rules that require stronger authentication, such as MFA, when access comes from untrusted locations, unfamiliar devices, or high-risk operations."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a baseline actually is",
+      "type": "mc",
+      "question": "What does a secure baseline represent in an organization's security posture?",
+      "options": {
+        "A": "The mandatory minimum security configuration every system of a given type must meet",
+        "B": "A recommended set of best practices that administrators may choose to follow",
+        "C": "An optional hardening guide that applies only to critical infrastructure",
+        "D": "A goal the organization hopes to achieve within the next fiscal year"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly defines a secure baseline as a documented minimum-security configuration standard that is a mandatory floor, not an aspirational target. Every system of a given type must satisfy it before deployment."
+    },
+    {
+      "section": "Authoritative baseline sources",
+      "type": "mc",
+      "question": "Which baseline source is required for US government and DoD systems?",
+      "options": {
+        "A": "Vendor-specific Microsoft Security Baselines",
+        "B": "CIS Benchmarks Level 2",
+        "C": "STIGs from DISA",
+        "D": "NIST SP 800-53 Moderate impact controls"
+      },
+      "correct": "C",
+      "explanation": "The section states that STIGs are Security Technical Implementation Guides from DISA and are required for US government and DoD systems. It also notes they are more prescriptive than CIS Benchmarks."
+    },
+    {
+      "section": "What a baseline actually configures",
+      "type": "text",
+      "question": "Name two specific configuration areas that a typical OS baseline covers.",
+      "rubric": "A sound answer names any two from the list: disabling unnecessary services, password policy, account lockout policy, audit logging, disabling default accounts, enabling automatic updates, host-based firewall, screen lock timeout, or full-disk encryption.",
+      "explanation": "The section lists nine specific areas an OS baseline configures. The student should be able to identify at least two from that concrete list."
+    },
+    {
+      "section": "Deploying baselines at scale",
+      "type": "mc",
+      "question": "Which tool is used to enforce baseline settings on Windows machines joined to Active Directory?",
+      "options": {
+        "A": "Tenable Nessus vulnerability scanner",
+        "B": "Ansible configuration management",
+        "C": "CIS-CAT Pro Assessor",
+        "D": "Group Policy Objects (GPOs)"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that Group Policy Objects (GPOs) enforce baseline settings on all Windows machines joined to Active Directory, with reapplication at startup and login."
+    },
+    {
+      "section": "Hardening vs. baseline",
+      "type": "text",
+      "question": "Explain the difference between hardening and a baseline.",
+      "rubric": "A sound answer states that hardening is the active process of removing software and disabling services, while the baseline is the documented target state or configuration that hardening aims to achieve.",
+      "explanation": "The section explicitly contrasts the two: hardening is the active process (like painting), while the baseline is the documented target state (the spec sheet)."
+    },
+    {
+      "section": "Configuration drift and continuous compliance",
+      "type": "mc",
+      "question": "What is configuration drift?",
+      "options": {
+        "A": "An expansion of security controls beyond baseline requirements",
+        "B": "Gradual divergence of a system from its baseline due to changes",
+        "C": "A failed compliance scan requiring immediate remediation",
+        "D": "A temporary system condition resolved by restarting the SIEM"
+      },
+      "correct": "B",
+      "explanation": "The section defines configuration drift as the gradual divergence of a system from its baseline over time, caused by admin changes, application requirements, or patches altering defaults."
+    },
+    {
+      "section": "Baseline exemptions",
+      "type": "mc",
+      "question": "Which of the following is NOT listed as a required element of a baseline exemption process?",
+      "options": {
+        "A": "Automatically updating the baseline to include the exception permanently",
+        "B": "Identifying compensating controls that partially mitigate the risk",
+        "C": "Obtaining formal risk acceptance from an authority such as the CISO",
+        "D": "Documenting why the specific control cannot be met"
+      },
+      "correct": "A",
+      "explanation": "The section lists four required elements of an exemption process: documenting the control and why, identifying compensating controls, obtaining formal risk acceptance, and setting a review date. It explicitly states exemptions are never permanent by default, so automatically updating the baseline is not part of the process."
+    }
+  ]
+}

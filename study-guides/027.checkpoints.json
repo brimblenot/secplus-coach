@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a buffer overflow is",
+      "type": "mc",
+      "question": "What happens to data that exceeds a buffer's allocated size in a buffer overflow?",
+      "options": {
+        "A": "The excess spills into adjacent memory and corrupts data there",
+        "B": "The excess data is silently discarded by the CPU",
+        "C": "The program automatically allocates additional memory",
+        "D": "The operating system blocks the write operation"
+      },
+      "correct": "A",
+      "explanation": "The section directly states that when more data is written to a buffer than it can hold, the excess spills into adjacent memory and corrupts whatever was stored there, potentially including control data or pointers."
+    },
+    {
+      "section": "Stack-based buffer overflows",
+      "type": "text",
+      "question": "Explain how unsafe C functions like strcpy enable a stack-based buffer overflow attack.",
+      "rubric": "A sound answer should state that unsafe functions copy input until a null character without checking the buffer size, allowing excess data to overwrite the return address and redirect execution.",
+      "explanation": "The section explains that functions like strcpy copy without size checks, so if a small buffer receives too much input, the extra bytes overwrite the saved return address, letting the attacker control where the CPU jumps next."
+    },
+    {
+      "section": "Heap-based buffer overflows",
+      "type": "mc",
+      "question": "What makes heap-based buffer overflows generally harder to exploit than stack-based overflows?",
+      "options": {
+        "A": "Functions that allocate heap memory perform automatic bounds checking",
+        "B": "The heap stores only immutable data that cannot be corrupted",
+        "C": "Heap memory is protected by the operating system and cannot be written to",
+        "D": "Heap layout is less predictable, making it harder for attackers to reliably exploit"
+      },
+      "correct": "D",
+      "explanation": "The section states that heap-based overflows are generally harder to exploit because heap layout is less predictable, contrasting this with the more deterministic structure of the stack."
+    },
+    {
+      "section": "Integer overflows",
+      "type": "text",
+      "question": "How can an integer overflow indirectly cause a buffer overflow?",
+      "rubric": "A sound answer should explain that if an overflowed integer is used to calculate buffer size, it produces a tiny buffer, but the program then writes a large amount of data into it, creating a buffer overflow.",
+      "explanation": "The section explains that when an integer exceeds its maximum value and wraps around, if that overflowed result is used as a buffer size calculation, the program allocates too little memory but still writes too much data."
+    },
+    {
+      "section": "Format string vulnerabilities",
+      "type": "mc",
+      "question": "Which format specifier allows an attacker to write to arbitrary memory addresses?",
+      "options": {
+        "A": "%d reads an integer from the stack",
+        "B": "%n writes character count to a memory pointer",
+        "C": "%s reads a string pointer from the stack",
+        "D": "%x reads a value as hexadecimal"
+      },
+      "correct": "B",
+      "explanation": "The section's table explicitly identifies %n as the specifier that writes the count of characters printed to a pointer, enabling arbitrary memory writes when an attacker controls the format string."
+    },
+    {
+      "section": "Real-world examples",
+      "type": "mc",
+      "question": "What type of memory access vulnerability does Heartbleed exploit?",
+      "options": {
+        "A": "Format string vulnerability in the heartbeat handler",
+        "B": "Integer overflow in OpenSSL certificate validation",
+        "C": "Buffer over-read that leaks up to 64 KB of server memory",
+        "D": "Buffer overflow that overwrites the return address"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly identifies Heartbleed as a buffer over-read (not a write overflow) in OpenSSL's heartbeat handler that exposed up to 64 KB of adjacent server memory."
+    },
+    {
+      "section": "Mitigations",
+      "type": "mc",
+      "question": "What does a stack canary do to protect against stack-based buffer overflows?",
+      "options": {
+        "A": "Randomizes the stack memory address each program run",
+        "B": "Random value placed between variables and return address; terminates if overwritten",
+        "C": "Prevents all data from being written to the stack",
+        "D": "Encrypts the return address to prevent prediction"
+      },
+      "correct": "B",
+      "explanation": "The section states that a stack canary is a random value inserted between local variables and the return address, and the program checks before return that this value is unchanged; an overflow that corrupts it causes immediate termination."
+    },
+    {
+      "section": "Mitigations",
+      "type": "text",
+      "question": "How does ASLR help prevent buffer overflow exploitation, and what is one way an attacker might bypass it?",
+      "rubric": "A sound answer should state that ASLR randomizes memory addresses so attackers cannot hardcode them, but ASLR can be bypassed by a separate information leak vulnerability that reveals actual addresses.",
+      "explanation": "The section explains that ASLR makes reliable exploitation harder by randomizing addresses, but bypassing it requires an information leak that discloses the actual memory layout before the overflow."
+    },
+    {
+      "section": "Mitigations",
+      "type": "mc",
+      "question": "What advanced exploitation technique allows attackers to bypass DEP / NX bit protection?",
+      "options": {
+        "A": "Format string attacks, which write directly to the return address location",
+        "B": "Integer overflow, which overflows a size variable to allocate a tiny buffer",
+        "C": "Heap spraying, which fills the heap with shellcode to improve landing zone probability",
+        "D": "Return-Oriented Programming, which chains short executable code snippets already present in the program"
+      },
+      "correct": "D",
+      "explanation": "The section defines ROP as an advanced technique that bypasses DEP by chaining together short snippets of existing legitimate executable code, called gadgets, so no new code is injected and DEP cannot block it."
+    }
+  ]
+}

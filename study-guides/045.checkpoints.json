@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "What denial of service actually is",
+      "type": "mc",
+      "question": "Which pillar of the CIA triad does a denial of service attack primarily target?",
+      "options": {
+        "A": "Confidentiality",
+        "B": "Availability",
+        "C": "Authenticity",
+        "D": "Integrity"
+      },
+      "correct": "B",
+      "explanation": "The study guide explicitly states that DoS attacks target availability, which is the A in the CIA triad. The goal is to exhaust resources so legitimate users cannot reach the service, not to steal data or modify it."
+    },
+    {
+      "section": "From DoS to DDoS",
+      "type": "text",
+      "question": "Explain how a botnet allows a DDoS attack to overcome the limitations of a single-source DoS attack.",
+      "rubric": "A sound answer should explain that a botnet coordinates hundreds, thousands, or millions of infected devices worldwide to attack simultaneously, making source-based filtering ineffective because the attack comes from many sources at once rather than one IP address.",
+      "explanation": "The section states that single-source attacks are limited by one machine's bandwidth and can be blocked by filtering one IP, whereas a botnet defeats this by distributing the attack across many devices globally, making source-based filtering nearly useless."
+    },
+    {
+      "section": "Three DDoS attack categories",
+      "type": "mc",
+      "question": "Which DDoS attack category targets web application logic rather than network bandwidth or server processing resources?",
+      "options": {
+        "A": "Volumetric attack",
+        "B": "Amplification attack",
+        "C": "Application layer attack",
+        "D": "Protocol attack"
+      },
+      "correct": "C",
+      "explanation": "The table in the section shows that application layer (Layer 7) attacks target web app logic to disrupt service, whereas volumetric attacks saturate bandwidth and protocol attacks exhaust connection-handling capacity."
+    },
+    {
+      "section": "Volumetric attacks and amplification",
+      "type": "mc",
+      "question": "In a DNS amplification attack, what is the approximate amplification factor that makes this technique effective?",
+      "options": {
+        "A": "Up to 4,000 times the request size",
+        "B": "Up to 51 times the request size",
+        "C": "Up to 10 times the request size",
+        "D": "Up to 51,000 times the request size"
+      },
+      "correct": "A",
+      "explanation": "The section's amplification table specifies that DNS amplification has an amplification factor of up to 4,000×, achieved through DNS all-records queries sent to open resolvers with the victim's IP spoofed."
+    },
+    {
+      "section": "Protocol attacks",
+      "type": "text",
+      "question": "Describe what happens during a SYN flood attack and why SYN cookies prevent it from succeeding.",
+      "rubric": "A sound answer should explain that a SYN flood fills the server's connection table with half-open entries by sending many spoofed SYN packets; SYN cookies fix this by encoding connection parameters in the sequence number so the server only allocates resources when a valid ACK arrives, preventing spoofed SYNs from consuming space.",
+      "explanation": "The section explains that SYN flood attacks fill the connection table with half-open entries waiting for ACKs that never come, and SYN cookies solve this by encoding connection data into the sequence number so resources are only allocated when a legitimate ACK returns with that encoded value."
+    },
+    {
+      "section": "Application layer attacks",
+      "type": "mc",
+      "question": "Why is Slowloris considered effective despite using very little bandwidth?",
+      "options": {
+        "A": "It floods servers with valid HTTP GET requests at high speed",
+        "B": "It redirects legitimate traffic by exploiting DNS resolution flaws",
+        "C": "It sends oversized HTTP requests that crash web servers immediately",
+        "D": "It holds partial HTTP connections open slowly to exhaust the server's connection pool"
+      },
+      "correct": "D",
+      "explanation": "The section states that Slowloris opens many simultaneous connections with partial HTTP headers sent slowly enough to avoid timeout, filling most web servers' connection pools with incomplete requests while using minimal bandwidth."
+    },
+    {
+      "section": "Permanent DoS (phlashing)",
+      "type": "mc",
+      "question": "What distinguishes permanent denial of service (phlashing) from other DoS attacks?",
+      "options": {
+        "A": "It temporarily disables network devices through configuration changes",
+        "B": "It overwhelms targets using spoofed UDP packets",
+        "C": "It corrupts hardware by installing malicious firmware that causes permanent damage",
+        "D": "It exhausts bandwidth by amplifying DNS queries across multiple servers"
+      },
+      "correct": "C",
+      "explanation": "The section defines phlashing as aiming to physically destroy the target by corrupting hardware through malicious firmware, requiring physical replacement rather than simply disrupting availability."
+    },
+    {
+      "section": "DDoS-as-a-weapon variations",
+      "type": "mc",
+      "question": "What is a booter or stresser service?",
+      "options": {
+        "A": "A DDoS-for-hire platform that allows anyone to purchase attacks cheaply",
+        "B": "A firewall that inspects HTTP traffic for attack patterns",
+        "C": "A tool that tests network resilience under controlled load",
+        "D": "An ISP service that distributes traffic across multiple nodes"
+      },
+      "correct": "A",
+      "explanation": "The section describes booter/stresser services as DDoS-for-hire platforms that lower the barrier to entry by allowing anyone to buy attacks cheaply, without requiring technical expertise."
+    },
+    {
+      "section": "Defenses",
+      "type": "text",
+      "question": "Explain how traffic scrubbing centers mitigate DDoS attacks.",
+      "rubric": "A sound answer should explain that scrubbing centers route traffic through third-party services that filter attack traffic using machine learning or behavioral analysis, forwarding only clean traffic to the victim's network.",
+      "explanation": "The section states that traffic scrubbing routes traffic through scrubbing centers (such as Cloudflare or Akamai) that filter attack traffic via ML and behavioral analysis before forwarding legitimate traffic to the target."
+    }
+  ]
+}

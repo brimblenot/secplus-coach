@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Jailbreaking and rooting",
+      "type": "mc",
+      "question": "What is the primary security layer that jailbreaking disables on iOS devices?",
+      "options": {
+        "A": "The app sandbox that isolates applications",
+        "B": "The MDM detection system for device integrity",
+        "C": "The Secure Enclave storing biometric data",
+        "D": "Code-signing requirements enforced by Apple"
+      },
+      "correct": "A",
+      "explanation": "The section states that jailbreaking disables the app sandbox — the isolation layer that keeps apps from touching each other or the OS. While jailbreaking does bypass code-signing and can weaken the Secure Enclave, the sandbox is the primary isolation mechanism explicitly named."
+    },
+    {
+      "section": "Sideloading",
+      "type": "text",
+      "question": "Explain why sideloading bypasses security protections that official app stores provide.",
+      "rubric": "A sound answer should state that sideloading installs apps from sources other than the official app store, thereby skipping the security review process that the store normally conducts.",
+      "explanation": "The section defines sideloading as installing from a source other than the official platform app store, bypassing that store's security review entirely. The student should recognize that the security review is what the store offers and sideloading circumvents it."
+    },
+    {
+      "section": "Malicious applications",
+      "type": "mc",
+      "question": "Which behavior describes an app that passes review acting harmlessly, then downloads harmful code after installation?",
+      "options": {
+        "A": "Banking trojans, which overlay fake login screens",
+        "B": "Dynamic code loading, which downloads malicious code after passing review",
+        "C": "Premium SMS fraud, which silently subscribes victims to paid services",
+        "D": "Permission harvesting, which requests excessive permissions unnecessarily"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly defines dynamic code loading as passing review behaving innocuously, then downloading malicious code later. This technique allows an app to evade review by deferring its malicious behavior."
+    },
+    {
+      "section": "Bluetooth attacks",
+      "type": "mc",
+      "question": "Which Bluetooth attack exploits the OBEX Push Protocol to silently read contacts and files?",
+      "options": {
+        "A": "Blueborne, which allows worm-like spread between paired devices",
+        "B": "Bluebugging, which provides full remote control of the target",
+        "C": "Bluesnarfing, which exploits OBEX to read contacts, messages, and files",
+        "D": "Bluejacking, which sends unsolicited messages to nearby devices"
+      },
+      "correct": "C",
+      "explanation": "The section's table explicitly states that bluesnarfing exploits the OBEX Push Protocol to silently read the victim's contacts, messages, calendar, and files. Bluejacking is nuisance-only; bluebugging provides full control; Blueborne is a protocol-stack vulnerability."
+    },
+    {
+      "section": "NFC attacks",
+      "type": "text",
+      "question": "Describe how a relay attack extends the effective range of NFC transactions.",
+      "rubric": "A sound answer should explain that two attacker devices work together: one near the victim's card captures the signal, and the other relays it over a longer distance to a payment terminal, allowing fraud while the card stays in the victim's pocket.",
+      "explanation": "The section defines a relay attack as using two attacker-controlled devices to extend effective NFC range, with device 1 capturing the signal from the victim's card and device 2 positioned at a payment terminal to complete a fraudulent transaction."
+    },
+    {
+      "section": "Wi-Fi risks",
+      "type": "mc",
+      "question": "What is an evil twin access point?",
+      "options": {
+        "A": "An open Wi-Fi network in a public place that transmits unencrypted traffic",
+        "B": "A VPN server that intercepts traffic between a device and a trusted network",
+        "C": "A captive portal page that serves malicious content to connected devices",
+        "D": "A Wi-Fi hotspot created by an attacker with the same SSID as a previously used network"
+      },
+      "correct": "D",
+      "explanation": "The section defines an evil twin access point as an attacker-created hotspot with the same SSID as a network the victim previously used, causing the device to auto-connect and route traffic through the attacker."
+    },
+    {
+      "section": "SS7 vulnerabilities and SIM swapping",
+      "type": "mc",
+      "question": "In a SIM swapping attack, what does the attacker do to compromise the victim's accounts?",
+      "options": {
+        "A": "Socially engineers the carrier into moving the victim's phone number to the attacker's SIM",
+        "B": "Installs stalkerware on the victim's device to monitor calls and messages",
+        "C": "Creates an evil twin Wi-Fi network to capture authentication codes",
+        "D": "Exploits SS7 protocol flaws to intercept SMS across the telecom network"
+      },
+      "correct": "A",
+      "explanation": "The section defines SIM swapping as a social engineering attack where the attacker calls the carrier, impersonates the victim, and convinces a representative to move the victim's number to the attacker's SIM, giving the attacker access to calls and SMS."
+    },
+    {
+      "section": "Grayware and stalkerware",
+      "type": "text",
+      "question": "What distinguishes stalkerware from ordinary grayware?",
+      "rubric": "A sound answer should identify that stalkerware is a subset of grayware specifically marketed for covert monitoring of another person (partner or child), operates hidden from the app list, and continuously uploads sensitive data like location and messages.",
+      "explanation": "The section defines stalkerware as a subset of grayware that operates covertly, hides from the app list, and is marketed for monitoring a partner or child. Ordinary grayware is privacy-invasive but not necessarily covert or marketed as a monitoring tool."
+    },
+    {
+      "section": "Mobile Device Management (MDM)",
+      "type": "mc",
+      "question": "Which MDM deployment model gives the organization full IT control while allowing employees to use the device personally?",
+      "options": {
+        "A": "BYOD, where the employee owns the device and IT control is limited",
+        "B": "MAM, where only applications and their data are managed, not the device",
+        "C": "CYOD, where the organization owns the device but the employee picks from an approved list",
+        "D": "COPE, where the organization owns the device and the employee can use it personally"
+      },
+      "correct": "D",
+      "explanation": "The section's table shows that COPE (Corporate-Owned, Personally Enabled) means the organization owns the device and has full control, distinguishing it from BYOD (limited control) and CYOD (employee chooses from approved list)."
+    }
+  ]
+}

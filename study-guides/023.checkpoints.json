@@ -1,0 +1,110 @@
+{
+  "checkpoints": [
+    {
+      "section": "Pretexting: building a believable cover story",
+      "type": "text",
+      "question": "What is the attacker's goal in pretexting, and how does research help achieve it?",
+      "rubric": "A sound answer explains that the attacker aims to shift the target from questioning legitimacy to assisting, and that research makes the story plausible and internally consistent so the target lowers their guard.",
+      "explanation": "The section states the attacker researches to make the story plausible and that the goal is to shift thinking from 'Is this person legitimate?' to 'How do I help?' — those are the two core ideas."
+    },
+    {
+      "section": "Elicitation: extracting information through conversation",
+      "type": "mc",
+      "question": "In elicitation, why does the target volunteer sensitive information without realizing it?",
+      "options": {
+        "A": "Because it feels like a natural conversation rather than an interrogation",
+        "B": "Because the attacker presents fake credentials that the target believes",
+        "C": "Because the attacker uses direct questions that force disclosure of system passwords",
+        "D": "Because the target is required by their employer to share project timelines with peers"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that elicitation works because there is no direct request and information surfaces naturally in what feels like networking or small talk."
+    },
+    {
+      "section": "Shoulder surfing: eyes on your screen",
+      "type": "mc",
+      "question": "What is the primary function of a privacy screen in defending against shoulder surfing?",
+      "options": {
+        "A": "It encrypts screen content so attackers cannot interpret what they see",
+        "B": "It prevents biometric scanning of the user's face while they work",
+        "C": "It blocks long-range camera lenses by emitting a reflective light field",
+        "D": "It makes the display readable only from directly in front and appears dark from other angles"
+      },
+      "correct": "D",
+      "explanation": "The section defines privacy screens as polarized film filters that make the display readable only from directly in front, appearing dark from any other angle."
+    },
+    {
+      "section": "Dumpster diving: trash as intelligence",
+      "type": "mc",
+      "question": "Which combination of defenses best addresses dumpster diving?",
+      "options": {
+        "A": "Biometric access to dumpsters and weekly incinerator services",
+        "B": "Posting guards at dumpsters and prohibiting employee breaks near trash areas",
+        "C": "Cross-cut shredders, media degaussing, and clean desk policies",
+        "D": "Strip-cut shredders, employee monitoring, and locked trash bins"
+      },
+      "correct": "C",
+      "explanation": "The section lists cross-cut shredders, degaussing of storage media, and clean desk policies as the defenses against dumpster diving."
+    },
+    {
+      "section": "Tailgating vs. piggybacking: following through the door",
+      "type": "mc",
+      "question": "Which statement correctly distinguishes tailgating from piggybacking?",
+      "options": {
+        "A": "Tailgating targets employees while piggybacking targets external parties",
+        "B": "Tailgating occurs without authorization's knowledge; piggybacking has their awareness",
+        "C": "Tailgating requires the authorized person to know about the breach",
+        "D": "Tailgating uses fraudulent credentials while piggybacking uses social engineering"
+      },
+      "correct": "B",
+      "explanation": "The section's table explicitly defines tailgating as the unauthorized person slipping through without the authorized person knowing, and piggybacking as the authorized person knowingly holding the door open."
+    },
+    {
+      "section": "Tailgating vs. piggybacking: following through the door",
+      "type": "text",
+      "question": "How does an access control vestibule (mantrap) prevent both tailgating and piggybacking?",
+      "rubric": "A sound answer explains that the vestibule has two doors where the first must close and lock before the second opens, physically preventing two people from passing simultaneously.",
+      "explanation": "The section defines the mantrap as a small enclosed area with two doors where the first must close and lock before the second opens, making it physically impossible to slip through behind someone."
+    },
+    {
+      "section": "Caller ID spoofing",
+      "type": "text",
+      "question": "Why should you never treat caller ID as a form of authentication?",
+      "rubric": "A sound answer states that VoIP services allow attackers to make any number appear on the recipient's caller ID, including legitimate organizations' numbers, so the displayed number cannot be trusted to verify identity.",
+      "explanation": "The section explains that VoIP technology allows attackers to spoof any number, including your bank's official number or internal extensions, making caller ID unreliable for authentication."
+    },
+    {
+      "section": "Identity fraud",
+      "type": "mc",
+      "question": "What personal information does an attacker typically steal to commit identity fraud?",
+      "options": {
+        "A": "Social Security number, date of birth, and address",
+        "B": "Browser history, saved passwords, and browsing preferences",
+        "C": "Employer name, job title, and work email address",
+        "D": "Phone number, emergency contact, and insurance policy number"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that identity fraud uses stolen personal details including Social Security number, date of birth, and address."
+    },
+    {
+      "section": "Doppelganger domains",
+      "type": "mc",
+      "question": "What is a doppelganger domain used for?",
+      "options": {
+        "A": "Hosting multiple subdomains for a legitimate organization's regional offices",
+        "B": "Fake websites, credential harvesting, or email impersonation through lookalike domain names",
+        "C": "Redirecting users to educational content about cybersecurity best practices",
+        "D": "Creating backup websites in case the primary domain goes offline"
+      },
+      "correct": "B",
+      "explanation": "The section defines doppelganger domains as domain names that look or sound nearly identical to a legitimate organization's domain, used for fake websites, credential harvesting, or email impersonation."
+    },
+    {
+      "section": "The helpdesk impersonation script",
+      "type": "text",
+      "question": "Why is the 'IT detected a problem with your account' script particularly effective, and what is the primary defense?",
+      "rubric": "A sound answer states that it works because IT legitimately contacts users and the framing triggers authority compliance and urgency, and the defense is a firm policy that IT will never ask for passwords, plus verification procedures like valid ticket numbers or known callback numbers.",
+      "explanation": "The section explains the technique exploits authority and urgency, then identifies the defense as a policy that IT never asks for passwords combined with verification procedures."
+    }
+  ]
+}

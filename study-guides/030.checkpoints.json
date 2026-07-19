@@ -1,0 +1,116 @@
+{
+  "checkpoints": [
+    {
+      "section": "Why operating systems are prime targets",
+      "type": "mc",
+      "question": "What does a CVE represent in the context of operating system security?",
+      "options": {
+        "A": "A standardized ID and description for a documented vulnerability",
+        "B": "A patch release schedule maintained by Microsoft",
+        "C": "A type of malware that targets kernel memory",
+        "D": "A government certification proving an OS is secure"
+      },
+      "correct": "A",
+      "explanation": "CVE stands for Common Vulnerabilities and Exposures—the standardized ID system for documented vulnerabilities. Each flaw gets a unique CVE number and description."
+    },
+    {
+      "section": "Patch Tuesday and the shrinking exploit window",
+      "type": "text",
+      "question": "Explain why the time between a patch release and working exploit code appearing in the wild has become so short.",
+      "rubric": "A sound answer states that once a patch ships, attackers can reverse-engineer it to understand the underlying flaw, since the patch essentially describes what was broken. This accelerates the creation of working exploits.",
+      "explanation": "The section explains that patch release allows attackers to reverse-engineer the fix to understand the vulnerability, collapsing the time to exploit development."
+    },
+    {
+      "section": "End-of-life operating systems",
+      "type": "mc",
+      "question": "Which of the following is a compensating control for protecting an end-of-life operating system?",
+      "options": {
+        "A": "Installing third-party antivirus as a replacement for patches",
+        "B": "Disabling all user accounts to prevent lateral movement",
+        "C": "Purchasing extended vendor support directly from the manufacturer",
+        "D": "Network isolation to prevent direct internet connectivity"
+      },
+      "correct": "D",
+      "explanation": "The section lists network isolation as a compensating control for EOL systems. The others either contradict the text or are not listed as valid mitigations."
+    },
+    {
+      "section": "Default configurations as vulnerabilities",
+      "type": "mc",
+      "question": "What vulnerability was exploited by PrintNightmare on Windows systems?",
+      "options": {
+        "A": "The NetBIOS protocol enabling credential capture locally",
+        "B": "The SMBv1 protocol permitting unauthenticated file-share access",
+        "C": "The Print Spooler service allowing local privilege escalation and remote code execution",
+        "D": "The Telnet server sending credentials in cleartext over networks"
+      },
+      "correct": "C",
+      "explanation": "PrintNightmare (CVE-2021-1675 / CVE-2021-34527) exploited the Print Spooler service and allowed both local privilege escalation and remote code execution."
+    },
+    {
+      "section": "Kernel vulnerabilities",
+      "type": "text",
+      "question": "Why does a kernel exploit pose a greater risk to system security than a vulnerability in a user-space application?",
+      "rubric": "A sound answer explains that the kernel runs in ring 0 with unrestricted access to all hardware, memory, and system operations, so a kernel exploit gives an attacker complete system control below any user-space security controls.",
+      "explanation": "The section states that kernel exploits operate at ring 0, the most privileged processor mode, giving attackers complete system control beneath all user-space defenses."
+    },
+    {
+      "section": "Device driver vulnerabilities and BYOVD",
+      "type": "mc",
+      "question": "How does BYOVD (Bring Your Own Vulnerable Driver) evade Secure Boot protections?",
+      "options": {
+        "A": "By modifying the bootloader signature to match the system firmware",
+        "B": "By installing a legitimately signed but known-vulnerable driver that passes signature validation",
+        "C": "By disabling Secure Boot before the system reaches the login prompt",
+        "D": "By replacing the TPM certificates with attacker-controlled keys"
+      },
+      "correct": "B",
+      "explanation": "The section explains that BYOVD uses a legitimately signed driver from a trusted certificate authority, so Secure Boot and code-signing requirements do not block it despite its known vulnerability."
+    },
+    {
+      "section": "Privilege escalation",
+      "type": "mc",
+      "question": "What is the difference between vertical and horizontal privilege escalation?",
+      "options": {
+        "A": "Vertical targets the kernel while horizontal targets applications",
+        "B": "Vertical requires network access; horizontal requires local access",
+        "C": "Vertical exploits drivers; horizontal exploits services",
+        "D": "Vertical elevates to higher privileges; horizontal accesses another same-level account"
+      },
+      "correct": "D",
+      "explanation": "The section defines vertical escalation as moving from a limited account to Administrator/root and horizontal as moving to another user at the same privilege level."
+    },
+    {
+      "section": "Windows privilege escalation vectors",
+      "type": "mc",
+      "question": "What does DLL search order hijacking exploit?",
+      "options": {
+        "A": "Weak permissions on the Windows System32 registry hive",
+        "B": "Plaintext credentials in LSASS process memory",
+        "C": "The sequence Windows uses to search directories for DLL files",
+        "D": "Unquoted spaces in service executable paths"
+      },
+      "correct": "C",
+      "explanation": "The section defines DLL search order hijacking as placing a malicious DLL in a directory Windows searches before the legitimate one, causing it to load instead."
+    },
+    {
+      "section": "Linux privilege escalation vectors",
+      "type": "text",
+      "question": "Describe what the SUID bit does and why it can be a privilege escalation vector.",
+      "rubric": "A sound answer explains that SUID makes an executable run with the file owner's (often root) privileges instead of the caller's, and that unnecessary SUID binaries that can spawn shells are exploitable.",
+      "explanation": "The section states SUID is a permission bit that causes an executable to run with its owner's privileges, and unnecessary SUID binaries capable of spawning shells are a classic escalation path."
+    },
+    {
+      "section": "Boot-level threats",
+      "type": "mc",
+      "question": "What purpose does TPM serve in protecting the boot process?",
+      "options": {
+        "A": "It encrypts the Master Boot Record to prevent tampering",
+        "B": "It stores keys and attests the boot chain integrity",
+        "C": "It blocks unsigned drivers before kernel initialization",
+        "D": "It validates firmware signatures before UEFI loads"
+      },
+      "correct": "B",
+      "explanation": "The section describes TPM as a dedicated security chip that stores cryptographic keys and can attest (cryptographically confirm) that the boot chain has not been tampered with."
+    }
+  ]
+}

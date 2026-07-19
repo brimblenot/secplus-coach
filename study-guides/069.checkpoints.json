@@ -1,0 +1,37 @@
+{
+  "checkpoints": [
+    {
+      "section": "Data at rest",
+      "type": "mc",
+      "question": "Which encryption method protects only sensitive database fields rather than the entire storage volume?",
+      "options": {
+        "A": "Full disk encryption using BitLocker",
+        "B": "AES-256 encryption across all sectors",
+        "C": "Column-level encryption of database fields",
+        "D": "Self-encrypting drives with firmware control"
+      },
+      "correct": "C",
+      "explanation": "Column-level encryption encrypts only sensitive fields like SSNs or card numbers, leaving other fields readable for performance. The other options protect entire storage volumes or drives, not selective fields."
+    },
+    {
+      "section": "Data in transit",
+      "type": "text",
+      "question": "Explain how certificate validation defends against on-path attacks during data in transit.",
+      "rubric": "A sound answer states that the client checks the server's digital certificate against a trusted certificate authority before opening the session, confirming the server's identity and preventing an attacker from impersonating the legitimate server.",
+      "explanation": "The section explains that certificate validation requires checking a server's certificate against a trusted CA before the session opens. This verification ensures the client connects to the legitimate server, not an attacker relaying traffic."
+    },
+    {
+      "section": "Data in use",
+      "type": "mc",
+      "question": "What attack method exploits the fact that DRAM retains data after power is cut?",
+      "options": {
+        "A": "Clipboard hijacking to capture copied passwords",
+        "B": "Cold boot attacks extracting data from powered-off RAM chips",
+        "C": "Memory scraping by malware reading decrypted data from RAM",
+        "D": "Shoulder surfing by observing the physical screen display"
+      },
+      "correct": "B",
+      "explanation": "Cold boot attacks remove power, chill the RAM, transplant it to another system, and image its contents because DRAM retains data for seconds to minutes after shutdown. Memory scraping, shoulder surfing, and clipboard hijacking are separate attack types that do not exploit DRAM data retention."
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "checkpoints": [
+    {
+      "section": "What makes a replay attack unique",
+      "type": "mc",
+      "question": "In a replay attack, why does the attacker not need to be on the network path during the attack itself?",
+      "options": {
+        "A": "The attacker can break encryption and forge new credentials",
+        "B": "The attacker uses a network tap to intercept all future traffic automatically",
+        "C": "The attacker injects malware that continuously sends new authentication requests",
+        "D": "The attacker captures valid data once and retransmits it later from anywhere"
+      },
+      "correct": "D",
+      "explanation": "The section states the attacker can capture data once and replay it from anywhere, anytime — no need to be on the path during the later attack. The other options either describe different attack phases or introduce capabilities the section does not claim."
+    },
+    {
+      "section": "Pass-the-hash (Windows / NTLM)",
+      "type": "text",
+      "question": "Why is the NTLM password hash valuable enough for an attacker to steal, even if they never obtain the plaintext password?",
+      "rubric": "A sound answer states that the hash is used directly as the authentication credential in NTLM, so possessing the hash is functionally equivalent to knowing the password, making it sufficient to authenticate.",
+      "explanation": "The section explains that NTLM uses the password hash directly as the credential and that knowing the hash is functionally identical to knowing the password, so theft of the hash alone grants authentication capability."
+    },
+    {
+      "section": "Pass-the-ticket (Kerberos)",
+      "type": "mc",
+      "question": "What is stolen to create a Golden Ticket, and what does possession of it enable?",
+      "options": {
+        "A": "A single service ticket, allowing forging of tickets for one specific service",
+        "B": "The KDC's master password, allowing complete control of the Kerberos realm",
+        "C": "The KRBTGT account's NTLM hash, allowing forging of TGTs for any user",
+        "D": "A TGT from an end-user account, allowing access to all resources the user could reach"
+      },
+      "correct": "C",
+      "explanation": "The section defines a Golden Ticket as theft of the KRBTGT hash, which enables forging TGTs for any user with arbitrary validity periods. Option A describes a Silver Ticket, option C describes basic pass-the-ticket, and option D is not stated in the section."
+    },
+    {
+      "section": "How Kerberos fights replay",
+      "type": "text",
+      "question": "Describe the two built-in anti-replay controls Kerberos uses to prevent old captured requests from being replayed.",
+      "rubric": "A sound answer mentions both timestamps with a ±5-minute clock skew window (older replays rejected) and authenticator tracking where the KDC maintains a list of recently seen authenticators and rejects duplicates.",
+      "explanation": "The section explicitly lists timestamps (with the 5-minute window detail) and authenticator tracking (with duplicate rejection) as Kerberos's two anti-replay defenses."
+    },
+    {
+      "section": "Broader anti-replay mechanisms",
+      "type": "mc",
+      "question": "Which mechanism works by having the server issue a fresh random value each authentication session, which the client must use in its response?",
+      "options": {
+        "A": "A nonce, generated fresh by the server each session",
+        "B": "A sequence number, numbered monotonically by the client",
+        "C": "A timestamp, synchronized across the network",
+        "D": "A short-lived token, expiring after a set duration"
+      },
+      "correct": "A",
+      "explanation": "The section defines a nonce as a number used exactly once, generated fresh by the server each session, and states the client must embed the current nonce in its response. The other options describe different mechanisms with different roles."
+    },
+    {
+      "section": "Web tokens and TLS",
+      "type": "mc",
+      "question": "What does token binding accomplish in the context of bearer token replay attacks?",
+      "options": {
+        "A": "It requires the client to prove ownership of the token using a nonce challenge",
+        "B": "It cryptographically ties a token to a specific TLS connection, preventing use from a different connection",
+        "C": "It encrypts the token so it cannot be captured over the network",
+        "D": "It adds a timestamp to the token so it expires after a short duration"
+      },
+      "correct": "B",
+      "explanation": "The section states token binding cryptographically ties a token to a specific TLS connection so it cannot be used from a different one. The other options describe different defense mechanisms not attributed to token binding."
+    },
+    {
+      "section": "Defenses",
+      "type": "mc",
+      "question": "Which Windows defense prevents tools like Mimikatz from reading NTLM hashes out of LSASS memory?",
+      "options": {
+        "A": "Protected Users group, which disables NTLM entirely and limits ticket lifetimes",
+        "B": "Network segmentation, which limits which systems an attacker can reach with stolen credentials",
+        "C": "EDR software, which monitors for anomalous LSASS memory access patterns",
+        "D": "Credential Guard, which isolates credentials in a Hyper-V container inaccessible to the main kernel"
+      },
+      "correct": "D",
+      "explanation": "The section specifically states Credential Guard stores credentials inside an isolated Hyper-V container inaccessible to the main OS kernel, blocking Mimikatz. The other options are separate defenses that do not directly prevent memory reading."
+    }
+  ]
+}

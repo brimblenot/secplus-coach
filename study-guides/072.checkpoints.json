@@ -1,0 +1,94 @@
+{
+  "checkpoints": [
+    {
+      "section": "The two failure modes to avoid",
+      "type": "mc",
+      "question": "What is the goal of capacity planning in terms of resource provisioning?",
+      "options": {
+        "A": "Provision comfortably above expected peak demand without excessive idle resources.",
+        "B": "Acquire the absolute minimum resources needed to function.",
+        "C": "Match current utilization exactly to avoid any wasted infrastructure.",
+        "D": "Buy as much capacity as the budget allows to ensure no future constraints."
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states the goal is to provision comfortably above peak demand without excessive idle resources, which balances avoiding under-provisioning while also avoiding over-provisioning waste."
+    },
+    {
+      "section": "People capacity: the slowest resource to scale",
+      "type": "text",
+      "question": "Why does SOC staffing require months of advance planning rather than reactive hiring?",
+      "rubric": "A sound answer notes that recruiting and onboarding security analysts takes months, so you cannot staff up reactively when demand suddenly increases; you must plan based on projected demand ahead of time.",
+      "explanation": "The section states recruiting and onboarding takes months and emphasizes you cannot staff up reactively, requiring advance planning based on projected demand rather than current headcount."
+    },
+    {
+      "section": "Technology capacity: compute, network, and security tools",
+      "type": "mc",
+      "question": "At what sustained network utilization threshold do links typically begin to show rising latency and packet loss?",
+      "options": {
+        "A": "Above 50% utilization",
+        "B": "Above 70% utilization",
+        "C": "Above 90% utilization",
+        "D": "Above 85% utilization"
+      },
+      "correct": "B",
+      "explanation": "The section provides the specific rule of thumb that links above approximately 70% sustained utilization develop rising latency and packet loss, degrading both performance and security tool effectiveness."
+    },
+    {
+      "section": "Technology capacity: compute, network, and security tools",
+      "type": "text",
+      "question": "What is the critical capacity requirement for an IDS/IPS, and what happens when it cannot be met?",
+      "rubric": "A sound answer states that an IDS/IPS must process traffic at line rate (as fast as traffic arrives); if it cannot keep up, it either introduces latency or drops packets, creating blind spots where attacks pass undetected."
+    },
+    {
+      "section": "SIEM capacity: the data-volume challenge",
+      "type": "mc",
+      "question": "Which of the following best describes the licensing and capacity challenge for a SIEM during a major security incident?",
+      "options": {
+        "A": "Licensing is subscription-based, and storage capacity automatically expands during incidents.",
+        "B": "Licensing is per-device, and incidents do not significantly affect log volume requirements.",
+        "C": "Licensing is volume-based, and the SIEM must handle dramatic spikes in log volume during incidents.",
+        "D": "Licensing is based on retention period, and incidents reduce the need for long-term storage."
+      },
+      "correct": "C",
+      "explanation": "The section states licensing is often volume-based and during major incidents log volumes spike dramatically, requiring the SIEM to handle peak rather than average ingestion."
+    },
+    {
+      "section": "SIEM capacity: the data-volume challenge",
+      "type": "text",
+      "question": "What is tiered storage for logs, and why is it used in SIEM deployments?",
+      "rubric": "A sound answer explains that tiered storage places recent logs in fast, expensive storage for quick searches while moving older logs to cheaper archive storage; this balances regulatory retention mandates with cost management."
+    },
+    {
+      "section": "Infrastructure capacity: power, cooling, and addresses",
+      "type": "mc",
+      "question": "What does a PUE of 1.0 represent in a data center?",
+      "options": {
+        "A": "A facility with significant inefficiency that needs replacement",
+        "B": "A highly efficient facility performing better than typical industry standards",
+        "C": "An average-efficiency facility requiring moderate improvements",
+        "D": "Theoretical perfection with zero overhead"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that a PUE of 1.0 represents theoretical perfection with zero overhead, and notes that lower PUE values indicate more efficient facilities."
+    },
+    {
+      "section": "Security-specific capacity concerns",
+      "type": "mc",
+      "question": "What is the primary advantage of using cloud-based DDoS mitigation services instead of on-premises infrastructure?",
+      "options": {
+        "A": "They automatically apply patches to all organizational endpoints",
+        "B": "They replace all other security tools in an organization",
+        "C": "They distribute attack traffic across global infrastructure for higher capacity",
+        "D": "They reduce costs compared to on-premises DDoS solutions"
+      },
+      "correct": "C",
+      "explanation": "The section states that cloud-based DDoS services absorb attacks across a global network, offering effectively unlimited capacity, which solves the problem of attack traffic exceeding on-premises mitigation infrastructure."
+    },
+    {
+      "section": "Security-specific capacity concerns",
+      "type": "text",
+      "question": "Why is it important to request cloud service quota increases before limits are hit in production?",
+      "rubric": "A sound answer indicates that providers cap resources like virtual machines, storage, and IP addresses by default, and hitting these limits in production creates an outage or denial of service; proactive requests prevent this disruption."
+    }
+  ]
+}

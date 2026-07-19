@@ -1,0 +1,70 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a race condition is",
+      "type": "mc",
+      "question": "What must be true for a race condition to occur in a program?",
+      "options": {
+        "A": "A network connection fails during program execution",
+        "B": "The program runs on an outdated operating system",
+        "C": "An attacker gains physical access to the server",
+        "D": "Multiple threads or users access the same resource simultaneously"
+      },
+      "correct": "D",
+      "explanation": "The section states race conditions happen in concurrent systems where multiple threads, processes, or users share resources at the same time. Physical access, OS version, and network interruption are not stated as requirements."
+    },
+    {
+      "section": "TOCTOU: the core attack pattern",
+      "type": "text",
+      "question": "In one or two sentences, explain what a TOCTOU vulnerability is and why the gap between the check and use matters.",
+      "rubric": "A sound answer should state that TOCTOU is a vulnerability where a program checks a condition but acts on it later, and an attacker can modify the resource during the gap between check and use, causing the program to act on stale information.",
+      "explanation": "The section defines TOCTOU as checking a condition at one moment then acting later, with the window of vulnerability being the gap where an attacker can modify the checked resource."
+    },
+    {
+      "section": "TOCTOU in web apps: double-spend and overdraft",
+      "type": "mc",
+      "question": "Why does a double-spend attack succeed in an e-commerce system with a race condition?",
+      "options": {
+        "A": "Both users pass inventory checks before either decrement is processed",
+        "B": "The attacker uses an undetected fake payment method",
+        "C": "The server intentionally allows overselling for revenue",
+        "D": "The database automatically rolls back a transaction"
+      },
+      "correct": "A",
+      "explanation": "The section's inventory example shows both requests hit the stock check before either decrement runs, so both checks pass and the item is sold twice. The other options are not stated in the section."
+    },
+    {
+      "section": "Dirty COW: the most famous race condition exploit",
+      "type": "text",
+      "question": "What is Copy-on-Write (COW) memory optimization, and how did Dirty COW exploit it?",
+      "rubric": "A sound answer should explain that COW creates a private writable copy only when a process writes to it, and Dirty COW exploited a race between writing to the private copy and discarding it to trick the kernel into writing to the original read-only file instead.",
+      "explanation": "The section defines COW as creating a private copy only when actually written to, and describes the Dirty COW race as interleaving write and discard operations to fool the kernel into modifying the protected original file."
+    },
+    {
+      "section": "Real-world impact beyond hacking",
+      "type": "mc",
+      "question": "What consequence did the race condition in Mars Rover Spirit cause?",
+      "options": {
+        "A": "Loss of Earth communication for months",
+        "B": "An infinite reboot loop requiring remote patching",
+        "C": "Damage to the rover's navigation system",
+        "D": "Loss of all rover science data records"
+      },
+      "correct": "B",
+      "explanation": "The section states the race condition triggered a file system error causing a reboot, which immediately hit the same error, creating an infinite reboot loop that engineers patched."
+    },
+    {
+      "section": "Defenses: closing the window",
+      "type": "mc",
+      "question": "What is the primary goal that all race condition defenses aim to achieve?",
+      "options": {
+        "A": "Encrypt all shared memory data",
+        "B": "Prevent attackers from accessing the network",
+        "C": "Eliminate gaps between a check and its resulting action",
+        "D": "Slow concurrent operations for predictable timing"
+      },
+      "correct": "C",
+      "explanation": "The section states the core fix is atomicity — making a check and its resulting action a single, indivisible operation with no gap. The other options are not presented as the primary goal."
+    }
+  ]
+}

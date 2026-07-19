@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "What a watering hole attack is",
+      "type": "mc",
+      "question": "In a watering hole attack, what does the attacker compromise?",
+      "options": {
+        "A": "The victim's email server to send malicious messages",
+        "B": "Employee devices before external site access",
+        "C": "A website regularly visited by members of the victim organization",
+        "D": "The victim organization's internal network directly"
+      },
+      "correct": "C",
+      "explanation": "The section defines a watering hole attack as compromising a third-party website that members of the target org are known to visit regularly, then waiting for those users to visit it and become infected."
+    },
+    {
+      "section": "Why attackers choose this technique",
+      "type": "text",
+      "question": "Explain why a watering hole attack can bypass traditional employee security training.",
+      "rubric": "A sound answer states that the user is performing routine, normal behavior they have no reason to question — visiting a trusted site — so security awareness training about phishing and suspicious requests does not apply.",
+      "explanation": "The section explains that watering holes sidestep trained defenses because users are doing something routine and trusted with no reason to question it, unlike phishing or suspicious requests."
+    },
+    {
+      "section": "How the attack unfolds (four stages)",
+      "type": "mc",
+      "question": "In the compromise stage of a watering hole attack, what is a typical vulnerability the attacker might exploit?",
+      "options": {
+        "A": "Poor email filtering at the victim organization",
+        "B": "Lack of encryption on internal network traffic",
+        "C": "Weak passwords on employee computers accessing the site",
+        "D": "An unpatched plugin or SQL injection vulnerability in the site"
+      },
+      "correct": "D",
+      "explanation": "The section states that compromising the site involves finding a vulnerability such as outdated CMS plugins, unpatched WordPress, or SQL injection flaws in the third-party website."
+    },
+    {
+      "section": "Drive-by downloads",
+      "type": "text",
+      "question": "What is required from the user to trigger a drive-by download, and why do zero-days make this attack difficult to prevent?",
+      "rubric": "A sound answer states that no user action beyond visiting the page is required — the malware installs automatically — and zero-days work against even fully updated systems because no patch exists for the unknown vulnerability.",
+      "explanation": "The section defines drive-by downloads as requiring no click or file opening, and explains that zero-days defeat fully patched systems because the vendor has no patch for an unknown flaw."
+    },
+    {
+      "section": "Real-world example: Polish Financial Supervision Authority (2017)",
+      "type": "mc",
+      "question": "How did the attackers make their malicious code difficult for outside security researchers to detect in the Polish FSA case?",
+      "options": {
+        "A": "They encrypted the malicious JavaScript from analysis tools",
+        "B": "They configured code execution only for banking IP ranges",
+        "C": "They removed all attack traces from server logs",
+        "D": "They disguised code as legitimate advertising content"
+      },
+      "correct": "B",
+      "explanation": "The section states that the injected malicious JavaScript was configured to execute only for IP ranges belonging to banks and financial institutions, making the site appear completely normal to outside visitors and researchers."
+    },
+    {
+      "section": "Malvertising",
+      "type": "mc",
+      "question": "What is the key difference between malvertising and a watering hole attack?",
+      "options": {
+        "A": "Malvertising targets ads served by ad networks while a watering hole compromises the website itself",
+        "B": "Malvertising uses drive-by downloads while watering holes require user clicks",
+        "C": "Malvertising only targets financial institutions while watering holes target all organizations",
+        "D": "Malvertising requires the attacker to hack the website while a watering hole uses ad networks"
+      },
+      "correct": "A",
+      "explanation": "The section explains that malvertising injects malicious scripts into ads served by legitimate advertising networks without compromising the site itself, whereas a watering hole requires compromising the website."
+    },
+    {
+      "section": "Strategic web compromise",
+      "type": "text",
+      "question": "What does the term 'strategic web compromise' emphasize, and which groups typically use this technique?",
+      "rubric": "A sound answer states that strategic web compromise emphasizes the deliberate, targeted selection of sites that reliably reach high-value targets, and that APT (Advanced Persistent Threat) groups, often nation-state-sponsored, use this as an alternative to spear phishing.",
+      "explanation": "The section defines strategic web compromise as the threat-intelligence term for watering hole attacks used in targeted espionage, stressing deliberate site selection, and identifies APTs as sophisticated groups that employ this technique."
+    },
+    {
+      "section": "Defenses (defense in depth)",
+      "type": "mc",
+      "question": "Which defense control detects malicious activity *after* an infection has already occurred on an employee's machine?",
+      "options": {
+        "A": "Browser sandboxing that isolates each tab in its own process",
+        "B": "Web filtering that blocks access to known compromised sites",
+        "C": "EDR (Endpoint Detection and Response) that monitors behavioral activity on endpoints",
+        "D": "DNS filtering that blocks resolution of malicious domains"
+      },
+      "correct": "C",
+      "explanation": "The section describes EDR as a behavioral monitoring agent on endpoints that detects post-infection activity such as unexpected processes and unusual network connections, even when initial delivery bypassed perimeter defenses."
+    }
+  ]
+}

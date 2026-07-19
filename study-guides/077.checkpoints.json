@@ -1,0 +1,90 @@
+{
+  "checkpoints": [
+    {
+      "section": "Mobile device hardening",
+      "type": "mc",
+      "question": "Which of the following is the foundational requirement that enables an organization to push and enforce security policies on employee mobile devices?",
+      "options": {
+        "A": "Mobile Device Management (MDM) enrollment",
+        "B": "Disabling Bluetooth and NFC radios",
+        "C": "Full-device encryption configured by the user",
+        "D": "Automatic screen lock timeout settings"
+      },
+      "correct": "A",
+      "explanation": "The section states that MDM is the foundation of mobile hardening because without MDM enrollment, IT has no way to verify or control device security. The other controls are policies delivered through MDM, not prerequisites for it."
+    },
+    {
+      "section": "Workstation hardening",
+      "type": "text",
+      "question": "Why is removing local administrator rights from standard user accounts considered the biggest single win in workstation hardening?",
+      "rubric": "A sound answer explains that most malware succeeds by running with administrator privileges, so stripping that privilege prevents malware from installing software, modifying system files, or disabling security tools.",
+      "explanation": "The section identifies this as the biggest win and gives the reason: most malware depends on admin-level execution to succeed. Removing that privilege blocks the attack vector entirely."
+    },
+    {
+      "section": "Switch hardening",
+      "type": "mc",
+      "question": "What does Dynamic ARP Inspection (DAI) prevent on a hardened switch?",
+      "options": {
+        "A": "Rogue DHCP servers distributing false IP configurations to clients",
+        "B": "ARP poisoning that maps an attacker's MAC address to a legitimate IP address",
+        "C": "Unauthorized devices connecting through unmanaged ports",
+        "D": "VLAN hopping between network segments"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that DAI validates ARP using a snooping table to prevent ARP poisoning, where an attacker maps their MAC to a legitimate IP to intercept traffic."
+    },
+    {
+      "section": "Router hardening",
+      "type": "text",
+      "question": "Explain what a smurf amplification attack is and why disabling IP directed broadcasts prevents it.",
+      "rubric": "A sound answer identifies that IP directed broadcasts allow one packet to trigger broadcast responses from all hosts on a subnet, which attackers exploit; disabling them removes this amplification mechanism.",
+      "explanation": "The section defines smurf attacks as using one packet to trigger broadcast responses from all hosts, which amplifies traffic. Disabling IP directed broadcasts removes the ability to send such broadcasts."
+    },
+    {
+      "section": "Cloud infrastructure hardening",
+      "type": "mc",
+      "question": "Which of the following is a critical security mistake in cloud infrastructure that the study guide specifically warns against?",
+      "options": {
+        "A": "Configuring IAM roles with temporary credentials instead of access keys",
+        "B": "Enabling CloudTrail to log API calls and configuration changes",
+        "C": "Activating AWS GuardDuty to detect indicators of compromise",
+        "D": "Allowing SSH on port 22 from 0.0.0.0/0 in security group rules"
+      },
+      "correct": "D",
+      "explanation": "The section warns that security groups should never allow port 22 (SSH) or 3389 (RDP) from 0.0.0.0/0, comparing it to leaving the data center front door propped open. The other options are security best practices."
+    },
+    {
+      "section": "Server hardening",
+      "type": "mc",
+      "question": "What does Windows Defender Credential Guard protect against?",
+      "options": {
+        "A": "Unauthorized password changes to server administrator accounts",
+        "B": "Kerberos authentication failure from unsynchronized system clocks",
+        "C": "Credential extraction by isolating NTLM hashes and Kerberos tickets in memory",
+        "D": "Attack surface expansion from enabled server roles and features"
+      },
+      "correct": "C",
+      "explanation": "The section states that Credential Guard isolates NTLM hashes and Kerberos tickets in a virtualization-based security container specifically to prevent tools like Mimikatz from extracting them."
+    },
+    {
+      "section": "ICS/SCADA hardening",
+      "type": "text",
+      "question": "Why are compensating controls necessary for ICS/SCADA systems, and give one example from the section.",
+      "rubric": "A sound answer explains that ICS/SCADA systems prioritize availability and often run legacy systems that cannot be patched without halting production, so alternative safeguards are needed instead. Examples include OT DMZ, data diodes, or allowlisting.",
+      "explanation": "The section explains that these systems cannot always be patched because production must stay running. This gap is filled by compensating controls like network segmentation and one-way gateways."
+    },
+    {
+      "section": "IoT hardening",
+      "type": "mc",
+      "question": "Why do IoT devices pose an immediate and widespread security risk when they ship from the factory?",
+      "options": {
+        "A": "They run proprietary operating systems that cannot be hardened or configured",
+        "B": "They frequently ship with identical default usernames and passwords that attackers scan for at scale",
+        "C": "They do not support encryption protocols and cannot be isolated on VLANs",
+        "D": "They automatically connect to the internet without requiring administrator approval"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that IoT devices ship with identical factory credentials and attackers scan for them at scale. This is why changing defaults immediately is the first step."
+    }
+  ]
+}

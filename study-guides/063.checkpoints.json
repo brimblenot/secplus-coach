@@ -1,0 +1,57 @@
+{
+  "checkpoints": [
+    {
+      "section": "IDS vs. IPS: the core difference",
+      "type": "mc",
+      "question": "What is the key operational difference between an IDS and an IPS?",
+      "options": {
+        "A": "An IDS uses signature detection; an IPS uses anomaly detection.",
+        "B": "An IDS requires a network tap; an IPS requires a SPAN port.",
+        "C": "An IDS monitors encrypted traffic; an IPS monitors unencrypted traffic.",
+        "D": "An IDS generates alerts passively; an IPS drops packets in real time."
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that IDS is passive and generates alerts without blocking, while IPS sits inline and drops malicious packets in real time. The other options describe different characteristics not contrasting IDS and IPS directly."
+    },
+    {
+      "section": "False positives and false negatives",
+      "type": "text",
+      "question": "Explain what a false positive is and why it poses a particular risk for an IPS system.",
+      "rubric": "A sound answer states that a false positive is when the system flags legitimate traffic as malicious, and for an IPS this directly blocks legitimate business traffic, causing operational disruption.",
+      "explanation": "The section defines false positive as flagging legitimate traffic and explains that for IPS, this means blocking legitimate business traffic and causing outages, whereas IDS merely wastes analyst time."
+    },
+    {
+      "section": "Three detection methodologies",
+      "type": "mc",
+      "question": "Which detection methodology can identify zero-day attacks?",
+      "options": {
+        "A": "Signature-based detection, because it uses a comprehensive wanted-poster database.",
+        "B": "Anomaly-based detection, because it alerts on deviations from normal behavior patterns.",
+        "C": "Rule-based detection, because it relies on predefined suspicious patterns.",
+        "D": "Heuristic detection, because it applies logic to exact byte-sequence matches."
+      },
+      "correct": "B",
+      "explanation": "The section states that anomaly-based detection can detect zero-days and novel attacks because they deviate from the baseline, while signature-based detection cannot detect unknown threats lacking a signature."
+    },
+    {
+      "section": "Network-based vs. host-based systems",
+      "type": "text",
+      "question": "What is a key advantage of HIDS over NIDS in detecting threats?",
+      "rubric": "A sound answer states that HIDS runs inside the host and can see threats invisible to network tools, such as attacks within a single host, malware using encrypted channels, or insider threats from authenticated users.",
+      "explanation": "The section explains that HIDS agents see threats the network layer cannot: intra-host attacks, encrypted-channel malware, and insider activity because the agent operates inside the encrypted channel."
+    },
+    {
+      "section": "Alert tuning and SIEM integration",
+      "type": "mc",
+      "question": "What role does SIEM play in improving the effectiveness of IDS/IPS alerts?",
+      "options": {
+        "A": "SIEM correlates IDS/IPS events with logs to reduce false alarms and identify real incidents.",
+        "B": "SIEM deploys agents on hosts to improve alert tuning.",
+        "C": "SIEM encrypts IDS/IPS alerts to prevent analyst access.",
+        "D": "SIEM replaces IDS/IPS by using only signature-based rules."
+      },
+      "correct": "A",
+      "explanation": "The section states that SIEM collects and correlates logs from many sources with IDS/IPS events, using that enriched context to separate false alarms from genuine incidents much faster than IDS/IPS alone."
+    }
+  ]
+}

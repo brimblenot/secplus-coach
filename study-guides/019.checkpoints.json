@@ -1,0 +1,57 @@
+{
+  "checkpoints": [
+    {
+      "section": "The X.509 certificate format",
+      "type": "mc",
+      "question": "In an X.509 certificate, which field contains the identity of the certificate owner?",
+      "options": {
+        "A": "Serial Number",
+        "B": "Issuer",
+        "C": "Validity Period",
+        "D": "Subject"
+      },
+      "correct": "D",
+      "explanation": "The Subject field holds the identity of the cert owner, such as a domain name or organization name. The Issuer field identifies the CA that signed it, not the owner."
+    },
+    {
+      "section": "Certificate validation levels",
+      "type": "text",
+      "question": "Briefly explain what distinguishes DV validation from EV validation in terms of what the CA checks.",
+      "rubric": "A sound answer states that DV verifies only domain control (e.g., via email or DNS), while EV performs full verification of legal, physical, and operational existence per CA/Browser Forum rules. DV is faster and cheaper; EV carries the strongest identity assurance.",
+      "explanation": "The section explicitly contrasts DV as domain-control-only and automated versus EV as requiring verification of full legal, physical, and operational existence. This distinction is the core difference in validation rigor."
+    },
+    {
+      "section": "Wildcard and SAN certificates",
+      "type": "mc",
+      "question": "A wildcard certificate for `*.example.com` will cover which of the following?",
+      "options": {
+        "A": "All domains ending with example.com across the entire internet",
+        "B": "Single-level subdomains like www.example.com and mail.example.com",
+        "C": "The apex domain example.com automatically",
+        "D": "Any subdomain at any depth, such as sub.sub.example.com"
+      },
+      "correct": "B",
+      "explanation": "A wildcard cert covers any single-level subdomain but does not cover the apex domain unless explicitly listed, and does not cover deeper levels like sub.sub.example.com."
+    },
+    {
+      "section": "Specialized certificate types",
+      "type": "mc",
+      "question": "Which certificate type is used to digitally sign executables and enable the OS to display the publisher's organization name instead of 'Unknown Publisher'?",
+      "options": {
+        "A": "Code signing certificates",
+        "B": "Server certificates",
+        "C": "Client certificates",
+        "D": "S/MIME certificates"
+      },
+      "correct": "A",
+      "explanation": "Code signing certificates are issued to developers and organizations to sign executables and packages; when verified at install time, they allow the OS to display the org name rather than 'Unknown Publisher'."
+    },
+    {
+      "section": "Certificate hierarchy: root, intermediate, and CSR",
+      "type": "text",
+      "question": "Explain why root CAs remain offline and what role intermediate CAs play in managing this separation.",
+      "rubric": "A sound answer states that root CAs stay offline to protect their private keys from compromise, because a compromised root CA would allow fraudulent certificates for any domain. Intermediate CAs perform day-to-day signing, so if one is compromised, only that intermediate's cert needs revocation while the root and other intermediates remain unaffected.",
+      "explanation": "The section explicitly describes root CAs going offline to limit exposure and explains that intermediates do live signing to contain the blast radius of any compromise to a single intermediate."
+    }
+  ]
+}

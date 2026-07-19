@@ -1,0 +1,97 @@
+{
+  "checkpoints": [
+    {
+      "section": "Least privilege: the universal baseline",
+      "type": "text",
+      "question": "Explain why periodic access reviews are necessary under the principle of least privilege.",
+      "rubric": "A sound answer states that permissions tend to creep upward over time as roles change, so reviews are needed to remove unneeded access that has accumulated.",
+      "explanation": "The section explicitly states that permissions creep upward over time as roles change, making periodic reviews required to claw back unneeded access."
+    },
+    {
+      "section": "Mandatory Access Control (MAC)",
+      "type": "mc",
+      "question": "In Bell-LaPadula model, what does the No-Write-Down rule prevent?",
+      "options": {
+        "A": "Users from writing secrets down to lower classification levels",
+        "B": "Users from modifying their own security labels",
+        "C": "Users from accessing resources without admin approval",
+        "D": "Users from reading classified files above their clearance level"
+      },
+      "correct": "A",
+      "explanation": "The section states No-Write-Down prevents leaking secrets down to lower classification levels, directly protecting confidentiality."
+    },
+    {
+      "section": "Discretionary Access Control (DAC)",
+      "type": "mc",
+      "question": "What is the primary weakness of DAC as described?",
+      "options": {
+        "A": "It cannot be implemented on modern operating systems",
+        "B": "It is too complex for enterprise environments to manage",
+        "C": "It relies entirely on users making good security decisions without system enforcement",
+        "D": "It requires administrators to approve every access decision"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states DAC's weakness is that it relies entirely on users making good security decisions, and over-sharing is a policy violation no system will catch."
+    },
+    {
+      "section": "Role-Based Access Control (RBAC)",
+      "type": "text",
+      "question": "What is role explosion in RBAC, and why is it a concern?",
+      "rubric": "A sound answer identifies role explosion as creating too many fine-grained roles, which can make RBAC as complex as per-user permissions and defeat its management advantage.",
+      "explanation": "The section defines role explosion as too many fine-grained roles that make RBAC as complex as per-user permissions, and advises keeping the role set minimal."
+    },
+    {
+      "section": "Attribute-Based Access Control (ABAC)",
+      "type": "mc",
+      "question": "In ABAC, what three categories of attributes can influence an access decision?",
+      "options": {
+        "A": "User role, resource classification, and administrator approval",
+        "B": "Department, job title, and security clearance level",
+        "C": "Time of day, network location, and device type",
+        "D": "Subject attributes, resource attributes, and environment attributes"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly lists subject attributes, resource attributes, and environment attributes as the three categories ABAC evaluates for access decisions."
+    },
+    {
+      "section": "Rule-based access control",
+      "type": "mc",
+      "question": "Which statement best describes how rule-based access control differs from identity-based models?",
+      "options": {
+        "A": "Rules require users to possess specific job titles or roles",
+        "B": "Rules apply explicit conditions to resources regardless of who the user is",
+        "C": "Rules are evaluated by administrators rather than automated systems",
+        "D": "Rules combine multiple attributes to make fine-grained decisions"
+      },
+      "correct": "B",
+      "explanation": "The section states that rule-based access control applies explicit rules to resources regardless of who the user is — identity is irrelevant, only the rule matters."
+    },
+    {
+      "section": "Policy-Based Access Control (PBAC)",
+      "type": "text",
+      "question": "What is the primary purpose of Policy-Based Access Control in an organization?",
+      "rubric": "A sound answer indicates that PBAC centralizes access policy in one engine to ensure consistent and auditable decisions across many applications, often blending RBAC and ABAC.",
+      "explanation": "The section defines PBAC as centralizing access policy in one engine for consistency and auditability across applications."
+    },
+    {
+      "section": "Organizational access controls",
+      "type": "mc",
+      "question": "What is the key difference between separation of duties and dual control?",
+      "options": {
+        "A": "Separation of duties divides sequential steps among different people; dual control requires two people to act simultaneously",
+        "B": "Separation of duties requires three people while dual control requires only two",
+        "C": "Separation of duties prevents fraud; dual control prevents errors",
+        "D": "Separation of duties applies to high-risk tasks; dual control applies to routine operations"
+      },
+      "correct": "A",
+      "explanation": "The section explains that separation of duties splits a process across multiple people sequentially, while dual control requires two authorized individuals to act simultaneously for a sensitive operation to proceed."
+    },
+    {
+      "section": "Organizational access controls",
+      "type": "text",
+      "question": "How does mandatory vacation specifically help detect insider fraud?",
+      "rubric": "A sound answer states that mandatory vacation forces the perpetrator to be absent, which breaks ongoing fraud schemes that require the fraudster's presence to remain hidden.",
+      "explanation": "The section explains that mandatory vacation is designed to expose fraud requiring the perpetrator to be present to hide it, as many frauds unravel when the fraudster cannot be there."
+    }
+  ]
+}

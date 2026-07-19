@@ -1,0 +1,129 @@
+{
+  "checkpoints": [
+    {
+      "section": "What makes supply chain attacks dangerous",
+      "type": "mc",
+      "question": "What is a transitive dependency?",
+      "options": {
+        "A": "A library inherited through another library you use directly",
+        "B": "A vendor relationship requiring transitive trust",
+        "C": "A security patch applied across all vendor systems",
+        "D": "A library your code directly imports and uses"
+      },
+      "correct": "A",
+      "explanation": "The section defines transitive dependency as a library your code doesn't directly use but inherits through another library, and notes you may not even know it exists."
+    },
+    {
+      "section": "Log4Shell — a dependency gone wrong",
+      "type": "mc",
+      "question": "What CVE severity score did Log4Shell receive?",
+      "options": {
+        "A": "8.9, the second-highest possible severity rating",
+        "B": "9.8, critical but requiring network access to exploit",
+        "C": "10.0, the maximum severity score",
+        "D": "7.5, indicating high risk but with some mitigating factors"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states Log4Shell received a CVSS score of 10.0 — the maximum — because it was remotely exploitable, required no authentication or user interaction, and had full impact on confidentiality, integrity, and availability."
+    },
+    {
+      "section": "SolarWinds — the canonical build-pipeline compromise",
+      "type": "text",
+      "question": "Describe how attackers were able to distribute malicious code to SolarWinds customers without raising suspicion.",
+      "rubric": "A sound answer explains that attackers infiltrated the build pipeline, so their code was compiled and signed with SolarWinds' legitimate certificate before being shipped as a routine update, allowing it to pass through trusted channels and reach ~18,000 customers.",
+      "explanation": "The section states attackers inserted code into the build pipeline, which then compiled, signed, and shipped the malicious code as a legitimate update using SolarWinds' own cryptographic certificate."
+    },
+    {
+      "section": "MSPs — the multiplier attack vector",
+      "type": "mc",
+      "question": "In the Kaseya VSA attack, what type of vulnerability did attackers exploit?",
+      "options": {
+        "A": "A configuration error in the MSP's default settings",
+        "B": "A weak credential used by multiple MSP clients",
+        "C": "A known vulnerability that had a patch available but was not yet deployed",
+        "D": "A previously unknown vulnerability with no patch available"
+      },
+      "correct": "D",
+      "explanation": "The section identifies the vulnerability as a zero-day, defined as a previously unknown vulnerability with no patch available."
+    },
+    {
+      "section": "Hardware supply chain risks",
+      "type": "mc",
+      "question": "Which of the following is an example of a hardware supply chain risk that was documented in a 2022 DHS action?",
+      "options": {
+        "A": "Supply chain delays caused by port congestion",
+        "B": "Over one billion dollars in counterfeit components sold via shell companies",
+        "C": "Hardware trojans implanted in motherboards during manufacturing",
+        "D": "Malicious firmware installed on network equipment at factories"
+      },
+      "correct": "B",
+      "explanation": "The section states a 2022 DHS action caught a reseller who sold over one billion dollars of counterfeit Cisco gear across approximately thirty shell companies over nearly a decade."
+    },
+    {
+      "section": "SBOM — knowing what's in your software",
+      "type": "text",
+      "question": "Why did organizations with an SBOM have a significant advantage during the Log4Shell incident compared to those without one?",
+      "rubric": "A sound answer indicates that organizations with SBOMs could identify exposure immediately and find vulnerable components quickly, whereas organizations without SBOMs spent days or weeks in manual analysis.",
+      "explanation": "The section contrasts response times: those with SBOMs identified Log4Shell exposure immediately, while those without spent days or weeks in manual analysis."
+    },
+    {
+      "section": "Dependency confusion",
+      "type": "mc",
+      "question": "How does a dependency confusion attack exploit package manager behavior?",
+      "options": {
+        "A": "Compromising developer credentials for public repository access",
+        "B": "Registering a public package with a private package's name and higher version number",
+        "C": "Intercepting traffic between build systems and package repositories",
+        "D": "Registering a malicious private package harder to maintain than public versions"
+      },
+      "correct": "B",
+      "explanation": "The section explains that an attacker registers a public package with the same name as an organization's private package but with a higher version number, causing the build system to fetch the malicious public version."
+    },
+    {
+      "section": "Code provenance and integrity",
+      "type": "mc",
+      "question": "What does Cosign do in the Sigstore ecosystem?",
+      "options": {
+        "A": "It signs and verifies container images before deployment",
+        "B": "It encrypts container images before they are deployed to production",
+        "C": "It ensures that build outputs match their source code exactly",
+        "D": "It manages cryptographic keys for Git repository access"
+      },
+      "correct": "A",
+      "explanation": "The section identifies Cosign as the component of Sigstore for signing and verifying container images before deployment."
+    },
+    {
+      "section": "Vendor risk management",
+      "type": "mc",
+      "question": "What distinguishes SOC 2 Type 2 from a point-in-time security audit?",
+      "options": {
+        "A": "Type 2 audits cost significantly less than point-in-time assessments",
+        "B": "Type 2 is legally required whereas point-in-time audits are optional",
+        "C": "Type 2 evaluates a time period while point-in-time is a single moment",
+        "D": "Type 2 examines financial controls while point-in-time covers security"
+      },
+      "correct": "C",
+      "explanation": "The section defines SOC 2 Type 2 as an independent third-party audit of a vendor's security controls over a period of time, giving stronger assurance than a one-time snapshot."
+    },
+    {
+      "section": "Software composition analysis and scanning",
+      "type": "mc",
+      "question": "What does SCA (Software Composition Analysis) primarily do?",
+      "options": {
+        "A": "Verifies that all software artifacts are signed by trusted developers",
+        "B": "Monitors vendor security questionnaires and compliance certifications",
+        "C": "Analyzes network traffic to detect unauthorized third-party connections",
+        "D": "Scans your application's dependencies and flags known vulnerabilities"
+      },
+      "correct": "D",
+      "explanation": "The section states that SCA tools scan your application's dependencies and flag known vulnerabilities, serving as the primary technical control for software supply chain risk."
+    },
+    {
+      "section": "The Target breach — every principle in one case",
+      "type": "text",
+      "question": "What fundamental supply chain security control failures enabled the attacker to move from the HVAC vendor's network to Target's POS systems?",
+      "rubric": "A sound answer identifies that the HVAC vendor's network segment was not segregated from Target's POS network, allowing lateral movement once the vendor was compromised.",
+      "explanation": "The section states that the HVAC vendor's network segment was not segregated from Target's POS network, which enabled attackers to move laterally after compromising the vendor's access."
+    }
+  ]
+}

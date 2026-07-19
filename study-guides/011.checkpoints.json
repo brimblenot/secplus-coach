@@ -1,0 +1,103 @@
+{
+  "checkpoints": [
+    {
+      "section": "Allow lists vs. deny lists",
+      "type": "mc",
+      "question": "Which control strategy blocks everything by default and only allows pre-approved items?",
+      "options": {
+        "A": "Deny list, which is easier to administer but reactive to unknown threats",
+        "B": "Allow list, which requires high administrative burden but blocks unknown malware",
+        "C": "Antivirus signature matching, which maintains a guest list of safe applications",
+        "D": "EDR platform, which permits all items unless explicitly prohibited by policy"
+      },
+      "correct": "B",
+      "explanation": "An allow list explicitly names permitted items and blocks everything else by default, making it very effective against unknown malware but requiring maintenance of every approved application. The section contrasts this with deny lists, which are reactive."
+    },
+    {
+      "section": "Restricted activities within a change window",
+      "type": "text",
+      "question": "A technician has an approved change window to upgrade network switches. What should happen if they discover the upgrade also requires a firewall rule modification?",
+      "rubric": "A sound answer states that significant unexpected changes must be escalated to the change authority for approval rather than implemented unilaterally; only minor directly necessary ancillary changes may be made and documented in the change record.",
+      "explanation": "The section states that a change window authorizes only the exact documented scope in the RFC. Significant unexpected changes must be escalated, not implemented without approval."
+    },
+    {
+      "section": "Downtime planning and blue-green deployment",
+      "type": "mc",
+      "question": "In a 24×7 environment where downtime is unacceptable, what does a blue-green deployment allow an organization to do?",
+      "options": {
+        "A": "Automatically roll back any changes that fail within seconds of detection",
+        "B": "Maintain two separate infrastructure versions to handle peak traffic loads",
+        "C": "Apply changes to one environment while traffic continues on the other, then switch if validation passes",
+        "D": "Schedule downtime notifications to users before applying changes during maintenance windows"
+      },
+      "correct": "C",
+      "explanation": "Blue-green deployment maintains two identical environments; the change is applied to the inactive one while live traffic runs on the other, then traffic switches after validation, enabling near-instant rollback if needed."
+    },
+    {
+      "section": "Version control",
+      "type": "text",
+      "question": "Explain how version control and Infrastructure as Code (IaC) together support both change tracking and risk mitigation in technical change management.",
+      "rubric": "A sound answer states that version control records every change with author identity, timestamp, and description to create an audit trail, enables rollback to prior commits if problems occur, and IaC extends these same traceability and reversibility benefits to infrastructure resources defined in config files.",
+      "explanation": "The section explains that version control provides audit trails and enables rollback, and IaC applies these same principles to infrastructure rather than just application code."
+    },
+    {
+      "section": "Dependency management",
+      "type": "mc",
+      "question": "A development team is updating a core authentication library used by six other microservices. Which dependencies must they account for before deploying the change?",
+      "options": {
+        "A": "Only upstream dependencies, because the library is being changed, not the services calling it",
+        "B": "External APIs only, because internal service dependencies are managed separately",
+        "C": "Both upstream dependencies the library relies on and downstream dependencies that rely on the library",
+        "D": "Only downstream dependencies, because the six microservices rely on the library being updated"
+      },
+      "correct": "D",
+      "explanation": "Downstream dependencies are services that rely on the changed component—in this case, the six microservices that depend on the authentication library. The section defines downstream as services that rely on the changed component."
+    },
+    {
+      "section": "Legacy application challenges",
+      "type": "mc",
+      "question": "A legacy application runs on a deprecated OS and receives no vendor patches. What is the primary reason compensating controls are used instead of patching?",
+      "options": {
+        "A": "Patches no longer exist and modifying the system risks breaking critical functionality",
+        "B": "Compensating controls are more cost-effective than vendor support",
+        "C": "The system requires microsegmentation before patches can be safely applied",
+        "D": "Vendor patches would introduce vulnerabilities that cannot be reversed"
+      },
+      "correct": "A",
+      "explanation": "The section states that legacy applications are no longer actively supported by vendors, patches no longer exist, and direct modification is risky. Compensating controls like application-layer firewalls and microsegmentation reduce risk without changing the system itself."
+    },
+    {
+      "section": "Environment separation",
+      "type": "mc",
+      "question": "Which environment serves as a final validation in a near-identical replica of production before changes go live?",
+      "options": {
+        "A": "Sandbox environment, which is used only for malware research and patch testing",
+        "B": "Development environment, where code is initially written and tested with loose controls",
+        "C": "Testing/QA environment, where formal functional and integration testing occurs",
+        "D": "Staging/Pre-production environment, which maintains high control and mirrors production closely"
+      },
+      "correct": "D",
+      "explanation": "The section's environment table identifies Staging/Pre-production as the final validation environment in a near-identical replica of production with high control level, before the strictest Production environment."
+    },
+    {
+      "section": "CI/CD pipeline security",
+      "type": "mc",
+      "question": "Which security testing tool scans third-party libraries and open-source components for known vulnerabilities?",
+      "options": {
+        "A": "SCA, which identifies vulnerabilities in third-party libraries and components",
+        "B": "DAST, which simulates attacks against a running application",
+        "C": "SBOM, which records every commit author, timestamp, and change description",
+        "D": "SAST, which analyzes source code before compilation"
+      },
+      "correct": "A",
+      "explanation": "The section's tool table identifies SCA (Software Composition Analysis) as the tool that scans third-party libraries and open-source components for known vulnerabilities."
+    },
+    {
+      "section": "Configuration drift",
+      "type": "text",
+      "question": "What causes configuration drift and why is it a security concern?",
+      "rubric": "A sound answer states that configuration drift occurs when small unintentional changes accumulate outside the formal change management process, and it creates undetected security gaps and makes systems difficult to audit because actual configuration deviates from the approved baseline.",
+      "explanation": "The section defines drift as gradual deviation from the documented baseline through changes made outside formal change management, and notes it creates security gaps and auditing difficulties."
+    }
+  ]
+}
