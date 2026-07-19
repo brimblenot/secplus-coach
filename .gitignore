@@ -3,3 +3,6 @@ node_modules/
 data/
 .env.local
 *.db
+
+# Copyrighted lecture transcripts — excluded from the public repo (supply your own to run)
+transcripts/
