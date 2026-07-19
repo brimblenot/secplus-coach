@@ -3,75 +3,93 @@
     {
       "section": "Why update channels are high-value targets",
       "type": "mc",
-      "question": "What is the primary reason a malicious update attack is effective?",
+      "question": "According to the section, what makes an update prompt appearing inside an application when you first open it more trustworthy than a popup while browsing a random website?",
       "options": {
-        "A": "Operating systems disable firewalls during update installation",
-        "B": "Users trust updates from safe channels and install them without hesitation",
-        "C": "Updates are always unsigned and never verified by security tools",
-        "D": "Certificate authorities refuse to sign legitimate software updates"
+        "A": "The application verifies user identity before showing the prompt, while website popups cannot perform verification",
+        "B": "The application prompt includes a valid digital signature, unlike website popups which lack this protection",
+        "C": "The application prompt uses encryption protocols that are stronger than those used by website popups",
+        "D": "The prompt appears inside the application when opened, whereas a random website popup is a common social engineering red flag"
       },
-      "correct": "B",
-      "explanation": "The section defines the chain of trust: users have been conditioned to install updates, security tools often apply less scrutiny to update traffic, and the update arrives through a channel that has worked safely many times before."
+      "correct": "D",
+      "explanation": "The section explicitly marks a prompt inside the application as reasonable trust and a popup while browsing as a red flag, indicating source legitimacy is tied to where the prompt appears."
     },
     {
       "section": "The SolarWinds Orion attack (2020)",
-      "type": "text",
-      "question": "Explain how SUNBURST was able to pass authenticity checks despite being malicious code.",
-      "rubric": "A sound answer states that SUNBURST was compiled into the legitimate binary as part of the build pipeline compromise, and the malicious package was then signed by SolarWinds' real code-signing certificate, so it passed standard authenticity checks.",
-      "explanation": "The section explains that attackers compromised the build pipeline, inserted the backdoor into the source code before compilation, and the resulting binary was signed with SolarWinds' legitimate certificate, making it appear authentic."
+      "type": "mc",
+      "question": "What did the SUNBURST backdoor do to evade detection by sandbox tools during the SolarWinds attack?",
+      "options": {
+        "A": "It encrypted all its network traffic to prevent analysis tools from reading it",
+        "B": "It deleted security analysis tools from infected machines before activating",
+        "C": "It stayed dormant for approximately two weeks to escape sandbox observation periods",
+        "D": "It disguised itself as legitimate Orion network communication in all network logs"
+      },
+      "correct": "C",
+      "explanation": "The section states that SUNBURST stayed dormant for about two weeks to escape sandbox tools, which only observe behavior for short periods."
     },
     {
       "section": "ASUS ShadowHammer (2019)",
       "type": "mc",
-      "question": "How did the ASUS ShadowHammer malware make detection difficult?",
+      "question": "How did the ASUS ShadowHammer malware limit its active payload to only certain infected machines?",
       "options": {
-        "A": "It remained dormant for weeks to avoid automated alerts",
-        "B": "It disabled antivirus software upon installation",
-        "C": "It encrypted network traffic to evade security monitoring",
-        "D": "It checked MAC addresses and only activated on specific targets"
+        "A": "It checked each infected machine's MAC address against a hardcoded list of approximately six hundred specific target machines",
+        "B": "It required the user to enter a PIN code before activating any malicious functions on the system",
+        "C": "It scanned the network for specific firewall configurations and security settings before executing code",
+        "D": "It verified that the machine's IP address matched a list of approved government networks before activating"
       },
-      "correct": "D",
-      "explanation": "The section states that the malware checked each infected machine's MAC address against a hardcoded list of ~600 specific targets; only those machines received the active payload, making detection extremely difficult for others."
+      "correct": "A",
+      "explanation": "The section explains that the malware checked each infected machine's MAC address against a hardcoded list of about 600 specific targets to determine which machines received the active payload."
     },
     {
       "section": "3CX supply chain attack (2023) — second-order compromise",
-      "type": "text",
-      "question": "Describe how the 3CX attack cascaded through two different supply chains.",
-      "rubric": "A sound answer explains that attackers first compromised X_TRADER financial software, a 3CX employee then installed it and was compromised, which gave attackers access to 3CX's development environment, allowing them to trojanize 3CX's updates to customers.",
-      "explanation": "The section traces the attack from X_TRADER compromise, through a 3CX employee's installation of it, to infiltration of 3CX's development environment, finally to trojanized VoIP app builds distributed to customers."
+      "type": "mc",
+      "question": "In the 3CX supply chain attack, which software was compromised first, and how did the attackers use it to reach 3CX customers?",
+      "options": {
+        "A": "A third-party VoIP service was compromised first, which 3CX relied on for its update infrastructure",
+        "B": "X_TRADER financial trading software was compromised first, then used as a foothold to infiltrate 3CX's development environment",
+        "C": "A customer's endpoint security tool was compromised first, allowing access to 3CX build systems",
+        "D": "A 3CX network module was compromised first, then used to infiltrate X_TRADER's development servers"
+      },
+      "correct": "B",
+      "explanation": "The section states that X_TRADER was compromised first; a 3CX employee installed it, giving attackers a foothold to infiltrate 3CX's development environment, which then trojanized 3CX's VoIP app."
     },
     {
       "section": "Dependency confusion and package registry attacks",
       "type": "mc",
-      "question": "What is the core mechanism of a dependency confusion attack?",
+      "question": "What does a package manager do when both a private internal registry and a public registry are configured with packages of the same name?",
       "options": {
-        "A": "An attacker publishes a malicious package with a higher version to a public registry",
-        "B": "An attacker intercepts traffic between developer and registry",
-        "C": "An attacker steals maintainer credentials and uploads malware",
-        "D": "An attacker modifies source code in the public repository"
+        "A": "It always chooses the private registry to protect and prioritize internal proprietary code",
+        "B": "It selects based on version number, allowing attackers to publish higher versions on public registries to gain priority",
+        "C": "It prompts the user to manually choose which registry to use for the package installation",
+        "D": "It downloads from both registries and compares the file hashes before selecting which one to use"
       },
-      "correct": "A",
-      "explanation": "The section defines dependency confusion as exploiting how package managers resolve names when both private and public registries are configured; the attacker publishes to the public registry with a higher version number, causing the package manager to prefer and install the malicious one."
+      "correct": "B",
+      "explanation": "The section explains that dependency confusion exploits how package managers prefer higher version numbers; an attacker publishes a malicious package with a higher version to the public registry, causing the package manager to install it instead of the private one."
     },
     {
       "section": "Malicious browser extension updates",
-      "type": "text",
-      "question": "Why does a malicious browser extension update pose a particular risk compared to a fresh malicious extension installation?",
-      "rubric": "A sound answer states that an extension update delivers malicious functionality through the browser's update mechanism without requiring the user to re-approve permissions, because the extension already possesses broad permissions from its initial install.",
-      "explanation": "The section explains that extensions already have broad permissions approved at install time; when the extension is updated, the user does not re-approve permissions, allowing malicious new functionality to execute with existing privileges."
+      "type": "mc",
+      "question": "Why can a malicious browser extension update deliver new malicious functionality without requiring the user to re-approve permissions?",
+      "options": {
+        "A": "Updates execute under the broad permissions already granted during initial installation without re-approval",
+        "B": "Extension updates occur at the operating system level, completely bypassing browser security controls",
+        "C": "Browser extensions use a separate update mechanism that does not validate digital signatures on updates",
+        "D": "Users cannot revoke permissions from an extension once it has been installed on the system"
+      },
+      "correct": "A",
+      "explanation": "The section states that extensions request broad permissions at install time and updates use the browser's update mechanism without requiring the user to re-approve permissions because the extension already has them."
     },
     {
       "section": "Defenses across the software supply chain",
       "type": "mc",
-      "question": "Which defense detects tampering in a downloaded file even when the vendor's digital signature is valid?",
+      "question": "What does cryptographic hash verification protect against that code signing alone may not prevent?",
       "options": {
-        "A": "Code signing by the software vendor",
-        "B": "Binary authorization policies in the execution environment",
-        "C": "Cryptographic hash verification against a separately published hash",
-        "D": "Dependency scanning tools that check for known vulnerabilities"
+        "A": "It prevents attackers from obtaining or stealing the vendor's code-signing cryptographic keys",
+        "B": "It ensures that the vendor's build pipeline has not been compromised by injected malicious code",
+        "C": "It detects file tampering by comparing the downloaded file's SHA-256 hash to a separately published hash value",
+        "D": "It verifies that the software does not contain any known vulnerabilities listed in CVE databases"
       },
       "correct": "C",
-      "explanation": "The section states that cryptographic hash verification compares a downloaded file's SHA-256 hash against a hash the vendor published through a separate channel; this detects tampering even when a signature is valid, addressing cases where signing keys may be stolen."
+      "explanation": "The section states that cryptographic hash verification compares a downloaded file's SHA-256 hash against a hash published through a separate channel, detecting tampering even when a signature is valid."
     }
   ]
 }

@@ -3,88 +3,106 @@
     {
       "section": "What a distributed ledger actually is",
       "type": "mc",
-      "question": "In a distributed ledger, how is agreement reached about which version of the ledger is correct?",
+      "question": "In a distributed ledger, how is agreement reached on which version of the ledger is correct?",
       "options": {
         "A": "A central authority reviews all changes and approves them",
-        "B": "An agreed-upon consensus mechanism is used by the network",
-        "C": "Whichever node has the fastest internet connection wins",
-        "D": "The oldest node on the network makes all final decisions"
+        "B": "The node with the most computing power decides the correct version",
+        "C": "Through a consensus mechanism, an agreed-upon process used by the network",
+        "D": "Each node independently verifies and then deletes conflicting copies"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states that 'changes must be approved by the network through a consensus mechanism — an agreed-upon process for deciding which version of the ledger is correct.' No single authority controls it."
+      "correct": "C",
+      "explanation": "The section explicitly defines a consensus mechanism as the agreed-upon process for deciding which version of the ledger is correct, replacing any single authority."
     },
     {
       "section": "How blocks chain together",
-      "type": "text",
-      "question": "Explain why changing a single transaction in an old block would be detected by other nodes on the network.",
-      "rubric": "A sound answer explains that altering a transaction changes that block's hash, which breaks the cryptographic pointer stored in the next block, causing that block's hash to change, and cascading through all subsequent blocks until the hashes no longer match other nodes' copies.",
-      "explanation": "The section describes how the hash of the previous block is stored as a cryptographic link in the next block, so any transaction change propagates broken pointers through the entire chain."
+      "type": "mc",
+      "question": "What happens to subsequent blocks if a transaction in block #500 is altered?",
+      "options": {
+        "A": "Only block #500 is affected and other nodes automatically reject it without any further impact",
+        "B": "Block #500's hash changes, breaking the pointer in block #501, causing its hash to change as well",
+        "C": "The timestamp in block #501 is updated to reflect the change made in block #500",
+        "D": "The nonce field is recalculated across all blocks to restore consistency in the chain"
+      },
+      "correct": "B",
+      "explanation": "The section explains that altering a transaction in block #500 changes that block's hash, which breaks the cryptographic pointer stored in block #501, causing its hash to change, and this cascades through all subsequent blocks."
     },
     {
       "section": "Consensus mechanisms",
       "type": "mc",
-      "question": "What percentage of the network's hash rate must an attacker control to execute a 51% attack on a Proof of Work blockchain?",
+      "question": "In a Proof of Work network, what must an attacker control to successfully carry out a 51% attack?",
       "options": {
-        "A": "More than 50% of the total hash rate",
-        "B": "Approximately 33% of the total hash rate",
-        "C": "Exactly 50% of the total hash rate",
-        "D": "At least 25% of the total hash rate"
+        "A": "More than half of all staked collateral locked by validators",
+        "B": "More than half of all cryptocurrency currently in circulation",
+        "C": "The majority of nodes physically located in one geographic region",
+        "D": "More than half of the total hash rate of the network"
       },
-      "correct": "A",
-      "explanation": "The section states that 'when a single attacker controls more than half of a PoW network's total hash rate, they can rewrite history and double-spend.'"
+      "correct": "D",
+      "explanation": "The section defines a 51% attack as occurring when an attacker controls more than half of a PoW network's total hash rate, enabling them to rewrite history and double-spend."
     },
     {
       "section": "Public vs. private blockchains",
       "type": "mc",
-      "question": "Why are private blockchains typically faster than public blockchains?",
+      "question": "What is the main trade-off between public and private blockchains?",
       "options": {
-        "A": "They allow administrators to skip consensus entirely",
-        "B": "They do not require any cryptographic hashing",
-        "C": "They require fewer, trusted nodes to reach consensus",
-        "D": "They use more powerful computers than public chains"
+        "A": "Public blockchains require global consensus and are slower, while private blockchains use fewer trusted nodes and are faster",
+        "B": "Public blockchains store all data encrypted, while private blockchains store data in plaintext",
+        "C": "Public blockchains use Proof of Work, while private blockchains must use Proof of Stake",
+        "D": "Public blockchains require payment to join, while private blockchains are free to enter"
       },
-      "correct": "C",
-      "explanation": "The table indicates that private blockchains are 'faster — fewer, trusted nodes' compared to public blockchains that need 'global consensus.'"
+      "correct": "A",
+      "explanation": "The section's table shows that public blockchains are slower due to the need for global consensus, while private blockchains are faster because fewer trusted nodes are involved."
     },
     {
       "section": "Smart contracts",
-      "type": "text",
-      "question": "What is the main security risk of smart contracts, and why is it a concern?",
-      "rubric": "A sound answer states that smart contract code is immutable once deployed, so any bugs or vulnerabilities cannot be patched and become permanent exploits.",
-      "explanation": "The section explicitly warns that smart contract bugs are immutable once deployed and have caused hundreds of millions of dollars in losses."
+      "type": "mc",
+      "question": "Why is discovering a bug in a smart contract's code particularly dangerous after deployment?",
+      "options": {
+        "A": "The contract will automatically delete itself to prevent further damage to the network",
+        "B": "The code is immutable once deployed, so the bug cannot be patched and remains exploitable",
+        "C": "The bug will cause the blockchain to fork into two separate chains",
+        "D": "All transactions using the contract are reversed and refunded to all users immediately"
+      },
+      "correct": "B",
+      "explanation": "The section states that smart contract bugs are immutable once deployed, meaning they cannot be patched, and exploitable flaws have resulted in significant losses."
     },
     {
       "section": "Security applications of blockchain",
       "type": "mc",
-      "question": "What does Certificate Transparency require all publicly trusted CAs to do?",
+      "question": "In Certificate Transparency, what do domain owners use to detect unauthorized certificate issuance?",
       "options": {
-        "A": "Verify the identity of every website before issuing a certificate",
-        "B": "Keep all certificate data encrypted and private from domain owners",
-        "C": "Delete all issued certificates after one year",
-        "D": "Submit every certificate they issue to public, append-only CT logs"
+        "A": "They implement a private blockchain that CAs must use instead of public CT logs",
+        "B": "They require all CAs to obtain written approval before submitting certificates to public logs",
+        "C": "They monitor CT logs using tools like Certstream to detect newly logged certificates in real time",
+        "D": "They contact Certificate Authorities directly to request a list of all issued certificates"
       },
-      "correct": "D",
-      "explanation": "The section states that Certificate Transparency requires 'all publicly trusted Certificate Authorities to submit every certificate they issue to public, append-only CT logs built on Merkle trees.'"
+      "correct": "C",
+      "explanation": "The section explains that domain owners monitor logs (for example via Certstream, a tool providing a real-time feed of newly logged certificates) to detect unauthorized certificate issuance."
     },
     {
       "section": "Ransomware and cryptocurrency",
       "type": "mc",
-      "question": "What privacy technique does Monero use to prevent linking transactions to a recipient's public address?",
+      "question": "What is the key difference between Bitcoin and Monero in terms of anonymity?",
       "options": {
-        "A": "Ring signatures that mix multiple transactions",
-        "B": "One-time stealth addresses per transaction",
-        "C": "Blockchain confirmations before finality",
-        "D": "Encrypted wallet names for sender viewing"
+        "A": "Bitcoin is pseudonymous and traceable, while Monero uses ring signatures and stealth addresses",
+        "B": "Bitcoin transactions are completely anonymous, while Monero transactions are publicly visible",
+        "C": "Bitcoin is used only by criminals, while Monero is used only by legitimate businesses",
+        "D": "Bitcoin requires personal banking information, while Monero requires proof of identity"
       },
-      "correct": "B",
-      "explanation": "The section defines stealth addresses as 'one-time addresses that prevent linking transactions to a recipient's public address' as part of Monero's anonymity features."
+      "correct": "A",
+      "explanation": "The section states that Bitcoin is pseudonymous not anonymous and is publicly traceable, while Monero uses ring signatures and stealth addresses to provide much stronger anonymity."
     },
     {
       "section": "What blockchain does NOT fix",
-      "type": "text",
-      "question": "If a user's private key is stolen, why cannot the blockchain itself prevent the attacker from using it?",
-      "rubric": "A sound answer explains that the blockchain cannot distinguish between the legitimate owner and an attacker using a stolen key, so endpoint security is still required to prevent key theft.",
-      "explanation": "The section states 'the blockchain can't tell the difference between you and an attacker using your stolen key,' making endpoint security the real defense."
+      "type": "mc",
+      "question": "If a private key used to authorize blockchain transactions is stolen, what does blockchain technology do to prevent the attacker from using it?",
+      "options": {
+        "A": "Consensus nodes reject any transaction that is signed with a previously stolen key",
+        "B": "The blockchain automatically revokes the key and issues a replacement to the owner",
+        "C": "The blockchain locks the associated wallet and prevents all future transactions immediately",
+        "D": "Blockchain cannot distinguish the legitimate owner from the attacker using the stolen key; endpoint security is required"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that blockchain cannot tell the difference between a legitimate user and an attacker using a stolen key, so endpoint security remains necessary."
     }
   ]
 }

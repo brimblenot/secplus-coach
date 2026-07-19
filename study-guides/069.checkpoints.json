@@ -3,35 +3,54 @@
     {
       "section": "Data at rest",
       "type": "mc",
-      "question": "Which encryption method protects only sensitive database fields rather than the entire storage volume?",
+      "question": "Which of the following is the accepted encryption standard for data at rest according to the study material?",
       "options": {
-        "A": "Full disk encryption using BitLocker",
-        "B": "AES-256 encryption across all sectors",
-        "C": "Column-level encryption of database fields",
-        "D": "Self-encrypting drives with firmware control"
+        "A": "SHA-256 hashing with salted password protection on databases",
+        "B": "AES-256, which is computationally infeasible to brute-force",
+        "C": "RSA-2048 with software-based key management on all storage media",
+        "D": "Triple DES with hardware acceleration on enterprise servers"
       },
-      "correct": "C",
-      "explanation": "Column-level encryption encrypts only sensitive fields like SSNs or card numbers, leaving other fields readable for performance. The other options protect entire storage volumes or drives, not selective fields."
+      "correct": "B",
+      "explanation": "The section explicitly states that AES-256 with a 256-bit key is the accepted standard for data at rest and is computationally infeasible to brute-force. The other options describe different cryptographic approaches not presented as the standard for this state."
     },
     {
       "section": "Data in transit",
-      "type": "text",
-      "question": "Explain how certificate validation defends against on-path attacks during data in transit.",
-      "rubric": "A sound answer states that the client checks the server's digital certificate against a trusted certificate authority before opening the session, confirming the server's identity and preventing an attacker from impersonating the legitimate server.",
-      "explanation": "The section explains that certificate validation requires checking a server's certificate against a trusted CA before the session opens. This verification ensures the client connects to the legitimate server, not an attacker relaying traffic."
+      "type": "mc",
+      "question": "What does TLS 1.3 mandate that helps protect against attacks even if an encryption key is later compromised?",
+      "options": {
+        "A": "Certificate pinning used on client devices to prevent man-in-the-middle attacks from occurring",
+        "B": "Real-time key rotation performed every five minutes across all network segments and connections",
+        "C": "Forward secrecy, which ensures past sessions remain protected even if encryption keys are compromised",
+        "D": "Mutual authentication between client and server using biometric credentials for identity verification"
+      },
+      "correct": "C",
+      "explanation": "The section states that TLS 1.3 mandates forward secrecy, which ensures that past sessions stay safe even if a key is later compromised. Forward secrecy is explicitly listed as a feature that makes TLS 1.3 preferred over 1.2."
     },
     {
       "section": "Data in use",
       "type": "mc",
-      "question": "What attack method exploits the fact that DRAM retains data after power is cut?",
+      "question": "How did the Target breach specifically exploit data in use, according to the study material?",
       "options": {
-        "A": "Clipboard hijacking to capture copied passwords",
-        "B": "Cold boot attacks extracting data from powered-off RAM chips",
-        "C": "Memory scraping by malware reading decrypted data from RAM",
-        "D": "Shoulder surfing by observing the physical screen display"
+        "A": "Malware on point-of-sale terminals performed memory scraping to capture card data during decryption",
+        "B": "Employees used weak passwords allowing attackers to steal login credentials through shoulder surfing",
+        "C": "Hackers gained physical access to the server room and launched a cold boot attack on databases",
+        "D": "Attackers intercepted encrypted packets sent between point-of-sale terminals and the data center"
       },
-      "correct": "B",
-      "explanation": "Cold boot attacks remove power, chill the RAM, transplant it to another system, and image its contents because DRAM retains data for seconds to minutes after shutdown. Memory scraping, shoulder surfing, and clipboard hijacking are separate attack types that do not exploit DRAM data retention."
+      "correct": "A",
+      "explanation": "The section states that memory scraping is how Target's breach worked: malware on point-of-sale terminals grabbed card data the instant it was decrypted for processing. This directly illustrates the vulnerability of data in use."
+    },
+    {
+      "section": "Data in use",
+      "type": "mc",
+      "question": "Which of the following describes what a cold boot attack exploits about DRAM?",
+      "options": {
+        "A": "DRAM encryption keys are stored in a separate chip that loses power before the main memory does",
+        "B": "DRAM automatically clears its contents when the CPU temperature drops below a certain threshold value",
+        "C": "DRAM segments can be individually powered down, allowing attackers to isolate and read specific regions",
+        "D": "DRAM retains data for seconds to minutes after power loss, especially when cooled, allowing extraction"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that DRAM retains data for seconds to minutes after power is cut, especially when cooled, and that attackers exploit this by removing power, chilling the RAM, and then imaging its contents."
     }
   ]
 }

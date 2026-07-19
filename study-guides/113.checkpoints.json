@@ -2,69 +2,94 @@
   "checkpoints": [
     {
       "section": "What the BIA actually answers",
-      "type": "text",
-      "question": "In your own words, explain what irreversible harm means in the context of a BIA and why it matters to setting recovery targets.",
-      "rubric": "A sound answer recognizes that irreversible harm is the point at which a disruption causes permanent damage — such as regulatory violations, permanent customer loss, or financial failure — that cannot be undone, and that identifying this threshold helps the organization set realistic and appropriately aggressive recovery targets.",
-      "explanation": "The section explicitly states that MTD is the time before 'irreversible harm' occurs (regulatory violations, permanent customer loss, financial failure) and frames this as the basis for setting recovery priorities. The student must connect the concept to its practical role in planning."
+      "type": "mc",
+      "question": "According to the study guide, what is the primary purpose of a Business Impact Analysis?",
+      "options": {
+        "A": "Document compliance requirements and regulatory obligations",
+        "B": "Create audit trails of system changes and track modifications",
+        "C": "Identify critical business processes and quantify the harm from disruption",
+        "D": "Establish security controls and define access policies for systems"
+      },
+      "correct": "C",
+      "explanation": "The BIA is explicitly described as a business resilience document that identifies critical processes and quantifies the harm from disruption. It is not primarily a security document."
     },
     {
       "section": "The five BIA steps",
       "type": "mc",
-      "question": "In Step 3 of the BIA, who is primarily responsible for defining the Maximum Tolerable Downtime for a critical process?",
+      "question": "In the BIA process, what does MTD represent?",
       "options": {
-        "A": "The disaster recovery vendor selected for the organization",
-        "B": "Process owners, validated by financial modeling",
-        "C": "The IT infrastructure team based on hardware specifications",
-        "D": "Regulatory compliance officers based on legal requirements alone"
+        "A": "Average time to repair hardware after a failure occurs",
+        "B": "Maximum acceptable duration between disruption and full restoration",
+        "C": "Maximum acceptable data loss measured in hours or days",
+        "D": "Maximum time a process can remain offline before irreversible harm"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states that 'Process owners define this; financial modeling validates it.' This places primary responsibility with business process owners, not IT or external vendors."
+      "correct": "D",
+      "explanation": "MTD (Maximum Tolerable Downtime or MTPD) is explicitly defined as how long a process can be offline before irreversible harm occurs, such as regulatory violations or financial failure."
     },
     {
       "section": "RTO — how fast you must recover",
       "type": "mc",
-      "question": "Which recovery approach is appropriate for an RTO target of 4 to 24 hours?",
+      "question": "Which recovery approach is associated with an RTO target of less than one hour?",
       "options": {
-        "A": "Hot standby with continuous real-time data mirroring to multiple sites",
-        "B": "Active-active instances with synchronous replication and automated failover",
-        "C": "Cold site with tape restoration and offline backup media",
-        "D": "Warm standby with asynchronous replication and manual failover"
+        "A": "Cold site recovery using tape restoration from offsite archives",
+        "B": "Active-active or hot standby with synchronous replication and automated failover",
+        "C": "Warm standby with asynchronous replication and manual failover",
+        "D": "Weekly backups stored at a geographically distant secondary location"
       },
-      "correct": "D",
-      "explanation": "The RTO table in the section directly maps the 4–24 hour range to 'Warm standby with asynchronous replication + manual failover' with moderate cost."
+      "correct": "B",
+      "explanation": "The study guide's RTO table shows that RTO targets under one hour require active-active or hot standby infrastructure with synchronous replication and automated failover, which is the highest-cost option."
     },
     {
       "section": "RPO — how much data loss is acceptable",
-      "type": "text",
-      "question": "Explain why an RPO of zero requires synchronous replication and why that approach is more expensive than periodic backups.",
-      "rubric": "A sound answer states that RPO = 0 means no data loss is tolerated, so every write must be simultaneously written to a secondary site (synchronous replication) in real-time, whereas periodic backups only need to run at set intervals — the continuous synchronous approach requires more infrastructure and bandwidth, making it costlier.",
-      "explanation": "The section defines RPO = 0 as requiring synchronous replication and notes it is 'most expensive,' reserved for critical systems. It contrasts this implicitly with 'larger RPO' where 'periodic backups are sufficient' and 'cost drops significantly.'"
+      "type": "mc",
+      "question": "What backup strategy is required to achieve an RPO of zero?",
+      "options": {
+        "A": "Synchronous replication of every write to both primary and secondary",
+        "B": "Daily backups with asynchronous data sync to warm standby",
+        "C": "Hourly backups to local tape with daily offsite transfers",
+        "D": "Real-time log shipping to a geographically distant cold site"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that RPO of zero requires synchronous replication to ensure every write is simultaneously written to a secondary site, making it the most expensive option."
     },
     {
       "section": "MTBF and MTTR — reliability metrics",
       "type": "mc",
       "question": "Which statement correctly distinguishes MTBF from MTTR?",
       "options": {
-        "A": "MTBF measures downtime duration; MTTR measures the time between successive outages",
-        "B": "MTBF is improved by buying spare parts; MTTR is improved by buying better hardware",
-        "C": "MTBF measures reliability—how often things break; MTTR measures recovery speed—how fast you fix it",
-        "D": "MTBF measures how fast you repair hardware; MTTR measures how often hardware fails"
+        "A": "MTBF is time between failures and MTTR is time between backups",
+        "B": "MTBF measures reliability and improves with better hardware while MTTR measures recovery speed and improves through spare parts",
+        "C": "MTBF measures repair speed and MTTR measures failure frequency",
+        "D": "MTBF is managed through infrastructure design and MTTR through hardware only"
       },
-      "correct": "C",
-      "explanation": "The section's comparison table explicitly states MTBF 'Measures Reliability (how often things break)' and MTTR 'Measures Recovery speed (how fast you fix it),' and rows clearly separate what improves each metric."
+      "correct": "B",
+      "explanation": "The study guide defines MTBF as a reliability measure improved by quality hardware, and MTTR as recovery speed improved by spare parts, vendor support contracts, and procedures."
     },
     {
       "section": "Impact categories beyond financial loss",
       "type": "mc",
-      "question": "Which impact category is described as the hardest to quantify but often the biggest long-term harm?",
+      "question": "According to the study guide, which of the following is listed as one of the five impact categories captured in a BIA?",
       "options": {
-        "A": "Reputational impact including customer loss and brand damage",
-        "B": "Life and safety impact in healthcare or utility sectors",
-        "C": "Legal and regulatory impact from contract failures",
-        "D": "Operational impact from inability to deliver services"
+        "A": "Employee productivity loss and reduced work efficiency",
+        "B": "Network latency and bandwidth consumption across sites",
+        "C": "Reputational harm including customer loss and brand damage",
+        "D": "System availability metrics and uptime percentages"
       },
-      "correct": "A",
-      "explanation": "The section explicitly states that reputational harm—'Customer loss, brand damage, negative media'—is 'hardest to quantify, often the biggest long-term harm.'"
+      "correct": "C",
+      "explanation": "The study guide explicitly lists reputational impact, which includes customer loss and brand damage, as one of five harm categories; it notes this is often the biggest long-term harm and hardest to quantify."
+    },
+    {
+      "section": "BIA documentation and maintenance",
+      "type": "mc",
+      "question": "How often should a BIA be reviewed at minimum according to the study guide?",
+      "options": {
+        "A": "Every three years during strategic planning cycles",
+        "B": "Biannually as part of standard risk assessment cycles",
+        "C": "Quarterly to ensure alignment with current systems",
+        "D": "Annually and after major changes to processes or infrastructure"
+      },
+      "correct": "D",
+      "explanation": "The study guide states that BIAs should be reviewed at minimum annually and after any major change to processes, infrastructure, or org structure."
     }
   ]
 }

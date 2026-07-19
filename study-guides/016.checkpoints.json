@@ -5,66 +5,78 @@
       "type": "mc",
       "question": "What is the key difference between steganography and encryption in terms of what they hide?",
       "options": {
-        "A": "Steganography hides the existence of a message; encryption hides its content.",
-        "B": "Steganography hides the content of a message; encryption hides its existence.",
-        "C": "Steganography uses a mathematical key; encryption does not.",
-        "D": "Steganography requires a token vault; encryption does not."
+        "A": "Steganography requires a cryptographic key while encryption does not require one.",
+        "B": "Steganography is used only for images while encryption can be used for any data type.",
+        "C": "Steganography hides the content of a message while encryption hides the message's existence.",
+        "D": "Steganography hides the existence of a message while encryption hides the message's content."
       },
-      "correct": "A",
-      "explanation": "The section explicitly states that encryption scrambles content but advertises that a secret exists, while steganography hides both the content and the fact that communication is happening."
+      "correct": "D",
+      "explanation": "The section explicitly states that steganography hides both content and the fact that communication is happening, while encryption scrambles content but advertises that a secret exists."
     },
     {
       "section": "Tokenization: replacing the value with a stand-in",
-      "type": "text",
-      "question": "Explain why a token cannot be reversed using a mathematical key, and what must be done instead to recover the original value.",
-      "rubric": "A sound answer states that a token has no mathematical relationship to the original value, so it cannot be reversed with a key. Instead, the original value is recovered by querying the token vault with proper authorization.",
-      "explanation": "The section defines a token as having no mathematical relationship to the original, and explicitly states that the only way to recover the original is to query a token vault with proper authorization."
+      "type": "mc",
+      "question": "How is the original value recovered from a token in a tokenization system?",
+      "options": {
+        "A": "By using a decryption algorithm stored on the merchant's point-of-sale terminal.",
+        "B": "By applying a cryptographic key to reverse the mathematical relationship.",
+        "C": "By querying a secure token vault database with proper authorization.",
+        "D": "By reconstructing the original data from the token's mathematical formula."
+      },
+      "correct": "C",
+      "explanation": "The section states that the token has no mathematical relationship to the original value and the only way to recover it is to query a token vault with proper authorization."
     },
     {
       "section": "Data masking: realistic but fake",
       "type": "mc",
-      "question": "Which data masking approach applies masking in real time at query time without changing the stored data?",
+      "question": "What is the primary difference between static and dynamic data masking?",
       "options": {
-        "A": "Static data masking creates a permanently masked database copy for testing.",
-        "B": "Tokenization replaces sensitive values with vault-backed surrogates.",
-        "C": "Format-preserving encryption maintains the original data format when encrypting.",
-        "D": "Dynamic data masking applies masking at query time based on user role."
+        "A": "Static masking creates a permanent masked copy of data while dynamic masking applies masking in real time at query time.",
+        "B": "Static masking replaces data with fake names while dynamic masking replaces data with fake addresses and SSNs.",
+        "C": "Static masking can be reversed using a cryptographic key while dynamic masking cannot be reversed once applied.",
+        "D": "Static masking is enforced by the database management system while dynamic masking is enforced at the network layer."
       },
-      "correct": "D",
-      "explanation": "The section defines dynamic data masking as applying masking in real time at query time without changing stored data, and gives the example of a customer service rep seeing masked card numbers while a fraud analyst sees the full number."
+      "correct": "A",
+      "explanation": "The section explicitly distinguishes static masking as creating a permanently masked copy and dynamic masking as applying masking in real time without changing stored data."
     },
     {
       "section": "Privacy-focused techniques",
-      "type": "text",
-      "question": "What is the difference between pseudonymization and anonymization in terms of reversibility and GDPR status?",
-      "rubric": "A sound answer states that pseudonymization is reversible with a key and is still considered personal data under GDPR, while anonymization irreversibly removes identifiers and is not subject to privacy regulations—though true anonymization is difficult to achieve.",
-      "explanation": "The section explicitly contrasts pseudonymization as reversible with a mapping key and remaining personal data, versus anonymization as irreversible with no regulatory status, and notes that linkage attacks make true anonymization extremely hard."
+      "type": "mc",
+      "question": "Under GDPR, how does pseudonymized data differ from anonymized data in terms of regulatory status?",
+      "options": {
+        "A": "Pseudonymized data and anonymized data receive identical treatment under all GDPR requirements and protections.",
+        "B": "Pseudonymized data is still considered personal data under GDPR while truly anonymized data is not subject to privacy regulations.",
+        "C": "Pseudonymized data is exempt from privacy regulations while anonymized data falls under GDPR requirements.",
+        "D": "Pseudonymized data requires a vault for storage while anonymized data requires only a cryptographic key."
+      },
+      "correct": "B",
+      "explanation": "The section states that GDPR recognizes pseudonymized data as lower-risk but still personal data, while truly anonymized data is not subject to privacy regulations."
     },
     {
       "section": "Format-preserving encryption: encrypting without breaking the format",
       "type": "mc",
-      "question": "What problem does format-preserving encryption solve that tokenization does not?",
+      "question": "How does format-preserving encryption differ from tokenization in terms of reversibility?",
       "options": {
-        "A": "FPE hides the existence of encrypted data from observers.",
-        "B": "FPE uses a cryptographic key to produce reversible ciphertext, while tokenization requires vault access and a mathematical key.",
-        "C": "FPE produces ciphertext in the same format and length as the original, fitting legacy system constraints.",
-        "D": "FPE eliminates the need for key management on receiving systems."
+        "A": "Format-preserving encryption requires a vault to reverse the transformation while tokenization uses a cryptographic key for reversal.",
+        "B": "Format-preserving encryption uses a cryptographic key and is reversible while tokenization has no mathematical relationship and requires a vault.",
+        "C": "Format-preserving encryption is irreversible once applied while tokenization is reversible with the correct cryptographic key.",
+        "D": "Format-preserving encryption stores the original value in a database while tokenization stores the original value in a vault."
       },
-      "correct": "C",
-      "explanation": "The section states that FPE solves the problem of legacy systems with strict field-length constraints that cannot store arbitrary ciphertext, and notes that FPE produces ciphertext in the same format and length as plaintext."
+      "correct": "B",
+      "explanation": "The section clarifies that FPE uses a real cryptographic key and is reversible with that key, unlike tokenization which has no mathematical relationship and requires a vault lookup."
     },
     {
       "section": "Code obfuscation: protecting logic from reverse engineering",
       "type": "mc",
-      "question": "What does code obfuscation do to source code or compiled code?",
+      "question": "What is the purpose of code obfuscation and what does it preserve?",
       "options": {
-        "A": "It replaces function names with random tokens stored in a secure vault.",
-        "B": "It transforms code to make it difficult to analyze and reverse-engineer without changing its function.",
-        "C": "It encrypts the code so that only authorized users can execute it.",
-        "D": "It removes all comments and documentation from the source files."
+        "A": "Code obfuscation encrypts source code to prevent execution while preserving the original algorithm logic and functionality.",
+        "B": "Code obfuscation removes unnecessary code to reduce file size while preserving performance metrics and execution speed.",
+        "C": "Code obfuscation transforms code to make it difficult to analyze and reverse-engineer while preserving the actual functionality.",
+        "D": "Code obfuscation compiles source code into binary format while preserving human-readable variable names and comments."
       },
-      "correct": "B",
-      "explanation": "The section defines code obfuscation as transforming source code or compiled code to make it difficult for humans to analyze and reverse-engineer, without changing what the code does."
+      "correct": "C",
+      "explanation": "The section states that code obfuscation transforms code to make it difficult to analyze and reverse-engineer, without changing what the code actually does."
     }
   ]
 }

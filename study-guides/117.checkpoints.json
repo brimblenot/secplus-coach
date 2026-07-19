@@ -2,89 +2,107 @@
   "checkpoints": [
     {
       "section": "Privacy vs. security",
-      "type": "text",
-      "question": "Explain why an organization with strong security controls can still have a privacy problem.",
-      "rubric": "A sound answer states that security alone does not ensure privacy — an org can properly protect data (security) while still misusing it, such as by retaining it longer than needed, sharing it without consent, or using it for purposes beyond its original collection.",
-      "explanation": "The section establishes that security is necessary but not sufficient for privacy; the example of retaining data too long or sharing without consent illustrates how proper locks (security) don't prevent rule violations (privacy)."
+      "type": "mc",
+      "question": "An organization implements strong encryption and access controls but retains customer email addresses indefinitely without consent. Which statement correctly describes this situation?",
+      "options": {
+        "A": "The organization has met privacy requirements because its security prevents unauthorized access.",
+        "B": "The organization has strong security but may violate privacy through retaining customer data beyond necessity.",
+        "C": "The organization has achieved privacy because its encryption and access controls are adequate.",
+        "D": "The organization has prioritized security over privacy, which represents the correct trade-off."
+      },
+      "correct": "B",
+      "explanation": "The section states that security is necessary but not sufficient for privacy, and an org can have strong security and still violate privacy by retaining data longer than needed or sharing it without consent."
     },
     {
       "section": "Core privacy principles",
       "type": "mc",
-      "question": "Which principle requires an organization to delete or anonymize personal data once its original purpose has been fulfilled?",
+      "question": "A company collects phone numbers from customers during account signup for two-factor authentication. Later, it uses those numbers to send marketing calls without requesting new consent. Which core privacy principle does this violate?",
       "options": {
-        "A": "Ensuring personal data is correct and up to date",
-        "B": "Deleting or anonymizing data once its purpose is fulfilled",
-        "C": "Collecting only the minimum data needed for a purpose",
-        "D": "Using data only for the original stated purpose"
+        "A": "Data minimization, because collecting phone numbers for authentication is not essential.",
+        "B": "Accuracy, because marketing contact information may become outdated over time.",
+        "C": "Storage limitation, because phone numbers should not be retained after initial use.",
+        "D": "Purpose limitation, because data collected for authentication was reused for marketing without consent."
       },
-      "correct": "B",
-      "explanation": "Storage limitation specifically requires deletion or anonymization once the purpose is fulfilled; the other principles address different stages (minimization at collection, purpose limitation during use, accuracy during retention)."
+      "correct": "D",
+      "explanation": "The section defines purpose limitation as 'collect for a specific reason; don't reuse for incompatible purposes' and gives the exact example of using a customer's email for order confirmations versus marketing."
     },
     {
       "section": "Personal data categories",
       "type": "mc",
-      "question": "Which of the following is an example of a quasi-identifier under data protection law?",
+      "question": "Which of the following is classified as a quasi-identifier under data protection frameworks?",
       "options": {
-        "A": "ZIP code, birthdate, and gender combined",
-        "B": "A Social Security number",
-        "C": "A passport number",
-        "D": "A biometric fingerprint"
+        "A": "A combination of zip code, birthdate, and gender that identifies someone when combined together.",
+        "B": "A social security number that directly identifies a specific individual.",
+        "C": "A religious affiliation that qualifies as special category data under GDPR.",
+        "D": "A diagnosis of diabetes that qualifies as health-related protected information."
       },
       "correct": "A",
-      "explanation": "Quasi-identifiers identify an individual only in combination; the other options are direct identifiers that uniquely ID someone on their own."
+      "explanation": "The section defines quasi-identifiers as information that identifies an individual only in combination, using zip plus birthdate plus gender as the example."
     },
     {
       "section": "Privacy by Design — seven principles",
-      "type": "text",
-      "question": "According to Privacy by Design, at what stage should privacy be considered in system development?",
-      "rubric": "A sound answer states that privacy must be built in from the start, proactively designed into the architecture from the beginning, not added later as an afterthought or patch.",
-      "explanation": "Principle 1 (proactive) and Principle 3 (embedded into design) both emphasize that privacy must be part of the initial architecture, not bolted on afterward."
+      "type": "mc",
+      "question": "A software development team plans to add privacy controls to a system after it goes into production based on user feedback. Which Privacy by Design principle does this approach violate?",
+      "options": {
+        "A": "Respect for user privacy, because post-deployment changes may inconvenience users.",
+        "B": "Privacy as the default, because protective features should be automatic rather than optional.",
+        "C": "Proactive, not reactive, because privacy controls should be built in before system deployment.",
+        "D": "Full functionality, because adding features later may affect system usability."
+      },
+      "correct": "C",
+      "explanation": "The section states that Privacy by Design is 'proactive, not reactive — prevent privacy harms before they happen,' and the analogy explains that adding privacy after construction is complete is far less effective."
     },
     {
       "section": "GDPR data subject rights",
       "type": "mc",
-      "question": "Under GDPR, what is the standard response timeframe for a Data Subject Access Request?",
+      "question": "A user requests access to all personal data a company holds about them. Under GDPR, what is the organization's maximum response timeframe before a justified extension?",
       "options": {
-        "A": "15 calendar days",
-        "B": "60 calendar days",
-        "C": "30 calendar days",
-        "D": "45 calendar days"
+        "A": "30 calendar days from the request receipt.",
+        "B": "15 calendar days from the request receipt.",
+        "C": "60 calendar days from the request receipt.",
+        "D": "45 calendar days from the request receipt."
       },
-      "correct": "C",
-      "explanation": "GDPR specifies 30 calendar days as the standard response timeframe, with a possible 2-month extension for complex requests; CCPA allows 45 days."
+      "correct": "A",
+      "explanation": "The section explicitly states that under GDPR, the response timeframe is 30 calendar days, with an option for up to a 2-month extension for complex requests with notice."
     },
     {
       "section": "Privacy Impact Assessment (PIA / DPIA)",
       "type": "mc",
-      "question": "A Privacy Impact Assessment is required when processing personal data poses which of the following?",
+      "question": "A DPIA is required when a data processing activity poses high risk. What must an organization do if high residual risk remains even after mitigation measures are applied?",
       "options": {
-        "A": "Routine customer transactions stored in encrypted databases",
-        "B": "Collection of employee contact information for company communications",
-        "C": "Any minor data collection from three or more individuals",
-        "D": "Large-scale sensitive data, public surveillance, or extensive automated profiling"
+        "A": "Document the risks and notify all data subjects through email notification.",
+        "B": "Consult the supervisory authority before proceeding with the processing.",
+        "C": "Proceed with the activity and monitor risks continuously afterward.",
+        "D": "Implement additional technical controls and retake the assessment independently."
       },
-      "correct": "D",
-      "explanation": "The section states a DPIA is required for high-risk processing: large-scale sensitive data, public surveillance, or extensive automated profiling; routine or low-risk processing does not trigger this requirement."
+      "correct": "B",
+      "explanation": "The section states that if high residual risk remains after mitigation, the organization must consult the supervisory authority before proceeding."
     },
     {
       "section": "Consent requirements",
       "type": "mc",
-      "question": "Under GDPR, which of the following invalidates consent as a legal basis for processing?",
+      "question": "A website includes a pre-ticked checkbox stating 'I agree to marketing emails' on its signup form. Which of the following best describes the validity of this consent under GDPR requirements?",
       "options": {
-        "A": "An individual receives an easy mechanism to withdraw consent",
-        "B": "Separate consents are required for different processing purposes",
-        "C": "A pre-ticked checkbox is used to obtain consent",
-        "D": "The individual receives clear notice before consenting"
+        "A": "The consent is valid if the privacy policy is clearly written and explains the marketing purpose.",
+        "B": "The consent is valid because the user had the opportunity to uncheck the box.",
+        "C": "The consent is invalid because pre-ticked boxes do not constitute unambiguous affirmative action.",
+        "D": "The consent is invalid because separate consent forms must be signed for each data purpose."
       },
       "correct": "C",
-      "explanation": "The section states consent must be given by a clear affirmative action and that silence, pre-ticked boxes, or inactivity do not count; pre-ticked boxes explicitly invalidate consent."
+      "explanation": "The section explicitly states that for valid GDPR consent, unambiguous affirmative action is required, and pre-ticked boxes do NOT count."
     },
     {
       "section": "Cross-border data transfers",
-      "type": "text",
-      "question": "Name one mechanism that allows EU personal data to be transferred outside the EEA legally.",
-      "rubric": "A sound answer names any one of: adequacy decision, Standard Contractual Clauses (SCCs), or Binding Corporate Rules (BCRs), and briefly states how it works.",
-      "explanation": "The section lists three approved mechanisms; naming any one with a brief explanation demonstrates understanding of legal cross-border transfer safeguards."
+      "type": "mc",
+      "question": "A multinational company wants to transfer EU employee personal data to its subsidiary in Japan without establishing individual consent for each transfer. Which mechanism allows intra-group data transfers across borders while meeting GDPR requirements?",
+      "options": {
+        "A": "An adequacy decision confirming Japan's data protection laws match GDPR standards.",
+        "B": "A data processing agreement approved by each employee's home country authority.",
+        "C": "Standard Contractual Clauses signed between the EU and Japan to facilitate transfers.",
+        "D": "Binding Corporate Rules that establish consistent protection standards across company entities."
+      },
+      "correct": "D",
+      "explanation": "The section defines Binding Corporate Rules as intra-group rules for multinational companies moving data between their own entities across borders, which applies precisely to this scenario."
     }
   ]
 }

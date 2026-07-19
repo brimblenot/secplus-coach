@@ -2,76 +2,94 @@
   "checkpoints": [
     {
       "section": "Why injection beats running a standalone process",
-      "type": "text",
-      "question": "Why does process injection allow an attacker to inherit the target process's privilege level, and what does this achieve compared to running a standalone malicious process?",
-      "rubric": "A sound answer states that injected code runs inside an already-running, trusted process and inherits that process's privileges, access tokens, and permissions — avoiding the detection risk and privilege limitations of launching a new standalone process.",
-      "explanation": "The section explicitly explains that injected code inherits the target process's privilege level and permissions, and contrasts this with the three problems a standalone process faces: visibility in the process list, creation logs, and limited privileges."
+      "type": "mc",
+      "question": "Why does process injection allow an attacker to bypass privilege restrictions that would apply to a standalone malicious process?",
+      "options": {
+        "A": "The injected code bypasses Windows authentication during execution",
+        "B": "The injected code runs in kernel mode instead of user mode",
+        "C": "The injected code inherits the target process's privilege level and access tokens",
+        "D": "The injected code receives elevated privileges from the system boot"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that injected code inherits the target process's privilege level, access tokens, and permissions, allowing it to avoid the privilege restrictions of the account that launched the original malware."
     },
     {
       "section": "DLL injection — the most common technique",
       "type": "mc",
-      "question": "What is the purpose of the CreateRemoteThread API call in a DLL injection attack?",
+      "question": "In the DLL injection API sequence, what is the purpose of the CreateRemoteThread call?",
       "options": {
-        "A": "To allocate memory space inside the target process for the malicious code",
-        "B": "To write the malicious DLL file path into the target process's memory",
-        "C": "To verify that the target process has sufficient privileges to load the DLL",
-        "D": "To start a new thread in the target process that calls LoadLibrary with the DLL path"
+        "A": "It starts a new thread in another process that calls LoadLibrary with the DLL path",
+        "B": "It triggers Windows to search the file system for the DLL and load it into memory",
+        "C": "It writes the malicious DLL's file path into the target process's memory region",
+        "D": "It allocates writable memory space inside the target process to hold the DLL path"
       },
-      "correct": "D",
-      "explanation": "The section states that CreateRemoteThread starts a new thread in another process and calls LoadLibrary with the DLL path, triggering Windows to load the DLL. VirtualAllocEx allocates memory (option A), and WriteProcessMemory writes the path (option C)."
+      "correct": "A",
+      "explanation": "The section states that CreateRemoteThread starts a new thread in another process and calls LoadLibrary with the DLL path, which then triggers Windows to load the DLL."
     },
     {
       "section": "Reflective DLL injection — no file required",
-      "type": "text",
-      "question": "Why does reflective DLL injection evade antivirus detection, and what detection method must defenders use instead?",
-      "rubric": "A sound answer states that reflective DLL injection bypasses antivirus by mapping the DLL from raw bytes already in memory without writing a file to disk, so defenders must use behavioral monitoring rather than file scanning.",
-      "explanation": "The section explains that standard DLL injection is vulnerable to antivirus file scanning, while reflective injection uses its own loader code to avoid disk writes entirely, forcing defenders to rely on behavioral monitoring."
+      "type": "mc",
+      "question": "How does reflective DLL injection differ from standard DLL injection in terms of file system exposure?",
+      "options": {
+        "A": "It writes the DLL to a temporary file that is immediately deleted after loading",
+        "B": "It maps the DLL from raw bytes already in memory, avoiding any file written to disk",
+        "C": "It stores the DLL in system memory instead of the file system registry",
+        "D": "It encrypts the DLL file on disk so antivirus cannot scan it for signatures"
+      },
+      "correct": "B",
+      "explanation": "The section explains that reflective DLL injection contains its own loader code that maps the DLL from raw bytes already in memory, bypassing the Windows loader and avoiding any on-disk file that antivirus could scan."
     },
     {
       "section": "Process hollowing — gutting a legitimate process",
       "type": "mc",
-      "question": "In process hollowing, why is the legitimate binary spawned in a suspended state before the attacker injects code?",
+      "question": "What is the key advantage of process hollowing in terms of process list visibility?",
       "options": {
-        "A": "To disable antivirus monitoring features that are triggered only when a process is actively running",
-        "B": "To create memory space and prevent the legitimate code from executing while the attacker unmaps and replaces it",
-        "C": "To ensure the malicious code can inherit the process's access tokens before the legitimate code initializes",
-        "D": "To allow the attacker time to obtain elevated administrator privileges before resuming execution"
+        "A": "The process list is completely hidden from security tools and administrators",
+        "B": "The process appears with a randomized name that changes each run",
+        "C": "The process list shows no entry because it runs in a suspended state",
+        "D": "The process list shows the legitimate name while the code inside is the attacker's"
       },
-      "correct": "B",
-      "explanation": "The section states the process is spawned suspended so the attacker can then unmaps the legitimate image and writes malicious code into the now-empty space before resuming, ensuring the legitimate code does not execute."
+      "correct": "D",
+      "explanation": "The section states that after process hollowing, the process list still shows a legitimate name and PID, but the code running inside is entirely the attacker's, making it blend in with legitimate processes."
     },
     {
       "section": "Thread hijacking and APC injection",
       "type": "mc",
-      "question": "What does an attacker modify when performing thread hijacking on an existing thread in a legitimate process?",
+      "question": "What does thread hijacking accomplish by changing a thread's instruction pointer?",
       "options": {
-        "A": "The thread's memory allocation table to point to malicious code regions",
-        "B": "The thread's access control list to grant it elevated execution permissions",
-        "C": "The instruction pointer register to point to malicious code before resuming the thread",
-        "D": "The thread's scheduling priority to ensure malicious code runs before legitimate code"
+        "A": "It redirects the thread to execute malicious code instead of the original instructions",
+        "B": "It prevents the thread from accessing protected memory regions",
+        "C": "It modifies the thread's scheduling priority to run faster",
+        "D": "It causes the thread to spawn a new process with elevated privileges"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that thread hijacking changes the instruction pointer — the CPU register holding the address of the next instruction to execute — to point to malicious code, then resumes the thread."
+      "correct": "A",
+      "explanation": "The section explains that thread hijacking changes the instruction pointer, which is the CPU register holding the address of the next instruction to execute, redirecting it to malicious code."
     },
     {
       "section": "Process Doppelgänging — abusing NTFS transactions",
-      "type": "text",
-      "question": "Explain how Process Doppelgänging uses NTFS transactions to create a process without leaving a recoverable file on disk.",
-      "rubric": "A sound answer states that the attacker writes a malicious executable inside an NTFS transaction, creates a process from that transacted file, then rolls back the transaction so the file disappears from disk while the process continues running with the malicious code.",
-      "explanation": "The section describes the three-step sequence: write the file inside a transaction, create the process from it, then roll back the transaction — leaving the process running but no on-disk executable to recover."
+      "type": "mc",
+      "question": "How does Process Doppelgänging defeat forensic analysis of the malicious executable?",
+      "options": {
+        "A": "It overwrites the executable with random data before forensic examination",
+        "B": "It splits the executable across multiple system partitions to avoid recovery",
+        "C": "It encrypts the executable so forensic tools cannot decrypt it without a key",
+        "D": "It rolls back the NTFS transaction so the malicious file disappears from disk"
+      },
+      "correct": "D",
+      "explanation": "The section states that after creating a process from a transacted file, the attacker rolls back the transaction so the file disappears from disk, while the process continues running with the malicious code, making forensic recovery extremely difficult."
     },
     {
       "section": "Defenses",
       "type": "mc",
-      "question": "Which defense mechanism validates at runtime that execution only follows control-flow paths the compiler deemed valid?",
+      "question": "According to the defenses section, how does DEP protect against simple shellcode injection, and what technique can bypass it?",
       "options": {
-        "A": "CFI, which detects jumps to unexpected locations and blocks invalid control flow",
-        "B": "ASLR, which randomizes base addresses of the executable, stack, heap, and libraries",
-        "C": "AMSI, which inspects malicious scripts before they reach the injection stage",
-        "D": "DEP, which marks heap and stack pages as non-executable using the NX bit"
+        "A": "DEP encrypts all executable code in memory; ASLR randomization bypasses it by changing addresses",
+        "B": "DEP marks data pages non-executable and blocks shellcode; ROP chains bypass it by reusing legitimate code",
+        "C": "DEP prevents new processes from being created; CFI blocks execution of injected threads",
+        "D": "DEP scans injected code in real time; EDR monitors API call sequences to stop injection"
       },
-      "correct": "A",
-      "explanation": "The section states that CFI validates at runtime that execution only follows compiler-validated control-flow paths and detects jumps to unexpected locations, blocking ROP attacks."
+      "correct": "B",
+      "explanation": "The section states that DEP marks heap/stack pages as non-executable and blocks simple shellcode, but is bypassed by ROP (Return-Oriented Programming), which chains small sequences of already-present legitimate code instead of injecting new code."
     }
   ]
 }

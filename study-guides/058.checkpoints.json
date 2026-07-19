@@ -5,99 +5,104 @@
       "type": "mc",
       "question": "In an IaaS deployment, which of the following is the customer responsible for managing?",
       "options": {
-        "A": "Physical hardware and the hypervisor",
-        "B": "The cloud provider's global network infrastructure",
-        "C": "The operating system, middleware, and application code",
-        "D": "Only the data stored in the cloud"
+        "A": "Physical hardware and hypervisor software components",
+        "B": "Operating system, middleware, application code, and data",
+        "C": "Hypervisor patching and virtual machine creation",
+        "D": "Global network infrastructure and data center security"
       },
-      "correct": "C",
-      "explanation": "IaaS provides hardware and hypervisor; the customer manages everything above the hypervisor layer, including OS, middleware, app code, and data. The provider handles the physical infrastructure and networking."
-    },
-    {
-      "section": "Service models: what the provider manages vs. what you manage",
-      "type": "text",
-      "question": "Explain one key difference in the customer's security responsibilities between PaaS and SaaS.",
-      "rubric": "A sound answer notes that in PaaS the customer writes and secures their own application code, whereas in SaaS the provider manages the application itself and the customer primarily manages data and user access controls within the app.",
-      "explanation": "PaaS requires the customer to write and secure app code; SaaS eliminates that burden by providing the full application, leaving the customer to focus on data security and access settings."
+      "correct": "B",
+      "explanation": "In IaaS, the provider supplies physical hardware and the hypervisor; the customer manages everything above the hypervisor layer, including OS, middleware, app code, and data."
     },
     {
       "section": "Service models: what the provider manages vs. what you manage",
       "type": "mc",
-      "question": "Which statement best describes the security focus for functions deployed in a FaaS environment?",
+      "question": "Which service model allows customers to deploy only individual functions that run in response to events, with no visible servers or platforms to manage?",
       "options": {
-        "A": "Managing the physical servers and networking infrastructure that execute the functions",
-        "B": "Configuring TLS encryption and OS-level firewall rules for each deployed function",
-        "C": "Patching the operating system and configuring the hypervisor for the function's runtime",
-        "D": "Securing function code, using least privilege IAM roles, and protecting secrets in environment variables"
+        "A": "Platform as a Service with containerized workloads",
+        "B": "Infrastructure as a Service with auto-scaling enabled",
+        "C": "Software as a Service with API-based application access",
+        "D": "Function as a Service, also called serverless computing"
       },
       "correct": "D",
-      "explanation": "FaaS abstracts away infrastructure entirely; the provider handles OS, patching, and scaling. The customer focuses on writing secure function code, applying least privilege IAM roles, and securing secrets."
+      "explanation": "FaaS (Function as a Service), or serverless computing, allows customers to deploy only individual units of code that run in response to events; the OS, patching, and scaling are completely invisible to the customer."
     },
     {
       "section": "Deployment models: who shares the infrastructure",
       "type": "mc",
-      "question": "Which deployment model is most suitable for an organization that must comply with strict data sovereignty regulations requiring exclusive jurisdiction over data location?",
+      "question": "Which deployment model is owned by a provider and shared logically across many customers, offering maximum scalability and cost efficiency?",
       "options": {
-        "A": "Private cloud, which gives the organization greatest control and data sovereignty",
-        "B": "Multi-cloud, which uses multiple providers to reduce vendor lock-in",
-        "C": "Public cloud, which offers the lowest latency to end users",
-        "D": "Community cloud, which shares infrastructure among peer organizations"
+        "A": "Private cloud with dedicated hardware",
+        "B": "Hybrid cloud combining on-premises and provider resources",
+        "C": "Public cloud with multi-tenant infrastructure",
+        "D": "Community cloud for regulated organizations"
       },
-      "correct": "A",
-      "explanation": "Private cloud is dedicated to one organization and either on-premises or on dedicated third-party hardware, enabling the organization to retain exclusive jurisdiction over where data resides and who accesses it."
+      "correct": "C",
+      "explanation": "Public cloud infrastructure is owned by a provider and shared across many customers, each logically isolated, delivering maximum scalability and cost efficiency."
     },
     {
       "section": "Deployment models: who shares the infrastructure",
-      "type": "text",
-      "question": "What is a primary security challenge introduced when an organization adopts a hybrid cloud model, and how are the two environments typically connected securely?",
-      "rubric": "A sound answer identifies that hybrid cloud increases complexity across authentication systems, logging formats, and network configs, and notes that environments are connected via VPNs (encrypted tunnels) or dedicated private connections like AWS Direct Connect or Azure ExpressRoute to avoid the public internet.",
-      "explanation": "Hybrid cloud combines public and private environments with different tooling and configurations, increasing complexity; dedicated connections bypass the public internet for greater security and predictable performance."
+      "type": "mc",
+      "question": "In a hybrid cloud setup, what is the primary purpose of using AWS Direct Connect or Azure ExpressRoute?",
+      "options": {
+        "A": "Provide dedicated private connection with lower latency",
+        "B": "Automatically scale resources across multiple cloud providers",
+        "C": "Encrypt all traffic between on-premises and public cloud",
+        "D": "Enforce FedRAMP compliance across cloud deployments"
+      },
+      "correct": "A",
+      "explanation": "AWS Direct Connect and Azure ExpressRoute are dedicated private connections that bypass the public internet entirely, providing lower latency and more predictable performance for hybrid cloud connectivity."
     },
     {
       "section": "Shared responsibility model",
       "type": "mc",
-      "question": "In the shared responsibility model, which of the following is primarily the customer's responsibility across all cloud service models?",
+      "question": "According to the shared responsibility model, which of the following is a customer responsibility regardless of the cloud service model?",
       "options": {
-        "A": "Global network infrastructure and DDoS protection at the cloud perimeter",
-        "B": "Identity and access management, data classification, and encryption choices",
-        "C": "The physical security of the data center and hypervisor patching",
-        "D": "Operating system configuration and middleware installation for all services"
+        "A": "Managing physical data center infrastructure and facilities",
+        "B": "Identity and access management and encryption choices",
+        "C": "Patching hypervisors and updating cloud infrastructure",
+        "D": "Maintaining global networks connecting cloud regions"
       },
       "correct": "B",
-      "explanation": "Regardless of service model, the customer is nearly always responsible for identity and access management, data classification, and client-side encryption decisions; the provider handles physical security and infrastructure."
+      "explanation": "Identity and access management, data classification, and client-side encryption are nearly always the customer's responsibility across all service models."
     },
     {
       "section": "Cloud security constructs",
       "type": "mc",
-      "question": "Which statement correctly distinguishes security groups from NACLs in AWS?",
+      "question": "What is the key difference between security groups and NACLs in terms of how they evaluate traffic?",
       "options": {
-        "A": "Security groups are stateful instance-level controls; NACLs are stateless subnet-level controls",
-        "B": "Security groups are stateless subnet-level controls; NACLs are stateful instance-level controls",
-        "C": "NACLs are stateful and finer-grained; security groups are stateless and coarser",
-        "D": "Both security groups and NACLs operate at the instance level and are stateful"
+        "A": "Security groups are stateful, NACLs are stateless",
+        "B": "Security groups filter inbound only, NACLs filter both directions",
+        "C": "Security groups work at subnet level, NACLs at instance level",
+        "D": "Security groups use IP addresses, NACLs use protocols"
       },
       "correct": "A",
-      "explanation": "Security groups are stateful firewalls at the instance or interface level that track connection state; NACLs are stateless subnet-level controls where each traffic direction needs explicit rules."
-    },
-    {
-      "section": "Cloud security constructs",
-      "type": "text",
-      "question": "What is the purpose of a CASB, and what is one key threat it helps detect?",
-      "rubric": "A sound answer states that a CASB provides visibility and control over cloud services and enforces policies like data loss prevention; it detects shadow IT (unsanctioned cloud apps used without IT approval).",
-      "explanation": "A CASB sits between users and cloud services to enforce DLP policies, apply access controls, and identify shadow IT — unauthorized cloud applications employees use without IT knowledge or approval."
+      "explanation": "Security groups are stateful firewalls that track connection state, so return traffic is automatically permitted; NACLs are stateless and require explicit rules in each direction."
     },
     {
       "section": "Cloud security constructs",
       "type": "mc",
-      "question": "How does SASE differ from traditional network security architectures in terms of where security is applied?",
+      "question": "Which cloud security control is specifically designed to detect unsanctioned cloud applications used by employees and enforce data loss prevention policies on SaaS services?",
       "options": {
-        "A": "SASE applies security centrally at the data center, while traditional architecture applies it at multiple network points",
-        "B": "SASE applies security at the cloud edge near users instead of backhauling traffic to a central data center",
-        "C": "SASE inspects only encrypted traffic, while traditional architecture inspects all traffic types",
-        "D": "SASE routes all traffic through a single on-premises gateway before reaching cloud services"
+        "A": "Virtual Private Cloud peering for application traffic isolation",
+        "B": "AWS Transit Gateway for centralized network routing",
+        "C": "Cloud Access Security Broker monitoring user cloud access",
+        "D": "Secure web gateway filtering malware at network edge"
       },
-      "correct": "B",
-      "explanation": "SASE is a cloud-delivered framework that bundles security functions and applies them at the cloud edge near the user, rather than routing all traffic back to a central data center for inspection."
+      "correct": "C",
+      "explanation": "A CASB (Cloud Access Security Broker) sits between users and cloud services to provide visibility, enforce data loss prevention, apply access controls, and detect shadow IT."
+    },
+    {
+      "section": "Cloud security constructs",
+      "type": "mc",
+      "question": "Which architectural framework bundles multiple network security functions including CASB, secure web gateways, zero trust network access, and SD-WAN into a single cloud-delivered platform?",
+      "options": {
+        "A": "Virtual Private Cloud with multiple security groups",
+        "B": "AWS PrivateLink with interface endpoint configuration",
+        "C": "Network Access Control List enforcement strategy",
+        "D": "Secure Access Service Edge architecture"
+      },
+      "correct": "D",
+      "explanation": "SASE (Secure Access Service Edge) is an architectural framework that bundles CASB, secure web gateways, zero trust network access, firewall-as-a-service, and SD-WAN into a single cloud-delivered platform."
     }
   ]
 }

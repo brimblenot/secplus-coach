@@ -3,118 +3,145 @@
     {
       "section": "What a standard actually is",
       "type": "mc",
-      "question": "Which statement best describes how a security standard differs from a security policy?",
+      "question": "How do security standards differ from policies in terms of implementation?",
       "options": {
-        "A": "A standard specifies exact implementations and configurations while a policy states general intent",
-        "B": "A standard is created by external frameworks while a policy is always created internally",
-        "C": "A standard applies only to government agencies while a policy applies to all organizations",
-        "D": "A standard is general intent while a policy specifies exact implementations and configurations"
+        "A": "Standards are voluntary guidance while policies are legally binding requirements",
+        "B": "Standards specify exact technology and configurations while policies state only general intent",
+        "C": "Standards apply only to government agencies while policies apply to all organizations",
+        "D": "Standards state general intent while policies specify exact technology and configurations"
       },
-      "correct": "A",
-      "explanation": "The section explicitly states that standards are prescriptive and technology-specific with exact specifications, whereas policies state only general intent like 'keep data protected.'"
+      "correct": "B",
+      "explanation": "The section explicitly contrasts standards as prescriptive and technology-specific versus policies as general intent statements."
     },
     {
       "section": "NIST Cybersecurity Framework (CSF)",
-      "type": "text",
-      "question": "List the five core functions of the NIST CSF and briefly explain what each one covers.",
-      "rubric": "A sound answer names all five functions (Identify, Protect, Detect, Respond, Recover) and pairs each with its domain: asset management and risk assessment (Identify); access control and data security (Protect); continuous monitoring (Detect); response planning and mitigation (Respond); restoration and communications (Recover).",
-      "explanation": "The section provides a table listing all five functions with their coverage areas, which directly answers what each function addresses."
+      "type": "mc",
+      "question": "Which NIST CSF function focuses on continuous monitoring and anomaly detection?",
+      "options": {
+        "A": "Identify, which covers asset management and risk assessment",
+        "B": "Protect, which covers access control and data security",
+        "C": "Detect, which covers continuous monitoring and anomaly detection",
+        "D": "Recover, which covers restoration of capabilities and communications"
+      },
+      "correct": "C",
+      "explanation": "The table in the section directly maps the Detect function to continuous monitoring and anomaly detection activities."
     },
     {
       "section": "NIST SP 800-53",
       "type": "mc",
-      "question": "NIST SP 800-53 organizes controls into families identified by two-letter prefixes. Which of the following is a correct example of a family prefix and its meaning?",
+      "question": "What do the two-letter prefixes in NIST SP 800-53 control families represent?",
       "options": {
-        "A": "AC stands for Authentication and Cryptography",
-        "B": "IA stands for Information Architecture",
-        "C": "AU stands for Audit and Accountability",
-        "D": "IR stands for Identification and Resource management"
+        "A": "Assessment levels that measure the effectiveness of controls within a system",
+        "B": "Impact baselines used to determine which organizations are required to follow the standard",
+        "C": "Categories of controls based on implementation timeline and resource requirements for deployment",
+        "D": "Control family identifiers such as AC for Access Control and AU for Audit and Accountability"
       },
-      "correct": "C",
-      "explanation": "The section explicitly lists AU as Audit and Accountability among its examples of control families, while the other options misrepresent the meanings given in the text."
+      "correct": "D",
+      "explanation": "The section states that controls are grouped into families identified by two-letter prefixes and provides AC and AU as examples."
     },
     {
       "section": "NIST SP 800-171 and CMMC",
       "type": "mc",
-      "question": "At which CMMC level(s) is third-party assessment by a C3PAO required rather than self-attestation?",
+      "question": "Which CMMC level requires compliance with all 110 NIST SP 800-171 requirements?",
       "options": {
-        "A": "Level 1 only",
-        "B": "Levels 2 and 3",
-        "C": "Level 3 only",
-        "D": "All three levels"
+        "A": "Level 2, which includes all 110 NIST SP 800-171 requirements",
+        "B": "Level 1, which establishes foundational cyber hygiene practices",
+        "C": "Level 3, which adds 24 additional practices beyond the standard requirements",
+        "D": "All levels, since 800-171 is the baseline for all CMMC certifications"
       },
-      "correct": "B",
-      "explanation": "The section states that Levels 2 and 3 require third-party assessments by C3PAOs, whereas Level 1 is not mentioned as requiring this."
+      "correct": "A",
+      "explanation": "The table explicitly shows that Level 2 Advanced requires all 110 NIST SP 800-171 requirements."
     },
     {
       "section": "ISO 27001 and ISO 27002",
-      "type": "text",
-      "question": "Explain the relationship between ISO 27001 and ISO 27002 and what each one provides.",
-      "rubric": "A sound answer conveys that ISO 27001 is the standard for an ISMS with independent audit and certification, while ISO 27002 is the companion guide providing detailed implementation guidance for the controls referenced in 27001."
+      "type": "mc",
+      "question": "What does ISO 27001 certification demonstrate about an organization?",
+      "options": {
+        "A": "The organization has completed remediation planning for identified control gaps",
+        "B": "The organization has completed gap assessment and identified security deficiencies",
+        "C": "The organization has a formally managed ISMS that has been verified by independent audit",
+        "D": "The organization has implemented security best practices across 14 defined domains"
+      },
+      "correct": "C",
+      "explanation": "The section states that ISO 27001 certification is granted after independent audit and signals that security is formally managed."
     },
     {
       "section": "SOC 2",
       "type": "mc",
-      "question": "What is the key difference between SOC 2 Type 1 and SOC 2 Type 2 reports?",
+      "question": "What is the key difference between SOC 2 Type 1 and Type 2 reports?",
       "options": {
-        "A": "Type 1 covers security; Type 2 covers availability",
-        "B": "Type 1 is mandatory; Type 2 is optional for providers",
-        "C": "Type 1 requires AICPA approval; Type 2 does not",
-        "D": "Type 1 assesses design; Type 2 validates operational effectiveness over time"
+        "A": "Type 1 covers security controls while Type 2 covers availability and processing integrity",
+        "B": "Type 1 applies to small service providers while Type 2 applies to large enterprise organizations",
+        "C": "Type 1 requires AICPA oversight while Type 2 is independently verified by third-party auditors",
+        "D": "Type 1 is a point-in-time snapshot of control design while Type 2 proves controls operated effectively over time"
       },
       "correct": "D",
-      "explanation": "The section explicitly defines Type 1 as controls designed correctly at a point in time and Type 2 as demonstrating operational effectiveness over a 6–12 month period."
+      "explanation": "The report type table clearly distinguishes Type 1 as a design snapshot versus Type 2 as operational effectiveness over 6–12 months."
     },
     {
       "section": "PCI DSS",
       "type": "mc",
-      "question": "Which scanning and testing requirements does PCI DSS mandate?",
+      "question": "What scanning and testing requirements does PCI DSS mandate?",
       "options": {
-        "A": "Quarterly vulnerability scans by ASVs and annual penetration testing",
-        "B": "Monthly vulnerability scans by QSAs and annual penetration testing",
-        "C": "Biannual vulnerability scans by ASVs and quarterly penetration testing",
-        "D": "Annual vulnerability scans by ASVs and monthly penetration testing"
+        "A": "Quarterly vulnerability scans by ASVs and annual penetration testing by qualified assessors",
+        "B": "Semi-annual vulnerability scans and biennial penetration testing depending on organization size",
+        "C": "Annual vulnerability scans by ASVs and quarterly penetration testing by internal teams",
+        "D": "Monthly vulnerability scans for large merchants and quarterly scans for organizations under assessment"
       },
       "correct": "A",
-      "explanation": "The section explicitly states PCI DSS requires quarterly vulnerability scans by ASVs and annual penetration testing, making B the accurate answer."
+      "explanation": "The section explicitly states that PCI DSS requires quarterly vulnerability scans by ASVs and annual penetration testing."
     },
     {
       "section": "HIPAA",
       "type": "mc",
-      "question": "Under HIPAA's Breach Notification Rule, how many days do covered entities have to notify affected individuals after discovering a breach?",
+      "question": "What timeframe does HIPAA's Breach Notification Rule specify for notifying affected individuals?",
       "options": {
-        "A": "45 days",
-        "B": "30 days",
-        "C": "90 days",
-        "D": "60 days"
+        "A": "Within 72 hours of discovering a breach of Protected Health Information",
+        "B": "Within 60 days of discovering a breach of Protected Health Information",
+        "C": "Within 30 days of discovering a breach of Protected Health Information",
+        "D": "Within 90 days of discovering a breach of Protected Health Information"
       },
-      "correct": "D",
-      "explanation": "The section states the Breach Notification Rule requires notification within 60 days of discovering a breach."
+      "correct": "B",
+      "explanation": "The Breach Notification Rule table in the section specifies notification within 60 days of discovering a breach."
     },
     {
       "section": "GDPR",
       "type": "mc",
-      "question": "How quickly must a breach be notified to a GDPR supervisory authority, and what is the maximum fine for non-compliance?",
+      "question": "Within what timeframe must a GDPR breach be reported to the supervisory authority?",
       "options": {
-        "A": "48 hours; 2% of global revenue or €10 million, whichever is greater",
-        "B": "72 hours; 4% of global revenue or €20 million, whichever is greater",
-        "C": "30 days; €10 million maximum fine",
-        "D": "60 days; €15 million maximum fine"
+        "A": "Within 90 days of discovering the breach",
+        "B": "Within 30 days of discovering the breach",
+        "C": "Within 60 days of discovering the breach",
+        "D": "Within 72 hours of discovering the breach"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states breach notification must occur within 72 hours and fines reach 4% of annual global revenue or €20 million, whichever is greater."
+      "correct": "D",
+      "explanation": "The section explicitly states that breach notification to supervisory authority must occur within 72 hours."
     },
     {
       "section": "CIS Controls",
-      "type": "text",
-      "question": "What are the three Implementation Groups (IGs) of the CIS Controls, and which organizations should adopt each?",
-      "rubric": "A sound answer identifies all three groups and their target organizations: IG1 for organizations with limited security expertise, IG2 for those with moderate risk, and IG3 with all 18 controls for sophisticated, high-threat organizations."
+      "type": "mc",
+      "question": "How many controls comprise the CIS Controls framework?",
+      "options": {
+        "A": "18 controls organized into three Implementation Groups",
+        "B": "14 control families organized across multiple domains",
+        "C": "12 core controls organized across 6 categories",
+        "D": "24 advanced practices plus a baseline set of foundational controls"
+      },
+      "correct": "A",
+      "explanation": "The section states that the CIS Controls are a prioritized set of 18 controls organized into three Implementation Groups."
     },
     {
       "section": "Applying standards: gap assessment to audit",
-      "type": "text",
-      "question": "Describe the three main phases an organization follows when adopting a security standard.",
-      "rubric": "A sound answer identifies the three phases in order: gap assessment (comparing current controls to standard requirements), remediation planning (prioritizing deficiencies with owners and timelines), and evidence collection (maintaining proof that controls are implemented and effective)."
+      "type": "mc",
+      "question": "What is the second step in the process of adopting a security standard?",
+      "options": {
+        "A": "Evidence collection to maintain documentation and proof of implemented controls and their effectiveness",
+        "B": "Remediation planning to prioritize gaps and assign owners and timelines for implementation",
+        "C": "External audit to obtain third-party verification and confirmation of compliance status",
+        "D": "Gap assessment to compare current controls against standard requirements and identify deficiencies"
+      },
+      "correct": "B",
+      "explanation": "The numbered process lists remediation planning as step 2, following gap assessment and preceding evidence collection."
     }
   ]
 }

@@ -3,134 +3,145 @@
     {
       "section": "Core terminology",
       "type": "mc",
-      "question": "Which of the following describes an incident rather than an event or alert?",
+      "question": "Which of the following is the correct relationship between events, alerts, and incidents?",
       "options": {
-        "A": "A firewall blocking a connection attempt detected by the security tool",
-        "B": "An event flagged by a security tool that requires review but may be a false positive",
-        "C": "A confirmed security event that has negative impact on confidentiality, integrity, or availability",
-        "D": "Any observable occurrence such as a login or file creation on a system"
+        "A": "An alert is any observable occurrence; an event is an alert flagged as potentially significant; an incident is a confirmed security event with negative impact on the CIA triad.",
+        "B": "An event is a confirmed security event with negative impact on the CIA triad; an alert is an event flagged as potentially significant; an incident is any observable occurrence.",
+        "C": "An event is any observable occurrence; an alert is an event flagged as potentially significant; an incident is a confirmed security event with negative impact on the CIA triad.",
+        "D": "An incident is any observable occurrence; an alert is an incident flagged as potentially significant; an event is a confirmed security event with negative impact on the CIA triad."
       },
       "correct": "C",
-      "explanation": "An incident is defined as a confirmed security event with negative impact on the CIA triad, which distinguishes it from routine events (any observable occurrence) and alerts (flagged but unconfirmed events)."
+      "explanation": "Events are routine, high-volume occurrences; alerts are events flagged by tools that may be true or false positives; incidents are only the confirmed events with actual CIA impact that trigger the full IR process."
     },
     {
       "section": "The PICERL lifecycle",
-      "type": "text",
-      "question": "In your own words, what is the purpose of the PICERL lifecycle and where is it defined?",
-      "rubric": "A sound answer identifies PICERL as the six-phase incident response model from NIST SP 800-61 that structures how organizations handle security incidents from before they occur through learning after resolution.",
-      "explanation": "PICERL (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned) is the NIST Special Publication 800-61 framework that guides the entire incident response process."
+      "type": "mc",
+      "question": "Which PICERL phase focuses on improving the incident response process based on what was learned from the incident?",
+      "options": {
+        "A": "Containment, which limits spread and preserves evidence during active incidents.",
+        "B": "Recovery, which restores systems and monitors them for signs of renewed activity.",
+        "C": "Preparation, which builds capability and gathers necessary tools before incidents occur.",
+        "D": "Lessons Learned, which reviews the incident timeline and creates improvement action items."
+      },
+      "correct": "D",
+      "explanation": "Lessons Learned is held within days of resolution and reviews what worked, what failed, and gaps in detection to improve controls and training before the next incident."
     },
     {
       "section": "Preparation",
       "type": "mc",
-      "question": "What is an out-of-band communication channel in the context of incident response preparation?",
+      "question": "What is the primary purpose of defining out-of-band communication channels during preparation?",
       "options": {
-        "A": "A communication method that bypasses potentially compromised infrastructure, such as personal cell phones",
-        "B": "The dedicated network segment reserved for forensic analysis equipment",
-        "C": "The primary email and messaging systems used for daily business communication",
-        "D": "A formal written document describing all incident response procedures"
+        "A": "To create encrypted email accounts for every member of the Computer Security Incident Response Team.",
+        "B": "To provide backup communication paths that bypass potentially compromised infrastructure during an incident response.",
+        "C": "To establish a dedicated logging system that captures all incident responder conversations.",
+        "D": "To ensure all incident responders can reach each other via multiple network protocols simultaneously."
       },
-      "correct": "A",
-      "explanation": "Out-of-band communication channels are defined as channels that bypass potentially compromised infrastructure, with personal cell phones and separate email systems given as examples."
+      "correct": "B",
+      "explanation": "Out-of-band communication channels like personal cell phones or separate email systems are needed because the normal network infrastructure may have been compromised by the attacker."
     },
     {
       "section": "Identification and detection",
       "type": "mc",
-      "question": "Which of the following is a detection source mentioned for identifying incidents?",
+      "question": "During the identification phase, what does triage involve?",
       "options": {
-        "A": "Manual code review of all applications deployed in production",
-        "B": "Quarterly penetration testing reports from external vendors",
-        "C": "Weekly scheduled scans of the entire backup repository",
-        "D": "SIEM alerts aggregating and correlating logs from across the environment"
+        "A": "Confirming true versus false positives and assessing scope, severity, and affected systems.",
+        "B": "Isolating affected systems from the network to prevent outbound communication.",
+        "C": "Restoring systems from backups and monitoring them for signs of reinfection.",
+        "D": "Removing malware and persistence mechanisms from compromised systems before spread."
       },
-      "correct": "D",
-      "explanation": "SIEM (Security Information and Event Management) is explicitly listed as a detection source alongside EDR, user reports, threat intelligence, and tips from partners or law enforcement."
+      "correct": "A",
+      "explanation": "Triage during identification involves confirming whether the alert is real or false, and assessing what data is at risk and how long access may have existed."
     },
     {
       "section": "Containment",
-      "type": "text",
-      "question": "Why should you avoid powering off a compromised system during short-term containment?",
-      "rubric": "A sound answer explains that powering off destroys volatile memory, which may contain running attacker tools, encryption keys, or evidence of active network connections needed for investigation.",
-      "explanation": "The section explicitly states that powering off destroys volatile memory that may hold critical forensic evidence, making network isolation the correct first response."
+      "type": "mc",
+      "question": "Why is powering off a compromised system considered inappropriate during short-term containment?",
+      "options": {
+        "A": "Because it prevents forensic specialists from accessing the system's file system and data later.",
+        "B": "Because it triggers automatic data backup systems that could spread the malware to backup infrastructure.",
+        "C": "Because it interrupts network isolation and allows the attacker to move laterally to other systems.",
+        "D": "Because it destroys volatile memory, which may hold running attacker tools, encryption keys, or active network connections."
+      },
+      "correct": "D",
+      "explanation": "Volatile memory contains critical forensic evidence that is lost when the system powers down, so isolation without power-off is the correct immediate action."
     },
     {
       "section": "Eradication",
       "type": "mc",
-      "question": "Which of the following is an example of a persistence mechanism that must be removed during eradication?",
+      "question": "Which of the following is a persistence mechanism that an attacker might leave behind that must be removed during eradication?",
       "options": {
-        "A": "A backup file created before the incident",
-        "B": "A web shell uploaded to provide remote access",
-        "C": "A firewall rule blocking malicious IPs",
-        "D": "A vulnerability patch issued by the vendor"
+        "A": "Network segmentation, access control lists, security patches, and privilege guards.",
+        "B": "Scheduled tasks, backdoor accounts, registry run keys, and web shells.",
+        "C": "Firewall rules, intrusion detection signatures, antivirus definitions, and monitoring.",
+        "D": "Backup files, system restore points, temporary cache files, and update logs."
       },
       "correct": "B",
-      "explanation": "Web shells are explicitly identified as persistence mechanisms that attackers use and that must be removed during eradication; the other options are not persistence mechanisms."
+      "explanation": "Persistence mechanisms are tools the attacker uses to maintain access; incomplete removal of these items causes reinfection."
     },
     {
       "section": "Recovery",
       "type": "mc",
-      "question": "In what order should services be restored during the Recovery phase?",
+      "question": "In what order should systems be restored during the recovery phase?",
       "options": {
-        "A": "Starting with the oldest systems first to ensure legacy compatibility",
-        "B": "In the reverse order of when they were initially compromised",
-        "C": "In business-priority order based on organizational needs",
-        "D": "In alphabetical order of system names for consistency and documentation"
+        "A": "In reverse chronological order of backup creation, starting with the most recently backed-up systems.",
+        "B": "In the order they were originally compromised, starting with the first infected system.",
+        "C": "In business-priority order, restoring the most critical services to normal operation first.",
+        "D": "In alphabetical order by hostname, ensuring consistent and documented restoration procedures."
       },
       "correct": "C",
-      "explanation": "The section states that services should be restored in business-priority order, emphasizing alignment with organizational priorities rather than technical or chronological factors."
-    },
-    {
-      "section": "Lessons learned",
-      "type": "text",
-      "question": "When should a lessons-learned meeting be held and what is its primary purpose?",
-      "rubric": "A sound answer states that the meeting should be held within days of resolution while memory is fresh, and its purpose is to review the timeline, identify what worked and what failed, find gaps in detection, and produce action items to improve controls, tools, and training.",
-      "explanation": "The section emphasizes timing (within days, while memory is fresh) and the forward-looking purpose of identifying improvements for future incidents."
+      "explanation": "Recovery prioritizes restoring services by business need, not by when they were compromised or when backups were made."
     },
     {
       "section": "Severity classification",
       "type": "mc",
-      "question": "Which severity level applies to a confirmed data exfiltration of regulated data?",
+      "question": "According to the severity classification table, what is the response timeline for a high-severity incident?",
       "options": {
-        "A": "Medium, requiring response within 24 hours",
-        "B": "Low, requiring response within days",
-        "C": "High, requiring response within hours",
-        "D": "Critical, requiring immediate response and full mobilization"
+        "A": "Within hours of confirmation, with escalation to executive leadership.",
+        "B": "Immediate full mobilization within the first hour of detection.",
+        "C": "Within 24 hours, with normal business hours response procedures activated.",
+        "D": "Within days, with routine incident tracking and documentation required."
       },
-      "correct": "D",
-      "explanation": "The severity table explicitly lists confirmed regulated-data exfiltration as a Critical-level incident requiring immediate response and full mobilization."
+      "correct": "A",
+      "explanation": "High-severity incidents such as suspected breach or privileged account compromise require response within hours, whereas critical incidents require immediate mobilization."
     },
     {
       "section": "Communication and legal considerations",
       "type": "mc",
-      "question": "Under the GDPR regulation, what is the notification deadline for informing the supervisory authority of a data breach?",
+      "question": "What is the notification timeline for a GDPR breach under EU data privacy law?",
       "options": {
-        "A": "Within 72 hours of awareness",
-        "B": "Within 4 business days of determining materiality",
-        "C": "Within 60 days of breach notification",
-        "D": "Within 24 hours of awareness"
+        "A": "Within 60 days of discovery to law enforcement and government agencies.",
+        "B": "Within 72 hours of awareness to the supervisory authority.",
+        "C": "Within 24 hours of discovering the breach to all affected data subjects.",
+        "D": "Within 4 business days of determining materiality to regulatory authorities."
       },
-      "correct": "A",
-      "explanation": "The regulation table explicitly states that GDPR requires notification to the supervisory authority within 72 hours of awareness."
+      "correct": "B",
+      "explanation": "GDPR requires notification to the supervisory authority within 72 hours of awareness of a breach, which is shorter than HIPAA's 60-day window or the SEC's 4-business-day window."
     },
     {
       "section": "Playbooks",
-      "type": "text",
-      "question": "What is a playbook and what problem does it solve during incident response?",
-      "rubric": "A sound answer explains that a playbook is a pre-written, tested, step-by-step procedure for a specific incident type, and it solves the problem of eliminating in-the-moment procedural decisions under stress.",
-      "explanation": "The section defines a playbook as pre-written and tested procedures designed to remove the need for real-time decision-making, which is the core value proposition."
+      "type": "mc",
+      "question": "What is the primary benefit of having pre-written playbooks for specific incident types?",
+      "options": {
+        "A": "They eliminate in-the-moment procedural decisions under stress by providing tested, step-by-step procedures.",
+        "B": "They provide detailed background on how each attack method works and its historical frequency.",
+        "C": "They automatically trigger remediation actions without requiring human approval or oversight.",
+        "D": "They ensure that all incident responders receive the same salary and work schedule throughout the response."
+      },
+      "correct": "A",
+      "explanation": "Playbooks are pre-written procedures that remove the need to decide what to do during an incident when stress and time pressure are highest."
     },
     {
       "section": "Tabletop exercises and the CSIRT",
       "type": "mc",
-      "question": "What distinguishes a tabletop exercise from a live incident response drill?",
+      "question": "What is a tabletop exercise in the context of incident response?",
       "options": {
-        "A": "It involves external consultants and law enforcement participation",
-        "B": "It is a discussion-based scenario walkthrough that does not activate real systems",
-        "C": "It tests only the technical analysts and forensics specialists",
-        "D": "It uses real infrastructure but with safety controls to prevent actual damage"
+        "A": "An automated test where forensic software scans all systems to identify potential vulnerabilities and exploits.",
+        "B": "A live simulation where actual production systems are deliberately compromised to test response procedures.",
+        "C": "A physical meeting where incident responders review past incidents and update documentation manually.",
+        "D": "A discussion-based scenario walkthrough that practices IR decision-making without activating real systems."
       },
-      "correct": "B",
-      "explanation": "The section defines a tabletop exercise as a discussion-based scenario walkthrough where no live infrastructure is touched, distinguishing it from operational drills."
+      "correct": "D",
+      "explanation": "A tabletop exercise is a non-disruptive discussion-based practice that walks through incident scenarios and decision-making without touching real infrastructure."
     }
   ]
 }

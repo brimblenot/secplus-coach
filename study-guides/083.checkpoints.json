@@ -2,96 +2,120 @@
   "checkpoints": [
     {
       "section": "Raw data vs. threat intelligence",
-      "type": "text",
-      "question": "Explain the difference between raw data and threat intelligence using an example from the section.",
-      "rubric": "A sound answer states that raw data is unprocessed facts (like a list of IP addresses), while threat intelligence adds context and analysis that tells you what to do with it (knowing those IPs are C2 servers run by a specific ransomware group targeting hospitals, including their entry methods).",
-      "explanation": "This tests whether the student grasps the core distinction that intelligence requires processed analysis and actionable context, not just facts."
+      "type": "mc",
+      "question": "Which of the following is an example of threat intelligence rather than raw data?",
+      "options": {
+        "A": "Knowledge that those IPs are C2 servers operated by a ransomware group targeting hospitals with preferred entry vectors identified",
+        "B": "A spreadsheet of file hashes detected on multiple systems",
+        "C": "A collection of domain names extracted from network traffic logs",
+        "D": "A list of IP addresses flagged as malicious in a database"
+      },
+      "correct": "A",
+      "explanation": "Threat intelligence is processed, analyzed information that provides context about attackers — who they are and how to stop them. A simple list of IPs is raw data; knowing those IPs belong to a specific group, their targets, and their methods is intelligence."
     },
     {
       "section": "OSINT sources",
       "type": "mc",
-      "question": "Which of the following is a government agency source of OSINT threat intelligence?",
+      "question": "Which of the following is a government agency that publishes OSINT threat advisories?",
       "options": {
-        "A": "CrowdStrike blog posts and malware research reports",
-        "B": "VirusTotal malware sandbox behavioral indicators",
-        "C": "Krebs on Security investigative journalism",
-        "D": "CISA alerts and FBI Flash reports"
+        "A": "GitHub hosts malware analysis reports from researchers",
+        "B": "Twitter communities discuss threat actor techniques openly",
+        "C": "CISA issues cybersecurity alerts and advisories",
+        "D": "Microsoft publishes vulnerability research on its website"
       },
-      "correct": "D",
-      "explanation": "The section explicitly lists CISA and FBI Flash as government OSINT sources; the other options are security researcher blogs or commercial sandboxes, not government agencies."
+      "correct": "C",
+      "explanation": "CISA (Cybersecurity and Infrastructure Security Agency) is explicitly listed as a government source of OSINT threat intelligence through alerts and advisories, along with FBI Flash reports and NSA advisories."
     },
     {
       "section": "Threat intelligence sharing organizations",
       "type": "mc",
-      "question": "What is the key difference between an ISAC and an ISAO?",
+      "question": "Which type of threat intelligence sharing organization is open to any group of organizations regardless of industry sector?",
       "options": {
-        "A": "ISACs share raw threat data; ISAOs share analyzed intelligence",
-        "B": "ISACs are government entities; ISAOs are private sector",
-        "C": "ISACs are sector-specific nonprofits; ISAOs are flexible communities formed by executive order",
-        "D": "ISACs use STIX format for data; ISAOs use TAXII protocols"
+        "A": "ISACs, which are sector-specific nonprofits formed by peer organizations",
+        "B": "ISAOs, which were created by executive order as flexible sharing communities",
+        "C": "H-ISACs, which provide intelligence limited to healthcare organizations only",
+        "D": "E-ISACs, which exclusively serve electric power utilities and related industries"
       },
-      "correct": "C",
-      "explanation": "The section states ISACs are sector-specific (e.g., FS-ISAC for finance) while ISAOs were created by executive order as flexible alternatives where any group can form a sharing community."
+      "correct": "B",
+      "explanation": "ISAOs were created by executive order as a flexible alternative to the sector-specific ISAC model, allowing any group of organizations to form a sharing community regardless of industry."
     },
     {
       "section": "Standard formats: STIX and TAXII",
-      "type": "text",
-      "question": "Describe the roles of STIX and TAXII in automated threat intelligence sharing.",
-      "rubric": "A sound answer states that STIX is the standardized language or format for describing threat intelligence objects and their relationships, while TAXII is the transport protocol or postal service that moves STIX data between organizations using REST API.",
-      "explanation": "This tests the section's core point that these are complementary standards: STIX for the structure, TAXII for the delivery mechanism."
+      "type": "mc",
+      "question": "In the STIX and TAXII model, what role does TAXII serve?",
+      "options": {
+        "A": "TAXII is the malware analysis sandbox used to generate threat intelligence indicators",
+        "B": "TAXII is the standardized language used to describe threat intelligence objects and relationships",
+        "C": "TAXII is a format for bundling IoCs with MITRE ATT&CK technique mappings",
+        "D": "TAXII is the REST API protocol that transports STIX data between organizations automatically"
+      },
+      "correct": "D",
+      "explanation": "TAXII is the transport mechanism—a REST API that moves STIX data between organizations. STIX is the language for describing threat intelligence; TAXII is how it gets delivered."
     },
     {
       "section": "Indicators of Compromise (IoCs)",
       "type": "mc",
-      "question": "Which IoC type is used to identify malware families even when individual file hashes change due to packing or obfuscation?",
+      "question": "Which IoC type uses pattern-matching expressions to detect malware families even when individual file hashes change?",
       "options": {
-        "A": "IP address blocklists applied at firewalls",
-        "B": "YARA rules that match byte sequences and structural traits",
-        "C": "Email subject lines and sender addresses at security gateways",
-        "D": "Domain names filtered by DNS resolution"
+        "A": "IP address blocklists applied at the firewall to prevent connections",
+        "B": "Email subject lines and sender addresses applied at gateways",
+        "C": "YARA rules that identify malware by byte sequences and structural traits",
+        "D": "Domain name filters applied at DNS gateways to block resolution"
       },
-      "correct": "B",
-      "explanation": "The section defines YARA rules as pattern-matching expressions that identify malware families by byte sequences and structural traits, explicitly stating they detect families when hashes change due to packing or obfuscation."
+      "correct": "C",
+      "explanation": "YARA rules are pattern-matching expressions that detect malware families by their byte sequences, strings, or structural traits—making them effective even when individual hashes change due to packing or obfuscation."
     },
     {
       "section": "TTPs vs. IoCs",
-      "type": "text",
-      "question": "Why are TTPs considered more durable for defense than IoCs?",
-      "rubric": "A sound answer explains that IoCs (IPs, domains) are easily changed by attackers with minimal effort, while TTPs (tactics, techniques, procedures) require attackers to develop entirely new capabilities to change, making them harder to evade.",
-      "explanation": "This tests the section's key argument that behavior-based detection outlasts artifact-based detection because changing how you operate is far harder than getting a new IP."
+      "type": "mc",
+      "question": "Why are TTPs considered more durable than IoCs for long-term defensive value?",
+      "options": {
+        "A": "TTPs are automatically updated by threat feeds, whereas IoCs must be refreshed manually",
+        "B": "IoCs rely on behavior analysis, while TTPs rely on fixed infrastructure that cannot be replaced",
+        "C": "TTPs are easier to block because they involve fewer network artifacts than IoCs",
+        "D": "IoCs can be easily changed by attackers, while TTPs require attackers to develop entirely new capabilities"
+      },
+      "correct": "D",
+      "explanation": "IoCs like IP addresses and domains are easily changed—an attacker just gets a new one. TTPs describe how attackers operate, which requires developing new capabilities to change, making TTP-based detection far more durable."
     },
     {
       "section": "MITRE ATT&CK framework",
       "type": "mc",
-      "question": "In the MITRE ATT&CK framework, which tactic describes an attacker's effort to avoid being detected by disabling security tools or injecting code into other processes?",
+      "question": "In the MITRE ATT&CK framework, which tactic represents an attacker attempting to remain active after a system reboot?",
       "options": {
-        "A": "Defense Evasion, which includes disabling tools and process injection",
-        "B": "Execution, which covers running attacker code via PowerShell or scheduled tasks",
-        "C": "Privilege Escalation, which exploits vulnerabilities to gain higher access",
-        "D": "Persistence, which focuses on surviving reboots and maintaining access"
+        "A": "Defense Evasion, by disabling detection tools and performing process injection",
+        "B": "Persistence, through methods such as registry run keys and backdoor accounts",
+        "C": "Initial Access, by establishing resilient infection mechanisms on target systems",
+        "D": "Privilege Escalation, using token impersonation and vulnerability exploits"
       },
-      "correct": "A",
-      "explanation": "The section defines Defense Evasion as the tactic for avoiding detection and explicitly lists disabling tools and process injection as examples; the other tactics address different attacker objectives."
+      "correct": "B",
+      "explanation": "Persistence is the tactic focused on surviving reboots and maintaining access over time, using methods like registry run keys and backdoor accounts."
     },
     {
       "section": "Threat hunting",
       "type": "mc",
-      "question": "Which threat hunting approach starts with a threat intelligence tip and searches for that specific behavior in SIEM and EDR logs?",
+      "question": "Which threat hunting approach starts from threat intelligence about a specific attacker behavior and searches for that pattern in system logs and EDR telemetry?",
       "options": {
-        "A": "Hypothesis-based hunting, which starts from threat intelligence and searches for specific behaviors",
-        "B": "Network-focused hunting, which searches only packet captures and firewall logs",
-        "C": "Baseline anomaly hunting, which establishes normal behavior and hunts for deviations",
-        "D": "Alert-driven hunting, which investigates indicators as they are flagged by automated systems"
+        "A": "Hypothesis-based hunting, which begins with intelligence and searches for specific behaviors",
+        "B": "Baseline anomaly hunting, which establishes normal behavior and detects deviations",
+        "C": "Indicator-based hunting, which relies on automated alerts from security tools",
+        "D": "Vulnerability-based hunting, which prioritizes patch management and exploitation timelines"
       },
       "correct": "A",
-      "explanation": "The section explicitly defines hypothesis-based hunting as starting from threat intelligence (a tip) and searching for that specific behavior in SIEM, EDR, and network data."
+      "explanation": "Hypothesis-based threat hunting starts from threat intelligence—such as 'this actor uses Base64-encoded PowerShell'—and then searches SIEM logs and EDR telemetry for that specific behavior."
     },
     {
       "section": "Vulnerability intelligence",
-      "type": "text",
-      "question": "What is the purpose of the CISA Known Exploited Vulnerabilities catalog, and how does it inform patching decisions?",
-      "rubric": "A sound answer states that the KEV catalog lists CVEs confirmed to be actively exploited in real attacks, allowing organizations to prioritize patches for vulnerabilities with confirmed community exploitation over those that are merely theoretical risks.",
-      "explanation": "This tests understanding that the catalog enables risk-based patching by distinguishing confirmed active threats from theoretical vulnerabilities."
+      "type": "mc",
+      "question": "What is the purpose of the CISA Known Exploited Vulnerabilities catalog in prioritizing patching efforts?",
+      "options": {
+        "A": "It lists all theoretical vulnerabilities that could someday be exploited in the future",
+        "B": "It identifies CVEs actively exploited in the wild, making them highest-priority patches",
+        "C": "It provides the CVSS severity scores for all published vulnerabilities",
+        "D": "It tracks which software vendors have the most security flaws reported annually"
+      },
+      "correct": "B",
+      "explanation": "The CISA Known Exploited Vulnerabilities catalog is a maintained list of CVEs confirmed to be actively exploited in real attacks, enabling organizations to treat them as highest-priority patches."
     }
   ]
 }

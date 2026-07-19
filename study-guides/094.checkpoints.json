@@ -3,121 +3,145 @@
     {
       "section": "Network flow data",
       "type": "mc",
-      "question": "What does a NetFlow record capture about traffic?",
+      "question": "Which of the following best describes what NetFlow captures about network traffic?",
       "options": {
-        "A": "Source and destination IP, ports, protocol, bytes, packet count, and timestamps, but not payload content",
-        "B": "Only sampled packets at a ratio of 1 out of every N to reduce overhead on high-speed links",
-        "C": "Complete packet payloads along with header information for forensic reconstruction",
-        "D": "Packet headers and payload content from a subset of flows selected by the router"
+        "A": "Source and destination IP addresses, ports, protocol, and bytes transferred, but not packet payload content",
+        "B": "Vendor-neutral flow records that are exclusive to Cisco routers and cannot be used elsewhere",
+        "C": "Complete packet headers and full payload content from every single packet on the network",
+        "D": "Only sampled packets from high-speed links to reduce overhead on the monitoring switch"
       },
       "correct": "A",
-      "explanation": "NetFlow captures metadata about flows—IPs, ports, protocol, bytes, packet count, and timestamps—but explicitly does not capture payload content. This distinguishes it from full packet capture and sFlow, which samples instead of capturing all flows."
+      "explanation": "NetFlow records flow metadata including source/destination IP, ports, protocol, bytes, and timestamps, but explicitly does not capture payload content. The other options describe full packet capture, sFlow, and IPFIX respectively."
     },
     {
       "section": "Full packet capture",
-      "type": "text",
-      "question": "What does full packet capture record, and what is its main storage tradeoff?",
-      "rubric": "A sound answer states that full packet capture records every packet including both headers and payload, enabling session reconstruction and file extraction, but requires enormous storage.",
-      "explanation": "The section defines full packet capture as recording every packet in its entirety—headers and payload—and explicitly identifies the tradeoff as enormous storage requirements."
+      "type": "mc",
+      "question": "What is the primary tradeoff when implementing full packet capture on a network?",
+      "options": {
+        "A": "Ability to identify applications on non-standard ports versus inability to detect malware signatures",
+        "B": "Complete forensic record of all traffic versus enormous storage requirements and costs",
+        "C": "Passive monitoring without switch overhead versus inability to reconstruct encrypted sessions",
+        "D": "Real-time blocking of malicious traffic versus inability to perform historical threat hunting"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that full packet capture records everything (headers and payload) but has a major tradeoff of enormous storage requirements. The other options describe DPI, IPS, and sensor placement trade-offs."
     },
     {
       "section": "Deep packet inspection (DPI)",
       "type": "mc",
-      "question": "Which capability does DPI enable that depends on reading packet payload content?",
+      "question": "Which capability is enabled by deep packet inspection reading packet payload content?",
       "options": {
-        "A": "Sampling traffic at 1 out of every N packets for low overhead",
-        "B": "Recording source and destination IP addresses across flows",
-        "C": "Detecting applications even when they use non-standard ports",
-        "D": "Exporting NetFlow records to a central SIEM system"
+        "A": "Sampling only one packet out of every N packets to reduce monitoring overhead on high-speed links",
+        "B": "Capturing flow metadata such as source IP, destination port, and bytes transferred without payload access",
+        "C": "Identifying applications running on non-standard ports and detecting malware signatures inside file transfers",
+        "D": "Recording every packet in its entirety for historical forensic analysis and session reconstruction"
       },
       "correct": "C",
-      "explanation": "DPI works by reading payload content and is used to identify applications running on non-standard ports, detect malware signatures inside files, and enforce content policies. The other options describe flow data or sampling, not deep packet inspection."
+      "explanation": "DPI reads payload content, which allows identification of applications on non-standard ports and detection of malware signatures. The other options describe NetFlow/sFlow and full packet capture."
     },
     {
       "section": "Log data: network devices",
       "type": "mc",
-      "question": "What port and protocol combination is used for encrypted syslog transmission?",
+      "question": "What are the two standard transport options for syslog, and what are their respective ports?",
       "options": {
-        "A": "Port 443 with HTTPS encryption",
-        "B": "Port 6514 with TLS encryption",
-        "C": "Port 389 with LDAP encryption",
-        "D": "Port 514 with UDP unencrypted"
+        "A": "UDP on port 514 or encrypted TCP on port 514 with authentication",
+        "B": "Cisco NetFlow on port 2055 or IPFIX on port 4739",
+        "C": "TCP on port 514 or encrypted TLS on port 515",
+        "D": "UDP on port 514 or encrypted TLS on port 6514"
       },
-      "correct": "B",
-      "explanation": "The section states that syslog uses port 514 for unencrypted transport (UDP or TCP) and port 6514 for encrypted transport via TLS."
+      "correct": "D",
+      "explanation": "Syslog uses UDP or TCP on port 514 for unencrypted transport and TLS on port 6514 for encrypted transport. The other options list incorrect port numbers and protocols."
     },
     {
       "section": "Log data: Windows Event Logs",
       "type": "mc",
-      "question": "Which Event ID indicates that a new process was created on a Windows system?",
+      "question": "If an attacker created a new user account on a Windows system, which Event ID would appear in the Security log?",
       "options": {
-        "A": "4624 indicating successful logon",
-        "B": "4698 indicating scheduled task created",
-        "C": "4720 indicating user account created",
-        "D": "4688 indicating new process created"
+        "A": "Event ID 4720 indicating that a user account was created",
+        "B": "Event ID 4688 indicating that a new process was created by the attacker",
+        "C": "Event ID 4672 indicating special privileges were assigned to a logon session",
+        "D": "Event ID 4625 indicating a failed attempt to create a user account"
       },
-      "correct": "D",
-      "explanation": "Event ID 4688 specifically means a new process was created. The other Event IDs track logon success, account creation, and task creation respectively."
+      "correct": "A",
+      "explanation": "Event ID 4720 specifically means a user account was created. Event ID 4625 is failed logon, 4688 is new process creation, and 4672 is special privileges assignment."
     },
     {
       "section": "Log data: Linux logs",
-      "type": "text",
-      "question": "Where do SSH logins and sudo commands get recorded in a standard Linux system, and what does auditd provide?",
-      "rubric": "A sound answer states that SSH logins and sudo commands are logged to auth.log or secure, and auditd provides detailed kernel-level audit events when configured.",
-      "explanation": "The section specifies that auth.log or secure logs SSH and sudo activity, while audit.log contains kernel-level events from the auditd daemon."
+      "type": "mc",
+      "question": "In a Linux system, which log file would record SSH login attempts and sudo command usage?",
+      "options": {
+        "A": "The audit.log file which is only generated when the auditd kernel audit daemon is configured",
+        "B": "The syslog or messages file which records general system events and application crashes",
+        "C": "The kern.log file which captures all kernel events and system startup information",
+        "D": "The auth.log or secure file which tracks SSH logins, sudo usage, and PAM authentication"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that auth.log and secure files record SSH logins, sudo/su use, and PAM authentication. The other log files serve different purposes."
     },
     {
       "section": "Application and cloud logs",
       "type": "mc",
-      "question": "What information does a web server log in Combined Log Format include?",
+      "question": "What information does the Combined Log Format for web server logs include?",
       "options": {
-        "A": "Client IP, timestamp, HTTP method, URL, response code, bytes, Referer header, and User-Agent string",
-        "B": "TCP flow data including source and destination ports and packet counts",
-        "C": "AWS CloudTrail API calls and the identity of the caller making each request",
-        "D": "Only the client IP address and the requested URL without response codes"
+        "A": "Process creation information, file system operations, network connections, and registry changes",
+        "B": "Database query text, username, timestamp, affected tables, and connection duration",
+        "C": "Client IP, timestamp, HTTP method, URL, response code, and bytes transferred",
+        "D": "AWS API caller identity, request time, source IP, and resource affected by call"
       },
-      "correct": "A",
-      "explanation": "Combined Log Format records client IP, timestamp, HTTP method, URL, response code, bytes, Referer header, and User-Agent string, enabling reconstruction of every request to spot scanning or exploitation attempts."
+      "correct": "C",
+      "explanation": "Combined Log Format records client IP, timestamp, HTTP method, URL, response code, bytes, Referer, and User-Agent. The other options describe database logs, AWS CloudTrail, and EDR telemetry."
     },
     {
       "section": "Security-specific telemetry",
-      "type": "text",
-      "question": "How does EDR differ from traditional antivirus in terms of what security data it captures and how it enables detection?",
-      "rubric": "A sound answer explains that EDR records continuous endpoint telemetry enabling threat hunting through historical queries, whereas traditional antivirus only matches known signatures at execution time and keeps no ongoing record.",
-      "explanation": "The section contrasts EDR's continuous recording of process trees, file operations, and network connections (supporting threat hunting) against antivirus's signature-matching-only approach with no historical record."
+      "type": "mc",
+      "question": "How does EDR telemetry enable threat hunting differently from traditional antivirus?",
+      "options": {
+        "A": "Traditional antivirus uses deep packet inspection on non-standard ports, while EDR only detects known signatures",
+        "B": "EDR records continuous endpoint activity for query across the fleet, while antivirus only matches signatures at execution time",
+        "C": "EDR can block malware in real time, while antivirus conducts retrospective forensic investigations of incidents",
+        "D": "Antivirus records process creation and file system operations, while EDR only responds to network flow alerts"
+      },
+      "correct": "B",
+      "explanation": "The section states that EDR records everything continuously enabling threat hunting, while traditional antivirus only matches signatures at execution time with no ongoing record. The other options misstate the capabilities."
     },
     {
       "section": "SIEM aggregation and log storage",
       "type": "mc",
-      "question": "Which storage tier in a SIEM would be appropriate for logs needed for active investigations and real-time queries?",
+      "question": "What is the purpose of standardized schemas like CEF and LEEF in a SIEM?",
       "options": {
-        "A": "Warm storage with slower access and 6–12 month window",
-        "B": "Hot storage with immediate access and 30–90 day window",
-        "C": "Archive storage with quarterly retrieval for compliance audits",
-        "D": "Cold storage with slowest access for years-long regulatory archival"
+        "A": "They encrypt log data in transit between network devices and the central SIEM server",
+        "B": "They compress log data into a smaller format to reduce hot storage requirements significantly",
+        "C": "They automatically classify logs into hot, warm, or cold storage tiers based on severity",
+        "D": "They allow a SIEM to parse events consistently regardless of the source product or vendor"
       },
-      "correct": "B",
-      "explanation": "Hot storage provides immediate access over a 30–90 day window and is used for active SIEM queries and ongoing investigations, whereas warm and cold tiers trade access speed for longer retention."
+      "correct": "D",
+      "explanation": "CEF and LEEF are standardized schemas that enable consistent parsing of events from different vendors and sources. The other options describe data compression, encryption, and storage tiering features."
     },
     {
       "section": "Metadata analysis",
-      "type": "text",
-      "question": "Why is metadata alone often as revealing as the actual content of encrypted communications?",
-      "rubric": "A sound answer states that metadata captures who communicated, when, how long, how often, and how much data transferred, which can reveal suspicious behavior patterns even when payload content is encrypted.",
-      "explanation": "The section illustrates that timing, volume, frequency, and direction of communications expose intent and anomalies independently of what is actually said, using the analogy that an envelope reveals secrets even when the letter is sealed."
+      "type": "mc",
+      "question": "Why is metadata analysis valuable for security monitoring even when traffic is encrypted?",
+      "options": {
+        "A": "Metadata reveals who, when, how often, and how much data is communicated without reading encrypted content",
+        "B": "Encrypted traffic automatically decrypts when passing through a network tap or SPAN port for extraction",
+        "C": "Metadata includes DPI analysis of packet payloads to detect malware signatures in encrypted transfers",
+        "D": "Metadata contains full packet payloads that security tools can reconstruct from packet headers"
+      },
+      "correct": "A",
+      "explanation": "The section explains that metadata about communications (who, when, how long, how much data) can reveal suspicious behavior even when content is encrypted. The other options misstate how metadata and encryption work."
     },
     {
       "section": "Sensor placement",
       "type": "mc",
-      "question": "Which sensor placement method can actively block malicious traffic but introduces a single point of failure risk?",
+      "question": "What is the key advantage of a network tap compared to a SPAN port for monitoring critical links?",
       "options": {
-        "A": "Remote syslog server that collects logs from all monitored devices",
-        "B": "Network tap that physically splits the signal for passive monitoring",
-        "C": "Inline sensor positioned directly in the network path",
-        "D": "SPAN port that copies traffic passively to a monitoring interface"
+        "A": "A network tap can actively block malicious traffic inline, while a SPAN port only monitors passively without blocking capability",
+        "B": "A network tap is a passive hardware device that cannot be disabled by switch configuration errors and adds no switch processing overhead",
+        "C": "A network tap is a managed-switch feature that copies traffic to a monitoring port while the SPAN port requires external hardware",
+        "D": "A network tap guarantees zero latency introduction to the network, while a SPAN port always adds measurable delay to forwarded traffic"
       },
-      "correct": "C",
-      "explanation": "An inline sensor sits in the network forwarding path, allowing it to block traffic like an IPS does, but if it malfunctions it causes a network outage, making it a single point of failure."
+      "correct": "B",
+      "explanation": "The section states that a network tap is hardware-passive and cannot be disabled by switch misconfiguration, and it adds zero switch overhead, whereas SPAN ports can be accidentally disabled and add processing load. SPAN ports cannot block, and inline sensors (not taps) are for blocking."
     }
   ]
 }

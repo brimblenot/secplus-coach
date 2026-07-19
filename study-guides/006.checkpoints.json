@@ -3,81 +3,80 @@
     {
       "section": "What a gap analysis is and why organizations run one",
       "type": "mc",
-      "question": "Which of the following best describes the primary output of a gap analysis?",
+      "question": "Which of the following best describes what a gap analysis documents?",
       "options": {
-        "A": "A prioritized list of shortfalls and a roadmap for fixing them",
-        "B": "A compliance certificate proving adherence to a specific standard",
-        "C": "A detailed inventory of all hardware and software assets in use",
-        "D": "A threat model showing how attackers could exploit vulnerabilities"
+        "A": "The cost of implementing new security technologies across the entire infrastructure",
+        "B": "The process of interviewing staff to identify their security training needs",
+        "C": "The differences between an organization's current security posture and a defined target state",
+        "D": "The likelihood that a specific threat will exploit a known vulnerability in the system"
       },
-      "correct": "A",
-      "explanation": "A gap analysis compares current state to a target standard and documents the differences (gaps); the output is a prioritized list of shortfalls and a remediation roadmap. The other options describe different security activities."
-    },
-    {
-      "section": "The five steps of a gap analysis",
-      "type": "text",
-      "question": "In your own words, explain what it means to assess the current state in a gap analysis and name at least two methods used to do it.",
-      "rubric": "A sound answer should state that assessing current state means gathering evidence of what controls actually exist, and name at least two of: interviews, documentation review, technical testing, or direct observation.",
-      "explanation": "Step 2 requires concrete evidence of what controls are in place using multiple methods; the guide lists four specific approaches. The answer should show the student understands this is fact-finding, not judgment."
+      "correct": "C",
+      "explanation": "Gap analysis is a formal evaluation that compares current security posture to a target state and documents the differences, or gaps, between them. Risk assessment measures likelihood of threat exploitation; cost analysis measures spending; staff interviews are just one assessment method."
     },
     {
       "section": "The five steps of a gap analysis",
       "type": "mc",
-      "question": "When identifying gaps in Step 3, what distinguishes a useful gap statement from an unhelpful one?",
+      "question": "In the five-step gap analysis process, what is accomplished in Step 3?",
       "options": {
-        "A": "A useful gap expresses the problem as a general feeling rather than measurable evidence",
-        "B": "A useful gap mentions the specific control that is missing and references the standard it violates",
-        "C": "A useful gap identifies only technical shortfalls and ignores policy deficiencies",
-        "D": "A useful gap focuses on the cost of remediation rather than the control itself"
+        "A": "Documenting every area where current state falls short of the target",
+        "B": "Assigning gaps to owners and creating timelines for remediation",
+        "C": "Gathering evidence of what controls actually exist through interviews and testing",
+        "D": "Selecting the framework or standard that represents good security for the organization"
       },
-      "correct": "B",
-      "explanation": "The guide contrasts vague statements like 'Security could be better' with specific, actionable ones that name the control and the violated standard. Specificity is what makes a gap usable for remediation."
+      "correct": "A",
+      "explanation": "Step 3 is when gaps are identified and documented with specificity. Step 1 defines the target baseline, Step 2 assesses current state, and Step 5 builds the remediation roadmap."
     },
     {
       "section": "Technical vs. policy gaps — both must be addressed",
-      "type": "text",
-      "question": "Why does the guide state that both technical and policy gaps must be addressed together?",
-      "rubric": "A sound answer should explain that technical controls without policies get misconfigured or bypassed, and policies without technical controls cannot be reliably enforced—both are needed for effective security.",
-      "explanation": "The guide explicitly states that technical controls need supporting policies, and policies need technical enforcement; neither alone is sufficient. The answer should capture this interdependence."
+      "type": "mc",
+      "question": "Why do both technical controls and policy controls need to be present?",
+      "options": {
+        "A": "Technical controls protect against external threats while policy controls protect against insider threats and user misconduct",
+        "B": "Technical controls are required by law while policy controls satisfy internal stakeholder expectations and governance requirements",
+        "C": "Technical controls are faster to implement than policy controls while policies provide long-term security benefits and organizational guidance",
+        "D": "Technical controls without supporting policies get misconfigured or bypassed, and policies without technical controls cannot be reliably enforced"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that technical controls without supporting policies get misconfigured or bypassed, and policies without technical controls cannot be reliably enforced. Both are necessary for effective security."
     },
     {
       "section": "Gap analysis vs. risk assessment",
       "type": "mc",
-      "question": "What is the core difference between the question a gap analysis answers and the question a risk assessment answers?",
+      "question": "How do gap analysis and risk assessment differ in their core focus?",
       "options": {
-        "A": "Gap analysis measures against external standards; risk assessment measures against internal budgets",
-        "B": "Gap analysis occurs before incidents; risk assessment occurs only after incidents happen",
-        "C": "Gap analysis covers only technical controls while risk assessment covers only policy controls",
-        "D": "Gap analysis identifies what controls exist or are missing versus a standard; risk assessment measures the probability a threat will exploit a vulnerability"
+        "A": "Gap analysis focuses on technical controls while risk assessment focuses on policy controls and compliance requirements",
+        "B": "Gap analysis evaluates controls against a standard while risk assessment evaluates likelihood of specific threats exploiting specific vulnerabilities",
+        "C": "Gap analysis requires external auditors while risk assessment is conducted internally by the security staff and team",
+        "D": "Gap analysis is performed before audits while risk assessment is performed after a breach or security incident occurs"
       },
-      "correct": "D",
-      "explanation": "The guide defines the distinct core question each method answers: gap analysis compares to a standard or framework, while risk assessment targets specific threat-vulnerability pairs. The answer shows these are complementary but different."
+      "correct": "B",
+      "explanation": "The section defines gap analysis as asking what controls exist or lack versus a standard, while risk assessment asks how likely a specific threat is to exploit a specific vulnerability. They are related but distinct approaches."
     },
     {
       "section": "Zero trust gap analysis",
       "type": "mc",
       "question": "What does a zero trust gap analysis specifically identify?",
       "options": {
-        "A": "Whether the organization has purchased zero trust software",
-        "B": "The number of external vendors and their third-party audit status",
-        "C": "Where implicit trust exists, what identity verification mechanisms are absent, and the path to full zero trust",
-        "D": "Which employees have too much network access and need termination"
+        "A": "Which legacy systems cannot be upgraded to support modern security protocols and zero trust architecture requirements",
+        "B": "The cost of deploying multi-factor authentication and advanced verification across all users and devices in the environment",
+        "C": "Where implicit trust currently exists, which identity verification mechanisms are missing, and what steps lead to zero trust implementation",
+        "D": "The number of users who fail to follow zero trust policies and verification requirements within the organization"
       },
       "correct": "C",
-      "explanation": "The guide states that a zero trust gap analysis identifies where implicit trust exists (flat networks), missing identity verification, and implementation steps. Zero trust requires explicit verification regardless of location."
+      "explanation": "The section states that a zero trust gap analysis specifically identifies where implicit trust currently exists, which identity verification mechanisms are missing, and what steps lead to full zero trust implementation."
     },
     {
       "section": "OT environments and gap analysis challenges",
       "type": "mc",
-      "question": "Why are OT environments uniquely difficult to assess in a gap analysis?",
+      "question": "Which framework is specifically designed for gap analysis in OT security?",
       "options": {
-        "A": "OT networks are always isolated and do not require gap analysis",
-        "B": "OT systems are too new to have established security frameworks",
-        "C": "Gap analysis applies only to IT, not OT environments",
-        "D": "Legacy systems lack patches, proprietary protocols resist standard tools, and scanning risks disrupting operations"
+        "A": "IEC 62443 for addressing unique OT security assessment challenges",
+        "B": "PCI DSS for securing organizations that process payment card data",
+        "C": "ISO/IEC 27001 for establishing an Information Security Management System globally",
+        "D": "NIST SP 800-171 for protecting systems that handle Controlled Unclassified Information"
       },
-      "correct": "D",
-      "explanation": "The guide lists three specific challenges: legacy OS that cannot be patched, proprietary protocols that standard tools do not understand, and high availability requirements that make scanning disruptive. These are the reasons OT gap analysis is harder."
+      "correct": "A",
+      "explanation": "The section explicitly identifies IEC 62443 as the framework specifically designed for OT security gap analysis, because legacy OT environments face unique constraints like unpatched systems and proprietary protocols."
     }
   ]
 }

@@ -38,8 +38,8 @@ Every MC question must follow real CompTIA SY0-701 exam conventions:
 2. FORCE A DECISION UNDER CONSTRAINTS
    Use qualifiers that eliminate easy guessing: "Which of the following BEST...", "What should the administrator do FIRST...", "Which would MOST effectively...", "Which is the PRIMARY reason...". The qualifier forces the student to pick the most correct answer, not just a correct one.
 
-3. ALL OPTIONS MUST BE THE SAME LENGTH (±15 words)
-   This is mandatory. The correct answer must NOT be longer than the distractors. If your correct answer is a long sentence, shorten it. If your distractors are short, expand them. Every option should look equally plausible at a glance.
+3. ALL OPTIONS MUST BE NEARLY IDENTICAL IN LENGTH AND DETAIL
+   This is mandatory and the student's #1 complaint. All four options must be within a few words of each other — the longest no more than ~1.15× the words of the shortest — and carry the SAME amount of detail and specificity, so they look identical at a glance. The correct answer must NOT be the longest, the most detailed, or the most technical-sounding one; NO option may spell out more than the others. If the correct answer is a long sentence, shorten it and add matching detail to the distractors. If your distractors are short, expand them to match. The answer must be impossible to spot by picking the most thorough option without reading the stem.
 
 4. PLAUSIBLE DISTRACTORS — NO OBVIOUSLY WRONG ANSWERS
    Each wrong option must be something a student with partial knowledge would seriously consider. Use these distractor strategies:

@@ -3,88 +3,106 @@
     {
       "section": "Brute force physical entry",
       "type": "mc",
-      "question": "What is the primary function of a mantrap vestibule in physical security?",
+      "question": "What is the primary function of a mantrap vestibule in preventing unauthorized facility access?",
       "options": {
-        "A": "It records video of all people entering the facility for later review",
-        "B": "It alerts security staff when an unauthorized person attempts entry",
-        "C": "It physically prevents tailgating by admitting only one person at a time",
-        "D": "It requires all visitors to scan an ID badge before proceeding"
+        "A": "It physically admits only one person at a time, preventing tailgating regardless of social pressure",
+        "B": "It uses biometric scanners to verify the identity of each person entering the facility",
+        "C": "It delays an attacker long enough for security personnel to respond to an intrusion attempt",
+        "D": "It logs the badge ID of every person who enters and detects duplicate card usage patterns"
       },
-      "correct": "C",
-      "explanation": "A mantrap vestibule is a double-door airlock that blocks tailgating mechanically, regardless of social pressure or badge status — it is a physical control, not a detection or monitoring system."
+      "correct": "A",
+      "explanation": "The section defines a mantrap vestibule as a double-door airlock that admits only one person at a time and physically prevents tailgating regardless of social pressure — the mechanism itself prevents sharing a single passage."
     },
     {
       "section": "Card Skimming",
-      "type": "text",
-      "question": "Explain the difference between what a standard ATM skimmer captures and what a shimmer device captures.",
-      "rubric": "A sound answer states that a skimmer captures magnetic stripe data (via overlay on the card slot), while a shimmer is inserted inside the chip slot and captures chip data — and that shimmer data enables card-not-present fraud because no physical chip is needed for online purchases.",
-      "explanation": "The section explicitly states that an ATM skimmer overlay reads the magnetic stripe, while a shimmer device reads chip data and enables card-not-present fraud where no physical chip is required."
+      "type": "mc",
+      "question": "What type of fraud does a shimmer device enable that a traditional ATM skimmer overlay cannot?",
+      "options": {
+        "A": "Wireless data transmission using Bluetooth to send stolen data to a nearby accomplice",
+        "B": "Magnetic stripe duplication that allows the attacker to use the card at point-of-sale terminals",
+        "C": "Card-not-present fraud, enabling online purchases where no physical chip is needed",
+        "D": "Real-time transaction monitoring that allows the attacker to intercept PIN codes during use"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that a shimmer device reads chip data and enables card-not-present fraud (online purchases where no physical chip is needed), whereas the traditional ATM skimmer overlay reads the magnetic stripe."
     },
     {
-      "section": "RFID cloning",
+      "section": "RFID Cloning",
       "type": "mc",
-      "question": "Why does cloning a contactless payment card fail to complete a transaction, but cloning an HID proximity badge succeeds in granting access?",
+      "question": "Why do contactless payment cards resist RFID cloning attacks while older HID proximity cards do not?",
       "options": {
-        "A": "Payment cards require biometric confirmation, while badges only need the card ID",
-        "B": "Payment cards use dynamic cryptograms per transaction, while proximity badges broadcast a static ID",
-        "C": "Payment cards are encrypted end-to-end, while badges transmit in plaintext",
-        "D": "Payment cards use multi-factor authentication, while badges use single-factor only"
+        "A": "Contactless payment cards use longer-range RF signals that are harder to capture with cheap hardware",
+        "B": "Contactless payment cards employ multi-factor authentication that requires a PIN at each point of sale",
+        "C": "Contactless payment cards use stronger encryption algorithms that cannot be defeated with standard cloning tools",
+        "D": "Contactless payment cards generate a dynamic cryptogram per transaction instead of broadcasting a static ID"
       },
-      "correct": "B",
-      "explanation": "The section states that contactless payment cards generate a dynamic cryptogram (one-time code) per transaction, so a static clone cannot work; older cards lack this protection and remain vulnerable."
+      "correct": "D",
+      "explanation": "The section states that contactless payment cards generate a dynamic cryptogram (one-time code) per transaction, so a static clone cannot complete a payment, while older cards lack this protection and broadcast a static ID that can be cloned."
     },
     {
       "section": "USB-based attacks",
-      "type": "text",
-      "question": "Why do USB Rubber Ducky and O.MG Cable attacks bypass both antivirus and application allowlisting?",
-      "rubric": "A sound answer states that these devices emulate a keyboard and fire pre-programmed keystrokes, invoking legitimate OS utilities (like PowerShell) by typing commands — no malicious file is written to disk, so antivirus and allowlisting (which control files and programs) do not detect or block them.",
-      "explanation": "The section explicitly notes that these attacks bypass antivirus and allowlisting because they invoke legitimate utilities through keystroke injection, not file execution or program launch."
+      "type": "mc",
+      "question": "How does a USB Rubber Ducky bypass both antivirus and application allowlisting defenses?",
+      "options": {
+        "A": "It disables antivirus signatures before they can scan incoming USB device firmware for malicious code",
+        "B": "It emulates a USB keyboard and types pre-programmed commands, invoking legitimate OS utilities without writing files to disk",
+        "C": "It copies approved system utilities into memory and executes them under their trusted certificate before allowlisting can block them",
+        "D": "It exploits a vulnerability in the operating system's USB driver to gain administrative privileges before any security check"
+      },
+      "correct": "B",
+      "explanation": "The section explains that USB Rubber Ducky and O.MG Cable bypass antivirus and allowlisting because they invoke legitimate OS utilities by typing commands — no file is written to disk, and they work by emulating a keyboard."
     },
     {
       "section": "Juice jacking",
       "type": "mc",
       "question": "Which defense prevents data theft at a compromised public USB charging station while still allowing the device to charge?",
       "options": {
-        "A": "A password prompt on the charging device",
-        "B": "A VPN connection active during charging",
-        "C": "An antivirus scan before connecting to the station",
-        "D": "A power-only USB cable with data lines physically absent"
+        "A": "A power-only USB cable that has data lines physically absent from the connector",
+        "B": "A software firewall on the device that blocks all inbound connections during charging mode",
+        "C": "An encryption module that encrypts all data transmitted over the USB charging connection in real time",
+        "D": "A biometric lock on the charging port that requires fingerprint authentication before power is delivered"
       },
-      "correct": "D",
-      "explanation": "A power-only USB cable has no data lines, so it cannot carry stolen data to or from the charging station — power still flows to the device."
+      "correct": "A",
+      "explanation": "The section lists power-only USB cable as a defense for juice jacking — it has data lines physically absent, so power flows but no data can be stolen."
     },
     {
       "section": "Cold boot attacks",
-      "type": "text",
-      "question": "Why is full disk encryption alone insufficient to prevent a cold boot attack?",
-      "rubric": "A sound answer states that encryption keys are stored in DRAM while the system is powered on, and DRAM retains its contents for seconds to minutes after power is cut — so an attacker can recover the keys from RAM before they are erased, even if the stored disk data is encrypted.",
-      "explanation": "The section explains that DRAM retains contents after power-off and that full disk encryption protects stored data but not keys already loaded in RAM, which a cold boot attack targets directly."
+      "type": "mc",
+      "question": "Why is full disk encryption alone insufficient to protect against a cold boot attack?",
+      "options": {
+        "A": "Full disk encryption is defeated by physically removing the storage device before the cold boot attack can execute",
+        "B": "Full disk encryption protects stored data but not encryption keys already loaded into RAM that the attack can recover",
+        "C": "Cold boot attacks bypass full disk encryption by using a firmware-level exploit to decrypt the storage automatically",
+        "D": "Cold boot attacks access the encrypted disk through an out-of-band management interface that encrypts alone cannot defend"
+      },
+      "correct": "B",
+      "explanation": "The section states that full disk encryption protects stored data but not keys already loaded into RAM, which is what a cold boot attack exploits by recovering data from DRAM after power-off."
     },
     {
       "section": "Hardware implants",
       "type": "mc",
-      "question": "Which of the following is a defense against hardware implants?",
+      "question": "What is the primary purpose of using tamper-evident chassis seals as a defense against hardware implants?",
       "options": {
-        "A": "Tamper-evident chassis seals and hardware chain of custody",
-        "B": "Frequent patching of the operating system",
-        "C": "Strong passwords on all user accounts",
-        "D": "Regular antivirus scans of the hard drive"
+        "A": "To encrypt all data traveling across internal buses and prevent unauthorized hardware from intercepting communications",
+        "B": "To physically disable the device's motherboard if the seal is broken, destroying any implant that was inserted",
+        "C": "To prevent the physical installation of backdoor devices inside equipment by making tampering visually obvious",
+        "D": "To alert security personnel immediately when someone opens the chassis by triggering an electronic alarm"
       },
-      "correct": "A",
-      "explanation": "The section lists tamper-evident seals and chain of custody as defenses; antivirus, passwords, and OS patches operate at the software level and do not detect or prevent hardware implants below the OS."
+      "correct": "C",
+      "explanation": "The section lists tamper-evident chassis seals as a defense against implant installation, enabling detection of hardware changes through visible evidence of tampering."
     },
     {
       "section": "Environmental attacks",
       "type": "mc",
-      "question": "Which of the following is an example of an environmental attack?",
+      "question": "Which type of environmental attack causes facility-wide outages by targeting the infrastructure computing equipment depends on?",
       "options": {
-        "A": "Cutting external electrical panels to cause a facility-wide power outage",
-        "B": "Sending a phishing email to trick an employee into revealing credentials",
-        "C": "Installing malware on a web server to steal customer data",
-        "D": "Exploiting a buffer overflow vulnerability in application code"
+        "A": "Activating fire suppression systems that displace oxygen and interfere with network connectivity",
+        "B": "Flooding from overhead plumbing or external water intrusion that causes corrosion of data center hardware",
+        "C": "Cutting external electrical panels or HVAC units to disable power and cooling systems simultaneously",
+        "D": "Cutting external electrical panels or draining generator fuel to cause facility-wide power loss"
       },
-      "correct": "A",
-      "explanation": "Environmental attacks target infrastructure that computing equipment depends on — power, cooling, fire suppression, and plumbing — not the equipment itself; the other options are software or network attacks."
+      "correct": "D",
+      "explanation": "The section identifies power attacks as cutting external electrical panels or draining generator fuel, which cause facility-wide outage by affecting the infrastructure that computing equipment depends on."
     }
   ]
 }

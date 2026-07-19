@@ -10,7 +10,7 @@ export const maxDuration = 60
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 // Stable system prompt — cached across checkpoint generations within the 5-min TTL.
-const SYSTEM_PROMPT = `You are a CompTIA Security+ SY0-701 study coach writing quick in-lecture comprehension checks. These are low-stakes retrieval practice the student answers section-by-section while reading — not the graded exam quiz — so keep them short and direct. You strictly obey the scope lock: a checkpoint may only test content written in its own section of the provided study guide.`
+const SYSTEM_PROMPT = `You are a CompTIA Security+ SY0-701 study coach writing quick in-lecture comprehension checks. These are low-stakes retrieval practice the student answers section-by-section while reading — not the graded exam quiz — so keep them short and direct. Every checkpoint is MULTIPLE CHOICE (no free-text). You strictly obey the scope lock: a checkpoint may only test content written in its own section of the provided study guide.`
 
 export async function POST(req: NextRequest) {
   try {

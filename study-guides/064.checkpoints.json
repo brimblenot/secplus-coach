@@ -3,42 +3,54 @@
     {
       "section": "Jump servers",
       "type": "mc",
-      "question": "What does a jump server enable that reduces direct access to internal servers?",
+      "question": "What is the primary security benefit of using a jump server for administrator access?",
       "options": {
-        "A": "Routing admin traffic through a hardened gateway with MFA and logging",
-        "B": "Encrypting traffic between workstations and internal servers",
-        "C": "Automatically patching servers on protected network segments",
-        "D": "Balancing admin requests across multiple hardened servers"
+        "A": "It automatically encrypts all traffic between the admin workstation and the internal servers",
+        "B": "It creates a single authorized gateway through which all admin traffic is funneled to protected systems",
+        "C": "It prevents administrators from needing to remember passwords for any of the internal systems",
+        "D": "It eliminates the need for administrators to use multi-factor authentication on their own workstations"
       },
-      "correct": "A",
-      "explanation": "The section defines a jump server as the single authorized gateway through which admin traffic funnels, protected by MFA and session recording. The other options describe different security mechanisms not central to jump server design."
+      "correct": "B",
+      "explanation": "A jump server acts as the single authorized gateway through which all administrator traffic must pass, reducing attack surface by centralizing access control. The other options misrepresent jump server functionality or confuse it with related technologies like MFA or encryption."
     },
     {
       "section": "Load balancers",
-      "type": "text",
-      "question": "Explain why a Layer 7 load balancer can route requests based on URL path but a Layer 4 load balancer cannot.",
-      "rubric": "A sound answer states that Layer 7 operates at the application (HTTP/HTTPS) layer and inspects HTTP content like URLs and headers, whereas Layer 4 operates only at the transport (TCP/UDP) layer and sees only IP addresses and ports, not application-level details.",
-      "explanation": "The section's comparison table shows Layer 4 uses only IP address and port for routing, while Layer 7 routes by URL path, hostname, and headers. This difference directly follows from which OSI layer each operates at."
+      "type": "mc",
+      "question": "Which load balancer layer can decrypt HTTPS traffic from clients and inspect request headers and URL paths before forwarding?",
+      "options": {
+        "A": "Layer 4 load balancer using least-connections algorithm with health checks",
+        "B": "Layer 7 load balancer using round-robin distribution and weighted routing",
+        "C": "Layer 7 load balancer using SSL termination and HTTP-aware routing",
+        "D": "Layer 4 load balancer using IP hash routing with session persistence"
+      },
+      "correct": "C",
+      "explanation": "Only Layer 7 load balancers operate at the application layer and can perform SSL termination to decrypt HTTPS and inspect HTTP headers and URL paths. Layer 4 operates only at the transport layer and cannot perform these functions."
     },
     {
       "section": "Proxy servers",
       "type": "mc",
-      "question": "Which type of proxy sits between internal clients and external internet resources and can operate without explicit client configuration?",
+      "question": "What is the key difference between a forward proxy and a reverse proxy in terms of where each sits and whom it serves?",
       "options": {
-        "A": "Explicit forward proxy requiring clients to point at the proxy address",
-        "B": "Transparent forward proxy using intercepting rules with no client configuration",
-        "C": "Open proxy available to any internet user without authentication",
-        "D": "Reverse proxy using transparent interception via firewall rules"
+        "A": "A forward proxy sits on the server side and protects backend servers from external threats and attacks",
+        "B": "A forward proxy requires explicit client configuration to function, while a reverse proxy requires firewall rules to function",
+        "C": "A forward proxy performs SSL/TLS inspection on traffic, while a reverse proxy performs load distribution and caching",
+        "D": "A forward proxy sits on the client side and serves internal users, while a reverse proxy sits on the server side and protects backend servers"
       },
-      "correct": "B",
-      "explanation": "The section describes a transparent (intercepting) forward proxy that intercepts traffic via firewall rules with no client configuration, sitting on the client side. Option A describes a reverse proxy, option C describes an explicit proxy, and option D describes a different security risk."
+      "correct": "D",
+      "explanation": "A forward proxy sits between internal clients and the internet to serve those clients; a reverse proxy sits between internet clients and backend servers to protect those servers. The positioning and direction of service is the fundamental distinction between them."
     },
     {
       "section": "Web Application Firewalls",
-      "type": "text",
-      "question": "Why does a negative-model WAF require constant updates while a positive-model WAF does not?",
-      "rubric": "A sound answer states that a negative model maintains a list of known-bad patterns and must be updated each time a new attack is discovered, whereas a positive model defines only what is valid and blocks everything else by default, so it does not need updates for novel attacks.",
-      "explanation": "The section's comparison table explicitly states the negative model needs constant updates and can be bypassed by novel attacks, while the positive model blocks everything not explicitly allowed. The metaphor of the bouncer illustrates this difference."
+      "type": "mc",
+      "question": "In a negative security model WAF, what is the core limitation when defending against novel application-layer attacks?",
+      "options": {
+        "A": "It requires constant signature updates and cannot detect previously unknown attack patterns",
+        "B": "It is complex to configure because it must define every valid input format and request pattern",
+        "C": "It blocks legitimate requests that do not match known attack signatures in its database",
+        "D": "It decrypts HTTPS traffic at the gateway, which adds latency to all client requests"
+      },
+      "correct": "A",
+      "explanation": "The negative security model maintains a list of known-bad patterns and blocks matches, so novel attacks not yet in the signature database can bypass it. A positive model has the opposite weakness: it is complex to configure, which is why the negative model was described with that limitation."
     }
   ]
 }

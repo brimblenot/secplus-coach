@@ -3,89 +3,80 @@
     {
       "section": "Scripting languages and what they're good for",
       "type": "mc",
-      "question": "Which of the following best describes what Script Block Logging records in PowerShell?",
+      "question": "Which three PowerShell logging modes does a security team need to enable to capture PowerShell activity completely?",
       "options": {
-        "A": "Full text transcript of every session including all input and output",
-        "B": "Actual code in each script block, including deobfuscated content",
-        "C": "Scheduled task execution timestamps and return codes",
-        "D": "Pipeline execution details during module processing"
+        "A": "Script Block Logging, Module Logging, and Event Log Forwarding",
+        "B": "Module Logging, Execution Logging, and Transcription Logging",
+        "C": "Script Block Logging, Process Logging, and Transcription Logging",
+        "D": "Script Block Logging, Module Logging, and Transcription Logging"
       },
-      "correct": "B",
-      "explanation": "Script Block Logging specifically captures the actual code in each script block and includes deobfuscated content, as stated in the PowerShell logging modes table."
-    },
-    {
-      "section": "Scripting languages and what they're good for",
-      "type": "text",
-      "question": "Why is Python considered the most versatile security language, and what role does Ruby play in the security tooling landscape?",
-      "rubric": "A sound answer states that Python has multiple specialized security libraries (Scapy, Requests, Paramiko, Impacket, Volatility) for different security tasks, while Ruby is the native language of Metasploit, making it important for writing Metasploit modules.",
-      "explanation": "The section lists Python's key libraries across packet crafting, HTTP, SSH, Windows protocols, and memory forensics; it identifies Ruby specifically as Metasploit's native language."
+      "correct": "D",
+      "explanation": "The study guide explicitly lists the three logging modes as Script Block Logging (records actual code including deobfuscated content), Module Logging (pipeline execution details), and Transcription Logging (full text transcript of every session)."
     },
     {
       "section": "Automation use cases across the security lifecycle",
       "type": "mc",
-      "question": "In the log aggregation and parsing use case, what does a SIEM platform do?",
+      "question": "Which platform aggregates and correlates security events from multiple sources for alerting after logs have been collected and parsed?",
       "options": {
-        "A": "Collects logs from diverse sources and normalizes formats to a common schema",
-        "B": "Enriches events with asset and threat-intel context before forwarding",
-        "C": "Automatically creates tickets in the IT ticketing system for alerts",
-        "D": "Aggregates and correlates security events for alerting"
+        "A": "A SOAR platform that executes automated incident response workflows and actions",
+        "B": "An IaC solution that manages and provisions infrastructure through code",
+        "C": "A SIEM system that aggregates, parses, and correlates security events for alerting",
+        "D": "An EDR tool that monitors endpoints for detection and response activities"
       },
-      "correct": "D",
-      "explanation": "The SIEM definition in the section states it is a platform that aggregates and correlates security events for alerting; the other options describe steps in the broader log aggregation pipeline but not the SIEM's core function."
+      "correct": "C",
+      "explanation": "The study guide states that a SIEM (Security Information and Event Management system) is a platform that aggregates and correlates security events for alerting, and is the destination where log aggregation and parsing workflows forward their data."
     },
     {
       "section": "SOAR: automated incident response at machine speed",
-      "type": "text",
-      "question": "What is a SOAR playbook, and what key metric does SOAR improve?",
-      "rubric": "A sound answer explains that a SOAR playbook is an automated response workflow executed by the SOAR platform, and that the key metric is MTTR (Mean Time to Respond)—the average time from alert generation to incident containment.",
-      "explanation": "The section defines playbooks as automated response workflows and identifies MTTR as the key metric SOAR improves."
+      "type": "mc",
+      "question": "What is the primary metric that SOAR platforms improve when automating incident response workflows?",
+      "options": {
+        "A": "MTTD, the average time from system breach to threat detection",
+        "B": "MTTR, the average time from alert generation to incident containment",
+        "C": "MTPD, the average time from patch release to patch deployment",
+        "D": "MTBF, the average time between system failures and recovery"
+      },
+      "correct": "B",
+      "explanation": "The study guide explicitly defines MTTR (Mean Time to Respond) as the average time from alert generation to incident containment, and identifies it as the key metric that SOAR improves."
     },
     {
       "section": "Infrastructure as Code (IaC) and configuration management",
       "type": "mc",
-      "question": "What does configuration drift refer to in the context of configuration management tools?",
+      "question": "Which static analysis tools are used to scan Infrastructure as Code files and detect misconfigurations before deployment?",
       "options": {
-        "A": "When a server's actual state diverges from its intended state",
-        "B": "When Terraform templates are applied inconsistently across environments",
-        "C": "When static analysis tools detect errors in IaC code before deployment",
-        "D": "When security groups are not baked into infrastructure templates"
+        "A": "Checkov, tfsec, and cfn-nag for scanning IaC templates before deployment",
+        "B": "Terraform, CloudFormation, and Deployment Manager for IaC scanning",
+        "C": "AMSI, SIEM, and EDR for runtime configuration monitoring",
+        "D": "Ansible, Puppet, and Chef for detecting configuration drift automatically"
       },
       "correct": "A",
-      "explanation": "The section defines configuration drift as when a system's actual state diverges from its intended state, which configuration management tools detect and remediate automatically."
-    },
-    {
-      "section": "Infrastructure as Code (IaC) and configuration management",
-      "type": "text",
-      "question": "Name two security benefits that Infrastructure as Code provides and explain how one of them reduces risk.",
-      "rubric": "A sound answer identifies two benefits from: security groups and ACLs applied automatically at provisioning, CIS Benchmark hardening on new servers, or catching misconfigurations in development via static analysis tools. It then explains how one (typically the scanning benefit) reduces risk by catching problems early when fixes are cheaper.",
-      "explanation": "The section lists three security benefits of IaC: automatic application of security controls at provisioning, Ansible playbooks for hardening, and pre-deployment scanning tools."
+      "explanation": "The study guide names Checkov, tfsec, and cfn-nag as static analysis tools that detect misconfigurations in IaC code in development, where fixes are cheap."
     },
     {
       "section": "Automation risks and secrets management",
       "type": "mc",
-      "question": "What does an idempotent script do?",
+      "question": "Why is storing credentials in plaintext within automation scripts a significant security risk?",
       "options": {
-        "A": "Retrieves credentials from a secrets vault at runtime instead of hardcoding them",
-        "B": "Runs only on non-production systems before being deployed to production",
-        "C": "Produces the same end state whether run once or ten times",
-        "D": "Validates all inputs and handles errors before executing core logic"
+        "A": "Plaintext credentials in scripts risk exposure, especially when stored in version control",
+        "B": "Plaintext credentials prevent automation accounts from enforcing least privilege controls",
+        "C": "Plaintext credentials in scripts prevent idempotent design and repeated execution",
+        "D": "Plaintext credentials in scripts are blocked by AMSI and prevent script execution"
       },
-      "correct": "C",
-      "explanation": "The section defines idempotent design as producing the same end state whether run once or ten times, preventing partial-execution inconsistencies."
-    },
-    {
-      "section": "Automation risks and secrets management",
-      "type": "text",
-      "question": "Why is hardcoding credentials in automation scripts considered a major risk, and what is the correct alternative?",
-      "rubric": "A sound answer states that hardcoded credentials in scripts are exposed if the script is seen or version-controlled, and the correct approach is a secrets vault like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault that stores credentials outside the script and allows the script to retrieve them at runtime using service identity.",
-      "explanation": "The section identifies hardcoded plaintext credentials as a frequent source of exposure, especially in version control, and describes secrets vaults as the solution that enables credential rotation without script changes."
+      "correct": "A",
+      "explanation": "The study guide explicitly states that hardcoding credentials in plaintext inside a script — especially one stored in version control — is a frequent source of credential exposure."
     },
     {
       "section": "REST API integration",
-      "type": "text",
-      "question": "What role do REST APIs play in modern security tool integration, and why do they matter for automation?",
-      "rubric": "A sound answer states that REST APIs allow security tools to exchange data over HTTP and trigger actions in each other, enabling custom integrations beyond vendor connectors and letting tools that would otherwise operate in isolation share data.",
-      "explanation": "The section explains that REST APIs are interfaces for software systems to exchange data using standard web conventions, and lists examples like querying threat intelligence, blocking rules, and triggering responses."
+      "type": "mc",
+      "question": "What do REST APIs enable between security tools that would otherwise operate in isolation?",
+      "options": {
+        "A": "Automated patch deployment across multiple vendors and platforms",
+        "B": "Configuration management and drift detection on remote systems",
+        "C": "Data sharing and triggering actions between tools for custom integrations",
+        "D": "Encrypted communication channels for secure credential exchange only"
+      },
+      "correct": "C",
+      "explanation": "The study guide states that REST APIs allow security tools to share data and trigger actions in each other, enabling custom integrations beyond what vendor connectors provide."
     }
   ]
 }

@@ -3,88 +3,106 @@
     {
       "section": "The identity lifecycle: joiner, mover, leaver",
       "type": "mc",
-      "question": "What is privilege creep and when does it occur?",
+      "question": "During the mover phase of the identity lifecycle, what must happen to prevent privilege creep?",
       "options": {
-        "A": "The process of granting temporary access to resources for a specific maintenance window",
-        "B": "The gradual accumulation of excess permissions when a user changes roles and old access is not removed",
-        "C": "The practice of reviewing manager access to ensure subordinates have appropriate permissions",
-        "D": "The automatic deletion of all accounts when an employee leaves the organization"
+        "A": "The user must complete additional authentication before accessing new resources in the system",
+        "B": "The user's password must be changed before the role transition occurs to the new role",
+        "C": "The old role's access must be removed while new role's access is added simultaneously",
+        "D": "The user's account must be temporarily disabled during the transition period between roles"
       },
-      "correct": "B",
-      "explanation": "Privilege creep is defined in the section as the gradual accumulation of excess permissions over time, occurring specifically during the mover phase when old role access is not removed."
+      "correct": "C",
+      "explanation": "The section explicitly states that during access modification (mover phase), old role's access must be removed and new role's access is added; failing to remove old access causes privilege creep."
     },
     {
       "section": "Just-in-time provisioning",
-      "type": "text",
-      "question": "Explain how JIT provisioning limits security risk and name the protocol that automates it.",
-      "rubric": "A sound answer states that JIT provisioning grants temporary, on-demand access that is automatically revoked when the task is done, eliminating standing privilege and limiting the window of exposure if credentials are compromised, and identifies SCIM as the protocol that automates account creation and deletion.",
-      "explanation": "The section explicitly states that JIT grants temporary access and auto-revokes it, limiting exposure if credentials are breached, and that SCIM automates account provisioning and deprovisioning."
+      "type": "mc",
+      "question": "What is the primary security advantage of JIT provisioning over standing privileged access?",
+      "options": {
+        "A": "It eliminates the need for password vaulting in production environments",
+        "B": "It allows administrators to work without multi-factor authentication",
+        "C": "It removes the requirement for session recording of administrative activity",
+        "D": "It limits the window of exposure if credentials are compromised"
+      },
+      "correct": "D",
+      "explanation": "The section states that JIT provisioning grants temporary, on-demand access and automatically revokes it, which eliminates standing privilege and limits the window of exposure if credentials are compromised."
     },
     {
       "section": "User identity governance",
       "type": "mc",
-      "question": "What is the purpose of access recertification campaigns?",
+      "question": "What is the purpose of access recertification campaigns in user identity governance?",
       "options": {
-        "A": "Managers periodically review and confirm their subordinates' current access remains appropriate and uncertified access is revoked",
-        "B": "Credentials are stored in an encrypted vault and rotated after each privileged session",
-        "C": "Temporary admin credentials are requested, approved for a time window, then automatically revoked",
-        "D": "Automated systems detect when a user holds permissions that violate separation of duties"
+        "A": "To create automated alerts whenever a user requests access to a protected resource",
+        "B": "To have managers periodically review and confirm that subordinates' access remains appropriate",
+        "C": "To implement multi-factor authentication for all administrative role changes in the system",
+        "D": "To automatically encrypt all user credentials stored in the directory service infrastructure"
       },
-      "correct": "A",
-      "explanation": "The section defines access recertification campaigns as periodic manager reviews where managers confirm each subordinate's current access is still appropriate and uncertified access is revoked."
+      "correct": "B",
+      "explanation": "The section defines access recertification campaigns as periodic manager reviews where managers confirm each subordinate's current access is still appropriate, and uncertified access is revoked."
     },
     {
       "section": "Privileged Identity Management and Privileged Access Management",
-      "type": "text",
-      "question": "Describe what password vaulting does and why it prevents credential reuse and exposure.",
-      "rubric": "A sound answer explains that password vaulting stores credentials in an encrypted vault so users never see the actual password, the vault checks out credentials on behalf of the user, and the password is automatically rotated after each session, preventing reuse and exposure.",
-      "explanation": "The section states that password vaulting stores encrypted credentials that users never access directly, the vault dispenses them on behalf of the user, and rotates the password after each session."
+      "type": "mc",
+      "question": "In PAM, what does password vaulting accomplish regarding credential exposure?",
+      "options": {
+        "A": "It stores passwords in an encrypted vault and rotates them after each session",
+        "B": "It encrypts passwords during transmission and allows users to view credentials after authentication",
+        "C": "It requires users to manually change their password before accessing any privileged resource",
+        "D": "It prevents administrators from requesting elevated access more than once per day"
+      },
+      "correct": "A",
+      "explanation": "The section describes password vaulting as credentials stored in an encrypted vault where users never see the actual password, the vault checks out credentials on behalf of the user, and rotates the password after each session."
     },
     {
       "section": "Single sign-on",
       "type": "mc",
-      "question": "Why is MFA particularly critical for an SSO identity provider?",
+      "question": "What is the primary security risk associated with SSO if a credential is compromised?",
       "options": {
-        "A": "MFA is required to verify the identity provider's digital certificate during federation",
-        "B": "MFA allows the identity provider to record sessions for audit and forensics purposes",
-        "C": "MFA prevents users from accessing multiple applications with a single token",
-        "D": "A single compromised SSO credential opens all connected applications, making MFA essential for protection"
+        "A": "The attacker can only access applications in the same geographic region",
+        "B": "The identity provider must be completely reset before any user can re-authenticate",
+        "C": "The user's session is limited to a single device before additional authentication is required",
+        "D": "The compromised credential opens access to all connected applications simultaneously"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that one compromised SSO credential opens all connected apps, making MFA on the IdP critical."
+      "explanation": "The section explicitly states that one compromised SSO credential opens all connected apps, making this a security risk that is mitigated by implementing MFA on the IdP."
     },
     {
       "section": "Federation and its protocols",
       "type": "mc",
-      "question": "What is the role of the Identity Provider in a SAML 2.0 federation flow?",
+      "question": "In SAML 2.0 federation, what does the Service Provider validate to confirm the user's identity?",
       "options": {
-        "A": "Receives the user's request and redirects them to authenticate with their home organization",
-        "B": "Verifies the service provider's public certificate before granting access to protected resources",
-        "C": "Validates the user's credentials and issues a digitally signed assertion containing identity and attributes",
-        "D": "Stores encrypted credentials and dispenses them to authorized applications on demand"
+        "A": "The IdP's signature on the SAML assertion using the IdP's public certificate",
+        "B": "The user's password against the IdP's encrypted credential database",
+        "C": "The HTTP request headers to ensure they originated from a trusted IdP server",
+        "D": "The user's session token against a shared encryption key between SP and IdP"
       },
-      "correct": "C",
-      "explanation": "The section defines the IdP as the authoritative source that performs authentication and issues signed SAML assertions containing claims about the user's identity and attributes."
+      "correct": "A",
+      "explanation": "The section describes the SAML 2.0 flow where the SP validates the signature of the SAML assertion with the IdP's public certificate to confirm the assertion came from the authoritative IdP."
     },
     {
       "section": "Federation and its protocols",
-      "type": "text",
-      "question": "Explain the key difference between OAuth 2.0 and OIDC and what layer OIDC adds.",
-      "rubric": "A sound answer states that OAuth 2.0 is an authorization framework only, while OIDC adds an authentication layer on top of OAuth 2.0 by introducing the ID token, a cryptographically signed JWT containing claims about who the user is.",
-      "explanation": "The section explicitly contrasts OAuth 2.0 as authorization-only with OIDC as adding authentication via the ID token, a JWT containing identity claims."
+      "type": "mc",
+      "question": "How does OIDC differ from OAuth 2.0 in terms of what information is provided to the third-party application?",
+      "options": {
+        "A": "OAuth 2.0 includes user identity claims while OIDC only provides authorization tokens for access",
+        "B": "OIDC adds an authentication layer by introducing an ID token containing claims about user identity",
+        "C": "OAuth 2.0 is restricted to enterprise environments while OIDC works only in cloud deployments",
+        "D": "OIDC uses XML-based assertions whereas OAuth 2.0 uses JSON Web Tokens for credential exchange"
+      },
+      "correct": "B",
+      "explanation": "The section states that OIDC adds an authentication layer on top of OAuth 2.0 by introducing the ID token, a cryptographically signed JWT containing claims about who the user is, whereas OAuth 2.0 is authorization only."
     },
     {
       "section": "Directory services",
       "type": "mc",
-      "question": "What is the primary purpose of Conditional Access policies in Azure Active Directory?",
+      "question": "What is the primary function of Conditional Access policies in Azure Active Directory?",
       "options": {
-        "A": "Require stronger authentication based on risk factors such as location, device, or operation",
-        "B": "Enforce separation of duties across multiple Azure AD administrative roles",
-        "C": "Automatically rotate credentials after each privileged session in Azure resources",
-        "D": "Store and audit all administrative session activity across the cloud environment"
+        "A": "They encrypt all user credentials before storing them in the cloud directory service",
+        "B": "They enforce configuration settings across all domain-joined computers in the organization",
+        "C": "They require stronger authentication based on risk factors like untrusted location or unfamiliar device",
+        "D": "They automatically rotate user passwords after each cloud application access by users"
       },
-      "correct": "A",
-      "explanation": "The section defines Conditional Access policies as risk-based rules that require stronger authentication, such as MFA, when access comes from untrusted locations, unfamiliar devices, or high-risk operations."
+      "correct": "C",
+      "explanation": "The section describes Conditional Access policies as risk-based rules that require stronger authentication, such as MFA, when access comes from an untrusted location, unfamiliar device, or high-risk operation."
     }
   ]
 }

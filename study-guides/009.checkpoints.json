@@ -3,101 +3,119 @@
     {
       "section": "Honeypots: decoy systems that catch attackers in the act",
       "type": "mc",
-      "question": "What is the key difference between a low-interaction and high-interaction honeypot in terms of what an attacker can do?",
+      "question": "What is the key difference between a low-interaction honeypot and a high-interaction honeypot?",
       "options": {
-        "A": "A low-interaction honeypot targets automated scans; a high-interaction honeypot targets APT groups",
-        "B": "A low-interaction honeypot mimics services only; a high-interaction honeypot provides a real OS and allows attacker commands",
-        "C": "A low-interaction honeypot must be isolated; a high-interaction honeypot connects safely to production",
-        "D": "A low-interaction honeypot exposes a full OS and applications for attacker exploration"
+        "A": "A low-interaction honeypot requires constant manual monitoring by security staff, while a high-interaction honeypot operates entirely without security team oversight.",
+        "B": "A low-interaction honeypot attracts only automated scans, while a high-interaction honeypot attracts advanced persistent threats and targeted attackers.",
+        "C": "A low-interaction honeypot is deployed in production networks, while a high-interaction honeypot is used only in isolated lab environments for research purposes.",
+        "D": "A low-interaction honeypot emulates only basic service responses with limited exploit capability, while a high-interaction honeypot runs a full OS and applications allowing attackers to log in and execute commands."
       },
-      "correct": "B",
-      "explanation": "The study guide explicitly states that low-interaction honeypots expose only surface-level service responses with no real OS, while high-interaction honeypots expose a full OS and applications where an attacker can log in and run commands."
+      "correct": "D",
+      "explanation": "The section explicitly contrasts the two types: low-interaction exposes only surface responses with low risk and detects automated scans, while high-interaction provides full OS and applications with higher risk to detect deep attacker tactics."
     },
     {
       "section": "Honeynets: simulating an entire fake organization",
-      "type": "text",
-      "question": "Why is a honeynet particularly valuable for studying APTs, and what kind of information does it help gather?",
-      "rubric": "A sound answer explains that honeynets simulate a full production environment with multiple interconnected systems, allowing sophisticated attackers to conduct multi-stage intrusions over time, and that the intelligence gathered on TTPs (Tactics, Techniques, and Procedures) feeds back into real production defenses.",
-      "explanation": "The section states that honeynets are valuable for studying APTs because they mimic a full production environment allowing attackers to perform lateral movement and other multi-stage activities, and that TTPs intelligence gathered feeds back into real defenses."
+      "type": "mc",
+      "question": "What is a honeynet designed to accomplish that a single honeypot cannot?",
+      "options": {
+        "A": "A honeynet simulates a full production environment with multiple interconnected systems, allowing observation of attackers through initial access, lateral movement, and exfiltration stages.",
+        "B": "A honeynet automatically blocks all malware traffic before it reaches any internal system in the organization's network.",
+        "C": "A honeynet requires less isolation from production networks than individual honeypots and enables faster deployment across the security infrastructure.",
+        "D": "A honeynet uses canary tokens to alert the SOC when any file is accessed by an unauthorized user within the deception environment."
+      },
+      "correct": "A",
+      "explanation": "The section states that a honeynet is designed to mimic a full production environment allowing attackers to explore across multiple stages, valuable for studying APTs and their TTPs."
     },
     {
       "section": "Honeyfiles and canary tokens: fake files that tattle on intruders",
       "type": "mc",
-      "question": "What is the primary function of a canary token embedded inside a honeyfile?",
+      "question": "How do canary tokens work within honeyfiles?",
       "options": {
-        "A": "To propagate malware to the attacker's machine when the file is executed",
-        "B": "To encrypt the honeyfile contents so attackers cannot read them",
-        "C": "To deceive the attacker into believing the file is authentic and valuable",
-        "D": "To track and alert the SOC the moment the file is opened"
+        "A": "Canary tokens are network monitoring tools that detect when a honeyfile is copied to an attacker's external device or storage.",
+        "B": "Canary tokens are encryption mechanisms that prevent honeyfiles from being read unless the SOC explicitly grants access permissions.",
+        "C": "Canary tokens are unique URL links or embedded pixels hidden in documents that trigger an alert when the file is opened by any user.",
+        "D": "Canary tokens are fake usernames and passwords stored in honeyfiles that alert the system when an attacker attempts to use them for authentication."
       },
-      "correct": "D",
-      "explanation": "The study guide states that canary tokens are tracking triggers hidden inside a document (a unique URL, embedded pixel, or fake credential) that fire an alert to the SOC the moment the file is opened."
+      "correct": "C",
+      "explanation": "The section defines canary tokens as tracking triggers hidden inside a document such as a unique URL, embedded pixel, or fake credential that fire an alert to the SOC when the file is opened."
     },
     {
       "section": "Honeytokens: fake data values that expose theft",
-      "type": "text",
-      "question": "How do honeytokens detect credential theft or insider threats once they are stolen?",
-      "rubric": "A sound answer explains that when an attacker steals and uses a honeytoken (such as fake credentials or API keys), the authentication attempt or outbound call triggers an immediate alert, exposing that the token was stolen.",
-      "explanation": "The section states that when an attacker steals and uses a honeytoken, the authentication attempt or outbound call triggers an immediate alert, which is especially effective at detecting credential theft and insider threats."
+      "type": "mc",
+      "question": "Which of the following is a valid example of a honeytoken?",
+      "options": {
+        "A": "A monitoring tool that tracks all login attempts to production servers in real time to detect unauthorized access events.",
+        "B": "A fake username and password placed in a config file or credential dump that does not work on any real system in the organization.",
+        "C": "A network appliance that redirects malicious DNS queries to a controlled address to prevent malware communication with external servers.",
+        "D": "A complete fake file named confidential_plans.doc placed in a shared network drive to attract attacker interest and trigger deception alerts."
+      },
+      "correct": "B",
+      "explanation": "The section lists fake credentials as a honeytoken example: usernames and passwords that appear real but do not work on any real system, triggering an alert when an attacker attempts to use them."
     },
     {
       "section": "DNS sinkholing: cutting off malware's phone home",
       "type": "mc",
-      "question": "At what point in the DNS resolution process does a sinkhole intercept and redirect malware traffic?",
+      "question": "What two outcomes does DNS sinkholing accomplish when malware attempts to contact its C2 server?",
       "options": {
-        "A": "When the attacker first establishes an initial access foothold",
-        "B": "When the malware binary is first downloaded by the victim machine",
-        "C": "When the malware tries to contact its C2 using a domain name lookup",
-        "D": "When legitimate users perform normal DNS queries for routine websites"
+        "A": "DNS sinkholing encrypts malware traffic and forwards it to law enforcement agencies for investigation and criminal prosecution of threat actors.",
+        "B": "DNS sinkholing blocks the connection entirely and automatically removes malware from the affected system without further analysis or investigation.",
+        "C": "DNS sinkholing redirects malware traffic to a controlled IP address instead of the attacker's C2 server and logs the connection to identify infected internal devices.",
+        "D": "DNS sinkholing patches vulnerable software on the infected device and alerts the attacker that their C2 infrastructure has been discovered and disabled."
       },
       "correct": "C",
-      "explanation": "The study guide states that when malware tries to contact its C2 using a domain name, the sinkhole intercepts the DNS lookup and redirects it to a controlled IP address instead of the attacker's real server."
+      "explanation": "The section states that DNS sinkholing redirects known malicious domains to a controlled IP address instead of the real C2, and the sinkhole server logs the connection attempt to reveal which internal device is infected."
     },
     {
       "section": "Dark web monitoring: finding your data before attackers use it",
       "type": "mc",
-      "question": "What is the primary goal of dark web monitoring for an organization?",
+      "question": "What is the primary purpose of dark web monitoring in the context of threat intelligence?",
       "options": {
-        "A": "To search for stolen organizational data and alert the organization before attackers exploit it",
-        "B": "To shut down underground marketplaces by reporting them to law enforcement",
-        "C": "To arrest criminals operating on the dark web forums and marketplaces",
-        "D": "To monitor all employee internet activity and prevent dark web access"
+        "A": "To monitor all employee activity on the dark web and prevent insider threats from selling sensitive company information to external parties.",
+        "B": "To search dark web forums and paste sites for stolen organizational data such as domain names, credentials, and API keys to enable timely response before exploitation.",
+        "C": "To anonymously access the dark web using Tor and launch countermeasures against threat actors who have stolen company data and infrastructure.",
+        "D": "To automatically shut down dark web marketplaces that offer tools or services commonly used in attacks against the organization's infrastructure."
       },
-      "correct": "A",
-      "explanation": "The study guide defines dark web monitoring as a threat intelligence service that searches for an organization's stolen data and alerts the organization so it can force password resets, revoke API keys, or open an incident before attackers exploit the data."
+      "correct": "B",
+      "explanation": "The section explains that dark web monitoring searches for stolen data and alerts the organization so they can force password resets and revoke API keys before attackers exploit the data."
     },
     {
       "section": "Fake telemetry and tactical deception",
-      "type": "text",
-      "question": "What is the overall goal of tactical deception in a network environment?",
-      "rubric": "A sound answer explains that tactical deception is the strategy of making the environment appear larger, more complex, and richer in valuable data than it really is, so that attackers are more likely to touch a deception asset and trigger detection.",
-      "explanation": "The section states that tactical deception is the broader strategy of making the environment appear larger, more complex, and richer in valuable data than it really is, increasing the probability an attacker touches a deception asset and triggers detection."
+      "type": "mc",
+      "question": "What does fake telemetry aim to accomplish when an attacker gains a foothold in a network?",
+      "options": {
+        "A": "Fake telemetry directly blocks all attacker movement within the network by restricting access to critical system files and security controls.",
+        "B": "Fake telemetry automatically disconnects the attacker from the network and notifies law enforcement of the intrusion and security breach.",
+        "C": "Fake telemetry encrypts all network traffic so attackers cannot gather any reconnaissance information regardless of their access level or privileges.",
+        "D": "Fake telemetry presents false information about the network to mislead attacker reconnaissance and cause them to trigger deception assets through wasted effort."
+      },
+      "correct": "D",
+      "explanation": "The section defines fake telemetry as presenting false information to mislead attacker reconnaissance, and tactical deception as making the environment appear larger and more complex to increase the probability an attacker touches a deception asset."
     },
     {
       "section": "Why deception alerts are almost always real",
       "type": "mc",
-      "question": "Why do deception systems produce near-zero false positives, unlike signature-based detection?",
+      "question": "Why do deception systems produce near-zero false positives compared to signature-based detection?",
       "options": {
-        "A": "Because deception systems use advanced machine learning algorithms that other detection methods lack",
-        "B": "Because deception systems only alert on threats from outside the organization, not insider activity",
-        "C": "Because deception systems are monitored by human analysts rather than automated tools",
-        "D": "Because no legitimate user or process ever has a reason to touch a honeypot, honeyfile, honeytoken, or sinkhole"
+        "A": "No legitimate user or process ever touches a honeypot, honeyfile, honeytoken, or sinkhole, so any alert indicates something abnormal is definitively occurring.",
+        "B": "Deception systems are deployed only in isolated lab environments where no legitimate business activity or normal user operations occur.",
+        "C": "Deception systems filter out common user actions before generating alerts to the SOC and reduce noise from routine network activity and operations.",
+        "D": "Deception systems use machine learning algorithms trained only on malicious traffic patterns and ignore benign user behavior in the environment."
       },
-      "correct": "D",
-      "explanation": "The study guide states that deception systems produce near-zero false positives because no legitimate user or process ever touches a honeypot, honeyfile, honeytoken, or sinkhole, so any alert means something abnormal is definitively happening."
+      "correct": "A",
+      "explanation": "The section explains that deception systems produce near-zero false positives because no legitimate user or process ever touches these assets, making any alert an automatic indication of abnormal activity."
     },
     {
       "section": "Legal considerations for honeypots",
       "type": "mc",
-      "question": "Why does the entrapment legal defense not apply to private organizations operating honeypots?",
+      "question": "Why does the legal defense of entrapment typically not apply to private organizations operating honeypots?",
       "options": {
-        "A": "Because the attacker chose to attack; the honeypot did not induce the crime",
-        "B": "Because private organizations do not have law enforcement authority to make arrests",
-        "C": "Because private organizations can operate honeypots without any legal constraints",
-        "D": "Because honeypots are considered a form of acceptable network security practice"
+        "A": "Private organizations are exempt from all legal liability as long as their honeypots are isolated from production systems and networks.",
+        "B": "Entrapment applies only to government actors, not private organizations, because the attacker chose to attack and the honeypot did not induce the crime.",
+        "C": "Entrapment is a legal defense that applies only to criminal prosecutions and private organizations cannot prosecute attackers in criminal court.",
+        "D": "Private organizations have explicit legal immunity under cybersecurity law to use any deception technique without legal restriction or liability."
       },
-      "correct": "A",
-      "explanation": "The study guide states that entrapment applies only to government actors, not private organizations, because the attacker chose to attack; the honeypot did not induce the crime."
+      "correct": "B",
+      "explanation": "The section states that entrapment applies only to government actors, not private organizations, because the attacker chose to attack; the honeypot did not induce the crime."
     }
   ]
 }

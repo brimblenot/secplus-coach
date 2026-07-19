@@ -37,9 +37,14 @@ function wordCount(s: string): number {
 }
 
 // Detects the "longest answer is correct" tell: the correct option is (tied for)
-// the longest AND the longest option runs more than ~1.5× the words of the
-// shortest — the same ratio the generation prompts ask for. Under that ratio a
-// student can pick the right answer by length/detail alone. Non-MC or malformed
+// the longest AND the longest option runs more than ~1.25× the words of the
+// shortest. Under that ratio a student can pick the right answer by length/detail
+// alone, so we flag it for a rewrite. The 1.25 threshold is deliberately tighter
+// than the ~1.5 the prompts ask for — the prompt rule leaks, and the student
+// reported still being able to spot the answer by detail. Also flags when the
+// correct option is the longest by an absolute margin (≥4 words over the
+// shortest) even if the ratio is under 1.25, since a few extra words of detail on
+// an already-long option still reads as "the thorough one." Non-MC or malformed
 // questions never flag.
 function correctIsLengthOutlier(q: MCLike): boolean {
   if (q.type !== 'mc' || !q.options || !q.correct || !(q.correct in q.options)) return false
@@ -48,7 +53,8 @@ function correctIsLengthOutlier(q: MCLike): boolean {
   const correctN = wordCount(q.options[q.correct])
   const minN = Math.min(...counts.map((c) => c.n))
   const maxN = Math.max(...counts.map((c) => c.n))
-  return correctN === maxN && minN > 0 && maxN > 1.5 * minN
+  if (correctN !== maxN || minN === 0) return false
+  return maxN > 1.25 * minN || maxN - minN >= 4
 }
 
 let _client: Anthropic | null = null
@@ -84,9 +90,10 @@ export async function enforceMCLengthParity<Q extends MCLike>(questions: Q[]): P
 
     const prompt = `You are editing CompTIA Security+ SY0-701 multiple-choice options to remove a length "tell". In each question below the CORRECT option is noticeably longer or more detailed than the distractors, which lets a student guess it by length alone.
 
-For EACH question, rewrite ALL of its options so that:
-- Every option is closely matched in length and level of detail — the longest option no more than ~1.3× the words of the shortest.
-- The correct option is NOT the longest or the most detailed one.
+For EACH question, rewrite ALL FOUR options so that:
+- Every option is nearly identical in length and level of detail — the longest option must be no more than ~1.15× the words of the shortest, and ideally all four are within a few words of each other so they look the same at a glance.
+- No single option is more specific, more technical, or more fully-explained than the others. If the correct answer currently spells out extra detail, trim it; if the distractors are terse, flesh them out to match — every option must carry the same amount of detail.
+- The correct option must NOT be the longest or the most detailed one.
 - Each letter keeps the SAME meaning it has now (letter A stays idea A, etc.) and the SAME letter stays correct. Do NOT change which answer is right, do NOT swap or merge options, do NOT introduce any new concept, technology, or term that is not already in that question's options.
 - Plain prose, no markdown, SY0-701 exam depth.
 

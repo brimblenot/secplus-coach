@@ -2,109 +2,133 @@
   "checkpoints": [
     {
       "section": "Defense in depth",
-      "type": "text",
-      "question": "Explain what defense in depth means and why no single control is relied upon to stop all attacks.",
-      "rubric": "A sound answer states that defense in depth stacks multiple independent security controls across layers so that if an attacker bypasses one, they immediately face another; no single control is trusted to stop everything.",
-      "explanation": "The section defines defense in depth as stacking multiple independent controls and explicitly states that no single control is trusted to stop everything. The student should recognize this foundational principle."
+      "type": "mc",
+      "question": "According to defense in depth, what is the primary reason for stacking multiple security controls across physical, network, host, and application layers?",
+      "options": {
+        "A": "To ensure no single control is trusted to stop everything and create a resilient posture that withstands compromise",
+        "B": "To make network administration easier and reduce the complexity of managing individual security tools",
+        "C": "To satisfy compliance requirements that mandate specific security controls for regulated industries",
+        "D": "To reduce overall costs by consolidating multiple security implementations into fewer solutions"
+      },
+      "correct": "A",
+      "explanation": "Defense in depth explicitly states that no single control is trusted to stop everything and that layers together create a resilient posture. The other options are benefits but not the primary principle."
     },
     {
       "section": "Network segmentation and the DMZ",
       "type": "mc",
-      "question": "Which direction of traffic between the DMZ and internal network is blocked by firewall rules?",
+      "question": "Which direction of traffic between the DMZ and internal network must be blocked according to the foundational firewall rules?",
       "options": {
-        "A": "Internet to DMZ is blocked to prevent external attackers from reaching public services",
-        "B": "Internal to DMZ is blocked to prevent internal users from accessing public servers",
-        "C": "DMZ to internal is blocked to prevent a compromised DMZ server from pivoting deeper",
-        "D": "DMZ to internet is blocked to prevent data exfiltration from public servers"
+        "A": "DMZ to Internet traffic must be blocked",
+        "B": "Internal to DMZ traffic must be blocked",
+        "C": "DMZ to Internal traffic must be blocked",
+        "D": "Internet to DMZ traffic must be blocked"
       },
       "correct": "C",
-      "explanation": "The section explicitly states that DMZ → Internal is BLOCKED and explains this prevents a compromised web server from pivoting deeper into the network."
+      "explanation": "The study guide explicitly states 'DMZ → Internal: BLOCKED' to prevent a compromised web server from pivoting deeper into the network."
     },
     {
       "section": "Screened subnets",
       "type": "mc",
-      "question": "What is the key security benefit of a screened subnet design?",
+      "question": "In a screened subnet architecture, how many firewalls must an attacker compromise to reach internal systems?",
       "options": {
-        "A": "Removes the requirement for network segmentation",
-        "B": "Uses a single firewall to filter all traffic",
-        "C": "Encrypts data between network segments",
-        "D": "Forces attackers to breach multiple firewalls to reach internal systems"
+        "A": "An attacker must compromise three firewalls in sequence to reach internal systems",
+        "B": "An attacker must compromise one inner firewall to reach internal systems",
+        "C": "An attacker must compromise one outer firewall to reach internal systems",
+        "D": "An attacker must compromise two firewalls protecting the screened subnet zone"
       },
       "correct": "D",
-      "explanation": "The section states that a screened subnet uses two firewalls (outer and inner) and notes that an attacker must compromise both to reach internal systems."
+      "explanation": "A screened subnet is protected by both an outer firewall facing the internet and an inner firewall facing the trusted network, requiring an attacker to compromise both."
     },
     {
       "section": "Implicit deny and least privilege",
-      "type": "text",
-      "question": "What does implicit deny mean for firewall behavior, and how does it differ from a default allow approach?",
-      "rubric": "A sound answer states that implicit deny blocks all traffic by default unless explicitly permitted, whereas default allow would permit traffic unless explicitly blocked. This prevents unknown attack types from slipping through.",
-      "explanation": "The section defines implicit deny as blocking by default unless explicitly permitted and contrasts it with allow all/block known bad. It also explains the security benefit: preventing unknown attack types from bypassing unchecked rules."
+      "type": "mc",
+      "question": "Under the implicit deny principle, how are new services typically handled by a firewall?",
+      "options": {
+        "A": "New services are allowed by default and removed if they cause issues",
+        "B": "New services require explicit rules and deliberate review to allow",
+        "C": "New services are blocked only if they match known attack signatures",
+        "D": "New services are allowed to any internal network segment automatically"
+      },
+      "correct": "B",
+      "explanation": "Implicit deny means all traffic is blocked by default unless explicitly permitted, requiring a deliberate, reviewed decision to allow new services."
     },
     {
       "section": "Security zones",
       "type": "mc",
-      "question": "Which of the following is described as a common security zone with typically poor built-in security?",
+      "question": "What is an advantage of using named security zones with zone-based policies instead of per-host firewall rules?",
       "options": {
-        "A": "IoT zone",
-        "B": "Management zone",
-        "C": "Database zone",
-        "D": "Internal zone"
+        "A": "Zone-based policies reduce the total number of devices that require protection",
+        "B": "Zone-based policies are easier to audit and naming conventions reduce misconfiguration errors",
+        "C": "Zone-based policies automatically encrypt all network traffic between security zones",
+        "D": "Zone-based policies eliminate the need for any firewall configuration entirely"
       },
-      "correct": "A",
-      "explanation": "The section lists common zones and specifically notes that IoT (Internet of Things) is a zone for connected devices with poor built-in security."
+      "correct": "B",
+      "explanation": "The study guide states that zone-based policies are easier to audit than rules written per individual host, and naming conventions make intent clear and reduce misconfiguration."
     },
     {
       "section": "Bastion hosts and privileged access",
       "type": "mc",
-      "question": "What is the primary function of a bastion host in a protected network?",
+      "question": "Which of the following is a key security characteristic of a bastion host?",
       "options": {
-        "A": "To route all user internet traffic through a central proxy server",
-        "B": "To act as a single hardened, controlled entry point for administrative access with logging",
-        "C": "To block all external users from accessing the internal network permanently",
-        "D": "To encrypt all traffic between network segments using VPN protocols"
+        "A": "It requires multi-factor authentication and logs all sessions for audit and forensic review",
+        "B": "It grants permanent access tokens to administrators who pass initial security screening",
+        "C": "It runs multiple software applications to handle various administrative and operational tasks",
+        "D": "It provides unlimited access to all internal systems after the initial authentication process"
       },
-      "correct": "B",
-      "explanation": "The section defines a bastion host as a hardened, minimal system that acts as the single controlled entry point for administrative access, with session logging and MFA requirements."
+      "correct": "A",
+      "explanation": "A bastion host requires MFA to connect and all sessions are logged and ideally recorded for forensic use, functioning as a single controlled entry point for administrative access."
     },
     {
       "section": "Zero trust",
-      "type": "text",
-      "question": "How does zero trust differ from traditional network models in terms of when trust is granted?",
-      "rubric": "A sound answer states that zero trust evaluates every access request per-request regardless of network location and continuously re-evaluates, rather than granting trust once to anything inside the perimeter.",
-      "explanation": "The section explains that zero trust removes implicit trust given to devices inside the perimeter and instead evaluates authorization per-request. It contrasts this with VPN, which grants broad access after one authentication."
+      "type": "mc",
+      "question": "How does ZTNA (Zero Trust Network Access) differ from traditional VPN in terms of what it grants after authentication?",
+      "options": {
+        "A": "ZTNA is designed for external users only while VPN is designed for internal users",
+        "B": "ZTNA grants broad network access while VPN grants access to specific applications only",
+        "C": "ZTNA eliminates the need for authentication while VPN requires users to authenticate repeatedly",
+        "D": "ZTNA grants access to specific applications with continuous verification while VPN grants broad network access after one authentication"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly states that ZTNA grants access only to specific authorized applications continuously re-evaluated, whereas VPN grants broad network access after a single authentication."
     },
     {
       "section": "Cloud VPC design",
       "type": "mc",
-      "question": "Which VPC component is described as a stateful firewall operating at the instance level?",
+      "question": "In a VPC design, which subnet component has no direct internet route and typically hosts databases and backend servers?",
       "options": {
-        "A": "Network ACL",
-        "B": "Internet gateway",
-        "C": "Security group",
-        "D": "VPC Flow Logs"
+        "A": "Network ACL that applies stateless filtering rules to inbound and outbound traffic",
+        "B": "Public subnet that has an internet gateway providing direct internet route access",
+        "C": "Private subnet with no direct internet route that typically hosts databases and backend servers",
+        "D": "Security group that applies stateful filtering rules to network traffic and access"
       },
       "correct": "C",
-      "explanation": "The table in the section explicitly identifies security group as a stateful firewall at the instance level, while Network ACL is described as stateless filtering at the subnet level."
+      "explanation": "According to the VPC design table, a private subnet has no direct internet route and hosts databases and backend servers."
     },
     {
       "section": "Layer 2 switch security",
       "type": "mc",
-      "question": "Which Layer 2 control validates DHCP messages and blocks offers from untrusted ports to prevent rogue DHCP servers?",
+      "question": "Which Layer 2 security control validates DHCP messages and blocks offers from untrusted ports to prevent rogue DHCP servers?",
       "options": {
-        "A": "Port security",
-        "B": "Sticky MAC learning",
-        "C": "Dynamic ARP Inspection",
-        "D": "DHCP snooping"
+        "A": "Port security limits MAC addresses per port",
+        "B": "Dynamic ARP Inspection validates ARP packets against DHCP tables",
+        "C": "Sticky MAC learning saves the expected device's MAC address",
+        "D": "DHCP snooping validates DHCP messages from untrusted ports"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that DHCP snooping validates DHCP messages and blocks offers from untrusted ports, preventing rogue DHCP servers from redirecting traffic."
+      "explanation": "DHCP snooping validates DHCP messages and blocks offers from untrusted ports, preventing rogue DHCP servers from redirecting traffic."
     },
     {
       "section": "Physical and out-of-band management",
-      "type": "text",
-      "question": "What is out-of-band management and why is it valuable during a network compromise?",
-      "rubric": "A sound answer states that out-of-band management uses a dedicated, separate network independent of production, allowing admins to reach devices even if the production network is compromised or down.",
-      "explanation": "The section defines out-of-band management as dedicated and separate from production, and explains it allows admin access when the primary network is down or compromised."
+      "type": "mc",
+      "question": "What is the primary purpose of an out-of-band management network in secure infrastructure?",
+      "options": {
+        "A": "It provides backup internet connectivity for all users and network devices",
+        "B": "It allows administrators to access and manage devices even if the production network is down or compromised",
+        "C": "It encrypts all user traffic as it travels across the network infrastructure",
+        "D": "It eliminates the requirement for physical security controls and access restrictions"
+      },
+      "correct": "B",
+      "explanation": "Out-of-band management networks are dedicated and separate from production, allowing admins to access devices even if the production network is down or compromised."
     }
   ]
 }

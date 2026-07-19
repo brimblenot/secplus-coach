@@ -5,79 +5,78 @@
       "type": "mc",
       "question": "What is the key difference between typosquatting and bitsquatting?",
       "options": {
-        "A": "Typosquatting requires hundreds of domains while bitsquatting needs one",
-        "B": "Typosquatting downloads malware while bitsquatting harvests credentials only",
-        "C": "Typosquatting exploits typing errors while bitsquatting targets bit flips in stored URLs from memory corruption",
-        "D": "Typosquatting targets search engines and bitsquatting targets email systems"
+        "A": "Typosquatting requires many registered domains, while bitsquatting relies on only a few carefully selected alternatives.",
+        "B": "Typosquatting exploits misspellings of domain names, while bitsquatting targets domains differing by a single bit flip in memory.",
+        "C": "Typosquatting is primarily used for credential harvesting, while bitsquatting is primarily used for malware distribution.",
+        "D": "Typosquatting affects servers processing millions of lookups, while bitsquatting primarily targets individual home users."
       },
-      "correct": "C",
-      "explanation": "The section explicitly states typosquatting targets common misspellings users make when typing URLs, while bitsquatting exploits the rare case where memory corruption flips exactly one bit in a stored URL."
+      "correct": "B",
+      "explanation": "The section explicitly states typosquatting targets common misspellings or near-identical variations, while bitsquatting exploits memory corruption that changes a single bit in a stored URL."
     },
     {
       "section": "Influence campaigns",
-      "type": "text",
-      "question": "Explain how sockpuppets are used in an influence campaign to manipulate public perception.",
-      "rubric": "A sound answer states that sockpuppets are fake accounts that interact with each other (posting, liking, sharing) to trick algorithms into amplifying manufactured content to real audiences, which then may spread to mainstream media.",
-      "explanation": "The section describes sockpuppets as fake accounts designed to appear independent, and explains how their coordinated activity tricks algorithms into amplification, eventually drawing real user engagement."
+      "type": "mc",
+      "question": "How do sockpuppets help amplify disinformation in influence campaigns?",
+      "options": {
+        "A": "Sockpuppets are fake accounts that interact with content to trick algorithms into amplifying it to real audiences.",
+        "B": "Sockpuppets are automated bots that delete competing narratives from search engine results and indexes.",
+        "C": "Sockpuppets are purchased social media followings that attackers acquire from content creators and resellers.",
+        "D": "Sockpuppets are legitimate accounts that volunteer to spread disinformation messages across multiple platforms."
+      },
+      "correct": "A",
+      "explanation": "The section states sockpuppets are fake accounts designed to look like independent users that post, like, and share each other's content, tricking algorithms into amplifying it to real audiences."
     },
     {
       "section": "Invoice scams and Business Email Compromise",
       "type": "mc",
-      "question": "In a Business Email Compromise attack targeting accounts payable, what does the attacker typically request?",
+      "question": "In a Business Email Compromise attack, what does the attacker typically do differently compared to a basic invoice scam?",
       "options": {
-        "A": "Approval to purchase new inventory at inflated prices from a shell company",
-        "B": "Immediate payment for goods that were never ordered or delivered",
-        "C": "Login credentials for the accounting system so the attacker can submit invoices directly",
-        "D": "A change to payment routing details to redirect future legitimate vendor payments"
+        "A": "The attacker creates fake vendor accounts on the company's financial systems to bypass normal approval workflows.",
+        "B": "The attacker sends invoices to accounts payable departments across multiple companies at the same time.",
+        "C": "The attacker impersonates a known vendor and requests changes to payment routing to redirect legitimate future payments.",
+        "D": "The attacker submits fraudulent invoices for goods that were never ordered by any department in the company."
       },
-      "correct": "D",
-      "explanation": "The section states that in BEC, the attacker impersonates a vendor and requests a change to payment routing details, which redirects future legitimate payments to attacker-controlled accounts."
+      "correct": "C",
+      "explanation": "The section explains BEC supercharges invoice scams by having the attacker pose as a known vendor requesting a payment routing detail change to redirect legitimate payments to attacker accounts."
     },
     {
       "section": "Psychological principles exploited by social engineers",
       "type": "mc",
-      "question": "Which psychological principle is an attacker using when they tell an employee, 'Your account will lock permanently in one hour unless you reset your password right now'?",
+      "question": "Which psychological principle is being exploited when an attacker threatens a user with termination or legal action?",
       "options": {
-        "A": "Intimidation, because the threat of account loss is frightening",
-        "B": "Urgency and scarcity, because time pressure degrades decision quality",
-        "C": "Authority, because the attacker claims to represent a system administrator",
-        "D": "Reciprocity, because the attacker is offering a solution to a problem"
+        "A": "Authority, by convincing the target they must obey someone in power.",
+        "B": "Urgency, by creating artificial time pressure to prevent careful decision-making.",
+        "C": "Reciprocity, by establishing a sense of obligation before making a request.",
+        "D": "Intimidation, by using fear of consequences to override the target's resistance."
       },
-      "correct": "B",
-      "explanation": "The section's table identifies urgency and scarcity as exploiting time pressure that degrades decision quality; the one-hour deadline in this example is the core manipulation tactic."
+      "correct": "D",
+      "explanation": "The principles table explicitly lists intimidation as exploiting fear of consequences such as termination or legal action."
     },
     {
       "section": "Hoaxes and diversion theft",
-      "type": "text",
-      "question": "What is the essential difference between a hoax and an actual malware attack in social engineering?",
-      "rubric": "A sound answer states that a hoax is false information intended to make targets harm themselves without any real attack tool or malware being deployed, whereas a typical malware attack involves an actual tool.",
-      "explanation": "The section defines a hoax as false information that tricks the target into self-harm without requiring a deployed attack tool, and gives the example of a fake virus warning telling users to delete a legitimate system file."
+      "type": "mc",
+      "question": "What is the primary difference between a hoax and a diversion theft attack?",
+      "options": {
+        "A": "A hoax is typically spread via email messages, while diversion theft uses phone calls to manipulate delivery companies.",
+        "B": "A hoax targets individuals and small groups, while diversion theft primarily targets large corporations and enterprises.",
+        "C": "A hoax requires technical tools like malware, while diversion theft relies primarily on social engineering techniques.",
+        "D": "A hoax spreads false information causing targets to harm themselves, while diversion theft redirects items to attacker locations."
+      },
+      "correct": "D",
+      "explanation": "The section defines a hoax as false information spread to make targets self-harm without real tools, and diversion theft as physically misdirecting legitimate deliveries through social engineering."
     },
     {
       "section": "Deepfake attacks",
       "type": "mc",
-      "question": "Which of the following is a real-world risk posed by audio deepfakes according to the section?",
+      "question": "What is the primary security risk posed by audio deepfakes in fraud scenarios?",
       "options": {
-        "A": "They clone voices to impersonate people and trick targets into authorizing wire transfers",
-        "B": "They can only be created by nation-states and are inaccessible to common attackers",
-        "C": "They are less convincing than email and are rarely used in documented fraud",
-        "D": "They compromise website design and brand appearance"
+        "A": "Audio deepfakes replace legitimate security systems by disabling microphone-based authentication on user devices.",
+        "B": "Audio deepfakes are easier to create than video deepfakes and require minimal technical expertise or specialized tools.",
+        "C": "Audio deepfakes can clone voices to impersonate someone in real-time, such as a CEO authorizing wire transfers over phone calls.",
+        "D": "Audio deepfakes prevent employees from recognizing social engineering attempts by attackers in phone conversations."
       },
-      "correct": "A",
-      "explanation": "The section explicitly states that audio deepfakes clone a voice and notes documented cases where fake CEO voices authorized wire transfers over the phone."
-    },
-    {
-      "section": "Defenses",
-      "type": "mc",
-      "question": "What does the section recommend as a verification procedure for sensitive requests to counter social engineering?",
-      "options": {
-        "A": "Ask the sender to provide two pieces of identification before granting access",
-        "B": "Confirm the request via a separate known channel, never using a contact method provided by the requester",
-        "C": "Call back the sender using a phone number they provide in their original request",
-        "D": "Wait 24 hours before fulfilling any request to allow time for verification"
-      },
-      "correct": "B",
-      "explanation": "The section states to confirm sensitive requests via a separate known channel, explicitly noting never to call the number the caller provided."
+      "correct": "C",
+      "explanation": "The section states that audio deepfakes clone a voice and gives a documented example of fake CEO voices authorizing wire transfers over the phone."
     }
   ]
 }

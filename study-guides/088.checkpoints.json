@@ -3,88 +3,262 @@
     {
       "section": "Network intrusion detection and prevention",
       "type": "mc",
-      "question": "What is the primary difference between how Snort detects threats and how Zeek detects threats?",
+      "question": "What is the primary difference between Snort's NIDS mode and Suricata's inline IPS capability?",
       "options": {
-        "A": "Snort uses signature matching while Zeek extracts metadata and logs",
-        "B": "Snort is host-based while Zeek is network-based",
-        "C": "Snort captures full packets while Zeek does not",
-        "D": "Snort is open-source while Zeek is commercial"
+        "A": "Snort in NIDS mode alerts on signature matches; Suricata in inline IPS mode actively blocks matching traffic",
+        "B": "Snort uses multi-threaded processing while Suricata relies on single-threaded packet analysis",
+        "C": "Snort captures full packets for analysis while Suricata extracts only metadata from traffic",
+        "D": "Snort analyzes operating system logs while Suricata analyzes network traffic sources"
       },
       "correct": "A",
-      "explanation": "The section explicitly states that Snort matches traffic to known attack patterns while Zeek extracts metadata and writes structured logs instead of comparing to signatures. This is their fundamental methodological difference."
+      "explanation": "Snort's NIDS mode alerts when packets match known attack signatures, while Suricata adds native inline IPS capability that actively blocks traffic, not just alerts on it."
+    },
+    {
+      "section": "Network intrusion detection and prevention",
+      "type": "mc",
+      "question": "How does Zeek's approach to threat detection differ from Snort's signature-matching method?",
+      "options": {
+        "A": "Zeek performs real-time traffic blocking while Snort generates alerts for human review",
+        "B": "Zeek monitors individual host systems while Snort monitors network traffic patterns",
+        "C": "Zeek extracts metadata and writes structured logs instead of matching traffic against signatures",
+        "D": "Zeek requires full packet capture while Snort analyzes traffic in real time"
+      },
+      "correct": "C",
+      "explanation": "Zeek extracts metadata like DNS queries and HTTP requests into compact, queryable logs rather than using signature matching; this makes it invaluable for threat hunting and investigation."
+    },
+    {
+      "section": "Network intrusion detection and prevention",
+      "type": "mc",
+      "question": "Which tool is designed to analyze OS logs, monitor file integrity, and detect rootkits on individual machines?",
+      "options": {
+        "A": "Suricata, which captures network traffic and alerts on signature matches",
+        "B": "Zeek, which extracts metadata from network connections",
+        "C": "Snort, which operates in sniffer mode to display packets live",
+        "D": "OSSEC, which is a host-based intrusion detection system"
+      },
+      "correct": "D",
+      "explanation": "OSSEC is a HIDS (Host-based Intrusion Detection System) that analyzes OS logs, monitors file integrity, and detects rootkits on individual machines rather than monitoring network traffic."
     },
     {
       "section": "Vulnerability scanners",
-      "type": "text",
-      "question": "What is SCAP and why does Tenable Nessus's support for it matter?",
-      "rubric": "A sound answer explains that SCAP is a standard protocol that lets different tools consistently describe and check vulnerabilities and configurations, and that Nessus's support for SCAP (including standards like CIS Benchmarks and DISA STIGs) allows it to conduct standardized compliance and security configuration assessments.",
-      "explanation": "The section defines SCAP as a NIST-maintained standard enabling consistent vulnerability and configuration description across tools, and states that Nessus supports it along with CIS Benchmarks and DISA STIGs, making it valuable for compliance work."
+      "type": "mc",
+      "question": "What does SCAP (Security Content Automation Protocol) allow different vulnerability scanning tools to do?",
+      "options": {
+        "A": "Extract and recover credentials from compromised systems and devices",
+        "B": "Allow consistent description and checking of vulnerabilities and configuration baselines",
+        "C": "Block malicious traffic at the network perimeter and edge devices",
+        "D": "Automatically patch discovered vulnerabilities in real time across systems"
+      },
+      "correct": "B",
+      "explanation": "SCAP is a NIST-maintained standard that lets different tools consistently describe and check vulnerabilities and configuration baselines, including CIS Benchmarks and DISA STIGs."
+    },
+    {
+      "section": "Vulnerability scanners",
+      "type": "mc",
+      "question": "Which vulnerability scanner is notable for being cloud-based and combining agent-based endpoint scanning, network scanning, and cloud security posture management?",
+      "options": {
+        "A": "OpenVAS, which is the leading open-source vulnerability scanner",
+        "B": "Tenable Nessus, known for its large plugin database and SCAP support",
+        "C": "Rapid7 InsightVM, which integrates with Metasploit for exploit context",
+        "D": "Qualys VMDR, which integrates agent, network, and cloud posture capabilities"
+      },
+      "correct": "D",
+      "explanation": "Qualys VMDR is a cloud SaaS platform combining agent-based endpoint scanning, network scanning, and CSPM (Cloud Security Posture Management) in one integrated solution."
     },
     {
       "section": "Network analysis tools",
       "type": "mc",
-      "question": "Which of the following best describes what tcpdump does?",
+      "question": "What is the primary function of Wireshark and what file format does it use to save captured traffic?",
       "options": {
-        "A": "Decodes protocols and extracts files from HTTP sessions",
-        "B": "Aggregates NetFlow data for traffic analysis",
-        "C": "Captures network traffic and saves it to pcap files",
-        "D": "Performs port scanning and version detection on targets"
+        "A": "Network discovery tool that performs OS fingerprinting on remote hosts and systems",
+        "B": "Graphical packet capture and protocol analysis tool that saves network traffic in PCAP format",
+        "C": "Command-line packet sniffer that captures and saves network traffic in PCAP format",
+        "D": "File transfer utility that creates reverse shell connections for remote access"
+      },
+      "correct": "B",
+      "explanation": "Wireshark is the standard graphical packet capture and protocol analysis tool that decodes hundreds of protocols and saves captures in PCAP format."
+    },
+    {
+      "section": "Network analysis tools",
+      "type": "mc",
+      "question": "Which Nmap flag performs service version detection on discovered open ports?",
+      "options": {
+        "A": "The `-sV` flag, which detects service versions",
+        "B": "The `-O` flag, which performs OS fingerprinting",
+        "C": "The `-sU` flag, which performs UDP scanning",
+        "D": "The default flag with no options, which enumerates open ports"
+      },
+      "correct": "A",
+      "explanation": "The `-sV` flag performs service version detection on discovered open ports, identifying what software is running on those ports."
+    },
+    {
+      "section": "Network analysis tools",
+      "type": "mc",
+      "question": "What do NetFlow collectors aggregate to support traffic pattern analysis and security monitoring?",
+      "options": {
+        "A": "Raw packet data stored in PCAP files collected from multiple network sources",
+        "B": "Raw TCP and UDP connectivity information gathered from Netcat session logs",
+        "C": "NetFlow metadata including source and destination IP addresses, ports, bytes, and duration",
+        "D": "Full network packet captures with complete protocol decoding and analysis data"
       },
       "correct": "C",
-      "explanation": "The section identifies tcpdump as the command-line packet capture equivalent to Wireshark, capable of writing captures to pcap files—such as the example `tcpdump -i eth0 -w capture.pcap`."
+      "explanation": "NetFlow collectors aggregate NetFlow protocol data that records traffic flow metadata—source and destination IPs, ports, bytes, and duration—from capable network devices."
     },
     {
       "section": "Password and credential tools",
-      "type": "text",
-      "question": "Explain the difference between how Hashcat and Hydra attack passwords.",
-      "rubric": "A sound answer states that Hashcat cracks offline password hashes using GPU acceleration to test candidate passwords against captured hash databases, while Hydra performs online password attacks by sending live authentication attempts over the network to running services.",
-      "explanation": "The section clearly distinguishes that Hashcat works on offline hashes (supporting dictionary, rules-based, brute force, and hybrid attacks), while Hydra sends live authentication attempts against running services like SSH or FTP."
+      "type": "mc",
+      "question": "What type of attack does Hashcat perform when it applies transformation rules to wordlist entries?",
+      "options": {
+        "A": "Rules-based attack that transforms wordlist entries with operations like capitalize or append",
+        "B": "Hybrid attack combining wordlist entries with brute force character appending tactics",
+        "C": "Dictionary attack that systematically tests each word in a wordlist against the target",
+        "D": "Brute force attack that tests all possible character combinations exhaustively"
+      },
+      "correct": "A",
+      "explanation": "A rules-based attack applies transformation rules to wordlist entries, such as appending '1!' or capitalizing the first letter, to increase crack success rates."
+    },
+    {
+      "section": "Password and credential tools",
+      "type": "mc",
+      "question": "How does Hydra differ from Hashcat in the type of password attack it performs?",
+      "options": {
+        "A": "Hydra uses automatic hash type detection while Hashcat requires manual specification",
+        "B": "Hydra performs online password attacks against live services while Hashcat cracks offline hashes",
+        "C": "Hydra extracts credentials from Windows memory while Hashcat analyzes network traffic",
+        "D": "Hydra performs GPU-accelerated offline hash cracking while Hashcat tests live credentials"
+      },
+      "correct": "B",
+      "explanation": "Hydra performs online password attacks by sending live authentication attempts over the network against running services, while Hashcat cracks offline hashes."
+    },
+    {
+      "section": "Password and credential tools",
+      "type": "mc",
+      "question": "What does Mimikatz extract from the LSASS process on Windows systems?",
+      "options": {
+        "A": "Vulnerability scan results and patch status information from systems",
+        "B": "Network traffic captures and protocol analysis data from Windows systems",
+        "C": "NetFlow metadata exported from network devices and collectors",
+        "D": "NTLM hashes and sometimes plaintext passwords from Windows system memory"
+      },
+      "correct": "D",
+      "explanation": "Mimikatz extracts NTLM hashes and sometimes plaintext passwords from the LSASS process, which handles authentication and stores credential material in memory."
+    },
+    {
+      "section": "Password and credential tools",
+      "type": "mc",
+      "question": "What does a Golden Ticket attack in Mimikatz accomplish?",
+      "options": {
+        "A": "Enables pass-the-hash authentication without requiring plaintext password knowledge",
+        "B": "Extracts plaintext passwords directly from the LSASS process in real time",
+        "C": "Forges Kerberos tickets using the KRBTGT account hash for persistent domain access",
+        "D": "Reuses previously captured Kerberos tickets for lateral movement within a domain"
+      },
+      "correct": "C",
+      "explanation": "A Golden Ticket attack forges Kerberos tickets using the KRBTGT account hash (the master key account), granting persistent domain access."
     },
     {
       "section": "Web application security tools",
       "type": "mc",
-      "question": "Which tool is specifically designed to detect and exploit SQL injection vulnerabilities automatically?",
+      "question": "What is the primary function of Burp Suite's intercepting proxy feature?",
       "options": {
-        "A": "Nikto for checking web servers for outdated software and missing headers",
-        "B": "OWASP ZAP for integrating security into development pipelines",
-        "C": "Burp Suite's Intruder module for payload injection",
-        "D": "Sqlmap for finding injection points and extracting database contents"
+        "A": "Automates payload injection for fuzzing and brute force testing of web applications",
+        "B": "Sits between browser and server to capture and modify HTTP and HTTPS requests",
+        "C": "Automatically tests web applications for SQL injection and cross-site scripting flaws",
+        "D": "Manually crafts and resends modified requests to test specific payload behavior"
+      },
+      "correct": "B",
+      "explanation": "Burp Suite's intercepting proxy sits between the browser and server, allowing the operator to capture and modify HTTP/HTTPS requests for testing."
+    },
+    {
+      "section": "Web application security tools",
+      "type": "mc",
+      "question": "What is OWASP ZAP particularly suited for in web application security?",
+      "options": {
+        "A": "Noisy scanning of web servers for outdated software and missing security headers",
+        "B": "Automated detection and exploitation of SQL injection vulnerabilities",
+        "C": "Commercial exploitation framework for advanced red team operations",
+        "D": "Free alternative to Burp Suite that integrates into CI/CD pipelines"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that Sqlmap automates detection and exploitation of SQL injection vulnerabilities, identifies the database type, and extracts database contents automatically."
+      "explanation": "OWASP ZAP is a free Burp Suite alternative well-suited for development teams integrating security scanning into CI/CD pipelines."
     },
     {
       "section": "Exploitation frameworks",
       "type": "mc",
-      "question": "What is a key feature that distinguishes Cobalt Strike from Metasploit?",
+      "question": "What does Metasploit's Meterpreter payload provide after successful exploitation?",
       "options": {
-        "A": "Offers post-exploitation modules for privilege escalation",
-        "B": "Includes malleable C2 profiles mimicking legitimate protocols",
-        "C": "Provides exploit modules for hundreds of CVEs",
-        "D": "Is an open-source framework available free"
+        "A": "Interactive shell with file system access, registry manipulation, and pivoting capabilities",
+        "B": "Automatic privilege escalation and lateral movement without operator interaction",
+        "C": "Command-and-control traffic that evades detection by network security systems",
+        "D": "Malleable command-and-control profiles that mimic legitimate application protocols"
       },
-      "correct": "B",
-      "explanation": "The section identifies malleable C2 profiles as Cobalt Strike's key differentiator—they allow command-and-control traffic to mimic legitimate protocols to evade detection, making it the stated distinguishing feature over Metasploit."
+      "correct": "A",
+      "explanation": "Meterpreter is Metasploit's advanced interactive shell payload providing file system access, registry manipulation, credential extraction, host pivoting, and screenshots over an encrypted channel."
+    },
+    {
+      "section": "Exploitation frameworks",
+      "type": "mc",
+      "question": "What is the key differentiator of Cobalt Strike compared to Metasploit?",
+      "options": {
+        "A": "Focuses on automated vulnerability scanning rather than active exploitation techniques",
+        "B": "Provides open-source exploitation modules for hundreds of known CVEs and vulnerabilities",
+        "C": "Uses malleable C2 profiles to mimic legitimate protocols and evade network detection",
+        "D": "Includes automated post-exploitation and privilege escalation for target systems"
+      },
+      "correct": "C",
+      "explanation": "Cobalt Strike's key differentiator is its malleable C2 profiles—configurable command-and-control traffic that mimics legitimate application protocols to evade detection."
     },
     {
       "section": "Digital forensics tools",
-      "type": "text",
-      "question": "Why is Volatility particularly valuable for analyzing a system suspected of running fileless malware?",
-      "rubric": "A sound answer explains that Volatility analyzes memory dumps to extract processes and artifacts from RAM, which is critical because fileless malware runs entirely in memory without writing to disk—so traditional disk forensics would miss it entirely.",
-      "explanation": "The section states that Volatility is essential for fileless malware because such malware runs entirely in memory and writes nothing to disk, meaning disk forensics cannot detect it, but memory analysis can."
+      "type": "mc",
+      "question": "What is the primary purpose of Volatility in digital forensics?",
+      "options": {
+        "A": "To acquire forensic images of disk drives and verify integrity with hashes",
+        "B": "To analyze disk images and recover deleted files from file systems",
+        "C": "To search for keywords and identify files based on hash values",
+        "D": "To analyze memory dumps and extract process lists, connections, and loaded modules"
+      },
+      "correct": "D",
+      "explanation": "Volatility is the primary open-source memory forensics framework that analyzes memory dumps to extract process lists, network connections, registry hives, and loaded modules."
+    },
+    {
+      "section": "Digital forensics tools",
+      "type": "mc",
+      "question": "Why is Volatility particularly critical for detecting fileless malware?",
+      "options": {
+        "A": "Extracts deleted files that malware may have removed from the file system",
+        "B": "Analyzes system memory where fileless malware runs without writing to disk",
+        "C": "Scans disk files for known malware signatures and cryptographic hashes",
+        "D": "Monitors network traffic to detect command-and-control communications and beacons"
+      },
+      "correct": "B",
+      "explanation": "Volatility is critical for fileless malware because it analyzes memory dumps to detect malware that runs entirely in memory and writes nothing to disk, which traditional disk forensics would miss."
+    },
+    {
+      "section": "Digital forensics tools",
+      "type": "mc",
+      "question": "What does dcfldd add to the basic functionality of dd during forensic imaging?",
+      "options": {
+        "A": "Calculates MD5 and SHA-1 hashes during imaging to verify forensic copy integrity",
+        "B": "Automates deleted file recovery and forensic timeline analysis of systems",
+        "C": "Analyzes memory dumps and detects rootkit presence on forensic targets",
+        "D": "Provides graphical interface for selecting devices and verifying forensic image hashes"
+      },
+      "correct": "A",
+      "explanation": "dcfldd is dd with added MD5/SHA-1 hash verification during imaging, allowing operators to confirm the copy is an exact, unaltered duplicate during the acquisition process."
     },
     {
       "section": "Endpoint Detection and Response platforms",
       "type": "mc",
-      "question": "What is the primary operational advantage EDR platforms provide compared to traditional antivirus?",
+      "question": "How does EDR differ from traditional antivirus in detecting security threats?",
       "options": {
-        "A": "EDR records behavioral timelines for threat hunting while antivirus only alerts at execution",
-        "B": "EDR scans files faster using GPU acceleration",
-        "C": "EDR detects viruses on network devices",
-        "D": "EDR uses AI to predict future attacks"
+        "A": "EDR blocks malware before execution while antivirus allows execution and then removes files",
+        "B": "EDR uses AI and machine learning while antivirus uses only rule-based detection",
+        "C": "EDR records continuous behavioral timelines while antivirus only matches signatures at execution time",
+        "D": "EDR operates on endpoints while antivirus operates only at the network gateway"
       },
-      "correct": "A",
-      "explanation": "The section contrasts EDR's continuous monitoring and historical timeline capability with traditional antivirus, which only performs signature matching at execution time and keeps no record—making threat hunting impossible with antivirus alone."
+      "correct": "C",
+      "explanation": "EDR records a continuous behavioral timeline enabling threat hunting and retrospective investigation, while traditional antivirus only matches files against known signatures at execution time and keeps no activity record."
     }
   ]
 }

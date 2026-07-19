@@ -3,94 +3,106 @@
     {
       "section": "What a zero-day actually is",
       "type": "mc",
-      "question": "What is the defining characteristic of a zero-day vulnerability?",
+      "question": "Why does a zero-day vulnerability pose a significant problem for defenders compared to a known vulnerability?",
       "options": {
-        "A": "The vendor knows about it but has chosen not to release a patch",
-        "B": "The vendor is unaware the flaw exists, so no patch or advisory is available",
-        "C": "The vulnerability was discovered on the first day of the year",
-        "D": "Attackers have zero ways to exploit it because defenses are in place"
+        "A": "Attackers have additional time to develop and test exploitation techniques before defenders can prepare responses",
+        "B": "No patch or vendor advisory exists, leaving defenders without specific countermeasures while attackers already have working exploits",
+        "C": "Vendors develop fixes more slowly than attackers can identify and exploit the vulnerability in the wild",
+        "D": "Antivirus signature databases lack detection rules for the specific flaw, making traditional scanning ineffective"
       },
       "correct": "B",
-      "explanation": "A zero-day is defined by the vendor having zero days to develop a fix because they don't know the flaw exists. This means no patch, no advisory, and no signature for defenses to match against."
+      "explanation": "A zero-day is unknown to the vendor, so there is no patch, advisory, or signature for defenders to use. The section explicitly states attackers gain an asymmetric advantage because they can exploit freely while defenders have no specific countermeasure."
     },
     {
       "section": "Who discovers zero-days — and why it matters",
-      "type": "text",
-      "question": "Name two different parties that might discover a zero-day and briefly describe what they typically do with it.",
-      "rubric": "A sound answer names two discoverers from the table (researchers, bounty hunters, nation-states, or criminals) and states what each does: researchers report via coordinated disclosure, bounty hunters submit to platforms for rewards, nation-states stockpile for operations, criminals use or sell to brokers.",
-      "explanation": "The section lists four distinct discoverer types with different intentions; a student should pick any two and state their corresponding action from the table."
+      "type": "mc",
+      "question": "What is the primary difference in how bug bounty hunters and nation-state intelligence agencies handle zero-day discoveries?",
+      "options": {
+        "A": "Bug bounty hunters target hardware vulnerabilities while nation-states focus exclusively on software flaws",
+        "B": "Bug bounty hunters withhold disclosure longer while nation-states immediately publish their discoveries",
+        "C": "Bug bounty hunters report findings through disclosure platforms for compensation, while nation-states keep discoveries secret for operational use",
+        "D": "Bug bounty hunters operate independently while nation-states always coordinate with equipment vendors"
+      },
+      "correct": "C",
+      "explanation": "The section states bug bounty hunters submit via platforms like HackerOne for rewards, while nation-state agencies stockpile flaws for offensive operations and do not disclose them."
     },
     {
       "section": "The zero-day lifecycle",
       "type": "mc",
-      "question": "During which period is the zero-day threat window most dangerous?",
+      "question": "During which phase of the zero-day lifecycle is the risk window most dangerous?",
       "options": {
-        "A": "Between CVE assignment and CVSS score publication",
-        "B": "Between discovery and the vendor receiving notification",
-        "C": "Between first exploitation in the wild and successful patch deployment",
-        "D": "Between the patch release and when the vendor publishes an advisory"
+        "A": "Between vendor notification and patch release",
+        "B": "Between discovery and weaponization, before attackers know how to exploit it",
+        "C": "Between patch release and widespread patch deployment",
+        "D": "Between first exploitation in the wild and successful patch deployment"
       },
-      "correct": "C",
-      "explanation": "The section states that the most dangerous period is the window between first exploitation and successful patch deployment, because during this time no standard defense addresses the specific flaw."
+      "correct": "D",
+      "explanation": "The section explicitly states the most dangerous period is the window between first exploitation and successful patch deployment, because no standard defense addresses the specific flaw during this time."
     },
     {
       "section": "The CVE system",
       "type": "mc",
-      "question": "What is the primary purpose of the CVE naming system?",
+      "question": "What is the primary purpose of the CVE system maintained by MITRE?",
       "options": {
-        "A": "To measure vulnerability severity using a numerical scale",
-        "B": "To document which nation-state created an exploit",
-        "C": "To record how long vendors have known about a flaw",
-        "D": "To standardize vulnerability identification across all parties"
+        "A": "To create standardized identifiers ensuring the same vulnerability is recognized consistently across vendors and security tools",
+        "B": "To document which vendors have released patches and updates for known vulnerabilities",
+        "C": "To evaluate how difficult a particular vulnerability is to exploit in real-world attack scenarios",
+        "D": "To assign numerical severity ratings that help organizations prioritize which vulnerabilities to remediate first"
       },
-      "correct": "D",
-      "explanation": "The CVE system is a standardized naming framework maintained by MITRE; the section explains that it gives every flaw a single unambiguous ID so vendors, security tools, and organizations all refer to the same thing."
+      "correct": "A",
+      "explanation": "The section states CVE is a standardized naming and cataloging framework that gives every flaw a single unambiguous ID so vendors, security tools, and organizations all refer to the same thing."
     },
     {
       "section": "The CVSS scoring system",
       "type": "mc",
-      "question": "Which CVSS Base Score metric measures whether a flaw can affect components beyond the vulnerable component itself?",
+      "question": "What does a CVSS Base Score of 10.0 represent?",
       "options": {
-        "A": "Scope",
-        "B": "User Interaction",
-        "C": "Attack Vector",
-        "D": "Privileges Required"
+        "A": "A vulnerability that receives patches quickly and presents minimal risk to organizations over time",
+        "B": "A network-adjacent vulnerability requiring significant attack complexity and specialized techniques to successfully exploit",
+        "C": "A remotely exploitable vulnerability requiring no authentication or user interaction, affecting multiple components and compromising confidentiality, integrity, and availability",
+        "D": "A locally exploitable vulnerability that requires valid user credentials but enables complete system control"
       },
-      "correct": "A",
-      "explanation": "The Scope metric specifically measures whether exploitation can affect components beyond the vulnerable one; a score of 10.0 includes cross-component impact."
+      "correct": "C",
+      "explanation": "The section states a 10.0 score means remotely exploitable, no authentication, no user interaction, cross-component impact, and complete confidentiality, integrity, and availability compromise."
     },
     {
       "section": "Disclosure models",
-      "type": "text",
-      "question": "Explain the key difference in timing between responsible disclosure and full immediate disclosure.",
-      "rubric": "A sound answer states that responsible disclosure withholds public details for a set period (the section specifies 90 days) to give the vendor time to patch, while full immediate disclosure publishes everything right away with no waiting period.",
-      "explanation": "The section contrasts the two models explicitly: responsible disclosure gives the vendor 90 days (Project Zero standard) before public release, while full immediate disclosure publishes with no notification or waiting period."
+      "type": "mc",
+      "question": "What is the standard timeframe researchers agree to in responsible disclosure, and who established this standard?",
+      "options": {
+        "A": "60 days, established by the National Vulnerability Database",
+        "B": "120 days, established by international security organizations",
+        "C": "180 days, established by MITRE's CVE program",
+        "D": "90 days, established by Google's Project Zero"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states responsible disclosure typically uses a 90-day standard, which was set by Google's Project Zero, giving the vendor time to patch before attackers can exploit published details."
     },
     {
       "section": "Nation-state risk: the EternalBlue lesson",
       "type": "mc",
-      "question": "What protocol did the EternalBlue exploit target?",
+      "question": "What was the consequence when the NSA's EternalBlue exploit was stolen and published by the Shadow Brokers?",
       "options": {
-        "A": "SMB (Server Message Block)",
-        "B": "DNS (Domain Name System)",
-        "C": "HTTP (Hypertext Transfer Protocol)",
-        "D": "SSH (Secure Shell)"
+        "A": "The NSA released a public advisory enabling Windows users to quickly patch the vulnerability",
+        "B": "The exploit was repurposed in WannaCry and NotPetya attacks, inflicting tens of billions of dollars in damage",
+        "C": "Microsoft deployed a patch within one day and successfully contained the threat before widespread attacks",
+        "D": "Law enforcement apprehended the Shadow Brokers and prevented the exploit from being used in attacks"
       },
-      "correct": "A",
-      "explanation": "The section states that EternalBlue targeted a flaw in Windows SMB, which is the Windows file-sharing protocol."
+      "correct": "B",
+      "explanation": "The section states that after publication, the EternalBlue exploit targeting Windows SMB was weaponized in WannaCry and NotPetya, with combined damage in the tens of billions of dollars."
     },
     {
       "section": "Defending without a patch",
       "type": "mc",
-      "question": "How does EDR differ from traditional antivirus in defending against zero-days?",
+      "question": "Why is EDR (Endpoint Detection and Response) effective against zero-day exploits when traditional antivirus is not?",
       "options": {
-        "A": "EDR prevents all malware from running by blocking the file system",
-        "B": "EDR matches files against known-bad signatures at execution time",
-        "C": "EDR only works on Windows systems while antivirus works on all platforms",
-        "D": "EDR detects exploitation behaviors without needing to know the specific vulnerability"
+        "A": "EDR identifies suspicious behaviors characteristic of exploitation without requiring knowledge of a specific vulnerability, while antivirus depends on signature matching",
+        "B": "EDR automatically applies security patches while antivirus requires users to manually initiate remediation",
+        "C": "EDR terminates all outbound network connections while antivirus permits malicious traffic to pass through unblocked",
+        "D": "EDR functions across all operating systems while antivirus operates only on Windows systems"
       },
-      "correct": "D",
-      "explanation": "The section contrasts the two: traditional antivirus only matches files against a known-bad signature list, while EDR records ongoing activity and can catch novel exploit behavior without knowing the specific flaw."
+      "correct": "A",
+      "explanation": "The section explains that EDR detects exploitation behaviors like shellcode execution and process injection without needing a signature, whereas antivirus only matches files against known-bad signatures at execution time."
     }
   ]
 }

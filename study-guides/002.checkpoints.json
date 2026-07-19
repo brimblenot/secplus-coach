@@ -3,42 +3,54 @@
     {
       "section": "The four categories of security controls",
       "type": "mc",
-      "question": "Which of the following is an example of a technical control?",
+      "question": "Which category of security control relies directly on people to carry out security processes?",
       "options": {
-        "A": "A written policy document that defines acceptable use of company systems",
-        "B": "A firewall that blocks unauthorized network traffic",
-        "C": "A perimeter fence surrounding the data center",
-        "D": "A security guard who patrols the building after hours"
+        "A": "Operational controls, which depend on people performing security functions",
+        "B": "Physical controls, which limit access to buildings and devices",
+        "C": "Managerial controls, which are implemented through documentation and policies",
+        "D": "Technical controls, which use technology to enforce security policy"
       },
-      "correct": "B",
-      "explanation": "A firewall is a technology-based mechanism that enforces security policy and is explicitly listed as a technical control example in the section. The other options represent managerial (A), operational (C), and physical (D) controls."
+      "correct": "A",
+      "explanation": "Operational controls are explicitly defined as relying on people to carry out security processes, with examples including security guards, training, and incident response teams."
     },
     {
       "section": "The six functional types of security controls",
-      "type": "text",
-      "question": "Explain the key difference between a preventive control and a deterrent control.",
-      "rubric": "A sound answer states that a preventive control mechanically or technically blocks an action from occurring, while a deterrent control discourages an attack by raising its perceived cost without necessarily stopping it. The example of a locked door versus a warning sign illustrates this distinction.",
-      "explanation": "The section explicitly contrasts these two types: preventive controls mechanically block actions, while deterrent controls discourage attempts by raising perceived cost. The door-lock versus warning-sign example directly illustrates this difference."
+      "type": "mc",
+      "question": "What is the primary difference between a preventive control and a deterrent control?",
+      "options": {
+        "A": "Preventive controls instruct people on secure behavior, while deterrent controls restore operations after an incident",
+        "B": "Preventive controls log events after they occur, while deterrent controls stop incidents before they happen",
+        "C": "Preventive controls are applied after detection to reverse damage, while deterrent controls identify events as they occur",
+        "D": "Preventive controls mechanically block an action, while deterrent controls discourage attempts by raising perceived cost"
+      },
+      "correct": "D",
+      "explanation": "The study guide explicitly contrasts these two types: a preventive control mechanically blocks the action (like a locked door), while a deterrent raises the perceived cost without necessarily blocking it (like a warning sign)."
     },
     {
       "section": "One control, multiple types",
       "type": "mc",
-      "question": "A CCTV camera monitoring a server room is considered which functional types?",
+      "question": "A CCTV camera system can be classified as which of the following combinations of functional types?",
       "options": {
-        "A": "Preventive and corrective, because it stops attacks and restores systems",
-        "B": "Corrective and directive, because it restores operations and instructs staff",
-        "C": "Detective and deterrent, because it records activity and discourages attackers",
-        "D": "Detective only, because it records activity after events occur"
+        "A": "Both directive and detective, because it instructs people and identifies unauthorized access",
+        "B": "Both detective and deterrent, because it records activity and visible cameras discourage attackers",
+        "C": "Both corrective and compensating, because it restores operations and provides backup security",
+        "D": "Both detective and preventive, because it records activity and enforces access"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that a CCTV camera is both detective (records activity) and deterrent (visible cameras discourage attackers). It does not prevent or correct attacks."
+      "correct": "B",
+      "explanation": "The section explicitly states that a CCTV camera is both detective (records activity) and deterrent (visible cameras discourage attackers)."
     },
     {
       "section": "Defense-in-depth",
-      "type": "text",
-      "question": "What is the core goal of a defense-in-depth security strategy?",
-      "rubric": "A sound answer states that defense-in-depth layers controls from multiple categories and types so that if one control fails, others remain to detect, compensate, or correct the issue. The key idea is that no single control is assumed to be sufficient.",
-      "explanation": "The section defines defense-in-depth as layering controls so that failure of one does not result in total compromise. This ensures redundancy across categories and functional types."
+      "type": "mc",
+      "question": "What is the primary goal of a defense-in-depth security strategy?",
+      "options": {
+        "A": "To implement directive controls before deploying any other functional control types",
+        "B": "To deploy technical controls exclusively within all categories of the security framework",
+        "C": "To layer controls across multiple categories so that one control failure does not cause total compromise",
+        "D": "To use the strongest preventive controls to stop any single attack from succeeding"
+      },
+      "correct": "C",
+      "explanation": "Defense-in-depth is defined as layering controls from all four categories and multiple types so that if one control fails, others remain to detect, correct, or compensate."
     }
   ]
 }

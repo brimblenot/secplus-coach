@@ -3,101 +3,119 @@
     {
       "section": "Jailbreaking and rooting",
       "type": "mc",
-      "question": "What is the primary security layer that jailbreaking disables on iOS devices?",
+      "question": "Which of the following best describes what jailbreaking an iOS device does to the app sandbox?",
       "options": {
-        "A": "The app sandbox that isolates applications",
-        "B": "The MDM detection system for device integrity",
-        "C": "The Secure Enclave storing biometric data",
-        "D": "Code-signing requirements enforced by Apple"
+        "A": "It moves the sandbox to a separate hardware chip for added protection",
+        "B": "It disables the isolation layer that prevents apps from accessing each other or the OS",
+        "C": "It encrypts the sandbox environment to prevent unauthorized data access",
+        "D": "It strengthens the isolation layer that separates apps from the OS"
       },
-      "correct": "A",
-      "explanation": "The section states that jailbreaking disables the app sandbox — the isolation layer that keeps apps from touching each other or the OS. While jailbreaking does bypass code-signing and can weaken the Secure Enclave, the sandbox is the primary isolation mechanism explicitly named."
+      "correct": "B",
+      "explanation": "Jailbreaking exploits kernel vulnerabilities to bypass Apple's restrictions, including disabling the app sandbox — the isolation layer protecting apps from each other and the OS."
     },
     {
       "section": "Sideloading",
-      "type": "text",
-      "question": "Explain why sideloading bypasses security protections that official app stores provide.",
-      "rubric": "A sound answer should state that sideloading installs apps from sources other than the official app store, thereby skipping the security review process that the store normally conducts.",
-      "explanation": "The section defines sideloading as installing from a source other than the official platform app store, bypassing that store's security review entirely. The student should recognize that the security review is what the store offers and sideloading circumvents it."
+      "type": "mc",
+      "question": "On Android, what permission must users typically grant before sideloading an APK file?",
+      "options": {
+        "A": "Permission to enable developer mode",
+        "B": "Permission to access the Google Play Store",
+        "C": "Permission to modify system applications",
+        "D": "Permission to install from unknown sources"
+      },
+      "correct": "D",
+      "explanation": "Android allows sideloading via APK files by default, but users must grant the 'install from unknown sources' permission, which bypasses the app store's security review."
     },
     {
       "section": "Malicious applications",
       "type": "mc",
-      "question": "Which behavior describes an app that passes review acting harmlessly, then downloads harmful code after installation?",
+      "question": "What does permission harvesting typically involve?",
       "options": {
-        "A": "Banking trojans, which overlay fake login screens",
-        "B": "Dynamic code loading, which downloads malicious code after passing review",
-        "C": "Premium SMS fraud, which silently subscribes victims to paid services",
-        "D": "Permission harvesting, which requests excessive permissions unnecessarily"
+        "A": "Requesting significantly fewer permissions than the app needs to operate",
+        "B": "Automatically granting all system permissions without any user consent or notice",
+        "C": "Requesting far more permissions than the app actually requires to function",
+        "D": "Stealing permission tokens directly from other installed applications on the device"
       },
-      "correct": "B",
-      "explanation": "The section explicitly defines dynamic code loading as passing review behaving innocuously, then downloading malicious code later. This technique allows an app to evade review by deferring its malicious behavior."
+      "correct": "C",
+      "explanation": "Permission harvesting is when an app requests far more permissions than necessary — for example, a flashlight app requesting contacts, SMS, microphone, camera, and location data."
     },
     {
       "section": "Bluetooth attacks",
       "type": "mc",
-      "question": "Which Bluetooth attack exploits the OBEX Push Protocol to silently read contacts and files?",
+      "question": "Which Bluetooth attack allows an attacker to silently read a victim's contacts, messages, and calendar using the OBEX Push Protocol?",
       "options": {
-        "A": "Blueborne, which allows worm-like spread between paired devices",
-        "B": "Bluebugging, which provides full remote control of the target",
-        "C": "Bluesnarfing, which exploits OBEX to read contacts, messages, and files",
-        "D": "Bluejacking, which sends unsolicited messages to nearby devices"
+        "A": "Bluesnarfing, which exploits the OBEX file-transfer protocol",
+        "B": "Blueborne, which spreads like a worm between paired devices",
+        "C": "Bluejacking, which is a nuisance-only intrusion",
+        "D": "Bluebugging, which enables full remote device control"
       },
-      "correct": "C",
-      "explanation": "The section's table explicitly states that bluesnarfing exploits the OBEX Push Protocol to silently read the victim's contacts, messages, calendar, and files. Bluejacking is nuisance-only; bluebugging provides full control; Blueborne is a protocol-stack vulnerability."
+      "correct": "A",
+      "explanation": "Bluesnarfing exploits the OBEX Push Protocol to silently steal contacts, messages, calendar data, and files without user interaction."
     },
     {
       "section": "NFC attacks",
-      "type": "text",
-      "question": "Describe how a relay attack extends the effective range of NFC transactions.",
-      "rubric": "A sound answer should explain that two attacker devices work together: one near the victim's card captures the signal, and the other relays it over a longer distance to a payment terminal, allowing fraud while the card stays in the victim's pocket.",
-      "explanation": "The section defines a relay attack as using two attacker-controlled devices to extend effective NFC range, with device 1 capturing the signal from the victim's card and device 2 positioned at a payment terminal to complete a fraudulent transaction."
+      "type": "mc",
+      "question": "In an NFC relay attack, how do two attacker-controlled devices enable a fraudulent transaction?",
+      "options": {
+        "A": "One device clones the card's cryptographic key while the second device executes the payment",
+        "B": "One device captures an NFC signal and relays it over a longer channel to a second device",
+        "C": "One device intercepts encrypted card data and decrypts it for use by the second device",
+        "D": "One device jams the signal while the second device emulates an authorized NFC reader"
+      },
+      "correct": "B",
+      "explanation": "A relay attack uses two devices: one near the victim's card captures the NFC signal and relays it to a second device at a payment terminal, extending effective NFC range."
     },
     {
       "section": "Wi-Fi risks",
       "type": "mc",
-      "question": "What is an evil twin access point?",
+      "question": "What is an evil twin access point in the context of mobile device Wi-Fi risks?",
       "options": {
-        "A": "An open Wi-Fi network in a public place that transmits unencrypted traffic",
-        "B": "A VPN server that intercepts traffic between a device and a trusted network",
-        "C": "A captive portal page that serves malicious content to connected devices",
-        "D": "A Wi-Fi hotspot created by an attacker with the same SSID as a previously used network"
+        "A": "A legitimate access point that has been compromised by malware or unauthorized actors",
+        "B": "A Wi-Fi jammer that blocks a device from connecting to any available networks",
+        "C": "An attacker-created hotspot with the same SSID as a network the victim previously used",
+        "D": "A captive portal network that requires payment or credentials before allowing access"
       },
-      "correct": "D",
-      "explanation": "The section defines an evil twin access point as an attacker-created hotspot with the same SSID as a network the victim previously used, causing the device to auto-connect and route traffic through the attacker."
+      "correct": "C",
+      "explanation": "An evil twin access point is created by an attacker with the same SSID as a trusted network, causing the victim's device to auto-connect and route traffic through the attacker."
     },
     {
       "section": "SS7 vulnerabilities and SIM swapping",
       "type": "mc",
-      "question": "In a SIM swapping attack, what does the attacker do to compromise the victim's accounts?",
+      "question": "In a SIM swapping attack, what does the attacker accomplish by convincing a carrier representative to move the victim's number to a new SIM?",
       "options": {
-        "A": "Socially engineers the carrier into moving the victim's phone number to the attacker's SIM",
-        "B": "Installs stalkerware on the victim's device to monitor calls and messages",
-        "C": "Creates an evil twin Wi-Fi network to capture authentication codes",
-        "D": "Exploits SS7 protocol flaws to intercept SMS across the telecom network"
+        "A": "The attacker obtains full root or administrative access to the victim's operating system",
+        "B": "The attacker can decrypt all past messages that are stored on the victim's phone",
+        "C": "The attacker gains direct administrative access to the carrier's billing and account systems",
+        "D": "The attacker gains the ability to intercept calls and SMS messages, including MFA codes"
       },
-      "correct": "A",
-      "explanation": "The section defines SIM swapping as a social engineering attack where the attacker calls the carrier, impersonates the victim, and convinces a representative to move the victim's number to the attacker's SIM, giving the attacker access to calls and SMS."
+      "correct": "D",
+      "explanation": "Once the attacker controls the victim's phone number via SIM swapping, they receive all incoming calls and SMS — including multi-factor authentication codes for banks and email accounts."
     },
     {
       "section": "Grayware and stalkerware",
-      "type": "text",
-      "question": "What distinguishes stalkerware from ordinary grayware?",
-      "rubric": "A sound answer should identify that stalkerware is a subset of grayware specifically marketed for covert monitoring of another person (partner or child), operates hidden from the app list, and continuously uploads sensitive data like location and messages.",
-      "explanation": "The section defines stalkerware as a subset of grayware that operates covertly, hides from the app list, and is marketed for monitoring a partner or child. Ordinary grayware is privacy-invasive but not necessarily covert or marketed as a monitoring tool."
+      "type": "mc",
+      "question": "How does stalkerware differ from typical grayware in its operation and purpose?",
+      "options": {
+        "A": "Stalkerware is sold commercially for monitoring and operates covertly to collect location and messages",
+        "B": "Stalkerware requires root access to operate while grayware functions on unrooted devices",
+        "C": "Stalkerware operates openly in the app list while grayware hides from user detection",
+        "D": "Stalkerware collects only browsing data while grayware collects all types of device data"
+      },
+      "correct": "A",
+      "explanation": "Stalkerware is commercial monitoring software marketed for tracking partners or children that operates covertly, hides from the app list, and continuously uploads location, messages, and other data."
     },
     {
       "section": "Mobile Device Management (MDM)",
       "type": "mc",
-      "question": "Which MDM deployment model gives the organization full IT control while allowing employees to use the device personally?",
+      "question": "In MDM deployment models, which option gives the organization full IT control while allowing the employee to choose from an approved device list?",
       "options": {
-        "A": "BYOD, where the employee owns the device and IT control is limited",
-        "B": "MAM, where only applications and their data are managed, not the device",
-        "C": "CYOD, where the organization owns the device but the employee picks from an approved list",
-        "D": "COPE, where the organization owns the device and the employee can use it personally"
+        "A": "CYOD, where the organization owns and controls devices selected from an approved list",
+        "B": "MAM, where mobile applications are managed with geofencing and location controls",
+        "C": "COPE, where corporate devices are provided with limited restrictions on personal use",
+        "D": "BYOD, where the organization maintains full control over personally owned devices"
       },
-      "correct": "D",
-      "explanation": "The section's table shows that COPE (Corporate-Owned, Personally Enabled) means the organization owns the device and has full control, distinguishing it from BYOD (limited control) and CYOD (employee chooses from approved list)."
+      "correct": "A",
+      "explanation": "CYOD (Choose Your Own Device) allows the employee to select from an organization-approved list of devices, with the organization maintaining full ownership and control while offering choice."
     }
   ]
 }

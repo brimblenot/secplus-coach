@@ -2,102 +2,120 @@
   "checkpoints": [
     {
       "section": "Why change management exists",
-      "type": "text",
-      "question": "In one or two sentences, explain why change management requires evaluating risks before changes reach production rather than making changes and fixing problems afterward.",
-      "rubric": "A sound answer states that uncontrolled changes cause security incidents, outages, or compliance failures, and that evaluating risk in advance allows the organization to test safely, schedule at low-impact times, and maintain an audit trail.",
-      "explanation": "The section explicitly states that uncontrolled changes are a leading cause of these failures, and that change management provides structure to evaluate risks beforehand and test safely in scheduled windows."
+      "type": "mc",
+      "question": "According to the study guide, what is the primary reason change management provides structure before changes reach production?",
+      "options": {
+        "A": "To ensure all IT staff follow procedures and maintain consistent documentation standards",
+        "B": "To prevent technicians from making mistakes during the implementation phase",
+        "C": "To evaluate risks and create an audit trail before changes impact production systems",
+        "D": "To reduce the total number of change requests submitted each year"
+      },
+      "correct": "C",
+      "explanation": "The section states that change management evaluates risks before they hit production, tests safely, schedules at low-impact times, and creates an audit trail. Risk evaluation and documentation are its core purposes."
     },
     {
       "section": "The core process flow",
       "type": "mc",
-      "question": "In the change management process, what is the primary responsibility of the owner when an RFC is submitted?",
+      "question": "In the change management process flow, what is the purpose of the maintenance window?",
       "options": {
-        "A": "Scheduling the change into the next available maintenance window",
-        "B": "Approving or rejecting the RFC at the CAB meeting",
-        "C": "Documenting all technical details of the modification to be made",
-        "D": "Being responsible for the system being changed and ensuring testing occurs"
+        "A": "To provide time for the RFC to be formally submitted by the system owner",
+        "B": "To ensure that all dependent systems are tested before the change is approved",
+        "C": "To allow the CAB to document all changes after they have been implemented",
+        "D": "To schedule approved changes during low-traffic periods and communicate them to stakeholders"
       },
       "correct": "D",
-      "explanation": "The section defines the owner as the person responsible for the system being changed; the owner is designated in the RFC itself but is not the CAB reviewer, scheduler, or documentarian."
+      "explanation": "The section defines the maintenance window as a scheduled low-traffic period, typically nights or weekends, where approved changes are slotted and communicated to stakeholders in advance."
     },
     {
       "section": "The Change Advisory Board (CAB)",
       "type": "mc",
-      "question": "Which of the following is one of the four dimensions the CAB evaluates when reviewing an RFC?",
+      "question": "Which of the following is one of the four dimensions the CAB evaluates when reviewing a change request?",
       "options": {
-        "A": "Whether dependent systems were checked after testing in non-production",
-        "B": "Whether this change opens attack surface, removes controls, or creates compliance gaps",
-        "C": "Whether the change will be implemented during a Friday evening maintenance window",
-        "D": "Whether the requester has completed required training certifications"
+        "A": "Whether the technician performing the change has relevant prior experience",
+        "B": "Whether the change affects systems directly or indirectly and its impact scope",
+        "C": "Whether the change needs approval from all business unit managers",
+        "D": "Whether the change requires scheduling a new maintenance window"
       },
       "correct": "B",
-      "explanation": "The section lists security impact as one of four dimensions the CAB evaluates; it specifically asks whether the change opens attack surface, removes controls, or creates compliance gaps."
+      "explanation": "The section lists four dimensions: technical impact (affected systems), business impact (revenue/productivity), security impact (attack surface/controls), and test results. Option B captures technical, business, and security dimensions."
     },
     {
       "section": "Change categories",
       "type": "mc",
-      "question": "An actively exploited zero-day vulnerability requires a patch within hours. Which change category applies, and what is unusual about its approval process?",
+      "question": "What is the key difference in the approval process between a normal change and an emergency change?",
       "options": {
-        "A": "Normal change; requires standard full CAB review before implementation",
-        "B": "Standard change; approved by a template with no full CAB review",
-        "C": "Emergency change; uses expedited approval followed by retrospective CAB review",
-        "D": "Emergency change; bypasses all CAB review and approval entirely"
+        "A": "Normal changes require full CAB review before approval; emergency changes skip initial review",
+        "B": "Normal changes need testing in non-production environments before deployment",
+        "C": "Normal changes must be fully documented; emergency changes need minimal documentation",
+        "D": "Normal changes require a maintenance window scheduled in advance for implementation"
       },
-      "correct": "C",
-      "explanation": "The section defines emergency changes as requiring expedited approval from leadership (e.g., CISO and CTO) and then retrospective CAB review afterward, not no review at all."
+      "correct": "A",
+      "explanation": "The section states that normal changes require full CAB review, while emergency changes receive expedited approval from key roles like the CISO and CTO, followed by a retrospective CAB review after implementation."
     },
     {
       "section": "Ownership and stakeholders",
-      "type": "text",
-      "question": "A change to shipping label software is submitted. Name two departments beyond shipping that stakeholder identification should uncover, and briefly explain why.",
-      "rubric": "A sound answer names two or more departments (such as accounting, customer service, or revenue recognition teams) and explains that changes can ripple into areas that depend on shipping data or are affected by the modified system.",
-      "explanation": "The section uses the shipping label example to show how a single change affects accounting (billing data), customer service (tracking), and revenue recognition—demonstrating that missing stakeholders creates preparation gaps."
+      "type": "mc",
+      "question": "Who is responsible for ensuring testing happens and signing off on User Acceptance Testing after a change?",
+      "options": {
+        "A": "The technician who performs the implementation work",
+        "B": "The system owner, often a business unit manager",
+        "C": "The security team member assigned to the change",
+        "D": "The CAB chair who approved the change request"
+      },
+      "correct": "B",
+      "explanation": "The section defines the owner as the person responsible for a system, often a business unit manager, who ensures testing happens and signs off on UAT."
     },
     {
       "section": "Impact analysis and test results",
       "type": "mc",
-      "question": "What must happen before test results can be presented to the CAB as part of an RFC?",
+      "question": "What does the study guide identify as a required component for any significant RFC?",
       "options": {
-        "A": "The change must be validated in a non-production environment such as test, staging, or sandboxed setup",
-        "B": "The change must be scheduled into an approved maintenance window first",
-        "C": "The change must be approved by the system owner in writing",
-        "D": "The change must pass an impact analysis risk rating of low or medium only"
+        "A": "A detailed list of all systems that will be unavailable during the implementation",
+        "B": "Documentation showing the CMDB has been updated with new configuration details",
+        "C": "Confirmation that all business unit stakeholders received advance notice of change",
+        "D": "Evidence that the change was validated in a non-production environment first"
       },
-      "correct": "A",
-      "explanation": "The section states that test results are evidence the change was validated in a non-production environment and are a required component of significant RFCs before CAB review."
+      "correct": "D",
+      "explanation": "The section explicitly states that test results—evidence the change was validated in a non-production environment (test, staging, or sandbox)—are required for significant RFCs."
     },
     {
       "section": "Rollback plans",
-      "type": "text",
-      "question": "Why is a rollback plan harder or impossible for database schema changes than for software patch uninstalls, given that both are production changes?",
-      "rubric": "A sound answer explains that database schema changes process new data once live, making it difficult or impossible to undo the change without losing or corrupting that new data; in contrast, uninstalling a patch and verifying original files restores the prior state cleanly.",
-      "explanation": "The section contrasts the two scenarios: uninstalling a patch is reversible, but schema changes that already processed new data cannot easily be undone without data loss—illustrating why some changes are harder to back out."
+      "type": "mc",
+      "question": "According to the study guide, which type of change presents a challenge for rollback?",
+      "options": {
+        "A": "Uninstalling a software patch and verifying original files were restored",
+        "B": "Replacing a failed disk with a new one in the storage system",
+        "C": "Database schema changes that have already processed new data",
+        "D": "Adding a new user account that was provisioned incorrectly"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly lists database schema changes that have already processed new data as hard or impossible to roll back, contrasting them with easy rollbacks like uninstalling patches."
     },
     {
       "section": "Change freezes and unauthorized changes",
       "type": "mc",
-      "question": "Which of the following tools or methods detects unauthorized changes by comparing live system state against a known-good baseline?",
+      "question": "Which of the following is a method the study guide mentions for detecting unauthorized changes?",
       "options": {
-        "A": "User Acceptance Testing sessions run by the system owner",
-        "B": "Stakeholder interviews conducted after emergency changes are implemented",
-        "C": "Configuration management tools that verify actual state matches the baseline",
-        "D": "Change freeze policies documented in the organization's change control handbook"
+        "A": "File Integrity Monitoring that alerts when files are modified unexpectedly",
+        "B": "Manual audits performed by IT staff on a quarterly basis",
+        "C": "Regular backups compared against previous backup versions",
+        "D": "User surveys asking whether they made any system changes"
       },
-      "correct": "C",
-      "explanation": "The section lists configuration management tools as one method for detecting unauthorized changes by comparing live state against a known-good baseline."
+      "correct": "A",
+      "explanation": "The section lists FIM (File Integrity Monitoring), configuration management tools, and SIEM as methods for detecting unauthorized changes; FIM specifically alerts when files are modified unexpectedly."
     },
     {
       "section": "Configuration management and the CMDB",
       "type": "mc",
-      "question": "Configuration drift is most accurately described as:",
+      "question": "What does the study guide describe as the problem when a system's actual state diverges from what the CMDB says it should be?",
       "options": {
-        "A": "A system's actual state diverging from what the CMDB says it should be",
-        "B": "The delay between approving an RFC and scheduling it into a maintenance window",
-        "C": "A gradual loss of access permissions as users change roles over time",
-        "D": "A failure to document changes in the audit trail after implementation"
+        "A": "Configuration drift, which signals a change occurred outside the formal process",
+        "B": "Unauthorized access, which means the system has been compromised",
+        "C": "CMDB corruption, which requires a full database rebuild",
+        "D": "Shadow IT deployment, which is detected through manual interviews"
       },
       "correct": "A",
-      "explanation": "The section defines configuration drift as the divergence between a system's actual state and the CMDB baseline, caused by unauthorized changes, partial implementations, or self-modifying software."
+      "explanation": "The section defines configuration drift as a system's actual state diverging from the CMDB's intended state and notes it is a red flag requiring investigation."
     }
   ]
 }

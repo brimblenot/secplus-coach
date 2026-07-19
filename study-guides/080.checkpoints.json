@@ -2,109 +2,185 @@
   "checkpoints": [
     {
       "section": "The Secure Software Development Lifecycle (SSDLC)",
-      "type": "text",
+      "type": "mc",
       "question": "Why is it better to integrate security activities into every phase of the SSDLC rather than adding security after development is complete?",
-      "rubric": "A sound answer should state that building security in from the start is cheaper, more effective, and less disruptive than retrofitting security into finished software.",
-      "explanation": "The section explicitly states that retrofitting security into finished software is more expensive, less effective, and more disruptive than building it in from the start, and uses the house-building analogy to reinforce this principle."
+      "options": {
+        "A": "Building security into each phase of development is more cost-effective and less disruptive than adding it after completion",
+        "B": "Security requirements can only be defined during the requirements phase of the SSDLC",
+        "C": "Integrating security at every phase means developers do not need to write code reviews",
+        "D": "Adding security early prevents developers from writing any code that could contain vulnerabilities"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that retrofitting security into finished software is more expensive, less effective, and more disruptive than building it in from the start, making early integration the preferred approach."
     },
     {
       "section": "Input validation",
       "type": "mc",
-      "question": "Which input validation approach is considered most secure?",
+      "question": "What is the key difference between allowlist validation and denylist validation?",
       "options": {
-        "A": "Type validation rejects input that cannot be parsed as the expected data type",
-        "B": "Denylist validation rejects known-bad patterns and accepts everything else",
-        "C": "Length validation enforces minimum and maximum length to prevent buffer overflows",
-        "D": "Allowlist validation accepts only input matching a known-good specification"
+        "A": "Allowlist validation works on client-side systems while denylist validation works server-side",
+        "B": "Allowlist validation accepts only known-good input and rejects everything else",
+        "C": "Allowlist validation uses regular expressions while denylist validation uses type checking",
+        "D": "Denylist validation rejects known-bad patterns and accepts everything else by default"
+      },
+      "correct": "B",
+      "explanation": "The section defines allowlist as accepting only known-good input and denylist as accepting everything except known-bad patterns, and explicitly states allowlist is the most secure approach."
+    },
+    {
+      "section": "Input validation",
+      "type": "mc",
+      "question": "Why must server-side validation always run, even if client-side validation is also present?",
+      "options": {
+        "A": "Server-side validation is required because browsers do not understand client-side code",
+        "B": "Server-side validation is the only method that enforces data type constraints",
+        "C": "Client-side validation causes performance problems that server-side validation solves",
+        "D": "Client-side validation can be bypassed by disabling JavaScript or using a web proxy"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that allowlist validation is the 'most secure' approach because it defines exactly what is acceptable and rejects everything else, whereas denylist validation is less secure due to encoding tricks and syntax variations."
+      "explanation": "The section explicitly states that client-side validation is trivially bypassed by disabling JavaScript, modifying requests with a web proxy, or sending raw HTTP requests, so the server must never trust it has already happened."
     },
     {
       "section": "Output encoding",
       "type": "mc",
-      "question": "What encoding method is required when outputting user-supplied data within a database query?",
+      "question": "What is the purpose of output encoding?",
       "options": {
-        "A": "Parameterized queries separate SQL code structure from user-supplied values",
-        "B": "HTML encoding converts special characters to entity equivalents",
-        "C": "URL encoding converts special characters to percent-format notation",
-        "D": "JavaScript encoding protects against script injection in the browser"
+        "A": "Output encoding validates that user input matches an expected format before display",
+        "B": "Output encoding prevents attackers from accessing the application source code",
+        "C": "Output encoding converts user data into a safe form so it is treated as data, not code",
+        "D": "Output encoding compresses user data to reduce the size of HTTP responses"
       },
-      "correct": "A",
-      "explanation": "The section's table explicitly lists parameterized queries and prepared statements as the required encoding for database query context, noting they make SQL injection impossible regardless of input."
+      "correct": "C",
+      "explanation": "The section defines output encoding as converting user-supplied data into a safe representation before it appears in application output, so the browser treats it as data, not code."
+    },
+    {
+      "section": "Output encoding",
+      "type": "mc",
+      "question": "Which encoding method separates SQL code structure from user-supplied values at the database driver level?",
+      "options": {
+        "A": "URL encoding converts special characters to percent format for safe transmission",
+        "B": "HTML encoding converts special characters to entity equivalents for safe display",
+        "C": "JavaScript encoding prevents scripts from executing in the browser context",
+        "D": "Parameterized queries and prepared statements separate SQL code structure from user-supplied values"
+      },
+      "correct": "D",
+      "explanation": "The section states that parameterized queries and prepared statements separate SQL code structure from user-supplied values at the database driver level, making SQL injection impossible."
     },
     {
       "section": "Error handling",
-      "type": "text",
-      "question": "What information should be hidden from users when an error occurs, and where should detailed error information be stored instead?",
-      "rubric": "A sound answer should state that users should see only generic error pages without stack traces, SQL syntax, file paths, server hostnames, or version numbers, and that detailed error information should go to protected log files accessible only to administrators.",
-      "explanation": "The section directly specifies what users should not see and contrasts it with where detailed information belongs — the building-blueprint analogy reinforces why exposing server details is dangerous."
+      "type": "mc",
+      "question": "What information should users see when an application error occurs?",
+      "options": {
+        "A": "A generic error page with no stack traces, file paths, hostnames, or version numbers",
+        "B": "A detailed stack trace showing the exact line of code that failed",
+        "C": "The server hostname and version number so users know which system processed the request",
+        "D": "SQL syntax errors so users understand what went wrong in the database query"
+      },
+      "correct": "A",
+      "explanation": "The section states users should see only a generic error page with no stack traces, SQL syntax, file paths, server hostnames, or version numbers, while detailed error info goes to protected log files."
     },
     {
       "section": "Security testing tools",
       "type": "mc",
-      "question": "Which testing approach can detect authentication weaknesses and session management flaws by sending malicious inputs to a running application without requiring access to source code?",
+      "question": "What is the primary limitation of SAST — Static Application Security Testing?",
       "options": {
-        "A": "Fuzzing sends randomly generated inputs to discover memory corruption vulnerabilities",
-        "B": "SAST analyzes source code without executing it to find injection flaws",
-        "C": "DAST tests a running application by sending malicious inputs and observing responses",
-        "D": "IAST injects a sensor into the runtime and observes internal behavior during test execution"
+        "A": "SAST requires a running application and cannot work with source code alone",
+        "B": "SAST cannot detect runtime vulnerabilities because it analyzes code without executing it",
+        "C": "SAST cannot find hard-coded credentials or dangerous functions in the code",
+        "D": "SAST is too slow to integrate into CI/CD pipelines for every code commit"
       },
-      "correct": "C",
-      "explanation": "The section states that DAST finds authentication weaknesses and session management flaws by testing a running application like an attacker would, and requires no access to source code."
+      "correct": "B",
+      "explanation": "The section explicitly states that SAST cannot detect vulnerabilities that only appear at runtime, such as authentication logic flaws and business logic issues, because it never runs the code."
     },
     {
       "section": "Security testing tools",
-      "type": "text",
-      "question": "Explain why IAST has a lower false positive rate than SAST or DAST alone.",
-      "rubric": "A sound answer should indicate that IAST combines the internal code visibility of SAST with the real-execution coverage of DAST, allowing it to confirm whether a flaw is actually reachable during real execution.",
-      "explanation": "The section defines false positive as a reported vulnerability that is not actually exploitable, and explains that IAST's lower rate comes from being able to confirm reachability during actual execution — combining both approaches' strengths."
+      "type": "mc",
+      "question": "What can DAST — Dynamic Application Security Testing — detect that SAST cannot?",
+      "options": {
+        "A": "DAST can detect all code-level flaws without needing access to the application",
+        "B": "DAST can identify hard-coded credentials and insecure randomness in source code",
+        "C": "DAST can find authentication and session management flaws by testing a running application",
+        "D": "DAST can discover SQL injection vulnerabilities from string concatenation patterns"
+      },
+      "correct": "C",
+      "explanation": "The section states DAST finds authentication weaknesses, session management flaws, and runtime vulnerabilities that depend on application state — things SAST cannot see because SAST never executes the code."
+    },
+    {
+      "section": "Security testing tools",
+      "type": "mc",
+      "question": "Why does IAST — Interactive Application Security Testing — have a lower false positive rate than SAST or DAST alone?",
+      "options": {
+        "A": "IAST injects sensors into runtime to confirm whether a flaw is actually reachable",
+        "B": "IAST only reports vulnerabilities found in open-source dependencies",
+        "C": "IAST requires manual code review, which is more accurate than automated scanning",
+        "D": "IAST accesses source code and running applications to eliminate false positives"
+      },
+      "correct": "A",
+      "explanation": "The section states that IAST has a lower false positive rate than SAST or DAST alone because it can confirm whether a flaw is actually reachable during real execution."
     },
     {
       "section": "Software Composition Analysis (SCA)",
       "type": "mc",
-      "question": "What does SCA stand for and what is its primary function?",
+      "question": "What does Software Composition Analysis scan for?",
       "options": {
-        "A": "Static Code Analysis scans source code for injection vulnerabilities before compilation",
-        "B": "Software Composition Analysis scans third-party dependencies for known vulnerabilities",
-        "C": "Secure Coding Audit reviews code changes to ensure compliance with security standards",
-        "D": "Source Code Authentication verifies that code changes are signed by authorized developers"
+        "A": "SCA generates detailed error messages and stack traces to help debug code",
+        "B": "SCA scans third-party dependencies for known vulnerabilities by comparing library versions",
+        "C": "SCA monitors running applications to detect runtime authentication flaws",
+        "D": "SCA scans source code to find SQL injection and cross-site scripting vulnerabilities"
       },
       "correct": "B",
-      "explanation": "The section defines SCA as scanning an application's third-party dependencies against vulnerability databases like the NVD to identify known vulnerabilities in libraries and frameworks."
+      "explanation": "The section defines SCA as scanning an application's third-party dependencies for known vulnerabilities and matching library versions against vulnerability databases such as the NVD."
     },
     {
       "section": "Fuzzing",
-      "type": "text",
-      "question": "What types of vulnerabilities is fuzzing particularly effective at discovering, and why?",
-      "rubric": "A sound answer should mention that fuzzing finds memory corruption and format string vulnerabilities through massive automated testing of randomly generated or malformed inputs, catching things code review and structured tests miss.",
-      "explanation": "The section explicitly states that fuzzing discovers crashes and unexpected behavior particularly in memory corruption and format string vulnerabilities, and notes it is almost always automated because finding crash-inducing inputs can require millions of test cases."
+      "type": "mc",
+      "question": "What type of vulnerabilities can fuzzing discover?",
+      "options": {
+        "A": "Fuzzing can identify logic errors in business code by analyzing source code patterns",
+        "B": "Fuzzing can find vulnerable dependencies by scanning version numbers",
+        "C": "Fuzzing can discover crashes, hangs, and unexpected behavior including memory corruption",
+        "D": "Fuzzing can detect authentication weaknesses by sending malicious HTTP requests"
+      },
+      "correct": "C",
+      "explanation": "The section states fuzzing automatically sends randomly generated inputs to discover crashes, hangs, and unexpected behavior, particularly memory corruption and format string vulnerabilities."
     },
     {
       "section": "Secrets management",
       "type": "mc",
-      "question": "Why is embedding secrets like credentials and API keys directly in source code particularly dangerous?",
+      "question": "Why is it dangerous to embed secrets like credentials and API keys in source code?",
       "options": {
-        "A": "They persist in version control history even after removal from code",
-        "B": "The application cannot properly encrypt them during deployment",
-        "C": "The compiler fails to parse them correctly in the binary",
-        "D": "They may be lost if developers forget to update them in production"
+        "A": "Embedded secrets are visible only to developers and not to the security team",
+        "B": "Embedded secrets prevent the use of parameterized queries in database connections",
+        "C": "Secrets in code cause the application to run slower because they must be decrypted",
+        "D": "Secrets in code get committed to version control and persist in history even after deletion"
       },
-      "correct": "A",
-      "explanation": "The section explicitly warns that secrets embedded in code get committed to version control and persist in history even after deletion, making them recoverable by anyone with repo access."
+      "correct": "D",
+      "explanation": "The section states that secrets embedded in code get committed to version control and persist in history even after deletion — anyone with repo access can recover them."
     },
     {
       "section": "HTTP security headers",
       "type": "mc",
-      "question": "Which HTTP security header tells browsers to use only HTTPS and prevents downgrade attacks to unencrypted HTTP?",
+      "question": "What does the HSTS header instruct browsers to do?",
       "options": {
-        "A": "CSP defines which sources of scripts, styles, and media are trusted",
-        "B": "HSTS enforces HTTPS-only connections and prevents protocol downgrade",
-        "C": "STS restricts server transfer protocols to encrypted channels only",
-        "D": "HTTPS forces all connections through the secure socket layer"
+        "A": "HSTS defines which sources of scripts and styles are trusted to prevent cross-site scripting",
+        "B": "HSTS compresses HTTP responses to reduce bandwidth usage between browser and server",
+        "C": "HSTS encrypts all cookies so they cannot be read by malicious scripts on the page",
+        "D": "HSTS tells browsers to use only HTTPS and prevents downgrade attacks to unencrypted HTTP"
+      },
+      "correct": "D",
+      "explanation": "The section defines HSTS as telling browsers to use only HTTPS and preventing downgrade attacks to unencrypted HTTP."
+    },
+    {
+      "section": "HTTP security headers",
+      "type": "mc",
+      "question": "What is the purpose of the Content Security Policy header?",
+      "options": {
+        "A": "CSP forces all connections to use HTTPS instead of unencrypted HTTP",
+        "B": "CSP defines which sources of scripts, styles, and media are trusted to limit XSS",
+        "C": "CSP validates all user input on the server side before processing requests",
+        "D": "CSP encrypts sensitive data in HTTP responses before sending to the browser"
       },
       "correct": "B",
-      "explanation": "The section's table explicitly identifies HSTS (HTTP Strict Transport Security) as the header that tells browsers to use only HTTPS and prevents downgrade attacks to unencrypted HTTP."
+      "explanation": "The section states that CSP defines which sources of scripts, styles, and media are trusted to limit the impact of cross-site scripting attacks."
     }
   ]
 }

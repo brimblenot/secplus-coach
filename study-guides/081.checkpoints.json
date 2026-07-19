@@ -3,108 +3,132 @@
     {
       "section": "What counts as an asset",
       "type": "mc",
-      "question": "Which of the following is classified as a software asset?",
+      "question": "Which of the following is an example of a software asset?",
       "options": {
-        "A": "A licensed operating system installed on a company workstation",
-        "B": "A compute instance running in Amazon Web Services",
-        "C": "A network switch that routes traffic between office subnets",
-        "D": "A database containing customer transaction records"
+        "A": "A compute instance running in Amazon Web Services",
+        "B": "A network switch that routes traffic across the organization",
+        "C": "A database containing customer information stored on premises",
+        "D": "A licensed application or operating system installed on a device"
       },
-      "correct": "A",
-      "explanation": "Software assets include licensed apps, operating systems, VM images, firmware, and dev tools. The switch is hardware, the database is data, and the AWS instance is a cloud asset."
+      "correct": "D",
+      "explanation": "The section lists software assets as licensed apps, operating systems, VM images, firmware, and dev tools. The other options are hardware, data, and cloud assets respectively."
     },
     {
       "section": "Asset inventory and discovery",
-      "type": "text",
-      "question": "Explain the key difference between agent-based and agentless discovery methods and name one advantage of agentless discovery.",
-      "rubric": "A sound answer states that agent-based installs software on devices to report details, while agentless uses network scanning without installation, and identifies that agentless can discover unauthorized devices IT did not know were connected.",
-      "explanation": "The section contrasts the two methods directly: agent-based requires installation but gives deep detail; agentless sends probe packets and catches devices the organization forgot to register, including unauthorized ones."
+      "type": "mc",
+      "question": "Which discovery method does NOT require software installation on target devices?",
+      "options": {
+        "A": "Agent-based discovery that captures installed applications on endpoints",
+        "B": "Agent-based discovery that reports running services and patch status",
+        "C": "Agentless discovery using network scanning and remote management protocols",
+        "D": "Agent-based discovery that installs a program to report hardware details"
+      },
+      "correct": "C",
+      "explanation": "The section states agentless discovery uses network scanning and remote management protocols without installing software, whereas agent-based discovery requires a lightweight program to be installed on each device."
     },
     {
       "section": "The CMDB",
       "type": "mc",
-      "question": "What is the primary value a CMDB adds beyond a simple asset list?",
+      "question": "What does a CMDB store beyond a simple list of assets?",
       "options": {
-        "A": "It encrypts data on network-connected devices",
-        "B": "It tracks hardware specifications of all devices",
-        "C": "It automatically patches software to current versions",
-        "D": "It stores asset relationships for impact analysis during incidents"
+        "A": "Historical acquisition price and depreciation value information for each asset",
+        "B": "Relationships between assets, such as dependencies and which applications run on which servers",
+        "C": "Manufacturer warranty dates and associated support contract terms and conditions",
+        "D": "Physical location coordinates and network addresses of hardware devices"
       },
-      "correct": "D",
-      "explanation": "The CMDB stores not just what assets exist, but the relationships between them — which apps run on which servers, which servers support which business processes — enabling impact analysis when incidents or CVEs occur."
+      "correct": "B",
+      "explanation": "The section defines a CMDB as storing not just what assets exist, but the relationships between them—which apps run on which servers, which servers support which business processes, and which users own which assets."
     },
     {
       "section": "Asset classification",
       "type": "mc",
-      "question": "An asset that stores customer financial information would most likely receive which classification?",
+      "question": "Which asset class is subject to PCI DSS, HIPAA, or GDPR compliance requirements?",
       "options": {
-        "A": "Regulated, subject only to industry-specific compliance rules",
-        "B": "Sensitive, with enhanced monitoring and tight change control",
-        "C": "Critical, because it always halts core operations if it fails",
-        "D": "General, with standard baseline controls"
+        "A": "Regulated assets subject to specific compliance frameworks",
+        "B": "Critical assets that halt core operations if they fail",
+        "C": "General assets that support functions without sensitive data",
+        "D": "Sensitive assets that store confidential customer information"
       },
-      "correct": "B",
-      "explanation": "Customer financial data is confidential information, so the asset storing it receives a Sensitive classification with enhanced monitoring and tight change control. Critical refers to operational impact, not data sensitivity alone."
+      "correct": "A",
+      "explanation": "The section classifies Regulated assets as those subject to PCI DSS, HIPAA, or GDPR compliance requirements, distinct from Critical and Sensitive classifications."
     },
     {
       "section": "Hardware lifecycle phases",
-      "type": "text",
-      "question": "Name the hardware lifecycle phase in which configuration drift is detected, and briefly explain what drift means.",
-      "rubric": "A sound answer identifies the Operations phase and explains that drift is a deviation from the approved security baseline.",
-      "explanation": "The section states that during Operations, regular patching, vulnerability scanning, and configuration management detect drift — deviation from the approved security baseline."
+      "type": "mc",
+      "question": "What document is obtained during the retirement phase to provide auditable proof of proper disposal?",
+      "options": {
+        "A": "Certificate of destruction from a third party confirming the method and date of destruction",
+        "B": "Decommissioning approval form that must be signed by the chief information officer",
+        "C": "Data sanitization report documenting the overwrite operations that were performed",
+        "D": "Compliance attestation that certifies the asset met all required security standards"
+      },
+      "correct": "A",
+      "explanation": "The section states that during retirement, organizations must obtain a certificate of destruction—a document from a third party confirming which assets were destroyed, how, and when—for auditable proof of proper disposal."
     },
     {
       "section": "Software license management and end-of-life tracking",
       "type": "mc",
-      "question": "Which statement correctly describes end-of-life (EOL) software and the appropriate response?",
+      "question": "What happens to a product when it reaches end-of-life status?",
       "options": {
-        "A": "EOL software may receive patches for one more year; continue using it until then",
-        "B": "EOL software is automatically uninstalled by the vendor to force upgrades",
-        "C": "EOL software stops receiving patches; migrate to supported alternatives or apply compensating controls",
-        "D": "EOL software requires application allowlisting to prevent unauthorized execution"
+        "A": "The vendor continues releasing minor patches but stops major updates",
+        "B": "The vendor transitions the product to a community-maintained version",
+        "C": "The vendor requires organizations to purchase an extended support contract",
+        "D": "The vendor stops releasing security patches and support entirely"
       },
-      "correct": "C",
-      "explanation": "The section defines EOL as the point the vendor stops releasing security patches, making vulnerabilities permanently unpatched. Organizations must either migrate or apply compensating controls like network isolation and enhanced monitoring."
+      "correct": "D",
+      "explanation": "The section defines end-of-life as the date a vendor stops releasing security patches for a product, making any vulnerability found after that date permanently unpatched."
     },
     {
       "section": "BYOD and mobile device management",
       "type": "mc",
-      "question": "What is the primary purpose of the selective wipe feature in MDM?",
+      "question": "What does selective wipe accomplish on a BYOD device?",
       "options": {
-        "A": "To completely erase all data and settings on a lost device so it cannot be misused",
-        "B": "To encrypt all files so they cannot be read without a company-issued key",
-        "C": "To prevent unauthorized apps from executing on the personal device",
-        "D": "To remove only corporate data while leaving the employee's personal data untouched"
+        "A": "It removes the entire device contents and returns it to factory settings",
+        "B": "It encrypts all sensitive files with a key held by the organization",
+        "C": "It removes only corporate data while leaving personal data untouched",
+        "D": "It disables network connectivity to prevent unauthorized data transfer"
       },
-      "correct": "D",
-      "explanation": "Selective wipe removes only corporate data when a device is lost or an employee departs, preserving the personal data the employee owns while protecting the organization's assets."
+      "correct": "C",
+      "explanation": "The section describes selective wipe as a capability that removes only corporate data, leaving personal data untouched, when a device is lost or an employee departs."
     },
     {
       "section": "Cloud asset management",
-      "type": "text",
-      "question": "Why is resource tagging important for cloud asset management, and what is one use it enables?",
-      "rubric": "A sound answer explains that tagging attaches standardized metadata to cloud resources and enables automatic policy application, cost allocation, or compliance reporting based on those tags.",
-      "explanation": "The section states that resource tagging allows security policies, cost allocation, and compliance reports to be applied automatically based on standardized metadata fields like owner, environment, and data classification."
+      "type": "mc",
+      "question": "What is resource tagging in cloud asset management?",
+      "options": {
+        "A": "Labeling resources with physical barcodes to support inventory audit and verification processes",
+        "B": "Attaching standardized metadata to cloud resources for policy enforcement and compliance automation",
+        "C": "Assigning resource ownership to specific department managers for accountability and cost allocation",
+        "D": "Marking resources with unique identifiers for billing and inventory tracking purposes"
+      },
+      "correct": "B",
+      "explanation": "The section defines resource tagging as attaching standardized metadata fields (owner, environment, data classification, cost center, application) to cloud resources so security policies, cost allocation, and compliance reports can be applied automatically."
     },
     {
       "section": "Physical tracking and data destruction",
       "type": "mc",
-      "question": "When should cryptographic erasure be used instead of clearing as a data destruction method?",
+      "question": "Which data sanitization method uses a strong magnetic field to scramble magnetic media?",
       "options": {
-        "A": "When sensitive data must be destroyed before external transfer or reuse",
-        "B": "When the data is not sensitive enough to warrant hardware techniques",
-        "C": "When the asset will be reused internally and recovery risk is acceptable",
-        "D": "When the asset is physically being shredded or incinerated"
+        "A": "Destruction by physical shredding or disintegration",
+        "B": "Purging through degaussing that renders recovery infeasible",
+        "C": "Purging through cryptographic erasure of encryption keys",
+        "D": "Clearing, which overwrites data with software"
       },
-      "correct": "A",
-      "explanation": "According to NIST SP 800-88, purging methods like cryptographic erasure render recovery infeasible even with lab equipment and are used for sensitive data before external transfer or reuse; clearing is adequate for lower-sensitivity data reused internally."
+      "correct": "B",
+      "explanation": "The section identifies degaussing as a purging technique that uses a strong magnetic field to scramble magnetic media, rendering recovery infeasible even with lab equipment."
     },
     {
       "section": "Asset management and vulnerability management",
-      "type": "text",
-      "question": "Explain how an accurate asset inventory directly supports vulnerability management when a new CVE is published.",
-      "rubric": "A sound answer states that an accurate software inventory allows teams to instantly identify which systems are affected by the CVE so they can be remediated.",
-      "explanation": "The section explains that vulnerability scanners can only target systems known to exist, and when a CVE is published, an accurate inventory lets teams immediately identify affected systems and close the loop between knowing what you have and fixing what is broken."
+      "type": "mc",
+      "question": "Why is an accurate software inventory critical when a CVE is published?",
+      "options": {
+        "A": "It enables the organization to contact software vendors for emergency patches",
+        "B": "It allows the organization to determine which vendors provide the most secure products",
+        "C": "It proves to regulators that the organization tracks all software licenses",
+        "D": "It lets the organization immediately identify which systems are affected by the vulnerability"
+      },
+      "correct": "D",
+      "explanation": "The section states that when a CVE is published, an accurate software inventory lets teams instantly identify which systems are affected by the publicly identified security flaw."
     }
   ]
 }

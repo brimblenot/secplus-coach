@@ -3,114 +3,132 @@
     {
       "section": "Why operating systems are prime targets",
       "type": "mc",
-      "question": "What does a CVE represent in the context of operating system security?",
+      "question": "Why is a compromised operating system considered especially dangerous compared to a compromised application?",
       "options": {
-        "A": "A standardized ID and description for a documented vulnerability",
-        "B": "A patch release schedule maintained by Microsoft",
-        "C": "A type of malware that targets kernel memory",
-        "D": "A government certification proving an OS is secure"
+        "A": "A compromised OS undermines security controls built above it since the OS is the foundational software layer that supports all other protections",
+        "B": "A compromised OS prevents users from accessing files and forces a complete system reinstall before normal operation resumes",
+        "C": "A compromised OS requires more patches than applications because it contains significantly more lines of code that need updating",
+        "D": "A compromised OS allows attackers to bypass network firewalls completely and infiltrate other connected devices on the same network"
       },
       "correct": "A",
-      "explanation": "CVE stands for Common Vulnerabilities and Exposures—the standardized ID system for documented vulnerabilities. Each flaw gets a unique CVE number and description."
+      "explanation": "The section states that a compromised OS undermines every security control built above it because the OS is the foundational layer on which all applications run. This makes it fundamentally different from a compromised application."
     },
     {
       "section": "Patch Tuesday and the shrinking exploit window",
-      "type": "text",
-      "question": "Explain why the time between a patch release and working exploit code appearing in the wild has become so short.",
-      "rubric": "A sound answer states that once a patch ships, attackers can reverse-engineer it to understand the underlying flaw, since the patch essentially describes what was broken. This accelerates the creation of working exploits.",
-      "explanation": "The section explains that patch release allows attackers to reverse-engineer the fix to understand the vulnerability, collapsing the time to exploit development."
+      "type": "mc",
+      "question": "What is the primary reason the window between patch release and working exploit code in the wild has shrunk to hours in some cases?",
+      "options": {
+        "A": "Organizations delay applying patches after release, which gives attackers sufficient time to develop reliable and functional exploit code",
+        "B": "Vendors publish detailed technical documentation about vulnerabilities before or shortly after releasing patches to the public",
+        "C": "Attackers reverse-engineer the patch itself to understand the underlying vulnerability that was fixed and develop working exploit code",
+        "D": "Attackers now have access to automated tools that scan networks more efficiently and identify vulnerabilities faster than in the past"
+      },
+      "correct": "C",
+      "explanation": "The section explains that once a patch ships, attackers reverse-engineer it to understand the underlying flaw because the patch itself describes what was broken."
     },
     {
       "section": "End-of-life operating systems",
       "type": "mc",
-      "question": "Which of the following is a compensating control for protecting an end-of-life operating system?",
+      "question": "What makes an end-of-life operating system a permanent security risk that cannot be remedied through vendor patching?",
       "options": {
-        "A": "Installing third-party antivirus as a replacement for patches",
-        "B": "Disabling all user accounts to prevent lateral movement",
-        "C": "Purchasing extended vendor support directly from the manufacturer",
-        "D": "Network isolation to prevent direct internet connectivity"
+        "A": "The operating system becomes incompatible with modern security tools and firewalls",
+        "B": "The operating system loses the ability to connect to the internet and communicate with other systems",
+        "C": "Users are unable to update their hardware to match the OS requirements",
+        "D": "The vendor no longer provides security patches for any newly discovered vulnerabilities"
       },
       "correct": "D",
-      "explanation": "The section lists network isolation as a compensating control for EOL systems. The others either contradict the text or are not listed as valid mitigations."
+      "explanation": "The section defines an end-of-life OS as one the vendor no longer supports, meaning no more security patches are ever released, making every newly discovered vulnerability a permanent zero-day."
     },
     {
       "section": "Default configurations as vulnerabilities",
       "type": "mc",
-      "question": "What vulnerability was exploited by PrintNightmare on Windows systems?",
+      "question": "Why did the Print Spooler service represent a significant default configuration vulnerability on Windows systems?",
       "options": {
-        "A": "The NetBIOS protocol enabling credential capture locally",
-        "B": "The SMBv1 protocol permitting unauthenticated file-share access",
-        "C": "The Print Spooler service allowing local privilege escalation and remote code execution",
-        "D": "The Telnet server sending credentials in cleartext over networks"
+        "A": "It enabled anonymous users to access printer resources without authentication or authorization checks",
+        "B": "It was exploited by PrintNightmare to allow both local privilege escalation and remote code execution",
+        "C": "It required users to manually disable it before every system update to prevent exploits",
+        "D": "It transmitted all print jobs in cleartext and exposed sensitive document data to network sniffing"
       },
-      "correct": "C",
-      "explanation": "PrintNightmare (CVE-2021-1675 / CVE-2021-34527) exploited the Print Spooler service and allowed both local privilege escalation and remote code execution."
+      "correct": "B",
+      "explanation": "The section states that the Print Spooler service was exploited by PrintNightmare (CVE-2021-1675 / CVE-2021-34527), which allowed both local privilege escalation and remote code execution."
     },
     {
       "section": "Kernel vulnerabilities",
-      "type": "text",
-      "question": "Why does a kernel exploit pose a greater risk to system security than a vulnerability in a user-space application?",
-      "rubric": "A sound answer explains that the kernel runs in ring 0 with unrestricted access to all hardware, memory, and system operations, so a kernel exploit gives an attacker complete system control below any user-space security controls.",
-      "explanation": "The section states that kernel exploits operate at ring 0, the most privileged processor mode, giving attackers complete system control beneath all user-space defenses."
+      "type": "mc",
+      "question": "What made Dirty COW (CVE-2016-5195) a critical privilege escalation vulnerability in Linux systems?",
+      "options": {
+        "A": "It allowed unprivileged local users to write to read-only files, including /etc/passwd, achieving full root access",
+        "B": "It exploited a flaw in the sudo configuration that allowed standard users to execute root commands",
+        "C": "It permitted privileged users to view encrypted files without knowing the correct decryption keys",
+        "D": "It enabled attackers to bypass firewall rules and access kernel memory from remote network hosts"
+      },
+      "correct": "A",
+      "explanation": "The section describes Dirty COW as a race condition in Linux's memory handling where any local unprivileged user could write to read-only files including /etc/passwd, achieving full root access."
     },
     {
       "section": "Device driver vulnerabilities and BYOVD",
       "type": "mc",
-      "question": "How does BYOVD (Bring Your Own Vulnerable Driver) evade Secure Boot protections?",
+      "question": "How does a BYOVD attack bypass Secure Boot protections?",
       "options": {
-        "A": "By modifying the bootloader signature to match the system firmware",
-        "B": "By installing a legitimately signed but known-vulnerable driver that passes signature validation",
-        "C": "By disabling Secure Boot before the system reaches the login prompt",
-        "D": "By replacing the TPM certificates with attacker-controlled keys"
+        "A": "It modifies the UEFI firmware to disable Secure Boot before the operating system initializes",
+        "B": "It installs a legitimately signed vulnerable driver that passes code-signing checks despite having a known exploit",
+        "C": "It exploits a flaw in the TPM chip that prevents proper signature validation of drivers",
+        "D": "It tricks the operating system into loading driver files from an untrusted network location"
       },
       "correct": "B",
-      "explanation": "The section explains that BYOVD uses a legitimately signed driver from a trusted certificate authority, so Secure Boot and code-signing requirements do not block it despite its known vulnerability."
+      "explanation": "The section states that BYOVD uses a legitimately signed driver from a trusted certificate authority that Secure Boot cannot block, even though it has a known vulnerability."
     },
     {
       "section": "Privilege escalation",
       "type": "mc",
-      "question": "What is the difference between vertical and horizontal privilege escalation?",
+      "question": "Which type of privilege escalation moves a user from a limited account to an administrator or root account?",
       "options": {
-        "A": "Vertical targets the kernel while horizontal targets applications",
-        "B": "Vertical requires network access; horizontal requires local access",
-        "C": "Vertical exploits drivers; horizontal exploits services",
-        "D": "Vertical elevates to higher privileges; horizontal accesses another same-level account"
+        "A": "Horizontal escalation from one user account to another at the same privilege level",
+        "B": "Sequential escalation through multiple intermediate privilege levels before reaching administrator",
+        "C": "Lateral escalation by moving between different systems on the same network",
+        "D": "Vertical escalation from a standard user account to administrator or root"
       },
       "correct": "D",
-      "explanation": "The section defines vertical escalation as moving from a limited account to Administrator/root and horizontal as moving to another user at the same privilege level."
+      "explanation": "The section defines vertical privilege escalation as moving from a user account to administrator/root, as illustrated in the table showing user to administrator/root transition."
     },
     {
       "section": "Windows privilege escalation vectors",
       "type": "mc",
-      "question": "What does DLL search order hijacking exploit?",
+      "question": "What vulnerability does an unquoted service path create that allows privilege escalation on Windows?",
       "options": {
-        "A": "Weak permissions on the Windows System32 registry hive",
-        "B": "Plaintext credentials in LSASS process memory",
-        "C": "The sequence Windows uses to search directories for DLL files",
-        "D": "Unquoted spaces in service executable paths"
+        "A": "Attackers can modify the registry entry for the service and change its executable path to point to their own malicious code instead",
+        "B": "Non-admin users can read service configuration files and extract credentials that are stored in plaintext within those files",
+        "C": "Windows tries to run executables at each space-delimited segment of the path, allowing a malicious binary at a guessable location to execute as SYSTEM",
+        "D": "The service executable does not validate the digital signature of loaded DLL files before executing them during the boot process"
       },
       "correct": "C",
-      "explanation": "The section defines DLL search order hijacking as placing a malicious DLL in a directory Windows searches before the legitimate one, causing it to load instead."
+      "explanation": "The section explains that when a service executable path contains spaces and no quotes, Windows may try to run executables at each space-delimited segment, allowing a malicious binary at a guessable path to be executed as SYSTEM."
     },
     {
       "section": "Linux privilege escalation vectors",
-      "type": "text",
-      "question": "Describe what the SUID bit does and why it can be a privilege escalation vector.",
-      "rubric": "A sound answer explains that SUID makes an executable run with the file owner's (often root) privileges instead of the caller's, and that unnecessary SUID binaries that can spawn shells are exploitable.",
-      "explanation": "The section states SUID is a permission bit that causes an executable to run with its owner's privileges, and unnecessary SUID binaries capable of spawning shells are a classic escalation path."
+      "type": "mc",
+      "question": "How does an SUID bit misconfiguration enable local privilege escalation on Linux systems?",
+      "options": {
+        "A": "It enables attackers to replace cron job scripts with malicious code that executes with root privileges",
+        "B": "It permits any user to modify the sudoers file and grant themselves passwordless root access",
+        "C": "It makes an executable run with the file owner's privileges, often root, instead of the caller's privileges",
+        "D": "It allows the SUID binary to search for shared libraries in world-writable directories before system paths"
+      },
+      "correct": "C",
+      "explanation": "The section defines SUID (Set User ID) as a permission bit that makes an executable run with the file owner's privileges (often root) instead of the caller's, and notes that unnecessary SUID binaries that can spawn shells are a classic escalation path."
     },
     {
       "section": "Boot-level threats",
       "type": "mc",
-      "question": "What purpose does TPM serve in protecting the boot process?",
+      "question": "What is the primary advantage of a bootkit infection compared to standard malware?",
       "options": {
-        "A": "It encrypts the Master Boot Record to prevent tampering",
-        "B": "It stores keys and attests the boot chain integrity",
-        "C": "It blocks unsigned drivers before kernel initialization",
-        "D": "It validates firmware signatures before UEFI loads"
+        "A": "A bootkit disables the network adapter to prevent the system from connecting to security update servers and receiving patches",
+        "B": "A bootkit prevents users from accessing the BIOS setup menu and changing boot device priorities to boot from external media",
+        "C": "A bootkit can encrypt the entire hard drive without any user intervention or detection occurring during the encryption process",
+        "D": "A bootkit executes before the OS loads and survives OS reinstallation because it resides in the boot partition rather than the OS"
       },
-      "correct": "B",
-      "explanation": "The section describes TPM as a dedicated security chip that stores cryptographic keys and can attest (cryptographically confirm) that the boot chain has not been tampered with."
+      "correct": "D",
+      "explanation": "The section states that bootkits execute before the OS loads and survive OS reinstallation because they are installed in the Master Boot Record or EFI System Partition."
     }
   ]
 }

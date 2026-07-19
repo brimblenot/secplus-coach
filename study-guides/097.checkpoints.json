@@ -2,96 +2,198 @@
   "checkpoints": [
     {
       "section": "Least privilege: the universal baseline",
-      "type": "text",
-      "question": "Explain why periodic access reviews are necessary under the principle of least privilege.",
-      "rubric": "A sound answer states that permissions tend to creep upward over time as roles change, so reviews are needed to remove unneeded access that has accumulated.",
-      "explanation": "The section explicitly states that permissions creep upward over time as roles change, making periodic reviews required to claw back unneeded access."
+      "type": "mc",
+      "question": "What is the primary security benefit of applying the principle of least privilege?",
+      "options": {
+        "A": "It eliminates the need for periodic access reviews and user permission audits.",
+        "B": "It limits damage from a compromised account by restricting it to only necessary permissions.",
+        "C": "It prevents all external attackers from gaining any access to company systems.",
+        "D": "It removes the requirement for users to authenticate before accessing resources."
+      },
+      "correct": "B",
+      "explanation": "The section states that least privilege limits blast radius—a compromised low-privilege account cannot do admin-level damage. The other options misstate or contradict principles covered in the section."
     },
     {
       "section": "Mandatory Access Control (MAC)",
       "type": "mc",
-      "question": "In Bell-LaPadula model, what does the No-Write-Down rule prevent?",
+      "question": "In a MAC system, who has the authority to grant or revoke access permissions?",
       "options": {
-        "A": "Users from writing secrets down to lower classification levels",
-        "B": "Users from modifying their own security labels",
-        "C": "Users from accessing resources without admin approval",
-        "D": "Users from reading classified files above their clearance level"
+        "A": "Resource owners decide which users can access their files without restriction.",
+        "B": "Individual users can change their own security labels at any time.",
+        "C": "Each user can share access with colleagues based on their job role.",
+        "D": "The system administrator, based on security labels assigned to subjects and objects."
       },
-      "correct": "A",
-      "explanation": "The section states No-Write-Down prevents leaking secrets down to lower classification levels, directly protecting confidentiality."
+      "correct": "D",
+      "explanation": "MAC is defined as a system where the system enforces access based on labels; users cannot grant, revoke, or override decisions. Only administrators assign labels to subjects and objects."
+    },
+    {
+      "section": "Mandatory Access Control (MAC)",
+      "type": "mc",
+      "question": "Which Bell-LaPadula rule prevents a user from writing information to a lower classification level?",
+      "options": {
+        "A": "No-Read-Down stops contamination from lower classification levels.",
+        "B": "No-Write-Up blocks writing to higher integrity objects.",
+        "C": "No-Write-Down prevents leaking secrets to lower classification levels.",
+        "D": "No-Read-Up blocks reading above the user's clearance level."
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that Bell-LaPadula's No-Write-Down rule prevents writing to lower classification, which prevents leaking secrets down. This is the confidentiality-focused model."
     },
     {
       "section": "Discretionary Access Control (DAC)",
       "type": "mc",
-      "question": "What is the primary weakness of DAC as described?",
+      "question": "What is the primary weakness of Discretionary Access Control?",
       "options": {
-        "A": "It cannot be implemented on modern operating systems",
-        "B": "It is too complex for enterprise environments to manage",
-        "C": "It relies entirely on users making good security decisions without system enforcement",
-        "D": "It requires administrators to approve every access decision"
+        "A": "It relies on users making good decisions and cannot detect over-sharing automatically.",
+        "B": "Resource owners are forbidden from deciding who accesses their own files.",
+        "C": "The operating system prevents any file permissions from being modified after creation.",
+        "D": "It automatically denies all access requests to prevent accidental sharing."
       },
-      "correct": "C",
-      "explanation": "The section explicitly states DAC's weakness is that it relies entirely on users making good security decisions, and over-sharing is a policy violation no system will catch."
+      "correct": "A",
+      "explanation": "The section identifies DAC's weakness as reliance on users making good security decisions—no system will catch over-sharing because the owner has discretion."
     },
     {
       "section": "Role-Based Access Control (RBAC)",
-      "type": "text",
-      "question": "What is role explosion in RBAC, and why is it a concern?",
-      "rubric": "A sound answer identifies role explosion as creating too many fine-grained roles, which can make RBAC as complex as per-user permissions and defeat its management advantage.",
-      "explanation": "The section defines role explosion as too many fine-grained roles that make RBAC as complex as per-user permissions, and advises keeping the role set minimal."
+      "type": "mc",
+      "question": "In RBAC, what happens when a user's job function changes?",
+      "options": {
+        "A": "The user retains both the old and new role to prevent access loss.",
+        "B": "All permissions remain unchanged and must be manually updated one by one.",
+        "C": "The user's old role is deleted from the system immediately.",
+        "D": "The user is reassigned to a different role with automatic permission updates."
+      },
+      "correct": "D",
+      "explanation": "The section states that changing a user's job function equals reassigning their role, after which all permissions update automatically—a key advantage of RBAC over per-user permission models."
+    },
+    {
+      "section": "Role-Based Access Control (RBAC)",
+      "type": "mc",
+      "question": "What operational risk can arise if an organization creates too many roles in an RBAC system?",
+      "options": {
+        "A": "Role explosion can make RBAC as complex as assigning permissions to individual users.",
+        "B": "The database server will automatically delete the least-used roles without warning.",
+        "C": "The cloud platform will refuse to enforce any role-based permissions.",
+        "D": "Users will be unable to request access to any role in the system."
+      },
+      "correct": "A",
+      "explanation": "The section explicitly warns that role explosion—too many fine-grained roles—can make RBAC as complex as per-user permissions, defeating its scalability advantage."
     },
     {
       "section": "Attribute-Based Access Control (ABAC)",
       "type": "mc",
-      "question": "In ABAC, what three categories of attributes can influence an access decision?",
+      "question": "Which of the following is an example of a resource attribute in ABAC?",
       "options": {
-        "A": "User role, resource classification, and administrator approval",
-        "B": "Department, job title, and security clearance level",
-        "C": "Time of day, network location, and device type",
-        "D": "Subject attributes, resource attributes, and environment attributes"
+        "A": "The user's clearance level and experience years.",
+        "B": "The user's job title and department level.",
+        "C": "The data classification and sensitivity of the resource.",
+        "D": "The time of day and the user's network location."
       },
-      "correct": "D",
-      "explanation": "The section explicitly lists subject attributes, resource attributes, and environment attributes as the three categories ABAC evaluates for access decisions."
+      "correct": "C",
+      "explanation": "The section lists resource attributes as classification and sensitivity, along with data type. The other options describe subject attributes (A, D) or environment attributes (B)."
+    },
+    {
+      "section": "Attribute-Based Access Control (ABAC)",
+      "type": "mc",
+      "question": "What language is commonly used to express complex attribute-based access rules that combine multiple conditions?",
+      "options": {
+        "A": "RBAC, which assigns permissions based on user roles only.",
+        "B": "XACML, which uses Boolean logic to combine multiple attribute conditions.",
+        "C": "JSON, which stores predefined access control rules in a flat structure.",
+        "D": "SQL, which queries a database for user permission lists."
+      },
+      "correct": "B",
+      "explanation": "The section states XACML is the language for expressing complex Boolean attribute rules. The other options are either different access models or unrelated technologies."
     },
     {
       "section": "Rule-based access control",
       "type": "mc",
-      "question": "Which statement best describes how rule-based access control differs from identity-based models?",
+      "question": "In rule-based access control, what determines whether access is granted?",
       "options": {
-        "A": "Rules require users to possess specific job titles or roles",
-        "B": "Rules apply explicit conditions to resources regardless of who the user is",
-        "C": "Rules are evaluated by administrators rather than automated systems",
-        "D": "Rules combine multiple attributes to make fine-grained decisions"
+        "A": "The user's department and clearance level combined with the resource's classification.",
+        "B": "A combination of the user's attributes and the time the request is made.",
+        "C": "Explicit rules applied to resources regardless of who the user is.",
+        "D": "The identity and job role of the user requesting access."
       },
-      "correct": "B",
-      "explanation": "The section states that rule-based access control applies explicit rules to resources regardless of who the user is — identity is irrelevant, only the rule matters."
+      "correct": "C",
+      "explanation": "The section defines rule-based access control as applying explicit rules to resources regardless of who the user is—identity is irrelevant, only the rule matters."
     },
     {
       "section": "Policy-Based Access Control (PBAC)",
-      "type": "text",
-      "question": "What is the primary purpose of Policy-Based Access Control in an organization?",
-      "rubric": "A sound answer indicates that PBAC centralizes access policy in one engine to ensure consistent and auditable decisions across many applications, often blending RBAC and ABAC.",
-      "explanation": "The section defines PBAC as centralizing access policy in one engine for consistency and auditability across applications."
+      "type": "mc",
+      "question": "What is the primary purpose of PBAC in an organization?",
+      "options": {
+        "A": "To eliminate the need for user authentication on any networked resource.",
+        "B": "To centralize access policy in one engine for consistent and auditable decisions.",
+        "C": "To prevent any change to access permissions after they are initially assigned.",
+        "D": "To assign different access rules to each individual user based on personal preferences."
+      },
+      "correct": "B",
+      "explanation": "The section states PBAC centralizes access policy in one engine, often blending RBAC and ABAC, so decisions are consistent and auditable across applications."
+    },
+    {
+      "section": "Organizational access controls",
+      "type": "mc",
+      "question": "What is the purpose of the need-to-know principle in access control?",
+      "options": {
+        "A": "To grant access only to specific information a user's job role actually requires.",
+        "B": "To ensure users with a security clearance can access any file at that classification level.",
+        "C": "To prevent users from understanding why access decisions are made.",
+        "D": "To allow all employees to see all company data without restrictions."
+      },
+      "correct": "A",
+      "explanation": "The section defines need-to-know as limiting access to specific information required by the job, regardless of clearance level—a Top Secret clearance does not open every Top Secret file."
+    },
+    {
+      "section": "Organizational access controls",
+      "type": "mc",
+      "question": "How does separation of duties reduce organizational risk?",
+      "options": {
+        "A": "By eliminating the need for any audit trail or approval documentation.",
+        "B": "By allowing managers to personally override all access control decisions.",
+        "C": "By requiring the same person to perform all steps of a process to ensure consistency.",
+        "D": "By splitting high-risk tasks across multiple people so no single person can complete it."
+      },
+      "correct": "D",
+      "explanation": "The section states separation of duties splits high-risk tasks across multiple people to prevent fraud (requires collusion) and catch errors."
     },
     {
       "section": "Organizational access controls",
       "type": "mc",
       "question": "What is the key difference between separation of duties and dual control?",
       "options": {
-        "A": "Separation of duties divides sequential steps among different people; dual control requires two people to act simultaneously",
-        "B": "Separation of duties requires three people while dual control requires only two",
-        "C": "Separation of duties prevents fraud; dual control prevents errors",
-        "D": "Separation of duties applies to high-risk tasks; dual control applies to routine operations"
+        "A": "Separation of duties splits sequential steps between different people; dual control requires two people acting simultaneously.",
+        "B": "Separation of duties prevents all fraud, while dual control only prevents external attacks.",
+        "C": "Dual control is used only in banking, while separation of duties applies everywhere.",
+        "D": "Separation of duties applies to office work only, while dual control applies to physical security."
       },
       "correct": "A",
-      "explanation": "The section explains that separation of duties splits a process across multiple people sequentially, while dual control requires two authorized individuals to act simultaneously for a sensitive operation to proceed."
+      "explanation": "The section distinguishes that dual control requires simultaneous action from two authorized individuals, while separation of duties splits a sequential process between different people."
     },
     {
       "section": "Organizational access controls",
-      "type": "text",
-      "question": "How does mandatory vacation specifically help detect insider fraud?",
-      "rubric": "A sound answer states that mandatory vacation forces the perpetrator to be absent, which breaks ongoing fraud schemes that require the fraudster's presence to remain hidden.",
-      "explanation": "The section explains that mandatory vacation is designed to expose fraud requiring the perpetrator to be present to hide it, as many frauds unravel when the fraudster cannot be there."
+      "type": "mc",
+      "question": "What security benefit does job rotation provide?",
+      "options": {
+        "A": "It guarantees that no fraud will ever occur in the organization.",
+        "B": "It permanently removes the employee's access to all systems and data.",
+        "C": "It cross-trains staff, disrupts ongoing fraud, and surfaces security gaps from new perspectives.",
+        "D": "It eliminates the need for background checks before hiring new employees."
+      },
+      "correct": "C",
+      "explanation": "The section lists three benefits of job rotation: cross-training, disrupting fraud schemes that require continuous presence, and surfacing gaps when a new person takes over."
+    },
+    {
+      "section": "Organizational access controls",
+      "type": "mc",
+      "question": "How does mandatory vacation expose fraud in an organization?",
+      "options": {
+        "A": "It prevents employees from taking any time off, ensuring constant oversight.",
+        "B": "It allows the company to audit all employee financial accounts without permission.",
+        "C": "It requires employees to disclose all personal travel plans to management.",
+        "D": "It forces the fraudster to be absent, breaking schemes requiring their continuous presence."
+      },
+      "correct": "D",
+      "explanation": "The section explains that mandatory vacation is designed to expose fraud requiring the perpetrator to be present to hide it, and many financial frauds unravel when the fraudster cannot be there."
     }
   ]
 }

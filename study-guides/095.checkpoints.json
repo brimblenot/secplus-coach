@@ -3,88 +3,119 @@
     {
       "section": "Antivirus detection methods",
       "type": "mc",
-      "question": "Which antivirus detection method watches what a running process actually does — such as encrypting files or injecting code into other processes — rather than matching patterns or code structure?",
+      "question": "Which antivirus detection method analyzes code structure and obfuscation patterns to catch variants of known malware families without requiring an exact signature match?",
       "options": {
-        "A": "Heuristic detection, which analyzes code structure and obfuscation patterns without exact signature matches",
-        "B": "Behavioral detection, which observes runtime actions like privilege escalation and file encryption",
-        "C": "Polymorphic detection, which identifies malware that intentionally mutates its own code",
-        "D": "Signature-based detection, which compares files against a database of known malware patterns"
+        "A": "Signature-based detection, which compares files against a database of known malware patterns",
+        "B": "Behavioral detection, which watches what a running process does at runtime like file encryption",
+        "C": "Heuristic detection, which examines code structure and obfuscation patterns without needing an exact match",
+        "D": "Polymorphic detection, which tracks how malware mutates its own code to avoid matching stored signatures"
       },
-      "correct": "B",
-      "explanation": "Behavioral detection specifically watches what a process does at runtime (privilege escalation, code injection, file encryption, credential access), catching entirely new malware families. Signature detection relies on pattern matching, heuristic detection analyzes code structure, and polymorphic malware is what signature detection cannot catch."
+      "correct": "C",
+      "explanation": "The section explicitly defines heuristic detection as analyzing code structure and obfuscation patterns to catch variants without exact signature matches. This is the key distinction of that method."
     },
     {
       "section": "EDR vs. XDR",
-      "type": "text",
-      "question": "Explain the key difference between EDR and XDR in terms of what data they collect and correlate.",
-      "rubric": "A sound answer states that EDR collects telemetry from endpoints only and enables forensic investigation and threat hunting, while XDR ingests telemetry from multiple domains (endpoints, network, cloud, email) and correlates signals across all of them to see multi-stage attacks as one unified incident.",
-      "explanation": "EDR streams continuous endpoint telemetry to enable real-time detection and forensic reconstruction. XDR extends that by pulling in signals from network sensors, cloud workloads, and email security, then correlating them so a multi-step attack (phishing → malicious link → C2 → lateral movement) appears as one incident."
+      "type": "mc",
+      "question": "What is the primary capability that EDR provides that traditional antivirus software cannot deliver?",
+      "options": {
+        "A": "Automated response capabilities that quarantine hosts or kill processes remotely on demand during incidents",
+        "B": "Threat hunting where analysts query historical telemetry across endpoints to identify compromised systems",
+        "C": "Real-time detection of malware using behavioral analytics and machine learning models to identify threats",
+        "D": "Forensic history allowing investigators to reconstruct events after a breach using continuous telemetry data"
+      },
+      "correct": "D",
+      "explanation": "The section states that EDR enables forensic history — investigators can reconstruct exactly what happened after a breach, and that traditional antivirus keeps no activity record so it cannot do this."
+    },
+    {
+      "section": "EDR vs. XDR",
+      "type": "mc",
+      "question": "How does XDR differ from EDR in terms of the data it analyzes?",
+      "options": {
+        "A": "XDR ingests telemetry only from endpoints and correlates it with network traffic patterns",
+        "B": "XDR correlates signals from multiple domains simultaneously including endpoints, network sensors, cloud workloads, and email",
+        "C": "XDR extends detection by analyzing only cloud workloads and email security without endpoint visibility",
+        "D": "XDR focuses exclusively on endpoint telemetry and cannot integrate information from other security tools"
+      },
+      "correct": "B",
+      "explanation": "The section defines XDR as extending EDR by ingesting telemetry from multiple domains simultaneously: endpoints, network sensors, cloud workloads, and email security, correlating signals across all four."
     },
     {
       "section": "Host-based intrusion detection and prevention",
       "type": "mc",
-      "question": "Which of the following is a capability provided by HIDS/HIPS platforms like Wazuh?",
+      "question": "Which of the following is a key capability provided by HIDS/HIPS platforms like Wazuh?",
       "options": {
-        "A": "API gateway authentication for cloud workload protection",
-        "B": "DNS sinkhole redirection for blocking malicious domains",
-        "C": "File integrity monitoring to detect changes to critical system files",
-        "D": "Network packet inspection to identify lateral movement between servers"
+        "A": "File integrity monitoring that detects changes to critical system files",
+        "B": "Network perimeter filtering that blocks unauthorized traffic at the firewall",
+        "C": "Cloud workload analysis that correlates signals across multiple cloud providers",
+        "D": "Email security scanning that prevents phishing attacks before they reach users"
       },
-      "correct": "C",
-      "explanation": "File integrity monitoring is explicitly listed as a Wazuh/HIDS capability in the section. The other options describe network-layer or cloud-layer tools, not host-based intrusion detection systems."
+      "correct": "A",
+      "explanation": "The section lists file integrity monitoring as one of the key capabilities of HIDS/HIPS platforms like Wazuh; the other options describe capabilities outside the scope of host-based systems."
     },
     {
       "section": "Host-based firewalls",
       "type": "mc",
-      "question": "Windows Defender Firewall uses three profiles to apply stricter or looser rules depending on the network context. Which profile automatically applies stricter rules when a laptop connects to an untrusted public network?",
+      "question": "What is the purpose of the three profiles in Windows Defender Firewall with Advanced Security?",
       "options": {
-        "A": "Domain profile, which applies when joined to an Active Directory domain",
-        "B": "Guest profile, which applies only to temporary network access",
-        "C": "Private profile, which applies to corporate intranet connectivity",
-        "D": "Public profile, which applies stricter rules for untrusted networks"
+        "A": "To apply different strictness levels of firewall rules based on network trust context",
+        "B": "To separately manage inbound and outbound traffic filtering on the same network",
+        "C": "To classify firewall rules by the type of administrator who created them",
+        "D": "To rotate firewall configurations daily to prevent attackers from predicting rules"
       },
-      "correct": "D",
-      "explanation": "The section states that Windows Defender Firewall uses three profiles — domain, private, and public — and applies stricter rules automatically when a laptop joins an untrusted public network. The public profile is the one designed for untrusted networks."
+      "correct": "A",
+      "explanation": "The section states that Windows Defender Firewall uses three profiles (domain, private, and public) that apply stricter rules automatically when a laptop joins an untrusted public network, showing they reflect network trust."
     },
     {
       "section": "Data loss prevention on endpoints",
-      "type": "text",
-      "question": "How does endpoint DLP differ from network DLP in the types of data exfiltration it can block?",
-      "rubric": "A sound answer states that endpoint DLP blocks local exfiltration paths like USB drives and direct file operations, whereas network DLP only catches data leaving over the network.",
-      "explanation": "Endpoint DLP agents watch file operations (USB writes, email attachments, cloud uploads, print jobs) and can block local exfiltration, while network DLP only sees traffic crossing the network boundary. Together they close both paths."
+      "type": "mc",
+      "question": "How does endpoint DLP differ from network DLP in terms of what it can protect against?",
+      "options": {
+        "A": "Endpoint DLP requires cloud upload integration for enforcement, whereas network DLP operates entirely on-premises systems",
+        "B": "Network DLP detects USB writes and email attachments, whereas endpoint DLP focuses on monitoring network traffic",
+        "C": "Endpoint DLP blocks local exfiltration through USB drives, whereas network DLP monitors data leaving over network connections",
+        "D": "Network DLP prevents phishing attacks from reaching users, whereas endpoint DLP detects credit card numbers in files"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly contrasts endpoint and network DLP: endpoint DLP blocks local exfiltration paths like USB drives, while network DLP only catches data leaving over the network."
     },
     {
       "section": "Application control",
       "type": "mc",
-      "question": "Which application control mechanism enforces restrictions at the kernel level and cannot be bypassed from user mode?",
+      "question": "What is the key difference between WDAC and AppLocker in terms of enforcement?",
       "options": {
-        "A": "WDAC, which enforces code integrity policies at the kernel level",
-        "B": "Group Policy, which pushes application whitelists to domain-joined machines",
-        "C": "Windows Defender, which scans executables before they run",
-        "D": "AppLocker, which allows rules based on file path, hash, or publisher signature"
+        "A": "WDAC is designed for standard enterprise environments, whereas AppLocker is for highest-security scenarios and governments",
+        "B": "WDAC uses cryptographic hash verification exclusively, whereas AppLocker uses file path and publisher signature rules",
+        "C": "WDAC is a Group Policy tool easier to deploy broadly, whereas AppLocker requires direct kernel-level configuration",
+        "D": "WDAC enforces at the kernel level resisting user-mode bypass, whereas AppLocker enforces at user mode and can be bypassed"
       },
-      "correct": "A",
-      "explanation": "WDAC enforces at the kernel level and cannot be bypassed from user mode, making it the highest-security option. AppLocker runs in user mode and is easier to deploy but can be bypassed from user mode."
+      "correct": "D",
+      "explanation": "The section's feature comparison table and text explicitly state that WDAC enforces at kernel level and cannot be bypassed from user mode, while AppLocker enforces at user mode and can be bypassed."
     },
     {
       "section": "Disk encryption and patch management",
       "type": "mc",
-      "question": "BitLocker stores encryption keys in which component to enforce pre-boot authentication and prevent an attacker from reading a stolen drive on another machine?",
+      "question": "What role does the TPM play in BitLocker encryption?",
       "options": {
-        "A": "The Windows Registry, which is protected by kernel-mode access controls",
-        "B": "The TPM, a dedicated security chip on the motherboard",
-        "C": "Azure AD, which synchronizes security policies to the cloud",
-        "D": "Active Directory, where all domain secrets are stored centrally"
+        "A": "The TPM patches the Windows operating system to address vulnerabilities related to disk encryption mechanisms",
+        "B": "The TPM stores encryption keys and enforces pre-boot authentication so removed drives contain only ciphertext",
+        "C": "The TPM manages the deployment of BitLocker policies across all domain-joined machines in the enterprise",
+        "D": "The TPM generates recovery keys that must be stored in Active Directory before BitLocker can be enabled"
       },
       "correct": "B",
-      "explanation": "BitLocker uses the TPM (Trusted Platform Module) to store encryption keys, enforcing pre-boot authentication so that a stolen drive yields only ciphertext. Recovery keys are separately stored in Active Directory or Azure AD, but the TPM holds the primary key material."
+      "explanation": "The section describes the TPM as a dedicated security chip that stores encryption keys and enforces pre-boot authentication, making removed drives unreadable."
     },
     {
       "section": "Mobile and posture management",
-      "type": "text",
-      "question": "What is the purpose of a quarantine network in the context of NAC (Network Access Control) and posture assessment?",
-      "rubric": "A sound answer states that a quarantine network is a restricted network segment with no production access where non-compliant devices are placed until they are remediated to meet security posture requirements.",
-      "explanation": "NAC checks device security state (AV current, patches applied, encryption on) before allowing network access. Non-compliant devices are isolated in a quarantine network — a restricted segment with no production access — until remediated, preventing infected or unpatched devices from reaching critical systems."
+      "type": "mc",
+      "question": "What does posture assessment via NAC do when a device is found to be non-compliant?",
+      "options": {
+        "A": "It drops the non-compliant device into a quarantine network with no production access until remediated",
+        "B": "It immediately alerts the device owner and requires manual remediation before any further access",
+        "C": "It logs the non-compliance event but allows the device to access the network with restricted bandwidth",
+        "D": "It remotely wipes the device and requires the user to re-enroll in the MDM solution"
+      },
+      "correct": "A",
+      "explanation": "The section defines the quarantine network as a restricted network segment with no production access where non-compliant devices are placed until remediated."
     }
   ]
 }

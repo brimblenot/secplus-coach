@@ -3,68 +3,80 @@
     {
       "section": "What a race condition is",
       "type": "mc",
-      "question": "What must be true for a race condition to occur in a program?",
+      "question": "In which type of system environment do race conditions primarily occur?",
       "options": {
-        "A": "A network connection fails during program execution",
-        "B": "The program runs on an outdated operating system",
-        "C": "An attacker gains physical access to the server",
-        "D": "Multiple threads or users access the same resource simultaneously"
+        "A": "Single-threaded applications that process user input in sequential order",
+        "B": "Concurrent systems where multiple threads or processes share resources simultaneously",
+        "C": "Batch processing systems that execute jobs one at a time sequentially",
+        "D": "Offline programs that operate independently without network connectivity"
       },
-      "correct": "D",
-      "explanation": "The section states race conditions happen in concurrent systems where multiple threads, processes, or users share resources at the same time. Physical access, OS version, and network interruption are not stated as requirements."
+      "correct": "B",
+      "explanation": "The section defines race conditions as occurring in concurrent systems where multiple threads, processes, or users share resources simultaneously, allowing operations to interleave in unintended ways."
     },
     {
       "section": "TOCTOU: the core attack pattern",
-      "type": "text",
-      "question": "In one or two sentences, explain what a TOCTOU vulnerability is and why the gap between the check and use matters.",
-      "rubric": "A sound answer should state that TOCTOU is a vulnerability where a program checks a condition but acts on it later, and an attacker can modify the resource during the gap between check and use, causing the program to act on stale information.",
-      "explanation": "The section defines TOCTOU as checking a condition at one moment then acting later, with the window of vulnerability being the gap where an attacker can modify the checked resource."
+      "type": "mc",
+      "question": "In a TOCTOU vulnerability, what is the window of vulnerability?",
+      "options": {
+        "A": "The period during which a program initializes its security settings",
+        "B": "The time it takes for an attacker to identify a vulnerable application",
+        "C": "The gap between when the check occurs and when the use occurs",
+        "D": "The moment when a resource is first allocated in system memory"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that the gap between the check and the use is called the window of vulnerability, during which an attacker can modify the checked resource."
     },
     {
       "section": "TOCTOU in web apps: double-spend and overdraft",
       "type": "mc",
-      "question": "Why does a double-spend attack succeed in an e-commerce system with a race condition?",
+      "question": "In the withdrawal example from this section, why do both withdrawals succeed even though the account only had $100?",
       "options": {
-        "A": "Both users pass inventory checks before either decrement is processed",
-        "B": "The attacker uses an undetected fake payment method",
-        "C": "The server intentionally allows overselling for revenue",
-        "D": "The database automatically rolls back a transaction"
+        "A": "The users submitted their requests from different geographical locations",
+        "B": "The web application server processes requests in parallel threads without synchronization",
+        "C": "The bank's database automatically generates credit to cover overdraft conditions",
+        "D": "The balance check is not atomic with the balance update, allowing both checks to pass before either update executes"
       },
-      "correct": "A",
-      "explanation": "The section's inventory example shows both requests hit the stock check before either decrement runs, so both checks pass and the item is sold twice. The other options are not stated in the section."
+      "correct": "D",
+      "explanation": "The section explains that both withdrawals hit the stock check before either decrement runs, and the balance check is not atomic with the balance update, leaving a gap where outdated information is used."
     },
     {
       "section": "Dirty COW: the most famous race condition exploit",
-      "type": "text",
-      "question": "What is Copy-on-Write (COW) memory optimization, and how did Dirty COW exploit it?",
-      "rubric": "A sound answer should explain that COW creates a private writable copy only when a process writes to it, and Dirty COW exploited a race between writing to the private copy and discarding it to trick the kernel into writing to the original read-only file instead.",
-      "explanation": "The section defines COW as creating a private copy only when actually written to, and describes the Dirty COW race as interleaving write and discard operations to fool the kernel into modifying the protected original file."
+      "type": "mc",
+      "question": "How did Dirty COW allow an unprivileged user to overwrite read-only files?",
+      "options": {
+        "A": "It exploited a race condition in the kernel's copy-on-write mechanism by interleaving operations to write to the read-only file",
+        "B": "It overwhelmed the file system with concurrent requests until read-only restrictions failed to enforce",
+        "C": "It used network protocols to remotely modify file access control settings on vulnerable systems",
+        "D": "It bypassed file permissions by obtaining temporary administrative privileges for local users"
+      },
+      "correct": "A",
+      "explanation": "The section states that an attacker could interleave writing to the private copy and discarding the private copy fast enough to trick the kernel into writing to the original read-only file instead."
     },
     {
       "section": "Real-world impact beyond hacking",
       "type": "mc",
-      "question": "What consequence did the race condition in Mars Rover Spirit cause?",
+      "question": "What happened to the Mars Rover Spirit due to a race condition in 2004?",
       "options": {
-        "A": "Loss of Earth communication for months",
-        "B": "An infinite reboot loop requiring remote patching",
-        "C": "Damage to the rover's navigation system",
-        "D": "Loss of all rover science data records"
+        "A": "A race condition in the power system caused the battery to drain completely",
+        "B": "A race condition in the communication system caused permanent loss of contact with Earth",
+        "C": "A race condition in the navigation system caused the rover to become stranded off course",
+        "D": "A file system race condition caused a reboot loop until engineers transmitted a patch to resolve it"
       },
-      "correct": "B",
-      "explanation": "The section states the race condition triggered a file system error causing a reboot, which immediately hit the same error, creating an infinite reboot loop that engineers patched."
+      "correct": "D",
+      "explanation": "The section describes how a race condition caused a file system error triggering a reboot, which immediately hit the same error, creating an infinite reboot loop until engineers transmitted a patch."
     },
     {
       "section": "Defenses: closing the window",
       "type": "mc",
-      "question": "What is the primary goal that all race condition defenses aim to achieve?",
+      "question": "What is the fundamental principle that all defenses against race conditions aim to achieve?",
       "options": {
-        "A": "Encrypt all shared memory data",
-        "B": "Prevent attackers from accessing the network",
-        "C": "Eliminate gaps between a check and its resulting action",
-        "D": "Slow concurrent operations for predictable timing"
+        "A": "Isolation—keeping each thread completely separated from all other threads in the system",
+        "B": "Encryption—protecting shared resources by scrambling access for concurrent processes",
+        "C": "Atomicity—making a check and its action a single indivisible operation with no gap",
+        "D": "Redundancy—creating duplicate copies of resources to prevent concurrent access issues"
       },
       "correct": "C",
-      "explanation": "The section states the core fix is atomicity — making a check and its resulting action a single, indivisible operation with no gap. The other options are not presented as the primary goal."
+      "explanation": "The section states that the core fix is atomicity—making a check and its resulting action a single, indivisible operation with no gap between them."
     }
   ]
 }

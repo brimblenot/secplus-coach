@@ -3,48 +3,67 @@
     {
       "section": "Qualitative risk analysis",
       "type": "mc",
-      "question": "In qualitative risk analysis, what is a heat map?",
+      "question": "In qualitative risk analysis, what is a heat map used for?",
       "options": {
-        "A": "A document that tracks all control costs and their financial returns",
-        "B": "A list of threats ranked by their likelihood of occurring each year",
-        "C": "A numerical spreadsheet that calculates asset value and exposure factor",
-        "D": "A color-coded 2D matrix showing likelihood and impact, where red indicates high risk"
+        "A": "A timeline showing when each risk event is predicted to occur during the year",
+        "B": "A spreadsheet that tracks insurance premium changes based on risk ratings",
+        "C": "A color-coded 2D matrix showing likelihood and impact where red indicates high risk",
+        "D": "A numerical table that calculates the exact dollar cost of each identified risk"
       },
-      "correct": "D",
-      "explanation": "The study guide explicitly defines a heat map as a color-coded 2D matrix with likelihood on one axis and impact on the other, where red equals high risk, yellow/orange equals medium, and green equals low."
+      "correct": "C",
+      "explanation": "The study guide explicitly defines a heat map as a color-coded 2D matrix with likelihood on one axis and impact on the other, where red equals high risk and it lets executives grasp the risk picture at a glance."
     },
     {
       "section": "Quantitative risk analysis — core formulas",
-      "type": "text",
-      "question": "A company has a database server worth $80,000. If a ransomware attack destroys 50% of recoverable data, what is the Single Loss Expectancy? Show your work and explain what SLE represents.",
-      "rubric": "A sound answer calculates SLE = $80,000 × 0.5 = $40,000 and states that SLE is the expected dollar loss from one occurrence of a threat against one asset.",
-      "explanation": "The section defines Asset Value, Exposure Factor as a decimal, and the formula SLE = AV × EF; students must apply these to a concrete scenario."
+      "type": "mc",
+      "question": "A server worth $50,000 is fully destroyed by a threat with an exposure factor of 1.0. What is the Single Loss Expectancy?",
+      "options": {
+        "A": "$50,000",
+        "B": "$45,000",
+        "C": "$40,000",
+        "D": "$55,000"
+      },
+      "correct": "A",
+      "explanation": "SLE = AV × EF, so $50,000 × 1.0 = $50,000. The study guide provides this exact calculation as an example."
+    },
+    {
+      "section": "Quantitative risk analysis — core formulas",
+      "type": "mc",
+      "question": "A laptop with an AV of $1,000 and EF of 1.0 is stolen 7 times per year. What is the Annualized Loss Expectancy?",
+      "options": {
+        "A": "$8,000 per year",
+        "B": "$6,000 per year",
+        "C": "$5,000 per year",
+        "D": "$7,000 per year"
+      },
+      "correct": "D",
+      "explanation": "SLE = $1,000 × 1.0 = $1,000; ALE = SLE × ARO = $1,000 × 7 = $7,000 per year. The study guide walks through this example."
     },
     {
       "section": "Types of risk",
       "type": "mc",
-      "question": "Which term best describes the risk that remains after security controls are in place?",
+      "question": "What is the difference between inherent risk and residual risk?",
       "options": {
-        "A": "Control risk",
-        "B": "Inherent risk",
-        "C": "Residual risk",
-        "D": "Detection risk"
+        "A": "Inherent risk applies only to physical assets, while residual risk applies to digital assets",
+        "B": "Inherent risk exists before controls are applied, while residual risk is what remains after controls are implemented",
+        "C": "Inherent risk is calculated using formulas, while residual risk is assessed subjectively",
+        "D": "Inherent risk is the probability a threat will occur, while residual risk is the impact if it does"
       },
-      "correct": "C",
-      "explanation": "The study guide defines residual risk as the risk after controls are applied, whereas inherent risk exists before any controls; control risk and detection risk refer to failures within controls themselves."
+      "correct": "B",
+      "explanation": "The study guide defines inherent risk as risk before any controls exist and residual risk as risk after controls are applied."
     },
     {
       "section": "Data sources for quantitative analysis",
       "type": "mc",
-      "question": "Which data source publishes empirical breach frequency and characteristics data using the VERIS schema?",
+      "question": "Which data source provides a structured quantitative framework for measuring information risk in financial terms designed for executive audiences?",
       "options": {
-        "A": "Verizon DBIR / VERIS",
-        "B": "FAIR structured quantitative framework",
-        "C": "Ponemon Institute annual breach cost studies",
-        "D": "Marsh / AON insurance actuarial tables"
+        "A": "Marsh and AON provide insurance actuarial data on financial losses",
+        "B": "Ponemon Institute offers annual research on breach costs per record",
+        "C": "FAIR provides structured quantitative measurement of information risk in financial terms",
+        "D": "Verizon DBIR provides empirical breach frequency data across industries"
       },
-      "correct": "A",
-      "explanation": "The study guide explicitly states that Verizon DBIR provides empirical breach frequency and characteristics data across industries, and that VERIS is the Vocabulary for Event Recording and Incident Sharing schema underlying that data."
+      "correct": "C",
+      "explanation": "The study guide states that FAIR is a structured quantitative framework for measuring information risk in financial terms, designed for executive and financial audiences."
     }
   ]
 }

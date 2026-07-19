@@ -3,81 +3,93 @@
     {
       "section": "What spyware is and how it arrives",
       "type": "mc",
-      "question": "Which of the following is a common installation vector for spyware?",
+      "question": "Which of the following best describes the defining characteristic of spyware?",
       "options": {
-        "A": "Password manager applications",
-        "B": "Legitimate software vendor websites",
-        "C": "Operating system security updates",
-        "D": "Peer-to-peer file-sharing networks"
+        "A": "It can only be delivered via malicious email links and fake security software",
+        "B": "It always requires administrator privileges to install on a system",
+        "C": "It is exclusively distributed through peer-to-peer file-sharing networks",
+        "D": "It operates with stealth—monitoring user activity without meaningful informed consent"
       },
       "correct": "D",
-      "explanation": "The section explicitly lists peer-to-peer file-sharing networks as a common installation vector, along with free software bundles, fake security software, and malicious email links."
+      "explanation": "The section explicitly states that spyware is defined by stealth—the user either doesn't know it's running or agreed to it under conditions that buried the true scope. The other options describe specific installation vectors or technical constraints, not the defining trait."
     },
     {
       "section": "Keyloggers: the most dangerous spyware subtype",
-      "type": "text",
-      "question": "Explain why a hardware keylogger cannot be detected by antivirus software but a software keylogger can be.",
-      "rubric": "A sound answer states that hardware keyloggers operate below the OS and are invisible to software tools, while software keyloggers run as OS processes that antivirus can scan.",
-      "explanation": "The section states hardware keyloggers are completely invisible to software security tools because they operate below the OS, whereas software keyloggers run as hidden background processes that antivirus tools can detect."
+      "type": "mc",
+      "question": "Why are hardware keyloggers completely invisible to antivirus software?",
+      "options": {
+        "A": "They use encrypted communication protocols that prevent antivirus from intercepting or analyzing their data",
+        "B": "They operate at the hardware level below the operating system where software cannot detect or interact with them",
+        "C": "They physically block network connectivity so antivirus cannot perform online signature checks or updates",
+        "D": "They require elevated administrator credentials that antivirus programs cannot access or obtain for inspection"
+      },
+      "correct": "B",
+      "explanation": "The section states that hardware keyloggers operate below the OS, making them completely invisible to software security tools. Software-based tools running within the OS cannot detect physical devices outside its control."
     },
     {
       "section": "Other spyware types",
       "type": "mc",
-      "question": "Which spyware technique reads authentication credentials directly out of RAM?",
+      "question": "What is memory scraping in the context of credential harvesting spyware?",
       "options": {
-        "A": "Memory scraping",
-        "B": "Screen capture spyware",
-        "C": "Stalkerware",
-        "D": "Browser spyware"
+        "A": "Capturing form submissions before they reach the server over the network",
+        "B": "Recording periodic screenshots when banking or payment sites are detected",
+        "C": "Reading credentials directly out of RAM to steal authentication material",
+        "D": "Intercepting web activity and redirecting search results to attacker-controlled pages"
       },
-      "correct": "A",
-      "explanation": "The section defines memory scraping as reading credentials directly out of RAM, listing it as a technique used by credential harvesting spyware alongside keylogging and screen capture."
+      "correct": "C",
+      "explanation": "The section defines memory scraping as reading credentials directly out of RAM, and identifies it as one of the techniques credential harvesting spyware uses alongside keylogging and screen capture."
     },
     {
       "section": "Adware, PUPs, and browser hijacking",
       "type": "mc",
-      "question": "What does PUP/PUA stand for?",
+      "question": "What is a PUP/PUA and how does it relate to adware?",
       "options": {
-        "A": "Persistent Unlicensed Program / Unreliable Application",
-        "B": "Potentially Unwanted Program / Potentially Unwanted Application",
-        "C": "Pre-installed Utility Package / Unwanted Adware",
-        "D": "Proxy User Protocol / Unauthorized Adapter"
+        "A": "A Potentially Unwanted Program that exhibits behavior a fully-informed user would not willingly accept; adware is a common type",
+        "B": "A program that installs unwanted browser extensions to modify homepage and search engine settings without consent",
+        "C": "Software that uses memory scraping and screen capture techniques to steal banking credentials and login information",
+        "D": "Commercial monitoring software marketed for tracking individuals without their knowledge or explicit approval"
       },
-      "correct": "B",
-      "explanation": "The section explicitly defines PUP/PUA as Potentially Unwanted Program / Potentially Unwanted Application, describing software that isn't overtly malicious but whose behavior a fully-informed user wouldn't consent to."
+      "correct": "A",
+      "explanation": "The section defines PUP/PUA as software not overtly malicious but whose behavior a fully-informed user wouldn't consent to, and explains that adware falls into this category. The other options describe different types of malicious behavior."
     },
     {
       "section": "Tracking technologies",
       "type": "mc",
-      "question": "Which tracking technology reconstructs a tracking ID even after cookies are deleted by using multiple browser storage locations?",
+      "question": "What advantage does a supercookie or evercookie have over a regular persistent cookie?",
       "options": {
-        "A": "Tracking pixel",
-        "B": "Browser fingerprinting",
-        "C": "Supercookie / evercookie",
-        "D": "Persistent cookie"
+        "A": "It is embedded in transparent pixels within emails and survives factory reset of the device",
+        "B": "It identifies users by their unique browser fingerprint rather than requiring a stored ID file",
+        "C": "It uses multiple browser storage locations and can reconstruct the tracking ID even after cookies are deleted",
+        "D": "It is impossible to delete because it is stored directly on the hardware motherboard"
       },
       "correct": "C",
-      "explanation": "The section states that a supercookie or evercookie uses multiple browser storage locations including cookies, local storage, and IndexedDB to reconstruct the tracking ID even after cookies are deleted."
+      "explanation": "The section states that supercookies/evercookies use multiple browser storage locations (cookies, local storage, IndexedDB, cached content) and can reconstruct the tracking ID even after cookies are deleted, unlike regular persistent cookies."
     },
     {
       "section": "Bloatware and the Superfish incident",
-      "type": "text",
-      "question": "Describe how Superfish was able to intercept and modify HTTPS traffic on affected Lenovo laptops.",
-      "rubric": "A sound answer states that Superfish installed its own root CA into Windows, which allowed it to perform SSL man-in-the-middle interception to decrypt HTTPS traffic and inject ads.",
-      "explanation": "The section explains that Superfish installed a root Certificate Authority into Windows, enabling SSL man-in-the-middle interception of HTTPS traffic to inject advertisements."
+      "type": "mc",
+      "question": "How did Superfish enable SSL man-in-the-middle attacks on affected Lenovo laptops?",
+      "options": {
+        "A": "It installed a root Certificate Authority certificate that allowed decryption of HTTPS traffic to inject advertisements",
+        "B": "It redirected traffic to attacker-controlled servers that mimicked legitimate HTTPS sites to intercept user sessions",
+        "C": "It captured keystrokes entered during HTTPS sessions to extract banking credentials and sensitive account information",
+        "D": "It recorded screenshots and visual data from encrypted browser windows to collect displayed sensitive information"
+      },
+      "correct": "A",
+      "explanation": "The section explains that Superfish installed its own root CA into Windows, which it used to perform SSL man-in-the-middle interception—decrypting HTTPS traffic to inject ads. This root CA was the mechanism that enabled the attack."
     },
     {
       "section": "Defenses",
       "type": "mc",
-      "question": "Which Windows mechanism allows security products to scan scripts before they execute?",
+      "question": "What is the purpose of AMSI in defending against script-based spyware?",
       "options": {
-        "A": "Network traffic monitoring",
-        "B": "Anti-Malware Scan Interface",
-        "C": "Hardware port locks",
-        "D": "Physical keyboard inspection"
+        "A": "It performs audits of installed applications and browser extensions to identify and flag potentially unwanted programs",
+        "B": "It restricts USB port access to prevent hardware keyloggers from being installed on shared computers and workstations",
+        "C": "It monitors outbound network traffic to detect spyware attempting to communicate with collection and command servers",
+        "D": "It provides a Windows mechanism that allows security products to scan and analyze scripts before execution to block delivery"
       },
-      "correct": "B",
-      "explanation": "The section defines AMSI as Anti-Malware Scan Interface, a Windows mechanism that lets security products scan scripts before execution to block script-based spyware delivery."
+      "correct": "D",
+      "explanation": "The section defines AMSI as Anti-Malware Scan Interface, a Windows mechanism that lets security products scan scripts before they execute, blocking script-based spyware delivery. The other options describe different defense mechanisms."
     }
   ]
 }

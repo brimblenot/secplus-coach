@@ -3,115 +3,145 @@
     {
       "section": "Insecure Direct Object Reference (IDOR)",
       "type": "mc",
-      "question": "What does IDOR allow an attacker to do?",
+      "question": "An IDOR vulnerability occurs when an application fails to check what before exposing an internal resource to a user?",
       "options": {
-        "A": "Execute arbitrary OS commands by injecting shell metacharacters into input",
-        "B": "Access a resource without authorization by directly referencing it with a modified identifier",
-        "C": "Overlay an invisible frame over a legitimate page to capture clicks",
-        "D": "Trick a server into making HTTP requests to attacker-chosen destinations"
+        "A": "whether the user's browser supports the protocol",
+        "B": "whether the user is authenticated to the system",
+        "C": "whether the user is authorized to access that specific resource",
+        "D": "whether the user's IP address is on the allowlist"
       },
-      "correct": "B",
-      "explanation": "IDOR occurs when an application exposes a reference to an internal resource without checking whether the requesting user is authorized to access that specific resource, allowing attackers to change identifiers like user IDs to access other users' data."
+      "correct": "C",
+      "explanation": "IDOR happens when an app exposes a reference to an internal resource without checking if the requesting user is authorized to access that specific resource. Authentication alone is not sufficient."
     },
     {
       "section": "Directory traversal",
-      "type": "text",
-      "question": "Explain what directory traversal is and name one technique attackers use to bypass filters.",
-      "rubric": "A sound answer states that directory traversal uses sequences like ../ to climb the directory tree and read files outside the intended directory, and mentions URL encoding (representing .. as %2e%2e%2f) as a bypass technique.",
-      "explanation": "Directory traversal injects ../ sequences to escape the intended directory, and attackers bypass naive filters by using URL encoding to represent these characters in percent-encoded form."
+      "type": "mc",
+      "question": "Which technique do attackers use to bypass naive filters when performing directory traversal attacks?",
+      "options": {
+        "A": "URL encoding to represent path separator characters differently",
+        "B": "modifying the Host header to redirect file paths",
+        "C": "sending multiple requests with random timing intervals",
+        "D": "injecting comments into the file path parameter"
+      },
+      "correct": "A",
+      "explanation": "Attackers bypass naive filters by using URL encoding—representing characters as percent-encoded values like %2e%2e%2f instead of ../ to avoid simple string matching."
     },
     {
       "section": "Server-Side Request Forgery (SSRF)",
       "type": "mc",
-      "question": "In a cloud environment, what is the primary high-value target of an SSRF attack?",
+      "question": "In a cloud environment, why is the instance metadata service at 169.254.169.254 considered a high-value SSRF target?",
       "options": {
-        "A": "A chroot jail restricting the filesystem environment of a web server",
-        "B": "An XML parser configured to disable external entity processing",
-        "C": "The instance metadata service at 169.254.169.254 that exposes credentials and configuration",
-        "D": "A Web Application Firewall blocking malicious HTTP traffic"
+        "A": "it filters and validates all outbound network traffic",
+        "B": "it enforces mandatory encryption on all requests",
+        "C": "it contains the source code of all running applications",
+        "D": "it exposes credentials and configuration data for the instance"
       },
-      "correct": "C",
-      "explanation": "The instance metadata service at 169.254.169.254 is a link-local address exposing cloud VM credentials and configuration, making it a high-value target when an SSRF vulnerability tricks the server into fetching attacker-supplied URLs."
+      "correct": "D",
+      "explanation": "The instance metadata service at 169.254.169.254 is a link-local address that exposes credentials and configuration for the cloud VM, making it an attractive SSRF target in cloud environments."
     },
     {
       "section": "Command injection",
-      "type": "text",
-      "question": "What is the root cause of command injection, and what is the primary fix?",
-      "rubric": "A sound answer states that command injection occurs because the application does not separate data from commands, and the primary fix is to use parameterized subprocess APIs that pass arguments as arrays rather than concatenating user input into shell commands.",
-      "explanation": "Command injection exploits shell metacharacters embedded in user input that the application passes to a shell without separation; parameterized subprocess APIs prevent this by treating user input as data, never as shell syntax."
+      "type": "mc",
+      "question": "What is the root cause of command injection vulnerabilities?",
+      "options": {
+        "A": "the application uses encrypted communication channels",
+        "B": "the application does not separate data from commands",
+        "C": "the application logs all user input to a file",
+        "D": "the application runs with administrative privileges"
+      },
+      "correct": "B",
+      "explanation": "Command injection occurs because the application does not separate data from commands, allowing shell metacharacters in user input to be interpreted as command syntax rather than literal data."
     },
     {
       "section": "XML External Entity injection (XXE)",
       "type": "mc",
-      "question": "What does an XXE attack exploit?",
+      "question": "How does an XXE attack exploit vulnerable XML parsers?",
       "options": {
-        "A": "An XML parser that honors external entity references declared in the document",
-        "B": "A database query that fails to use parameterized statements",
-        "C": "A browser that attaches session cookies to cross-origin requests",
-        "D": "Insufficient authorization checks on resource identifiers in REST APIs"
+        "A": "by sending XML in an unsupported encoding format",
+        "B": "by declaring external entities that reference files or URLs",
+        "C": "by removing the XML declaration from the document header",
+        "D": "by overloading the parser with large XML documents"
       },
-      "correct": "A",
-      "explanation": "XXE exploits XML parsers that honor external entity references embedded in the document, allowing attackers to declare entities pointing to files like /etc/passwd that the parser then fetches and includes in the response."
+      "correct": "B",
+      "explanation": "XXE exploits XML parsers that honor external entity references embedded in the document, allowing attackers to declare entities pointing to sensitive files like /etc/passwd or internal URLs."
     },
     {
       "section": "LDAP injection",
       "type": "mc",
-      "question": "LDAP injection and SQL injection share the same principle applied to different systems. What is that principle?",
+      "question": "LDAP injection attacks and SQL injection attacks follow the same basic principle but target different systems. Which system does LDAP injection target?",
       "options": {
-        "A": "Embedding shell metacharacters to execute arbitrary commands",
-        "B": "Changing identifiers in URLs to access unauthorized resources",
-        "C": "Declaring external entities to fetch sensitive files",
-        "D": "Building queries by concatenating unsanitized user input"
+        "A": "network routing protocols",
+        "B": "web server configuration files",
+        "C": "cloud storage buckets",
+        "D": "directory services like Active Directory"
       },
       "correct": "D",
-      "explanation": "LDAP injection targets applications that build LDAP queries by concatenating unsanitized user input, allowing attackers to inject extra filter conditions, just as SQL injection does for database queries."
+      "explanation": "LDAP injection targets applications that build LDAP queries by concatenating unsanitized user input. LDAP is used to query directory services like Active Directory."
     },
     {
       "section": "Cross-Site Request Forgery (CSRF)",
-      "type": "text",
-      "question": "Explain why browsers are vulnerable to CSRF and name one defense mechanism.",
-      "rubric": "A sound answer states that browsers automatically attach session cookies to every request for a domain regardless of origin, and names either CSRF tokens (unique values verified on submission) or the SameSite cookie attribute (which blocks cookies on cross-origin requests).",
-      "explanation": "CSRF succeeds because browsers automatically include session cookies in all requests to a domain; CSRF tokens and SameSite cookie attributes provide defense by requiring verification or withholding cookies on cross-origin requests."
+      "type": "mc",
+      "question": "Why can CSRF attacks succeed even when the victim is legitimately logged into the target web application?",
+      "options": {
+        "A": "browsers attach session cookies to requests regardless of origin",
+        "B": "authentication tokens are stored in local storage publicly",
+        "C": "the attacker can intercept and modify the session cookie",
+        "D": "web applications cannot validate the origin of requests"
+      },
+      "correct": "A",
+      "explanation": "CSRF succeeds because browsers automatically attach session cookies to every request for a domain, regardless of where the request originates, so the victim's valid session is used without their knowledge."
     },
     {
       "section": "Clickjacking",
       "type": "mc",
-      "question": "What does clickjacking use to trick a victim into clicking on a malicious target?",
+      "question": "What does a clickjacking attack place over a visible, legitimate page to trick victims into triggering unintended actions?",
       "options": {
-        "A": "A session ID controlled by the attacker to hijack user activity",
-        "B": "External entity references in XML declarations",
-        "C": "An invisible iframe overlaid on a legitimate page to trick clicks",
-        "D": "URL-encoded sequences injected into file path parameters"
+        "A": "a pop-up window with misleading text or content",
+        "B": "a hidden form embedded in the page source code",
+        "C": "an invisible or transparent iframe containing a malicious target",
+        "D": "a JavaScript alert box asking for user confirmation"
       },
       "correct": "C",
-      "explanation": "Clickjacking overlays an invisible or transparent iframe containing a malicious target over a visible, legitimate page, so victims click what they can see but trigger an unintended action."
+      "explanation": "Clickjacking overlays an invisible or transparent iframe containing a malicious target over a visible, legitimate page, so victims click what they see but trigger what they cannot."
     },
     {
       "section": "Session fixation",
-      "type": "text",
-      "question": "How does session fixation work, and what is the primary fix?",
-      "rubric": "A sound answer states that the attacker pre-establishes a known session ID and tricks the victim into authenticating with that same ID, which the attacker then uses to access the authenticated session; the fix is to generate a completely new session identifier upon successful login.",
-      "explanation": "Session fixation succeeds when an app accepts a pre-known session ID and the victim logs in with it; the fix is to issue a completely new session identifier at login, invalidating any pre-authentication session."
+      "type": "mc",
+      "question": "How does a session fixation attack typically compromise an authenticated session?",
+      "options": {
+        "A": "the attacker steals the session ID from network traffic",
+        "B": "the attacker uses brute force to guess the session ID",
+        "C": "the attacker pre-establishes a session ID and tricks the victim into using it",
+        "D": "the attacker modifies the session timeout value on the server"
+      },
+      "correct": "C",
+      "explanation": "Session fixation occurs when the attacker pre-establishes a known session ID, tricks the victim into authenticating with that same ID, then uses it to access the now-authenticated session."
     },
     {
       "section": "Privilege escalation",
       "type": "mc",
       "question": "What is the difference between horizontal and vertical privilege escalation in web applications?",
       "options": {
-        "A": "Horizontal escalates through XML parsers; vertical through web services",
-        "B": "Horizontal accesses other users at same level; vertical accesses higher privileges",
-        "C": "Horizontal exploits CSRF tokens; vertical exploits database queries",
-        "D": "Horizontal targets network infrastructure while vertical targets the OS"
+        "A": "horizontal exploits network vulnerabilities; vertical exploits application logic",
+        "B": "horizontal accesses other users at the same level; vertical gains higher-privilege functions",
+        "C": "horizontal requires authentication; vertical does not require authentication",
+        "D": "horizontal targets databases; vertical targets file systems"
       },
       "correct": "B",
-      "explanation": "Horizontal escalation accesses resources of other users at the same privilege level, while vertical escalation gains access to higher-privilege functions or data that a user should not reach."
+      "explanation": "Horizontal escalation accesses resources of other users at the same privilege level, while vertical escalation gains access to higher-privilege functions or data that a user should not have."
     },
     {
       "section": "Insecure deserialization",
-      "type": "text",
-      "question": "Why is deserialization of untrusted data dangerous, and what is the consequence?",
-      "rubric": "A sound answer states that untrusted deserialization is dangerous because many formats allow the data to specify the object type and parameters to instantiate, enabling attackers to craft payloads that trigger arbitrary code execution when deserialized.",
-      "explanation": "Insecure deserialization allows serialization formats to specify object types and initialization parameters, so attackers can craft malicious payloads that execute arbitrary code when the application reconstructs the object."
+      "type": "mc",
+      "question": "Why is deserialization of untrusted data dangerous?",
+      "options": {
+        "A": "it prevents applications from caching frequently accessed objects",
+        "B": "it increases the time required to process user requests",
+        "C": "it requires excessive memory and causes denial of service",
+        "D": "serialization formats allow data to specify object types, enabling code execution"
+      },
+      "correct": "D",
+      "explanation": "Deserialization becomes dangerous when untrusted data specifies the object type and parameters to instantiate, allowing attackers to craft payloads that trigger arbitrary code execution."
     }
   ]
 }

@@ -3,88 +3,106 @@
     {
       "section": "Mobile device hardening",
       "type": "mc",
-      "question": "Which of the following is the foundational requirement that enables an organization to push and enforce security policies on employee mobile devices?",
+      "question": "Why is Mobile Device Management (MDM) enrollment described as the foundation of mobile device hardening?",
       "options": {
-        "A": "Mobile Device Management (MDM) enrollment",
-        "B": "Disabling Bluetooth and NFC radios",
-        "C": "Full-device encryption configured by the user",
-        "D": "Automatic screen lock timeout settings"
+        "A": "MDM enrollment prevents users from installing third-party applications on enrolled devices",
+        "B": "MDM enrollment encrypts all network traffic between the device and corporate servers",
+        "C": "MDM enrollment automatically installs antivirus and anti-malware software on all enrolled devices",
+        "D": "MDM enrollment allows IT to verify device identity and enforce security policies across the mobile device fleet"
       },
-      "correct": "A",
-      "explanation": "The section states that MDM is the foundation of mobile hardening because without MDM enrollment, IT has no way to verify or control device security. The other controls are policies delivered through MDM, not prerequisites for it."
+      "correct": "D",
+      "explanation": "The section states that without MDM enrollment, IT has no way to verify or control device security, making enrollment the foundation. The other options describe specific capabilities that come after enrollment but are not what make MDM foundational."
     },
     {
       "section": "Workstation hardening",
-      "type": "text",
-      "question": "Why is removing local administrator rights from standard user accounts considered the biggest single win in workstation hardening?",
-      "rubric": "A sound answer explains that most malware succeeds by running with administrator privileges, so stripping that privilege prevents malware from installing software, modifying system files, or disabling security tools.",
-      "explanation": "The section identifies this as the biggest win and gives the reason: most malware depends on admin-level execution to succeed. Removing that privilege blocks the attack vector entirely."
+      "type": "mc",
+      "question": "According to the section, why is removing local administrator rights from standard user accounts described as the biggest single win in workstation hardening?",
+      "options": {
+        "A": "Standard users cannot access corporate email or file shares without administrator privileges",
+        "B": "Most malware requires admin-level privileges to execute its payload and cannot perform full attacks without them",
+        "C": "Removing admin rights automatically patches all known vulnerabilities on the workstation",
+        "D": "Administrator accounts are more vulnerable to social engineering attacks than standard user accounts"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that most malware succeeds by running in admin-privileged context and that stripping this privilege prevents malware from installing software, modifying system files, or disabling security tools."
     },
     {
       "section": "Switch hardening",
       "type": "mc",
-      "question": "What does Dynamic ARP Inspection (DAI) prevent on a hardened switch?",
+      "question": "What does DHCP snooping prevent on a hardened switch?",
       "options": {
-        "A": "Rogue DHCP servers distributing false IP configurations to clients",
-        "B": "ARP poisoning that maps an attacker's MAC address to a legitimate IP address",
-        "C": "Unauthorized devices connecting through unmanaged ports",
-        "D": "VLAN hopping between network segments"
+        "A": "DHCP snooping blocks all broadcast traffic from entering unused ports on the switch",
+        "B": "DHCP snooping prevents devices from changing their MAC addresses to spoof other network endpoints",
+        "C": "DHCP snooping identifies legitimate DHCP servers in a trust table and blocks rogue servers from issuing IP addresses",
+        "D": "DHCP snooping encrypts DHCP messages to prevent attackers from intercepting IP leases"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states that DAI validates ARP using a snooping table to prevent ARP poisoning, where an attacker maps their MAC to a legitimate IP to intercept traffic."
+      "correct": "C",
+      "explanation": "The section states that DHCP snooping uses a trust table of legitimate DHCP servers to prevent rogue DHCP servers from handing out false IP configuration. The other options describe different switch controls or attack types."
     },
     {
       "section": "Router hardening",
-      "type": "text",
-      "question": "Explain what a smurf amplification attack is and why disabling IP directed broadcasts prevents it.",
-      "rubric": "A sound answer identifies that IP directed broadcasts allow one packet to trigger broadcast responses from all hosts on a subnet, which attackers exploit; disabling them removes this amplification mechanism.",
-      "explanation": "The section defines smurf attacks as using one packet to trigger broadcast responses from all hosts, which amplifies traffic. Disabling IP directed broadcasts removes the ability to send such broadcasts."
+      "type": "mc",
+      "question": "What threat does disabling IP directed broadcasts prevent on a hardened router?",
+      "options": {
+        "A": "Disabling IP directed broadcasts prevents smurf attacks where one packet causes broadcast responses from all subnet hosts",
+        "B": "Disabling IP directed broadcasts prevents attackers from injecting false routes into the routing protocol",
+        "C": "Disabling IP directed broadcasts blocks ARP poisoning attacks that redirect traffic through attacker paths",
+        "D": "Disabling IP directed broadcasts stops attackers from spoofing source IP addresses on outgoing traffic"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly identifies smurf amplification attacks as the threat prevented by disabling IP directed broadcasts. The other options describe different router hardening controls and attack types."
     },
     {
       "section": "Cloud infrastructure hardening",
       "type": "mc",
-      "question": "Which of the following is a critical security mistake in cloud infrastructure that the study guide specifically warns against?",
+      "question": "Why is it critical to never allow port 22 or 3389 from 0.0.0.0/0 in cloud security group rules?",
       "options": {
-        "A": "Configuring IAM roles with temporary credentials instead of access keys",
-        "B": "Enabling CloudTrail to log API calls and configuration changes",
-        "C": "Activating AWS GuardDuty to detect indicators of compromise",
-        "D": "Allowing SSH on port 22 from 0.0.0.0/0 in security group rules"
+        "A": "These ports require encryption that is not available when accessed from external IP addresses",
+        "B": "Opening these ports causes cloud providers to charge higher rates for network traffic and data transfer",
+        "C": "Cloud providers automatically disable these ports unless explicitly permitted from trusted source IPs",
+        "D": "Opening SSH or RDP to the entire internet exposes remote access services to attack attempts from any source"
       },
       "correct": "D",
-      "explanation": "The section warns that security groups should never allow port 22 (SSH) or 3389 (RDP) from 0.0.0.0/0, comparing it to leaving the data center front door propped open. The other options are security best practices."
+      "explanation": "The section warns against allowing port 22 or 3389 from 0.0.0.0/0 and compares it to leaving the front door of a data center propped open on the internet. The other options introduce information not stated in the section."
     },
     {
       "section": "Server hardening",
       "type": "mc",
-      "question": "What does Windows Defender Credential Guard protect against?",
+      "question": "What is the purpose of NTP (Network Time Protocol) on hardened servers?",
       "options": {
-        "A": "Unauthorized password changes to server administrator accounts",
-        "B": "Kerberos authentication failure from unsynchronized system clocks",
-        "C": "Credential extraction by isolating NTLM hashes and Kerberos tickets in memory",
-        "D": "Attack surface expansion from enabled server roles and features"
+        "A": "NTP prevents setuid programs from executing with elevated privileges when launched from mounted filesystems",
+        "B": "NTP isolates credential tokens inside a virtualization-based security container to prevent credential extraction",
+        "C": "NTP synchronizes clocks across systems, which is critical for Kerberos authentication, log correlation, and forensic timelines",
+        "D": "NTP encrypts all management traffic so administrators cannot eavesdrop on sensitive server communications"
       },
       "correct": "C",
-      "explanation": "The section states that Credential Guard isolates NTLM hashes and Kerberos tickets in a virtualization-based security container specifically to prevent tools like Mimikatz from extracting them."
+      "explanation": "The section states that NTP synchronizes clocks and is critical for Kerberos authentication, log correlation, and forensic timelines. The other options describe different server hardening controls."
     },
     {
       "section": "ICS/SCADA hardening",
-      "type": "text",
-      "question": "Why are compensating controls necessary for ICS/SCADA systems, and give one example from the section.",
-      "rubric": "A sound answer explains that ICS/SCADA systems prioritize availability and often run legacy systems that cannot be patched without halting production, so alternative safeguards are needed instead. Examples include OT DMZ, data diodes, or allowlisting.",
-      "explanation": "The section explains that these systems cannot always be patched because production must stay running. This gap is filled by compensating controls like network segmentation and one-way gateways."
+      "type": "mc",
+      "question": "What is the primary purpose of an OT DMZ in ICS/SCADA hardening?",
+      "options": {
+        "A": "An OT DMZ monitors network traffic and automatically blocks suspicious patterns detected on ICS systems",
+        "B": "An OT DMZ separates ICS networks from corporate IT networks to contain damage if the IT network is compromised",
+        "C": "An OT DMZ encrypts all communication between ICS devices and corporate servers using TLS protocols",
+        "D": "An OT DMZ applies security patches to legacy operating systems without requiring production downtime"
+      },
+      "correct": "B",
+      "explanation": "The section defines an OT DMZ as a network segment that separates ICS networks from corporate IT networks, limiting damage if IT is compromised. The other options describe different ICS/SCADA controls or capabilities."
     },
     {
       "section": "IoT hardening",
       "type": "mc",
-      "question": "Why do IoT devices pose an immediate and widespread security risk when they ship from the factory?",
+      "question": "Why does the section emphasize changing default credentials immediately on IoT devices?",
       "options": {
-        "A": "They run proprietary operating systems that cannot be hardened or configured",
-        "B": "They frequently ship with identical default usernames and passwords that attackers scan for at scale",
-        "C": "They do not support encryption protocols and cannot be isolated on VLANs",
-        "D": "They automatically connect to the internet without requiring administrator approval"
+        "A": "IoT devices frequently ship with identical factory usernames and passwords that attackers scan for at scale",
+        "B": "Default credentials enable remote management that consumes excessive bandwidth and slows network performance",
+        "C": "Default credentials allow all IoT devices on a network to communicate with each other without authentication",
+        "D": "Default credentials on IoT devices prevent firmware updates from being installed on the device"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states that IoT devices ship with identical factory credentials and attackers scan for them at scale. This is why changing defaults immediately is the first step."
+      "correct": "A",
+      "explanation": "The section explicitly states that IoT devices frequently ship with identical factory usernames and passwords, and attackers scan for them at scale. This is why changing defaults immediately is critical."
     }
   ]
 }

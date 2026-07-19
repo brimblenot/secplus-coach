@@ -3,81 +3,93 @@
     {
       "section": "Packet filtering firewalls",
       "type": "mc",
-      "question": "Why is a stateless packet filtering firewall vulnerable to a crafted inbound ACK packet?",
+      "question": "What is the primary limitation of a stateless packet filtering firewall when evaluating inbound traffic?",
       "options": {
-        "A": "It lacks a state table to track sessions",
-        "B": "It operates at Layer 7 and cannot parse TCP flags",
-        "C": "It requires explicit outbound rules to permit return traffic",
-        "D": "It cannot verify the ACK belongs to an established connection because it has no state memory"
+        "A": "It cannot forward packets between different network segments or zones",
+        "B": "It cannot determine if an inbound ACK packet is a legitimate reply or a crafted probe",
+        "C": "It cannot inspect source and destination IP addresses in packet headers",
+        "D": "It cannot block traffic on port 443 or any encrypted protocol"
       },
-      "correct": "D",
-      "explanation": "A packet filter checks headers in isolation without tracking connection state, so a crafted ACK packet with matching source/destination can pass if a permissive rule exists — the firewall cannot tell it is not a real reply."
+      "correct": "B",
+      "explanation": "Stateless packet filters judge every packet in isolation with no memory of prior packets, so they cannot distinguish between a legitimate ACK reply and a malicious crafted ACK packet."
     },
     {
       "section": "Stateful inspection firewalls",
-      "type": "text",
-      "question": "Explain how a stateful firewall's state table prevents an unsolicited inbound packet from entering the network, even if a rule permits its port and protocol.",
-      "rubric": "A sound answer states that the firewall records established connections (including the TCP handshake) in the state table, and blocks inbound packets that lack a matching entry in that table — only packets belonging to an already-open session are allowed in.",
-      "explanation": "The state table tracks live sessions; inbound packets are matched against it, so packets without a corresponding open connection are automatically blocked regardless of permissive rules, preventing crafted packets and session hijacking."
+      "type": "mc",
+      "question": "How does a stateful inspection firewall handle an unsolicited inbound packet that arrives on an allowed port?",
+      "options": {
+        "A": "It inspects the packet payload to determine if the application is legitimate",
+        "B": "It records the packet in the state table and allows it on the next occurrence",
+        "C": "It forwards the packet because the port is allowed, regardless of connection state",
+        "D": "It blocks the packet unless a matching connection entry exists in the state table"
+      },
+      "correct": "D",
+      "explanation": "Stateful firewalls block unsolicited inbound packets automatically unless the state table contains a matching entry for an established session, providing better protection than stateless filtering."
     },
     {
       "section": "Application-layer firewalls",
       "type": "mc",
-      "question": "Which attack can an application-layer firewall detect that a stateful inspection firewall cannot?",
+      "question": "What type of attack can an application-layer firewall detect that a stateful firewall cannot?",
       "options": {
-        "A": "Fragmented packets that reassemble into malicious payloads",
-        "B": "A crafted TCP ACK packet on a blocked port",
-        "C": "FTP PORT command injection to open an unauthorized data connection",
-        "D": "An inbound SYN packet with no matching state table entry"
+        "A": "Unsolicited inbound packets arriving on random ports",
+        "B": "Fragmented packets designed to evade inspection rules",
+        "C": "FTP PORT command injection abusing the protocol itself",
+        "D": "Packets with forged source IP addresses from outside the network"
       },
       "correct": "C",
-      "explanation": "An application-layer firewall fully parses application protocols like FTP and can detect protocol-level anomalies such as malicious PORT commands; stateful firewalls see only TCP/UDP flows without parsing the application content."
+      "explanation": "Application-layer firewalls fully parse protocols like FTP and can detect attacks such as FTP PORT command injection, which are invisible to stateful firewalls that only inspect headers and state."
     },
     {
       "section": "Next-Generation Firewalls (NGFWs)",
       "type": "mc",
-      "question": "A company observes suspicious HTTPS traffic over port 443 that appears to be corporate data exfiltration, but standard stateful firewall rules permit the traffic. Which NGFW capability would identify and potentially block this behavior?",
+      "question": "What does App-ID enable an NGFW to accomplish that a stateful firewall cannot?",
       "options": {
-        "A": "Deep packet inspection to examine IP and TCP headers",
-        "B": "App-ID to identify the actual application sending the traffic independent of port",
-        "C": "User-ID to link the traffic to an authenticated user",
-        "D": "Threat intelligence feeds to match known malicious IPs"
+        "A": "Distinguish between Netflix streaming and corporate VPN on the same port 443",
+        "B": "Execute suspicious files in an isolated sandbox to detect malware",
+        "C": "Block all inbound packets unless they match an explicit allow rule",
+        "D": "Decrypt and inspect encrypted traffic flowing through the firewall"
       },
-      "correct": "B",
-      "explanation": "App-ID identifies the application generating the traffic by behavioral signatures rather than port alone, so it can distinguish encrypted exfiltration from legitimate HTTPS traffic — both on port 443."
+      "correct": "A",
+      "explanation": "App-ID identifies applications by behavioral signatures rather than port number alone, allowing NGFWs to distinguish different apps using the same port—a capability stateful firewalls lack."
     },
     {
       "section": "Web Application Firewalls (WAFs)",
-      "type": "text",
-      "question": "What is the key difference between a positive (allowlist) and negative (blocklist) WAF security model in terms of how they handle unknown attacks?",
-      "rubric": "A sound answer states that a positive model blocks anything deviating from a known-valid request format and thus blocks novel attacks, while a negative model only blocks known attack patterns and thus may miss zero-day or novel attacks.",
-      "explanation": "Positive models block deviations from defined valid behavior, protecting against novel attacks; negative models require continuous updates to catch new patterns and may let unknown attacks through."
+      "type": "mc",
+      "question": "Which WAF security model defines what a valid request should look like and blocks anything that deviates?",
+      "options": {
+        "A": "Positive model defining an allowlist of valid requests",
+        "B": "Reverse proxy model that sits between users and web servers",
+        "C": "Behavioral model that learns normal traffic over time",
+        "D": "Negative model using known attack pattern signatures"
+      },
+      "correct": "A",
+      "explanation": "The positive (allowlist) model defines what valid requests look like and blocks deviations, providing strong protection against novel attacks but requiring detailed application modeling."
     },
     {
       "section": "Unified Threat Management (UTM)",
       "type": "mc",
-      "question": "What is the primary limitation of a UTM appliance compared to a Next-Generation Firewall?",
+      "question": "What is the primary tradeoff of a UTM appliance compared to an NGFW?",
       "options": {
-        "A": "A UTM lacks application-layer awareness features like App-ID and User-ID",
-        "B": "A UTM requires separate hardware for firewall and antivirus",
-        "C": "A UTM cannot block attacks on encrypted traffic",
-        "D": "A UTM cannot perform stateful inspection of TCP"
+        "A": "A UTM requires a separate management interface for each security function",
+        "B": "A UTM bundles multiple functions but lacks application awareness and may degrade under high traffic",
+        "C": "A UTM cannot integrate intrusion prevention and only filters by port",
+        "D": "A UTM cannot perform stateful inspection of network traffic"
       },
-      "correct": "A",
-      "explanation": "UTMs typically operate at Layer 4 without the deep application-layer capabilities (App-ID, User-ID, DPI) that NGFWs provide, making them less suitable for complex enterprise environments."
+      "correct": "B",
+      "explanation": "UTMs are not best-of-breed in any single function, often lack application-layer awareness, and performance degrades when multiple functions run simultaneously on high-traffic networks."
     },
     {
       "section": "Cloud firewall deployments",
       "type": "mc",
-      "question": "In AWS, why must a Network ACL include an explicit outbound rule to permit return traffic, whereas a Security Group does not?",
+      "question": "How do AWS security groups handle return traffic for established connections?",
       "options": {
-        "A": "Network ACLs operate at Layer 7 while Security Groups operate at Layer 3",
-        "B": "Network ACLs are stateless and evaluate each direction separately; Security Groups are stateful",
-        "C": "Network ACLs require Active Directory while Security Groups do not",
-        "D": "Security Groups are at the subnet level and Network ACLs at the instance level"
+        "A": "Return traffic is blocked unless both inbound and outbound rules match",
+        "B": "Return traffic requires a separate rule at the subnet-level Network ACL",
+        "C": "Return traffic is automatically permitted because security groups are stateful",
+        "D": "Return traffic requires an explicit outbound rule to be defined"
       },
-      "correct": "B",
-      "explanation": "Network ACLs are stateless and must have explicit rules for both directions; Security Groups are stateful and auto-permit return traffic, so only inbound rules are typically required."
+      "correct": "C",
+      "explanation": "Security groups are stateful and automatically permit return traffic for established connections without requiring explicit outbound rules, unlike stateless NACLs which require both inbound and outbound rules."
     }
   ]
 }

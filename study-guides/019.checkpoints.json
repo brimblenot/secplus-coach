@@ -3,55 +3,80 @@
     {
       "section": "The X.509 certificate format",
       "type": "mc",
-      "question": "In an X.509 certificate, which field contains the identity of the certificate owner?",
+      "question": "Which of the following fields in an X.509 certificate identifies the Certificate Authority that issued the certificate?",
       "options": {
-        "A": "Serial Number",
-        "B": "Issuer",
-        "C": "Validity Period",
-        "D": "Subject"
+        "A": "Issuer field",
+        "B": "Validity Period field",
+        "C": "Serial Number field",
+        "D": "Subject field"
       },
-      "correct": "D",
-      "explanation": "The Subject field holds the identity of the cert owner, such as a domain name or organization name. The Issuer field identifies the CA that signed it, not the owner."
+      "correct": "A",
+      "explanation": "The Issuer field holds the identity of the CA that signed the certificate. The Subject field identifies the cert owner, Serial Number is a unique ID, and Validity Period contains expiry dates."
     },
     {
       "section": "Certificate validation levels",
-      "type": "text",
-      "question": "Briefly explain what distinguishes DV validation from EV validation in terms of what the CA checks.",
-      "rubric": "A sound answer states that DV verifies only domain control (e.g., via email or DNS), while EV performs full verification of legal, physical, and operational existence per CA/Browser Forum rules. DV is faster and cheaper; EV carries the strongest identity assurance.",
-      "explanation": "The section explicitly contrasts DV as domain-control-only and automated versus EV as requiring verification of full legal, physical, and operational existence. This distinction is the core difference in validation rigor."
+      "type": "mc",
+      "question": "Which validation level requires the CA to verify only domain control and can be issued in minutes?",
+      "options": {
+        "A": "Extended Validation, which verifies full legal and operational existence",
+        "B": "Domain Validated, which verifies domain control only via email or DNS",
+        "C": "Enterprise Validated, which verifies domain control through a third party",
+        "D": "Organization Validated, which verifies legal org name and address"
+      },
+      "correct": "B",
+      "explanation": "Domain Validated (DV) certificates verify domain control only and can be issued quickly, often within minutes. OV and EV require more extensive verification and take longer."
     },
     {
       "section": "Wildcard and SAN certificates",
       "type": "mc",
-      "question": "A wildcard certificate for `*.example.com` will cover which of the following?",
+      "question": "A wildcard certificate issued for *.example.com will cover which of the following?",
       "options": {
-        "A": "All domains ending with example.com across the entire internet",
-        "B": "Single-level subdomains like www.example.com and mail.example.com",
-        "C": "The apex domain example.com automatically",
-        "D": "Any subdomain at any depth, such as sub.sub.example.com"
+        "A": "Multi-level subdomains such as sub.sub.example.com and deeper",
+        "B": "The apex domain example.com and all single-level subdomains",
+        "C": "Only single-level subdomains like www.example.com and mail.example.com",
+        "D": "The apex domain and any subdomain at any nesting level"
       },
-      "correct": "B",
-      "explanation": "A wildcard cert covers any single-level subdomain but does not cover the apex domain unless explicitly listed, and does not cover deeper levels like sub.sub.example.com."
+      "correct": "C",
+      "explanation": "A wildcard certificate covers only single-level subdomains; it does not cover the apex domain unless explicitly listed as a SAN, and does not cover deeper nesting levels like sub.sub.example.com."
     },
     {
       "section": "Specialized certificate types",
       "type": "mc",
-      "question": "Which certificate type is used to digitally sign executables and enable the OS to display the publisher's organization name instead of 'Unknown Publisher'?",
+      "question": "What does an S/MIME certificate enable a user to do in email clients?",
       "options": {
-        "A": "Code signing certificates",
-        "B": "Server certificates",
-        "C": "Client certificates",
-        "D": "S/MIME certificates"
+        "A": "Create backup copies of emails and store them in a central repository",
+        "B": "Authenticate the mail server and prevent spam filtering issues",
+        "C": "Encrypt emails and verify the sender's digital signature only",
+        "D": "Digitally sign emails and encrypt messages using the recipient's public key"
       },
-      "correct": "A",
-      "explanation": "Code signing certificates are issued to developers and organizations to sign executables and packages; when verified at install time, they allow the OS to display the org name rather than 'Unknown Publisher'."
+      "correct": "D",
+      "explanation": "S/MIME certificates enable digital signing (authentication and non-repudiation) and encryption (confidentiality using the recipient's public key) in email clients."
     },
     {
       "section": "Certificate hierarchy: root, intermediate, and CSR",
-      "type": "text",
-      "question": "Explain why root CAs remain offline and what role intermediate CAs play in managing this separation.",
-      "rubric": "A sound answer states that root CAs stay offline to protect their private keys from compromise, because a compromised root CA would allow fraudulent certificates for any domain. Intermediate CAs perform day-to-day signing, so if one is compromised, only that intermediate's cert needs revocation while the root and other intermediates remain unaffected.",
-      "explanation": "The section explicitly describes root CAs going offline to limit exposure and explains that intermediates do live signing to contain the blast radius of any compromise to a single intermediate."
+      "type": "mc",
+      "question": "Why do root CAs remain offline rather than signing certificates directly?",
+      "options": {
+        "A": "To reduce the time required for certificate issuance and validation",
+        "B": "To allow intermediate CAs to collect application fees before signing",
+        "C": "To protect the root CA private key from compromise and limit exposure",
+        "D": "To ensure that all certificates must pass through a third-party audit"
+      },
+      "correct": "C",
+      "explanation": "Root CAs stay offline to protect their private keys; compromise of a root CA would allow fraudulent certificates for any domain. Intermediate CAs handle day-to-day signing while the root remains protected."
+    },
+    {
+      "section": "Certificate hierarchy: root, intermediate, and CSR",
+      "type": "mc",
+      "question": "In the CSR process, what is submitted to the Certificate Authority?",
+      "options": {
+        "A": "The applicant's identity information without any cryptographic material attached",
+        "B": "Both the public key and the applicant's private key for CA verification purposes",
+        "C": "The applicant's private key encrypted with the CA's public key for security",
+        "D": "The public key and identity information signed with the applicant's private key"
+      },
+      "correct": "D",
+      "explanation": "A CSR contains the public key and identity information, signed with the applicant's private key. The private key itself is never submitted to the CA."
     }
   ]
 }

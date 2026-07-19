@@ -3,94 +3,106 @@
     {
       "section": "Trusted Platform Module (TPM)",
       "type": "mc",
-      "question": "What does a TPM do if boot component hashes don't match their baseline values stored in PCRs?",
+      "question": "What does a TPM use measured boot to verify?",
       "options": {
-        "A": "It refuses to release keys, preventing the system from accessing encrypted data.",
-        "B": "It automatically rolls back the OS to the previous version and retries the boot sequence.",
-        "C": "It allows the system to boot normally but logs a warning for the administrator to review later.",
-        "D": "It notifies the manufacturer but permits the device to continue operating as long as the user confirms override."
+        "A": "That each boot component from firmware through the OS kernel matches a stored hash value in Platform Configuration Registers",
+        "B": "That all installed software has been digitally signed by the manufacturer before it executes",
+        "C": "That the user has entered the correct password before any cryptographic keys are generated",
+        "D": "That the network connection remains encrypted during the initial system startup and boot sequence"
       },
       "correct": "A",
-      "explanation": "The section states that if boot components are tampered with, PCR values won't match the baseline and the TPM can refuse to release keys — this is the core tamper-detection mechanism that prevents bootkits from succeeding."
+      "explanation": "Measured boot hashes each startup component and stores those hashes in PCRs inside the TPM to build a chain-of-trust record. If any component is tampered with, the PCR values won't match."
     },
     {
       "section": "Hardware Security Module (HSM)",
-      "type": "text",
-      "question": "Explain why a Certificate Authority would use an HSM instead of storing private keys on a regular server.",
-      "rubric": "A sound answer should note that an HSM is a dedicated, tamper-resistant appliance certified to FIPS 140-2/140-3 standards that prevents root and intermediate keys from being extracted even if the server is breached — providing stronger physical and cryptographic protection than a standard server.",
-      "explanation": "The section identifies Certificate Authorities as a primary HSM use case and emphasizes that HSMs are FIPS-certified appliances designed so keys cannot be extracted, contrasting them with regular servers that lack this certified protection."
+      "type": "mc",
+      "question": "Which FIPS 140 level requires active tamper response that destroys keys if breached?",
+      "options": {
+        "A": "Level 3 requires a tamper-resistant enclosure with identity-based user authentication",
+        "B": "Level 2 requires tamper-evidence physical seals and security markings",
+        "C": "Level 4 requires active tamper response that automatically destroys keys if breached",
+        "D": "Level 1 requires only approved cryptographic algorithms for encryption operations"
+      },
+      "correct": "C",
+      "explanation": "FIPS 140-2/140-3 defines four levels, with Level 4 being the highest — it automatically destroys keys upon physical tampering detection."
     },
     {
       "section": "Secure Enclave and SGX",
       "type": "mc",
-      "question": "In Apple's Secure Enclave Processor, what data does the main operating system never see in plaintext?",
+      "question": "What is a key difference between how Apple's Secure Enclave and Intel SGX protect sensitive operations?",
       "options": {
-        "A": "The device's network traffic and encrypted file contents stored on disk.",
-        "B": "User authentication credentials and login password hashes required for OS access.",
-        "C": "Biometric templates and device encryption keys managed and matched internally by the SEP.",
-        "D": "Application cache files and temporary data held in system memory during normal operation."
+        "A": "The Secure Enclave is used only on mobile devices while SGX is used only on personal computers",
+        "B": "The Secure Enclave stores biometric templates and encryption keys in an isolated coprocessor that the OS cannot access",
+        "C": "Intel SGX encrypts application data in a hardware-protected memory region that the hypervisor cannot read or modify",
+        "D": "Both technologies allow the cloud provider to decrypt data as long as the user grants permission beforehand"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that Apple's SEP stores biometric templates and device encryption keys and performs all matching internally — the main OS never sees raw key material or biometric data."
+      "correct": "B",
+      "explanation": "The section states Apple's SEP is an isolated coprocessor where the main OS never sees raw key material or biometric data; Intel SGX is the CPU feature for x86 servers and confidential computing."
     },
     {
       "section": "Key Management Systems (KMS)",
       "type": "mc",
-      "question": "In a cloud KMS model, what is the key difference between BYOK and HYOK?",
+      "question": "In the HYOK cloud key trust model, who keeps the encryption keys?",
       "options": {
-        "A": "BYOK uses hardware security modules while HYOK uses only software-based key storage.",
-        "B": "BYOK stores keys on the cloud provider's systems while HYOK keeps keys entirely on-premises.",
-        "C": "BYOK requires the cloud provider to generate keys while HYOK lets the customer generate them.",
-        "D": "BYOK encrypts data before upload while HYOK relies only on the cloud provider's default encryption."
+        "A": "The cloud provider manages keys and can see plaintext data",
+        "B": "Both the customer and cloud provider share responsibility for key storage",
+        "C": "The customer generates keys and the cloud provider stores them encrypted",
+        "D": "The customer keeps keys on-premises and data is encrypted before upload"
       },
-      "correct": "B",
-      "explanation": "The section's table shows that BYOK places keys with the cloud provider while HYOK has the customer keep keys on-premises — the fundamental distinction is physical location and provider access to keys."
+      "correct": "D",
+      "explanation": "HYOK (Hold Your Own Key) means the customer keeps keys entirely on-premises, so the cloud provider never has access to unencrypted keys or plaintext data."
     },
     {
       "section": "Disk and File Encryption",
-      "type": "text",
-      "question": "What advantage does cryptographic erasure on a Self-Encrypting Drive provide compared to traditional data overwriting?",
-      "rubric": "A sound answer should explain that cryptographic erasure discards the Media Encryption Key (MEK) to instantly render all data unrecoverable, which is much faster than physically overwriting the entire drive.",
-      "explanation": "The section states that SEDs enable cryptographic erasure by discarding the MEK, which instantly makes data unrecoverable and is far faster than overwriting — this is presented as a key advantage of the Opal standard."
+      "type": "mc",
+      "question": "How do Self-Encrypting Drives enable cryptographic erasure?",
+      "options": {
+        "A": "By overwriting all data blocks multiple times with a secure algorithm before deletion",
+        "B": "By backing up the encrypted key material to an external recovery device",
+        "C": "By requiring users to enter a PIN code before the drive can power on",
+        "D": "By discarding the internal MEK to instantly render all encrypted data unrecoverable"
+      },
+      "correct": "D",
+      "explanation": "SEDs follow the Opal standard and support cryptographic erasure by simply discarding the MEK, which instantly makes all data unrecoverable without needing to overwrite the drive."
     },
     {
       "section": "Database Encryption",
       "type": "mc",
-      "question": "How does Transparent Data Encryption (TDE) differ from column-level encryption in its scope?",
+      "question": "What does Transparent Data Encryption (TDE) encrypt?",
       "options": {
-        "A": "TDE requires a separate Hardware Security Module while column-level encryption uses the database's built-in key store.",
-        "B": "TDE uses asymmetric cryptography while column-level encryption relies on symmetric keys only.",
-        "C": "TDE encrypts only backup files while column-level encryption protects data during active queries.",
-        "D": "TDE encrypts the entire database file while column-level encryption protects only specific sensitive columns."
+        "A": "Database files at the storage layer so data appears unencrypted to authorized connections",
+        "B": "Only specific sensitive columns like SSNs and credit card numbers within the database",
+        "C": "The network traffic that travels between the application server and the database",
+        "D": "The backup files but not the live database files during normal operation"
       },
-      "correct": "D",
-      "explanation": "The section defines TDE as encrypting database files at the storage layer (entire scope) and column-level encryption as protecting only specific sensitive columns — this directly contrasts their scope."
+      "correct": "A",
+      "explanation": "TDE encrypts database files at the storage layer; authorized database connections see unencrypted data while files on disk remain encrypted."
     },
     {
       "section": "Transport Encryption",
       "type": "mc",
-      "question": "In end-to-end encryption (such as Signal or WhatsApp), what can the service provider's servers read?",
+      "question": "What does end-to-end encryption in services like Signal and WhatsApp ensure?",
       "options": {
-        "A": "The plaintext during transmission but it is automatically purged after delivery.",
-        "B": "The plaintext message content but only anonymized metadata without user identification.",
-        "C": "Only ciphertext; the servers cannot read message content.",
-        "D": "The plaintext message content and metadata about sender and recipient."
+        "A": "The network connection uses IPsec to protect all IP traffic between endpoints",
+        "B": "The service provider's servers only ever see ciphertext and cannot read message content",
+        "C": "Users must authenticate with the service provider before sending any messages",
+        "D": "The service provider encrypts data only while it is traveling between servers"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that in end-to-end encryption, the service provider's servers only ever see ciphertext and cannot read message content."
+      "correct": "B",
+      "explanation": "End-to-end encryption means the service provider's servers only receive ciphertext; they cannot decrypt or read the actual message content."
     },
     {
       "section": "Quantum Threats to Encryption",
       "type": "mc",
-      "question": "According to Grover's algorithm, what is the effective impact on AES-128 symmetric key strength when run against a quantum computer?",
+      "question": "Which quantum algorithm threatens RSA and ECC encryption by solving discrete logarithm problems?",
       "options": {
-        "A": "The key's strength is reduced by only 25 percent, requiring an upgrade to AES-192.",
-        "B": "The key strength is halved, making AES-128 equivalent to AES-64 against a quantum attacker.",
-        "C": "The key remains unchanged because Grover's algorithm only affects asymmetric cryptography.",
-        "D": "The key becomes completely broken and unusable for any secure operation."
+        "A": "A post-quantum algorithm specifically designed for government cryptographic use only",
+        "B": "Grover's algorithm, which provides speedup for brute-force symmetric key search attacks",
+        "C": "Shor's algorithm, which can factor large integers and solve discrete logarithm problems",
+        "D": "A hybrid algorithm that combines both RSA and ECC key generation methods together"
       },
-      "correct": "B",
-      "explanation": "The section states that Grover's algorithm provides a quadratic speedup for brute-force symmetric key search, effectively halving key strength — AES-128 becomes AES-64-equivalent."
+      "correct": "C",
+      "explanation": "Shor's algorithm can break RSA and ECC entirely; Grover's algorithm is the one that affects symmetric encryption by halving key strength."
     }
   ]
 }

@@ -3,88 +3,106 @@
     {
       "section": "Account-based IoCs",
       "type": "mc",
-      "question": "Which of the following is an example of impossible travel as an account-based IoC?",
+      "question": "Which of the following is an example of impossible travel as an account-based indicator of compromise?",
       "options": {
-        "A": "The same account authenticates from New York at 9 AM and London at 11 AM on the same day",
-        "B": "A standard user account receives admin privileges through the normal IT provisioning workflow",
-        "C": "An account that has been dormant for six months suddenly becomes active with normal login patterns",
-        "D": "An account logs in from a new geographic location during business hours instead of the usual 8 AM–6 PM window"
+        "A": "An account that normally authenticates during business hours suddenly logs in at 3 AM",
+        "B": "An account logs in from New York at 9 AM and then from London at 11 AM the same day",
+        "C": "An account shows multiple failed login attempts followed by a successful login from a new location",
+        "D": "An account logs in from the same IP address multiple times within a single business day"
       },
-      "correct": "A",
-      "explanation": "Impossible travel occurs when the same account logs in from two distant geographic locations in a timeframe that makes it physically impossible for one person to travel between them, strongly suggesting credential theft. The section explicitly states this pattern as an IoC."
+      "correct": "B",
+      "explanation": "Impossible travel occurs when the same account authenticates from two geographically distant locations in a time window too short for one person to physically travel between them. This is a strong indicator of credential theft."
     },
     {
       "section": "Network-based IoCs",
-      "type": "text",
-      "question": "Explain what beaconing is and why it indicates a compromised host.",
-      "rubric": "A sound answer should state that beaconing is periodic, regular connections from a host to the same external IP address, and it indicates a C2 server issuing instructions to malware on the compromised host.",
-      "explanation": "The section defines beaconing as periodic, regular connections (e.g., every 60 seconds) to the same external IP and identifies this pattern as indicating a C2 server controlling malware on the host."
+      "type": "mc",
+      "question": "What does beaconing indicate in a network-based indicator of compromise?",
+      "options": {
+        "A": "A host sending large outbound data transfers to multiple external IPs during business hours",
+        "B": "A workstation using the SMB protocol to communicate with other internal systems",
+        "C": "A host making connections to publicly listed Tor exit nodes from a corporate network",
+        "D": "A compromised host making periodic regular connections to the same external IP controlled by an attacker"
+      },
+      "correct": "D",
+      "explanation": "Beaconing is when a compromised host makes periodic, predictable connections to the same external IP—a command and control server—issuing instructions to malware. This regular pattern makes it easy to detect."
     },
     {
       "section": "Host-based IoCs",
       "type": "mc",
-      "question": "Which of the following is a host-based IoC indicating exploitation?",
+      "question": "Which scenario best represents an unexpected child process as a host-based indicator of compromise?",
       "options": {
-        "A": "A user receiving a password reset notification after failing to authenticate once",
-        "B": "A web server responding to HTTP requests on port 443 instead of port 80",
-        "C": "Microsoft Word spawning a PowerShell child process without legitimate reason",
-        "D": "A DNS query to a newly registered domain from an internal workstation"
+        "A": "Microsoft Word spawning a PowerShell child process to execute commands",
+        "B": "Microsoft Word opening a document file from the user's Downloads folder",
+        "C": "A Windows service creating a new registry key in the HKEY_CURRENT_USER hive",
+        "D": "PowerShell launching a batch file as part of a scheduled system maintenance task"
       },
-      "correct": "C",
-      "explanation": "The section states that an unexpected child process like Word spawning PowerShell is an exploitation indicator because Word has no legitimate reason to do this. The other options describe network or account patterns, not host-based indicators."
+      "correct": "A",
+      "explanation": "Word has no legitimate reason to spawn PowerShell; this unexpected child process is a strong exploitation indicator. Applications should only create child processes for documented, legitimate functions."
     },
     {
       "section": "File-based IoCs",
       "type": "mc",
-      "question": "Which of the following demonstrates file masquerading as a file-based IoC?",
+      "question": "What do cryptographic hash algorithms like MD5, SHA-1, and SHA-256 allow security teams to do in file-based IoC detection?",
       "options": {
-        "A": "A file hash that matches multiple entries in a threat intelligence database",
-        "B": "A Base64-encoded attachment in an email from an external sender",
-        "C": "A PowerShell script stored in a user's AppData directory instead of System32",
-        "D": "An executable named svchost32.exe mimicking the real Windows process name svchost.exe"
+        "A": "Encrypt files to prevent attackers from modifying them on disk or during transmission",
+        "B": "Decompress Base64-encoded files to reveal their true contents and purpose",
+        "C": "Match a file's hash against threat intelligence databases to identify known malware",
+        "D": "Sign executables so they cannot be executed outside their intended directories"
       },
-      "correct": "D",
-      "explanation": "The section defines masquerading file names as executables with names like svchost32.exe or csrss_.exe that mimic real Windows process names. This deception technique is a specific file-based IoC."
+      "correct": "C",
+      "explanation": "File hashes produce unique fingerprints that can be checked against threat intelligence databases to instantly identify if a file is known malware. Each unique malware variant produces a different hash."
     },
     {
       "section": "Email-based IoCs",
-      "type": "text",
-      "question": "What does an inbox forwarding rule to an external address indicate, and why is it a concern in the context of business email compromise?",
-      "rubric": "A sound answer should explain that forwarding rules to external addresses allow an attacker to read all incoming email without needing ongoing access, even if the password is reset, representing a persistence mechanism in BEC attacks.",
-      "explanation": "The section states this pattern is a classic BEC indicator because the attacker can quietly read all email after a password reset, demonstrating persistent unauthorized access."
+      "type": "mc",
+      "question": "Which email indicator is most commonly associated with business email compromise according to the study material?",
+      "options": {
+        "A": "Macro-enabled Office documents arriving from external senders without warning",
+        "B": "Inbox forwarding rules configured to send all email to an external address",
+        "C": "Emails arriving from domains with look-alike character substitutions of legitimate domains",
+        "D": "Messages containing Base64-encoded content that bypasses content filters"
+      },
+      "correct": "B",
+      "explanation": "An inbox forwarding rule to an external address is a classic business email compromise (BEC) indicator; it allows the attacker to read all email even after the compromised password is reset."
     },
     {
       "section": "Threat intelligence sharing",
       "type": "mc",
-      "question": "Which statement correctly describes the relationship between STIX and TAXII?",
+      "question": "In threat intelligence sharing, what is the relationship between STIX and TAXII?",
       "options": {
-        "A": "STIX is a sector-specific sharing center, and TAXII is the database that aggregates malware hash reputations",
-        "B": "STIX is the standardized format for representing IoCs, and TAXII is the protocol that distributes STIX data between organizations",
-        "C": "STIX and TAXII are both protocols used interchangeably for sharing threat intelligence across ISACs",
-        "D": "STIX is the protocol for distributing threat data, and TAXII is the standardized format for representing it"
+        "A": "Both are file formats used by VirusTotal to store malware hash reputation information",
+        "B": "STIX is the protocol that transports threat data while TAXII is the standard format for representing it",
+        "C": "STIX is the format for representing IoCs and threat data while TAXII is the protocol distributing it",
+        "D": "TAXII is an open standard maintained by MITRE while STIX is a sector-specific sharing mechanism"
       },
-      "correct": "B",
-      "explanation": "The section defines STIX as the open standard format for representing IoCs and threat data in machine-readable form, and TAXII as the protocol that distributes STIX data between organizations."
+      "correct": "C",
+      "explanation": "STIX is the standardized format for representing IoCs, TTPs, and threat data in machine-readable form; TAXII is the protocol that distributes STIX data between organizations."
     },
     {
       "section": "MITRE ATT&CK and IoAs",
-      "type": "text",
-      "question": "Explain the key difference between an Indicator of Compromise (IoC) and an Indicator of Attack (IoA).",
-      "rubric": "A sound answer should state that IoCs confirm a compromise has already happened and are based on artifacts, while IoAs detect active, in-progress attacks through behavioral patterns before the attack is complete.",
-      "explanation": "The section explicitly contrasts the two: IoCs confirm compromise after artifacts exist, while IoAs flag an attack in progress before the attacker completes their objective, enabling earlier response."
+      "type": "mc",
+      "question": "What is the key difference between an indicator of compromise and an indicator of attack?",
+      "options": {
+        "A": "IoAs are mapped to MITRE ATT&CK techniques while IoCs are only used in threat hunting",
+        "B": "IoCs are specific to email threats while IoAs are used for network-based detections",
+        "C": "IoCs are behavioral patterns while IoAs are specific file artifacts found on systems",
+        "D": "IoCs confirm compromise already happened while IoAs flag active attacks before compromise occurs"
+      },
+      "correct": "D",
+      "explanation": "IoCs are observable artifacts that confirm a breach already occurred; IoAs represent behavioral patterns of an active, in-progress attack, enabling response before the attacker completes their objective."
     },
     {
       "section": "IoC management in a SIEM",
       "type": "mc",
-      "question": "Why does stale IoC data in a SIEM environment create alert fatigue?",
+      "question": "Why does IoC currency matter in a SIEM environment?",
       "options": {
-        "A": "Outdated threat intelligence prevents log data correlation across multiple systems",
-        "B": "Old IoCs match legitimate network events and generate false positives that overwhelm analysts",
-        "C": "Stale correlation rules disable automated blocking for known-malicious hashes",
-        "D": "IP addresses and domains change, malware gets new hashes, and old IoCs no longer match real threats"
+        "A": "Stale IoCs such as outdated IPs, domains, and hashes lead to alert fatigue when they no longer represent threats",
+        "B": "Expired IoCs prevent the SIEM from performing threat hunting on historical log data",
+        "C": "Old IoCs consume too much disk space and slow down SIEM correlation rule performance significantly",
+        "D": "Threat intelligence databases like VirusTotal require regular updates to their hash reputation scores"
       },
-      "correct": "D",
-      "explanation": "The section explains that IP addresses, domains, and malware hashes change over time, causing old IoCs to become ineffective and generating noise that distracts analysts from real alerts, leading to alert fatigue."
+      "correct": "A",
+      "explanation": "IP addresses, domains, and malware hashes change over time; stale IoCs trigger false positives, causing alert fatigue that makes analysts miss real threats. Regular maintenance and refresh of IoC data is essential."
     }
   ]
 }

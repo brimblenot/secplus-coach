@@ -3,94 +3,106 @@
     {
       "section": "Virtual Private Networks (VPNs)",
       "type": "mc",
-      "question": "Which of the following best describes the key difference between site-to-site VPN and remote access VPN?",
+      "question": "Which type of VPN requires client software to be installed on the endpoint and is user-initiated rather than always-on?",
       "options": {
-        "A": "Site-to-site VPN connects two networks and is always-on; remote access VPN connects one user and is user-initiated.",
-        "B": "Site-to-site VPN is cheaper because it replaces MPLS circuits, while remote access VPN requires more licensing.",
-        "C": "Site-to-site VPN uses IPsec encryption, while remote access VPN uses TLS encryption.",
-        "D": "Site-to-site VPN requires client software installation on all devices, while remote access VPN does not."
+        "A": "Remote access VPN using client-based software",
+        "B": "Site-to-site VPN connecting two full networks",
+        "C": "MPLS circuit VPN replacing dedicated private bandwidth",
+        "D": "Clientless remote access VPN using a web browser"
       },
       "correct": "A",
-      "explanation": "The section explicitly contrasts the two types: site-to-site connects networks with no client software and is always-on, while remote access connects a user with client or browser software and is user-initiated."
+      "explanation": "Client-based remote access VPN installs software like Cisco AnyConnect on the endpoint and is initiated by the user, contrasting with site-to-site VPNs which are always-on and require no client software."
     },
     {
       "section": "IPsec — the protocol suite behind most VPNs",
       "type": "mc",
       "question": "Which IPsec component provides both encryption and authentication of the payload?",
       "options": {
-        "A": "Diffie-Hellman encrypts the key material during exchange",
-        "B": "ESP (Encapsulating Security Payload) encrypts payload and authenticates",
-        "C": "AH (Authentication Header) encrypts and authenticates all packet data",
-        "D": "IKE (Internet Key Exchange) encrypts sensitive negotiation traffic"
+        "A": "IKE (Internet Key Exchange) which negotiates algorithms and exchanges keys",
+        "B": "Diffie-Hellman which derives a shared secret over untrusted channels",
+        "C": "ESP (Encapsulating Security Payload) which encrypts payload and authenticates",
+        "D": "AH (Authentication Header) which proves sender identity without encrypting"
       },
-      "correct": "B",
-      "explanation": "The section's table explicitly states that ESP 'Encrypts payload AND authenticates,' while AH only authenticates without encryption."
+      "correct": "C",
+      "explanation": "ESP is the component that actually provides VPN confidentiality by encrypting the payload and authenticating it; AH alone is almost never used in VPNs."
     },
     {
       "section": "IPsec — the protocol suite behind most VPNs",
-      "type": "text",
-      "question": "Explain why IPsec tunnel mode is used for VPN gateways but transport mode is used for host-to-host communication.",
-      "rubric": "A sound answer states that tunnel mode encrypts the entire original packet including the IP header (hiding real source/destination addresses), which is needed when gateways forward traffic between networks; transport mode encrypts only the payload and leaves headers visible, which is acceptable for direct host-to-host connections where the parties know each other's addresses.",
-      "explanation": "The section's table defines what each mode encrypts and where it is used; the answer reconstructs the reasoning from those facts."
+      "type": "mc",
+      "question": "In IPsec tunnel mode, what is encrypted compared to transport mode?",
+      "options": {
+        "A": "Only the original destination IP address while the source remains visible",
+        "B": "The entire original packet including both header and payload in a new packet",
+        "C": "Only the payload data while data center server addresses stay exposed",
+        "D": "Only the payload while the original IP header remains visible to observers"
+      },
+      "correct": "B",
+      "explanation": "Tunnel mode encrypts the entire original IP packet (header and payload) and wraps it in a new packet, whereas transport mode encrypts only the payload and leaves headers visible."
     },
     {
       "section": "SSL/TLS VPN vs. IPsec VPN",
       "type": "mc",
-      "question": "Why is SSL/TLS VPN commonly used for remote access in hotels or coffee shops, while IPsec VPN is not?",
+      "question": "Why is SSL/TLS VPN more commonly used for remote access in hotels and coffee shops?",
       "options": {
-        "A": "IPsec VPN requires stronger authentication factors than SSL/TLS VPN.",
-        "B": "SSL/TLS VPN is faster than IPsec VPN due to lower protocol overhead.",
-        "C": "SSL/TLS VPN provides stronger encryption than IPsec on public networks.",
-        "D": "SSL/TLS VPN uses TCP port 443 which firewalls allow, while IPsec may be blocked or break NAT."
+        "A": "It uses MPLS circuits which are designed for mobile device connectivity and access",
+        "B": "It does not require encryption which makes it faster than IPsec in most environments",
+        "C": "It uses UDP 500 which is open through most firewall rules and allows quick connections",
+        "D": "It runs on TCP port 443 which is almost always open through firewalls for HTTPS traffic"
       },
       "correct": "D",
-      "explanation": "The comparison table shows SSL/TLS VPN is firewall-friendly on TCP 443 while IPsec on UDP 500/4500 may be blocked or break NAT—a critical reason for its adoption in hotels and coffee shops."
+      "explanation": "SSL/TLS VPN uses TCP port 443 (standard HTTPS) which firewalls almost always leave open, making it firewall-friendly compared to IPsec which uses UDP ports and the ESP protocol that may be blocked."
     },
     {
       "section": "Split tunneling vs. full tunneling",
-      "type": "text",
-      "question": "Describe one security risk of split tunneling and explain how it occurs.",
-      "rubric": "A sound answer states that malware on a split-tunnel client can use the direct internet path to reach a command-and-control server while the VPN is active, bypassing corporate security controls that only inspect VPN-tunneled traffic.",
-      "explanation": "The section explicitly states this risk: malware could use the direct internet path for C2 communication while the VPN is active."
+      "type": "mc",
+      "question": "What is the security risk of split tunneling?",
+      "options": {
+        "A": "Only corporate traffic goes through encryption while all other traffic remains visible",
+        "B": "All corporate traffic is forced through the VPN tunnel which increases overall bandwidth costs",
+        "C": "Internet traffic bypasses VPN controls and malware can use a direct path to reach servers",
+        "D": "The VPN connection is automatically established at boot time and never disconnects"
+      },
+      "correct": "C",
+      "explanation": "Split tunneling allows internet traffic to bypass corporate controls, creating a risk where malware on a client could use the direct internet path to contact a command-and-control server while the VPN remains active."
     },
     {
       "section": "TLS — securing internet traffic",
       "type": "mc",
-      "question": "Which of the following is a key security improvement in TLS 1.3 compared to TLS 1.2?",
+      "question": "Why was RSA key exchange removed from TLS 1.3?",
       "options": {
-        "A": "TLS 1.3 reduces handshake round trips and improves connection speed.",
-        "B": "TLS 1.3 supports AEAD ciphers but prohibits CBC ciphers for security.",
-        "C": "TLS 1.3 removed RSA key exchange because it lacks Perfect Forward Secrecy.",
-        "D": "TLS 1.3 permits password-based authentication as an alternative to certificates."
+        "A": "It lacked Perfect Forward Secrecy and allowed past sessions to decrypt if the private key was compromised",
+        "B": "It required multiple handshake round trips and caused slower connection establishment times",
+        "C": "It was vulnerable to the BEAST attack and required immediate removal from the protocol",
+        "D": "It was replaced by AES-GCM cipher which offers faster and more efficient encryption capabilities"
       },
-      "correct": "C",
-      "explanation": "The section states RSA key exchange was removed because it did NOT provide PFS—if the server's private key was compromised, past sessions could be decrypted retroactively."
+      "correct": "A",
+      "explanation": "RSA key exchange did not provide PFS, meaning if a server's private key was ever compromised, all past encrypted sessions using that key could be retroactively decrypted."
     },
     {
       "section": "SSH — secure remote administration",
       "type": "mc",
-      "question": "How does SSH public key authentication differ from SSH password authentication in terms of vulnerability?",
+      "question": "Which SSH authentication method is immune to brute-force attacks?",
       "options": {
-        "A": "Public key auth is vulnerable to brute force attacks on the server.",
-        "B": "Password auth is vulnerable to brute force and theft; public key auth is not.",
-        "C": "Password auth uses stronger encryption than public key auth.",
-        "D": "Public key auth transmits keys over the network unencrypted."
+        "A": "Port forwarding which tunnels other protocols through the encrypted SSH connection",
+        "B": "Public key authentication where the private key never leaves the client",
+        "C": "Password authentication where the encrypted password is sent in the SSH session",
+        "D": "Telnet-based authentication which replaced cleartext credentials with encryption"
       },
       "correct": "B",
-      "explanation": "The section's authentication methods table states public key auth is 'immune to brute force and password capture,' while password auth is 'vulnerable to brute force and credential theft.'"
+      "explanation": "Public key authentication is immune to brute-force and password capture because the private key never leaves the client and is not transmitted, whereas password auth is vulnerable to both."
     },
     {
       "section": "Secure file transfer protocols",
       "type": "mc",
-      "question": "What is the main reason SFTP is generally preferred over FTPS for new deployments?",
+      "question": "What is the main advantage of SFTP over FTPS for new deployments?",
       "options": {
-        "A": "FTPS does not support modern encryption algorithms like AES.",
-        "B": "SFTP is faster because it uses UDP instead of TCP.",
-        "C": "SFTP supports explicit and implicit modes, while FTPS supports only explicit mode.",
-        "D": "SFTP uses one port over SSH; FTPS uses separate control and data channels."
+        "A": "SFTP uses explicit mode on port 21 which is easier to configure than implicit FTPS mode",
+        "B": "SFTP is an extension of FTP with TLS encryption added on top of the base protocol",
+        "C": "SFTP supports both explicit and implicit modes which provides maximum compatibility options",
+        "D": "SFTP runs on SSH and uses one port through a firewall while FTPS uses separate control and data channels"
       },
       "correct": "D",
-      "explanation": "The section explicitly states SFTP is preferred because it requires only one port through a firewall, whereas FTPS uses separate control and data channels that complicate firewall rules."
+      "explanation": "SFTP is preferred because it runs over SSH on port 22 (a single port) and simplifies firewall rules, whereas FTPS (standard FTP with TLS) uses separate control and data channels that complicate firewall configuration."
     }
   ]
 }

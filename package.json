@@ -9,7 +9,8 @@
     "db:init": "node scripts/init-db.js",
     "db:migrate": "node scripts/migrate-sqlite-to-pg.js",
     "flashcards:build": "node scripts/extract-acronyms.cjs",
-    "guides:build": "node scripts/build-study-guides.cjs"
+    "guides:build": "node scripts/build-study-guides.cjs",
+    "kb:sync": "node scripts/sync-obsidian.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.3",

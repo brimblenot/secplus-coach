@@ -3,108 +3,145 @@
     {
       "section": "What phishing is and how it works",
       "type": "mc",
-      "question": "Which of the following best describes how generic phishing achieves success despite a low per-message conversion rate?",
+      "question": "Which of the following best describes how generic phishing attacks achieve success despite low individual response rates?",
       "options": {
-        "A": "It relies on urgency and fear to override critical thinking in targeted individuals.",
-        "B": "It uses social engineering techniques that are highly sophisticated and difficult to detect.",
-        "C": "It impersonates trusted entities like banks, which increases credibility and click-through rates.",
-        "D": "It is sent to millions of recipients, so the low success rate is offset by sheer volume."
-      },
-      "correct": "D",
-      "explanation": "The section explicitly states that generic phishing has a low success rate offset by volume. The other options describe phishing tactics but do not explain why generic phishing succeeds despite low conversion."
-    },
-    {
-      "section": "Targeted variants",
-      "type": "text",
-      "question": "Explain why spear phishing has a dramatically higher success rate than generic phishing.",
-      "rubric": "A sound answer states that spear phishing uses real, personalized details about the target gathered from public sources and breaches to make the message believable and individualized, whereas generic phishing is not personalized.",
-      "explanation": "The section directly contrasts spear phishing's use of real target details (name, job, projects, vendors) gathered from LinkedIn and breaches with generic phishing's lack of personalization, establishing that personalization is the reason for higher success."
-    },
-    {
-      "section": "Targeted variants",
-      "type": "mc",
-      "question": "Which social-engineering attack uses caller ID spoofing via VoIP to impersonate bank or IT staff and extract sensitive credentials?",
-      "options": {
-        "A": "Vishing, which uses telephone calls to manufacture urgency and extract information.",
-        "B": "Smishing, which sends fraudulent text messages to mobile devices.",
-        "C": "Quishing, which uses malicious QR codes placed over legitimate ones.",
-        "D": "Whaling, which targets executives through professional written messages."
-      },
-      "correct": "A",
-      "explanation": "The section defines vishing as voice phishing that uses calls and specifically mentions caller ID spoofing via VoIP as part of the vishing technique. The other options describe different attack types."
-    },
-    {
-      "section": "Targeted variants",
-      "type": "mc",
-      "question": "Why does smishing succeed despite smartphones typically having security features?",
-      "options": {
-        "A": "Because voice calls carry more authority than text-based communications.",
-        "B": "Because phone screens truncate URLs and mobile browsers display less security information.",
-        "C": "Because QR code scanning bypasses link inspection entirely before loading the page.",
-        "D": "Because SMS messages cannot be filtered by email gateways."
+        "A": "They employ caller ID spoofing to make phone calls appear more legitimate to recipients",
+        "B": "They compensate for low success rates by being sent to millions of targets in bulk",
+        "C": "They use detailed personal information gathered from social media to craft believable messages",
+        "D": "They impersonate only the most trusted entities like government agencies and banks"
       },
       "correct": "B",
-      "explanation": "The section states that smartphone screens truncate URLs making inspection hard, and casual texting pace reduces scrutiny while mobile browsers show less security info. Options A, C, and D describe other attack characteristics or types."
+      "explanation": "The section states that generic phishing is sent to millions with no personalization, and that low success rate is offset by sheer volume. The other options describe targeted variants or different attack types, not generic phishing's success model."
     },
     {
       "section": "Targeted variants",
-      "type": "text",
-      "question": "Why are users unable to read a malicious QR code's destination URL before scanning it, and what does this enable?",
-      "rubric": "A sound answer states that QR codes encode URLs in a barcode format that users cannot read before scanning, so users are already loading the page before realizing the risk. It may also note that QR codes in email often bypass link-scanning filters.",
-      "explanation": "The section explicitly states that users cannot read the destination URL before scanning and are already loading the page by the time they realize the risk. It also notes that QR codes in email bypass link-scanning filters that don't decode them."
+      "type": "mc",
+      "question": "What distinguishes spear phishing from generic phishing in terms of attack preparation?",
+      "options": {
+        "A": "Spear phishing uses real details about the target gathered from LinkedIn, company sites, social media, and prior breaches",
+        "B": "Spear phishing avoids mentioning specific job titles or colleagues to reduce detection risk",
+        "C": "Spear phishing uses real details about the target gathered from LinkedIn, company sites, social media, and prior breaches",
+        "D": "Spear phishing relies on urgency and fear rather than personalized research about the target"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that spear phishing uses real details about the target—name, job title, colleagues, projects, vendors—gathered from LinkedIn, company sites, social media, and prior data breaches to craft individualized messages."
+    },
+    {
+      "section": "Targeted variants",
+      "type": "mc",
+      "question": "Why is whaling specifically targeted at C-suite executives?",
+      "options": {
+        "A": "They are more likely to share their credentials with trusted colleagues and vendors",
+        "B": "They receive more emails per day than other staff members do",
+        "C": "They are more likely to click on suspicious links than other employees",
+        "D": "They can authorize large wire transfers, access sensitive systems, and override normal procedures"
+      },
+      "correct": "D",
+      "explanation": "The section states that whaling targets C-suite executives because they can authorize large wire transfers, access sensitive systems, and override normal procedures—making them high-value targets for fraudulent transactions and credential theft."
+    },
+    {
+      "section": "Targeted variants",
+      "type": "mc",
+      "question": "How does caller ID spoofing via VoIP assist vishing attackers?",
+      "options": {
+        "A": "It encrypts the attacker's voice so the victim cannot recognize it is not a real employee",
+        "B": "It bypasses multi-factor authentication systems used by legitimate financial institutions",
+        "C": "It makes calls appear to come from a bank's real number or other trusted organization",
+        "D": "It allows attackers to record the phone conversation and replay it to other targets later"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that caller ID spoofing via VoIP makes calls appear to come from a bank's real number, increasing the victim's trust in the call."
+    },
+    {
+      "section": "Targeted variants",
+      "type": "mc",
+      "question": "What characteristics of smishing make it more successful than email phishing?",
+      "options": {
+        "A": "Text messages are encrypted end-to-end so email filters cannot detect malicious links in them",
+        "B": "Smartphone screens truncate URLs making destination inspection hard, and casual texting pace reduces scrutiny",
+        "C": "Smishing only targets financial institutions and ignores shipping carriers or other vendors",
+        "D": "Text message phishing requires the attacker to know the victim's phone number in advance which limits volume"
+      },
+      "correct": "B",
+      "explanation": "The section states that smartphone screens truncate URLs, making destination inspection difficult, and that casual texting pace reduces scrutiny; mobile browsers also show less security information than desktop email clients."
+    },
+    {
+      "section": "Targeted variants",
+      "type": "mc",
+      "question": "Why are QR codes in email particularly dangerous for phishing attacks?",
+      "options": {
+        "A": "QR codes are encrypted, making it impossible for users to verify the legitimacy of the encoded URL",
+        "B": "Users must download a separate QR code reader app that typically contains embedded malware",
+        "C": "QR codes force the user's phone to disable security features before the destination page can load",
+        "D": "Users cannot easily read the destination URL before scanning because the page loads before they can verify it"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that users cannot read the destination URL before scanning QR codes—they are already loading the page before they realize the risk—and that QR codes in email often bypass link-scanning filters that do not decode them."
     },
     {
       "section": "Business Email Compromise",
       "type": "mc",
-      "question": "Which statement accurately describes Business Email Compromise?",
+      "question": "What is a key characteristic that distinguishes Business Email Compromise from other phishing attacks?",
       "options": {
-        "A": "It uses QR codes and caller ID spoofing to trick users into revealing sensitive data.",
-        "B": "It involves malware delivered through email attachments to steal executive credentials.",
-        "C": "It is a pure social-engineering fraud attack with no malware that targets financial transactions.",
-        "D": "It impersonates shipping carriers to intercept payment information through text messages."
+        "A": "It uses social engineering to authorize fraudulent transactions with no malware involved",
+        "B": "It involves malware that steals credentials from the victim's browser cache",
+        "C": "It uses QR codes or text messages instead of traditional email delivery methods",
+        "D": "It requires the victim to click a malicious link embedded in the email body"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that BEC involves no malware and is pure social engineering focused on fraudulent financial transactions like wire transfers. Options A, C, and D describe other attack types."
+      "correct": "A",
+      "explanation": "The section explicitly states that BEC involves no malware—it is pure social engineering focused on authorizing fraudulent financial transactions by impersonating an executive or vendor."
     },
     {
       "section": "Technical tricks that make phishing convincing",
       "type": "mc",
-      "question": "In an HTML link trick, what is the discrepancy between what a user sees and what actually happens when the link is clicked?",
+      "question": "How does an HTML link trick exploit user trust?",
       "options": {
-        "A": "The domain name uses Unicode characters that look identical but resolve to a different IP.",
-        "B": "The URL is shortened to hide the destination, but hovering reveals a redirect chain.",
-        "C": "The subject line prepends safe keywords but the sender's address is forged.",
-        "D": "The visible URL displays a legitimate domain but the actual href points to the attacker's site."
+        "A": "The link is embedded in a redirect chain that hides the final destination from security scanners",
+        "B": "The link is prepended with Safe or Re to suggest prior trust or security scanning verification",
+        "C": "The link text displays a legitimate-looking URL but the actual href attribute points to the attacker's site",
+        "D": "The link uses Unicode characters that visually resemble the legitimate domain name to fool the user"
       },
-      "correct": "D",
-      "explanation": "The section defines the HTML link trick as displaying legitimate-looking URL text while the actual href points elsewhere, and notes that hovering reveals the true destination. The other options describe different techniques."
+      "correct": "C",
+      "explanation": "The section states that an HTML link trick displays a legitimate-looking URL in the link text while the actual href points to the attacker's site; hovering reveals the true destination."
     },
     {
       "section": "Technical tricks that make phishing convincing",
-      "type": "text",
-      "question": "How does pharming differ from phishing in terms of what the attack targets?",
-      "rubric": "A sound answer states that pharming corrupts DNS resolution or modifies the hosts file so users who type the correct URL are silently redirected to an attacker site, whereas phishing tricks users into clicking malicious links.",
-      "explanation": "The section distinguishes pharming as corrupting DNS resolution or the hosts file so correct URLs are silently redirected, rather than tricking users into clicking bad links as phishing does."
+      "type": "mc",
+      "question": "What is the fundamental difference between pharming and phishing attacks?",
+      "options": {
+        "A": "Pharming corrupts DNS resolution so correct URLs redirect to attacker sites; phishing tricks users into clicking bad links",
+        "B": "Phishing corrupts DNS resolution while pharming tricks users into clicking malicious links in emails",
+        "C": "Pharming only affects mobile devices while phishing attacks affect desktop computers and laptops",
+        "D": "Phishing requires the attacker to spoof the sender's email address while pharming does not need to"
+      },
+      "correct": "A",
+      "explanation": "The section states that pharming corrupts DNS resolution so users typing the correct URL are silently redirected to attacker sites, while phishing tricks users into clicking bad links—a key distinction in attack method."
     },
     {
       "section": "Defenses",
       "type": "mc",
-      "question": "Which email authentication standard adds a cryptographic signature to email headers that the receiver validates against the sender's DNS public key?",
+      "question": "How do SPF, DKIM, and DMARC work together to prevent email spoofing?",
       "options": {
-        "A": "SPF, which lists authorized mail servers for a domain in DNS records.",
-        "B": "MFA, which requires a second authentication factor beyond a password.",
-        "C": "DKIM, which adds a cryptographic signature for header validation.",
-        "D": "DMARC, which ties SPF and DKIM together and defines rejection policies."
+        "A": "DMARC generates one-time passwords that must be entered before an email can reach the inbox",
+        "B": "SPF blocks all incoming email unless it has a valid DKIM signature from a trusted source",
+        "C": "SPF checks who is allowed to send, DKIM adds a cryptographic signature, and DMARC ties them together",
+        "D": "DKIM encrypts the email body, SPF encrypts the headers, and DMARC decrypts both for the recipient"
       },
       "correct": "C",
-      "explanation": "The section defines DKIM as adding a cryptographic signature to email headers validated against the sender's DNS public key. The other options describe different defenses with different functions."
+      "explanation": "The section describes SPF as checking who is authorized to send, DKIM as adding a cryptographic signature, and DMARC as tying SPF and DKIM together with a policy that tells receivers to monitor, quarantine, or reject failing messages."
     },
     {
       "section": "Defenses",
-      "type": "text",
-      "question": "What does DMARC do that neither SPF nor DKIM does alone?",
-      "rubric": "A sound answer states that DMARC ties SPF and DKIM together and defines a policy telling receivers to monitor, quarantine, or reject messages that fail authentication, and enables spoofing reports.",
-      "explanation": "The section explicitly describes DMARC as tying SPF and DKIM together, establishing policy actions (none, quarantine, reject), and enabling spoofing reports. SPF and DKIM alone only handle authentication, not enforcement or reporting."
+      "type": "mc",
+      "question": "Why is MFA considered a critical compensating control against phishing attacks?",
+      "options": {
+        "A": "It prevents attackers from registering lookalike domains or performing typosquatting attacks",
+        "B": "Even if a password is stolen via phishing, the attacker cannot log in without the second authentication factor",
+        "C": "It encrypts the email channel so phishing messages cannot reach the victim's inbox",
+        "D": "It automatically detects and blocks all homograph attacks before they reach the user"
+      },
+      "correct": "B",
+      "explanation": "The section states that MFA is a defense because even if a password is stolen via phishing, the attacker cannot log in without the second factor, reducing the impact of credential compromise."
     }
   ]
 }

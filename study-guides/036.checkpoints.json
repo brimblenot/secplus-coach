@@ -3,127 +3,145 @@
     {
       "section": "What makes supply chain attacks dangerous",
       "type": "mc",
-      "question": "What is a transitive dependency?",
+      "question": "What is a transitive dependency in the context of supply chain attacks?",
       "options": {
-        "A": "A library inherited through another library you use directly",
-        "B": "A vendor relationship requiring transitive trust",
-        "C": "A security patch applied across all vendor systems",
-        "D": "A library your code directly imports and uses"
+        "A": "A vendor service that manages IT infrastructure for your organization",
+        "B": "A malicious piece of code inserted into your build pipeline by attackers",
+        "C": "A library your code directly imports and uses in your application",
+        "D": "A library your code does not directly use but inherits through another library"
       },
-      "correct": "A",
-      "explanation": "The section defines transitive dependency as a library your code doesn't directly use but inherits through another library, and notes you may not even know it exists."
+      "correct": "D",
+      "explanation": "The study guide defines transitive dependency as a library your code does not directly use but inherits through another library that does, and notes you may not even know it exists."
     },
     {
       "section": "Log4Shell — a dependency gone wrong",
       "type": "mc",
-      "question": "What CVE severity score did Log4Shell receive?",
+      "question": "What CVE score did Log4Shell receive, and what does that score represent?",
       "options": {
-        "A": "8.9, the second-highest possible severity rating",
-        "B": "9.8, critical but requiring network access to exploit",
-        "C": "10.0, the maximum severity score",
-        "D": "7.5, indicating high risk but with some mitigating factors"
+        "A": "9.0, indicating a critical vulnerability requiring user interaction to exploit",
+        "B": "10.0, the maximum score for a remotely exploitable vulnerability with full impact",
+        "C": "8.5, indicating a severe vulnerability affecting only availability and integrity",
+        "D": "7.5, indicating a moderately severe remote vulnerability with limited impact"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states Log4Shell received a CVSS score of 10.0 — the maximum — because it was remotely exploitable, required no authentication or user interaction, and had full impact on confidentiality, integrity, and availability."
+      "correct": "B",
+      "explanation": "The section states Log4Shell had a CVSS score of 10.0 — the maximum — because it was remotely exploitable, required no authentication or user interaction, and had full impact on confidentiality, integrity, and availability."
     },
     {
       "section": "SolarWinds — the canonical build-pipeline compromise",
-      "type": "text",
-      "question": "Describe how attackers were able to distribute malicious code to SolarWinds customers without raising suspicion.",
-      "rubric": "A sound answer explains that attackers infiltrated the build pipeline, so their code was compiled and signed with SolarWinds' legitimate certificate before being shipped as a routine update, allowing it to pass through trusted channels and reach ~18,000 customers.",
-      "explanation": "The section states attackers inserted code into the build pipeline, which then compiled, signed, and shipped the malicious code as a legitimate update using SolarWinds' own cryptographic certificate."
+      "type": "mc",
+      "question": "How did the SolarWinds attack remain undetected for so long after the malicious code was injected?",
+      "options": {
+        "A": "Victims did not have SBOMs and could not identify the compromise in their systems",
+        "B": "SolarWinds' certificate was revoked but customers continued to trust the updates",
+        "C": "The malicious code remained dormant for two weeks before phoning home to attacker infrastructure",
+        "D": "The attackers used encryption to hide the malware from security tools"
+      },
+      "correct": "C",
+      "explanation": "The section states the malicious code lay dormant for two weeks after being compiled and signed, then quietly phoned home — and the entire compromise went undetected for approximately nine months."
     },
     {
       "section": "MSPs — the multiplier attack vector",
       "type": "mc",
-      "question": "In the Kaseya VSA attack, what type of vulnerability did attackers exploit?",
+      "question": "What type of vulnerability did attackers exploit in the Kaseya VSA attack of July 2021?",
       "options": {
-        "A": "A configuration error in the MSP's default settings",
-        "B": "A weak credential used by multiple MSP clients",
-        "C": "A known vulnerability that had a patch available but was not yet deployed",
-        "D": "A previously unknown vulnerability with no patch available"
+        "A": "A previously unknown vulnerability in Kaseya's RMM software with no patch available",
+        "B": "A known vulnerability in Kaseya's RMM software that had a published patch available",
+        "C": "A misconfiguration in Kaseya's build pipeline that allowed code injection",
+        "D": "A hardware trojan in Kaseya's server infrastructure that persisted across reboots"
       },
-      "correct": "D",
-      "explanation": "The section identifies the vulnerability as a zero-day, defined as a previously unknown vulnerability with no patch available."
+      "correct": "A",
+      "explanation": "The section defines a zero-day as a previously unknown vulnerability with no patch available, and states that attackers exploited a zero-day in Kaseya's RMM software."
     },
     {
       "section": "Hardware supply chain risks",
       "type": "mc",
-      "question": "Which of the following is an example of a hardware supply chain risk that was documented in a 2022 DHS action?",
+      "question": "What did a 2022 DHS action reveal about counterfeit hardware components?",
       "options": {
-        "A": "Supply chain delays caused by port congestion",
-        "B": "Over one billion dollars in counterfeit components sold via shell companies",
-        "C": "Hardware trojans implanted in motherboards during manufacturing",
-        "D": "Malicious firmware installed on network equipment at factories"
+        "A": "Counterfeit hardware is always detectable through external inspection before deployment",
+        "B": "Counterfeit components often lack real security features or fail mechanically",
+        "C": "A reseller sold over one billion dollars of counterfeit Cisco equipment through shell companies",
+        "D": "Counterfeit components are primarily sourced from unauthorized distributors in Eastern Europe"
       },
-      "correct": "B",
-      "explanation": "The section states a 2022 DHS action caught a reseller who sold over one billion dollars of counterfeit Cisco gear across approximately thirty shell companies over nearly a decade."
+      "correct": "C",
+      "explanation": "The section states that a 2022 DHS action caught a reseller who sold over 1 billion dollars of counterfeit Cisco gear across approximately 30 shell companies over nearly a decade."
     },
     {
       "section": "SBOM — knowing what's in your software",
-      "type": "text",
-      "question": "Why did organizations with an SBOM have a significant advantage during the Log4Shell incident compared to those without one?",
-      "rubric": "A sound answer indicates that organizations with SBOMs could identify exposure immediately and find vulnerable components quickly, whereas organizations without SBOMs spent days or weeks in manual analysis.",
-      "explanation": "The section contrasts response times: those with SBOMs identified Log4Shell exposure immediately, while those without spent days or weeks in manual analysis."
+      "type": "mc",
+      "question": "Which Executive Order mandated SBOMs for software sold to the US federal government?",
+      "options": {
+        "A": "Executive Order 14017, issued in 2021 to require zero-trust architecture implementation",
+        "B": "Executive Order 14028, issued in May 2021 to mandate SBOMs for federal software purchases",
+        "C": "Executive Order 13636, issued in 2013 to require critical infrastructure protection standards",
+        "D": "Executive Order 13457, issued in 2014 to require annual vendor security assessments"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states Executive Order 14028 was issued in May 2021 and mandated SBOMs for all software sold to the US federal government."
     },
     {
       "section": "Dependency confusion",
       "type": "mc",
-      "question": "How does a dependency confusion attack exploit package manager behavior?",
+      "question": "How does the dependency confusion attack exploit package managers?",
       "options": {
-        "A": "Compromising developer credentials for public repository access",
-        "B": "Registering a public package with a private package's name and higher version number",
-        "C": "Intercepting traffic between build systems and package repositories",
-        "D": "Registering a malicious private package harder to maintain than public versions"
+        "A": "An attacker registers a public package with the same name as a private package but a higher version number",
+        "B": "An attacker modifies the source code of a public package already installed in a build system",
+        "C": "An attacker compromises the private repository and changes the version numbering scheme",
+        "D": "An attacker creates a man-in-the-middle intercept between the package manager and the repository"
       },
-      "correct": "B",
-      "explanation": "The section explains that an attacker registers a public package with the same name as an organization's private package but with a higher version number, causing the build system to fetch the malicious public version."
+      "correct": "A",
+      "explanation": "The section describes dependency confusion as an attacker registering a public package with the same name as an organization's private package but with a higher version number, causing the build system to fetch the malicious public version instead."
     },
     {
       "section": "Code provenance and integrity",
       "type": "mc",
-      "question": "What does Cosign do in the Sigstore ecosystem?",
+      "question": "What does Cosign do in the context of supply chain security?",
       "options": {
-        "A": "It signs and verifies container images before deployment",
-        "B": "It encrypts container images before they are deployed to production",
-        "C": "It ensures that build outputs match their source code exactly",
-        "D": "It manages cryptographic keys for Git repository access"
+        "A": "It generates machine-readable inventories of all software components in an application",
+        "B": "It audits vendor security controls over a period of time to provide assurance",
+        "C": "It cryptographically signs Git commits to bind them to a verified developer identity",
+        "D": "It signs and verifies container images before deployment as part of the Sigstore project"
       },
-      "correct": "A",
-      "explanation": "The section identifies Cosign as the component of Sigstore for signing and verifying container images before deployment."
+      "correct": "D",
+      "explanation": "The section identifies Cosign as the Sigstore component for signing and verifying container images before deployment."
     },
     {
       "section": "Vendor risk management",
       "type": "mc",
-      "question": "What distinguishes SOC 2 Type 2 from a point-in-time security audit?",
+      "question": "What is the key difference between SOC 2 Type 2 and a point-in-time security audit?",
       "options": {
-        "A": "Type 2 audits cost significantly less than point-in-time assessments",
-        "B": "Type 2 is legally required whereas point-in-time audits are optional",
-        "C": "Type 2 evaluates a time period while point-in-time is a single moment",
-        "D": "Type 2 examines financial controls while point-in-time covers security"
+        "A": "SOC 2 Type 2 covers security controls over a period of time rather than a single point-in-time snapshot",
+        "B": "SOC 2 Type 2 focuses only on physical security rather than logical security controls",
+        "C": "SOC 2 Type 2 is mandated by NIST while point-in-time audits are mandated by ISO",
+        "D": "SOC 2 Type 2 is faster to complete and less expensive than a point-in-time security audit"
       },
-      "correct": "C",
-      "explanation": "The section defines SOC 2 Type 2 as an independent third-party audit of a vendor's security controls over a period of time, giving stronger assurance than a one-time snapshot."
+      "correct": "A",
+      "explanation": "The section defines SOC 2 Type 2 as an independent third-party audit of a vendor's security controls over a period of time, providing stronger assurance than a point-in-time snapshot."
     },
     {
       "section": "Software composition analysis and scanning",
       "type": "mc",
-      "question": "What does SCA (Software Composition Analysis) primarily do?",
+      "question": "What does Software Composition Analysis scanning accomplish?",
       "options": {
-        "A": "Verifies that all software artifacts are signed by trusted developers",
-        "B": "Monitors vendor security questionnaires and compliance certifications",
-        "C": "Analyzes network traffic to detect unauthorized third-party connections",
-        "D": "Scans your application's dependencies and flags known vulnerabilities"
+        "A": "It applies reproducible build techniques to ensure binary integrity across builds",
+        "B": "It audits vendor security controls and checks for right-to-audit contract clauses",
+        "C": "It scans your application's dependencies and flags known vulnerabilities",
+        "D": "It monitors CVE feeds and alerts you when new vulnerabilities are published"
       },
-      "correct": "D",
-      "explanation": "The section states that SCA tools scan your application's dependencies and flag known vulnerabilities, serving as the primary technical control for software supply chain risk."
+      "correct": "C",
+      "explanation": "The section states that SCA tools scan an application's dependencies and flag known vulnerabilities — the primary technical control for software supply chain risk."
     },
     {
       "section": "The Target breach — every principle in one case",
-      "type": "text",
-      "question": "What fundamental supply chain security control failures enabled the attacker to move from the HVAC vendor's network to Target's POS systems?",
-      "rubric": "A sound answer identifies that the HVAC vendor's network segment was not segregated from Target's POS network, allowing lateral movement once the vendor was compromised.",
-      "explanation": "The section states that the HVAC vendor's network segment was not segregated from Target's POS network, which enabled attackers to move laterally after compromising the vendor's access."
+      "type": "mc",
+      "question": "How did attackers initially gain access to Target's network in the 2013 breach?",
+      "options": {
+        "A": "They exploited a vulnerability in Target's POS system directly through the internet",
+        "B": "They phished an HVAC vendor that held network access to Target's systems",
+        "C": "They installed a hardware trojan in networking equipment during the manufacturing process",
+        "D": "They compromised Target's supply chain by injecting malware into a software update"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that attackers stole credit card numbers by phishing an HVAC vendor that held network access to Target's systems, not by attacking Target directly."
     }
   ]
 }

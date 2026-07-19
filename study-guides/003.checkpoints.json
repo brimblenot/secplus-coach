@@ -3,62 +3,67 @@
     {
       "section": "What the CIA Triad is",
       "type": "mc",
-      "question": "Which DAD Triad outcome corresponds to the Availability pillar of CIA?",
+      "question": "Which DAD Triad outcome directly corresponds to the Integrity pillar of the CIA Triad?",
       "options": {
-        "A": "Decryption",
-        "B": "Disclosure",
-        "C": "Alteration",
-        "D": "Destruction"
+        "A": "Destruction",
+        "B": "Decryption",
+        "C": "Disclosure",
+        "D": "Alteration"
       },
       "correct": "D",
-      "explanation": "The study guide states that Destruction maps to Availability in the DAD Triad table, with examples like ransomware and DDoS attacks."
+      "explanation": "The study guide states that Alteration is the DAD threat that maps to the Integrity pillar of CIA. Disclosure maps to Confidentiality and Destruction maps to Availability."
     },
     {
       "section": "Confidentiality",
-      "type": "text",
-      "question": "Explain what the need-to-know principle is and how it relates to confidentiality.",
-      "rubric": "A sound answer states that the need-to-know principle restricts access to only the data someone requires for their specific job role, preventing unnecessary disclosure of sensitive information.",
-      "explanation": "The section defines need-to-know as granting access only to what someone needs for their specific job, using a marketing employee not seeing payroll data as an example."
+      "type": "mc",
+      "question": "What principle dictates that access to data should be limited to what an employee needs for their specific job role?",
+      "options": {
+        "A": "Data classification level",
+        "B": "Encryption standard",
+        "C": "Need-to-know principle",
+        "D": "Multi-factor authentication"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly defines the need-to-know principle as granting access only to what someone needs for their specific job, using the example that a marketing employee shouldn't see payroll data."
     },
     {
       "section": "Integrity",
       "type": "mc",
-      "question": "What does a hash function do to detect data tampering during transmission?",
+      "question": "What property, enabled by digital signatures, allows you to prove a specific entity performed a specific action and prevents them from later denying it?",
       "options": {
-        "A": "It copies data across multiple servers for comparison",
-        "B": "It generates a fixed-length value that changes if any input bit is altered",
-        "C": "It requires authentication before data transmission",
-        "D": "It encrypts the message with a private key"
+        "A": "Non-repudiation",
+        "B": "Change control",
+        "C": "Hashing capability",
+        "D": "File monitoring"
       },
-      "correct": "B",
-      "explanation": "The section states that any change to input, even one bit, produces a completely different hash, allowing comparison to detect tampering."
-    },
-    {
-      "section": "Integrity",
-      "type": "text",
-      "question": "What is non-repudiation and how does a digital signature provide it?",
-      "rubric": "A sound answer explains that non-repudiation proves a specific entity performed a specific action and cannot deny it later, and that a digital signature provides this because only the holder of the private key could have produced that signature.",
-      "explanation": "The section defines non-repudiation and states that digital signatures provide it because only the private key holder could have encrypted the hash to create the signature."
+      "correct": "A",
+      "explanation": "The section defines non-repudiation as the ability to prove beyond doubt that a specific entity performed a specific action so they cannot deny it, and states that digital signatures provide this capability."
     },
     {
       "section": "Availability",
       "type": "mc",
-      "question": "In the context of backups, what is the difference between RTO and RPO?",
+      "question": "Which metric defines the maximum acceptable time to restore a system after an outage?",
       "options": {
-        "A": "RTO is backup age; RPO is system restart speed",
-        "B": "RTO is acceptable data loss; RPO is recovery time",
-        "C": "RTO is recovery time; RPO is acceptable data loss duration",
-        "D": "RTO measures disk redundancy; RPO measures network redundancy"
+        "A": "Recovery Point Objective, which measures data loss",
+        "B": "Recovery Time Objective, which measures restoration time",
+        "C": "Redundancy Array, which provides system backup",
+        "D": "Service Level Agreement, which defines performance terms"
       },
-      "correct": "C",
-      "explanation": "The section defines RTO as the maximum acceptable time to restore a system and RPO as the maximum acceptable data loss measured in time."
+      "correct": "B",
+      "explanation": "The section explicitly defines RTO (Recovery Time Objective) as the maximum acceptable time to restore a system, while RPO measures maximum acceptable data loss in time."
     },
     {
       "section": "The tension between pillars",
-      "type": "text",
-      "question": "Describe one way that strengthening one CIA pillar can weaken another.",
-      "rubric": "A sound answer identifies a specific tradeoff: for example, strong authentication boosts confidentiality but reduces availability through added friction, or redundant systems improve availability but expand the attack surface.",
-      "explanation": "The section explicitly states that strong authentication boosts confidentiality but adds friction reducing availability, and that redundant systems improve availability but expand attack surface."
+      "type": "mc",
+      "question": "What does the study guide identify as a security concept that accounts for the probability a threat will exploit a vulnerability to violate a CIA pillar?",
+      "options": {
+        "A": "Threat model",
+        "B": "Attack surface",
+        "C": "Vulnerability scan",
+        "D": "Risk"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly defines risk as the probability that a threat exploits a vulnerability to violate a CIA pillar, and states it guides the balance between all three pillars."
     }
   ]
 }

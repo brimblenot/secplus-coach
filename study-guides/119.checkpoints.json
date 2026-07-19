@@ -3,81 +3,93 @@
     {
       "section": "Assessment types: how pen tests compare",
       "type": "mc",
-      "question": "Which assessment type actively exploits vulnerabilities to demonstrate real-world impact?",
+      "question": "What is the primary difference between a vulnerability assessment and a penetration test?",
       "options": {
-        "A": "Penetration test, performed annually by skilled testers to prove impact",
-        "B": "Red team exercise, performed continuously to test detection capability",
-        "C": "Vulnerability assessment, performed monthly to identify theoretical risks",
-        "D": "Bug bounty program, performed by independent researchers to find findings"
+        "A": "A vulnerability assessment includes social engineering and physical security testing, while a penetration test focuses only on network vulnerabilities",
+        "B": "A vulnerability assessment is performed annually by external testers, while a penetration test is performed monthly by internal staff",
+        "C": "A vulnerability assessment requires authorization from the CISO, while a penetration test does not require any formal permission",
+        "D": "A vulnerability assessment identifies vulnerabilities without exploiting them, while a penetration test actively exploits vulnerabilities to demonstrate real-world impact"
       },
-      "correct": "A",
-      "explanation": "The section explicitly states that penetration tests actively exploit vulnerabilities to prove real-world impact, are more costly, and are appropriate for annual comprehensive assessment — unlike vulnerability assessments which only identify but never exploit."
+      "correct": "D",
+      "explanation": "The section explicitly states that vulnerability assessments identify and rank vulnerabilities but never exploit them, whereas penetration tests actively exploit identified vulnerabilities to prove real-world impact."
     },
     {
       "section": "Compliance frameworks that require pen testing",
-      "type": "text",
-      "question": "What is segmentation testing and which compliance framework specifically requires it?",
-      "rubric": "A sound answer states that segmentation testing verifies network segments isolate the cardholder data environment and prevent attackers on one segment from reaching card data on another, and that PCI DSS requires it.",
-      "explanation": "The section defines segmentation testing as verification that network segments actually prevent cross-segment attack, and explicitly attributes this as a PCI DSS requirement not mentioned in the other frameworks."
+      "type": "mc",
+      "question": "Which compliance framework requires segmentation testing as part of penetration testing?",
+      "options": {
+        "A": "PCI DSS requires confirmation that network segments isolating cardholder data cannot be crossed",
+        "B": "NIST SP 800-53 CA-8 requires verification of control implementation and effectiveness",
+        "C": "ISO 27001 requires validation of the overall ISMS framework and documented policies",
+        "D": "SOC 2 requires independent third-party evidence to strengthen credibility and controls"
+      },
+      "correct": "A",
+      "explanation": "The section states that PCI DSS specifically requires segmentation testing to verify that network segments isolating the cardholder data environment actually prevent attackers on one segment from reaching card data on another."
     },
     {
       "section": "Authorization: the most legally critical step",
       "type": "mc",
-      "question": "What federal law is violated by conducting a penetration test without written authorization?",
+      "question": "What legal consequence may result from conducting a penetration test without proper authorization?",
       "options": {
-        "A": "The Gramm-Leach-Bliley Act, which governs financial data privacy",
-        "B": "The Computer Fraud and Abuse Act, which criminalizes unauthorized system access",
-        "C": "The Digital Millennium Copyright Act, which protects intellectual property",
-        "D": "The Health Insurance Portability and Accountability Act, which protects health records"
+        "A": "Breach of the PCI DSS compliance framework and loss of QSA certification",
+        "B": "Violation of the Computer Fraud and Abuse Act and equivalent laws globally",
+        "C": "Termination of the bug bounty program and loss of continuous vulnerability discovery",
+        "D": "Failure to complete the ISMS requirements and loss of ISO 27001 certification"
       },
       "correct": "B",
-      "explanation": "The section explicitly names the Computer Fraud and Abuse Act (CFAA) as the U.S. federal law that criminalizes unauthorized access to computer systems."
+      "explanation": "The section explicitly states that testing without authorization violates the Computer Fraud and Abuse Act, which is the U.S. federal law criminalizing unauthorized access to computer systems, and equivalent laws globally."
     },
     {
       "section": "Rules of engagement: scoping the test",
-      "type": "text",
-      "question": "Why must the rules of engagement document explicitly list both in-scope and out-of-scope systems?",
-      "rubric": "A sound answer states that testers must never assume a system is implicitly in scope and should not treat it as in-scope without explicit definition.",
-      "explanation": "The section warns that testers must never assume a system is implicitly in scope, so both in-scope and out-of-scope systems must be explicitly identified to prevent unintended testing of excluded resources."
+      "type": "mc",
+      "question": "Which of the following must be explicitly defined in a rules of engagement document?",
+      "options": {
+        "A": "The CISO's approval signature and the annual budget allocated to the penetration testing program",
+        "B": "The vendor's patch timeline and the specific CVE identifiers that will be targeted by the test",
+        "C": "In-scope systems by IP ranges or URLs, out-of-scope systems, testing hours, permitted techniques, and evidence handling procedures",
+        "D": "Only the list of authorized testers and the specific vulnerabilities to be exploited during the assessment"
+      },
+      "correct": "C",
+      "explanation": "The section states that rules of engagement must specify in-scope systems, out-of-scope systems, testing hours, permitted techniques, emergency contacts, and evidence handling procedures."
     },
     {
       "section": "SOC coordination: to notify or not",
       "type": "mc",
-      "question": "What is the trade-off between notifying the SOC before a pen test and not notifying them?",
+      "question": "What is a risk of not notifying the SOC that a penetration test is underway?",
       "options": {
-        "A": "Notifying prevents interference with the test, not notifying costs more money to resolve incidents",
-        "B": "Notifying improves the accuracy of findings, not notifying tests both networks and applications",
-        "C": "Notifying speeds up remediation, not notifying provides more evidence for the final report",
-        "D": "Notifying tests detection, not notifying tests response; not notifying requires tight coordination to prevent damage"
+        "A": "The SOC will require additional authorization and updated rules of engagement documentation",
+        "B": "The SOC will disable monitoring systems and prevent detection of actual attack activity",
+        "C": "The SOC will immediately report the activity as a Computer Fraud and Abuse Act violation",
+        "D": "The SOC may treat the test as a real attack and trigger incident response procedures"
       },
       "correct": "D",
-      "explanation": "The section states that notifying the SOC tests detection capability but not real-world response, while not notifying tests both detection and response but requires tight coordination to prevent defensive actions from causing unintended damage."
+      "explanation": "The section states that if the SOC is not told a test is underway, they may treat it as a real attack and trigger incident response, potentially interfering with the test or causing harm."
     },
     {
       "section": "Pen test reports: two audiences",
       "type": "mc",
-      "question": "What type of language should the executive summary section of a pen test report use?",
+      "question": "What information should be included in the technical findings section of a penetration test report?",
       "options": {
-        "A": "Technical jargon and reproduction steps to demonstrate tester expertise",
-        "B": "Detailed CVE identifiers and CVSS scores for each vulnerability found",
-        "C": "Business-risk language with overall rating, top findings, and business impact",
-        "D": "Proof-of-concept code and command output for internal security team validation"
+        "A": "Affected systems, reproduction steps, CVE identifiers, CVSS scores, proof-of-concept code, and specific remediation guidance",
+        "B": "Executive business risk summary, overall test rating, and a list of all vendors who should be notified",
+        "C": "The testers' certifications and credentials, the testing hours completed, and the names of SOC staff contacted",
+        "D": "Only the top vulnerabilities ranked by business impact without technical details or reproduction steps"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that the executive summary uses business-risk language only, with overall rating, top findings, and business impact, with no technical jargon."
+      "correct": "A",
+      "explanation": "The section explicitly lists that technical findings should include affected systems, reproduction steps, screenshots/command output, CVE identifiers, CVSS scores, proof-of-concept code, risk rating, and specific remediation guidance."
     },
     {
       "section": "Credentials and responsible disclosure",
       "type": "mc",
-      "question": "Under responsible disclosure, how long should a tester allow a vendor to patch a vulnerability before public disclosure?",
+      "question": "What is the approximate timeframe for responsible disclosure when a penetration test uncovers a vulnerability in a vendor's product?",
       "options": {
-        "A": "Approximately 180 days to ensure comprehensive testing and patch deployment",
-        "B": "Approximately 90 days to balance user protection with the vendor's patching time",
-        "C": "Approximately 30 days to maintain rapid vulnerability awareness",
-        "D": "Immediately upon discovery to maximize transparency to all users"
+        "A": "Publish the vulnerability immediately to maximize awareness and force immediate vendor response",
+        "B": "Notify the vendor privately and allow approximately 90 days to patch before public disclosure",
+        "C": "Disclose only to the affected customers and not to the vendor until a patch is released",
+        "D": "Wait one year before notifying the vendor to allow time for internal patching workflows"
       },
       "correct": "B",
-      "explanation": "The section explicitly states that responsible disclosure gives approximately 90 days to the vendor before public disclosure, balancing user protection with the vendor's need for time to fix the issue properly."
+      "explanation": "The section states that responsible disclosure means notifying the vendor privately and giving approximately 90 days to patch before any public disclosure, balancing user protection with the vendor's need for time to fix the issue properly."
     }
   ]
 }

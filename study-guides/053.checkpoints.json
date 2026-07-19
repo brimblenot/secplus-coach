@@ -3,101 +3,106 @@
     {
       "section": "Online vs. offline attacks",
       "type": "mc",
-      "question": "What is the key difference in speed between online and offline password attacks?",
+      "question": "What is the key difference between online and offline password attacks in terms of speed and constraints?",
       "options": {
-        "A": "Online attacks use wordlists while offline attacks use brute force methods",
-        "B": "Online attacks require network access while offline attacks require physical access",
-        "C": "Online attacks target Active Directory while offline attacks target SAM databases",
-        "D": "Online attacks are slowed by lockout policies; offline attacks test billions of guesses per second against stolen hashes"
+        "A": "Online attacks use stolen password hashes stored locally, while offline attacks submit guesses to a live authentication service over the network.",
+        "B": "Online attacks test billions of hashes per second without lockout limits, while offline attacks face network latency and account lockout policy constraints.",
+        "C": "Offline attacks require direct interaction with the target system, while online attacks operate independently against a stored file of hashes.",
+        "D": "Offline attacks test billions of hashes per second without lockout limits, while online attacks face network latency and account lockout policy constraints."
       },
       "correct": "D",
-      "explanation": "The section explicitly states that online attacks submit guesses to a live service and are constrained by lockout policies, while offline attacks operate against stolen hashes locally with no interaction with the target, allowing tools like Hashcat to test billions of hashes per second."
+      "explanation": "Offline attacks operate against stolen hashes locally and can test billions per second, while online attacks submit guesses to live services and face constraints like lockout policies and rate limiting."
     },
     {
       "section": "Brute force",
-      "type": "text",
-      "question": "Why does password length matter more than character set size in resisting brute force attacks?",
-      "rubric": "A sound answer explains that the time to brute force grows exponentially with length, making even 12 random characters take centuries to crack with current hardware, whereas character set size also increases time but length has the more dramatic protective effect.",
-      "explanation": "The section states that time grows exponentially with both length and character set size, but then emphasizes that length is the single most important password security property, with concrete examples showing that 12-char random ASCII is impractical to crack."
+      "type": "mc",
+      "question": "Which statement correctly describes the relationship between password length and brute force attack difficulty?",
+      "options": {
+        "A": "Time grows exponentially with length, and length is the single most important password security property.",
+        "B": "Time grows exponentially with character set size but remains constant regardless of length.",
+        "C": "Time is determined primarily by the number of lowercase letters in the password.",
+        "D": "Time grows linearly with length, so doubling length only doubles the cracking time."
+      },
+      "correct": "A",
+      "explanation": "The study guide states that time grows exponentially with length and character set size, and explicitly identifies length as the single most important password security property."
     },
     {
       "section": "Dictionary attacks",
       "type": "mc",
-      "question": "What is rockyou.txt and why is it significant for password cracking?",
+      "question": "What is rockyou.txt and why is it significant in password cracking?",
       "options": {
-        "A": "A tool that generates password rule variations for hybrid attacks",
-        "B": "A 2009 breach wordlist of 14 million plaintext passwords used as the baseline for cracking",
-        "C": "A service that notifies users when passwords appear in known breaches",
-        "D": "A configuration file for Linux password encryption"
+        "A": "An Active Directory service that stores NTLM hashes and Kerberos keys for every domain user account in an organization.",
+        "B": "A wordlist from a 2009 breach containing 14 million plaintext passwords, used as the baseline wordlist in most password cracking engagements.",
+        "C": "A GPU-accelerated password cracking tool capable of testing billions of hashes per second against stolen credential databases.",
+        "D": "A tool that applies rule-based transformations to generate password variations for use in hybrid cracking attacks."
       },
       "correct": "B",
-      "explanation": "The section defines rockyou.txt as a wordlist compiled from a 2009 breach exposing 14 million plaintext passwords and identifies it as the baseline wordlist for most cracking engagements."
+      "explanation": "Rockyou.txt is explicitly described as a wordlist compiled from a 2009 breach of 14 million plaintext passwords and is used as the baseline wordlist for most cracking engagements."
     },
     {
       "section": "Hybrid attacks",
-      "type": "text",
-      "question": "Explain how hybrid attacks combine dictionary wordlists with transformations, and why this approach is effective against real users.",
-      "rubric": "A sound answer states that hybrid attacks apply rule-based modifications like appending numbers, capitalizing letters, or substituting characters to base words, and that this works because users employ these same predictable shortcuts to meet complexity requirements.",
-      "explanation": "The section describes rule-based transformations applied to dictionary words and explicitly states that hybrid attacks are highly effective because the rules model the same shortcuts real users take to meet complexity requirements."
+      "type": "mc",
+      "question": "What do rule-based transformations in hybrid attacks do, and why are they effective?",
+      "options": {
+        "A": "They extract plaintext credentials from the LSASS process by simulating user browser behavior to bypass bot detection mechanisms.",
+        "B": "They distribute password guesses across multiple accounts with delays between attempts to stay below account lockout thresholds.",
+        "C": "They modify base words by appending numbers and capitalizing letters, replicating the same common shortcuts real users employ.",
+        "D": "They encrypt dictionary words using salts to prevent matches in rainbow table attacks against modern password storage."
+      },
+      "correct": "C",
+      "explanation": "Hybrid attacks apply modifications like appending numbers, capitalizing, and character substitution to dictionary words, and are highly effective because these rules model the shortcuts real users take."
     },
     {
       "section": "Password spraying",
       "type": "mc",
-      "question": "How does password spraying avoid triggering account lockout policies?",
+      "question": "How does password spraying evade lockout mechanisms, and what pattern indicates it is occurring?",
       "options": {
-        "A": "By attempting one or two passwords per account, then waiting between rounds to avoid triggering lockouts",
-        "B": "By targeting accounts with lockout policies that are disabled",
-        "C": "By spoofing source IP addresses to appear as multiple users",
-        "D": "By extracting hashes first to avoid login attempts entirely"
+        "A": "It uses precomputed hash tables for instant password cracking, detected by unusual registry access patterns on domain controllers.",
+        "B": "It guesses one or few common passwords against many accounts with delays between rounds, detected by low-frequency failures spread across accounts.",
+        "C": "It replays verified credential pairs obtained from breaches, detected by authentication events using passwords older than 90 days.",
+        "D": "It guesses one or few common passwords against many accounts with delays between rounds, detected by high-frequency failures on a single account."
       },
-      "correct": "A",
-      "explanation": "The section states that spraying guesses one or a few common passwords against every account, then waits before the next round, designed to stay below lockout thresholds because most policies trigger after 5-10 failures on one account."
+      "correct": "B",
+      "explanation": "Spraying stays below lockout thresholds by targeting many accounts with few guesses each and waiting between rounds; detection looks for the inverse pattern of classic brute force: low-frequency failures across many accounts."
     },
     {
       "section": "Credential stuffing",
-      "type": "text",
-      "question": "Why is credential stuffing effective as an attack, and what single defense does the section identify as most reliable?",
-      "rubric": "A sound answer explains that credential stuffing works because users reuse passwords across services, so breach pairs from one site unlock accounts elsewhere, and identifies multi-factor authentication (MFA) as the best defense because a replayed password pair alone is not enough.",
-      "explanation": "The section explains that stuffing works due to password reuse across services, with billions of breach pairs publicly available, and explicitly states that MFA is the best defense since replayed credentials alone are insufficient."
+      "type": "mc",
+      "question": "What is credential stuffing and what is the best defense against it?",
+      "options": {
+        "A": "Guessing passwords by testing every possible character combination; defended by account lockout policies.",
+        "B": "Using precomputed lookup tables to reverse password hashes; defended by applying unique per-user salts.",
+        "C": "Replaying verified username/password pairs from previous breaches; best defended by multi-factor authentication.",
+        "D": "Extracting hashes from the LSASS process using tools like Mimikatz; defended by Windows Credential Guard."
+      },
+      "correct": "C",
+      "explanation": "Credential stuffing replays verified pairs from breaches and does not guess; the study guide explicitly states that multi-factor authentication is the best defense because a replayed password pair alone is not enough."
     },
     {
       "section": "Rainbow table attacks",
       "type": "mc",
-      "question": "What cryptographic mechanism makes rainbow table attacks ineffective against modern password storage?",
+      "question": "Why do unique per-user salts defeat rainbow table attacks?",
       "options": {
-        "A": "Shortened hash output that requires more reversal attempts",
-        "B": "A time-based token appended to passwords that expires after login",
-        "C": "A unique random value added before hashing prevents precomputed table reuse across accounts",
-        "D": "Daily encryption key rotation of the hash database"
+        "A": "Salts encrypt passwords before storage, requiring additional decryption steps that defeat lookup table attacks on password databases.",
+        "B": "Salts slow down each hash computation with a configurable work factor, making offline cracking operations impractical.",
+        "C": "Salts add entropy to each password, making brute force attacks exponentially more expensive compared to unsalted hashes.",
+        "D": "Salts are unique random values added to each password before hashing, making identical passwords produce different hashes so a single table cannot be reused."
       },
-      "correct": "C",
-      "explanation": "The section states that salts are unique random values added to each password before hashing, making rainbow tables useless because two identical passwords produce different hashes, so a single precomputed table cannot match across accounts."
+      "correct": "D",
+      "explanation": "The study guide states that salts are unique random values added before hashing, so identical passwords produce different hashes, making a precomputed table useless since it cannot cover all salt variations."
     },
     {
       "section": "Hash dumping",
       "type": "mc",
-      "question": "Which Windows component does Mimikatz target to extract credentials directly from memory, and what does it contain?",
+      "question": "What does the LSASS process store and what tool is commonly used to extract credentials from it?",
       "options": {
-        "A": "Registry hive; encrypted credential strings from sessions",
-        "B": "SAM database; local account NTLM hashes",
-        "C": "NTDS.dit; domain account hashes and Kerberos keys",
-        "D": "LSASS process; cached credentials and sometimes plaintext passwords for single sign-on"
-      },
-      "correct": "D",
-      "explanation": "The section explicitly names LSASS as the target of Mimikatz's sekurlsa module and describes its contents as recently authenticated credentials cached in memory, including NTLM hashes, Kerberos tickets, and sometimes plaintext credentials in older configs."
-    },
-    {
-      "section": "Defenses summary",
-      "type": "mc",
-      "question": "Which defense is listed as the primary control against credential stuffing attacks?",
-      "options": {
-        "A": "Multi-factor authentication (MFA)",
-        "B": "Unique salts per account with bcrypt hashing",
-        "C": "Rate limiting and CAPTCHA on login forms",
-        "D": "12+ character minimum length passwords"
+        "A": "Recently authenticated credentials in memory for single sign-on; extracted with Mimikatz and its sekurlsa module.",
+        "B": "Active Directory database containing all domain account credentials; extracted by domain administrators.",
+        "C": "NTLM hashes and Kerberos keys for domain accounts; extracted with the NTDS.dit utility.",
+        "D": "Local account NTLM hashes only; extracted by booting to an alternate operating system."
       },
       "correct": "A",
-      "explanation": "The defenses table maps MFA to 'Stuffing, spraying, all credential attacks,' making it the listed control for credential stuffing specifically, unlike the other options which target different attack vectors."
+      "explanation": "LSASS caches recently authenticated credentials in memory for single sign-on, and Mimikatz's sekurlsa module reads credentials directly from LSASS memory."
     }
   ]
 }

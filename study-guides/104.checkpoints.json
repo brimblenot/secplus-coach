@@ -3,107 +3,119 @@
     {
       "section": "Windows Event Logs",
       "type": "mc",
-      "question": "Which Windows Event ID is the strongest indicator that an attacker has attempted to cover their tracks?",
+      "question": "Which Windows Event ID indicates that an attacker may have attempted to cover their tracks by deleting security log records?",
       "options": {
-        "A": "4688, which captures new process creation with full command line",
-        "B": "4720, which shows when a new user account is created",
-        "C": "4625, which records failed logon attempts and their reasons",
-        "D": "1102, which indicates the Security audit log has been cleared"
+        "A": "Event ID 4625, which captures failed logon attempts and failure reasons",
+        "B": "Event ID 4698, which logs when a scheduled task has been created",
+        "C": "Event ID 1102, which signals that the security audit log was cleared",
+        "D": "Event ID 4688, which records new process creation and command lines"
       },
-      "correct": "D",
-      "explanation": "Event ID 1102 specifically records when the Security audit log itself is cleared, described as highly anomalous and evidence of an attacker covering tracks. The others record normal or malicious activities, not log tampering itself."
+      "correct": "C",
+      "explanation": "Event ID 1102 is explicitly described as highly anomalous and indicating an attacker covering tracks by clearing the audit log. The other IDs record different activities but do not indicate log tampering."
     },
     {
       "section": "Linux system logs",
       "type": "mc",
-      "question": "On a Red Hat/CentOS system, which log file would you check to investigate SSH login attempts and sudo command execution?",
+      "question": "On a Red Hat/CentOS system, which log file would you examine to investigate SSH login attempts and sudo command execution?",
       "options": {
-        "A": "/var/log/kern.log for kernel and hardware events",
-        "B": "/var/log/secure for SSH logins, sudo commands, and PAM authentication",
-        "C": "/var/log/messages for general kernel and daemon events",
-        "D": "/var/log/audit/audit.log for kernel-level syscalls and file access"
+        "A": "/var/log/secure, which captures SSH logins, sudo commands, and PAM authentication",
+        "B": "/var/log/syslog, which records general kernel and daemon events",
+        "C": "/var/log/kern.log, which logs kernel events and hardware issues",
+        "D": "/var/log/audit/audit.log, which contains kernel-level syscall and file access records"
       },
-      "correct": "B",
-      "explanation": "The section states that /var/log/secure on Red Hat/CentOS captures SSH logins, sudo commands, su, and PAM authentication events, making it the primary authentication log."
+      "correct": "A",
+      "explanation": "The study guide explicitly states that /var/log/secure on Red Hat/CentOS captures SSH logins, sudo commands, su, and PAM authentication—the same information as /var/log/auth.log on Debian/Ubuntu."
     },
     {
       "section": "Network device logs and Syslog",
       "type": "mc",
-      "question": "Which port and protocol combination provides encrypted transmission for Syslog messages?",
+      "question": "Which transport protocol and port combination provides encrypted syslog transmission from network devices to a central log collector?",
       "options": {
-        "A": "TCP port 6514 with TLS encryption",
-        "B": "UDP port 514 for connectionless, efficient forwarding",
-        "C": "UDP port 6514 for fast encrypted transmission",
-        "D": "TCP port 514 for reliable delivery without encryption"
+        "A": "UDP port 6514, which offers encrypted connectionless log transmission",
+        "B": "TCP port 514, which provides reliable delivery of log messages",
+        "C": "UDP port 514, which offers connectionless and efficient log forwarding",
+        "D": "TCP port 6514, which transmits syslog messages with TLS encryption"
       },
-      "correct": "A",
-      "explanation": "The section specifies that TCP port 6514 is used for TLS-encrypted transmission of Syslog messages, while UDP 514 and TCP 514 lack encryption."
+      "correct": "D",
+      "explanation": "The study guide explicitly identifies TCP port 6514 as the port for TLS-encrypted syslog transmission. UDP 514 and TCP 514 are unencrypted options, and UDP 6514 is not mentioned as a standard syslog port."
     },
     {
       "section": "Web server access logs",
-      "type": "text",
-      "question": "Name one attack pattern that would be visible in Combined Log Format web server logs and describe what attacker activity creates it.",
-      "rubric": "A sound answer identifies one of: SQL injection (unusual characters in query parameters), directory traversal (../ sequences in URL paths), or vulnerability scanning (distinctive User-Agent strings or rapid requests to nonexistent URLs) and connects it to attacker behavior.",
-      "explanation": "The section lists three attack patterns explicitly: SQL injection shows unusual characters, directory traversal shows ../ sequences, and scanning shows distinctive User-Agents or rapid nonexistent requests."
+      "type": "mc",
+      "question": "In Apache or nginx Combined Log Format, what information is recorded that helps identify the browser or tool used to make an HTTP request?",
+      "options": {
+        "A": "The client IP address, which shows the network location from which the request originated",
+        "B": "The User-Agent string, which identifies the browser or tool identity making the request",
+        "C": "The HTTP status code, which reveals the server response outcome for the request",
+        "D": "The Referer header, which indicates the linking page that directed the client to the request"
+      },
+      "correct": "B",
+      "explanation": "The study guide states that the User-Agent string records browser/tool identity. The Referer header shows the linking page, status code shows the server response, and client IP shows the network source—all different purposes."
     },
     {
       "section": "Database and application logs",
       "type": "mc",
-      "question": "Which log type can reveal full-table-scan data-exfiltration attempts alongside legitimate performance issues?",
+      "question": "Which type of database log records queries that exceed a specified execution time and can reveal full-table-scan data exfiltration attempts?",
       "options": {
-        "A": "Application security logs capturing authentication and authorization failures",
-        "B": "PCI DSS compliance logs for cardholder data systems",
-        "C": "The slow query log recording queries exceeding a defined execution time",
-        "D": "Database query logs recording which query, table, DB user, timestamp, and source IP"
+        "A": "The error log, which captures all errors and exceptions generated during query execution",
+        "B": "The access control log, which tracks which database user executed each query",
+        "C": "The slow query log, which records queries exceeding a defined execution time threshold",
+        "D": "The query audit log, which captures every database query executed by any user"
       },
       "correct": "C",
-      "explanation": "The section explicitly states that the slow query log records queries exceeding a defined execution time and can reveal full-table-scan data-exfiltration attempts alongside performance issues."
+      "explanation": "The study guide explicitly defines the slow query log as recording queries exceeding a defined execution time and notes it can reveal full-table-scan data-exfiltration attempts. Other log types serve different purposes."
     },
     {
       "section": "Cloud audit logs",
       "type": "mc",
-      "question": "In AWS, what does CloudTrail record for every action taken on an account?",
+      "question": "In AWS, which cloud audit log service records every API call including the action, caller identity, source IP, and affected resources?",
       "options": {
-        "A": "API calls with action, identity, source IP, timestamp, and resources",
-        "B": "Console login events and API calls from the management dashboard",
-        "C": "Network traffic flows between VPCs and external networks",
-        "D": "Database queries and application errors in EC2 instances"
+        "A": "VPC Flow Logs capture network traffic information and connections between AWS resources",
+        "B": "AWS Config tracks configuration changes and drift detection for AWS resources over time",
+        "C": "CloudWatch monitors application performance metrics and system health in real time across resources",
+        "D": "CloudTrail records every API call including the action, caller identity, source IP, and affected resources"
       },
-      "correct": "A",
-      "explanation": "The section defines CloudTrail as logging every API call with action, caller identity, source IP, time, and resources affected, described as covering every command issued to the account."
+      "correct": "D",
+      "explanation": "The study guide explicitly describes CloudTrail as logging every API call including action, caller identity, source IP, and resources affected. The other services serve different cloud monitoring purposes."
     },
     {
       "section": "SIEM and log normalization",
-      "type": "text",
-      "question": "Explain how UEBA differs from simple correlation rules in detecting suspicious behavior.",
-      "rubric": "A sound answer conveys that UEBA uses statistics or machine learning to baseline normal behavior and detects deviations, whereas simple correlation rules trigger on fixed thresholds, allowing UEBA to catch subtle behavioral drift.",
-      "explanation": "The section contrasts UEBA's statistical/ML baseline approach with simple rules firing on fixed thresholds, emphasizing UEBA's ability to detect subtle drift."
+      "type": "mc",
+      "question": "Which capability uses statistical or machine learning methods to detect subtle behavioral deviations rather than relying on fixed threshold correlation rules?",
+      "options": {
+        "A": "UEBA, which baselines normal behavior and alerts on statistical deviations",
+        "B": "Syslog collection, which centralizes log messages from network devices using rsyslog",
+        "C": "Threat hunting, which uses historical log data to answer investigator-driven questions",
+        "D": "Log normalization, which converts different source formats into a common schema"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly defines UEBA (User and Entity Behavior Analytics) as using statistics/ML to baseline normal behavior and alert on deviations, distinguishing it from simple correlation rules with fixed thresholds."
     },
     {
       "section": "Log retention requirements",
       "type": "mc",
-      "question": "A company handling credit card payments must retain logs for compliance. What is the minimum total retention period and the minimum time for immediate accessibility?",
+      "question": "Which regulation requires a minimum of 12 months total log retention with 3 months of immediately accessible logs?",
       "options": {
-        "A": "24 months total with no specific accessibility tier requirement",
-        "B": "6 years from creation or last use per HIPAA requirements",
-        "C": "12 months total; 3 months immediately accessible per PCI DSS",
-        "D": "7 years for all financial records per Sarbanes-Oxley"
+        "A": "GDPR requires deletion of logs after a defined data minimization retention period",
+        "B": "PCI DSS requires 12 months total log retention with 3 months immediately accessible",
+        "C": "SOX specifies a minimum of 7 years retention for all financial transaction records",
+        "D": "HIPAA mandates a minimum of 6 years total log retention for all healthcare data"
       },
-      "correct": "C",
-      "explanation": "The section's PCI DSS row specifies 12 months total retention and 3 months immediately accessible; PCI DSS applies to cardholder data systems."
+      "correct": "B",
+      "explanation": "The study guide explicitly states PCI DSS requires 12 months total retention and 3 months immediately accessible. HIPAA requires 6 years and SOX requires 7 years, with different compliance frameworks."
     },
     {
       "section": "Log protection and integrity",
       "type": "mc",
-      "question": "Which mechanism provides a hardware-enforced guarantee that written log data cannot be modified or deleted?",
+      "question": "Which storage technology uses hardware enforcement to guarantee that written data cannot be modified or deleted after creation?",
       "options": {
-        "A": "Cryptographic log chaining where each record includes a hash of the previous record",
-        "B": "Centralized forwarding to a SIEM with restricted write access",
-        "C": "Minimal write-access controls allowing only log sources to write",
-        "D": "Write Once Read Many (WORM) storage with no deletion capability"
+        "A": "Cryptographic log chaining, which detects tampering by breaking the hash chain",
+        "B": "WORM storage, which enforces Write Once Read Many hardware-level guarantees",
+        "C": "Centralized forwarding, which prevents endpoint attackers from deleting logs retroactively",
+        "D": "Encrypted storage, which protects logs from unauthorized reading during transmission"
       },
-      "correct": "D",
-      "explanation": "The section defines WORM storage as hardware-enforced guarantee that written data cannot be modified or deleted, distinguishing it from software controls like centralized forwarding or cryptographic chaining."
+      "correct": "B",
+      "explanation": "The study guide explicitly defines WORM (Write Once Read Many) as a hardware-enforced guarantee that written data cannot be modified or deleted. Cryptographic chaining detects tampering, forwarding prevents retroactive deletion, and encryption protects confidentiality."
     }
   ]
 }

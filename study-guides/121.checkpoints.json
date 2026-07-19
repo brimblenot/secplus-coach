@@ -2,89 +2,159 @@
   "checkpoints": [
     {
       "section": "Training vs. awareness: not the same thing",
-      "type": "text",
-      "question": "In your own words, explain why an organization needs both security awareness and user training, rather than just one or the other.",
-      "rubric": "A sound answer distinguishes awareness as building mindset/motivation to care about security, while training builds the specific knowledge and skills to act securely in one's role. Both are necessary because motivation without capability, or capability without motivation, leaves gaps.",
-      "explanation": "The section explicitly states awareness creates mindset and training builds knowledge/skills, and that both are necessary and neither alone is sufficient. The driver's ed analogy reinforces this."
-    },
-    {
-      "section": "Role-based training: who needs what",
       "type": "mc",
-      "question": "Which of the following best describes what BEC attackers typically aim to accomplish when targeting finance staff?",
+      "question": "What is the primary difference between security awareness and user training?",
       "options": {
-        "A": "Intercepting encrypted communications between finance executives and auditors",
-        "B": "Leveraging SQL injection flaws in financial reporting applications",
-        "C": "Deceiving finance staff into transferring funds or modifying vendor payment information",
-        "D": "Deploying malware on accounting systems to extract tax return data"
-      },
-      "correct": "C",
-      "explanation": "The section defines BEC as a social engineering attack where attackers impersonate executives or vendors to trick finance employees into wiring money or changing vendor payment details. Options B, C, and D describe different attack types not part of the BEC definition for finance staff training."
-    },
-    {
-      "section": "Role-based training: who needs what",
-      "type": "mc",
-      "question": "For IT administrators, what is the primary security risk of a compromised admin account?",
-      "options": {
-        "A": "The attacker can perform lateral movement, escalate privileges, and cover tracks organization-wide",
-        "B": "The attacker is able to install unauthorized software on a single workstation",
-        "C": "The attacker can send phishing emails to end users using the admin's trusted reputation",
-        "D": "The attacker gains read-only access to the help desk ticketing system"
-      },
-      "correct": "A",
-      "explanation": "The section states that a compromised admin account lets an attacker move laterally, escalate privileges, and cover tracks organization-wide. This describes the core privilege-escalation risk specific to admin accounts, unlike the other options."
-    },
-    {
-      "section": "Role-based training: who needs what",
-      "type": "mc",
-      "question": "Which technique do developers use to prevent SQL injection attacks?",
-      "options": {
-        "A": "Input validation that rejects malformed or malicious data before application logic processes it",
-        "B": "Output encoding that neutralizes untrusted data before rendering it in HTML",
-        "C": "Secrets management tools like HashiCorp Vault to store and serve credentials securely",
-        "D": "Parameterized queries that separate query structure from user-supplied data"
+        "A": "Awareness teaches technical skills to employees, while training creates a security-conscious culture across the organization",
+        "B": "Awareness is required by law for all employees, while training is optional for most roles in organizations",
+        "C": "Awareness focuses on IT staff and their responsibilities, while training focuses on executive decision-making roles",
+        "D": "Awareness builds motivation to care about security, while training delivers knowledge and skills to act securely"
       },
       "correct": "D",
-      "explanation": "The section defines parameterized queries as a coding technique that prevents SQL injection by separating query structure from user-supplied data. While B, C, and D are legitimate developer security practices in the section, they do not specifically prevent SQL injection."
-    },
-    {
-      "section": "Role-based training: who needs what",
-      "type": "text",
-      "question": "Explain why offboarding timing for involuntary terminations is a critical security concern, based on what the section states about access revocation and insider threat risk.",
-      "rubric": "A sound answer identifies that access must be revoked at or before the moment the employee is informed, and explains that a disgruntled employee with active access is an immediate insider threat. The urgency stems from the employee's emotional state and motivation after learning of termination.",
-      "explanation": "The section explicitly states that for involuntary terminations, access must be revoked at or before the moment the employee is informed, and describes a disgruntled employee with active access as an immediate insider threat—establishing both the timing requirement and the rationale."
+      "explanation": "The section explicitly states that awareness is motivation and creates mindset, while training is capability that delivers knowledge and skills targeted to a specific role."
     },
     {
       "section": "Role-based training: who needs what",
       "type": "mc",
-      "question": "What does the section describe as whaling?",
+      "question": "According to the study guide, what is BEC and which role faces the highest risk from it?",
       "options": {
-        "A": "An insider threat where an executive abuses their access privileges",
-        "B": "Phishing attacks crafted specifically for executive targets, using personalized details from LinkedIn and public sources",
-        "C": "A technique that uses synthetic audio or video to impersonate an executive",
-        "D": "A social engineering attack targeting multiple high-ranking officers in the same organization"
+        "A": "BEC is a malware attack that steals credentials from users; developers and IT staff face the highest risk from it",
+        "B": "BEC is social engineering where attackers impersonate executives or vendors to trick finance staff into fraudulent transactions",
+        "C": "BEC is a phishing attack targeting only company executives; IT administrators face the highest risk from campaigns",
+        "D": "BEC is a privilege escalation technique used against jump servers; HR and payroll staff face the highest risk exposure"
       },
       "correct": "B",
-      "explanation": "The section defines whaling as phishing attacks crafted specifically for executive targets, using personalized details from LinkedIn, public speeches, and filings to build convincing pretexts. Option B describes deepfake technology (a separate threat), and C and D are not the section's definition."
+      "explanation": "The section defines BEC as social engineering impersonation targeting finance employees and explicitly identifies finance and accounting staff as the highest-risk group."
     },
     {
       "section": "Role-based training: who needs what",
       "type": "mc",
-      "question": "According to the section, what is juice jacking and how should employees protect themselves?",
+      "question": "What are jump servers and why does the guide recommend them for IT staff?",
       "options": {
-        "A": "A technique where attackers overclock a mobile device's battery to drain power faster; disable background apps to prevent it",
-        "B": "A risk where public USB charging stations transfer malware to connected devices; use AC adapters or data-blocking cables instead",
-        "C": "A malware strain that steals payment card data from mobile wallet applications; use VPN on public Wi-Fi",
-        "D": "A Wi-Fi eavesdropping attack that intercepts unencrypted traffic; connect only to WPA3-secured networks"
+        "A": "Jump servers are backup authentication systems that provide failover capability for admin accounts during outages",
+        "B": "Jump servers are cloud-based platforms that allow admins to work remotely from any location without additional security hardening",
+        "C": "Jump servers are dedicated hardened machines used only for sensitive admin tasks to reduce compromised account risk",
+        "D": "Jump servers are network monitoring tools that detect lateral movement and privilege escalation attempts in real time"
+      },
+      "correct": "C",
+      "explanation": "The section defines jump servers as dedicated hardened machines used only for sensitive admin tasks, supporting the practice of using separate accounts for admin versus daily use."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is parameterized queries and what vulnerability does it prevent?",
+      "options": {
+        "A": "Parameterized queries separate query structure from user-supplied data to prevent SQL injection attacks effectively",
+        "B": "Parameterized queries are input validation techniques that reject all special characters from user-supplied input",
+        "C": "Parameterized queries are output encoding functions that neutralize data before rendering in HTML pages",
+        "D": "Parameterized queries are encryption methods that prevent XSS attacks in web applications and databases"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly defines parameterized queries as a coding technique that prevents SQL injection by separating query structure from user-supplied data."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is secrets management and why is it important for developers?",
+      "options": {
+        "A": "Secrets management is encrypting all source code to prevent unauthorized access to development repositories and files",
+        "B": "Secrets management avoids hard-coding credentials or API keys in source code by using dedicated vaults at runtime",
+        "C": "Secrets management is creating strong passwords that developers must memorize and change on a monthly schedule",
+        "D": "Secrets management is documenting all system architecture and design decisions in encrypted wikis for accessibility"
       },
       "correct": "B",
-      "explanation": "The section defines juice jacking as a risk where public USB charging stations are rigged to transfer malware to connected devices, and recommends using AC adapters or data-blocking cables. Options B, C, and D describe different threats not covered in the juice jacking definition."
+      "explanation": "The section defines secrets management as not hard-coding credentials or keys, and using dedicated vault tools like HashiCorp Vault to store and serve secrets securely."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is an SBOM and what purpose does it serve?",
+      "options": {
+        "A": "An SBOM is a security baseline measurement that tests developer knowledge of input validation and secure coding techniques",
+        "B": "An SBOM is a source code review method that identifies hardcoded credentials and secrets in application repositories",
+        "C": "An SBOM is a system backup plan that documents all operating system components for disaster recovery purposes",
+        "D": "An SBOM is a Software Bill of Materials that inventories third-party libraries and components to track vulnerable dependencies"
+      },
+      "correct": "D",
+      "explanation": "The section defines SBOM as an inventory of all third-party libraries and components used to track known-vulnerable dependencies."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "When should access revocation occur during involuntary employee termination?",
+      "options": {
+        "A": "Access should be revoked after a final audit of all data accessed by the employee",
+        "B": "Access should be revoked only after all projects the employee was working on are completed",
+        "C": "Access should be revoked at or before the moment the employee is informed of termination",
+        "D": "Access should be revoked one week after termination to allow time for data handoff"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that for involuntary termination, access must be revoked at or before the moment the employee is informed, because a disgruntled employee with active access is an immediate insider threat."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is whaling and what makes it different from standard phishing?",
+      "options": {
+        "A": "Whaling is phishing attacks crafted for executives using personalized details from LinkedIn and public sources",
+        "B": "Whaling is a type of malware that targets marine research institutions and specialized research vessel networks",
+        "C": "Whaling is social engineering specifically used against IT staff and system administrators in large organizations",
+        "D": "Whaling is a bulk phishing campaign sent to thousands of users across the organization without personalization"
+      },
+      "correct": "A",
+      "explanation": "The section defines whaling as phishing attacks specifically targeting executives and crafted with personalized details from LinkedIn, speeches, and filings."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is juice jacking and what is the recommended protection?",
+      "options": {
+        "A": "Juice jacking is intercepting data on public Wi-Fi networks by injecting malicious code into network traffic",
+        "B": "Juice jacking is stealing juice or beverages from shared office refrigerators causing employee morale problems",
+        "C": "Juice jacking is social engineering where attackers pose as IT support to gain access to mobile devices",
+        "D": "Juice jacking transfers malware to devices from rigged public USB charging stations; use AC adapters or data-blocking cables"
+      },
+      "correct": "D",
+      "explanation": "The section defines juice jacking as malware transfer from rigged public USB charging stations and recommends AC adapters or data-blocking cables as protection."
+    },
+    {
+      "section": "Role-based training: who needs what",
+      "type": "mc",
+      "question": "What is side-loading and what security concern does it create?",
+      "options": {
+        "A": "Side-loading is installing apps from unofficial sources outside the official app store, which bypasses security vetting",
+        "B": "Side-loading is the process of loading data into databases using side-by-side batch operations",
+        "C": "Side-loading is a backup procedure that copies files to external storage devices on the side of a workstation",
+        "D": "Side-loading is when an employee accesses company data while physically standing beside a colleague"
+      },
+      "correct": "A",
+      "explanation": "The section defines side-loading as installing apps from unofficial sources that bypasses security vetting."
     },
     {
       "section": "Training delivery: how it works matters as much as what's taught",
-      "type": "text",
-      "question": "According to the section, what is the main reason phishing simulations are a better measure of training effectiveness than a written quiz alone?",
-      "rubric": "A sound answer explains that phishing simulations measure whether knowledge translates to actual behavior change—the real goal—rather than just whether people can recall facts. The section's fire drill analogy reinforces that the test is *action* in a realistic scenario, not theoretical knowledge.",
-      "explanation": "The section states that phishing simulations measure whether knowledge translates to behavior change, the real goal, and contrasts this with quiz scores. The fire drill analogy emphasizes testing actual response, not theory knowledge."
+      "type": "mc",
+      "question": "According to the study guide, why are phishing simulations more effective than written tests for measuring training success?",
+      "options": {
+        "A": "Phishing simulations bypass the need for scenario-based learning and pre-testing strategies in training programs",
+        "B": "Phishing simulations are cheaper to administer and easier to score than written tests across large organizations",
+        "C": "Phishing simulations measure whether knowledge translates to actual behavior change, while tests only measure abstract knowledge",
+        "D": "Phishing simulations replace the need for LMS systems to track employee compliance and training completion rates"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that phishing simulations measure whether knowledge translates to behavior change, which is the real goal, and compares them to fire drills where actual response matters more than theory."
+    },
+    {
+      "section": "Training delivery: how it works matters as much as what's taught",
+      "type": "mc",
+      "question": "What is microlearning and why does the guide recommend it over annual training sessions?",
+      "options": {
+        "A": "Microlearning is a technique where trainees teach themselves using only search engines and online tutorial resources",
+        "B": "Microlearning uses 5-10 minute modules spread throughout the year and produces better retention than one annual session",
+        "C": "Microlearning requires employees to complete all training in a single day to minimize time away from work duties",
+        "D": "Microlearning uses virtual reality simulations to train employees on emergency response and incident procedures"
+      },
+      "correct": "B",
+      "explanation": "The section states that microlearning involves 5-10 minute modules spread across the year and explicitly notes that this approach produces better retention than a single long annual session."
     }
   ]
 }

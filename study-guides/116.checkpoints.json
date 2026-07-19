@@ -2,82 +2,94 @@
   "checkpoints": [
     {
       "section": "Compliance ≠ security",
-      "type": "text",
-      "question": "Why is it possible for an organization to be compliant but not secure? Explain in one sentence.",
-      "rubric": "A sound answer states that compliance sets only minimum baselines or floors, so an organization can meet those minimum requirements without implementing additional controls needed for true security.",
-      "explanation": "The section explicitly states that frameworks set minimums, not maximums, and that compliance is a floor, not a ceiling — so meeting compliance does not guarantee security beyond that baseline."
+      "type": "mc",
+      "question": "Why is compliance described as a floor rather than a ceiling?",
+      "options": {
+        "A": "Because compliance frameworks set minimum requirements, and being compliant does not guarantee an organization is fully secure",
+        "B": "Because compliance frameworks set maximum requirements, and being compliant guarantees an organization is fully secure",
+        "C": "Because compliance frameworks set minimum requirements, and being compliant guarantees an organization is fully secure",
+        "D": "Because compliance frameworks set maximum requirements, and being compliant does not guarantee an organization is fully secure"
+      },
+      "correct": "A",
+      "explanation": "The section states that frameworks set minimums, not maximums, and that a compliant organization may still be insecure. Compliance is the baseline from which a mature program is built."
     },
     {
       "section": "Four categories of compliance obligations",
       "type": "mc",
-      "question": "Which of the following is an example of a contractual compliance obligation?",
+      "question": "Which of the following best describes a contractual compliance obligation?",
       "options": {
-        "A": "FISMA security requirements mandated for federal agencies by statute",
-        "B": "FERPA rules governing how states manage student education records",
-        "C": "PCI DSS enforced by payment card brands as part of merchant agreements",
-        "D": "HIPAA safeguards required by U.S. law for healthcare organizations"
+        "A": "A law enacted by government that carries legal penalties for organizational failure to comply",
+        "B": "An organization's own internal rules, such as an Acceptable Use Policy or data classification scheme",
+        "C": "A security requirement written into a business contract, such as PCI DSS demanded by card brands",
+        "D": "A voluntary standard adopted across an industry as a de facto requirement for participation"
       },
       "correct": "C",
-      "explanation": "The section defines contractual obligations as security requirements written into business contracts and explicitly lists PCI DSS as a contractual standard enforced by card brands, not a law."
+      "explanation": "The section defines contractual obligations as security requirements written into business contracts, with PCI DSS and ISO 27001 certification as examples."
     },
     {
       "section": "PCI DSS 12 requirements (organized in six categories)",
       "type": "mc",
-      "question": "According to the PCI DSS requirements, which of the following addresses the protection of cardholder data while it is being transmitted over a public network?",
+      "question": "According to PCI DSS, which requirement addresses the use of default vendor-supplied passwords?",
       "options": {
-        "A": "Requirement 6: Develop and maintain secure systems and applications",
-        "B": "Requirement 4: Encrypt cardholder data in transit over public networks",
-        "C": "Requirement 10: Track and monitor all access to network resources and cardholder data",
-        "D": "Requirement 3: Protect stored cardholder data"
+        "A": "Requirement 1, which requires installation and maintenance of a firewall",
+        "B": "Requirement 12, which requires an information security policy for all personnel",
+        "C": "Requirement 7, which restricts cardholder data access by need-to-know",
+        "D": "Requirement 2, which forbids the use of vendor-supplied default passwords"
       },
-      "correct": "B",
-      "explanation": "Requirement 4 explicitly addresses encryption of cardholder data in transit over public networks; Requirement 3 covers stored data, not data in motion."
+      "correct": "D",
+      "explanation": "Requirement 2 of PCI DSS specifically states that vendor-supplied default passwords must not be used."
     },
     {
       "section": "HIPAA Security Rule: three safeguard categories",
       "type": "mc",
-      "question": "A hospital implements workstation use policies and installs badge readers to control physical access to server rooms. Under HIPAA, which safeguard category do these controls fall into?",
+      "question": "Which HIPAA safeguard category includes facility access controls and workstation use policies?",
       "options": {
-        "A": "Physical safeguards including facility access controls and workstation policies",
-        "B": "Administrative safeguards focused on designated security officials",
-        "C": "Technical safeguards such as encryption and authentication systems",
-        "D": "Audit safeguards designed to monitor system access logs"
+        "A": "Operational safeguards, which address incident response procedures and contingency planning processes",
+        "B": "Physical safeguards, which address facility access controls and device and media controls",
+        "C": "Technical safeguards, which address access controls and encryption of data in transmission",
+        "D": "Administrative safeguards, which address security management processes and workforce security training"
       },
-      "correct": "A",
-      "explanation": "The section lists workstation use policies and facility access controls (badge readers) as examples of physical safeguards, not administrative or technical safeguards."
+      "correct": "B",
+      "explanation": "The section identifies physical safeguards as including facility access controls and workstation use policies, distinct from administrative and technical safeguards."
     },
     {
       "section": "Due care vs. due diligence",
-      "type": "text",
-      "question": "Describe the difference between due care and due diligence in one or two sentences.",
-      "rubric": "A sound answer explains that due care means implementing appropriate controls to protect against foreseeable harm, while due diligence means actively testing, monitoring, and verifying that those controls work and that third parties meet their obligations.",
-      "explanation": "The section explicitly contrasts these terms: due care is taking reasonable steps and implementing controls; due diligence goes further by actively testing and verifying controls work."
+      "type": "mc",
+      "question": "What is the key difference between due care and due diligence?",
+      "options": {
+        "A": "Due care means documenting security policies; due diligence means assigning security roles",
+        "B": "Due care means actively testing security controls; due diligence means documenting asset ownership",
+        "C": "Due care means taking reasonable steps to protect assets; due diligence means actively testing controls",
+        "D": "Due care means verifying third-party compliance; due diligence means implementing appropriate controls"
+      },
+      "correct": "C",
+      "explanation": "The section defines due care as implementing appropriate controls, while due diligence goes further to actively test, monitor, and verify that controls work."
     },
     {
       "section": "Compliance monitoring tools",
       "type": "mc",
-      "question": "Which tool measures compliance with CIS Benchmarks using real-time configuration assessment?",
+      "question": "What does CIS-CAT measure compliance with?",
       "options": {
-        "A": "Azure Policy, which monitors compliance in Microsoft cloud environments",
-        "B": "SCAP, which standardizes how compliance requirements are expressed and measured",
-        "C": "AWS Config, which continuously checks cloud resource configurations",
-        "D": "CIS-CAT, which evaluates configurations against CIS Benchmarks"
+        "A": "CIS Benchmarks, which are hardening configuration standards",
+        "B": "PCI DSS cardholder data requirements and payment processing standards",
+        "C": "HIPAA safeguard categories and electronic protected health information controls",
+        "D": "GDPR personal data protection requirements and compliance violations"
       },
-      "correct": "D",
-      "explanation": "The section explicitly identifies CIS-CAT (Center for Internet Security Configuration Assessment Tool) as the tool that measures compliance with CIS Benchmarks."
+      "correct": "A",
+      "explanation": "The section states that CIS-CAT measures compliance with CIS Benchmarks, which are hardening configuration standards."
     },
     {
       "section": "Penalties for noncompliance",
       "type": "mc",
-      "question": "Under GDPR, what is the maximum financial penalty for a noncompliance violation?",
+      "question": "What is the maximum GDPR penalty for noncompliance?",
       "options": {
-        "A": "Up to $100,000 per month from card brands",
-        "B": "$100 to $50,000 per individual violation with an annual category cap",
-        "C": "Up to 4% of annual global revenue or €20M, whichever is greater",
-        "D": "Up to 20 years imprisonment for executives who knowingly violate rules"
+        "A": "Up to 100,000 dollars per month imposed by regulatory bodies for violations",
+        "B": "Up to 1.9 million dollars per category per year for noncompliance with requirements",
+        "C": "Up to 20 years of imprisonment for executives who knowingly violate the regulation",
+        "D": "Up to four percent of annual global revenue or 20 million euros, whichever is greater"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that GDPR penalties are up to 4% of annual global revenue or €20M, whichever is greater — the other options reference PCI DSS, HIPAA, and SOX penalties."
+      "correct": "D",
+      "explanation": "The section specifies that GDPR penalties are up to 4 percent of annual global revenue or 20 million euros, whichever is greater."
     }
   ]
 }

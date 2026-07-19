@@ -2,115 +2,133 @@
   "checkpoints": [
     {
       "section": "What non-repudiation actually requires",
-      "type": "text",
-      "question": "Name the two assurances that must work together to achieve non-repudiation, and explain why one alone is insufficient.",
-      "rubric": "A sound answer identifies proof of integrity and proof of origin. It should note that integrity alone does not identify who created the data, so you also need to know the specific party responsible.",
-      "explanation": "The section explicitly states that non-repudiation depends on both assurances and that integrity alone is not enough because you need to know who created it."
+      "type": "mc",
+      "question": "Non-repudiation depends on two assurances working together. Which pair of properties must both be present?",
+      "options": {
+        "A": "Proof of integrity and proof of origin",
+        "B": "Proof of confidentiality and proof of authentication",
+        "C": "Proof of encryption and proof of key ownership",
+        "D": "Proof of identity and proof of data persistence"
+      },
+      "correct": "A",
+      "explanation": "Non-repudiation requires both proof of integrity (data was not modified) and proof of origin (it came from a specific, identifiable party). Integrity alone is insufficient."
     },
     {
       "section": "Hashing: the foundation of integrity",
       "type": "mc",
-      "question": "What property of a cryptographic hash function means that even a tiny change to the input produces a completely different hash?",
+      "question": "Which statement correctly describes what a cryptographic hash function produces?",
       "options": {
-        "A": "Deterministic output",
-        "B": "Avalanche effect",
-        "C": "Collision resistance",
-        "D": "Fixed-length fingerprint"
+        "A": "A digital signature that proves ownership of the plaintext",
+        "B": "A variable-length output that identifies the sender of the data",
+        "C": "An encrypted copy of the original message for confidentiality purposes",
+        "D": "A fixed-length value that serves as a fingerprint of the data"
       },
-      "correct": "B",
-      "explanation": "The section defines avalanche effect as the property that any tiny change to input produces a completely different hash. The other options describe different hash properties but not this specific behavior."
+      "correct": "D",
+      "explanation": "A cryptographic hash function produces a fixed-length hash value (message digest) that acts as a fingerprint. Hashing alone does not identify who created the hash."
     },
     {
       "section": "Digital signatures: how non-repudiation is actually proven",
-      "type": "text",
-      "question": "Explain how the matching of two hashes during signature verification proves both that data was not altered and that the signer holds the private key.",
-      "rubric": "A sound answer should explain that if the recipient's independently computed hash matches the hash decrypted from the signature, it means the data is intact (any alteration would break the match) and the signer must own the private key (only they could have encrypted it in a way the public key can decrypt).",
-      "explanation": "The section details the six-step process and explicitly states that matching hashes confirm both integrity and private key possession simultaneously."
+      "type": "mc",
+      "question": "In the digital signature process, what does the sender encrypt with their private key?",
+      "options": {
+        "A": "The entire plaintext message to ensure confidentiality",
+        "B": "The hash value of the plaintext message",
+        "C": "The recipient's public key to establish a shared secret",
+        "D": "A timestamp issued by a Time Stamping Authority"
+      },
+      "correct": "B",
+      "explanation": "The sender hashes the plaintext, then encrypts that hash with their private key to create the digital signature. This proves both that the data was not altered and that the signer holds the private key."
     },
     {
       "section": "Why HMAC doesn't achieve non-repudiation",
       "type": "mc",
-      "question": "Why is it impossible for a third-party arbitrator to determine who generated an HMAC, while they can determine who created a digital signature?",
+      "question": "Why does HMAC fail to provide non-repudiation even though it verifies integrity?",
       "options": {
-        "A": "HMAC uses a shared secret key that either party could have used, while a digital signature's private key belongs to only one party",
-        "B": "HMAC produces shorter output than digital signatures and is therefore easier to forge",
-        "C": "HMAC lacks hash integrity verification while digital signatures include it",
-        "D": "HMAC keys are stored in plaintext while private keys are encrypted"
+        "A": "HMAC requires a digital certificate from a Certificate Authority to function",
+        "B": "HMAC does not use a hash function and cannot detect any tampering",
+        "C": "Both parties share the same key, so a third party cannot determine who created it",
+        "D": "HMAC encrypts the entire message, making it impossible to verify authenticity"
       },
-      "correct": "A",
-      "explanation": "The section's comparison table and explanation state that in HMAC both parties share the same key, so either could have generated the code; digital signatures use a private key belonging to exactly one party, allowing a third party to determine the signer."
+      "correct": "C",
+      "explanation": "Because both parties in HMAC share the same key, an arbitrator cannot determine which party created the code — either could have made it. Digital signatures use a unique private key, allowing third parties to determine who signed."
     },
     {
       "section": "PKI and Certificate Authorities: anchoring identity",
       "type": "mc",
-      "question": "What does a CA's signature on Alice's digital certificate tell a third-party verifier?",
+      "question": "What role does a Certificate Authority play in making digital signatures trustworthy?",
       "options": {
-        "A": "That Alice's signature cannot be forged by any other person ever",
-        "B": "That Alice's public key has never been compromised in the past",
-        "C": "That the CA verified Alice owns the public key bound to the certificate",
-        "D": "That Alice's private key is stored securely on her device"
+        "A": "It encrypts the plaintext message to protect confidentiality during transmission",
+        "B": "It verifies the sender's identity and binds their public key to a certificate",
+        "C": "It stores copies of all private keys for backup and disaster recovery purposes",
+        "D": "It generates the private key that the sender uses to create digital signatures"
       },
-      "correct": "C",
-      "explanation": "The section states that a CA's signature on Alice's certificate means the CA verified Alice owns that key, establishing the chain of trust necessary for a third party to trust the signature."
+      "correct": "B",
+      "explanation": "A CA verifies identities and issues digital certificates that bind a public key to an identified entity. This chain of trust makes digital signatures legally meaningful and allows third parties to trust them."
     },
     {
       "section": "S/MIME: non-repudiation in email",
       "type": "mc",
-      "question": "In S/MIME, what does the sender's email client attach to the message along with the digital signature?",
+      "question": "In S/MIME, what does the sender attach to an email message along with the signature?",
       "options": {
-        "A": "The recipient's public key and a timestamp from a TSA",
-        "B": "An encryption key and an audit log entry",
-        "C": "The sender's certificate and a receipt confirmation",
-        "D": "The certificate and the signature"
+        "A": "The plaintext message and a request for a read receipt",
+        "B": "The encrypted private key and a timestamp from a TSA",
+        "C": "The hash value and the recipient's public key",
+        "D": "The signature and the sender's digital certificate"
       },
       "correct": "D",
-      "explanation": "The section states the sender's email client hashes the message, signs with private key, and attaches signature plus certificate. The other options introduce elements not mentioned in the S/MIME section."
+      "explanation": "S/MIME implementations attach the signature and the sender's certificate, allowing the recipient's client to verify the signature automatically."
     },
     {
       "section": "ECDSA: an efficient signature algorithm",
-      "type": "text",
-      "question": "How does ECDSA achieve the same security strength as RSA while being faster and computationally lighter?",
-      "rubric": "A sound answer should note that ECDSA uses elliptic curve mathematics rather than traditional asymmetric methods, and that this allows much shorter key lengths while maintaining equivalent security strength.",
-      "explanation": "The section explicitly states ECDSA provides the same security as RSA but with much shorter key lengths, making it faster and lighter."
+      "type": "mc",
+      "question": "What advantage does ECDSA provide compared to RSA?",
+      "options": {
+        "A": "ECDSA provides the same security strength with much shorter key lengths",
+        "B": "ECDSA encrypts the plaintext directly instead of hashing first",
+        "C": "ECDSA uses shared secret keys instead of public key pairs for faster processing",
+        "D": "ECDSA does not require a Certificate Authority to verify identity"
+      },
+      "correct": "A",
+      "explanation": "ECDSA produces digital signatures using elliptic curve math, providing the same security strength as RSA but with much shorter key lengths, making it faster and computationally lighter."
     },
     {
       "section": "Timestamps and audit logs: supporting evidence",
       "type": "mc",
-      "question": "What gap does a timestamp from a TSA fill that a digital signature alone cannot?",
+      "question": "What specific gap does a Time Stamping Authority fill that a digital signature alone cannot address?",
       "options": {
-        "A": "A timestamp proves the message was encrypted, while a signature only proves origin",
-        "B": "A timestamp verifies the CA is legitimate, while a signature only verifies the sender",
-        "C": "A timestamp prevents the private key from being stolen after signing",
-        "D": "A timestamp proves when a signature was created, while a signature only proves who signed"
+        "A": "It proves the sender's identity without requiring PKI infrastructure",
+        "B": "It encrypts the message to provide confidentiality during transmission",
+        "C": "It proves when a signature was created, not just who created it",
+        "D": "It stores a backup copy of the private key for disaster recovery"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states a digital signature proves who signed but not when, and timestamps fill that gap—critical in legal disputes where timing matters."
+      "correct": "C",
+      "explanation": "A digital signature proves who signed but not when. A TSA applies a cryptographically signed timestamp to fill that gap, which is critical in legal disputes where timing matters."
     },
     {
       "section": "Proof of origin vs. proof of delivery",
       "type": "mc",
-      "question": "Which of the following statements correctly describes the difference between proof of origin and proof of delivery?",
+      "question": "Which statement correctly distinguishes between proof of origin and proof of delivery?",
       "options": {
-        "A": "Proof of origin confirms the sender sent it; proof of delivery confirms the recipient received it",
-        "B": "Proof of origin confirms the recipient received it; proof of delivery confirms the sender sent it",
-        "C": "Proof of origin uses hashing; proof of delivery uses encryption",
-        "D": "Proof of origin requires a CA; proof of delivery requires a TSA"
+        "A": "Proof of origin protects against sender denial; proof of delivery protects against recipient denial",
+        "B": "Proof of origin uses timestamps; proof of delivery uses Certificate Authorities",
+        "C": "Proof of origin requires encryption; proof of delivery requires only a hash function",
+        "D": "Proof of origin is handled by HMAC; proof of delivery is handled by digital signatures"
       },
       "correct": "A",
-      "explanation": "The section's table clearly defines proof of origin as proving the sender sent it and proof of delivery as proving the recipient received it."
+      "explanation": "Proof of origin proves the sender sent it, preventing the sender from denying sending. Proof of delivery proves the recipient received it, preventing the recipient from denying receiving."
     },
     {
       "section": "Compliance context",
       "type": "mc",
-      "question": "Which of the following is a regulatory requirement that mandates non-repudiation controls?",
+      "question": "Which regulatory framework requires non-alterable preservation of financial records?",
       "options": {
-        "A": "SOX requires encryption of all financial transaction logs",
-        "B": "GDPR requires digital signatures on all employee communications",
-        "C": "HIPAA Security Rule requires audit controls on systems holding protected health information",
-        "D": "PCI-DSS requires all credit card data to be signed by a government CA"
+        "A": "GDPR standards for data minimization and retention periods",
+        "B": "PCI DSS requirements for payment card industry networks",
+        "C": "HIPAA Security Rule for protected health information systems",
+        "D": "SEC Rule 17a-4 and FINRA rules for financial institutions"
       },
-      "correct": "C",
-      "explanation": "The section explicitly names HIPAA Security Rule as requiring audit controls on systems with protected health information, while the other options either misstate regulations or introduce requirements not mentioned in this section."
+      "correct": "D",
+      "explanation": "SEC Rule 17a-4 and FINRA rules require financial records to be preserved in a non-alterable format, making non-repudiation a legal requirement in that industry."
     }
   ]
 }

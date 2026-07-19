@@ -3,114 +3,132 @@
     {
       "section": "URL filtering: the foundation",
       "type": "mc",
-      "question": "What does reputation scoring use to assign a trustworthiness score to a domain?",
+      "question": "URL filtering allows administrators to set policies at what level rather than managing millions of individual sites?",
       "options": {
-        "A": "Only user complaints reported to the vendor",
-        "B": "Behavior, hosting infrastructure, registration age, and threat intelligence",
-        "C": "The category assignment given by the filtering database",
-        "D": "Only the age of the domain registration"
+        "A": "Protocol level by blocking specific traffic types",
+        "B": "Category level based on vendor-maintained website categorization",
+        "C": "Individual domain level with manual entries for each site",
+        "D": "IP address level with subnet-based blocking rules"
       },
       "correct": "B",
-      "explanation": "The section explicitly states that reputation scoring assigns scores based on behavior, hosting infrastructure, registration age, and threat intelligence. Options A, C, and D each name only a subset or incorrect factor."
+      "explanation": "The study guide states that admins set category-level policies (block gambling, allow productivity tools, monitor social media) rather than managing millions of individual entries. Reputation scoring and custom lists then refine those category decisions."
     },
     {
       "section": "DNS filtering: block before connection",
-      "type": "text",
-      "question": "Explain why DNS filtering can block malicious domains regardless of which protocol an attacker's malware uses to communicate.",
-      "rubric": "A sound answer notes that DNS filtering blocks at the domain name resolution layer before any connection is made, so it prevents lookup of the domain name itself—blocking access to the IP address regardless of whether the malware later uses HTTP, HTTPS, or a custom protocol.",
-      "explanation": "The section states that DNS filtering blocks malicious domains from any protocol (HTTP, HTTPS, custom malware protocols), not just web browsing, because it operates at the DNS resolution step before any connection is ever made."
+      "type": "mc",
+      "question": "At what stage of the connection process does DNS filtering block malicious domains?",
+      "options": {
+        "A": "During the DNS resolution layer before any network connection is made",
+        "B": "When the server responds with content to the client for inspection",
+        "C": "At the proxy server when the encrypted payload arrives from the client",
+        "D": "After the TCP connection is established but before the HTTP request is sent"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that DNS filtering blocks malicious domains at the DNS resolution layer — the step where a domain name is translated into an IP address — before any network connection is ever made."
     },
     {
       "section": "Proxy-based filtering: inspect every request",
       "type": "mc",
-      "question": "Which method of proxy deployment requires no client configuration and is harder to bypass?",
+      "question": "What is the key difference between an explicit proxy and a transparent proxy in terms of configuration and user awareness?",
       "options": {
-        "A": "Explicit proxy configured via MDM",
-        "B": "Explicit proxy configured via Group Policy",
-        "C": "Transparent proxy redirected at the network/firewall level",
-        "D": "Transparent proxy configured via Group Policy"
+        "A": "Explicit proxy requires network configuration while transparent proxy needs no client setup",
+        "B": "Explicit proxy works only on HTTPS traffic while transparent proxy handles all protocols equally",
+        "C": "Explicit proxy is easier to bypass because users can change settings while transparent proxy operates without client knowledge",
+        "D": "Explicit proxy logs all traffic events while transparent proxy only monitors specific domains"
       },
       "correct": "C",
-      "explanation": "The section defines transparent proxy as redirecting traffic at the network/firewall level with no client configuration and no user awareness, and states it is harder to bypass because it requires no client cooperation."
+      "explanation": "The study guide states that an explicit proxy requires client configuration and is easy to bypass by changing browser settings, while a transparent proxy redirects at the network level with no client configuration or user awareness and is harder to bypass."
     },
     {
       "section": "SSL/TLS inspection: seeing inside encrypted traffic",
-      "type": "text",
-      "question": "Describe the man-in-the-middle process a proxy uses to inspect HTTPS traffic without breaking the connection to the real server.",
-      "rubric": "A sound answer explains that the proxy presents a dynamically generated certificate signed by its own CA to the client, establishes a separate TLS session to the real server, and inspects decrypted traffic between the two sessions.",
-      "explanation": "The section explicitly describes this three-step process: the proxy presents a certificate to the browser signed by its own CA, opens a separate session to the real server, and inspects the decrypted content in between."
+      "type": "mc",
+      "question": "Why must the proxy's CA certificate be installed on every client device for SSL/TLS inspection to work?",
+      "options": {
+        "A": "To enable the proxy to block specific certificate-based attacks from reaching clients",
+        "B": "To encrypt all traffic flowing between the client and the proxy server",
+        "C": "To verify the authenticity of the original web server's certificate before inspection",
+        "D": "To allow the proxy to generate certificates that clients will trust during the MITM operation"
+      },
+      "correct": "D",
+      "explanation": "The study guide explains that SSL inspection works by the proxy performing a man-in-the-middle: it presents a dynamically generated certificate to the browser signed by its own CA, and that CA certificate must be installed in the trusted certificate store so the browser will accept the proxy's certificate."
     },
     {
       "section": "Acceptable Use Policy",
       "type": "mc",
-      "question": "Under the AUP framework, which treatment typically applies to social media usage?",
+      "question": "What is the relationship between an AUP and web filtering?",
       "options": {
-        "A": "Always blocked without exception",
-        "B": "Always allowed during working hours",
-        "C": "Allowed only for IT security staff",
-        "D": "Logged and reported but not blocked"
+        "A": "Web filtering and the AUP operate as separate systems with minimal direct connection",
+        "B": "The AUP applies only to blocked sites while web filtering applies to all traffic",
+        "C": "The AUP is the legal framework while web filtering is its technical enforcement mechanism",
+        "D": "Web filtering creates the AUP by logging and analyzing what sites users visit"
       },
-      "correct": "D",
-      "explanation": "The section's treatment table lists social media under 'Monitored' with the description 'logged, reported, not blocked.'"
+      "correct": "C",
+      "explanation": "The study guide states that the AUP is the foundational policy document defining what web usage is permitted and prohibited, and that web filtering technically enforces what the AUP defines in writing."
     },
     {
       "section": "Safe search enforcement",
       "type": "mc",
       "question": "How does DNS-based safe search enforcement prevent users from disabling safe search manually?",
       "options": {
-        "A": "It redirects DNS lookups to filtering endpoints",
-        "B": "It blocks all search engine domains entirely",
-        "C": "It blocks results with adult content",
-        "D": "It logs unsafe search queries"
+        "A": "By replacing search results at the proxy before delivering them to the user",
+        "B": "By blocking the JavaScript that controls the safe search toggle in browsers",
+        "C": "By blocking all search engine requests that contain unsafe query parameters",
+        "D": "By redirecting DNS lookups for search engines to endpoints that enforce maximum filtering"
       },
-      "correct": "A",
-      "explanation": "The section states that DNS lookups for google.com are redirected to forcesafesearch.google.com and bing.com lookups go to strict.bing.com, which activate the search engine's maximum content filtering settings network-wide."
+      "correct": "D",
+      "explanation": "The study guide explains that DNS lookups for search engines are redirected to specific endpoints like forcesafesearch.google.com or strict.bing.com, which automatically activate the search engine's maximum content filtering settings network-wide."
     },
     {
       "section": "Download controls",
       "type": "mc",
-      "question": "Which of the following file types is listed as a common blocked executable for standard users?",
+      "question": "What do download controls do when a suspicious file passes type checking at the proxy?",
       "options": {
-        "A": ".txt or .pdf",
-        "B": ".exe or .msi",
-        "C": ".jpg or .png",
-        "D": ".mp3 or .mp4"
+        "A": "They scan it with antivirus and may submit it to a cloud sandbox for behavior analysis",
+        "B": "They encrypt the file until the user verifies its authenticity through a separate process",
+        "C": "They allow the download immediately but mark it as potentially malicious in logs",
+        "D": "They immediately quarantine the file for manual administrator review and approval"
       },
-      "correct": "B",
-      "explanation": "The section explicitly lists .exe and .msi as common blocked executables for standard users, along with .bat, .ps1, and .scr."
+      "correct": "A",
+      "explanation": "The study guide states that files passing type checks can be scanned by antivirus at the proxy, and suspicious files may be submitted to a cloud sandbox — an isolated environment that executes the file and reports behavioral indicators before delivery or blocking."
     },
     {
       "section": "Agent-based filtering: off-network devices",
-      "type": "text",
-      "question": "What problem does agent-based web filtering solve that proxy-based filtering cannot address?",
-      "rubric": "A sound answer identifies that agent-based filtering maintains policy enforcement for remote or home workers whose traffic never reaches the corporate proxy or firewall.",
-      "explanation": "The section states that agent-based filtering solves the problem of remote/home workers whose traffic never touches the corporate proxy or firewall by routing traffic through a cloud-based security service instead."
+      "type": "mc",
+      "question": "What problem does agent-based web filtering solve that proxy-based filtering alone cannot address?",
+      "options": {
+        "A": "It blocks malware at the network layer instead of the application layer",
+        "B": "It prevents remote and home workers from bypassing corporate filtering policies",
+        "C": "It reduces the cost of deploying web filtering infrastructure",
+        "D": "It provides faster filtering performance for users with slow internet connections"
+      },
+      "correct": "B",
+      "explanation": "The study guide states that agent-based filtering solves the problem of remote and home workers whose traffic never touches the corporate proxy or firewall by installing a lightweight client that enforces policies locally via a cloud-based security service."
     },
     {
       "section": "CASB: controlling cloud app access",
       "type": "mc",
-      "question": "In discovery mode, what does a CASB analyze to inventory cloud services in use?",
+      "question": "What does a CASB address with its discovery mode, and what risk does shadow IT represent?",
       "options": {
-        "A": "Employee survey responses about cloud app preferences",
-        "B": "Manual audits of employee device storage",
-        "C": "Cloud provider invoices and billing data",
-        "D": "Network traffic logs showing data volumes and service characteristics"
+        "A": "Discovery mode identifies malware in cloud traffic; shadow IT causes slow network performance",
+        "B": "Discovery mode blocks all cloud apps used by employees; shadow IT wastes corporate bandwidth",
+        "C": "Discovery mode monitors user behavior in cloud apps; shadow IT creates policy violations in logs",
+        "D": "Discovery mode inventories cloud services in use; shadow IT bypasses security and data governance"
       },
       "correct": "D",
-      "explanation": "The section states that in discovery mode, a CASB analyzes network traffic logs to inventory all cloud services in use, showing data volumes, risk posture, and compliance certifications."
+      "explanation": "The study guide explains that a CASB addresses shadow IT — employees using unauthorized cloud services that bypass organizational security and data governance — by analyzing traffic logs in discovery mode to inventory all cloud services in use."
     },
     {
       "section": "Bypass attempts and countermeasures",
       "type": "mc",
-      "question": "Which MDM-enforced control prevents users from bypassing filtering by disconnecting from corporate Wi-Fi?",
+      "question": "What is the most comprehensive filtering coverage option for managed mobile devices attempting to bypass Wi-Fi-based filtering?",
       "options": {
-        "A": "Disabling cellular data on managed devices",
-        "B": "Blocking personal VPN installations",
-        "C": "Always-on VPN that blocks device use when disconnected",
-        "D": "Logging users out of cloud services remotely"
+        "A": "MDM-enforced always-on VPN that applies to all data interfaces and prevents device use when inactive",
+        "B": "Disabling the device's ability to switch between Wi-Fi and cellular network connections",
+        "C": "Blocking all cellular data access on company devices during work hours",
+        "D": "Requiring users to manually authenticate for each internet connection attempt they make"
       },
-      "correct": "C",
-      "explanation": "The section identifies MDM-enforced always-on VPN configurations as providing the most comprehensive filtering coverage for managed mobile devices by applying to all data interfaces and preventing device use when VPN is inactive."
+      "correct": "A",
+      "explanation": "The study guide states that MDM-enforced always-on VPN configurations — which apply to all data interfaces and prevent device use when VPN is inactive — provide the most comprehensive filtering coverage for managed mobile devices."
     }
   ]
 }

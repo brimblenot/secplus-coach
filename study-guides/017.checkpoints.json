@@ -3,68 +3,80 @@
     {
       "section": "What a cryptographic hash function is",
       "type": "mc",
-      "question": "Which property of a cryptographic hash function means that changing a single bit in the input produces a completely different output?",
+      "question": "Which of the following is a core property that distinguishes a secure cryptographic hash function?",
       "options": {
-        "A": "Collision-resistant",
-        "B": "Deterministic",
-        "C": "One-way / preimage resistant",
-        "D": "Avalanche effect"
+        "A": "It allows different inputs to produce the same hash output to reduce storage requirements",
+        "B": "It produces variable-length output that depends on the size of the input file being hashed",
+        "C": "It is one-way, making it computationally infeasible to find any input that produces a given hash",
+        "D": "It can be reversed with the correct decryption key to recover the original input data"
       },
-      "correct": "D",
-      "explanation": "The avalanche effect is defined in the section as the property where changing even one bit in the input produces a completely different output. The other properties describe different security characteristics."
+      "correct": "C",
+      "explanation": "The section explicitly states that a secure hash function must be one-way (preimage resistant), meaning it is computationally infeasible to reverse it. This is the defining property that prevents recovery of the original input from a hash."
     },
     {
       "section": "The hash algorithms: what's safe and what's broken",
       "type": "mc",
-      "question": "Which of the following hash algorithms is approved for current security-critical purposes like TLS and code signing?",
+      "question": "Which hash algorithm is currently considered secure and is most widely deployed for security-critical purposes like TLS and code signing?",
       "options": {
-        "A": "SHA-3 with a Merkle–Damgård construction",
-        "B": "SHA-256 from the SHA-2 family",
-        "C": "SHA-1 following Google's SHAttered collision",
-        "D": "MD5 with a 128-bit output"
+        "A": "SHA-1, which was phased out after the SHAttered collision attack in 2017",
+        "B": "SHA-3, which uses the same Merkle-Damgård construction as SHA-1 for compatibility",
+        "C": "MD5, which has a 128-bit output and is still widely used in modern systems",
+        "D": "SHA-256, which is part of the SHA-2 family and has a 256-bit output"
       },
-      "correct": "B",
-      "explanation": "The section marks SHA-256 (SHA-2 family) as secure and most widely deployed for TLS and code signing. MD5 and SHA-1 are broken, and SHA-3 uses sponge construction, not Merkle–Damgård."
+      "correct": "D",
+      "explanation": "The study guide explicitly lists SHA-256 as secure and notes it is the most widely deployed algorithm used in TLS, Bitcoin, and code signing. MD5 and SHA-1 are both marked as broken with practical collisions, and SHA-3 uses a different sponge construction, not Merkle-Damgård."
     },
     {
       "section": "How hashing is used in practice",
-      "type": "text",
-      "question": "Explain how hashing is used to verify file integrity during a download.",
-      "rubric": "A sound answer states that a vendor publishes a hash of the file, the user computes the hash of the downloaded file themselves, and a matching hash confirms the file is unaltered and unchanged.",
-      "explanation": "The section describes file integrity verification: comparing a vendor's published hash to the hash computed by the user after download to detect tampering or corruption."
+      "type": "mc",
+      "question": "In password storage, why is storing the hash of a password preferred over storing the plaintext password?",
+      "options": {
+        "A": "The server can hash the submitted password and compare it to the stored hash without revealing plaintext",
+        "B": "Hashing makes passwords shorter and smaller so they use less database storage space overall",
+        "C": "Hashing encrypts the password so only authorized administrators can read or access it directly",
+        "D": "The hash function reverses the password during login to verify the user's identity and grant access"
+      },
+      "correct": "A",
+      "explanation": "The section states that servers store the hash of the password and at login, the server hashes the submitted password and compares it to the stored hash—the server never sees or stores the actual password, which is the security advantage."
     },
     {
       "section": "Why fast hashes are dangerous for passwords — and how salting fixes it",
       "type": "mc",
-      "question": "What does a salt accomplish in password storage?",
+      "question": "What does a salt accomplish in password hashing?",
       "options": {
-        "A": "It makes each user's password hash unique even if passwords are identical",
-        "B": "It slows down the hashing process to prevent offline attacks",
-        "C": "It replaces the need for a work factor in password hashing",
-        "D": "It stores the plaintext password securely in the database"
+        "A": "It adds an iteration count that increases the computational work required for each hash operation performed",
+        "B": "It is a unique random value per user concatenated with the password before hashing to defeat rainbow tables",
+        "C": "It slows down the hashing process to make dictionary attacks and brute force attempts less practical",
+        "D": "It encrypts the password hash with a secondary cipher to make it unreadable by attackers"
       },
-      "correct": "A",
-      "explanation": "The section explains that salt is a unique random value per user that, when concatenated with the password before hashing, ensures different hashes even for identical passwords and destroys the value of precomputed rainbow tables."
+      "correct": "B",
+      "explanation": "The section defines a salt as a unique, cryptographically random value generated per user and concatenated with the password before hashing. Even if two users choose the same password, their hashes differ, destroying the value of precomputed rainbow tables."
     },
     {
       "section": "HMAC: integrity + authentication with a shared key",
-      "type": "text",
-      "question": "Why does HMAC not provide non-repudiation, even though it provides integrity and authentication?",
-      "rubric": "A sound answer states that both sender and receiver share the same key, so either party could have generated the HMAC, making it impossible for one to prove the other created it.",
-      "explanation": "The section explicitly states that HMAC does not provide non-repudiation because both parties share the same key, so neither can prove which one generated the code."
+      "type": "mc",
+      "question": "Which of the following is a limitation of HMAC compared to digital signatures?",
+      "options": {
+        "A": "HMAC can only be used for short messages and cannot handle large files or data streams",
+        "B": "HMAC does not provide non-repudiation since both sender and receiver share the same secret key",
+        "C": "HMAC requires asymmetric cryptography which makes it slower than basic hashing operations alone",
+        "D": "HMAC cannot provide integrity verification of a message being transmitted or stored"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that HMAC does not provide non-repudiation because both sender and receiver share the same key, so either could have generated the HMAC and neither can prove the other did it."
     },
     {
       "section": "Digital signatures: authentication + integrity + non-repudiation",
       "type": "mc",
-      "question": "In the digital signature verification process, what does decrypting the signature with the sender's public key recover?",
+      "question": "In the digital signature verification process, what does the recipient do after decrypting the signature with the sender's public key?",
       "options": {
-        "A": "The original plaintext message",
-        "B": "The sender's private key",
-        "C": "The original hash of the message",
-        "D": "The certificate authority's signature"
+        "A": "The recipient encrypts the decrypted signature again to verify it matches the public key",
+        "B": "The recipient requests a second signature from the sender to confirm the first one",
+        "C": "The recipient independently hashes the received message and checks if both hashes match",
+        "D": "The recipient compares the decrypted signature to the original message to confirm authenticity"
       },
       "correct": "C",
-      "explanation": "The section's verification process states that decrypting the signature with the sender's public key recovers the original hash, which is then compared to an independently computed hash of the received message."
+      "explanation": "The section states that after decrypting the signature with the public key, the recipient independently hashes the received message, and if both hashes match, the signature is valid and the message is authentic and unaltered."
     }
   ]
 }

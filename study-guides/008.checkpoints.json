@@ -3,94 +3,171 @@
     {
       "section": "Defense-in-depth: layers from outside in",
       "type": "mc",
-      "question": "Physical security controls are organized in concentric zones. Which of the following lists those zones in the correct order from outermost to innermost?",
+      "question": "Physical security controls are organized as concentric zones. What are the four layers, ordered from outermost to innermost?",
       "options": {
         "A": "Device, room, building, perimeter",
-        "B": "Room, device, perimeter, building",
+        "B": "Building, perimeter, device, room",
         "C": "Perimeter, building, room, device",
-        "D": "Building, perimeter, device, room"
+        "D": "Room, device, perimeter, building"
       },
       "correct": "C",
-      "explanation": "The study guide explicitly orders the zones as perimeter (outer boundary), building (structure entry), room (sensitive areas), and device (individual hardware) from outside in."
+      "explanation": "The study guide explicitly lists the four zones in order: perimeter (outer boundary), building (structure entry), room (sensitive areas), and device (individual hardware)."
     },
     {
       "section": "Perimeter controls",
       "type": "mc",
-      "question": "A facility wants to prevent unauthorized people from climbing the perimeter fence while allowing security cameras to see outside the perimeter clearly. Which two fencing characteristics should they prioritize?",
+      "question": "Which type of fencing is described as being made of welded steel posts and is far more resistant to cutting and climbing than the alternative?",
       "options": {
-        "A": "Chain-link fencing without razor wire",
-        "B": "Transparent fencing with razor wire on top",
-        "C": "Steel palisade fencing without additional height",
-        "D": "Opaque fencing with razor wire on top"
+        "A": "Steel palisade fencing",
+        "B": "Chain-link fencing with barbed wire",
+        "C": "Opaque welded steel mesh",
+        "D": "Transparent chain-link with razor wire"
+      },
+      "correct": "A",
+      "explanation": "The study guide states that steel palisade fencing is made of welded steel posts and is far more cut/climb resistant than chain-link fencing."
+    },
+    {
+      "section": "Perimeter controls",
+      "type": "mc",
+      "question": "What is the primary purpose of bollards at vehicle access points?",
+      "options": {
+        "A": "To block visual reconnaissance from outside the perimeter",
+        "B": "To provide lighting for facial recognition at entry points",
+        "C": "To eliminate shadows and prevent unauthorized entry",
+        "D": "To stop vehicle ramming attacks at access points"
+      },
+      "correct": "D",
+      "explanation": "The study guide defines bollards as reinforced steel or concrete cylindrical posts installed at vehicle access points to stop vehicle ramming attacks."
+    },
+    {
+      "section": "Perimeter controls",
+      "type": "mc",
+      "question": "How does motion-activated security lighting help protect a facility compared to continuous lighting?",
+      "options": {
+        "A": "It eliminates shadows more effectively than fixed lights",
+        "B": "It conserves energy and draws immediate attention to movement",
+        "C": "It provides better facial recognition at all entry points",
+        "D": "It covers all entry points and loading docks equally"
       },
       "correct": "B",
-      "explanation": "Transparent fencing allows cameras to see out and makes climbers visible, while razor wire on top increases climb difficulty; the section states transparent fencing supports camera functionality and visibility of intruders."
+      "explanation": "The study guide states that motion-activated lighting conserves energy and draws immediate attention to movement, making it advantageous over continuous lighting."
     },
     {
       "section": "Building entry controls",
-      "type": "text",
-      "question": "Explain the difference between tailgating and piggybacking, and describe how a vestibule prevents both.",
-      "rubric": "A sound answer states that tailgating is unauthorized following without the authorized person's knowledge while piggybacking is following with their knowledge/consent, and that a vestibule prevents both by requiring each person to authenticate individually through interlocking doors that open only one at a time.",
-      "explanation": "The section defines both terms with their key difference being the authorized person's awareness, and explains that vestibules force individual authentication via interlocking single-open-door design."
+      "type": "mc",
+      "question": "What is the key difference between tailgating and piggybacking in the context of access control vestibules?",
+      "options": {
+        "A": "Tailgating happens at the perimeter; piggybacking happens in the building",
+        "B": "Tailgating requires a badge reader; piggybacking does not",
+        "C": "Tailgating involves consent from the authorized person; piggybacking does not",
+        "D": "Tailgating is unknowing; piggybacking is with the authorized person's consent"
+      },
+      "correct": "D",
+      "explanation": "The study guide defines tailgating as an unauthorized person following without the authorized person's knowledge, while piggybacking is the same act but with the authorized person's consent."
+    },
+    {
+      "section": "Building entry controls",
+      "type": "mc",
+      "question": "Which badge system type is described as using Radio Frequency ID signals and communicating wirelessly without contact?",
+      "options": {
+        "A": "Smart card with embedded chip",
+        "B": "Access card with cryptographic operations",
+        "C": "Proximity card using RFID technology",
+        "D": "Card combined with a PIN entry"
+      },
+      "correct": "C",
+      "explanation": "The study guide identifies proximity cards as using Radio Frequency ID signals that communicate with the reader wirelessly without contact."
+    },
+    {
+      "section": "Building entry controls",
+      "type": "mc",
+      "question": "What is the primary function of two-person integrity in sensitive areas?",
+      "options": {
+        "A": "Verifies visitor identity and issues visitor badges to authorized personnel",
+        "B": "Prevents any one person from taking unauthorized actions without a witness present",
+        "C": "Inspects packages and controls access at perimeter checkpoints",
+        "D": "Requires both badge readers and PIN codes for access control systems"
+      },
+      "correct": "B",
+      "explanation": "The study guide states that two-person integrity requires no single individual be alone in sensitive areas, preventing any one person from taking unauthorized actions without a witness."
     },
     {
       "section": "Biometric access control",
       "type": "mc",
-      "question": "When comparing two biometric systems for accuracy, which metric should you use as the standard benchmark?",
+      "question": "What does the CER metric measure in a biometric system, and what does a lower value indicate?",
       "options": {
-        "A": "Crossover Error Rate, because it represents the point where FAR equals FRR",
-        "B": "False Rejection Rate, because operational disruption is unacceptable",
-        "C": "False Acceptance Rate, because security failures are the greatest concern",
-        "D": "Average of FAR and FRR, because it balances both types of errors equally"
+        "A": "The point where FAR equals FRR and serves as the accuracy benchmark for the system",
+        "B": "The percentage of authorized users incorrectly rejected; lower indicates better operations",
+        "C": "The percentage of unauthorized users incorrectly authenticated; lower indicates better security",
+        "D": "The tradeoff between FAR and FRR thresholds; lower indicates fewer false rejections"
       },
       "correct": "A",
-      "explanation": "The study guide explicitly states that CER/EER is 'the standard comparison metric' for biometric system accuracy and identifies it as the point where FAR equals FRR."
+      "explanation": "The study guide defines CER as the crossover or equal error rate point where FAR equals FRR, and states that a lower CER represents a more accurate biometric system."
     },
     {
       "section": "Surveillance: CCTV",
       "type": "mc",
-      "question": "What is the typical footage retention period for CCTV systems in a data center?",
+      "question": "What is the typical footage retention period for CCTV systems as described in the study guide?",
       "options": {
-        "A": "180 to 365 days for archival purposes",
-        "B": "7 to 14 days for routine monitoring",
-        "C": "90 to 180 days for long-term compliance",
-        "D": "30 to 90 days for standard retention"
+        "A": "90 to 180 days for all standard installations",
+        "B": "30 to 90 days with longer retention in regulated industries",
+        "C": "2 to 4 weeks for motion-detected footage only",
+        "D": "7 to 14 days depending on storage capacity"
       },
-      "correct": "D",
-      "explanation": "The section directly states that CCTV footage retention is 'typically 30–90 days' and notes that regulated industries may require more."
+      "correct": "B",
+      "explanation": "The study guide states that footage retention is typically 30-90 days, with regulated industries potentially requiring longer retention."
     },
     {
       "section": "Environmental controls",
-      "type": "text",
-      "question": "Why is a hot aisle/cold aisle layout important for data center efficiency, and what flow does it create?",
-      "rubric": "A sound answer explains that the layout maximizes cooling efficiency by preventing hot exhaust air from recirculating back into server intakes, with cool air feeding server fronts on one side (cold aisle) and hot exhaust returning on the opposite side (hot aisle).",
-      "explanation": "The section describes both the efficiency benefit and the specific directional flow: cold aisle receives cool supply air feeding server intakes, while hot aisle receives exhaust returning to HVAC."
+      "type": "mc",
+      "question": "According to ASHRAE standards, what temperature range is recommended at server air inlets in a data center?",
+      "options": {
+        "A": "50-65 degrees Fahrenheit",
+        "B": "80-95 degrees Fahrenheit",
+        "C": "64-80 degrees Fahrenheit",
+        "D": "55-70 degrees Fahrenheit"
+      },
+      "correct": "C",
+      "explanation": "The study guide explicitly states that ASHRAE recommends a temperature of 64-80°F (18-27°C) at server air inlets."
+    },
+    {
+      "section": "Environmental controls",
+      "type": "mc",
+      "question": "In a hot aisle/cold aisle layout, where does the cool supply air feed server racks?",
+      "options": {
+        "A": "Through overhead diffusers positioned directly above the hot aisle",
+        "B": "From raised-floor vents located in the hot aisle perimeter",
+        "C": "Into the rear exhaust ports of servers located in the hot aisle",
+        "D": "Into the front air intakes of servers located in the cold aisle"
+      },
+      "correct": "D",
+      "explanation": "The study guide describes the cold aisle as where cool supply air from raised-floor vents or overhead diffusers feeds server fronts (air intakes)."
     },
     {
       "section": "Fire suppression systems",
       "type": "mc",
-      "question": "Why is Halon 1301 no longer used as a fire suppression agent in data centers?",
+      "question": "Which fire suppression system type was formerly the standard clean agent in data centers but is now banned under the Montreal Protocol?",
       "options": {
-        "A": "It is lethal to humans and can only be used in unmanned facilities",
-        "B": "It requires both fire detector and sprinkler activation, causing deployment delays",
-        "C": "It was banned under the Montreal Protocol due to ozone depletion concerns",
-        "D": "It leaves residue that damages electronic equipment and is difficult to clean"
+        "A": "Halon 1301 clean agent system for fire suppression",
+        "B": "FM-200 clean agent system for fire suppression",
+        "C": "Pre-action sprinkler system for fire suppression",
+        "D": "Novec 1230 clean agent system for fire suppression"
       },
-      "correct": "C",
-      "explanation": "The study guide states that Halon 1301 'was formerly the standard clean agent but is now banned under the Montreal Protocol for ozone depletion' and that FM-200 and Novec 1230 replaced it."
+      "correct": "A",
+      "explanation": "The study guide states that Halon 1301 was formerly the standard clean agent but is now banned under the Montreal Protocol for ozone depletion."
     },
     {
       "section": "Physical device security",
       "type": "mc",
-      "question": "What is a Kensington security slot, and what is it used for?",
+      "question": "What is a Kensington security slot used for in physical device security?",
       "options": {
-        "A": "A USB port on laptops that accepts encrypted security dongles for authentication",
-        "B": "A physical compartment on servers where encryption keys are stored securely",
-        "C": "A card reader slot on workstations that accepts badge-based access credentials",
-        "D": "A standardized lock port built into laptops that cable locks can thread through"
+        "A": "An RFID-based access control point on portable devices",
+        "B": "A physical port for biometric authentication on workstations",
+        "C": "A standardized lock port built into most laptops for cable locks",
+        "D": "A mounting bracket for server cages in data centers"
       },
-      "correct": "D",
-      "explanation": "The section defines a Kensington security slot as 'a standardized lock port built into most laptops' and explains it is used with cable locks to anchor laptops to fixed furniture."
+      "correct": "C",
+      "explanation": "The study guide describes a Kensington security slot as a standardized lock port built into most laptops through which a steel cable lock passes to anchor the device to fixed furniture."
     }
   ]
 }

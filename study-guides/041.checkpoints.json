@@ -3,42 +3,80 @@
     {
       "section": "The one difference that matters: propagation",
       "type": "mc",
-      "question": "What is the key difference in how a virus and a worm spread?",
+      "question": "What is the key propagation difference between a virus and a worm?",
       "options": {
-        "A": "A virus requires a host file and user action to spread; a worm self-replicates across networks autonomously.",
-        "B": "A virus spreads through email attachments only; a worm spreads through network services.",
-        "C": "A virus uses encryption to hide; a worm uses polymorphic code.",
-        "D": "A virus targets boot sectors; a worm targets executable files."
+        "A": "A virus requires user action to execute and attaches to a host file, while a worm self-replicates without user intervention.",
+        "B": "A virus spreads through email attachments only, while a worm spreads through network services only.",
+        "C": "A virus infects executable files, while a worm infects boot sectors.",
+        "D": "A virus is detected by antivirus software, while a worm is detected by behavioral analysis."
       },
       "correct": "A",
-      "explanation": "The defining distinction in the section is that viruses need a host file and user activation, while worms propagate autonomously by exploiting network vulnerabilities without either requirement."
+      "explanation": "The study guide explicitly defines a virus as malware that attaches to a host file and requires user action to activate, while a worm self-replicates autonomously across networks exploiting vulnerabilities with no host file or user action needed."
     },
     {
       "section": "Virus subtypes",
-      "type": "text",
-      "question": "Explain why polymorphic and metamorphic viruses defeat traditional signature-based antivirus.",
-      "rubric": "A sound answer states that polymorphic viruses encrypt their payload with a different key on each infection (producing different byte patterns each time), and metamorphic viruses rewrite their entire code on each infection using equivalent transformations. Signature matching relies on fixed known byte patterns, so when the malware's byte sequence changes every infection, the fixed signatures no longer match.",
-      "explanation": "Both virus types ensure no two copies have the same byte sequence, making static signature libraries useless; detection requires heuristic or behavioral analysis instead."
+      "type": "mc",
+      "question": "How does a polymorphic virus defeat traditional signature-based antivirus?",
+      "options": {
+        "A": "It rewrites its code using equivalent transformations on each replication cycle.",
+        "B": "It encrypts its payload with a different key each time, creating a unique byte signature.",
+        "C": "It hides from security tools by intercepting file-system calls and showing clean files.",
+        "D": "It infects both executables and boot sectors at the same time."
+      },
+      "correct": "B",
+      "explanation": "The section states that a polymorphic virus encrypts its payload and uses a decryption stub that re-encrypts with a different key on each new infection, producing a different byte sequence every time, which defeats signature matching that relies on fixed byte patterns."
+    },
+    {
+      "section": "Virus subtypes",
+      "type": "mc",
+      "question": "What is the primary advantage of a metamorphic virus over a polymorphic virus?",
+      "options": {
+        "A": "It encrypts its payload unlike polymorphic viruses which remain unencrypted.",
+        "B": "It targets boot sectors while polymorphic viruses only target executable files.",
+        "C": "It spreads through email faster than polymorphic viruses do.",
+        "D": "It has no static decryption stub to detect, making heuristic detection very difficult."
+      },
+      "correct": "D",
+      "explanation": "The section explains that metamorphic viruses rewrite their entire code on each infection using semantically equivalent transformations, producing no decryption stub to catch, which makes even heuristic detection extremely difficult compared to polymorphic variants."
     },
     {
       "section": "Worms and landmark incidents",
       "type": "mc",
-      "question": "Which exploit was used by both WannaCry and NotPetya?",
+      "question": "Which exploit did both WannaCry and NotPetya use to propagate?",
       "options": {
-        "A": "MS08-067 Windows Server Service vulnerability",
-        "B": "fingerd and sendmail vulnerabilities on Unix systems",
-        "C": "IIS web server vulnerability that defaced websites",
-        "D": "EternalBlue SMB exploit identified as MS17-010"
+        "A": "The fingerd and sendmail vulnerabilities on Unix systems.",
+        "B": "MS08-067 targeting the Windows Server Service vulnerability.",
+        "C": "EternalBlue exploiting the MS17-010 SMB vulnerability.",
+        "D": "A zero-day vulnerability in Siemens PLC systems."
+      },
+      "correct": "C",
+      "explanation": "The section's worm incidents table and EternalBlue paragraph both state that WannaCry and NotPetya both used EternalBlue, an NSA exploit targeting MS17-010, a vulnerability in the SMB protocol."
+    },
+    {
+      "section": "Worms and landmark incidents",
+      "type": "mc",
+      "question": "What tool did NotPetya use to harvest credentials and spread laterally beyond the initial SMB exploit?",
+      "options": {
+        "A": "EternalBlue, which exploited the SMB vulnerability repeatedly.",
+        "B": "A bootable scanning tool that removed the Master Boot Record infection.",
+        "C": "A decryption stub that rewrote malicious code on each infection.",
+        "D": "Mimikatz, which extracted passwords from memory."
       },
       "correct": "D",
-      "explanation": "The section explicitly states that both WannaCry and NotPetya exploited EternalBlue (the NSA-developed exploit targeting SMB, identified as MS17-010)."
+      "explanation": "The section explicitly states that Mimikatz is a credential-extraction tool that NotPetya used to harvest passwords from memory and spread laterally beyond the initial SMB exploit."
     },
     {
       "section": "Defenses",
-      "type": "text",
-      "question": "What is identified as the single most important control against worms, and why was it relevant to WannaCry and NotPetya?",
-      "rubric": "A sound answer states that patch management is the single most important control, and that WannaCry and NotPetya both exploited the MS17-010 vulnerability that Microsoft had already patched two months before the attacks occurred.",
-      "explanation": "The section emphasizes patch management as the primary worm defense and notes that both incidents exploited a known, already-patched vulnerability—demonstrating that timely patching could have prevented widespread infection."
+      "type": "mc",
+      "question": "Which defense is identified as the single most important control against worms?",
+      "options": {
+        "A": "Host-based and perimeter firewalls blocking targeted ports and services.",
+        "B": "IDS/IPS systems with signatures to detect worm propagation patterns.",
+        "C": "Patch management, as WannaCry and NotPetya exploited vulnerabilities patched months prior.",
+        "D": "Network segmentation to limit lateral spread if a worm gains a foothold."
+      },
+      "correct": "C",
+      "explanation": "The defenses section explicitly states that patch management is the single most important control against worms, citing WannaCry and NotPetya as examples where the vulnerability was patched two months before the attacks occurred."
     }
   ]
 }

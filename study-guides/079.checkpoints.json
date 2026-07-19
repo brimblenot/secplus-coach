@@ -3,88 +3,184 @@
     {
       "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
       "type": "mc",
-      "question": "What is the core cryptographic weakness that makes WEP fatally broken?",
+      "question": "WEP's primary cryptographic weakness stems from which issue with the RC4 stream cipher?",
       "options": {
-        "A": "The Michael MIC fails to detect tampering when the same IV repeats in succession.",
-        "B": "The RC4 cipher uses a 24-bit IV that exhausts quickly, forcing reuse and enabling keystream recovery.",
-        "C": "The 802.11 handshake transmits the passphrase in plaintext over the wireless medium.",
-        "D": "The AES key derives from the SSID, making it predictable on known networks."
+        "A": "The 24-bit IV space is too small, causing IV reuse that leaks keystream and compromises the key",
+        "B": "The cipher uses a fixed initialization vector that never changes between transmitted packets",
+        "C": "The cipher requires a new key for every packet, making key distribution impractical for networks",
+        "D": "The cipher cannot generate keys longer than 64 bits, which limits overall encryption strength"
       },
-      "correct": "B",
-      "explanation": "WEP's 24-bit IV space allows only ~16 million unique values; on busy networks this exhausts quickly, forcing IV reuse. When RC4 reuses an IV with the same key, the keystream is leaked, allowing attackers to mathematically recover the pre-shared key."
+      "correct": "A",
+      "explanation": "WEP uses a 24-bit IV (~16 million values) that exhausts and reuses on busy networks; reusing an IV with RC4 mathematically leaks the keystream, allowing attackers to recover the pre-shared key."
     },
     {
       "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
-      "type": "text",
-      "question": "Explain why WPA3-SAE makes offline password cracking impossible for an attacker who captures wireless frames, while WPA2 remains vulnerable to this attack.",
-      "rubric": "A sound answer states that WPA3-SAE's session key is never sent over the air—captured frames contain no crackable hash—preventing offline attacks. WPA2, by contrast, transmits a crackable handshake that allows attackers to capture it and then brute-force passwords at full hardware speed offline without lockout.",
-      "explanation": "WPA3 uses SAE (Simultaneous Authentication of Equals) based on Diffie-Hellman, where both sides independently calculate the session key without ever transmitting it. WPA2 handshakes contain a hash that attackers can capture and crack offline via dictionary or brute-force at their own pace."
+      "type": "mc",
+      "question": "What is the primary improvement WPA made over WEP in terms of key management?",
+      "options": {
+        "A": "WPA eliminated the need for any pre-shared key, relying entirely on digital certificates",
+        "B": "WPA increased the IV size from 24 bits to 64 bits, preventing IV reuse on any network",
+        "C": "WPA replaced RC4 with TKIP, which generates a fresh encryption key for every packet sent",
+        "D": "WPA introduced AES encryption, which is resistant to keystream recovery attacks"
+      },
+      "correct": "C",
+      "explanation": "WPA replaced RC4's broken key schedule with TKIP, which derives a fresh encryption key for every packet from a master key, and added Michael as a message integrity check."
+    },
+    {
+      "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
+      "type": "mc",
+      "question": "WPA2's use of CCMP and AES addresses which fatal WEP weakness?",
+      "options": {
+        "A": "CCMP removes the need for a pre-shared key, requiring digital certificates on all clients",
+        "B": "CCMP increases the IV size to 128 bits, making mathematical key recovery infeasible",
+        "C": "AES automatically detects and prevents deauthentication frame spoofing attacks on networks",
+        "D": "AES replaces RC4 with a block cipher and eliminates IV-reuse keystream leakage entirely"
+      },
+      "correct": "D",
+      "explanation": "WPA2 replaced RC4 with AES, a NIST-approved block cipher, via CCMP, eliminating the IV-reuse keystream leakage that broke WEP."
+    },
+    {
+      "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
+      "type": "mc",
+      "question": "What makes WPA3-SAE fundamentally resistant to offline dictionary attacks compared to WPA2?",
+      "options": {
+        "A": "SAE requires all clients to hold digital certificates, preventing password-based attacks",
+        "B": "SAE never sends the session key or crackable hash over the air during authentication",
+        "C": "SAE uses a 256-bit encryption key, making brute-force attempts computationally infeasible",
+        "D": "SAE implements account lockout after failed attempts, blocking repeated password guesses"
+      },
+      "correct": "B",
+      "explanation": "WPA3-SAE replaces the WPA2 four-way handshake with Dragonfly key exchange; the session key is never transmitted and captured frames contain no crackable hash, making offline attacks impossible."
+    },
+    {
+      "section": "The protocol evolution: WEP → WPA → WPA2 → WPA3",
+      "type": "mc",
+      "question": "What security property does WPA3's forward secrecy provide that WPA2 lacks?",
+      "options": {
+        "A": "The passphrase is changed automatically after each successful authentication to prevent future reuse",
+        "B": "Previous sessions are encrypted with a master key that is discarded after each client disconnects",
+        "C": "All historical session keys are stored on the access point and protected from unauthorized disclosure",
+        "D": "Each session generates a unique key, so compromising the passphrase later cannot decrypt previously captured sessions"
+      },
+      "correct": "D",
+      "explanation": "WPA3 provides forward secrecy by generating a unique key per session; if the passphrase is compromised later, attackers cannot decrypt previously captured sessions. WPA2 lacks this because a cracked handshake exposes that session's traffic."
     },
     {
       "section": "Personal mode vs. Enterprise mode",
       "type": "mc",
-      "question": "Which authentication model assigns a unique per-user credential and typically leverages a centralized RADIUS server?",
+      "question": "What is the primary authentication difference between Personal and Enterprise wireless modes?",
       "options": {
-        "A": "Personal mode with a pre-shared key shared across all devices on the network.",
-        "B": "Enterprise mode using WEP with individual client MAC address filtering.",
-        "C": "Personal mode with Wi-Fi Protected Setup to simplify credential distribution.",
-        "D": "Enterprise mode using 802.1X and unique per-user credentials validated against a directory."
+        "A": "Personal mode requires digital certificates on all devices, Enterprise uses a single pre-shared key",
+        "B": "Personal mode uses one shared passphrase for all users, Enterprise assigns unique per-user credentials",
+        "C": "Personal mode validates credentials locally on the access point, Enterprise delegates to a server",
+        "D": "Personal mode uses WPA2 encryption, while Enterprise mode uses WPA3 encryption exclusively"
       },
-      "correct": "D",
-      "explanation": "Enterprise mode uses 802.1X for port-based network access control, where each user authenticates with their own credentials via a RADIUS server (typically connected to Active Directory or a similar directory service)."
+      "correct": "B",
+      "explanation": "Personal mode uses one shared pre-shared key; Enterprise mode uses 802.1X with unique per-user credentials validated by RADIUS, making it suitable for business environments."
     },
     {
       "section": "802.1X and the three-role framework",
-      "type": "text",
-      "question": "Name the three roles in 802.1X and describe the state of the network port before authentication succeeds.",
-      "rubric": "A sound answer identifies the Supplicant (client), Authenticator (AP/switch), and Authentication Server (RADIUS), and states that the authenticator holds the port in an unauthorized state, passing only 802.1X traffic until credentials are validated.",
-      "explanation": "The Supplicant is the client device, the Authenticator is the access point or switch that enforces access, and the Authentication Server (RADIUS) validates credentials. Before success, the authenticator keeps the port unauthorized."
+      "type": "mc",
+      "question": "In the 802.1X framework, what is the role of the Authenticator?",
+      "options": {
+        "A": "The Authenticator is the client device that submits credentials to the access point for verification",
+        "B": "The Authenticator validates user credentials by querying Active Directory or backend directory",
+        "C": "The Authenticator is the access point or switch that holds the port unauthorized until authentication succeeds",
+        "D": "The Authenticator generates and distributes encryption keys to all connected supplicants on the network"
+      },
+      "correct": "C",
+      "explanation": "The Authenticator is the access point or switch that keeps the port unauthorized (passing only 802.1X traffic) until the RADIUS server validates the supplicant's credentials."
+    },
+    {
+      "section": "802.1X and the three-role framework",
+      "type": "mc",
+      "question": "What does a RADIUS server do on successful authentication of an 802.1X supplicant?",
+      "options": {
+        "A": "It signals the Authenticator to authorize the port and may assign the client to a specific VLAN",
+        "B": "It issues a temporary certificate to the supplicant valid for the duration of the session",
+        "C": "It encrypts all subsequent client traffic with AES-128 and sends the key to the access point",
+        "D": "It establishes a direct encrypted tunnel between the client and the authentication server for traffic"
+      },
+      "correct": "A",
+      "explanation": "On successful 802.1X authentication, the RADIUS server signals the Authenticator to move the port to authorized state; the Authenticator may also assign the client to a VLAN based on user identity."
     },
     {
       "section": "EAP methods inside 802.1X",
       "type": "mc",
-      "question": "Which EAP method requires a digital certificate on both the client and the authentication server, and uses no passwords?",
+      "question": "Which EAP method requires digital certificates on both the client and authentication server?",
       "options": {
-        "A": "EAP-FAST, which uses a pre-provisioned PAC token to establish a secure tunnel.",
-        "B": "EAP-TTLS, which supports multiple inner methods including CHAP and PAP for flexibility.",
-        "C": "EAP-TLS, where both supplicant and RADIUS server use certificates to authenticate each other.",
-        "D": "PEAP, which tunnels MSCHAPv2 inside a TLS channel for maximum compatibility."
+        "A": "PEAP requires certificates on both sides and uses MSCHAPv2 for password authentication",
+        "B": "EAP-TLS requires certificates on both sides and eliminates passwords entirely",
+        "C": "EAP-TTLS requires certificates on both sides but supports multiple inner authentication methods",
+        "D": "EAP-FAST requires certificates on both sides and uses a PAC-based tunnel for credentials"
       },
-      "correct": "C",
-      "explanation": "EAP-TLS is the strongest method because both the client and the authentication server present digital certificates for mutual authentication, eliminating passwords entirely."
+      "correct": "B",
+      "explanation": "EAP-TLS is the strongest method and requires digital certificates on both the client and authentication server; it eliminates passwords entirely by relying on mutual certificate validation."
+    },
+    {
+      "section": "EAP methods inside 802.1X",
+      "type": "mc",
+      "question": "Why is PEAP the most common EAP method in Windows environments?",
+      "options": {
+        "A": "PEAP uses a PAC-based tunnel instead of certificates, simplifying credential distribution on networks",
+        "B": "PEAP is the only EAP method compatible with Active Directory and Windows domain authentication",
+        "C": "PEAP supports multiple inner authentication methods including CHAP, PAP, and TACACS protocols",
+        "D": "PEAP eliminates the need for client certificates and uses password authentication inside a TLS tunnel"
+      },
+      "correct": "D",
+      "explanation": "PEAP does not require client certificates and uses MSCHAPv2 (Microsoft's challenge-response password authentication) inside a TLS tunnel, making it ideal for Windows environments."
     },
     {
       "section": "CCMP and TKIP details",
       "type": "mc",
-      "question": "What are the two simultaneous modes that CCMP uses to protect wireless data?",
+      "question": "What are the two simultaneous modes CCMP uses to provide both confidentiality and integrity?",
       "options": {
-        "A": "Encryption via Counter mode and integrity via CBC-MAC.",
-        "B": "Key scheduling via TKIP and packet-level integrity via digital signatures.",
-        "C": "Pre-shared key derivation and per-packet key rotation using the Dragonfly algorithm.",
-        "D": "Stream cipher RC4 for encryption and the Michael algorithm for integrity checking."
+        "A": "Counter mode for encryption and CBC-MAC for tampering detection",
+        "B": "GCM mode for encryption and digital signatures for tampering detection",
+        "C": "CFB mode for encryption and CRC-32 checksum for tampering detection",
+        "D": "ECB mode for encryption and HMAC-SHA256 for tampering detection"
       },
       "correct": "A",
-      "explanation": "CCMP uses AES in Counter mode for confidentiality (encryption) and CBC-MAC (Cipher Block Chaining Message Authentication Code) for integrity (detecting tampering)."
+      "explanation": "CCMP uses AES in Counter mode to provide confidentiality (encryption) and CBC-MAC (Cipher Block Chaining Message Authentication Code) to provide integrity and detect tampering."
     },
     {
       "section": "RADIUS and the AAA framework",
-      "type": "text",
-      "question": "What are the three functions that AAA describes, and which one determines what access rights a user receives after successful authentication?",
-      "rubric": "A sound answer lists Authentication (verifying identity), Authorization (determining access rights, often via VLAN assignment), and Accounting (logging activity), and identifies Authorization as the function that determines access rights.",
-      "explanation": "AAA stands for Authentication (credentials/certificates), Authorization (access rights and VLAN assignment based on group membership), and Accounting (logging session activity for auditing and billing)."
+      "type": "mc",
+      "question": "In the AAA framework, what does the Authorization function accomplish?",
+      "options": {
+        "A": "Authorization verifies user identity through credentials or certificates before granting network access",
+        "B": "Authorization encrypts traffic between the supplicant and the RADIUS server using TLS",
+        "C": "Authorization determines access rights and can assign users to specific VLANs based on group membership",
+        "D": "Authorization logs session activity, data transferred, and user identity for auditing and billing purposes"
+      },
+      "correct": "C",
+      "explanation": "Authorization determines access rights, often via VLAN assignment based on group membership or user identity; it controls what resources the authenticated user can access."
     },
     {
       "section": "Additional wireless security best practices",
       "type": "mc",
-      "question": "Why is disabling WPS considered a security best practice?",
+      "question": "Why should WPS be disabled on wireless networks?",
       "options": {
-        "A": "WPS prevents strong passphrases longer than 20 characters.",
-        "B": "WPS transmits the WiFi password in plaintext during setup.",
-        "C": "WPS uses an 8-digit PIN verified in halves, leaving only about 11,000 combinations for brute-force.",
-        "D": "WPS disables management frame protection against deauthentication attacks."
+        "A": "WPS requires client certificates, making it incompatible with most modern wireless devices",
+        "B": "WPS uses an 8-digit PIN split into two halves, leaving only about 11,000 effective combinations",
+        "C": "WPS transmits the pre-shared key in plaintext over the air, exposing the network password",
+        "D": "WPS uses weak RC4 encryption, which is vulnerable to the same IV-reuse attacks that broke WEP"
       },
-      "correct": "C",
-      "explanation": "Wi-Fi Protected Setup uses an 8-digit PIN that is verified in two halves, reducing the effective search space to roughly 11,000 combinations, which can be brute-forced quickly."
+      "correct": "B",
+      "explanation": "WPS uses an 8-digit PIN verified in two halves, leaving only approximately 11,000 effective combinations; this is trivially brute-forceable by an attacker."
+    },
+    {
+      "section": "Additional wireless security best practices",
+      "type": "mc",
+      "question": "What is the actual security value of hiding the SSID beacon?",
+      "options": {
+        "A": "Hidden SSIDs force attackers to perform packet injection, which generates network alerts",
+        "B": "Hidden SSIDs prevent all wireless monitoring tools from detecting the network's existence reliably",
+        "C": "Hidden SSIDs encrypt the network name with AES, making it unreadable to casual observers",
+        "D": "Hidden SSIDs suppress the beacon, but the SSID appears in probe request and response frames"
+      },
+      "correct": "D",
+      "explanation": "Hiding the SSID beacon suppresses the AP's broadcast, but the SSID still appears in plaintext in probe request and response frames whenever a legitimate client connects; it is not a real security control."
     }
   ]
 }

@@ -3,88 +3,145 @@
     {
       "section": "Physical segmentation",
       "type": "mc",
-      "question": "What is the primary characteristic that distinguishes physical segmentation from other segmentation approaches?",
+      "question": "What is the primary characteristic that distinguishes physical segmentation from other segmentation methods?",
       "options": {
-        "A": "It relies on software-configured virtual boundaries between network zones",
-        "B": "It requires a router to manage traffic between segments",
-        "C": "It applies classification labels to control data access",
-        "D": "It uses separate physical hardware and cables for each segment"
+        "A": "It relies on software configuration to create logical boundaries between network segments",
+        "B": "It requires dedicated physical cables, switches, and ports for each segment with explicit control points",
+        "C": "It applies access control lists to filter traffic between different network segments",
+        "D": "It uses separate hardware devices like firewalls and routers to divide the network into isolated zones"
       },
-      "correct": "D",
-      "explanation": "Physical segmentation divides networks using genuinely separate hardware such as distinct cables, switches, and ports. Other approaches like VLANs use logical division on shared hardware."
+      "correct": "B",
+      "explanation": "Physical segmentation uses genuinely separate hardware — distinct cables, switches, and ports — with traffic flowing only through configured devices like firewalls or routers. This is the defining feature that sets it apart from logical segmentation methods."
     },
     {
       "section": "VLANs and VLAN attacks",
-      "type": "text",
-      "question": "Explain how double-tagging works as a VLAN hopping attack.",
-      "rubric": "A sound answer states that the attack crafts a frame with two 802.1Q tags; the first switch strips the outer tag, and the inner tag then directs the frame to the target VLAN on the second switch.",
-      "explanation": "Double-tagging exploits how switches process VLAN tags in sequence. By nesting two tags, an attacker causes the first switch to remove the outer tag and inadvertently allow the inner tag to reach the target VLAN."
+      "type": "mc",
+      "question": "In a double-tagging VLAN hopping attack, why does the inner 802.1Q tag allow the attacker to reach the target VLAN?",
+      "options": {
+        "A": "The first switch strips the outer tag, leaving the inner tag to direct the frame to the target VLAN on the second switch",
+        "B": "The inner tag bypasses VLAN restrictions by traveling on a trunk link instead of a routed path",
+        "C": "The first switch recognizes the outer tag and forwards the frame without inspecting the inner tag structure",
+        "D": "The attacker crafts both tags to match the native VLAN on each switch in the path"
+      },
+      "correct": "A",
+      "explanation": "Double-tagging works because the first switch strips only the outer 802.1Q tag, and the inner tag then sends the frame to the target VLAN on the second switch, bypassing VLAN boundaries without traversing a router."
+    },
+    {
+      "section": "VLANs and VLAN attacks",
+      "type": "mc",
+      "question": "Which of the following is a valid defense against native VLAN attacks?",
+      "options": {
+        "A": "Disable Dynamic Trunking Protocol on all access ports to prevent automatic trunk negotiation",
+        "B": "Configure spanning tree to prevent frames from traveling to unintended VLAN segments",
+        "C": "Change the native VLAN away from the default VLAN 1 to an unused VLAN",
+        "D": "Apply VLAN ACLs to filter traffic flowing inside and between VLANs"
+      },
+      "correct": "C",
+      "explanation": "The section lists three specific defenses: changing the native VLAN away from default VLAN 1, disabling DTP on access ports, and applying VLAN ACLs. Changing the native VLAN directly addresses the native VLAN attack mechanism."
     },
     {
       "section": "DMZ architecture",
       "type": "mc",
-      "question": "What is the primary benefit of a dual-firewall DMZ architecture over a single-firewall DMZ?",
+      "question": "What is the primary purpose of a dual-firewall DMZ?",
       "options": {
-        "A": "It removes the need for inbound internet connections to DMZ servers",
-        "B": "It eliminates the need for access control lists on firewalls",
-        "C": "It forces attackers to breach two firewalls to reach internal systems after compromising a DMZ server",
-        "D": "It prevents all outbound traffic from the DMZ to the internet"
+        "A": "It allows internet traffic to reach DMZ servers while restricting outbound connections to the internal network",
+        "B": "It enables specific ports to be opened for web, email, and DNS services on public servers",
+        "C": "It isolates public-facing servers from direct internet access through a controlled perimeter boundary",
+        "D": "It places a firewall between the DMZ and internal network so attackers must defeat two firewalls to reach internal systems"
       },
-      "correct": "C",
-      "explanation": "A dual-firewall DMZ places one firewall between the internet and DMZ and a second between the DMZ and the internal network, so an attacker who compromises a public-facing server must still defeat the second firewall to reach internal systems."
+      "correct": "D",
+      "explanation": "A dual-firewall DMZ uses two separate firewalls: one between the internet and DMZ, and a second between the DMZ and the internal network, ensuring an attacker who compromises a public server still must defeat an additional firewall to reach internal systems."
     },
     {
       "section": "Microsegmentation and east-west vs. north-south traffic",
-      "type": "text",
-      "question": "Why does microsegmentation reduce the blast radius of a compromised host?",
-      "rubric": "A sound answer explains that microsegmentation isolates individual workloads so each server or container can only communicate with specific legitimate workloads, dramatically limiting lateral movement after compromise.",
-      "explanation": "Microsegmentation locks down each workload individually rather than just creating broad network zones. This prevents a compromised host from laterally spreading to other systems it has no legitimate reason to reach."
+      "type": "mc",
+      "question": "How does microsegmentation reduce the blast radius after a single host is compromised?",
+      "options": {
+        "A": "It eliminates the need for perimeter firewalls by moving all access control into the internal network",
+        "B": "It prevents north-south traffic from flowing between the data center and external networks during an incident",
+        "C": "It restricts lateral movement between servers by isolating individual workloads and limiting their communication paths",
+        "D": "It applies zero trust principles to block all outbound connections from compromised hosts immediately"
+      },
+      "correct": "C",
+      "explanation": "Microsegmentation isolates individual workloads so each can communicate only with the specific other workloads it legitimately needs to reach, dramatically reducing lateral movement options and thus the scope of damage after compromise."
     },
     {
       "section": "Air gaps",
       "type": "mc",
-      "question": "What does the Stuxnet example demonstrate about air-gapped networks?",
+      "question": "What does the Stuxnet example demonstrate about the limitations of air gaps?",
       "options": {
-        "A": "They are completely immune to malware and insider attacks",
-        "B": "They block network attacks but remain vulnerable to supply chain or physical media compromise",
-        "C": "They require classified security clearance to operate effectively",
-        "D": "They eliminate the need for access control or authentication"
+        "A": "Air gaps cannot protect against malware that spreads through infected USB drives and other physical media",
+        "B": "Air gaps are vulnerable to insider threats because physical media can carry malware into an isolated network",
+        "C": "Air gaps are ineffective against network-based attacks but may be vulnerable to supply chain compromise using physical media",
+        "D": "Air gaps block all forms of malware including worms designed to target industrial control systems"
       },
-      "correct": "B",
-      "explanation": "Stuxnet showed that air gaps successfully block network-based attacks but cannot protect against infected USB drives or other physical media introduced by insiders or supply chain compromise."
+      "correct": "A",
+      "explanation": "Stuxnet demonstrated that air gaps block network-based attacks but not supply chain compromise; it spread into an Iranian nuclear facility's air-gapped network through infected USB drives, showing that physical media can bypass electronic isolation."
     },
     {
       "section": "Jump servers",
       "type": "mc",
-      "question": "What is the primary control function of a jump server?",
+      "question": "What is the primary function of a jump server in network segmentation?",
       "options": {
-        "A": "It serves as a single controlled access point requiring authentication and session logging",
-        "B": "It assigns VLAN tags based on user roles and clearance levels",
-        "C": "It automatically patches all connected systems on the network segment",
-        "D": "It encrypts all network traffic between external and internal networks"
+        "A": "It isolates sensitive systems from the internet by placing a hardened system between the perimeter and internal network",
+        "B": "It forwards administrative traffic between multiple network segments while applying encryption and filtering rules",
+        "C": "It monitors all traffic entering a protected segment and alerts administrators of unauthorized access attempts",
+        "D": "It acts as the single controlled access point into a protected network segment requiring authentication and logging"
       },
-      "correct": "A",
-      "explanation": "A jump server acts as a hardened chokepoint where administrators authenticate first and all administrative traffic is logged, ensuring a single monitored entry path into protected segments."
+      "correct": "D",
+      "explanation": "A jump server is a hardened system that serves as the single controlled entry point into a protected segment; administrators must authenticate to it first and all sessions are logged, creating a chokepoint for administrative access."
     },
     {
       "section": "Access control models",
       "type": "mc",
-      "question": "In MAC, what determines whether access is granted or denied?",
+      "question": "In Mandatory Access Control, what determines whether a user can access an object?",
       "options": {
-        "A": "The resource owner's discretionary permissions",
-        "B": "User department, device posture, and time of day combined",
-        "C": "Organizational roles assigned to each user",
-        "D": "Classification labels assigned by the OS to subjects and objects"
+        "A": "The user's organizational role is matched against the permissions assigned to that role for the resource",
+        "B": "Classification labels assigned to both the subject and object by the OS security kernel are compared absolutely",
+        "C": "The resource owner grants or denies permissions based on their discretion and organizational policy",
+        "D": "A combination of user attributes, resource attributes, and environmental attributes are evaluated by the system"
       },
-      "correct": "D",
-      "explanation": "MAC — Mandatory Access Control — uses classification labels assigned by the security kernel; access decisions are absolute and based on those labels, not owner choice or other factors."
+      "correct": "B",
+      "explanation": "MAC is enforced by the OS/security kernel based on classification labels assigned to both subjects and objects; access is absolute — a Secret-cleared user cannot access Top Secret data regardless of other factors."
+    },
+    {
+      "section": "Access control models",
+      "type": "mc",
+      "question": "Which access control model simplifies administration at scale by assigning permissions to organizational roles rather than individual users?",
+      "options": {
+        "A": "Mandatory Access Control, which uses labels to enforce absolute access rules across the organization",
+        "B": "Role-Based Access Control, which assigns permissions to roles so adding employees means assigning a role",
+        "C": "Attribute-Based Access Control, which combines user, resource, and environmental attributes in access decisions",
+        "D": "Discretionary Access Control, which allows resource owners to delegate permissions to specific user accounts"
+      },
+      "correct": "B",
+      "explanation": "RBAC simplifies administration at scale by assigning permissions to organizational roles; adding a new employee means assigning an existing role rather than configuring every permission individually."
     },
     {
       "section": "Need-to-know, separation of duties, and least privilege",
-      "type": "text",
-      "question": "How does separation of duties reduce insider threat and fraud risk?",
-      "rubric": "A sound answer explains that separation of duties divides critical transactions between two or more people so no single person can complete a transaction alone, reducing fraud and insider threat.",
-      "explanation": "By requiring multiple individuals to participate in sensitive actions, separation of duties prevents any one person — even if compromised or malicious — from unilaterally performing critical functions."
+      "type": "mc",
+      "question": "What is the purpose of separation of duties in access control?",
+      "options": {
+        "A": "To divide critical transaction steps between multiple people to reduce fraud, error, and insider threat",
+        "B": "To store and automatically rotate credentials for privileged accounts in a secure vault",
+        "C": "To grant elevated permissions only when needed and revoke them immediately after use",
+        "D": "To ensure users access only the minimum information required for their current task"
+      },
+      "correct": "A",
+      "explanation": "Separation of duties requires no single person to complete a critical transaction alone; dividing steps between two or more people reduces fraud, error, and insider threat risk."
+    },
+    {
+      "section": "Need-to-know, separation of duties, and least privilege",
+      "type": "mc",
+      "question": "Which Privileged Access Management technique grants elevated permissions only for the duration they are actually needed?",
+      "options": {
+        "A": "Session recording, which logs all privileged sessions for audit and compliance purposes",
+        "B": "Password vaulting, which stores credentials for privileged accounts and rotates them automatically",
+        "C": "Least privilege, which ensures every account receives only the minimum permissions for its function",
+        "D": "Just-in-time access, which grants elevated permissions when needed and revokes them immediately after"
+      },
+      "correct": "D",
+      "explanation": "Just-in-time access is the PAM technique that grants elevated permissions only when needed and revokes them immediately after, minimizing the window of time a privileged credential is active."
     }
   ]
 }

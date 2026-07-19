@@ -2,96 +2,133 @@
   "checkpoints": [
     {
       "section": "Why monitoring speed matters",
-      "type": "text",
-      "question": "Why is continuous monitoring more effective than periodic checking at catching attacks?",
-      "rubric": "A sound answer explains that continuous monitoring detects threats in minutes rather than months, preventing attackers from escalating privileges, moving laterally, or entrenching themselves.",
-      "explanation": "The section states the average breach goes undetected for nine months, during which attackers escalate and move laterally; continuous monitoring compresses detection from months to minutes."
+      "type": "mc",
+      "question": "According to the study guide, what is the typical time period during which a breach goes undetected before being discovered?",
+      "options": {
+        "A": "About six months on average",
+        "B": "About nine months on average",
+        "C": "About three months on average",
+        "D": "About one month on average"
+      },
+      "correct": "B",
+      "explanation": "The section states that the average breach goes undetected for nine months according to IBM Security 2022 data, during which attackers escalate privileges and entrench themselves."
     },
     {
       "section": "SIEM — the central platform",
       "type": "mc",
-      "question": "What does log normalization accomplish in a SIEM?",
+      "question": "What does log normalization in a SIEM accomplish?",
       "options": {
-        "A": "Routes log data from multiple sources to a central repository using standard protocols",
-        "B": "Identifies suspicious patterns across sources and triggers alerts when thresholds are met",
-        "C": "Converts log messages into a common schema with consistent fields for comparison",
-        "D": "Automatically executes response workflows when specific alerts are generated"
+        "A": "It extracts common fields from inconsistent formats and maps them to a single schema for comparison",
+        "B": "It deletes duplicate entries from the collected log data to reduce volume",
+        "C": "It encrypts all log messages before sending them to the central repository for storage",
+        "D": "It compresses logs to reduce storage requirements in the repository"
       },
-      "correct": "C",
-      "explanation": "The section defines log normalization as extracting common fields from inconsistent formats and mapping them to a single schema; the other options describe log aggregation, correlation, and SOAR respectively."
+      "correct": "A",
+      "explanation": "The section defines log normalization as extracting common fields like timestamp, source IP, destination IP, user, action, and result from inconsistent formats and mapping them to a single schema so sources can be compared."
     },
     {
       "section": "Correlation rules and alerting",
-      "type": "text",
-      "question": "Give one example of a multi-source pattern that a correlation rule might detect, and explain why a single event alone would not raise an alarm.",
-      "rubric": "A sound answer provides a concrete pattern (e.g., 100 failed logins from one IP across 10 accounts in 5 minutes followed by a success, or privilege escalation after authentication failure) and explains that a single event is noise but the combination signals attack.",
-      "explanation": "The section explains that a single failed login is noise but the same pattern repeated across multiple sources (e.g., many failed logins followed by success) indicates credential stuffing or password spraying."
+      "type": "mc",
+      "question": "What does alert tuning aim to reduce in a SIEM environment?",
+      "options": {
+        "A": "Alert tuning aims to reduce analyst workload by disabling low-priority rules entirely",
+        "B": "Alert tuning aims to reduce storage costs by archiving old alerts periodically",
+        "C": "Alert tuning aims to reduce response time by automating all playbook executions automatically",
+        "D": "Alert tuning aims to reduce false positives by suppressing known-good patterns and adjusting thresholds"
+      },
+      "correct": "D",
+      "explanation": "The section states that alert fatigue is countered by alert tuning, which involves suppressing known-good patterns and raising thresholds based on behavioral baselines."
     },
     {
       "section": "SOAR — automated response",
       "type": "mc",
-      "question": "What is the primary advantage of SOAR in reducing response time?",
+      "question": "What does SOAR accomplish when a specific alert fires?",
       "options": {
-        "A": "It executes predefined automated response playbooks in seconds without human intervention for common incidents",
-        "B": "It applies machine learning to detect network anomalies that signature-based tools cannot identify",
-        "C": "It extracts common fields from different log sources and maps them to a single schema for comparison",
-        "D": "It collects logs from firewalls, IDS/IPS, and servers into one central location for analysts to review"
+        "A": "It archives the alert data to a secure location for compliance",
+        "B": "It sends notifications to security team members via email",
+        "C": "It executes automated response playbooks defined as predefined step-by-step workflows",
+        "D": "It logs additional forensic data for analyst review later"
       },
-      "correct": "A",
-      "explanation": "The section states SOAR executes automated playbooks when alerts fire and reduces mean time to respond from hours to minutes; the other options describe SIEM, log normalization, and NDR respectively."
+      "correct": "C",
+      "explanation": "The section defines SOAR as executing automated response playbooks, which are predefined step-by-step response workflows, when specific alerts fire."
     },
     {
       "section": "Log sources and what each reveals",
       "type": "mc",
-      "question": "Which Windows Event ID should you examine to detect pass-the-hash attacks?",
+      "question": "Which Windows Event ID indicates that a process has been created and captures the command line used?",
       "options": {
-        "A": "Event ID 4624, which records successful logon with source IP and logon type",
-        "B": "Event ID 4648, which detects explicit credential use without requiring a password",
-        "C": "Event ID 4672, which indicates special privileges have been assigned to an account",
-        "D": "Event ID 4688, which captures process creation with command line arguments"
+        "A": "Event ID 4625 indicates process creation failures in Windows",
+        "B": "Event ID 4648 indicates process creation audit logs in Windows",
+        "C": "Event ID 4624 indicates successful process creation in Windows",
+        "D": "Event ID 4688 indicates process creation with command line details"
       },
-      "correct": "B",
-      "explanation": "The section explicitly states that Event ID 4648 detects pass-the-hash, which uses a stolen password hash directly without cracking it."
+      "correct": "D",
+      "explanation": "The section shows that Event ID 4688 represents process creation with command line, which catches attacks like Mimikatz and LOLBAS abuse."
     },
     {
       "section": "Network monitoring",
-      "type": "text",
-      "question": "Explain the difference between NetFlow/IPFIX and full packet capture in terms of what data is stored and why.",
-      "rubric": "A sound answer states that NetFlow/IPFIX captures only metadata (IPs, ports, bytes, duration) and is cheaper and scalable, while full packet capture stores complete traffic content for forensic analysis but requires significant storage and is typically deployed only at key chokepoints.",
-      "explanation": "The section contrasts the two: NetFlow captures metadata cheaply, while full packet capture is storage-intensive and deployed selectively at network boundaries."
+      "type": "mc",
+      "question": "What does NetFlow/IPFIX capture about network traffic?",
+      "options": {
+        "A": "NetFlow/IPFIX captures traffic metadata like IPs, ports, bytes, and duration",
+        "B": "NetFlow/IPFIX captures encrypted summaries of all traffic flows",
+        "C": "NetFlow/IPFIX captures only failed connections and violations",
+        "D": "NetFlow/IPFIX captures complete traffic payload content for analysis"
+      },
+      "correct": "A",
+      "explanation": "The section states that NetFlow/IPFIX captures traffic metadata—IPs, ports, bytes, and duration—without storing payload content, making it cost-effective for identifying C2 beaconing and lateral movement."
     },
     {
       "section": "UEBA — behavioral analytics",
       "type": "mc",
-      "question": "What does the impossible travel indicator in UEBA detect?",
+      "question": "What does impossible travel detection in UEBA identify?",
       "options": {
-        "A": "Repeated authentication failures followed by a successful login, indicating brute force activity",
-        "B": "A user accessing files at unusual times or from unusual locations inconsistent with their role",
-        "C": "A standard user account suddenly executing administrative tools or privilege escalation commands",
-        "D": "An account logging in from geographically distant locations in a timeframe that makes physical travel impossible"
+        "A": "It identifies when a user accesses files outside their department",
+        "B": "It identifies when a user accesses systems during unusual hours of the day",
+        "C": "It identifies when an account logs in from geographically distant locations in impossible timeframes",
+        "D": "It identifies when a user transfers large amounts of data at once"
       },
-      "correct": "D",
-      "explanation": "The section defines impossible travel as an account logging in from New York then London 30 minutes later, which is physically impossible and signals compromise."
+      "correct": "C",
+      "explanation": "The section defines impossible travel as an account logging in from two distant locations in an impossibly short time, which signals that the account is compromised."
     },
     {
       "section": "High-priority threat patterns to monitor",
-      "type": "text",
-      "question": "Name two indicators a security team should monitor to detect ransomware activity.",
-      "rubric": "A sound answer mentions two of: mass file renames or extension changes, or deletion of Volume Shadow Copies via vssadmin or wmic.",
-      "explanation": "The section lists mass file renames/extension changes and deletion of Volume Shadow Copies as key ransomware indicators."
+      "type": "mc",
+      "question": "What key indicator suggests that ransomware may be executing on a system?",
+      "options": {
+        "A": "Regular periodic outbound connections with consistent byte sizes to external hosts",
+        "B": "Mass file renames and extension changes, and deletion of Volume Shadow Copies",
+        "C": "WMI connections and unexpected RDP sessions to workstations on the network",
+        "D": "Long DNS subdomains and connections to unapproved cloud storage services"
+      },
+      "correct": "B",
+      "explanation": "The section identifies ransomware indicators as mass file renames/extension changes and deletion of Volume Shadow Copies via vssadmin or wmic commands."
     },
     {
       "section": "SNMP — device health monitoring",
       "type": "mc",
-      "question": "What is the security risk with SNMPv1 and SNMPv2 that SNMPv3 addresses?",
+      "question": "What is an SNMP trap and how does it differ from standard polling?",
       "options": {
-        "A": "They cannot send unsolicited alerts called traps when threshold conditions are met",
-        "B": "They lack a structured database of device metrics organized by Object Identifiers",
-        "C": "They do not support polling agents on routers and switches for operational metrics",
-        "D": "They transmit community strings in plaintext, exposing shared authentication credentials"
+        "A": "An SNMP trap is a temporary suspension of SNMP communication to prevent congestion",
+        "B": "An SNMP trap is a scheduled report sent by the NMS to agents once per day",
+        "C": "An SNMP trap is a backup mechanism that activates when primary SNMP fails",
+        "D": "An SNMP trap is an unsolicited alert the agent sends to the NMS when a condition occurs"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that earlier SNMP versions transmit community strings in plaintext and that SNMPv3 is the only acceptable version for production because it addresses this vulnerability."
+      "explanation": "The section defines an SNMP trap as an unsolicited alert the agent sends to the NMS the moment a condition is met, such as CPU exceeding 95%, rather than waiting for the next polling cycle."
+    },
+    {
+      "section": "SNMP — device health monitoring",
+      "type": "mc",
+      "question": "Why is SNMPv3 required for production SNMP deployments?",
+      "options": {
+        "A": "SNMPv3 is faster than earlier versions and reduces overall network overhead",
+        "B": "SNMPv3 automatically generates MIB entries without manual configuration required",
+        "C": "SNMPv3 provides encryption and authentication, while earlier versions transmit credentials plaintext",
+        "D": "SNMPv3 supports more devices and offers better compatibility with legacy systems"
+      },
+      "correct": "C",
+      "explanation": "The section states that SNMPv3 is the only acceptable version because earlier versions transmit community strings, which are shared passwords used to authenticate SNMP queries, in plaintext."
     }
   ]
 }

@@ -3,75 +3,93 @@
     {
       "section": "Service Level Agreement (SLA)",
       "type": "mc",
-      "question": "Which of the following is a common remedy when an SLA's minimum performance level is not met?",
+      "question": "A cloud service provider's SLA guarantees 99.99% uptime. Approximately how much downtime per year does this permit?",
       "options": {
-        "A": "Immediate replacement of the service provider's equipment",
-        "B": "Automatic criminal penalties imposed by regulators",
-        "C": "Mandatory renegotiation of all contract pricing terms",
-        "D": "Service credits applied as discounts on future bills"
+        "A": "Approximately 5 minutes of downtime per year",
+        "B": "Approximately 52 minutes of downtime per year",
+        "C": "Approximately 8.7 hours of downtime per year",
+        "D": "Approximately 1 hour of downtime per year"
       },
-      "correct": "D",
-      "explanation": "The section states that penalties for SLA breaches are usually service credits (discounts on future bills); severe failures may trigger termination rights, but routine breaches result in credits."
+      "correct": "B",
+      "explanation": "The study guide table shows that 99.99% uptime permits approximately 52 minutes of downtime per year."
     },
     {
       "section": "Memorandum of Understanding (MOU) vs. Memorandum of Agreement (MOA)",
-      "type": "text",
-      "question": "Explain the key difference between an MOU and an MOA in terms of legal binding.",
-      "rubric": "A sound answer states that an MOU is non-binding and expresses mutual intent without creating enforceable legal obligations, while an MOA is binding and commits each party to specific actions and deliverables.",
-      "explanation": "The section explicitly contrasts MOU as non-binding (expressing intent without legal obligation) against MOA as binding (committing parties to specific actions and creating enforceable obligations)."
+      "type": "mc",
+      "question": "Your organization is starting an exploratory partnership with another company to evaluate potential collaboration. Which document type is most appropriate for this early-stage arrangement?",
+      "options": {
+        "A": "A Memorandum of Agreement committing both parties to specific deliverables",
+        "B": "A Statement of Work documenting scope and timeline for the partnership",
+        "C": "A Memorandum of Understanding expressing mutual intent without enforceable obligations",
+        "D": "A Master Service Agreement covering ongoing billing and liability terms"
+      },
+      "correct": "C",
+      "explanation": "The section states an MOU is non-binding and used for exploratory partnerships and early-stage collaborations before a formal contract exists."
     },
     {
       "section": "Master Service Agreement (MSA) and Statement of Work (SOW)",
       "type": "mc",
-      "question": "What is the primary purpose of a Statement of Work (SOW) within an MSA relationship?",
+      "question": "Your organization signs an MSA with a consulting firm covering billing, liability, and security requirements for the relationship. A specific project then needs detailed scope, deliverables, and timeline documentation. What document should be created?",
       "options": {
-        "A": "To permanently replace the MSA for all future business transactions",
-        "B": "To document the specifics of one project or engagement within the MSA framework",
-        "C": "To establish liability limits that override the parent MSA's terms",
-        "D": "To allow either party to terminate the relationship without cause"
+        "A": "A second Master Service Agreement that addresses the specific project requirements and scope",
+        "B": "A Non-Disclosure Agreement that protects confidential information related to the project",
+        "C": "A Service Level Agreement that sets performance targets and metrics for the project",
+        "D": "A Statement of Work that documents the scope, deliverables, and timeline of the project"
       },
-      "correct": "B",
-      "explanation": "The section defines SOW as documenting the specifics of one project or engagement within the MSA's framework, including scope, deliverables, timeline, and acceptance criteria."
+      "correct": "D",
+      "explanation": "The section explains that a SOW documents the specifics of one project within the MSA's framework, including scope, deliverables, timeline, and acceptance criteria."
     },
     {
       "section": "Non-Disclosure Agreement (NDA)",
-      "type": "text",
-      "question": "What does a bilateral NDA require compared to a unilateral NDA?",
-      "rubric": "A sound answer indicates that a bilateral NDA binds both parties to confidentiality obligations, whereas a unilateral NDA imposes obligations on only one party.",
-      "explanation": "The section's table shows unilateral NDA as 'One party only' and bilateral as 'Both parties,' with examples clarifying that unilateral applies to employee hiring and bilateral to two companies in due diligence."
+      "type": "mc",
+      "question": "When two companies are evaluating a potential merger and exchanging sensitive financial information, which type of NDA is most appropriate?",
+      "options": {
+        "A": "A bilateral NDA obligating both parties to maintain confidentiality",
+        "B": "A mutual NDA requiring only initial confidentiality before contract signing",
+        "C": "A unilateral NDA obligating only one party to maintain confidentiality",
+        "D": "A multilateral NDA involving three or more parties in the arrangement"
+      },
+      "correct": "A",
+      "explanation": "The section states that a bilateral NDA applies when both parties exchange sensitive information and both have confidentiality obligations, as in due diligence scenarios."
     },
     {
       "section": "Data Processing Agreement (DPA)",
       "type": "mc",
-      "question": "Under GDPR, which of the following is a required obligation of a data processor in a DPA?",
+      "question": "Your organization (the data controller) engages a cloud provider to process personal data of EU residents. Under GDPR Article 28, what must the DPA require the cloud provider to do regarding sub-processors it hires?",
       "options": {
-        "A": "Process data only on the controller's documented instructions",
-        "B": "Decide independently how personal data should be processed",
-        "C": "Approve or reject controller requests for data subject access",
-        "D": "Retain all personal data indefinitely for audit purposes"
+        "A": "Document all sub-processors but make hiring and removal decisions independently",
+        "B": "Keep sub-processor details confidential and notify the controller after the fact",
+        "C": "Automatically remove any sub-processor your organization questions or disapproves of",
+        "D": "Disclose all sub-processors and obtain controller approval before adding new ones"
       },
-      "correct": "A",
-      "explanation": "The section lists as the first required DPA provision that the processor must process data 'only on the controller's documented instructions'; the controller, not processor, makes processing decisions."
+      "correct": "D",
+      "explanation": "The section states the processor must disclose all sub-processors and get controller approval before adding new ones as a required DPA provision."
     },
     {
       "section": "Interconnection Security Agreement (ISA)",
       "type": "mc",
-      "question": "What does an Interconnection Security Agreement (ISA) document?",
+      "question": "Your organization is establishing a direct network connection with a government agency. What is the primary purpose of the Interconnection Security Agreement for this link?",
       "options": {
-        "A": "Encryption standards for cloud storage services",
-        "B": "Terms for employee personal device use on the company network",
-        "C": "Security controls for a direct network connection between two organizations",
-        "D": "Annual security training requirements for contractors"
+        "A": "To define the scope of work and deliverables the agency expects from your organization",
+        "B": "To set service availability targets and uptime guarantees for the network connection",
+        "C": "To document security controls, protocols, and incident response details governing the direct connection",
+        "D": "To establish confidentiality obligations for any information shared over the connection"
       },
       "correct": "C",
-      "explanation": "The section defines an ISA as documenting the security controls and technical details governing a direct network connection between two organizations' systems, covering protocols, ports, controls, data types, and contacts."
+      "explanation": "The section states that an ISA documents the security controls and technical details governing a direct network connection, including protocols, data types, and incident response contacts."
     },
     {
       "section": "Security-specific contract clauses",
-      "type": "text",
-      "question": "Name two security-specific contract clauses that can be embedded in any contract and briefly state what each one addresses.",
-      "rubric": "A sound answer names and describes any two of the following: breach notification clause (time to notify after discovery), liability and indemnification (who pays for breach), cyber liability insurance (required coverage), data ownership clause (org owns data), asset return/destruction (vendor handling at termination), or security control requirements (encryption, patches, access, monitoring).",
-      "explanation": "The section lists six specific clauses beyond named agreement types; students should be able to identify and briefly describe any two of them from the bulleted list."
+      "type": "mc",
+      "question": "You are contracting with a software vendor and want to ensure the vendor promptly notifies your organization if a security incident occurs. Which security-specific clause should be included in the contract?",
+      "options": {
+        "A": "An asset return clause defining how the vendor handles data destruction at contract end",
+        "B": "A breach notification clause requiring the vendor to notify within a defined timeframe",
+        "C": "A cyber liability insurance clause requiring the vendor to maintain specific coverage amounts",
+        "D": "A data ownership clause confirming your organization retains ownership of created data"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly identifies the breach notification clause as setting the maximum time a vendor has to notify the organization after discovering a security incident."
     }
   ]
 }

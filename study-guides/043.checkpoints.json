@@ -3,108 +3,119 @@
     {
       "section": "Ransomware: encryption as a weapon",
       "type": "mc",
-      "question": "In crypto-ransomware, why can victims not decrypt their files without paying the attacker?",
+      "question": "In crypto-ransomware, which encryption key is kept only on the attacker's servers and prevents victims from recovering files without payment?",
       "options": {
-        "A": "All victim files are stored on the attacker's servers and withheld from the victim",
-        "B": "The file encryption key is encrypted with the attacker's RSA public key, and only the attacker's RSA private key can decrypt it",
-        "C": "The RSA key is encrypted with AES-256, making decryption impossible without the attacker's tool",
-        "D": "The encryption algorithm changes for each file, so no single key works for all files"
+        "A": "The AES-256 symmetric key that encrypts the victim's files",
+        "B": "The RSA public key that encrypts the AES key",
+        "C": "The RSA private key that decrypts the AES key",
+        "D": "The master key stored in the victim's system registry"
       },
-      "correct": "B",
-      "explanation": "Crypto-ransomware uses a two-layer scheme: victims' files are encrypted with a random AES key, which is then encrypted with the attacker's RSA public key. Without the corresponding RSA private key held only by the attacker, the AES key cannot be recovered."
+      "correct": "C",
+      "explanation": "The section states the attacker encrypts the AES key with their RSA public key, and the RSA private key lives only on attacker servers, making recovery mathematically impossible without it."
     },
     {
       "section": "Ransomware extortion models",
-      "type": "text",
-      "question": "What is the key difference between single and double extortion in ransomware attacks?",
-      "rubric": "A sound answer states that single extortion encrypts files only, while double extortion combines file encryption with data theft and the threat to publish that data publicly.",
-      "explanation": "Single extortion relies only on file encryption to coerce payment. Double extortion adds a second pressure point by stealing data first and threatening to release it publicly if the ransom is not paid."
+      "type": "mc",
+      "question": "Which ransomware extortion model combines file encryption, data theft with public release threats, and a distributed denial-of-service attack?",
+      "options": {
+        "A": "Triple extortion uses encryption, data theft, and DDoS attacks",
+        "B": "Double extortion combines file encryption with data theft",
+        "C": "Single extortion adds file encryption only to the attack",
+        "D": "Ransomware as a Service provides attack platforms to affiliates"
+      },
+      "correct": "A",
+      "explanation": "Triple extortion adds a DDoS attack against the victim during negotiations to the encryption and data theft elements, applying maximum pressure for payment."
     },
     {
       "section": "Landmark ransomware incidents",
       "type": "mc",
-      "question": "Which of the following was notable for initially appearing to be ransomware but was actually designed as a wiper with no decryption capability?",
+      "question": "Which landmark ransomware incident was actually a wiper malware that appeared to be ransomware but made decryption impossible?",
       "options": {
-        "A": "Colonial Pipeline in 2021, which was deployed by the DarkSide RaaS group",
-        "B": "WannaCry in 2017, which used the NSA's EternalBlue exploit",
+        "A": "Colonial Pipeline in 2021, which was a DarkSide RaaS attack",
+        "B": "NotPetya in 2017, which looked like ransomware but was a wiper",
         "C": "CryptoLocker in 2013, which established the modern crypto-ransomware template",
-        "D": "NotPetya in 2017, which looked like ransomware but was ultimately a wiper"
+        "D": "WannaCry in 2017, which used the NSA's EternalBlue exploit"
       },
-      "correct": "D",
-      "explanation": "NotPetya appeared to be ransomware but functioned as a wiper — the decryption was never actually possible, meaning victims could not recover their data even by paying."
+      "correct": "B",
+      "explanation": "The section explicitly states NotPetya looked like ransomware but was actually a wiper, and that decryption was never possible for its victims."
     },
     {
       "section": "Trojans and remote access trojans",
       "type": "mc",
-      "question": "What is the defining characteristic that distinguishes a trojan from a virus?",
+      "question": "What is the primary difference between a trojan and a virus in terms of how it spreads?",
       "options": {
-        "A": "A trojan does not self-replicate and depends entirely on social engineering for installation",
-        "B": "A trojan encrypts files, while a virus deletes them",
-        "C": "A trojan communicates with command-and-control servers, while viruses operate independently",
-        "D": "A trojan requires user interaction to execute its payload, while a virus spreads automatically"
+        "A": "A trojan operates on networks while a virus targets individual systems",
+        "B": "A trojan encrypts files while a virus merely steals data",
+        "C": "A virus requires user interaction while a trojan runs automatically",
+        "D": "A trojan does not self-replicate and depends on social engineering for installation"
       },
-      "correct": "A",
-      "explanation": "Unlike a virus, a trojan does not self-replicate; it depends entirely on social engineering to trick users into running it, after which the payload operates independently."
+      "correct": "D",
+      "explanation": "The section states a trojan does not self-replicate and depends entirely on social engineering for installation, unlike a virus which self-replicates."
     },
     {
       "section": "Backdoors",
-      "type": "text",
-      "question": "What makes a backdoor particularly difficult to remove compared to other malware, and what are two methods it uses to hide its communication?",
-      "rubric": "A sound answer states that backdoors survive reboots and resist removal even after other malware is cleaned, and that they communicate via port-knocking, encrypted protocols, or legitimate cloud services to evade detection.",
-      "explanation": "Backdoors achieve persistence by surviving reboots and remaining even after other malware is cleaned. They evade detection by using covert communication channels such as port-knocking sequences or legitimate cloud services rather than obvious network traffic."
+      "type": "mc",
+      "question": "Which communication method allows a backdoor to unlock a hidden service by sending a specific sequence of connection attempts?",
+      "options": {
+        "A": "Direct network tunneling over standard HTTP protocols",
+        "B": "Port-knocking, sending a specific sequence of connection attempts",
+        "C": "Encrypted HTTPS channels with visible authentication prompts",
+        "D": "Broadcasting signals across legitimate cloud service APIs"
+      },
+      "correct": "B",
+      "explanation": "The section identifies port-knocking as a backdoor communication technique that sends a specific sequence of connection attempts to unlock a hidden service."
     },
     {
       "section": "Rootkits",
       "type": "mc",
-      "question": "Which type of rootkit has the highest power because it can hide from all user-space tools including antivirus software?",
+      "question": "Which rootkit type modifies the OS kernel itself and has the highest power to hide malware from all user-space security tools?",
       "options": {
-        "A": "Logic bomb rootkit that triggers on a specific date",
-        "B": "Firmware rootkit that lives in the MBR or UEFI",
-        "C": "Kernel rootkit that modifies the OS kernel itself",
-        "D": "User-mode rootkit that hooks Windows API functions"
+        "A": "Firmware rootkit, which lives in UEFI firmware or boot records",
+        "B": "User-mode rootkit, which hooks Windows API functions",
+        "C": "Application rootkit, which intercepts system service descriptor calls",
+        "D": "Kernel rootkit, which modifies the OS kernel itself"
       },
-      "correct": "C",
-      "explanation": "A kernel rootkit modifies the OS kernel itself and can hide processes and files using techniques like DKOM or SSDT hooking, making it invisible to all user-space tools including antivirus programs."
-    },
-    {
-      "section": "Rootkits",
-      "type": "text",
-      "question": "Why is scanning a system from within the infected OS unreliable for detecting a kernel rootkit, and what is the recommended approach instead?",
-      "rubric": "A sound answer states that the rootkit controls what the OS reports, so any scanning tool running on that OS will receive filtered results. The alternative is to boot from external trusted media and scan from outside the infected system.",
-      "explanation": "Because a kernel rootkit controls the OS itself, any security tool running on that OS receives only the filtered information the rootkit allows it to see. Only by booting from an external trusted medium can you bypass the rootkit's control and perform a reliable scan."
+      "correct": "D",
+      "explanation": "The section states kernel rootkits have the highest power because they modify the OS kernel itself and can hide from all user-space tools including antivirus."
     },
     {
       "section": "Botnets",
       "type": "mc",
-      "question": "In the context of botnets, what is the term for the individual compromised systems that are controlled by the attacker?",
+      "question": "What is the primary role of command-and-control (C2) infrastructure in a botnet?",
       "options": {
-        "A": "Bot herders that manage the command-and-control servers",
-        "B": "DDoS amplifiers that magnify network traffic",
-        "C": "Bots or zombies that receive commands from the attacker",
-        "D": "C2 nodes that relay malware distribution orders"
+        "A": "To encrypt communication between infected systems and servers",
+        "B": "To monitor network traffic and prevent credential stuffing attacks",
+        "C": "To provide a channel for the bot herder to command infected systems",
+        "D": "To distribute security patches to compromised zombie devices automatically"
       },
       "correct": "C",
-      "explanation": "The compromised systems in a botnet are called bots or zombies. They are controlled by the bot herder through command-and-control infrastructure to carry out attacks such as DDoS, spam, or credential stuffing."
+      "explanation": "The section defines a botnet as compromised systems controlled by an attacker called a bot herder through C2 infrastructure."
     },
     {
       "section": "Cryptominers (cryptojackers)",
-      "type": "text",
-      "question": "Why is Monero the preferred target currency for cryptominer malware, and what are two delivery methods for cryptomining malware?",
-      "rubric": "A sound answer states that Monero is preferred because it has a CPU-friendly mining algorithm and privacy features that block blockchain tracing. Delivery methods include browser-based JavaScript on compromised sites or installation as background malware.",
-      "explanation": "Monero is favored because its CPU-efficient algorithm allows profitable mining on standard computers and its privacy features prevent tracing transactions on the blockchain. Cryptominer malware is delivered either through JavaScript injected into compromised websites or installed as persistent background malware on systems."
+      "type": "mc",
+      "question": "Why is Monero the preferred target currency for cryptominer malware?",
+      "options": {
+        "A": "It offers CPU-friendly algorithms and strong privacy protections",
+        "B": "It integrates directly with browser-based JavaScript delivery methods",
+        "C": "It uses GPU-intensive algorithms for faster mining performance",
+        "D": "It requires less electricity than other cryptocurrencies to mine"
+      },
+      "correct": "A",
+      "explanation": "The section states Monero is preferred because it has a CPU-friendly algorithm and privacy features that block blockchain tracing of the attacker."
     },
     {
       "section": "Logic bombs",
       "type": "mc",
-      "question": "Which of the following is an example of an absence-based trigger for a logic bomb?",
+      "question": "Which type of logic bomb trigger activates when a specific user account, such as a departing employee's, is removed from the system?",
       "options": {
-        "A": "Execute a payload every time the system boots up",
-        "B": "Activate and destroy data if the planted developer's account is removed",
-        "C": "Wipe all files when a specific user logs into the system",
-        "D": "Delete all backups at midnight on December 31st"
+        "A": "Event-based trigger, which fires when a specific user logs in",
+        "B": "Time-based trigger, which executes at a specific date and time",
+        "C": "Absence-based trigger, which activates if a planted account is removed",
+        "D": "Condition-based trigger, which checks for modified file integrity"
       },
-      "correct": "B",
-      "explanation": "An absence-based trigger fires when something expected does not happen — in this case, when a malicious insider's account is removed (such as after they are fired), the logic bomb activates and destroys data."
+      "correct": "C",
+      "explanation": "The section lists absence-based triggers as those that activate if the planted developer's account is removed, such as when they are fired."
     }
   ]
 }

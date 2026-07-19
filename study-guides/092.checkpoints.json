@@ -3,114 +3,132 @@
     {
       "section": "Web protocols: HTTP vs. HTTPS",
       "type": "mc",
-      "question": "Which of the following best describes what HTTPS adds to HTTP?",
+      "question": "Which statement correctly describes what HTTPS protects that HTTP does not?",
       "options": {
-        "A": "A firewall rule that blocks unencrypted traffic",
-        "B": "Encryption via TLS and server authentication via certificate validation",
-        "C": "A faster connection speed for web browsers",
-        "D": "A requirement that users enter a password on every page"
+        "A": "HTTPS prevents network observers from accessing the domain name requested in the URL by hiding it inside the encrypted connection",
+        "B": "HTTPS encrypts all request and response content and authenticates the server via a certificate validated against a trusted CA store",
+        "C": "HTTPS encrypts all request and response content and prevents any form of session hijacking by removing cookies entirely",
+        "D": "HTTPS runs on a different port than HTTP and authenticates the server via a certificate that is digitally signed by the web browser"
       },
       "correct": "B",
-      "explanation": "HTTPS wraps HTTP in a TLS encryption layer and validates the server's certificate against the client's trusted certificate authority store, providing both confidentiality and server authentication. The other options either describe non-existent features or mischaracterize what HTTPS does."
+      "explanation": "The section explicitly states that HTTPS encrypts all request and response content and authenticates the server via a certificate validated against the client's trusted CA store. The other options either overstate the protection (B and C) or mischaracterize how certificates work (D)."
     },
     {
       "section": "File transfer protocols: FTP, SFTP, FTPS",
-      "type": "text",
-      "question": "Explain the key difference between SFTP and FTPS, even though their names are similar.",
-      "rubric": "A sound answer states that SFTP is a subsystem of SSH (using the SSH protocol family) while FTPS is actual FTP protected by a TLS layer — they are completely different protocols despite similar names.",
-      "explanation": "The section explicitly contrasts these two: SFTP runs inside SSH as an encrypted subsystem, whereas FTPS wraps the FTP protocol itself in TLS encryption. Understanding this distinction is crucial because they achieve security through different mechanisms."
+      "type": "mc",
+      "question": "What is the key difference between SFTP and FTPS in terms of how they achieve security?",
+      "options": {
+        "A": "SFTP uses SSH protocol and encrypts all traffic within an SSH tunnel for security",
+        "B": "SFTP is a different protocol from FTP but supports similar commands for compatibility",
+        "C": "SFTP encrypts file content while FTPS encrypts both file content and login credentials",
+        "D": "SFTP runs on port 22 while FTPS runs on port 990 and uses TLS encryption"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that SFTP is a subsystem of SSH (the SSH protocol family) and encrypts all data inside the SSH tunnel, while FTPS is actual FTP protected by a TLS layer. These are fundamentally different approaches to securing file transfer."
     },
     {
       "section": "Remote access: Telnet vs. SSH",
       "type": "mc",
-      "question": "What does SSH's public key authentication accomplish that Telnet does not?",
+      "question": "Which authentication method is supported by SSH but not by Telnet?",
       "options": {
-        "A": "It encrypts only the password but leaves commands visible",
-        "B": "It automatically logs out the user after five minutes of inactivity",
-        "C": "It prevents the user from typing commands on the remote system",
-        "D": "It allows credentials to be verified without a password crossing the network"
+        "A": "Password authentication with encrypted transmission of credentials across the network",
+        "B": "Certificate-based authentication where a digital certificate verifies server identity",
+        "C": "Public key authentication using a private key on the client and public key on the server",
+        "D": "Multi-factor authentication requiring both a password and a time-based one-time code"
       },
-      "correct": "D",
-      "explanation": "SSH's public key authentication means the client holds a private key and the server holds the matching public key, so no password crosses the wire at all. Telnet sends credentials in plaintext, making them capturable."
+      "correct": "C",
+      "explanation": "The section explicitly states that SSH supports public key authentication where the client holds a private key and the server holds the matching public key. Telnet transmits everything in plaintext, so it does not support any secure authentication method."
     },
     {
       "section": "Email protocols",
       "type": "mc",
-      "question": "Which port number indicates that IMAP traffic is encrypted with TLS?",
+      "question": "Which port and encryption requirement applies to client mail submission via SMTP?",
       "options": {
-        "A": "110",
-        "B": "143",
-        "C": "993",
-        "D": "995"
+        "A": "Port 143 with TLS assumed from the start of the connection for all client transactions",
+        "B": "Port 465 with plaintext transmission to maximize compatibility with older mail clients",
+        "C": "Port 25 with opportunistic STARTTLS that may or may not encrypt the connection",
+        "D": "Port 587 with STARTTLS required for encryption of client submissions"
       },
-      "correct": "C",
-      "explanation": "Port 993 is IMAPS (IMAP over TLS), which always uses encryption. Port 143 is plaintext IMAP. Ports 110 and 995 are for POP3 and POP3S respectively."
+      "correct": "D",
+      "explanation": "The section explicitly states that port 587 is used for client mail submission and requires STARTTLS. Port 25 is server-to-server with opportunistic STARTTLS, port 465 is SMTPS with TLS from the start, and port 143 is for IMAP."
     },
     {
       "section": "Directory services: LDAP vs. LDAPS",
-      "type": "text",
-      "question": "Why is running plaintext LDAP especially dangerous for an organization using Active Directory?",
-      "rubric": "A sound answer mentions that plaintext LDAP sends authentication credentials (including passwords in bind operations) unencrypted across the network, allowing anyone capturing traffic to harvest them.",
-      "explanation": "The section emphasizes that plaintext LDAP exposes credentials during bind operations (login requests), which is critical because Active Directory is central to identity management. An attacker capturing this traffic gains the ability to impersonate users."
+      "type": "mc",
+      "question": "What is the primary security risk of using standard LDAP on port 389?",
+      "options": {
+        "A": "Authentication credentials including passwords in bind operations travel unprotected in plaintext",
+        "B": "The LDAP protocol cannot verify the identity of the directory server requesting information",
+        "C": "Directory queries are limited to a small set of pre-approved Active Directory objects",
+        "D": "The connection timeout is shorter than LDAPS, causing frequent authentication failures"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that standard LDAP runs on port 389 in plaintext and that authentication credentials including passwords in bind operations travel unprotected. LDAPS on port 636 encrypts all directory traffic including authentication."
     },
     {
       "section": "Network management: SNMP versions",
       "type": "mc",
-      "question": "In SNMPv1 and v2c, what security vulnerability is created by the use of a community string?",
+      "question": "What does SNMPv3 in authPriv mode provide that SNMPv1 and v2c do not?",
       "options": {
-        "A": "The community string is transmitted in plaintext and acts like a shared password",
-        "B": "The community string is encrypted using a broken cipher",
-        "C": "The community string prevents all read access to network devices",
-        "D": "The community string can only be used once before expiring"
+        "A": "The ability to query multiple devices simultaneously without individual authentication",
+        "B": "Authentication using community strings and encryption using a shared master key",
+        "C": "Protection against network monitoring by disguising SNMP traffic as HTTP requests",
+        "D": "Authentication with HMAC and privacy with encryption instead of plaintext community strings"
       },
-      "correct": "A",
-      "explanation": "SNMPv1 and v2c use a community string (essentially a shared password) transmitted in plaintext with every message, allowing attackers who capture traffic to harvest it and gain management access to network devices."
+      "correct": "D",
+      "explanation": "The section explicitly states that SNMPv3 authPriv mode provides both authentication AND privacy, compared to SNMPv1 and v2c which authenticate using a community string transmitted in plaintext. This is the fundamental difference in security."
     },
     {
       "section": "Time synchronization: NTP and NTPsec",
       "type": "mc",
-      "question": "What is the consequence of clock skew exceeding five minutes in a Kerberos environment?",
+      "question": "Why does accurate time synchronization matter for Kerberos authentication?",
       "options": {
-        "A": "Network devices will stop communicating entirely",
-        "B": "Log files will become corrupted and unreadable",
-        "C": "Kerberos authentication will fail between misaligned systems",
-        "D": "Encryption keys will be automatically rotated"
+        "A": "Kerberos uses network time to generate one-time passwords that expire on clock drift",
+        "B": "Kerberos requires client and server clocks within five minutes or authentication will fail",
+        "C": "Kerberos cannot encrypt authentication traffic without synchronized network time protocol",
+        "D": "Kerberos requires all network devices to have identical clock settings for operation"
       },
-      "correct": "C",
-      "explanation": "The section states that Kerberos authentication requires clocks between client and server to be within five minutes of each other; clock skew beyond this threshold causes authentication failures. NTPsec helps prevent this by supporting authenticated NTP to block clock manipulation attacks."
+      "correct": "B",
+      "explanation": "The section explicitly states that Kerberos requires clocks between client and server to be within five minutes of each other — clock skew beyond this threshold causes authentication failures."
     },
     {
       "section": "VoIP protocols: SIP, RTP, and SRTP",
-      "type": "text",
-      "question": "Why is using SIPS alone (without SRTP) insufficient to fully protect a VoIP call?",
-      "rubric": "A sound answer explains that SIPS encrypts the call setup and signaling, but RTP carries the actual audio/video content unencrypted, leaving the media stream exposed to eavesdropping.",
-      "explanation": "The section clarifies that SIP sets up the call while RTP carries the actual media. Securing only SIP (via SIPS on port 5061) leaves the RTP media stream unencrypted; SRTP is needed to encrypt the audio and video payload itself."
+      "type": "mc",
+      "question": "What is the relationship between RTP and SRTP in VoIP?",
+      "options": {
+        "A": "RTP and SRTP are interchangeable terms for the same protocol that both encrypts and manages call sessions",
+        "B": "RTP is used for call setup and signaling, while SRTP handles the actual voice and video transmission",
+        "C": "RTP carries the actual audio and video media stream unencrypted, while SRTP encrypts and authenticates that media stream",
+        "D": "RTP is the modern standard for media transport, while SRTP is an older protocol no longer recommended"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that RTP carries the actual audio and video media stream and is unencrypted, while SRTP encrypts and authenticates the media stream. They serve the same purpose but at different security levels."
     },
     {
       "section": "DNS security: DNSSEC, DoH, DoT",
       "type": "mc",
-      "question": "What does DNSSEC protect against but not provide?",
+      "question": "What type of security does DNSSEC provide?",
       "options": {
-        "A": "It blocks DNS queries but does not allow legitimate resolution",
-        "B": "It encrypts queries but does not verify zone signatures",
-        "C": "It authenticates resolvers but does not authenticate clients",
-        "D": "It prevents cache poisoning but does not encrypt queries"
+        "A": "DNSSEC encrypts all DNS traffic using TLS on port 853 to prevent cache poisoning attacks",
+        "B": "DNSSEC adds cryptographic signatures to DNS responses for integrity but does not encrypt queries",
+        "C": "DNSSEC verifies the identity of the client making the DNS query before responding with any records",
+        "D": "DNSSEC encrypts DNS queries using HTTPS to hide which domains clients resolve"
       },
-      "correct": "D",
-      "explanation": "DNSSEC adds cryptographic signatures to prevent cache poisoning by making forged signed records impossible, but it does not encrypt queries themselves—providing integrity without confidentiality. DoH and DoT provide the encryption that DNSSEC lacks."
+      "correct": "B",
+      "explanation": "The section explicitly states that DNSSEC adds cryptographic signatures to DNS responses and prevents cache poisoning by making forged signed records impossible, but that it does NOT encrypt queries. It provides integrity, not confidentiality."
     },
     {
       "section": "IPsec: IP-layer security",
       "type": "mc",
-      "question": "In IPsec, which component provides both encryption and authentication?",
+      "question": "What does ESP provide that AH does not in IPsec?",
       "options": {
-        "A": "IKE (Internet Key Exchange)",
-        "B": "ESP (Encapsulating Security Payload)",
-        "C": "AH (Authentication Header)",
-        "D": "L2TP (Layer 2 Tunneling Protocol)"
+        "A": "ESP provides encryption in addition to authentication, while AH provides authentication and integrity only",
+        "B": "ESP encrypts only the payload while AH encrypts both the payload and the original IP headers",
+        "C": "ESP negotiates security associations via IKE while AH uses a manual key exchange process",
+        "D": "ESP works only in tunnel mode while AH works only in transport mode for different network configurations"
       },
-      "correct": "B",
-      "explanation": "ESP (protocol 50) provides encryption plus authentication, while AH (protocol 51) provides authentication and integrity only without encryption. IKE negotiates security associations, and L2TP is a tunneling protocol that pairs with IPsec for encryption."
+      "correct": "A",
+      "explanation": "The section explicitly states that ESP provides encryption plus authentication, while AH provides authentication and integrity only without encryption. These are the two distinct components with different capabilities."
     }
   ]
 }

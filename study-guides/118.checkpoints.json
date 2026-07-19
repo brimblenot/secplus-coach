@@ -3,81 +3,93 @@
     {
       "section": "Internal vs. external audits",
       "type": "mc",
-      "question": "Which of the following is a key weakness of internal audits that external audits address?",
+      "question": "What is the primary weakness of an internal audit, and how is it typically addressed?",
       "options": {
-        "A": "Internal auditors may lack independence when assessing controls they helped establish",
-        "B": "Internal audits are too costly to perform on a regular basis",
-        "C": "Internal audits cannot adapt their schedules to business needs",
-        "D": "Internal audits cannot identify gaps in financial controls"
+        "A": "It lacks independence because implementers may assess their own controls, so the audit function should report to the audit committee",
+        "B": "It cannot identify compliance gaps, so external auditors must always validate the findings",
+        "C": "It is too expensive, so organizations reduce costs by limiting the scope of the audit",
+        "D": "It takes too long to complete, so continuous monitoring tools are used to speed up the process"
       },
       "correct": "A",
-      "explanation": "The section explicitly states that internal audits lack independence — the same people who built the controls may be assessing them — and that external audits provide higher credibility because the auditor has no political stake in the outcome."
+      "explanation": "The section explicitly states the weakness is lack of independence and that the fix is having the audit function report to the audit committee, a board-level body above the CIO/CISO, creating separation between implementers and assessors."
     },
     {
       "section": "Types of audits",
       "type": "mc",
-      "question": "A SOX IT controls audit specifically evaluates IT controls that affect which business function?",
+      "question": "Which type of audit specifically evaluates IT controls that affect financial reporting accuracy?",
       "options": {
-        "A": "Operational efficiency and process effectiveness",
-        "B": "Financial reporting accuracy and completeness",
-        "C": "Disaster recovery and business continuity",
-        "D": "Physical security and access management"
+        "A": "A compliance audit that verifies adherence to PCI DSS standards and control requirements",
+        "B": "A security control audit that measures effectiveness against NIST 800-53 framework",
+        "C": "An operational audit that examines efficiency of business and security processes",
+        "D": "A SOX IT controls audit that checks design and operation of controls over financial reporting"
       },
-      "correct": "B",
-      "explanation": "The section's table states that a SOX IT controls audit checks IT controls affecting financial reporting — whether they are designed and operating correctly."
+      "correct": "D",
+      "explanation": "The table shows that SOX IT controls audit specifically checks IT controls affecting financial reporting and whether they are designed and operating correctly."
     },
     {
       "section": "Attestation",
-      "type": "text",
-      "question": "Explain in one sentence why an attestation creates more accountability than a simple audit finding.",
-      "rubric": "A sound answer states that attestation is a formal, legally accountable statement where the auditor or executive personally signs and becomes legally liable if the attestation is false, unlike a standard audit finding.",
-      "explanation": "The section defines attestation as a legally accountable statement and uses the affidavit comparison to show personal liability — signing is different from simply reporting findings."
+      "type": "mc",
+      "question": "What creates personal legal accountability in a management attestation under SOX?",
+      "options": {
+        "A": "The CPA firm auditing the organization takes on legal responsibility for all financial reporting controls",
+        "B": "External auditors provide a guarantee that internal controls meet industry best practices",
+        "C": "Senior executives formally declare responsibility for control effectiveness and become personally liable if the attestation is false",
+        "D": "The board of directors shares equal liability with management for any discovered control gaps"
+      },
+      "correct": "C",
+      "explanation": "The section states that SOX management attestation requires senior executives to personally declare responsibility for control effectiveness, making them personally liable if the attestation is false."
     },
     {
       "section": "Assessment types",
       "type": "mc",
-      "question": "What is the key difference between a vulnerability assessment and a threat assessment?",
+      "question": "What is the key difference between a vulnerability assessment and other assessment types?",
       "options": {
-        "A": "Vulnerability assessments are mandatory while threat assessments remain optional",
-        "B": "Vulnerability assessments require active exploitation while threat assessments do not",
-        "C": "Vulnerability assessments use automated tools while threat assessments use manual methods",
-        "D": "Vulnerability assessments identify weaknesses while threat assessments evaluate actual threats to the organization"
+        "A": "A vulnerability assessment evaluates overall security posture while others focus on specific threats only",
+        "B": "A vulnerability assessment identifies known weaknesses and assigns severity using CVSS but does not exploit vulnerabilities",
+        "C": "A vulnerability assessment uses interviews and observation while others rely only on automated scanning tools",
+        "D": "A vulnerability assessment compares controls against a target framework while others analyze threat likelihood and impact"
       },
-      "correct": "D",
-      "explanation": "The section's assessment table defines vulnerability assessment as scanning systems for known weaknesses, while threat assessment evaluates specific threats the org faces based on threat intelligence and industry data."
+      "correct": "B",
+      "explanation": "The table explicitly states that a vulnerability assessment scans systems for known weaknesses, assigns severity using CVSS, but does not exploit vulnerabilities, distinguishing it from assessments that may take other approaches."
     },
     {
       "section": "Regulatory examinations",
-      "type": "text",
-      "question": "Name one way regulatory examinations differ fundamentally from voluntary third-party audits.",
-      "rubric": "A sound answer states that regulators have legal authority to demand access and impose sanctions, or that you cannot opt out or limit scope, unlike voluntary audits.",
-      "explanation": "The section explicitly contrasts regulatory examinations with third-party audits, stating the regulator has legal authority to demand access and impose sanctions, and 'you cannot opt out or limit scope.'"
+      "type": "mc",
+      "question": "How do regulatory examinations differ from voluntary third-party audits?",
+      "options": {
+        "A": "Regulatory examinations are government-compelled with legal authority to demand access and impose sanctions; third-party audits are voluntary",
+        "B": "Regulatory examinations are less formal than third-party audits and vary widely in scope and methodology",
+        "C": "Regulatory examinations focus only on financial controls while third-party audits evaluate security and compliance comprehensively",
+        "D": "Regulatory examinations are conducted by CPAs while third-party audits are performed by internal security teams"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly defines regulatory examinations as government-compelled reviews where the regulator has legal authority to demand access and impose sanctions, and notes that unlike third-party audits, you cannot opt out or limit scope."
     },
     {
       "section": "The audit process",
       "type": "mc",
-      "question": "Which audit evidence collection technique involves an auditor independently running a control to verify it works?",
+      "question": "Which evidence collection technique involves the auditor independently running a control to verify it works?",
       "options": {
-        "A": "Analytical procedures",
-        "B": "Documentation review",
-        "C": "Re-performance",
-        "D": "Observation"
+        "A": "Inquiry that gathers information about how controls actually function in day-to-day practice",
+        "B": "Re-performance where the auditor independently runs the control to verify it works correctly",
+        "C": "Documentation review that examines policies, procedures, and configuration baselines to assess control design",
+        "D": "Inspection that examines physical assets, logs, configuration files, and access control lists"
       },
-      "correct": "C",
-      "explanation": "The section's evidence collection list defines re-performance as the auditor independently runs the control to verify it works."
+      "correct": "B",
+      "explanation": "The section lists re-performance as the technique where the auditor independently runs the control to verify it works."
     },
     {
       "section": "Continuous monitoring and bug bounties",
       "type": "mc",
-      "question": "What advantage do bug bounty programs provide that automated compliance scanners alone cannot offer?",
+      "question": "How do bug bounty programs differ from automated continuous monitoring tools?",
       "options": {
-        "A": "They track key performance indicators between formal audit periods",
-        "B": "They collect security events and correlate them across multiple systems",
-        "C": "They provide real-time alerts on noncompliant configurations immediately",
-        "D": "They catch vulnerabilities through human creative analysis that automated signature matching misses"
+        "A": "Bug bounty programs require organizational staff to test controls while automated tools use external vendors",
+        "B": "Bug bounty programs use SIEM platforms while automated tools rely on compliance scanners and dashboards",
+        "C": "Bug bounty programs involve independent researchers applying creative human analysis, catching what automated scanners miss",
+        "D": "Bug bounty programs track KPIs between audits while automated tools only collect security events during formal audits"
       },
-      "correct": "D",
-      "explanation": "The section states that bug bounties extend continuous monitoring with crowd-sourced human testing and explicitly notes they catch what automated scanners miss because humans apply creative analysis, not just signature matching."
+      "correct": "C",
+      "explanation": "The section states that bug bounty programs extend continuous monitoring with crowd-sourced human testing, and explicitly notes they catch what automated scanners miss because humans apply creative analysis, not just signature matching."
     }
   ]
 }

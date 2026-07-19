@@ -3,101 +3,145 @@
     {
       "section": "What denial of service actually is",
       "type": "mc",
-      "question": "Which pillar of the CIA triad does a denial of service attack primarily target?",
+      "question": "Which pillar of the CIA triad is targeted by a denial of service attack?",
       "options": {
-        "A": "Confidentiality",
-        "B": "Availability",
-        "C": "Authenticity",
-        "D": "Integrity"
+        "A": "Integrity",
+        "B": "Authentication",
+        "C": "Availability",
+        "D": "Confidentiality"
       },
-      "correct": "B",
-      "explanation": "The study guide explicitly states that DoS attacks target availability, which is the A in the CIA triad. The goal is to exhaust resources so legitimate users cannot reach the service, not to steal data or modify it."
+      "correct": "C",
+      "explanation": "DoS attacks deliberately exhaust a target's resources to make the service unavailable, directly targeting the Availability pillar of the CIA triad."
     },
     {
       "section": "From DoS to DDoS",
-      "type": "text",
-      "question": "Explain how a botnet allows a DDoS attack to overcome the limitations of a single-source DoS attack.",
-      "rubric": "A sound answer should explain that a botnet coordinates hundreds, thousands, or millions of infected devices worldwide to attack simultaneously, making source-based filtering ineffective because the attack comes from many sources at once rather than one IP address.",
-      "explanation": "The section states that single-source attacks are limited by one machine's bandwidth and can be blocked by filtering one IP, whereas a botnet defeats this by distributing the attack across many devices globally, making source-based filtering nearly useless."
+      "type": "mc",
+      "question": "What is a botnet in the context of DDoS attacks?",
+      "options": {
+        "A": "A single powerful server that generates and sends attack traffic directly to targets",
+        "B": "A detection system that monitors and alerts on incoming attack traffic",
+        "C": "A firewall device configured to identify and block malicious traffic patterns",
+        "D": "A network of infected machines controlled remotely by an attacker to launch coordinated attacks"
+      },
+      "correct": "D",
+      "explanation": "A botnet is a network of compromised machines organized under the attacker's remote control, allowing one command to trigger simultaneous attacks from thousands of devices."
     },
     {
       "section": "Three DDoS attack categories",
       "type": "mc",
-      "question": "Which DDoS attack category targets web application logic rather than network bandwidth or server processing resources?",
+      "question": "Which DDoS attack category targets web application logic and can succeed with relatively low bandwidth?",
       "options": {
-        "A": "Volumetric attack",
-        "B": "Amplification attack",
-        "C": "Application layer attack",
-        "D": "Protocol attack"
+        "A": "Amplification attacks that use third-party servers to increase packet volume",
+        "B": "Application layer attacks that disrupt service logic with relatively low bandwidth",
+        "C": "Protocol attacks that exhaust server connection-handling resources and capacity",
+        "D": "Volumetric attacks designed to saturate the network bandwidth capacity"
       },
-      "correct": "C",
-      "explanation": "The table in the section shows that application layer (Layer 7) attacks target web app logic to disrupt service, whereas volumetric attacks saturate bandwidth and protocol attacks exhaust connection-handling capacity."
+      "correct": "B",
+      "explanation": "Application layer (Layer 7) attacks target the web application itself rather than network infrastructure, allowing attackers to disrupt service efficiently without massive bandwidth."
     },
     {
       "section": "Volumetric attacks and amplification",
       "type": "mc",
-      "question": "In a DNS amplification attack, what is the approximate amplification factor that makes this technique effective?",
+      "question": "In DNS amplification attacks, what makes the amplification factor so large?",
       "options": {
-        "A": "Up to 4,000 times the request size",
-        "B": "Up to 51 times the request size",
-        "C": "Up to 10 times the request size",
-        "D": "Up to 51,000 times the request size"
+        "A": "The attacker spoofs the victim's IP in queries to open resolvers that respond with much larger data",
+        "B": "The network infrastructure duplicates packets sent to broadcast addresses automatically",
+        "C": "The victim's servers generate large error messages that are sent back to the attacker's source",
+        "D": "The attacker sends numerous copies of identical requests to multiply the total bandwidth consumed"
       },
       "correct": "A",
-      "explanation": "The section's amplification table specifies that DNS amplification has an amplification factor of up to 4,000×, achieved through DNS all-records queries sent to open resolvers with the victim's IP spoofed."
+      "explanation": "In DNS amplification, a small spoofed request using the victim's IP as the source causes third-party DNS servers to send large responses directly to the victim, creating an amplification factor up to around 4,000 times."
     },
     {
       "section": "Protocol attacks",
-      "type": "text",
-      "question": "Describe what happens during a SYN flood attack and why SYN cookies prevent it from succeeding.",
-      "rubric": "A sound answer should explain that a SYN flood fills the server's connection table with half-open entries by sending many spoofed SYN packets; SYN cookies fix this by encoding connection parameters in the sequence number so the server only allocates resources when a valid ACK arrives, preventing spoofed SYNs from consuming space.",
-      "explanation": "The section explains that SYN flood attacks fill the connection table with half-open entries waiting for ACKs that never come, and SYN cookies solve this by encoding connection data into the sequence number so resources are only allocated when a legitimate ACK returns with that encoded value."
+      "type": "mc",
+      "question": "How does a SYN flood attack cause denial of service?",
+      "options": {
+        "A": "Malicious payload data in packets crashes the server's operating system or kernel",
+        "B": "ICMP echo request floods consume all available network bandwidth and link capacity",
+        "C": "Spoofed SYN packets fill the server's connection table with half-open entries, exhausting the limit",
+        "D": "Malicious firmware modifications prevent the server from completing normal TCP handshake operations"
+      },
+      "correct": "C",
+      "explanation": "A SYN flood exploits the TCP three-way handshake by sending massive spoofed SYN packets; the server allocates half-open connection entries for each and the table fills, blocking legitimate connection attempts."
+    },
+    {
+      "section": "Protocol attacks",
+      "type": "mc",
+      "question": "What is the key mechanism of SYN cookies as a defense against SYN flood attacks?",
+      "options": {
+        "A": "The server stores fewer half-open connections by encoding parameters into the sequence number",
+        "B": "The server drops all incoming SYN packets from unverified sources automatically",
+        "C": "The server increases its connection table size to accommodate more half-open entries",
+        "D": "The server uses encryption to prevent spoofed SYN packets from reaching the network"
+      },
+      "correct": "A",
+      "explanation": "SYN cookies eliminate the need to store half-open connection state by encoding connection parameters into the SYN-ACK sequence number; resources are only allocated when a valid ACK returns with that encoded value."
     },
     {
       "section": "Application layer attacks",
       "type": "mc",
-      "question": "Why is Slowloris considered effective despite using very little bandwidth?",
+      "question": "How does Slowloris achieve denial of service while using very little bandwidth?",
       "options": {
-        "A": "It floods servers with valid HTTP GET requests at high speed",
-        "B": "It redirects legitimate traffic by exploiting DNS resolution flaws",
-        "C": "It sends oversized HTTP requests that crash web servers immediately",
-        "D": "It holds partial HTTP connections open slowly to exhaust the server's connection pool"
+        "A": "It sends large POST requests to force memory allocation and resource consumption on the server",
+        "B": "It opens many connections and sends partial HTTP headers slowly to hold connections open indefinitely",
+        "C": "It sends repeated valid HTTP GET requests until server memory becomes exhausted and unavailable",
+        "D": "It exploits DNS query processing to create heavy load on authoritative name servers"
       },
-      "correct": "D",
-      "explanation": "The section states that Slowloris opens many simultaneous connections with partial HTTP headers sent slowly enough to avoid timeout, filling most web servers' connection pools with incomplete requests while using minimal bandwidth."
+      "correct": "B",
+      "explanation": "Slowloris opens many connections and sends incomplete HTTP headers slowly enough to avoid timeout, filling the server's connection pool with incomplete requests while requiring minimal bandwidth."
     },
     {
       "section": "Permanent DoS (phlashing)",
       "type": "mc",
-      "question": "What distinguishes permanent denial of service (phlashing) from other DoS attacks?",
+      "question": "What is the objective of a permanent denial of service attack (phlashing)?",
       "options": {
-        "A": "It temporarily disables network devices through configuration changes",
-        "B": "It overwhelms targets using spoofed UDP packets",
-        "C": "It corrupts hardware by installing malicious firmware that causes permanent damage",
-        "D": "It exhausts bandwidth by amplifying DNS queries across multiple servers"
+        "A": "To deplete processing resources by filling the server's connection table with invalid entries",
+        "B": "To extract confidential data while the victim is distracted by ongoing service disruption",
+        "C": "To temporarily interrupt service by overwhelming available network bandwidth and capacity",
+        "D": "To permanently damage the target by deploying malicious firmware that corrupts hardware"
       },
-      "correct": "C",
-      "explanation": "The section defines phlashing as aiming to physically destroy the target by corrupting hardware through malicious firmware, requiring physical replacement rather than simply disrupting availability."
+      "correct": "D",
+      "explanation": "Phlashing aims to physically destroy hardware by accessing the device's firmware update mechanism and pushing a malicious firmware image that causes corruption requiring physical replacement."
     },
     {
       "section": "DDoS-as-a-weapon variations",
       "type": "mc",
-      "question": "What is a booter or stresser service?",
+      "question": "What is a DDoS smokescreen attack?",
       "options": {
-        "A": "A DDoS-for-hire platform that allows anyone to purchase attacks cheaply",
-        "B": "A firewall that inspects HTTP traffic for attack patterns",
-        "C": "A tool that tests network resilience under controlled load",
-        "D": "An ISP service that distributes traffic across multiple nodes"
+        "A": "A simultaneous DDoS launched to distract teams while a separate intrusion or theft occurs",
+        "B": "An attack that gradually increases traffic over time to evade rate-limiting defense mechanisms",
+        "C": "A ransom extortion scheme threatening to launch a DDoS unless payment is made immediately",
+        "D": "An attack using encrypted traffic to conceal malicious packets from security detection systems"
       },
       "correct": "A",
-      "explanation": "The section describes booter/stresser services as DDoS-for-hire platforms that lower the barrier to entry by allowing anyone to buy attacks cheaply, without requiring technical expertise."
+      "explanation": "A DDoS smokescreen uses a DDoS attack as a distraction tactic while attackers conduct a separate malicious activity like intrusion or data theft elsewhere."
     },
     {
       "section": "Defenses",
-      "type": "text",
-      "question": "Explain how traffic scrubbing centers mitigate DDoS attacks.",
-      "rubric": "A sound answer should explain that scrubbing centers route traffic through third-party services that filter attack traffic using machine learning or behavioral analysis, forwarding only clean traffic to the victim's network.",
-      "explanation": "The section states that traffic scrubbing routes traffic through scrubbing centers (such as Cloudflare or Akamai) that filter attack traffic via ML and behavioral analysis before forwarding legitimate traffic to the target."
+      "type": "mc",
+      "question": "What does a traffic scrubbing center do to defend against DDoS attacks?",
+      "options": {
+        "A": "It distributes target services across multiple geographic locations to reduce impact on availability",
+        "B": "It encrypts all outgoing traffic to prevent attackers from analyzing network patterns and behavior",
+        "C": "It routes traffic through filtering centers that remove attack traffic before forwarding clean data",
+        "D": "It automatically drops all packets that exceed a specified rate limit threshold per source IP"
+      },
+      "correct": "C",
+      "explanation": "Traffic scrubbing (provided by services like Cloudflare, Akamai, or AWS Shield) filters incoming traffic through analysis to identify and remove attack traffic before forwarding legitimate traffic to the target."
+    },
+    {
+      "section": "Defenses",
+      "type": "mc",
+      "question": "Which defense works by blocking packets with spoofed source IPs at the ISP level?",
+      "options": {
+        "A": "Load balancing, which distributes incoming traffic across multiple backend servers for redundancy",
+        "B": "Rate limiting, which restricts the number of requests accepted per IP address per unit of time",
+        "C": "Blackholing, which silently drops all traffic destined for the victim's IP address entirely",
+        "D": "Ingress filtering per BCP38, which prevents spoofed source packets from leaving ISP networks"
+      },
+      "correct": "D",
+      "explanation": "Ingress filtering (BCP38) is implemented by ISPs to block packets with spoofed source IPs from leaving their networks, undermining amplification attacks that rely on IP spoofing."
     }
   ]
 }

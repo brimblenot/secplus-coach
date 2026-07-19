@@ -109,7 +109,7 @@ Rules: Output ONLY the markdown above, starting with the "## " heading. Use "###
 // Shared MC quality rules — keeps the correct answer from being guessable by length.
 const MC_BALANCE_RULES = `MC requirements:
 - Scenario-based stem (e.g. "A security analyst discovers...").
-- All four options must be PARALLEL: same grammatical shape, same level of detail/specificity, and closely matched in length (the longest no more than ~1.5× the words of the shortest). The correct answer must NOT be the longest, most complete, most specific, or most technical-sounding option, and distractors must never be terse throwaways next to a fully-spelled-out answer — balance them so the choice cannot be guessed by picking the longest or most thorough one without reading the question.
+- All four options must be PARALLEL and NEARLY IDENTICAL IN LENGTH: same grammatical shape, same level of detail/specificity, and within a few words of each other (the longest no more than ~1.15× the words of the shortest) so they look the same at a glance. The correct answer must NOT be the longest, most complete, most specific, or most technical-sounding option; NO option may carry more detail than the rest. Never pair a fully-spelled-out correct answer with terse throwaway distractors — the choice must be impossible to guess by picking the longest or most thorough one without reading the question. If the correct answer needs extra words to be right, trim it and add matching detail to the distractors.
 - Distractors must be plausible and use named wrong-answer strategies (related-but-wrong-scenario, right-concept-wrong-implementation, compound part-right-part-wrong) — never obvious throwaways.
 - No verbatim phrases from the study material; stay at SY0-701 exam depth, no vendor-specific minutiae.
 - Keep every explanation to 1-2 sentences (40 words max) and every rubric to 2-3 short phrases. This is mandatory: long output is truncated mid-JSON and the quiz fails to generate, so be brief.`
@@ -193,24 +193,25 @@ Respond with ONLY valid JSON, no markdown fences:
 }`
 }
 
-// In-lecture "checkpoint" checks: one quick retrieval question per study-guide
-// section, answered right after reading that section (testing effect). Consumed by
-// app/api/session/checkpoints/route.ts. These are low-stakes practice — NOT the
-// graded topic quiz — so they stay simpler and shorter than exam questions.
-// Scope is locked to each section's own text (same rule as every quiz generator).
+// In-lecture "checkpoint" checks: one quick MULTIPLE-CHOICE retrieval question per
+// study-guide section, answered right after reading that section (testing effect).
+// Consumed by app/api/session/checkpoints/route.ts. These are low-stakes practice —
+// NOT the graded topic quiz — so they stay simpler and shorter than exam questions.
+// Checkpoints are MC-only (no free-text) by product decision, and their options are
+// held to a strict length parity so the answer can't be spotted by detail. Scope is
+// locked to each section's own text (same rule as every quiz generator).
 export function buildCheckpointsPrompt(guideContent: string, topicName: string): string {
   return `TOPIC: ${topicName}
 
-Below is a study guide split into "### " sections. For EACH content section, write ONE quick "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
+Below is a study guide split into "### " sections. For EACH content section, write ONE quick multiple-choice "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
 
 Rules:
 - One question per "### " section, in the order the sections appear. SKIP the "### Recap" and "### Exam flags" sections entirely (no question for either — they are summaries, not new material). The framing intro before the first "### " is not a section either — ignore it.
+- EVERY checkpoint is multiple choice (type "mc"). Do NOT write any free-text / written-response questions — no "text" type at all.
 - SCOPE LOCK: each question tests ONLY what its own section states. Never use facts from another section, and never introduce any term, technology, or concept not written in that section.
-- ANSWERABLE FROM THE SECTION ALONE: a fully-correct answer must be constructible using ONLY sentences written in this section. Before you write a question, check its model answer/rubric — every fact it expects must appear verbatim-in-substance in the section text. Do NOT ask a question whose correct answer depends on an unstated premise, an implied contrast, or outside knowledge. In particular, if the section explains something by comparison (e.g. "X does what Y cannot"), only ask about the compared thing (Y) if the section actually states the relevant fact about Y; otherwise ask only about what the section explicitly says. If you cannot form a question the section fully answers, ask a simpler recall question that it does — never reach beyond the text to make the question harder.
-- Pick the type per section: "mc" for a concrete fact/definition/recognition check; "text" for a section whose point is conceptual (a why/how/when-to-use). Aim for a genuine MIX across the guide, not all one type.
+- ANSWERABLE FROM THE SECTION ALONE: a fully-correct answer must be constructible using ONLY sentences written in this section. Before you write a question, check its correct option — every fact it depends on must appear verbatim-in-substance in the section text. Do NOT ask a question whose correct answer depends on an unstated premise, an implied contrast, or outside knowledge. In particular, if the section explains something by comparison (e.g. "X does what Y cannot"), only ask about the compared thing (Y) if the section actually states the relevant fact about Y; otherwise ask only about what the section explicitly says. If you cannot form a question the section fully answers, ask a simpler recall question that it does — never reach beyond the text to make the question harder.
 - Keep checkpoints QUICK — a plain recall/understanding check, shorter and simpler than an exam question. No tricky multi-clause scenarios.
-- For "mc": exactly 4 options A–D that are PARALLEL — same grammatical shape, same level of detail, and closely matched in length (the longest option no more than ~1.5× the words of the shortest; since quick-check options are short, keep them within a few words of each other). The correct answer must NOT be the most complete, specific, or detailed one. The classic tell to avoid: a fully-spelled-out correct answer surrounded by terse distractors, so it can be picked by spotting the longest/most-thorough option without reading the question. Every distractor must be a fleshed-out, plausible statement carrying the same amount of detail as the answer — never a short throwaway.
-- For "text": ask the student to state or apply the section's key idea in 1–2 sentences. Put what a sound answer says in "rubric" (a guide, not a checklist of required words).
+- Exactly 4 options A–D that are PARALLEL and NEARLY IDENTICAL IN LENGTH — same grammatical shape, same level of detail, and within a couple of words of each other so they look the same at a glance. The correct answer must NOT be the most complete, specific, or detailed one, and NO option may carry more detail than the rest. The classic tell to avoid: a fully-spelled-out correct answer surrounded by terse distractors, so it can be picked by spotting the longest/most-thorough option without reading the question. Every distractor must be a fleshed-out, plausible statement carrying the same amount of detail as the answer — never a short throwaway.
 - "section" must be the section's heading text copied EXACTLY, without the leading "### ".
 - Plain prose in every field. No markdown, no bold.
 - Keep every explanation to 1–2 sentences. Brevity is mandatory — long output is truncated mid-JSON and generation fails.
@@ -219,7 +220,7 @@ Respond with ONLY valid JSON, no markdown fences:
 {
   "checkpoints": [
     { "section": "<heading text>", "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "B", "explanation": "Plain prose, 1-2 sentences." },
-    { "section": "<heading text>", "type": "text", "question": "...", "rubric": "What a sound answer states.", "explanation": "Plain prose, 1-2 sentences." }
+    { "section": "<heading text>", "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "C", "explanation": "Plain prose, 1-2 sentences." }
   ]
 }
 

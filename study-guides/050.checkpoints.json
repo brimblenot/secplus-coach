@@ -3,101 +3,106 @@
     {
       "section": "Shell scripts as malicious code",
       "type": "mc",
-      "question": "Why do plain-text shell scripts often evade traditional antivirus detection?",
+      "question": "Why do traditional antivirus solutions struggle to detect malicious shell scripts?",
       "options": {
-        "A": "They run only in memory and leave no trace on disk",
-        "B": "They have no fixed binary signature to match against known hashes",
-        "C": "They are encrypted by default when stored on the filesystem",
-        "D": "They require administrative privileges that block scanner access"
+        "A": "Shell scripts execute only in memory without being written to disk or storage",
+        "B": "Shell scripts are compiled into binary code before execution by the operating system",
+        "C": "Shell scripts are plain text with no fixed binary pattern, leaving no signature for detection",
+        "D": "Shell scripts are automatically encrypted when stored on disk by default"
       },
-      "correct": "B",
-      "explanation": "The section states that shell scripts leave 'no binary signature' because antivirus traditionally matches file hashes, but a text file has no fixed binary pattern to match. Options A, C, and D describe other evasion concepts not mentioned in this section."
+      "correct": "C",
+      "explanation": "The section states that shell scripts leave no binary signature because traditional antivirus matches known file hashes, but a text file has no fixed binary pattern to match."
     },
     {
       "section": "PowerShell abuse and fileless attacks",
-      "type": "text",
-      "question": "Explain how the combination of IEX and System.Net.WebClient DownloadString enables a fileless attack.",
-      "rubric": "A sound answer states that DownloadString fetches a script from a URL and IEX executes that script content entirely in memory without writing it to disk, preventing antivirus from scanning a file hash.",
-      "explanation": "The section explicitly describes IEX running a string as code and DownloadString fetching text from a URL, with the result that the script runs 'entirely in memory, never writing a file to disk' — the core mechanism of fileless execution."
+      "type": "mc",
+      "question": "Which PowerShell command fetches a script from a URL and executes it directly in memory?",
+      "options": {
+        "A": "IEX with System.Net.WebClient DownloadString pulls and executes a script in memory",
+        "B": "Base64 encoding with EncodedCommand downloads and executes scripts from a server",
+        "C": "System.Net.WebClient DownloadString writes a file to disk before execution",
+        "D": "WS-Management protocol downloads scripts from the internet to the registry"
+      },
+      "correct": "A",
+      "explanation": "The section describes IEX (Invoke-Expression) combined with System.Net.WebClient DownloadString as the fileless execution technique that pulls a script from the internet and runs it entirely in memory without writing a file to disk."
     },
     {
       "section": "WMI persistence and remote execution",
       "type": "mc",
-      "question": "Where are WMI event subscriptions stored, and why does this make them effective for persistence?",
+      "question": "Where are WMI event subscriptions stored that allows them to survive system reboots?",
       "options": {
-        "A": "In the registry Run key for startup execution",
-        "B": "In scheduled task files for automatic reboot persistence",
-        "C": "In the WMI repository, evading typical registry-based persistence checks",
-        "D": "In startup folders before firewall initialization"
+        "A": "WMI event subscriptions are stored in the Windows registry Run key like other persistence mechanisms",
+        "B": "WMI event subscriptions are stored in temporary memory and are lost when the system restarts",
+        "C": "WMI event subscriptions are stored in scheduled tasks and require manual re-enablement after reboot",
+        "D": "WMI event subscriptions are stored in the WMI repository and survive reboots"
       },
-      "correct": "C",
-      "explanation": "The section states WMI subscriptions are 'stored in the WMI repository, not the registry, so they hide from typical persistence hunts.' The other options describe different persistence mechanisms not mentioned in this section."
+      "correct": "D",
+      "explanation": "The section explicitly states that WMI event subscriptions are stored in the WMI repository, not the registry, and survive reboots, making them difficult to find through typical persistence hunts."
     },
     {
       "section": "Python offensive tooling",
       "type": "mc",
-      "question": "Which Python library provides implementations of Windows protocols like SMB, MSRPC, and Kerberos?",
+      "question": "What does the Impacket Python library enable attackers to do?",
       "options": {
-        "A": "Impacket, for Windows protocol implementations",
-        "B": "Socket, for raw network connections",
-        "C": "Scapy, for building network packets",
-        "D": "Requests, for HTTP communication"
+        "A": "Impacket decodes Base64encoded PowerShell commands for forensic analysis",
+        "B": "Impacket provides pure-Python implementations of Windows protocols like SMB and Kerberos",
+        "C": "Impacket enables remote code execution through WMI without valid credentials",
+        "D": "Impacket allows attackers to build and inject arbitrary network packets on any OS"
       },
-      "correct": "A",
-      "explanation": "The section identifies Impacket as providing 'pure-Python implementations of Windows protocols (SMB, MSRPC, Kerberos),' while Scapy is described as a library for building and injecting network packets, not Windows protocols."
+      "correct": "B",
+      "explanation": "The section states that Impacket is a Python library providing pure-Python implementations of Windows protocols (SMB, MSRPC, Kerberos), enabling Windows attacks from any OS."
     },
     {
       "section": "JavaScript, VBScript, and HTA files",
       "type": "mc",
-      "question": "Which executable hosts and runs HTA files with elevated permissions?",
+      "question": "What is the primary advantage for attackers when using HTA files compared to regular scripts?",
       "options": {
-        "A": "wscript.exe, which interprets VBScript",
-        "B": "rundll32.exe, which executes DLL functions",
-        "C": "powershell.exe, which manages system scripts",
-        "D": "mshta.exe, Microsoft's HTA host process"
+        "A": "HTA files are automatically signed by Microsoft and therefore bypass application allowlisting controls",
+        "B": "HTA files use Base64 encoding to hide their content from email gateway filters and antivirus detection",
+        "C": "HTA files are executed by mshta.exe and run with elevated permissions that bypass browser sandboxing",
+        "D": "HTA files are stored in the WMI repository and survive system reboots without requiring re-execution"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states that HTA files are 'executed by mshta.exe (Microsoft's HTA host process)' and 'run with elevated permissions that bypass browser sandboxing.' wscript.exe is mentioned for VBScript, not HTA files."
+      "correct": "C",
+      "explanation": "The section describes HTA files as HTML Applications executed by mshta.exe that run with elevated permissions bypassing browser sandboxing, giving them higher privilege access than typical scripts."
     },
     {
       "section": "Office macros (VBA)",
-      "type": "text",
-      "question": "What is the purpose of the Document_Open and Workbook_Open event hooks in a malicious macro?",
-      "rubric": "A sound answer states that these hooks fire automatically when the document opens, causing the macro code to run without requiring any further user interaction.",
-      "explanation": "The section defines these hooks as firing 'automatically on open, requiring no further user interaction,' which explains their value in establishing immediate execution on document load."
+      "type": "mc",
+      "question": "What VBA event hooks fire automatically when a macro-enabled Office document is opened?",
+      "options": {
+        "A": "Macro_Initialize and Macro_Execute hooks fire when the user clicks Enable Macros in the notification bar",
+        "B": "Document_Open and Workbook_Open event hooks fire automatically without requiring further user interaction",
+        "C": "Auto_Run and Document_Load hooks fire only after the user saves the document and closes it",
+        "D": "Startup_Macro and OnOpen hooks require the user to double-click a button within the document to execute"
+      },
+      "correct": "B",
+      "explanation": "The section states that Document_Open and Workbook_Open are VBA event hooks that fire automatically on open, requiring no further user interaction."
     },
     {
       "section": "Staged vs. stageless payloads",
       "type": "mc",
-      "question": "What is the key difference between a staged and stageless payload in terms of delivery?",
+      "question": "What is the key structural difference between staged and stageless payloads?",
       "options": {
-        "A": "Staged payloads use a small loader then fetch the full payload; stageless includes everything upfront",
-        "B": "Staged payloads are larger; stageless payloads are compressed",
-        "C": "Staged payloads use PowerShell; stageless use binaries",
-        "D": "Staged payloads encrypt transit data; stageless transmit unencrypted"
+        "A": "Staged payloads use a small loader that downloads the full payload at runtime",
+        "B": "Staged payloads are encrypted and require decryption before running",
+        "C": "Staged payloads use Windows signed binaries while stageless use custom executables",
+        "D": "Staged payloads are delivered via email and stageless via web browsers"
       },
       "correct": "A",
-      "explanation": "The section defines staged as a small 'loader/dropper' that 'downloads full payload from a C2 server into memory at runtime,' while stageless is when the 'full payload bundled in one artifact.' The other options introduce concepts not mentioned in this section."
+      "explanation": "The section defines staged payloads as using a small loader/dropper that downloads a full payload from a C2 server, while stageless payloads bundle the full payload in one artifact."
     },
     {
       "section": "Living-off-the-land binaries (LOLBins)",
       "type": "mc",
-      "question": "What is the primary advantage of using LOLBins for malicious activity?",
+      "question": "Which legitimate Windows binary can be abused to download files from URLs and decode Base64 data?",
       "options": {
-        "A": "They require fewer system resources than third-party attack frameworks",
-        "B": "They are legitimate, signed Microsoft binaries that application allowlists typically permit",
-        "C": "They run faster than custom malware tools on compromised systems",
-        "D": "They automatically bypass antivirus software without additional configuration"
+        "A": "rundll32.exe can download files from URLs and decode Base64 data",
+        "B": "regsvr32.exe can download files from URLs and decode Base64 data",
+        "C": "mshta.exe can download files from URLs and decode Base64 data",
+        "D": "certutil.exe can download files from URLs and decode Base64 data"
       },
-      "correct": "B",
-      "explanation": "The section states that 'because these are signed Microsoft binaries, application allowlisting rules typically permit them,' making evasion of allowlist controls possible. The other options are not supported by the section text."
-    },
-    {
-      "section": "Defense-in-depth overview",
-      "type": "text",
-      "question": "Name two of the five defense layers described and explain why defense-in-depth is necessary.",
-      "rubric": "A sound answer names two layers from the list (AMSI, Script Block Logging, AppLocker/WDAC, EDR, or email filtering) and states that no single control stops all malicious code, so multiple layers are needed.",
-      "explanation": "The section opens with 'No single control stops all malicious code' and then lists five specific controls, making clear that layered defense is essential and providing the rationale for depth."
+      "correct": "D",
+      "explanation": "The section lists certutil.exe as capable of downloading files from URLs and decoding Base64 data as a LOLBin abuse technique."
     }
   ]
 }

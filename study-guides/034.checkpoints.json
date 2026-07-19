@@ -3,81 +3,93 @@
     {
       "section": "Type 1 vs. Type 2 hypervisors",
       "type": "mc",
-      "question": "Which statement correctly describes the security difference between Type 1 and Type 2 hypervisors?",
+      "question": "Which hypervisor type runs directly on hardware without a host OS underneath, and is therefore used in production environments?",
       "options": {
-        "A": "Type 2 provides stronger isolation through an additional software layer.",
-        "B": "Type 1 runs on bare metal with a smaller attack surface; Type 2 runs on a host OS and inherits its vulnerabilities.",
-        "C": "Type 1 is used for development environments; Type 2 is used for production.",
-        "D": "Type 2 runs on bare metal with a smaller attack surface; Type 1 runs on a host OS."
+        "A": "Type 1 hypervisor, which runs directly on hardware and has a smaller attack surface",
+        "B": "Type 2 hypervisor, which is deployed as an application on top of an existing host OS",
+        "C": "Type 1 hypervisor, which sits inside a host OS and is designed for development only",
+        "D": "Type 2 hypervisor, which is smaller and inherits fewer host OS vulnerabilities"
       },
-      "correct": "B",
-      "explanation": "Type 1 hypervisors run directly on hardware with no host OS underneath, creating a smaller attack surface for production use. Type 2 hypervisors run as applications on top of an existing host OS, meaning they inherit all vulnerabilities present in that OS."
+      "correct": "A",
+      "explanation": "Type 1 (bare-metal) hypervisors run directly on hardware with no host OS underneath, providing a smaller attack surface and are used in production. Type 2 run as applications on top of a host OS and inherit all its vulnerabilities."
     },
     {
       "section": "VM escape — the most severe virtualization vulnerability",
-      "type": "text",
-      "question": "Explain what a VM escape attack accomplishes and why it is considered the most severe virtualization vulnerability.",
-      "rubric": "A sound answer states that VM escape is an attack where malicious code in a guest VM exploits a flaw in the hypervisor or hardware emulation to break out of the VM boundary and reach the hypervisor or other VMs, and that one successful escape can expose every tenant on the same physical host simultaneously.",
-      "explanation": "VM escape breaks the isolation boundary between VMs by exploiting hypervisor or emulation-layer flaws, giving an attacker access to multiple tenants at once — far more damaging than a single-VM compromise."
+      "type": "mc",
+      "question": "What is VM escape, and what is the primary control to prevent it?",
+      "options": {
+        "A": "An attack where guest code exploits a hypervisor flaw to break out and reach other VMs; primary control is isolating VMs on separate physical hosts to contain the breach",
+        "B": "A snapshot feature that captures VM state and preserves it; primary control is regularly deleting old snapshots to free up storage resources",
+        "C": "A network misconfiguration allowing VMs to communicate across segments; primary control is enabling firewall rules between VMs to block traffic",
+        "D": "An attack where guest code exploits a hypervisor flaw to break out and reach other VMs; primary control is keeping the hypervisor patched to fix any exploitable vulnerabilities"
+      },
+      "correct": "D",
+      "explanation": "VM escape exploits flaws in the hypervisor or hardware emulation layer to break out of the guest VM boundary. Since a single unpatched flaw endangers all tenants on that host, patching the hypervisor first is the primary control."
     },
     {
       "section": "VM sprawl — forgotten VMs become forgotten vulnerabilities",
       "type": "mc",
-      "question": "What is a primary security risk created by VM sprawl?",
+      "question": "What is VM sprawl, and what role do snapshots play in increasing its risk?",
       "options": {
-        "A": "Unmanaged VMs automatically download and install malware from the internet.",
-        "B": "Snapshots increase the physical storage cost of the hypervisor hardware.",
-        "C": "VM sprawl reduces the speed at which the hypervisor can schedule workloads.",
-        "D": "Forgotten VMs stop receiving security patches and become easy targets for attackers."
+        "A": "The misconfiguration of virtual networks and connectivity; snapshots are used to recover VMs when isolation failures occur between segments",
+        "B": "The uncontrolled buildup of unmanaged VMs that stop receiving patches; snapshots preserve old vulnerabilities and stored credentials indefinitely on disk",
+        "C": "The rapid growth of VM performance requirements beyond capacity; snapshots reduce storage overhead significantly and help mitigate the problem",
+        "D": "The sharing of CPU resources between VMs without proper allocation; snapshots prevent side-channel attacks on the shared cache memory"
       },
-      "correct": "D",
-      "explanation": "VM sprawl refers to abandoned or unmanaged virtual machines that no longer receive patches or maintenance, making them vulnerable attack surfaces. Snapshots also preserve old vulnerabilities indefinitely."
+      "correct": "B",
+      "explanation": "VM sprawl is the uncontrolled accumulation of abandoned, unmanaged VMs that stop receiving security patches. Snapshots compound the risk by preserving old vulnerabilities, credentials, and session tokens indefinitely."
     },
     {
       "section": "VM isolation failures — when logical walls break down",
       "type": "mc",
-      "question": "Which of the following is an example of a VM isolation failure?",
+      "question": "Which of the following is a way that VM isolation can fail on the same physical host?",
       "options": {
-        "A": "Memory overcommitment that enhances virtual disk performance.",
-        "B": "A hypervisor requiring all VMs to be rebooted at the same time.",
-        "C": "Misconfigured virtual networks or VLANs that allow unintended VM communication.",
-        "D": "A shared clipboard feature between host and guest systems."
+        "A": "Virtual floppy disk controllers can bypass network segmentation controls and allow unauthorized communication between isolated VMs",
+        "B": "Snapshots can automatically delete security patches, reducing the security posture of VMs running on the same physical host",
+        "C": "Memory overcommitment causes the hypervisor to swap memory to disk; a hypervisor bug could potentially allow one VM to read another VM's memory",
+        "D": "Type 1 hypervisors lack proper isolation mechanisms and cannot adequately separate VMs from one another in a secure manner"
       },
       "correct": "C",
-      "explanation": "VM isolation failure occurs when the intended separation between VMs breaks down through misconfigured virtual networks, shared clipboards, or memory-overcommitment bugs that allow unintended data leakage or communication."
+      "explanation": "Memory overcommitment allocates more virtual RAM across VMs than physical RAM exists, forcing the hypervisor to swap memory. A bug in that layer could allow one VM to read another's memory, breaking isolation."
     },
     {
       "section": "Container security — shared kernel, weaker isolation",
-      "type": "text",
-      "question": "Describe one key security weakness of containers compared to virtual machines, using information from the section.",
-      "rubric": "A sound answer identifies that containers share the host OS kernel rather than running their own kernel, which provides weaker isolation than VMs, or names a specific container risk such as overprivileged containers, unpatched base images, container escape, or embedded secrets.",
-      "explanation": "Containers share the host kernel instead of running isolated kernels like VMs do, reducing isolation strength. Additional risks include running as root unnecessarily, using old unpatched images, and embedding credentials in images."
+      "type": "mc",
+      "question": "Why do containers provide weaker isolation than virtual machines, and what is one key security risk of overprivileged containers?",
+      "options": {
+        "A": "Containers do not use hypervisors and share kernel resources; overprivileged containers can consume more CPU resources than necessary on the host system",
+        "B": "Containers share memory space with the host operating system; overprivileged containers are forced to use unpatched base images with known vulnerabilities",
+        "C": "Containers share the host OS kernel instead of running their own; overprivileged containers grant unnecessary root access, so a compromised process has root on the host",
+        "D": "Containers require Type 2 hypervisors to function properly; overprivileged containers disable the Docker firewall rules that normally protect the host"
+      },
+      "correct": "C",
+      "explanation": "Containers share the host OS kernel instead of running their own, providing weaker isolation than VMs. Overprivileged containers run as root or with the Docker --privileged flag, so a compromised process gains root on the host."
     },
     {
       "section": "Kubernetes misconfigurations — orchestration at scale",
       "type": "mc",
-      "question": "What is a critical security risk with the Kubernetes API server?",
+      "question": "What are two critical Kubernetes security risks related to the API server and etcd?",
       "options": {
-        "A": "It must not be internet-exposed because misconfigured clusters are frequently exposed.",
-        "B": "It automatically deletes privileged pods when deployed.",
-        "C": "It prevents etcd encryption at rest.",
-        "D": "It requires all pods to run with cluster-admin privileges."
+        "A": "The API server must run in privileged mode to manage containers; etcd mounts should always use hostPath bindings for performance reasons",
+        "B": "The API server must never be internet-exposed to prevent unauthorized management access; etcd must be encrypted at rest so stored secrets are not plaintext",
+        "C": "The API server requires cluster-admin rights to authenticate users; etcd snapshots automatically delete old credentials to prevent unauthorized access",
+        "D": "The API server scales containers automatically based on demand; etcd requires RBAC wildcard permissions to function and manage cluster state"
       },
-      "correct": "A",
-      "explanation": "The Kubernetes API server is the control plane component through which all cluster management flows and must never be internet-exposed; however, misconfigured clusters are frequently exposed to the internet, creating a critical vulnerability."
+      "correct": "B",
+      "explanation": "The Kubernetes API server is the control plane component all management flows through and must never be internet-exposed. etcd stores all cluster state including secrets and must be encrypted at rest; without encryption, secrets are plaintext."
     },
     {
       "section": "Shared hardware and snapshot risks",
       "type": "mc",
-      "question": "What type of attack exploits the shared CPU cache between workloads on the same physical processor?",
+      "question": "What security risk do snapshots pose in a virtualization environment?",
       "options": {
-        "A": "RBAC wildcard permission attacks that grant excessive cluster access.",
-        "B": "Memory overcommitment attacks that force unintended page swapping.",
-        "C": "Spectre-class vulnerabilities that enable timing-based attacks on shared CPU cache.",
-        "D": "Container escape attacks that break out of a privileged pod."
+        "A": "Snapshots can capture session tokens, cached credentials, or in-memory encryption keys that remain exposed if the snapshot is not properly secured",
+        "B": "Snapshots automatically share CPU cache between VMs on the same physical processor, allowing side-channel attacks to leak sensitive data",
+        "C": "Snapshots prevent patches from being applied to unmanaged VMs, causing them to remain vulnerable to known security issues over time",
+        "D": "Snapshots misconfigure virtual network isolation between guest machines, allowing unauthorized communication across security boundaries"
       },
-      "correct": "C",
-      "explanation": "Spectre-class vulnerabilities are a realistic multi-tenant cloud risk in which two VMs time-sharing the same CPU core can exploit shared cache behavior, representing a hardware-level threat beyond traditional software patching."
+      "correct": "A",
+      "explanation": "Snapshots are point-in-time copies of a VM's state and can capture session tokens, cached credentials, or in-memory encryption keys indefinitely."
     }
   ]
 }

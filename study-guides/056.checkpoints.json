@@ -3,95 +3,119 @@
     {
       "section": "Patching",
       "type": "mc",
-      "question": "When should the normal patch management schedule be skipped?",
+      "question": "When should patch management skip the normal testing schedule and apply an update immediately?",
       "options": {
-        "A": "When the organization lacks automated patching tools",
-        "B": "When the patch has not yet been tested in production",
-        "C": "When a critical vulnerability with active exploits poses greater risk than patching",
-        "D": "When the patch is for a non-critical application"
+        "A": "When the patch is released during a standard maintenance window scheduled by the organization",
+        "B": "When the patch is for a non-critical system that rarely receives updates from the vendor",
+        "C": "When the vendor recommends testing the patch in non-production environments first",
+        "D": "When a critical or zero-day vulnerability's exploit risk outweighs the stability risk of expedited deployment"
       },
-      "correct": "C",
-      "explanation": "The section states that critical/zero-day vulns require emergency patching with expedited or skipped testing when exploit risk outweighs stability risk, contrasting with the normal schedule."
+      "correct": "D",
+      "explanation": "The study guide states that critical/zero-day vulns require emergency patching with expedited or skipped testing when exploit risk outweighs stability risk, in contrast to the normal scheduled approach."
     },
     {
       "section": "Encryption",
-      "type": "text",
-      "question": "Name one layer at which encryption protects data and describe what threat it defends against.",
-      "rubric": "A sound answer identifies one layer (full disk, file-level, in transit, or application-level) and states what it protects (e.g., stolen/lost device, specific files, network interception, data within an app).",
-      "explanation": "The section presents a table mapping encryption layers to their protective scope; students should recognize that encryption applies at multiple points and each blocks a different attack vector."
+      "type": "mc",
+      "question": "Which encryption tool or standard protects data as it moves across a network?",
+      "options": {
+        "A": "FileVault protects data moving across a network",
+        "B": "BitLocker protects data moving across a network",
+        "C": "TLS protects data moving across a network",
+        "D": "EFS protects data moving across a network"
+      },
+      "correct": "C",
+      "explanation": "The study guide's table identifies TLS (Transport Layer Security) as the standard that encrypts data in transit on the network, while BitLocker, EFS, and FileVault protect data at rest on devices."
     },
     {
       "section": "Monitoring",
       "type": "mc",
-      "question": "Which monitoring tool is most effective at detecting when a compromised account is used normally because it baselines individual user behavior?",
+      "question": "Which monitoring tool detects when a user or system's behavior deviates significantly from their established normal activity?",
       "options": {
-        "A": "EDR, which monitors process execution and file changes",
-        "B": "NDR, which detects anomalous network traffic patterns",
-        "C": "SIEM, which correlates logs from multiple sources",
-        "D": "UEBA, which alerts when user behavior deviates from baseline"
+        "A": "SIEM aggregates logs and alerts on suspicious patterns like failed login attempts",
+        "B": "UEBA baselines normal behavior per user and system, alerting on significant deviation",
+        "C": "EDR monitors host-level activity including process execution and file changes",
+        "D": "NDR monitors network traffic for anomalous patterns across the infrastructure"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states UEBA baselines normal behavior per user and alerts on significant deviation, making it effective against compromised accounts using valid credentials."
+      "correct": "B",
+      "explanation": "The study guide defines UEBA as the tool that baselines normal behavior per user or system and alerts when significant deviations occur, making it effective for insider threats and compromised accounts."
     },
     {
       "section": "Isolation, containment, and quarantine",
-      "type": "text",
-      "question": "Explain the difference between isolation and quarantine in incident response.",
-      "rubric": "A sound answer states that isolation is a manual process removing network access while preserving controlled access for investigation, whereas quarantine is the automated version performed by EDR when a suspicious host is detected.",
-      "explanation": "The section explicitly contrasts these two: isolation stops C2 and lateral movement but is manual (firewall rules or unplugging); quarantine achieves the same goal automatically via EDR detection."
+      "type": "mc",
+      "question": "What is the primary difference between isolation and quarantine?",
+      "options": {
+        "A": "Isolation removes network access while preserving investigation capability; quarantine is the automated EDR version",
+        "B": "Isolation represents broader incident response while quarantine represents the initial containment step",
+        "C": "Isolation includes the process of changing all compromised credentials used across the organization",
+        "D": "Isolation blocks all traffic except communications to the EDR management system"
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that isolation removes a system from network access while preserving controlled access for investigation, while quarantine is the automated EDR version that moves a host to a restricted segment."
     },
     {
       "section": "Compensating controls and exceptions",
       "type": "mc",
-      "question": "What must be documented when an exception to a security control is formally approved?",
+      "question": "What must be documented when formally acknowledging that a security control will not be applied?",
       "options": {
-        "A": "Business owner acknowledgment, residual risk, entry in the risk register, review date, and ideally compensating controls",
-        "B": "A list of all systems affected and the names of staff responsible for monitoring",
-        "C": "The compensating control and a plan to reach full compliance within one year",
-        "D": "Only the business owner acknowledgment and the reason the control cannot be applied"
+        "A": "A one-time approval from the compliance officer with documentation of the request",
+        "B": "Business owner acknowledgment, residual risk documentation, risk register entry, review date, and compensating controls if available",
+        "C": "The residual risk assessment and the timeframe for when the control might be applied in the future",
+        "D": "The vendor recommendation for the control and the date the control was formally considered"
       },
-      "correct": "A",
-      "explanation": "The section lists all required elements: business owner acknowledgment, residual risk, risk register entry, review date, and compensating controls; exceptions should also be time-limited."
+      "correct": "B",
+      "explanation": "The study guide lists the formal exception/exemption process requirements: business owner acknowledgment, residual risk, entry in the risk register, a review date, and ideally compensating controls."
     },
     {
       "section": "Application removal and isolation",
       "type": "mc",
       "question": "Why is application removal more complete than simply disabling a service?",
       "options": {
-        "A": "Removal requires administrator approval while disabling does not",
-        "B": "Removal deletes configuration files and scheduled tasks attackers could exploit",
-        "C": "Removal prevents the application from running in the future",
-        "D": "Removal frees up disk space more efficiently than disabling"
+        "A": "Removal eliminates binaries, configuration files, ports, and tasks; disabling leaves files that an attacker could still leverage",
+        "B": "Removal executes the application in a restricted sandbox environment instead of the system",
+        "C": "Removal streams the application user interface to the client without installing binaries locally",
+        "D": "Removal prevents the application from making any access requests to other systems on the network"
       },
-      "correct": "B",
-      "explanation": "The section states that removal eliminates binaries, config files, open ports, and scheduled tasks entirely, whereas disabling leaves these artifacts in place that attackers could leverage."
+      "correct": "A",
+      "explanation": "The study guide states that removal eliminates binaries, config files, open ports, and scheduled tasks entirely, whereas disabling a service leaves these in place where an attacker could still leverage them."
     },
     {
       "section": "Deny listing vs. allow listing",
-      "type": "text",
-      "question": "Explain why allow listing is considered proactive while deny listing is reactive.",
-      "rubric": "A sound answer states that allow listing blocks unknown and novel threats by default because only approved items are permitted, whereas deny listing only blocks known-bad items and cannot block zero-days or threats not yet identified.",
-      "explanation": "The section directly contrasts the two stances: deny listing is reactive because it requires the threat to be identified first; allow listing is proactive because novel malware is blocked automatically simply by not being on the approved list."
+      "type": "mc",
+      "question": "Which approach blocks zero-day malware and novel threats even before they are known?",
+      "options": {
+        "A": "Deny listing requires an administrator to explicitly approve every item before it can run",
+        "B": "Allow listing is reactive and only blocks threats after they have been identified and catalogued",
+        "C": "Deny listing blocks known-malicious items that have been identified by security researchers",
+        "D": "Allow listing permits only approved items and blocks everything else by default proactively"
+      },
+      "correct": "D",
+      "explanation": "The study guide defines allow listing as proactive—it blocks novel malware and zero-days by default because they are simply not on the approved list, whereas deny listing is reactive and only blocks known threats."
     },
     {
       "section": "Scanning",
       "type": "mc",
-      "question": "What is the main advantage of a credentialed scan over an uncredentialed scan?",
+      "question": "What is the key difference between credentialed and uncredentialed vulnerability scans?",
       "options": {
-        "A": "It requires fewer resources and completes faster",
-        "B": "It can be run remotely without network access to the target",
-        "C": "It can probe for SQLi and XSS vulnerabilities",
-        "D": "It authenticates and directly inspects software versions and configurations"
+        "A": "Credentialed scans probe for SQLi and XSS vulnerabilities in web application code and inputs",
+        "B": "Uncredentialed scans are more accurate because they reveal all possible vulnerabilities on the system",
+        "C": "Credentialed scans authenticate and inspect configurations directly; uncredentialed scans only observe network-exposed items",
+        "D": "Uncredentialed scans authenticate to the target and compare settings against security baselines"
       },
-      "correct": "D",
-      "explanation": "The section states credentialed scans authenticate and inspect directly, yielding greater accuracy, while uncredentialed scans only observe network exposure and are less accurate."
+      "correct": "C",
+      "explanation": "The study guide states that credentialed scans authenticate and inspect software versions and configs directly for accuracy, while uncredentialed scans only observe what's exposed over the network with less accuracy."
     },
     {
       "section": "Least privilege and access creep",
-      "type": "text",
-      "question": "What is access creep and how does access recertification help prevent it?",
-      "rubric": "A sound answer identifies access creep as the gradual accumulation of excess permissions as users change roles and old access is not removed, and states that access recertification campaigns require managers to review and confirm permissions are still needed, revoking those that aren't.",
-      "explanation": "The section defines access creep as the accumulation of unneeded permissions and presents access recertification as the mechanism to periodically validate and remove stale permissions."
+      "type": "mc",
+      "question": "What does access creep refer to, and how is it addressed?",
+      "options": {
+        "A": "Attackers slowly escalating privileges over time by identifying and exploiting configuration weaknesses",
+        "B": "The process of assigning the minimum permissions users need when they initially join the organization",
+        "C": "The gradual accumulation of excess permissions as users change roles and old access is not removed; addressed by access recertification",
+        "D": "The automatic removal of permissions that have not been used within a specified time period"
+      },
+      "correct": "C",
+      "explanation": "The study guide defines access creep as the gradual accumulation of excess permissions and identifies access recertification campaigns as the mechanism to periodically review and revoke inappropriate permissions."
     }
   ]
 }

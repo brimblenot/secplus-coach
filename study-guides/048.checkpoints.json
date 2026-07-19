@@ -3,86 +3,106 @@
     {
       "section": "What an on-path attack is",
       "type": "mc",
-      "question": "In an on-path attack, what is the attacker's primary objective regarding the victims' awareness?",
+      "question": "In an on-path attack, what is the attacker's primary goal regarding the visibility of their presence to the two communicating parties?",
       "options": {
-        "A": "To establish a separate encrypted tunnel with each party independently",
-        "B": "To remain invisible so each party believes it has a direct connection to the other",
-        "C": "To alert both parties that a third party is monitoring the conversation",
-        "D": "To modify only the metadata while keeping the message content unchanged"
+        "A": "The attacker wants both parties to know they are present so the parties can verify the connection is secure.",
+        "B": "The attacker wants to announce their presence after the initial connection is established so they can request consent.",
+        "C": "The attacker wants only one party to know about their presence while keeping the other party unaware of the interception.",
+        "D": "The attacker wants to remain invisible to both parties so each believes it is communicating directly with the other."
       },
-      "correct": "B",
-      "explanation": "The study guide defines invisibility to the victims as what makes the on-path attack dangerous; each party must believe it has a direct connection to the other, which is maintained by the attacker relaying messages."
+      "correct": "D",
+      "explanation": "The study guide states that in an on-path attack, the adversary positions themselves between two parties 'while each party believes it has a direct connection to the other,' and that 'invisibility to the victims is what makes it dangerous.' The attacker must remain undetected to succeed."
     },
     {
       "section": "ARP spoofing (local network on-path)",
-      "type": "text",
-      "question": "Explain why ARP spoofing is possible and how an attacker uses this weakness to redirect traffic.",
-      "rubric": "A sound answer should state that ARP has no authentication and accepts unsolicited replies, allowing an attacker to send forged ARP replies that poison the victim's ARP cache by replacing a trusted host's real MAC address with the attacker's MAC, causing traffic to be delivered to the attacker instead.",
-      "explanation": "The section explicitly states ARP lacks authentication and any device can send a gratuitous ARP reply that gets accepted, and that poisoning replaces a trusted host's MAC with the attacker's MAC to redirect traffic."
+      "type": "mc",
+      "question": "Why is ARP spoofing possible as an attack method on a local network?",
+      "options": {
+        "A": "ARP has no built-in authentication and any device can send unsolicited ARP replies that will be accepted by hosts.",
+        "B": "ARP only accepts replies from devices that have been pre-registered in a manual static configuration file.",
+        "C": "ARP requires devices to verify the physical location of the sender before accepting any reply message.",
+        "D": "ARP includes built-in authentication so only authorized devices can reply to ARP requests on the network."
+      },
+      "correct": "A",
+      "explanation": "The study guide explicitly states that 'ARP has no authentication — any device can send an unsolicited gratuitous ARP reply and other devices will accept it,' which is the fundamental weakness that enables ARP spoofing."
     },
     {
       "section": "SSL stripping (HTTPS downgrade)",
       "type": "mc",
-      "question": "In an SSL stripping attack, what does the attacker accomplish by intercepting the victim's initial HTTP request?",
+      "question": "In an SSL stripping attack, what communication pattern does the attacker create with the victim and the legitimate server?",
       "options": {
-        "A": "The attacker blocks the request and forces immediate disconnection",
-        "B": "The attacker replaces the server certificate with a self-signed certificate",
-        "C": "The attacker maintains HTTPS to the server but sends HTTP to the victim, reading cleartext while keeping the encrypted session",
-        "D": "The attacker modifies the victim's browser settings to reject HTTPS"
+        "A": "The attacker intercepts the HTTPS request, blocks it, and communicates with the server using only cleartext HTTP.",
+        "B": "The victim makes an HTTP request, and the attacker maintains HTTPS with the real server while returning HTTP to the victim.",
+        "C": "The victim and server negotiate a weaker SSL version that the attacker can decrypt without performing any interception.",
+        "D": "The attacker decrypts all HTTPS traffic using a stolen private key obtained directly from the target server."
       },
-      "correct": "C",
-      "explanation": "The study guide states the attacker intercepts HTTP, establishes HTTPS with the real server themselves, and returns only HTTP to the victim, allowing the attacker to read everything in cleartext while maintaining the encrypted session with the server."
+      "correct": "B",
+      "explanation": "The study guide states that SSL stripping intercepts 'the victim's initial plain HTTP request, establishes an HTTPS session with the real server themselves, and returns only an HTTP response to the victim — so the victim communicates with the attacker in cleartext while the attacker holds the encrypted session with the server.'"
     },
     {
       "section": "BGP hijacking (internet-scale on-path)",
-      "type": "text",
-      "question": "What fundamental weakness in BGP makes hijacking possible, and what happens as a result?",
-      "rubric": "A sound answer should state that BGP has no cryptographic verification of route announcements and runs on trust between operators, allowing an attacker to announce false or more-specific routes that cause other networks to route traffic through the attacker's infrastructure, sometimes globally within minutes."
+      "type": "mc",
+      "question": "What property of traditional BGP makes it vulnerable to hijacking attacks?",
+      "options": {
+        "A": "BGP routers encrypt all route announcements but do not verify the sender's identity.",
+        "B": "BGP requires routers to accept only announcements from routers in adjacent networks.",
+        "C": "BGP has no cryptographic verification of route announcements and runs on trust between operators.",
+        "D": "BGP routers use a shared password to authenticate announcements but the password is hardcoded."
+      },
+      "correct": "C",
+      "explanation": "The study guide explicitly states that 'Traditional BGP has no cryptographic verification of route announcements — it runs on trust between operators,' which is the fundamental vulnerability enabling hijacking."
     },
     {
       "section": "Session hijacking",
       "type": "mc",
-      "question": "Which combination of cookie flags and practices best protects against session token theft via both XSS and packet sniffing?",
+      "question": "Which method of session token capture involves an attacker stealing cookies on an unencrypted wireless network?",
       "options": {
-        "A": "Secure flag only, with long token lifetimes to reduce the need for regeneration",
-        "B": "Static token values that never change across multiple sessions",
-        "C": "HttpOnly flag only, regardless of connection type",
-        "D": "HttpOnly and Secure flags, used over HTTPS, with short session lifetimes"
+        "A": "Forcing the server to downgrade the session protocol to an older, weaker version.",
+        "B": "XSS attack that injects a malicious script into a webpage to steal cookie contents.",
+        "C": "Packet sniffing on unencrypted connections or sidejacking, such as with the Firesheep Firefox extension.",
+        "D": "Redirecting the victim to a fake login page where credentials are harvested and stored."
       },
-      "correct": "D",
-      "explanation": "The study guide lists HttpOnly (blocks XSS from reading cookies), Secure (cookie only sent over HTTPS), HTTPS everywhere (stops packet sniffing), and short session lifetimes as defenses that together address both attack vectors."
+      "correct": "C",
+      "explanation": "The study guide lists session token capture methods as 'XSS (cross-site scripting), packet sniffing on unencrypted connections, and sidejacking (capturing cookies on open Wi-Fi, popularized by the Firesheep Firefox extension).'"
     },
     {
       "section": "TLS inspection (authorized on-path)",
       "type": "mc",
-      "question": "What makes TLS inspection by an enterprise firewall different from a malicious on-path attack?",
+      "question": "How is TLS inspection different from other on-path attacks in terms of authorization and user awareness?",
       "options": {
-        "A": "Users consent and the organization's internal CA is installed on devices",
-        "B": "It uses a different encryption algorithm than malicious attacks do",
-        "C": "It inspects only external traffic, not internal corporate communications",
-        "D": "It prevents attackers from reading any data through end-to-end encryption"
+        "A": "TLS inspection is performed by internet service providers and is required by law in all jurisdictions.",
+        "B": "TLS inspection only works when the user explicitly requests the organization to intercept their traffic.",
+        "C": "TLS inspection is performed secretly without the knowledge of the users or the legitimate server.",
+        "D": "TLS inspection is legitimate when users are informed and the organization's CA certificate is installed on corporate devices."
       },
-      "correct": "A",
-      "explanation": "The study guide explicitly states TLS inspection is legitimate when users are informed and the org's CA certificate is installed on corporate devices, distinguishing it from unauthorized man-in-the-middle attacks."
+      "correct": "D",
+      "explanation": "The study guide states that TLS inspection is 'legitimate when users are informed and the org's CA certificate is installed on corporate devices,' distinguishing it as an authorized form of man-in-the-middle activity."
     },
     {
       "section": "Downgrade attacks",
       "type": "mc",
-      "question": "What does POODLE exploit to decrypt traffic, and what is the modern defense?",
+      "question": "What common cryptographic weakness did both POODLE and BEAST exploit in older protocol versions?",
       "options": {
-        "A": "A weak Diffie-Hellman implementation in TLS 1.2 by disabling all older protocols",
-        "B": "An unencrypted handshake in TLS 1.0 by enforcing TLS 1.3 exclusively",
-        "C": "CBC mode padding weakness in SSLv3 by disabling SSLv3 and older protocol versions",
-        "D": "A key exchange flaw in TLS 1.1 by using certificate pinning on all domains"
+        "A": "Both exploited the use of static initialization vectors found in stream cipher modes of operation.",
+        "B": "Both exploited weaknesses in CBC mode cipher block chaining with padding that could leak sensitive information.",
+        "C": "Both exploited the absence of forward secrecy in the key exchange algorithms used by those protocols.",
+        "D": "Both exploited the predictability of random number generation mechanisms in older protocol versions."
       },
-      "correct": "C",
-      "explanation": "The study guide states POODLE forced fallback to SSLv3 and exploited its CBC padding weakness; the defense table shows SSLv3 and older must be disabled, with TLS 1.2 as the minimum."
+      "correct": "B",
+      "explanation": "The study guide states that CBC mode — Cipher Block Chaining, a block cipher mode with padding — in older implementations leaks information through error responses (padding oracle), and both POODLE and BEAST exploited these CBC weaknesses."
     },
     {
       "section": "ICMP redirect attacks",
-      "type": "text",
-      "question": "What does an ICMP redirect attack do, and why is it considered a lower-risk threat in modern systems?",
-      "rubric": "A sound answer should state that ICMP redirect sends a crafted message instructing the victim to update its routing table to use the attacker as the next hop, but most modern operating systems ignore ICMP redirects by default."
+      "type": "mc",
+      "question": "What action does an ICMP redirect attack attempt to cause on a victim's system?",
+      "options": {
+        "A": "The attack causes the victim's system to update its routing table to use the attacker as the next hop for a destination.",
+        "B": "The attack causes the victim's system to send all traffic through the default gateway repeatedly until interrupted.",
+        "C": "The attack causes the victim's system to stop responding to any network traffic being sent from the attacker.",
+        "D": "The attack causes the victim's system to disconnect from the network and then reconnect to a different network."
+      },
+      "correct": "A",
+      "explanation": "The study guide defines an ICMP redirect attack as one that 'sends a crafted ICMP Redirect message to a victim, instructing it to update its routing table to use the attacker as the next hop for a specific destination.'"
     }
   ]
 }

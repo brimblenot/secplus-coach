@@ -69,22 +69,21 @@ RULES FOR THIS STUDY GUIDE:
 9. Do not add a preamble. Start directly with the H2 topic heading, then the framing intro paragraph, then the teaching sections, then "### Recap" and "### Exam flags".`
 
 // Checkpoints system prompt (app/api/session/checkpoints/route.ts) — verbatim.
-const CHECKPOINTS_SYSTEM_PROMPT = `You are a CompTIA Security+ SY0-701 study coach writing quick in-lecture comprehension checks. These are low-stakes retrieval practice the student answers section-by-section while reading — not the graded exam quiz — so keep them short and direct. You strictly obey the scope lock: a checkpoint may only test content written in its own section of the provided study guide.`
+const CHECKPOINTS_SYSTEM_PROMPT = `You are a CompTIA Security+ SY0-701 study coach writing quick in-lecture comprehension checks. These are low-stakes retrieval practice the student answers section-by-section while reading — not the graded exam quiz — so keep them short and direct. Every checkpoint is MULTIPLE CHOICE (no free-text). You strictly obey the scope lock: a checkpoint may only test content written in its own section of the provided study guide.`
 
 // buildCheckpointsPrompt (lib/prompts.ts) — verbatim.
 function buildCheckpointsPrompt(guideContent, topicName) {
   return `TOPIC: ${topicName}
 
-Below is a study guide split into "### " sections. For EACH content section, write ONE quick "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
+Below is a study guide split into "### " sections. For EACH content section, write ONE quick multiple-choice "checkpoint" question the student answers immediately after reading that section — just enough to confirm they caught its key idea.
 
 Rules:
 - One question per "### " section, in the order the sections appear. SKIP the "### Recap" and "### Exam flags" sections entirely (no question for either — they are summaries, not new material). The framing intro before the first "### " is not a section either — ignore it.
+- EVERY checkpoint is multiple choice (type "mc"). Do NOT write any free-text / written-response questions — no "text" type at all.
 - SCOPE LOCK: each question tests ONLY what its own section states. Never use facts from another section, and never introduce any term, technology, or concept not written in that section.
-- ANSWERABLE FROM THE SECTION ALONE: a fully-correct answer must be constructible using ONLY sentences written in this section. Before you write a question, check its model answer/rubric — every fact it expects must appear verbatim-in-substance in the section text. Do NOT ask a question whose correct answer depends on an unstated premise, an implied contrast, or outside knowledge. In particular, if the section explains something by comparison (e.g. "X does what Y cannot"), only ask about the compared thing (Y) if the section actually states the relevant fact about Y; otherwise ask only about what the section explicitly says. If you cannot form a question the section fully answers, ask a simpler recall question that it does — never reach beyond the text to make the question harder.
-- Pick the type per section: "mc" for a concrete fact/definition/recognition check; "text" for a section whose point is conceptual (a why/how/when-to-use). Aim for a genuine MIX across the guide, not all one type.
+- ANSWERABLE FROM THE SECTION ALONE: a fully-correct answer must be constructible using ONLY sentences written in this section. Before you write a question, check its correct option — every fact it depends on must appear verbatim-in-substance in the section text. Do NOT ask a question whose correct answer depends on an unstated premise, an implied contrast, or outside knowledge. In particular, if the section explains something by comparison (e.g. "X does what Y cannot"), only ask about the compared thing (Y) if the section actually states the relevant fact about Y; otherwise ask only about what the section explicitly says. If you cannot form a question the section fully answers, ask a simpler recall question that it does — never reach beyond the text to make the question harder.
 - Keep checkpoints QUICK — a plain recall/understanding check, shorter and simpler than an exam question. No tricky multi-clause scenarios.
-- For "mc": exactly 4 options A–D that are PARALLEL — same grammatical shape, same level of detail, and closely matched in length (the longest option no more than ~1.5× the words of the shortest; since quick-check options are short, keep them within a few words of each other). The correct answer must NOT be the most complete, specific, or detailed one. The classic tell to avoid: a fully-spelled-out correct answer surrounded by terse distractors, so it can be picked by spotting the longest/most-thorough option without reading the question. Every distractor must be a fleshed-out, plausible statement carrying the same amount of detail as the answer — never a short throwaway.
-- For "text": ask the student to state or apply the section's key idea in 1–2 sentences. Put what a sound answer says in "rubric" (a guide, not a checklist of required words).
+- Exactly 4 options A–D that are PARALLEL and NEARLY IDENTICAL IN LENGTH — same grammatical shape, same level of detail, and within a couple of words of each other so they look the same at a glance. The correct answer must NOT be the most complete, specific, or detailed one, and NO option may carry more detail than the rest. The classic tell to avoid: a fully-spelled-out correct answer surrounded by terse distractors, so it can be picked by spotting the longest/most-thorough option without reading the question. Every distractor must be a fleshed-out, plausible statement carrying the same amount of detail as the answer — never a short throwaway.
 - "section" must be the section's heading text copied EXACTLY, without the leading "### ".
 - Plain prose in every field. No markdown, no bold.
 - Keep every explanation to 1–2 sentences. Brevity is mandatory — long output is truncated mid-JSON and generation fails.
@@ -93,7 +92,7 @@ Respond with ONLY valid JSON, no markdown fences:
 {
   "checkpoints": [
     { "section": "<heading text>", "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "B", "explanation": "Plain prose, 1-2 sentences." },
-    { "section": "<heading text>", "type": "text", "question": "...", "rubric": "What a sound answer states.", "explanation": "Plain prose, 1-2 sentences." }
+    { "section": "<heading text>", "type": "mc", "question": "...", "options": { "A": "...", "B": "...", "C": "...", "D": "..." }, "correct": "C", "explanation": "Plain prose, 1-2 sentences." }
   ]
 }
 
@@ -124,7 +123,8 @@ function correctIsLengthOutlier(q) {
   const correctN = wordCount(q.options[q.correct])
   const minN = Math.min(...counts.map((c) => c.n))
   const maxN = Math.max(...counts.map((c) => c.n))
-  return correctN === maxN && minN > 0 && maxN > 1.5 * minN
+  if (correctN !== maxN || minN === 0) return false
+  return maxN > 1.25 * minN || maxN - minN >= 4
 }
 
 async function enforceMCLengthParity(anthropic, questions) {
@@ -145,9 +145,10 @@ async function enforceMCLengthParity(anthropic, questions) {
 
     const prompt = `You are editing CompTIA Security+ SY0-701 multiple-choice options to remove a length "tell". In each question below the CORRECT option is noticeably longer or more detailed than the distractors, which lets a student guess it by length alone.
 
-For EACH question, rewrite ALL of its options so that:
-- Every option is closely matched in length and level of detail — the longest option no more than ~1.3× the words of the shortest.
-- The correct option is NOT the longest or the most detailed one.
+For EACH question, rewrite ALL FOUR options so that:
+- Every option is nearly identical in length and level of detail — the longest option must be no more than ~1.15× the words of the shortest, and ideally all four are within a few words of each other so they look the same at a glance.
+- No single option is more specific, more technical, or more fully-explained than the others. If the correct answer currently spells out extra detail, trim it; if the distractors are terse, flesh them out to match — every option must carry the same amount of detail.
+- The correct option must NOT be the longest or the most detailed one.
 - Each letter keeps the SAME meaning it has now (letter A stays idea A, etc.) and the SAME letter stays correct. Do NOT change which answer is right, do NOT swap or merge options, do NOT introduce any new concept, technology, or term that is not already in that question's options.
 - Plain prose, no markdown, SY0-701 exam depth.
 

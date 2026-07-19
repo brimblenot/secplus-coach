@@ -3,108 +3,132 @@
     {
       "section": "The key distribution problem",
       "type": "mc",
-      "question": "Which statement best describes the key distribution problem?",
+      "question": "What is the fundamental challenge that the key distribution problem describes?",
       "options": {
-        "A": "Attackers can always intercept symmetric encryption keys sent over the network.",
-        "B": "Two parties must establish a shared secret over an untrusted network without having met before.",
-        "C": "Out-of-band key exchange is the only method that can ever be truly secure.",
-        "D": "In-band key exchange requires both parties to already share a secret key."
+        "A": "Managing the lifecycle of cryptographic keys from generation through eventual destruction",
+        "B": "Establishing a shared secret between two parties over an untrusted network when they have never communicated before",
+        "C": "Encrypting data using symmetric keys that are stored on a hardware security module",
+        "D": "Distributing copies of the same key to multiple servers across different geographic regions"
       },
       "correct": "B",
-      "explanation": "The section defines the key distribution problem as the challenge of securely establishing a shared secret between two parties who have never met, over a network an attacker may be watching. Options A, C, and D each misstate or overstate the problem."
+      "explanation": "The key distribution problem is defined as the challenge of securely establishing a shared secret between two parties who have never met, over a network an attacker may be watching. This is the core chicken-and-egg scenario the section describes."
     },
     {
       "section": "Key transport vs. key agreement",
-      "type": "text",
-      "question": "Explain the fundamental difference between key transport and key agreement in terms of how the session key is handled.",
-      "rubric": "A sound answer states that key transport sends an encrypted session key from one party to the other, while key agreement has both parties independently compute the shared secret without ever transmitting it.",
-      "explanation": "Key transport (like RSA) involves one party generating and sending the key encrypted; key agreement (like DH) has both parties contribute and compute the secret independently, so it's never transmitted over the network."
+      "type": "mc",
+      "question": "In RSA key transport, what happens to the session key, and why was this removed from TLS 1.3?",
+      "options": {
+        "A": "Both parties independently compute it; it was removed because it requires larger key sizes than elliptic curve methods",
+        "B": "One party generates and sends it in plaintext; it was removed because the plaintext is visible to eavesdroppers",
+        "C": "Both parties jointly derive it without transmitting it; it was removed because it is slower than key agreement",
+        "D": "One party generates and sends it encrypted to the other; it was removed because it lacks Perfect Forward Secrecy"
+      },
+      "correct": "D",
+      "explanation": "Key transport like RSA involves one party generating the session key and sending it encrypted to the other. The section states it was removed from TLS 1.3 because it lacks Perfect Forward Secrecy — if the server's long-term private key is stolen, all past sessions can be decrypted retroactively."
     },
     {
       "section": "Diffie-Hellman key agreement",
       "type": "mc",
-      "question": "In Diffie-Hellman key agreement, what mathematical problem makes it secure against an attacker who observes the exchanged public values?",
+      "question": "In Diffie-Hellman key agreement, what security property prevents an attacker from deriving the private values by observing the public values exchanged?",
       "options": {
-        "A": "The factorization problem prevents an attacker from breaking the shared secret into its prime components.",
-        "B": "The hashing problem makes it impossible to reverse the computation of the shared secret.",
-        "C": "The elliptic curve problem ensures that public values cannot be transmitted over an untrusted network.",
-        "D": "The discrete logarithm problem makes it computationally infeasible to derive private values from public values."
+        "A": "The discrete logarithm problem, which is computationally infeasible to reverse-engineer",
+        "B": "The use of a generator value that is kept secret from all eavesdroppers",
+        "C": "The encryption of all exchanged values with the prior session's shared secret",
+        "D": "The requirement that both parties use identical key sizes for their private values"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states that DH security rests on the discrete logarithm problem — knowing the public values, an attacker cannot efficiently reverse-engineer the private values."
+      "correct": "A",
+      "explanation": "The section explicitly states that security rests on the discrete logarithm problem — knowing the public values, an attacker cannot efficiently reverse-engineer the private values. This computational difficulty is what makes DH secure against eavesdroppers."
     },
     {
       "section": "Static DH vs. ephemeral DH (DHE) and Perfect Forward Secrecy",
-      "type": "text",
-      "question": "How does DHE enable Perfect Forward Secrecy, and why does Static DH not?",
-      "rubric": "A sound answer explains that DHE generates a fresh temporary key pair for each session and discards the private key afterward, so even if long-term keys are stolen later, past sessions cannot be decrypted. Static DH reuses the same long-term private key, so stealing it retroactively decrypts all past sessions.",
-      "explanation": "DHE's ephemeral key pairs are destroyed after each session, leaving nothing to steal that would unlock past traffic. Static DH uses the same permanent key across all sessions, so compromise of that key exposes everything recorded previously."
+      "type": "mc",
+      "question": "Why does DHE provide Perfect Forward Secrecy while static DH does not?",
+      "options": {
+        "A": "DHE uses elliptic curve mathematics instead of modular integer arithmetic",
+        "B": "DHE requires the server certificate to be renewed frequently to prevent decryption",
+        "C": "DHE generates a new temporary key pair for every session and discards the private key afterward",
+        "D": "DHE uses larger key sizes that take longer for attackers to compromise"
+      },
+      "correct": "C",
+      "explanation": "The section states that DHE generates a brand-new temporary DH key pair for every session, then immediately discards the private key after the shared secret is derived. Because these ephemeral keys no longer exist, stealing long-term keys cannot decrypt past sessions."
     },
     {
       "section": "Elliptic curve variants: ECDH and ECDHE",
       "type": "mc",
-      "question": "Why is ECDHE the dominant key exchange in TLS 1.3 compared to traditional DHE?",
+      "question": "What is the primary practical advantage of ECDH over traditional DH for the same security level?",
       "options": {
-        "A": "ECDHE uses elliptic curve math with smaller key sizes than DHE while maintaining equivalent security.",
-        "B": "ECDHE provides Perfect Forward Secrecy, unlike DHE.",
-        "C": "ECDHE requires hardware security modules, whereas DHE uses software.",
-        "D": "ECDHE encrypts the session key while DHE transmits it in the clear."
+        "A": "ECDH uses smaller keys that require less handshake data, faster computation, and less memory",
+        "B": "ECDH can be implemented without requiring agreement on public parameters in advance",
+        "C": "ECDH is resistant to quantum computing attacks while traditional DH is completely vulnerable",
+        "D": "ECDH allows both parties to use the same private key across multiple sessions without degradation"
       },
       "correct": "A",
-      "explanation": "The section states that the elliptic curve discrete logarithm problem is harder for a given key size, so a 256-bit ECDH key provides security equivalent to a 3072-bit traditional DH key, resulting in less handshake data and faster computation."
+      "explanation": "The section explains that the elliptic curve discrete logarithm problem is harder to solve for a given key size — a 256-bit ECDH key achieves the security of a 3072-bit traditional DH key. This leads to smaller keys, less handshake data, faster computation, and less memory usage."
     },
     {
       "section": "TLS 1.3 handshake flow",
       "type": "mc",
-      "question": "In the TLS 1.3 handshake, what is the role of the server's long-term certificate and private key?",
+      "question": "In the TLS 1.3 handshake, which component handles the transformation of the raw DH shared secret into usable symmetric session keys?",
       "options": {
-        "A": "They encrypt the session key so only the server can decrypt it.",
-        "B": "They derive the shared secret used for symmetric encryption.",
-        "C": "They authenticate the server's identity but do not establish the session keys.",
-        "D": "They stretch the raw key material into HMAC output."
+        "A": "HMAC, which is a keyed hash used to authenticate the handshake messages",
+        "B": "AES-GCM, which is the symmetric cipher that encrypts bulk data after key derivation",
+        "C": "HKDF, which processes the raw shared secret into symmetric session keys through extract and expand",
+        "D": "The server's long-term certificate, which derives key material from its public key parameters"
       },
       "correct": "C",
-      "explanation": "The section explicitly states that the server's long-term certificate and private key authenticate identity only — they play no role in deriving session keys, which is why PFS holds even if that key is later stolen."
+      "explanation": "The section states that HKDF (HMAC-based Key Derivation Function) stretches the raw shared secret into symmetric session keys. It does this through the extract step (concentrating entropy) and expand step (producing the needed key bytes)."
     },
     {
       "section": "Session keys and hybrid cryptography",
-      "type": "text",
-      "question": "What is hybrid cryptography, and why is it used in TLS?",
-      "rubric": "A sound answer explains that hybrid cryptography combines asymmetric key exchange (for establishing session keys) with symmetric encryption (for encrypting actual data), because asymmetric algorithms set up keys efficiently but symmetric ciphers do the bulk encryption work faster.",
-      "explanation": "TLS uses asymmetric cryptography (like ECDHE) to securely establish temporary symmetric session keys, then uses those symmetric keys (like AES) to encrypt the actual session data — this combines the strengths of both."
+      "type": "mc",
+      "question": "In the hybrid cryptography model used for TLS, what is the role of asymmetric encryption versus symmetric encryption?",
+      "options": {
+        "A": "Asymmetric encryption encrypts all data for the entire session; symmetric encryption is used only for key management",
+        "B": "Both asymmetric and symmetric encryption share equal responsibility in protecting the data throughout the session",
+        "C": "Symmetric encryption is used to authenticate the identity of both parties; asymmetric encryption encrypts the payload",
+        "D": "Asymmetric encryption establishes the session keys; symmetric encryption performs the bulk data encryption"
+      },
+      "correct": "D",
+      "explanation": "The section defines the hybrid cryptography model as: asymmetric key exchange sets up the session keys, and symmetric encryption (AES) does the bulk work of encrypting the actual data. Session keys are temporary and used for data encryption."
     },
     {
       "section": "Key wrapping",
       "type": "mc",
-      "question": "Which scenario is an example of key wrapping?",
+      "question": "What is key wrapping, and what is the relationship between the wrapping key and the wrapped key?",
       "options": {
-        "A": "Transmitting a raw DH shared secret over an untrusted network connection.",
-        "B": "Discarding the private key after an ephemeral ECDHE key exchange completes.",
-        "C": "Encrypting an AES session key under an RSA public key for storage in a key management system.",
-        "D": "Using HKDF to expand a DH output into multiple cipher keys."
+        "A": "Wrapping is a method of rotating keys; the wrapping key is discarded after the wrapped key is placed into service",
+        "B": "Wrapping is encrypting one symmetric key with another key; the wrapping key protects the wrapped key at rest",
+        "C": "Wrapping is the process of compressing key material; the wrapped key performs the compression while the wrapping key stores metadata",
+        "D": "Wrapping is combining two keys together; the wrapping key and wrapped key have equal importance in protecting data"
       },
-      "correct": "C",
-      "explanation": "The section defines key wrapping as encrypting one symmetric key with another key for secure storage or transmission, and gives exactly this example: backing up an AES session key encrypted under an RSA public key in a key management system."
+      "correct": "B",
+      "explanation": "The section defines key wrapping as encrypting one symmetric key with another key for secure storage or transmission. The wrapping key protects the wrapped key at rest, while the wrapped key does the actual data encryption."
     },
     {
       "section": "Key Derivation Functions (KDFs)",
       "type": "mc",
-      "question": "What are the two sequential steps performed by HKDF?",
+      "question": "Why is a KDF like HKDF necessary to process a raw DH shared secret before it can be used as an AES key?",
       "options": {
-        "A": "Storage and distribution of key bytes across HSMs.",
-        "B": "Encryption and authentication of the session key.",
-        "C": "Generation and rotation of the raw key material.",
-        "D": "Extract (concentrating entropy) and expand (stretching into needed key bytes)."
+        "A": "Because a raw DH output is too large and must be compressed to fit AES key sizes",
+        "B": "Because a raw DH output is encrypted and must be decrypted before use",
+        "C": "Because a raw DH output contains authentication information that must be verified first",
+        "D": "Because a raw DH output must be processed through extract and expand steps before use"
       },
       "correct": "D",
-      "explanation": "The section explicitly defines the two steps of HKDF as extract (concentrating entropy into a pseudorandom key) followed by expand (stretching it into as many key bytes as needed)."
+      "explanation": "The section explicitly states that a raw DH output isn't directly usable as an AES key. HKDF addresses this through two steps: extract (concentrating entropy) and expand (stretching it into the needed key bytes)."
     },
     {
       "section": "Key management lifecycle",
-      "type": "text",
-      "question": "List the six phases of the key management lifecycle and briefly explain why each phase matters for security.",
-      "rubric": "A sound answer names all six phases (generation, distribution, storage, rotation, revocation, destruction) and indicates that failure at any step breaks security even if the algorithm is strong.",
-      "explanation": "The section presents all six phases in the table and emphasizes via the analogy and opening statement that the entire lifecycle must be executed correctly — a weak link at any phase compromises the system regardless of algorithm strength."
+      "type": "mc",
+      "question": "Which phase of the key management lifecycle involves ensuring that key material is unrecoverably wiped when it is no longer needed?",
+      "options": {
+        "A": "Revocation, which marks the key as invalid when it is no longer trustworthy",
+        "B": "Destruction, which ensures key material is unrecoverably wiped at the end of its lifecycle",
+        "C": "Storage, which keeps the key in protected locations like an HSM or encrypted key store",
+        "D": "Rotation, which replaces the key on schedule or after potential compromise"
+      },
+      "correct": "B",
+      "explanation": "The key management lifecycle table explicitly lists Destruction as the phase where key material is unrecoverably wiped, which occurs after the key has been revoked and is no longer in use."
     }
   ]
 }

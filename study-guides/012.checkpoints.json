@@ -3,81 +3,93 @@
     {
       "section": "Symmetric encryption: one key does everything",
       "type": "mc",
-      "question": "Which of the following best describes the key distribution problem in symmetric encryption?",
+      "question": "What is the primary advantage of symmetric encryption over asymmetric encryption?",
       "options": {
-        "A": "The recipient cannot decrypt data if they do not have access to a public key server",
-        "B": "Multiple keys are required to encrypt a single message, making the process computationally expensive",
-        "C": "The sender must securely deliver the same secret key to every recipient who needs to decrypt data",
-        "D": "The encryption algorithm becomes weaker each time the key is used to protect new data"
+        "A": "It makes reverse-engineering the encryption key mathematically impossible",
+        "B": "It eliminates the need to distribute keys to any recipients",
+        "C": "It is faster and has lower computational cost",
+        "D": "It allows the private key to remain completely secret"
       },
       "correct": "C",
-      "explanation": "The section explicitly states that the sender must securely deliver the key to every recipient, and calls this the key distribution problem — it is the risky part of symmetric encryption."
+      "explanation": "The study guide explicitly states symmetric encryption is the fastest method with the lowest computational cost. The key distribution problem is actually a weakness of symmetric encryption, not an advantage."
     },
     {
       "section": "Asymmetric encryption: a matched key pair",
-      "type": "text",
-      "question": "Explain why you cannot reverse-engineer a private key from its matching public key.",
-      "rubric": "A sound answer states that the underlying mathematics (factoring huge prime numbers or solving discrete logarithms) makes this computationally infeasible, even though the keys are mathematically linked.",
-      "explanation": "The section explains that the keys are mathematically linked but cannot be reverse-engineered because the math involved makes it computationally infeasible."
+      "type": "mc",
+      "question": "Why is asymmetric encryption not used for bulk data encryption despite solving the key distribution problem?",
+      "options": {
+        "A": "It is much slower than symmetric encryption and computationally expensive",
+        "B": "It requires a Registration Authority to verify the identity of all users",
+        "C": "It cannot encrypt data that needs to remain secret for long periods",
+        "D": "It relies on the Certificate Authority to sign every piece of data"
+      },
+      "correct": "A",
+      "explanation": "The section states that asymmetric encryption is much slower than symmetric encryption, so it is used for key exchange and digital signatures rather than bulk data."
     },
     {
       "section": "Hybrid approach: combining both",
       "type": "mc",
-      "question": "In modern secure systems like HTTPS, asymmetric encryption is used primarily to accomplish which goal?",
+      "question": "What is the main purpose of using both asymmetric and symmetric encryption together in modern systems like TLS?",
       "options": {
-        "A": "Securely exchange a symmetric session key before switching to fast symmetric encryption",
-        "B": "Encrypt all data transmitted between client and server after the connection is established",
-        "C": "Protect against brute-force attacks on the encryption algorithm used for bulk data",
-        "D": "Verify the identity of both the client and the server throughout the entire session"
+        "A": "To eliminate the need for a Certificate Authority to issue certificates to end entities",
+        "B": "To ensure that the private key never needs to be stored on any device in the system",
+        "C": "To prevent the Registration Authority from needing to verify user identity information",
+        "D": "To use asymmetric encryption for key exchange and then use symmetric encryption for data"
       },
-      "correct": "A",
-      "explanation": "The section states that asymmetric encryption is used to securely exchange a symmetric session key, after which the system switches to fast symmetric encryption for actual data."
+      "correct": "D",
+      "explanation": "The section explicitly states that modern systems use asymmetric encryption to securely exchange a symmetric session key, then switch to fast symmetric encryption for actual data."
     },
     {
       "section": "PKI components",
       "type": "mc",
-      "question": "What is the primary reason the root CA is kept offline and air-gapped?",
+      "question": "Why is the root CA kept offline and air-gapped according to PKI best practice?",
       "options": {
-        "A": "To prevent end-entity certificates from being directly signed by the root and issued to untrusted parties",
-        "B": "Because its private key is critical, and keeping it offline is the best practice to protect the entire PKI hierarchy",
-        "C": "To reduce the computational load on the CA infrastructure and speed up certificate issuance",
-        "D": "To ensure that the Registration Authority can vet all applicants without interference from the root CA"
+        "A": "To ensure the root CA communicates with only a single intermediate CA at a time",
+        "B": "To protect its private key, which serves as the ultimate trust anchor for the PKI",
+        "C": "To prevent the Registration Authority from compromising intermediate CAs in the chain",
+        "D": "To avoid the need for the root CA to directly sign end-entity certificates in practice"
       },
       "correct": "B",
-      "explanation": "The section states that because the root CA's private key is so critical, best practice keeps the root CA offline and air-gapped, only brought online to sign subordinate CA certificates."
+      "explanation": "The study guide states that the root CA's private key is so critical that best practice keeps the root CA offline and air-gapped, only brought online to sign subordinate CA certificates."
     },
     {
       "section": "Certificate revocation",
-      "type": "text",
-      "question": "How does OCSP stapling solve both the latency problem of CRLs and the privacy problem of OCSP?",
-      "rubric": "A sound answer explains that the server fetches and caches a signed OCSP response and presents it during the TLS handshake, eliminating the need for real-time CA contact (fixing latency) and preventing the CA from seeing which sites the user visits (fixing privacy).",
-      "explanation": "The section describes OCSP stapling as the server pre-fetching and presenting a signed, cached OCSP response, eliminating both the latency of waiting for CRL updates and the privacy leak of the CA learning every site visited."
+      "type": "mc",
+      "question": "What problem does OCSP stapling solve that neither CRL nor standard OCSP solves alone?",
+      "options": {
+        "A": "It eliminates the need for the Certificate Authority to maintain a revocation list",
+        "B": "It allows the server to revoke certificates without contacting the CA",
+        "C": "It reduces the key size required for certificate validation checks",
+        "D": "It avoids latency from CRL downloads and privacy leaks from CA contact"
+      },
+      "correct": "D",
+      "explanation": "The study guide describes OCSP stapling as solving both the latency problem of CRL and the privacy problem of OCSP by having the server fetch and present a signed response during the TLS handshake."
     },
     {
       "section": "Certificate types",
       "type": "mc",
-      "question": "What is the key limitation of a wildcard certificate for the domain `*.example.com`?",
+      "question": "What domain names are covered by a wildcard certificate for `*.example.com`?",
       "options": {
-        "A": "It requires a separate Online Certificate Status Protocol responder for each subdomain it protects",
-        "B": "It covers all subdomains of example.com but does not cover the root domain itself",
-        "C": "It can only be issued to the owner of example.com and cannot be transferred to other organizations",
-        "D": "It covers only single-level subdomains and does not cover deeper levels like sub.sub.example.com"
+        "A": "All single-level subdomains such as www and mail but not deeper nested levels",
+        "B": "All subdomains at any depth including multi-level subdomains like sub.sub.example.com",
+        "C": "Only www.example.com and mail.example.com subdomains of the domain",
+        "D": "Only the root domain example.com and one randomly selected subdomain of it"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states that a wildcard certificate covers all single-level subdomains but does not cover deeper levels like sub.sub.example.com."
+      "correct": "A",
+      "explanation": "The section states that a wildcard certificate covers all single-level subdomains but does not cover deeper levels like sub.sub.example.com."
     },
     {
       "section": "Other PKI concepts",
       "type": "mc",
-      "question": "Why is certificate-based authentication considered more resistant to credential theft than password-based authentication?",
+      "question": "What is the key security advantage of certificate-based authentication compared to password-based authentication?",
       "options": {
-        "A": "Certificate issuance requires multi-factor authentication, unlike password creation",
-        "B": "Certificates use longer key lengths than passwords, making brute-force attacks impractical",
-        "C": "The private key never leaves the device and is not transmitted, while passwords can be phished or stolen",
-        "D": "Certificates automatically expire after a set period, whereas passwords remain valid until manually reset"
+        "A": "The Registration Authority verifies the user identity before every login",
+        "B": "The private key is never transmitted and never leaves the device",
+        "C": "The certificate is harder to phish because it uses asymmetric encryption",
+        "D": "The password can be encrypted using the public key during transmission"
       },
-      "correct": "C",
-      "explanation": "The section states that a private key never leaves the device and is never transmitted, making certificate auth resistant to credential theft and replay attacks, unlike passwords which can be phished or stolen."
+      "correct": "B",
+      "explanation": "The study guide explicitly states that a private key never leaves the device and is never transmitted, making certificate auth resistant to credential theft and replay attacks."
     }
   ]
 }

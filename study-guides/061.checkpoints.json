@@ -3,88 +3,106 @@
     {
       "section": "Availability: keeping systems reachable",
       "type": "mc",
-      "question": "In an active-active cluster, what happens to service when one node fails?",
+      "question": "In an active-passive cluster, what happens when the active node fails?",
       "options": {
-        "A": "Capacity drops but the service continues running on the remaining nodes",
-        "B": "A standby node takes over after a few seconds of downtime",
-        "C": "The service stops immediately until the standby node is manually activated",
-        "D": "All load balancing rules are reconfigured and service pauses briefly"
+        "A": "The entire cluster goes offline until manual intervention restores the active node",
+        "B": "The standby node takes over after a brief delay, resulting in seconds of downtime",
+        "C": "Both nodes continue operating but at reduced performance until the failure is repaired",
+        "D": "Service continues but capacity drops as the standby node assumes the load"
       },
-      "correct": "A",
-      "explanation": "The study guide states that in active-active clustering, 'all nodes share load simultaneously' and 'capacity drops, but service continues' when a node fails. Active-passive is the model where a standby takes over with downtime."
+      "correct": "B",
+      "explanation": "The study guide states that in active-passive clustering, a standby node takes over when the active node fails, with seconds of downtime. Active-active is the model where capacity drops but service continues."
     },
     {
       "section": "Reliability: measuring how well it stays healthy",
-      "type": "text",
-      "question": "Explain the difference between MTBF and MTTR in terms of what each one measures.",
-      "rubric": "A sound answer states that MTBF measures the average time between failures (how often breakdowns occur), while MTTR measures the average time to restore service after a failure occurs (how long recovery takes).",
-      "explanation": "The section defines MTBF as 'average time between failures for a repairable system' and MTTR as 'average time to restore service after failure,' making clear they measure different phases of the reliability cycle."
+      "type": "mc",
+      "question": "Which reliability metric measures the average time a repairable system operates before experiencing a failure?",
+      "options": {
+        "A": "MTTR measures the average time required to restore a system to operation after failure occurs",
+        "B": "MTTF measures the expected operational lifespan before a non-repairable component fails",
+        "C": "MTBF measures the average time a repairable system operates between failure events",
+        "D": "SLA measures the maximum allowed downtime per month as agreed between provider and customer"
+      },
+      "correct": "C",
+      "explanation": "The section defines MTBF as the mean time between failures for a repairable system, with higher values indicating greater reliability. MTTR measures repair time, and MTTF applies to non-repairable components."
     },
     {
       "section": "Cost and TCO",
       "type": "mc",
-      "question": "Which of the following is explicitly included in Total Cost of Ownership?",
+      "question": "What does Total Cost of Ownership include beyond the initial purchase price of a system?",
       "options": {
-        "A": "Capital expenditure for servers and network equipment only",
-        "B": "Electricity and cooling costs but not employee training expenses",
-        "C": "Only the initial hardware purchase price and first-year support contract",
-        "D": "Acquisition, licensing, electricity, cooling, labor, and decommissioning"
+        "A": "The initial sticker price and annual software license renewal fees only",
+        "B": "Purchase price, basic support for the first year, and energy consumption estimates",
+        "C": "Hardware costs and the salary of one full-time administrator for one year",
+        "D": "Acquisition price, deployment costs, licensing, electricity, cooling, space, labor, and maintenance"
       },
       "correct": "D",
-      "explanation": "The study guide lists TCO as including 'acquisition, deployment, licensing, electricity, cooling, physical space, labor, maintenance, upgrades, and eventual decommissioning.' Option A reflects this comprehensive list; others omit or narrow it."
+      "explanation": "The section defines TCO as the full lifetime cost including acquisition, deployment, licensing, electricity, cooling, physical space, labor, maintenance, upgrades, and decommissioning."
     },
     {
       "section": "Responsiveness: latency and throughput",
       "type": "mc",
-      "question": "Which of these techniques reduces latency by caching static content at locations near users?",
+      "question": "What is a CDN used for in reducing latency?",
       "options": {
-        "A": "Edge computing that processes data closer to the source",
-        "B": "A Content Delivery Network distributed globally at edge locations",
-        "C": "Application-layer caching with tools like Redis or Memcached",
-        "D": "Placing compute geographically close to users in data centers"
+        "A": "A globally distributed system that caches static content at edge locations near users",
+        "B": "A local caching tool that reduces the time required to retrieve data from a primary server",
+        "C": "A geographic strategy that processes data closer to the source rather than at a central location",
+        "D": "An in-memory data store that serves repeated queries without hitting the database"
       },
-      "correct": "B",
-      "explanation": "The section defines CDN as 'a globally distributed system that caches static content at edge locations near users.' While other options reduce latency, only the CDN explicitly targets caching content at edge locations."
+      "correct": "A",
+      "explanation": "The section defines a CDN as a globally distributed system that caches static content at edge locations near users to reduce latency. The other options describe in-memory caching (Redis/Memcached) and edge computing."
     },
     {
       "section": "Scalability: growing without breaking",
-      "type": "text",
-      "question": "What security risk does auto-scaling introduce, and why does it matter?",
-      "rubric": "A sound answer states that security monitoring tools configured for the original server set won't automatically cover new instances spun up by auto-scaling, leaving those new instances unmonitored; security architecture must scale dynamically with the application rather than assume a static host list.",
-      "explanation": "The section explicitly warns that 'Security monitoring tools that were configured for the original set of servers won't automatically cover new instances' and notes that 'security architecture must scale with the application.'"
+      "type": "mc",
+      "question": "What is a security risk associated with auto-scaling in cloud environments?",
+      "options": {
+        "A": "Monitoring tools may not automatically adjust to cover newly created instances during scaling events",
+        "B": "Vertical scaling reaches hardware limits and requires manual administrative intervention to proceed",
+        "C": "New instances may be created faster than security patches can be deployed to them",
+        "D": "Horizontal scaling adds more servers to the infrastructure and increases potential attack surface"
+      },
+      "correct": "A",
+      "explanation": "The section explicitly states that security monitoring tools configured for the original set of servers won't automatically cover new instances, and that security architecture must scale with the application."
     },
     {
       "section": "Ease of deployment: Infrastructure as Code",
       "type": "mc",
-      "question": "What is the primary security risk when using Infrastructure as Code?",
+      "question": "What is configuration drift and how does Infrastructure as Code help eliminate it?",
       "options": {
-        "A": "Storing Terraform or Ansible scripts in private Git repositories instead of public ones",
-        "B": "Requiring pull request review before any infrastructure changes are deployed",
-        "C": "Hardcoding credentials, API keys, or cryptographic material in version-controlled files",
-        "D": "Using configuration management tools like Puppet or Ansible to automate deployments"
+        "A": "Development and production environments become inconsistent; IaC addresses this through containerization",
+        "B": "Data is lost when instances terminate; IaC prevents this through automated backup and restoration",
+        "C": "Settings gradually diverge from intended baseline through manual changes; IaC prevents this through version control",
+        "D": "Security updates are delayed in deployment; IaC eliminates this through automated patching processes"
       },
       "correct": "C",
-      "explanation": "The section includes a critical warning: 'Never hardcode credentials, API keys, or cryptographic material in IaC files stored in version control,' and recommends using dedicated secrets tools instead. The other options describe practices that support security or are neutral."
+      "explanation": "The section defines configuration drift as the gradual divergence from undocumented manual changes and states that IaC eliminates this by defining infrastructure in version-controlled code files."
     },
     {
       "section": "Ease of recovery: RTO, RPO, and DR",
       "type": "mc",
-      "question": "Which metric defines the maximum amount of data loss an organization can tolerate after an incident?",
+      "question": "What does RPO measure in disaster recovery planning?",
       "options": {
-        "A": "RPO, which measures the maximum acceptable data loss in terms of time",
-        "B": "MTTR, which measures how long it takes to repair a failed component",
-        "C": "MTBF, which measures the average interval between system failures",
-        "D": "RTO, which measures the time allowed to restore all systems to production"
+        "A": "The maximum acceptable downtime period before the organization must resume operations",
+        "B": "The maximum acceptable data loss measured in time elapsed after a disaster occurs",
+        "C": "The required frequency for conducting backup and recovery testing throughout the year",
+        "D": "The time required to restore all systems to their state immediately before the disaster"
       },
-      "correct": "A",
-      "explanation": "The study guide defines RPO as 'Recovery Point Objective' and explains it 'measures max acceptable data loss, measured in time' with the example 'we can afford to lose at most 1 hour of transactions.' RTO measures downtime, not data loss."
+      "correct": "B",
+      "explanation": "The section defines RPO as Recovery Point Objective, measuring the maximum acceptable data loss in time units. RTO measures maximum downtime, not RPO."
     },
     {
       "section": "Risk transference: cyber insurance",
-      "type": "text",
-      "question": "What does cyber insurance actually do, and what does it not do?",
-      "rubric": "A sound answer states that cyber insurance reduces financial impact when incidents occur (covering costs like forensics, business interruption, fines, and notification) but does not prevent incidents from happening. It may note that insurers require baseline controls as a condition of coverage.",
-      "explanation": "The section explicitly states 'Cyber insurance does not prevent incidents — it reduces financial impact when they happen' and lists what policies cover. It also notes insurers require baseline controls, which indirectly pushes toward better security but is not incident prevention."
+      "type": "mc",
+      "question": "What does cyber insurance primarily accomplish?",
+      "options": {
+        "A": "It provides real-time detection and automated response to active cyber attacks",
+        "B": "It guarantees that no security breaches will occur if proper controls are maintained",
+        "C": "It eliminates the need for organizations to implement baseline security controls",
+        "D": "It reduces the financial impact when security incidents occur rather than preventing incidents"
+      },
+      "correct": "D",
+      "explanation": "The section explicitly states that cyber insurance does not prevent incidents but reduces financial impact when they happen. It also notes that insurers require baseline controls, pushing organizations toward better hygiene."
     }
   ]
 }

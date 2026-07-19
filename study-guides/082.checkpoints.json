@@ -5,106 +5,130 @@
       "type": "mc",
       "question": "What is the key difference between vulnerability scanning and penetration testing?",
       "options": {
-        "A": "Scanning is done by vendors; penetration testing is done by in-house staff",
-        "B": "Scanning requires credentials; penetration testing does not require credentials",
-        "C": "Scanning finds vulnerabilities and reports them; penetration testing finds, exploits, and demonstrates impact",
-        "D": "Scanning tests networks only; penetration testing tests applications only"
+        "A": "Vulnerability scanning identifies weaknesses without exploiting them, while penetration testing exploits vulnerabilities to demonstrate their actual impact.",
+        "B": "Vulnerability scanning serves compliance purposes, while penetration testing serves proactive risk management and threat detection.",
+        "C": "Vulnerability scanning targets web applications exclusively, while penetration testing targets networks and infrastructure systems.",
+        "D": "Vulnerability scanning requires authenticated credentials, while penetration testing operates without any credentials or access."
       },
-      "correct": "C",
-      "explanation": "The section explicitly states scanning identifies and reports weaknesses without exploiting them, while pen testing exploits vulnerabilities to demonstrate real-world impact."
+      "correct": "A",
+      "explanation": "The section explicitly defines scanning as finding and reporting without exploiting, versus pen testing which exploits to prove real-world impact. The other distinctions are not stated in this section."
     },
     {
       "section": "Why organizations scan",
-      "type": "text",
-      "question": "Name two compliance frameworks that require or assess vulnerability scanning.",
-      "rubric": "A sound answer names any two of PCI DSS, HIPAA, SOC 2, or FedRAMP as stated in the framework table.",
-      "explanation": "The section lists four compliance mandates (PCI DSS, HIPAA, SOC 2, FedRAMP) that all require or assess scanning."
+      "type": "mc",
+      "question": "Which of the following is a scanning requirement under PCI DSS?",
+      "options": {
+        "A": "Quarterly external scans by the organization and internal scans by an ASV",
+        "B": "Monthly external scans by an ASV with continuous internal scanning required",
+        "C": "Annual external scans by an ASV with internal scans performed yearly",
+        "D": "Quarterly external scans by an ASV and internal scans after significant changes"
+      },
+      "correct": "D",
+      "explanation": "The table in this section states PCI DSS requires quarterly external scans by an Approved Scanning Vendor and internal scans after significant changes."
     },
     {
       "section": "Types of vulnerability scans",
       "type": "mc",
-      "question": "Which scan type compares a system's settings against a security baseline like a CIS Benchmark or DISA STIG?",
+      "question": "What does a configuration compliance scanning tool compare against a system?",
       "options": {
-        "A": "Database scanning",
-        "B": "Network vulnerability scanning",
-        "C": "Web application scanning",
-        "D": "Configuration compliance scanning"
+        "A": "Web application source code compared against industry vulnerability frameworks like OWASP Top 10.",
+        "B": "Open ports and running services compared against a database of known vulnerable software versions.",
+        "C": "Current system settings compared against a security baseline such as CIS Benchmark or DISA STIG standards.",
+        "D": "Database user credentials compared against historical audit records and access control policies."
       },
-      "correct": "D",
-      "explanation": "The section defines configuration compliance scanning as comparing actual system settings against a security baseline such as CIS Benchmark or DISA STIG."
+      "correct": "C",
+      "explanation": "The section states configuration compliance scanning compares a system's actual settings against security baselines such as CIS Benchmark or DISA STIG and reports deviations."
     },
     {
       "section": "Authenticated vs. unauthenticated scanning",
-      "type": "text",
-      "question": "Why does unauthenticated scanning produce more false positives than authenticated scanning?",
-      "rubric": "A sound answer explains that unauthenticated scanning must guess software versions from banners rather than read patch status and software inventory directly from the system.",
-      "explanation": "The section states unauthenticated scanners observe only external visibility and must guess versions from banners, while authenticated scans read actual software and patch data directly."
+      "type": "mc",
+      "question": "Why does unauthenticated scanning typically produce more false positives than authenticated scanning?",
+      "options": {
+        "A": "Unauthenticated scanning has limited scope to web applications and cannot assess network-level security.",
+        "B": "Unauthenticated scanning cannot read the registry directly and must infer software versions from banner responses.",
+        "C": "Unauthenticated scanning initiates parallel connections to many systems which generate excessive false alarms.",
+        "D": "Unauthenticated scanning relies on network credentials that may be improperly configured or outdated."
+      },
+      "correct": "B",
+      "explanation": "The section states unauthenticated scanning cannot see patch status and registry settings, and must guess versions from banners rather than read them directly, leading to more false positives."
     },
     {
       "section": "Agent-based vs. agentless scanning",
       "type": "mc",
-      "question": "Which scanning approach installs a small background program on each target system to provide continuous, always-current data?",
+      "question": "Which scanning approach installs a lightweight program on each target system to continuously report findings?",
       "options": {
-        "A": "Agent-based scanning that deploys a lightweight program for continuous monitoring",
-        "B": "Unauthenticated banner-based scanning of network services",
-        "C": "Configuration compliance scanning to verify settings",
-        "D": "Agentless scanning using network credentials to assess systems"
-      },
-      "correct": "A",
-      "explanation": "The section defines agent-based scanning as installing a lightweight agent that runs continuously and reports findings to a central console for always-current data."
-    },
-    {
-      "section": "Scan tools to know",
-      "type": "mc",
-      "question": "Which of these is a cloud-based vulnerability management platform that combines agentless, agent-based, and CSPM scanning?",
-      "options": {
-        "A": "OpenVAS as a free open-source network scanner",
-        "B": "Qualys VMDR with combined scanning capabilities",
-        "C": "Tenable Nessus with the largest plugin database",
-        "D": "Rapid7 InsightVM with exploit awareness features"
+        "A": "Agentless scanning, which connects remotely over the network using credentials",
+        "B": "Agent-based scanning, which installs a small background agent on each system",
+        "C": "Network scanning, which requires the scanner to reach the target over the network",
+        "D": "Unauthenticated scanning, which observes only externally visible information"
       },
       "correct": "B",
-      "explanation": "The section identifies Qualys VMDR as a cloud-based platform that combines agentless, agent-based, and CSPM capabilities."
+      "explanation": "The section defines agent-based scanning as installing a lightweight agent on each target system that runs continuously and reports findings to a central console."
     },
     {
       "section": "Scan frequency",
       "type": "mc",
-      "question": "What is the minimum scanning frequency for internal authenticated scans according to the section?",
+      "question": "According to the section, what is the minimum scanning frequency for authenticated scans of internal assets?",
       "options": {
-        "A": "Monthly for internal assets",
-        "B": "Continuous for external systems only",
-        "C": "Weekly for all internal systems",
-        "D": "Quarterly for all systems"
+        "A": "Continuous scanning using agent-based tools only",
+        "B": "Annual scans after major infrastructure changes",
+        "C": "Quarterly scans of all internal systems",
+        "D": "Monthly authenticated scans of internal assets"
       },
-      "correct": "A",
-      "explanation": "The section explicitly states 'Monthly authenticated scans — internal assets minimum' as a frequency guideline."
+      "correct": "D",
+      "explanation": "The section explicitly lists monthly authenticated scans as the minimum for internal assets."
     },
     {
       "section": "Reading scan results: false positives and false negatives",
-      "type": "text",
-      "question": "What is a false positive in vulnerability scanning, and which scan type is more prone to them?",
-      "rubric": "A sound answer defines a false positive as a reported vulnerability that does not actually exist, and notes that unauthenticated scans are more prone to them.",
-      "explanation": "The section defines false positive as the scanner reporting a vulnerability that doesn't exist and states they are more common in unauthenticated scans."
+      "type": "mc",
+      "question": "What is a false negative in the context of vulnerability scanning?",
+      "options": {
+        "A": "A vulnerability exists but the scanner does not detect it because it is not in the plugin database yet.",
+        "B": "The scanner identifies a vulnerability in an unauthenticated scan that cannot be confirmed during an authenticated scan.",
+        "C": "The scanner detects only network-level exposures and fails to identify application-level vulnerabilities.",
+        "D": "The scanner reports a vulnerability that does not exist because patches were applied without updating version strings."
+      },
+      "correct": "A",
+      "explanation": "The section defines false negative as a real vulnerability that the scanner misses, and gives zero-day and custom app vulnerabilities as examples."
     },
     {
       "section": "CVSS scoring",
       "type": "mc",
-      "question": "A vulnerability has a CVSS score of 8.5. What severity rating and typical patch window does this represent?",
+      "question": "Which CVSS base score metric measures whether an attacker needs user interaction to exploit the vulnerability?",
       "options": {
-        "A": "Low severity with a quarterly patch cycle",
-        "B": "Medium severity with a ~30 day patch window",
-        "C": "High severity with a 7–14 day patch window",
-        "D": "Critical severity with a 24–48 hour patch window"
+        "A": "Attack Vector, which ranges from Network to Physical",
+        "B": "Attack Complexity, which ranges from Low to High",
+        "C": "User Interaction, which ranges from None to Required",
+        "D": "Privileges Required, which ranges from None to High"
       },
       "correct": "C",
-      "explanation": "The section severity table shows scores 7.0–8.9 are rated High with a typical 7–14 day patch window."
+      "explanation": "The CVSS metrics table in this section defines User Interaction as measuring whether a victim needs to do something, with values of None or Required."
+    },
+    {
+      "section": "CVSS scoring",
+      "type": "mc",
+      "question": "What is the typical patch window for a vulnerability with a CVSS score of 9.2?",
+      "options": {
+        "A": "Approximately 30 days for standard systems",
+        "B": "24 to 48 hours for internet-exposed systems",
+        "C": "7 to 14 days for most deployments",
+        "D": "Quarterly patch cycle for low-priority systems"
+      },
+      "correct": "B",
+      "explanation": "The severity ranges table shows a CVSS score of 9.2 falls in the Critical range (9.0–10.0), which has a typical patch window of 24–48 hours for internet-exposed systems."
     },
     {
       "section": "Vulnerability prioritization",
-      "type": "text",
-      "question": "Besides CVSS score, name three other factors that should be considered when prioritizing vulnerabilities for remediation.",
-      "rubric": "A sound answer names any three of: exploitability, asset criticality, or exposure (internet-facing vs. isolated).",
-      "explanation": "The section lists four prioritization factors: CVSS severity, exploitability, asset criticality, and exposure; the answer requires three of the non-CVSS ones."
+      "type": "mc",
+      "question": "What does the CISA Known Exploited Vulnerabilities catalog provide that helps with prioritization?",
+      "options": {
+        "A": "A list of CVEs actively exploited in real attacks to prioritize as the highest severity.",
+        "B": "Machine learning forecasts predicting the likelihood a CVE will be exploited within the next 30 days.",
+        "C": "A ranking of which systems and assets are most critical to your organization's business operations.",
+        "D": "A standardized severity score based on attack vector, attack complexity, and user interaction requirements."
+      },
+      "correct": "A",
+      "explanation": "The section defines CISA KEV as a catalog of CVEs confirmed as actively exploited in real attacks, designated to treat as highest priority."
     }
   ]
 }

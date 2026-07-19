@@ -30,7 +30,7 @@ The new question must be as hard as the original — follow all of these rules:
 STYLE RULES (mandatory):
 - Scenario-based stem: "A technician discovers...", "A company must ensure...", "After an audit reveals..."
 - Use a decision qualifier where natural: BEST, MOST likely, FIRST, PRIMARY reason
-- For MC: all four options must be approximately equal length (±15 words). Never make the correct answer longer than the others. All three distractors must be plausible to someone with partial knowledge — no obviously wrong answers. The correct answer position (A/B/C/D) must differ from the original question's correct answer.
+- For MC: all four options must be nearly identical in length and detail — within a few words of each other (the longest no more than ~1.15× the words of the shortest), carrying the same specificity. Never make the correct answer the longest or most detailed; no option may spell out more than the rest, so the answer cannot be spotted by picking the most thorough option. All three distractors must be plausible to someone with partial knowledge — no obviously wrong answers. The correct answer position (A/B/C/D) must differ from the original question's correct answer.
 - For text: ask the student to APPLY or ANALYZE the concept (not just define it). Include a rubric listing 2-3 key points a complete answer must cover.
 - Do not reuse any phrasing, examples, or wording from the original question
 - Test application of the concept, not recognition of a definition

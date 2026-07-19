@@ -3,101 +3,119 @@
     {
       "section": "Allow lists vs. deny lists",
       "type": "mc",
-      "question": "Which control strategy blocks everything by default and only allows pre-approved items?",
+      "question": "Which type of control explicitly names every permitted item and blocks everything else by default?",
       "options": {
-        "A": "Deny list, which is easier to administer but reactive to unknown threats",
-        "B": "Allow list, which requires high administrative burden but blocks unknown malware",
-        "C": "Antivirus signature matching, which maintains a guest list of safe applications",
-        "D": "EDR platform, which permits all items unless explicitly prohibited by policy"
+        "A": "An allow list that reacts to newly discovered threats in production",
+        "B": "A deny list that blocks malware signatures while permitting legitimate software",
+        "C": "An allow list that permits only pre-approved items and blocks unknown code",
+        "D": "A deny list that requires advance listing of all acceptable applications"
       },
-      "correct": "B",
-      "explanation": "An allow list explicitly names permitted items and blocks everything else by default, making it very effective against unknown malware but requiring maintenance of every approved application. The section contrasts this with deny lists, which are reactive."
+      "correct": "C",
+      "explanation": "An allow list explicitly names permitted items and blocks everything else by default, making it effective against unknown malware. A deny list takes the opposite approach, permitting everything except explicitly blocked items."
     },
     {
       "section": "Restricted activities within a change window",
-      "type": "text",
-      "question": "A technician has an approved change window to upgrade network switches. What should happen if they discover the upgrade also requires a firewall rule modification?",
-      "rubric": "A sound answer states that significant unexpected changes must be escalated to the change authority for approval rather than implemented unilaterally; only minor directly necessary ancillary changes may be made and documented in the change record.",
-      "explanation": "The section states that a change window authorizes only the exact documented scope in the RFC. Significant unexpected changes must be escalated, not implemented without approval."
+      "type": "mc",
+      "question": "During an approved change window, what must happen if a technician discovers a significant unexpected change is needed beyond the documented scope?",
+      "options": {
+        "A": "The change must be escalated to the change authority for expedited approval",
+        "B": "The change should be implemented immediately and documented afterward",
+        "C": "The change window should be extended to permit the additional modification",
+        "D": "The change can proceed if it is directly necessary to complete the approved work"
+      },
+      "correct": "A",
+      "explanation": "The study guide states that significant unexpected changes must be escalated to the change authority for expedited approval and not implemented unilaterally, even during an open change window."
     },
     {
       "section": "Downtime planning and blue-green deployment",
       "type": "mc",
-      "question": "In a 24×7 environment where downtime is unacceptable, what does a blue-green deployment allow an organization to do?",
+      "question": "In a 24×7 environment where downtime is unacceptable, what is the primary advantage of using a blue-green deployment pattern?",
       "options": {
-        "A": "Automatically roll back any changes that fail within seconds of detection",
-        "B": "Maintain two separate infrastructure versions to handle peak traffic loads",
-        "C": "Apply changes to one environment while traffic continues on the other, then switch if validation passes",
-        "D": "Schedule downtime notifications to users before applying changes during maintenance windows"
+        "A": "It eliminates the need to communicate planned maintenance windows to users in advance before deployment",
+        "B": "It allows changes to be applied to the inactive environment while live traffic continues on the active one, enabling seamless updates",
+        "C": "It reduces the total number of production servers required to maintain normal operational capacity and performance",
+        "D": "It automatically reverts changes if performance degradation is detected after the switchover occurs"
       },
-      "correct": "C",
-      "explanation": "Blue-green deployment maintains two identical environments; the change is applied to the inactive one while live traffic runs on the other, then traffic switches after validation, enabling near-instant rollback if needed."
+      "correct": "B",
+      "explanation": "Blue-green deployment maintains two identical environments; changes are applied to the inactive one while the other serves live traffic, and traffic switches once validation is complete, enabling zero-downtime updates."
     },
     {
       "section": "Version control",
-      "type": "text",
-      "question": "Explain how version control and Infrastructure as Code (IaC) together support both change tracking and risk mitigation in technical change management.",
-      "rubric": "A sound answer states that version control records every change with author identity, timestamp, and description to create an audit trail, enables rollback to prior commits if problems occur, and IaC extends these same traceability and reversibility benefits to infrastructure resources defined in config files.",
-      "explanation": "The section explains that version control provides audit trails and enables rollback, and IaC applies these same principles to infrastructure rather than just application code."
+      "type": "mc",
+      "question": "What key information does a commit in a version control system like Git capture?",
+      "options": {
+        "A": "The file content, approval authority, deployment environment, and rollback timestamp",
+        "B": "Only the modified file content and a timestamp for audit purposes",
+        "C": "The author identity, file size, and approval status from the change board",
+        "D": "The modified file content, author identity, timestamp, and description of the change"
+      },
+      "correct": "D",
+      "explanation": "Each commit captures the modified file content, the author's identity, a timestamp, and a description of why the change was made, providing a complete audit trail."
     },
     {
       "section": "Dependency management",
       "type": "mc",
-      "question": "A development team is updating a core authentication library used by six other microservices. Which dependencies must they account for before deploying the change?",
+      "question": "What are upstream dependencies in the context of change management?",
       "options": {
-        "A": "Only upstream dependencies, because the library is being changed, not the services calling it",
-        "B": "External APIs only, because internal service dependencies are managed separately",
-        "C": "Both upstream dependencies the library relies on and downstream dependencies that rely on the library",
-        "D": "Only downstream dependencies, because the six microservices rely on the library being updated"
+        "A": "The third-party vendors that provide patches and security updates",
+        "B": "External libraries listed in the Software Bill of Materials for the system",
+        "C": "Services that rely on the changed component and may be affected by the modification",
+        "D": "Services that the changed component relies on and must continue functioning"
       },
       "correct": "D",
-      "explanation": "Downstream dependencies are services that rely on the changed component—in this case, the six microservices that depend on the authentication library. The section defines downstream as services that rely on the changed component."
+      "explanation": "Upstream dependencies are services that the changed component relies on, meaning they must remain available for the change to work correctly."
     },
     {
       "section": "Legacy application challenges",
       "type": "mc",
-      "question": "A legacy application runs on a deprecated OS and receives no vendor patches. What is the primary reason compensating controls are used instead of patching?",
+      "question": "Which of the following is an example of a compensating control for a legacy application that can no longer be patched by its vendor?",
       "options": {
-        "A": "Patches no longer exist and modifying the system risks breaking critical functionality",
-        "B": "Compensating controls are more cost-effective than vendor support",
-        "C": "The system requires microsegmentation before patches can be safely applied",
-        "D": "Vendor patches would introduce vulnerabilities that cannot be reversed"
+        "A": "Requesting the vendor provide emergency patches or security updates for the legacy system",
+        "B": "Installing additional antivirus software on the legacy application server to detect threats",
+        "C": "Placing the system behind an application-layer firewall that inspects and filters traffic at Layer 7",
+        "D": "Upgrading the legacy application to a newer version that receives vendor support and patches"
       },
-      "correct": "A",
-      "explanation": "The section states that legacy applications are no longer actively supported by vendors, patches no longer exist, and direct modification is risky. Compensating controls like application-layer firewalls and microsegmentation reduce risk without changing the system itself."
+      "correct": "C",
+      "explanation": "The study guide lists placing a legacy system behind an application-layer firewall as a compensating control that reduces risk without changing the system itself. Upgrading is replacement, not a compensating control."
     },
     {
       "section": "Environment separation",
       "type": "mc",
-      "question": "Which environment serves as a final validation in a near-identical replica of production before changes go live?",
+      "question": "In which environment is final validation performed in a near-identical replica of production before changes reach live systems?",
       "options": {
-        "A": "Sandbox environment, which is used only for malware research and patch testing",
-        "B": "Development environment, where code is initially written and tested with loose controls",
-        "C": "Testing/QA environment, where formal functional and integration testing occurs",
-        "D": "Staging/Pre-production environment, which maintains high control and mirrors production closely"
+        "A": "Staging or pre-production environment with high control levels",
+        "B": "Testing environment where formal functional and integration testing occurs",
+        "C": "Production environment after untested changes have been deployed",
+        "D": "Development environment where developers initially test their code"
       },
-      "correct": "D",
-      "explanation": "The section's environment table identifies Staging/Pre-production as the final validation environment in a near-identical replica of production with high control level, before the strictest Production environment."
+      "correct": "A",
+      "explanation": "The study guide identifies staging or pre-production as the environment for final validation in a near-identical replica of production before reaching the strictest production environment."
     },
     {
       "section": "CI/CD pipeline security",
       "type": "mc",
-      "question": "Which security testing tool scans third-party libraries and open-source components for known vulnerabilities?",
+      "question": "Which security testing tool scans source code for vulnerabilities before compilation occurs?",
       "options": {
-        "A": "SCA, which identifies vulnerabilities in third-party libraries and components",
-        "B": "DAST, which simulates attacks against a running application",
-        "C": "SBOM, which records every commit author, timestamp, and change description",
-        "D": "SAST, which analyzes source code before compilation"
+        "A": "SBOM, which creates a structured list of every component in the system",
+        "B": "SAST, which scans source code for vulnerabilities before compilation",
+        "C": "DAST, which simulates attacks against a running application to find flaws",
+        "D": "SCA, which scans third-party libraries and open-source components for issues"
       },
-      "correct": "A",
-      "explanation": "The section's tool table identifies SCA (Software Composition Analysis) as the tool that scans third-party libraries and open-source components for known vulnerabilities."
+      "correct": "B",
+      "explanation": "SAST (Static Application Security Testing) scans source code for vulnerabilities before compilation, while DAST tests running applications and SCA checks third-party components."
     },
     {
       "section": "Configuration drift",
-      "type": "text",
-      "question": "What causes configuration drift and why is it a security concern?",
-      "rubric": "A sound answer states that configuration drift occurs when small unintentional changes accumulate outside the formal change management process, and it creates undetected security gaps and makes systems difficult to audit because actual configuration deviates from the approved baseline.",
-      "explanation": "The section defines drift as gradual deviation from the documented baseline through changes made outside formal change management, and notes it creates security gaps and auditing difficulties."
+      "type": "mc",
+      "question": "What is configuration drift and how does it occur in systems?",
+      "options": {
+        "A": "The intentional separation of production and testing environments for security isolation",
+        "B": "The planned, intentional changes made through the formal change management process",
+        "C": "The gradual, often unintentional deviation of actual configuration from the approved baseline",
+        "D": "The automatic updates applied by cloud providers without manual intervention"
+      },
+      "correct": "C",
+      "explanation": "Configuration drift is the gradual deviation of actual system configuration from the approved baseline, often accumulating through small changes made outside formal change management."
     }
   ]
 }

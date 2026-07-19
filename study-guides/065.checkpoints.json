@@ -3,68 +3,67 @@
     {
       "section": "802.1X: port-based network access control",
       "type": "mc",
-      "question": "In 802.1X, which role actually validates the device's credentials and decides whether to grant or deny access?",
+      "question": "In an 802.1X authentication exchange, which role is responsible for actually validating the credentials of the connecting device?",
       "options": {
-        "A": "The supplicant, which authenticates itself to the switch",
-        "B": "The authentication server, which evaluates credentials and returns Access-Accept or Access-Reject",
-        "C": "The authenticator, which relays EAP messages and enforces the outcome",
-        "D": "The RADIUS server, which is responsible for both relaying messages and making the final decision"
+        "A": "The supplicant, which stores the credentials locally and validates them before sending",
+        "B": "The authenticator, which enforces the authorization decision after receiving it from the backend",
+        "C": "The authentication server, which validates credentials and returns Access-Accept or Access-Reject",
+        "D": "The RADIUS relay, which intercepts the credentials and checks them against an internal database"
       },
-      "correct": "B",
-      "explanation": "The section states that the authentication server is the backend that actually validates credentials, while the authenticator (switch port) enforces the outcome but does not decide it. RADIUS is the protocol the authentication server typically uses, not a separate role."
+      "correct": "C",
+      "explanation": "The authentication server is the backend that actually validates credentials, typically a RADIUS server querying Active Directory or LDAP. The authenticator enforces the outcome but does not decide it."
     },
     {
       "section": "EAP methods compared",
-      "type": "text",
-      "question": "Explain the key difference between EAP-TLS and PEAP in terms of which party must present a certificate.",
-      "rubric": "A sound answer states that EAP-TLS requires both client and server certificates (mutual authentication), while PEAP requires only a server certificate and passes credentials like username/password inside a TLS tunnel instead.",
-      "explanation": "The section explicitly compares these two methods: EAP-TLS requires digital certificates from both parties, whereas PEAP uses only a server certificate and tunnels a username/password (MSCHAPv2) inside that tunnel."
+      "type": "mc",
+      "question": "Which EAP method requires digital certificates on both the client device and the server, and what is the primary advantage of this requirement?",
+      "options": {
+        "A": "EAP-TLS requires certificates on both sides and provides mutual authentication, the strongest method",
+        "B": "PEAP requires certificates on both sides and eliminates the need for existing Active Directory passwords",
+        "C": "EAP-TTLS requires certificates on both sides and allows more flexible inner authentication methods",
+        "D": "EAP-FAST requires certificates on both sides and avoids needing a full PKI deployment"
+      },
+      "correct": "A",
+      "explanation": "EAP-TLS is the strongest method because both the client and server prove identity with digital certificates, providing mutual authentication. The other methods do not require client certificates."
     },
     {
       "section": "Fallback and assignment: MAB, Guest VLAN, dynamic VLAN",
       "type": "mc",
-      "question": "Why must MAC Authentication Bypass devices be confined to restricted VLANs?",
+      "question": "What is the primary weakness of MAC Authentication Bypass, and what control should be applied to MAB-enabled devices?",
       "options": {
-        "A": "Because MAB only functions when the device is physically isolated from the network",
-        "B": "Because RADIUS cannot process MAC addresses from unrestricted VLANs",
-        "C": "Because MAB requires additional licensing for isolated network segments",
-        "D": "Because MAC addresses are unencrypted and easily spoofed, posing a security risk"
+        "A": "MAB requires a separate RADIUS server, so backup servers should be confined to restricted VLANs",
+        "B": "MAB devices cannot authenticate with PEAP, so they must be restricted to dynamic VLAN assignment",
+        "C": "MAB relies on Active Directory passwords, so legacy devices should be confined to restricted VLANs",
+        "D": "MAC addresses are unencrypted and trivially spoofed, so MAB devices should be confined to restricted VLANs"
       },
       "correct": "D",
-      "explanation": "The section explicitly states that MAC addresses travel unencrypted in Ethernet frames and can be spoofed trivially, making MAB inherently weak; it then directly concludes that MAB devices should be confined to restricted VLANs."
-    },
-    {
-      "section": "Switch-level attack defenses",
-      "type": "text",
-      "question": "Describe how port security prevents a CAM table overflow attack.",
-      "rubric": "A sound answer explains that port security enforces a maximum number of MAC addresses allowed on a port and shuts down the port when that limit is exceeded, preventing the switch from flooding traffic to all ports as it would when the CAM table fills.",
-      "explanation": "The section describes CAM table overflow as filling the switch's MAC-to-port table to force flooding, then states that port security with a maximum MAC limit stops this by shutting down the port when the limit is exceeded."
+      "explanation": "MAC addresses travel unencrypted and can be spoofed trivially, making MAB weak. MAB devices should be confined to restricted VLANs to limit the damage if a MAC is spoofed."
     },
     {
       "section": "Switch-level attack defenses",
       "type": "mc",
-      "question": "What does DHCP snooping mark ports as to control which devices can send DHCP offers?",
+      "question": "What is CAM table overflow, and how does port security with a maximum MAC limit defend against it?",
       "options": {
-        "A": "Isolated or connected, restricting untrusted ports to Guest VLAN assignment only",
-        "B": "Authorized or unauthorized, depending on whether the device has passed 802.1X",
-        "C": "Trusted or untrusted, with only trusted ports allowed to send DHCP offers",
-        "D": "Monitored or unmonitored, based on whether they are part of the DHCP snooping binding table"
+        "A": "CAM table overflow drops frames when full, and port security with MAC limits rebuilds the table when triggered",
+        "B": "CAM table overflow floods the switch with random MACs until it falls back to hub-mode flooding, and port security shuts down the port when the MAC limit is exceeded",
+        "C": "CAM table overflow corrupts MAC-to-port mappings, and port security with MAC limits uses sticky MAC learning to block spoofing attempts",
+        "D": "CAM table overflow requires DHCP snooping to recover the table, and port security with MAC limits validates ARP replies against bindings"
       },
-      "correct": "C",
-      "explanation": "The section explicitly states that DHCP snooping marks ports as trusted (legitimate servers/uplinks) or untrusted (end devices), and only trusted ports can send DHCP offers."
+      "correct": "B",
+      "explanation": "CAM table overflow fills the table with random MACs until the switch broadcasts all frames like a hub, allowing traffic capture. Port security stops this by shutting down the port when the MAC limit is exceeded."
     },
     {
       "section": "Switch-level attack defenses",
       "type": "mc",
-      "question": "What problem does Dynamic ARP Inspection (DAI) prevent by validating ARP replies against the DHCP snooping binding table?",
+      "question": "Which three switch-level security features work together as a dependent chain to prevent ARP spoofing and IP spoofing?",
       "options": {
-        "A": "ARP spoofing by validating ARP replies against DHCP snooping bindings",
-        "B": "Unauthorized port traffic by enforcing IP Source Guard rules",
-        "C": "DHCP starvation by exhausting available IP addresses in the pool",
-        "D": "MAC flooding by preventing CAM table exhaustion attacks"
+        "A": "DHCP snooping builds the binding table, DAI validates ARP replies against it, and IP Source Guard validates source IPs against the same table",
+        "B": "MAB fallback configuration, RADIUS authentication, and trusted port designation combine to stop ARP and IP spoofing attacks",
+        "C": "MAC address filtering, CAM table protection, and port security with sticky MAC learning form a chain to stop ARP and IP spoofing",
+        "D": "EAP-TLS with mutual certificates, Dynamic VLAN assignment, and Guest VLAN isolation work together to prevent spoofing on untrusted ports"
       },
       "correct": "A",
-      "explanation": "The section defines ARP spoofing as broadcasting fake ARP replies to claim the gateway's IP maps to the attacker's MAC, and states that DAI prevents this by validating ARP replies against the binding table and dropping contradictions."
+      "explanation": "DHCP snooping builds the ground-truth binding table of IP, MAC, VLAN, and port relationships. DAI uses this table to validate ARP replies, and IP Source Guard uses it to validate source IP addresses on untrusted ports."
     }
   ]
 }

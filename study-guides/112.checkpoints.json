@@ -6,92 +6,116 @@
       "question": "Which of the following is an example of a likelihood control used in risk mitigation?",
       "options": {
         "A": "Deploying multi-factor authentication to reduce the chance of unauthorized access",
-        "B": "Creating backups to limit damage from system failure",
-        "C": "Implementing encryption to protect data if a breach occurs",
-        "D": "Establishing incident response plans to manage the fallout from an attack"
+        "B": "Creating backups to minimize damage from data loss",
+        "C": "Establishing an incident response plan to limit operational impact",
+        "D": "Implementing encryption to protect data if a breach occurs"
       },
       "correct": "A",
-      "explanation": "The section explicitly lists MFA as a likelihood control—it makes exploitation less probable. Encryption and backups are impact controls, and incident response plans address post-breach response, not prevention."
-    },
-    {
-      "section": "The four risk response strategies",
-      "type": "text",
-      "question": "What is residual risk, and why does it matter after mitigation controls are in place?",
-      "rubric": "A sound answer identifies residual risk as the risk remaining after controls are applied and notes that it must be compared to the organization's risk tolerance to ensure acceptable exposure.",
-      "explanation": "The section defines residual risk explicitly and emphasizes that it persists even after mitigation and must be weighed against risk tolerance—the key insight is that mitigation is never absolute."
+      "explanation": "Likelihood controls make exploitation less probable; MFA is listed as a likelihood control because it requires a second proof of identity. Encryption, backups, and incident response plans are impact controls."
     },
     {
       "section": "The four risk response strategies",
       "type": "mc",
-      "question": "A team decides to stop storing payment card data on-premises and instead outsource that function to a payment processor. Which risk response strategy does this represent?",
+      "question": "What is the key difference between risk acceptance and neglect?",
       "options": {
-        "A": "Risk transference by paying the processor to assume financial liability",
-        "B": "Risk acceptance by acknowledging the processor will handle the risk instead",
-        "C": "Risk avoidance by eliminating the activity that creates the risk",
-        "D": "Risk mitigation by reducing the number of systems that handle card data"
+        "A": "Neglect involves documenting the risk while acceptance involves ignoring it completely",
+        "B": "Risk acceptance is a conscious documented decision while neglect is ignoring a risk unintentionally",
+        "C": "Neglect requires risk owner approval while acceptance does not require any formal sign-off",
+        "D": "Acceptance applies to high-impact risks while neglect applies to low-impact risks"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that acceptance requires deliberate, documented decision-making and the risk owner's signature, whereas neglect is ignoring a risk due to inattention or ignorance."
+    },
+    {
+      "section": "The four risk response strategies",
+      "type": "mc",
+      "question": "When would risk avoidance be the appropriate strategy?",
+      "options": {
+        "A": "When cyber insurance premiums are too expensive to purchase adequate coverage for the risk",
+        "B": "When a control cost is less than the expected financial loss from the risk occurring",
+        "C": "When mitigation, acceptance, and transference cannot keep risk within tolerance and discontinuing the activity is viable",
+        "D": "When residual risk after mitigation remains below the organization's risk tolerance threshold"
       },
       "correct": "C",
-      "explanation": "The section defines avoidance as eliminating the activity entirely and gives this exact example—outsourcing payment processing removes the organization from PCI DSS scope by stopping direct storage."
-    },
-    {
-      "section": "The four risk response strategies",
-      "type": "text",
-      "question": "Explain the key difference between risk acceptance and risk neglect.",
-      "rubric": "A sound answer states that acceptance requires a conscious, documented decision (with rationale and owner sign-off), while neglect is ignoring a risk due to inattention or ignorance.",
-      "explanation": "The section emphasizes that neglect is not acceptance and highlights the critical requirement for written documentation and deliberate decision-making in true acceptance."
+      "explanation": "Risk avoidance is only appropriate when no other strategy combination works to bring risk within tolerance AND the risky activity can realistically be stopped."
     },
     {
       "section": "The four risk response strategies",
       "type": "mc",
-      "question": "A company purchases cyber liability insurance to cover forensic investigation, breach notification, and legal fees if a data breach occurs. What does this insurance do in terms of risk response?",
+      "question": "What does cyber liability insurance primarily cover?",
       "options": {
-        "A": "Prevents breaches from occurring in the first place",
-        "B": "Removes all requirements for security controls",
-        "C": "Protects the company from all legal liability",
-        "D": "Transfers financial risk to an insurance provider"
+        "A": "Compensation to the insurance company for assuming all cybersecurity risk",
+        "B": "Prevention of future breaches by funding additional security controls",
+        "C": "Complete elimination of the organization's liability to customers for data breaches",
+        "D": "Forensic investigation, breach notification, legal fees, credit monitoring, and regulatory fines"
       },
       "correct": "D",
-      "explanation": "The section defines transference as shifting financial burden and explicitly states that cyber insurance covers these costs. Critically, it does NOT reduce breach probability and does NOT eliminate legal liability."
+      "explanation": "The section lists forensic investigation, breach notification, credit monitoring, legal fees, regulatory fines, and business interruption as items covered by cyber liability insurance."
+    },
+    {
+      "section": "The four risk response strategies",
+      "type": "mc",
+      "question": "Which statement about risk transference is accurate?",
+      "options": {
+        "A": "It reduces the probability a breach occurs by shifting responsibility to insurers",
+        "B": "It removes the need for the organization to implement any compensating controls",
+        "C": "It shifts the financial burden to another party while the underlying risk still exists",
+        "D": "It eliminates the organization's legal liability for customer data processed by third parties"
+      },
+      "correct": "C",
+      "explanation": "Transference changes who pays if a loss occurs, not whether it happens; the section explicitly states that organizations retain ultimate legal liability even when third parties process their data."
     },
     {
       "section": "Policy exemptions vs. exceptions",
       "type": "mc",
-      "question": "A company has an embedded operating system that will malfunction if security patches are applied. The organization removes this system from its patch policy and implements network isolation around it instead. Is this a policy exemption or exception?",
+      "question": "When should a policy exemption be used rather than a policy exception?",
       "options": {
-        "A": "An exception, because network isolation is a workaround",
-        "B": "An exemption, because compliance is technically impossible",
-        "C": "An exemption, because the system will never be patched",
-        "D": "An exception, because the company is temporarily delaying patches"
+        "A": "When an organization wants to apply a policy to only a subset of users for a short period",
+        "B": "When a vendor temporarily cannot meet the requirements of a service level agreement",
+        "C": "When an operational conflict requires a temporary deviation from a policy requirement",
+        "D": "When compliance is technically impossible, such as with an embedded OS that breaks if patched"
       },
-      "correct": "B",
-      "explanation": "The section defines exemption as applied when compliance is technically impossible and uses a similar embedded-OS scenario as a direct example. Exemptions typically remain in place while the technical constraint exists."
+      "correct": "D",
+      "explanation": "An exemption removes a system from policy scope entirely because compliance is technically impossible; an exception is used when compliance is possible but temporarily conflicts with operations."
     },
     {
       "section": "Secondary risks",
-      "type": "text",
-      "question": "Give an example of a secondary risk and explain how it arises from a risk treatment.",
-      "rubric": "A sound answer identifies a secondary risk created by a treatment activity—such as backup infrastructure becoming an attack target when deploying backups—and recognizes that it must be evaluated before finalizing the treatment.",
-      "explanation": "The section defines secondary risks as new risks created by treatment activities and gives concrete examples; the key is showing that treatment decisions can introduce fresh threats that require evaluation."
+      "type": "mc",
+      "question": "Which of the following is an example of a secondary risk?",
+      "options": {
+        "A": "A firewall rule blocking a vendor connection that was supposed to be allowed through",
+        "B": "A backup infrastructure becoming an attack target as a result of deploying backups",
+        "C": "A patched server being compromised because the patch was not fully effective",
+        "D": "A network segmentation control preventing legitimate traffic between departments"
+      },
+      "correct": "B",
+      "explanation": "Secondary risks are new risks created by risk treatment activities; the section explicitly mentions that deploying backups introduces secondary risk by making the backup infrastructure itself an attack target."
     },
     {
       "section": "Control selection criteria",
       "type": "mc",
-      "question": "When selecting a security control, which of the following refers to how much a control reduces the expected yearly cost of a risk?",
+      "question": "Which criterion for control selection specifically measures the expected yearly cost of a risk?",
       "options": {
-        "A": "Reduction in annualized loss expectancy",
-        "B": "Impact on user workflows and productivity",
-        "C": "Alignment with regulatory requirements",
-        "D": "Initial investment and deployment expense"
+        "A": "Effectiveness, which calculates the annual financial benefit of the control",
+        "B": "Usability impact, which determines how much friction the control introduces to users",
+        "C": "Regulatory compliance, which ensures mandatory requirements are satisfied",
+        "D": "Cost, which includes purchase, implementation labor, licensing, and maintenance"
       },
       "correct": "A",
-      "explanation": "The section identifies effectiveness as the dimension measuring how much a control reduces likelihood, impact, or ALE, where ALE is defined as expected yearly cost. Effectiveness is what controls a risk's financial burden."
+      "explanation": "Effectiveness measures how much a control reduces likelihood, impact, or ALE (Annualized Loss Expectancy), which is the expected yearly cost of a risk."
     },
     {
       "section": "Enterprise risk management and the risk register",
-      "type": "text",
-      "question": "Why do CISOs present risk in financial language (expected loss, residual risk) to boards?",
-      "rubric": "A sound answer explains that financial language enables board-level decision-making by connecting cybersecurity risk to business priorities and resource allocation alongside other enterprise risks.",
-      "explanation": "The section states that ERM integrates cybersecurity risk with financial and operational risks so boards allocate resources appropriately; financial framing is the bridge between technical risk and strategic decision-making."
+      "type": "mc",
+      "question": "What is the primary purpose of Enterprise Risk Management in an organization?",
+      "options": {
+        "A": "To eliminate all cybersecurity risks before they impact the business",
+        "B": "To integrate cybersecurity risk with financial, operational, and strategic risks for resource allocation",
+        "C": "To reduce the need for quarterly reviews of the risk register by senior management",
+        "D": "To ensure that CISOs have the authority to override executive leadership decisions"
+      },
+      "correct": "B",
+      "explanation": "ERM integrates cybersecurity risk with financial, operational, strategic, market, and compliance risks so boards can allocate resources appropriately across the enterprise."
     }
   ]
 }

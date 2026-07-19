@@ -3,81 +3,197 @@
     {
       "section": "Routers and routing",
       "type": "mc",
-      "question": "Which defense mechanism cryptographically binds IP prefixes to their authorized autonomous system to prevent BGP hijacking?",
+      "question": "What is the primary difference between static routing and dynamic routing?",
       "options": {
-        "A": "Resource Public Key Infrastructure (RPKI)",
-        "B": "AS path filtering to reject unexpected paths",
-        "C": "Route filtering using prefix lists",
-        "D": "Dynamic routing protocol updates"
+        "A": "Static routing is used only on the internet while dynamic routing is used only within enterprise LANs",
+        "B": "Static routing provides automatic failover while dynamic routing requires manual failover when a link goes down",
+        "C": "Static routing requires manual entry of routes while dynamic routing exchanges reachability information automatically via protocols",
+        "D": "Static routing uses OSPF while dynamic routing uses manually configured next-hop addresses"
       },
-      "correct": "A",
-      "explanation": "RPKI is the cryptographic defense that detects and rejects forged prefix announcements by verifying that an announced prefix is legitimately owned by the autonomous system claiming it. Route filtering and AS path filtering are earlier-stage defenses but lack cryptographic verification."
+      "correct": "C",
+      "explanation": "The section explicitly states that static routing involves an admin manually entering each route with no automatic failover, whereas dynamic routing uses protocols for routers to exchange reachability information automatically."
+    },
+    {
+      "section": "Routers and routing",
+      "type": "mc",
+      "question": "What does RPKI protect against in the context of BGP?",
+      "options": {
+        "A": "RPKI allows routers to calculate lowest-cost paths to destination networks through automation",
+        "B": "RPKI cryptographically binds IP prefixes to authorized autonomous systems to detect forged BGP announcements",
+        "C": "RPKI converts dynamic routing protocols into static routes to prevent hijacking attempts",
+        "D": "RPKI blocks BGP announcements originating from untrusted autonomous systems on the internet"
+      },
+      "correct": "B",
+      "explanation": "The section states that RPKI cryptographically binds IP prefixes to their authorized autonomous system so that forged announcements can be detected and rejected."
     },
     {
       "section": "Switches, hubs, and bridges",
-      "type": "text",
-      "question": "Explain why a hub creates a passive capture risk that a switch does not.",
-      "rubric": "A sound answer states that hubs repeat signals to every port, so every connected device sees all traffic, making passive eavesdropping trivial. Switches use MAC address tables to forward frames only to the correct port, so devices see only traffic intended for them.",
-      "explanation": "Hubs operate at Layer 1 with no address awareness and broadcast to all ports; switches operate at Layer 2, use MAC tables to isolate traffic to specific ports, preventing passive sniffing."
+      "type": "mc",
+      "question": "How do managed switches differ from unmanaged switches in terms of security capabilities?",
+      "options": {
+        "A": "Managed switches forward frames faster using hardware acceleration compared to unmanaged switches",
+        "B": "Managed switches implement CAM tables while unmanaged switches rely only on MAC learning",
+        "C": "Managed switches require a router to function while unmanaged switches operate independently",
+        "D": "Managed switches support VLANs and port security features while unmanaged switches do not"
+      },
+      "correct": "D",
+      "explanation": "The section's table shows that managed switches support VLANs, port security, 802.1X, DHCP snooping, and SNMP monitoring, while unmanaged switches support none of these features."
+    },
+    {
+      "section": "Switches, hubs, and bridges",
+      "type": "mc",
+      "question": "Why are hubs considered a passive capture risk compared to switches?",
+      "options": {
+        "A": "Hubs repeat signals to every port without address awareness, exposing all traffic to every device",
+        "B": "Hubs use slower backplanes that allow attackers time to intercept frames in transit",
+        "C": "Hubs forward frames based on MAC addresses less efficiently than switches do",
+        "D": "Hubs transmit data over fiber optic cable that is easier to tap than copper cable"
+      },
+      "correct": "A",
+      "explanation": "The section states that hubs are Layer 1 devices with no awareness of addresses that simply repeat signals to every port, making passive capture trivial because every device sees every other device's traffic."
     },
     {
       "section": "Network topologies and security",
       "type": "mc",
-      "question": "In a star topology, what is isolated when a single device fails?",
+      "question": "What is the security advantage of a star topology compared to a bus topology?",
       "options": {
-        "A": "All devices connected to that switch",
-        "B": "Only that device's connection",
-        "C": "The entire network backbone",
-        "D": "The entire local area network"
+        "A": "Star topology uses faster switching while bus topology relies on slower repeater technology",
+        "B": "Star topology isolates device failures while bus topology breaks entirely if any connection fails",
+        "C": "Star topology requires authentication to join while bus topology allows any device to connect",
+        "D": "Star topology encrypts traffic automatically while bus topology sends all data in plaintext"
       },
       "correct": "B",
-      "explanation": "The study guide states that in a star topology, failure is isolated to one device, meaning only that device loses connectivity. Other devices remain connected to the central switch."
+      "explanation": "The section's topology table notes that star topology has a failure isolated to one device, while bus topology is a shared medium where any break kills the whole network."
+    },
+    {
+      "section": "Network topologies and security",
+      "type": "mc",
+      "question": "What is the relationship between physical topology and logical topology in the context of VLANs?",
+      "options": {
+        "A": "Logical topology determines cable installation while physical topology determines traffic flow",
+        "B": "Physical topology always matches logical topology unless a router is present in the network",
+        "C": "VLANs eliminate the need for physical topology design by making all connections logical",
+        "D": "Devices can share physical switches but be isolated into separate broadcast domains using VLANs"
+      },
+      "correct": "D",
+      "explanation": "The section defines VLANs as virtual networks where devices share the same physical switches but are isolated into separate broadcast domains at Layer 2, exemplifying how logical topology can differ from physical topology."
     },
     {
       "section": "Physical media",
       "type": "mc",
-      "question": "Which physical medium is most resistant to electromagnetic interference and very difficult to tap?",
+      "question": "Why is single-mode fiber preferred in high-security environments compared to twisted pair copper?",
       "options": {
-        "A": "Wireless 802.11 transmission over radio frequency",
-        "B": "Twisted pair copper cabling with shielding",
-        "C": "Unshielded twisted pair copper cabling",
-        "D": "Fiber optic cable using light signals"
+        "A": "Single-mode fiber is immune to EMI and hard to tap while twisted pair is susceptible to both",
+        "B": "Single-mode fiber supports higher bit rates than twisted pair copper cable supports",
+        "C": "Single-mode fiber is cheaper to install than twisted pair in most enterprise networks",
+        "D": "Single-mode fiber encrypts data automatically while twisted pair sends all data in cleartext"
       },
-      "correct": "D",
-      "explanation": "The study guide identifies fiber optic cable as immune to EMI and very hard to tap, making it preferred for high-security and long-distance runs. Twisted pair copper is susceptible to EMI and can be physically tapped; wireless is inherently broadcast."
+      "correct": "A",
+      "explanation": "The section's table indicates that single-mode fiber is immune to EMI and very hard to tap, while Cat 5e and 6 twisted pair are susceptible to EMI and can be physically tapped."
     },
     {
       "section": "SDN and the three network planes",
-      "type": "text",
-      "question": "Describe what microsegmentation is and why SDN makes it practical.",
-      "rubric": "A sound answer explains that microsegmentation is granular per-workload traffic control that limits lateral movement after a compromise, and that SDN makes it practical because centralized policy definition can be applied consistently and updated network-wide instantly.",
-      "explanation": "SDN enables microsegmentation by centralizing control logic, allowing administrators to define and enforce fine-grained per-workload policies across the entire network rather than relying on broad VLAN boundaries."
+      "type": "mc",
+      "question": "What is the primary security advantage of SDN's centralized control plane approach?",
+      "options": {
+        "A": "SDN automatically encrypts traffic between forwarding devices and the controller in all cases",
+        "B": "SDN prevents all data plane attacks by blocking unauthorized protocols at the control plane level",
+        "C": "SDN applies policies centrally and consistently, allowing suspicious devices to be quarantined by updating network rules",
+        "D": "SDN eliminates the need for firewalls by routing traffic through a central security appliance"
+      },
+      "correct": "C",
+      "explanation": "The section lists as security advantages that policies defined centrally are applied consistently everywhere and suspicious devices can be quarantined in seconds by updating forwarding rules network-wide."
+    },
+    {
+      "section": "SDN and the three network planes",
+      "type": "mc",
+      "question": "Which plane is attacked in a BGP hijacking scenario?",
+      "options": {
+        "A": "The data plane, which forwards packets based on existing routing rules",
+        "B": "The control plane, which makes forwarding decisions including routing table updates",
+        "C": "The management plane, which handles administrative SSH and API access",
+        "D": "The forwarding plane, which physically moves Ethernet frames between ports"
+      },
+      "correct": "B",
+      "explanation": "The section's three-plane table identifies BGP hijacking as a control plane attack, since the control plane makes forwarding decisions including routing table updates."
+    },
+    {
+      "section": "SDN and the three network planes",
+      "type": "mc",
+      "question": "What does microsegmentation in an SDN environment accomplish?",
+      "options": {
+        "A": "It divides the network into large VLAN boundaries to separate different departments",
+        "B": "It encrypts all data plane traffic using IPsec tunnels between network devices",
+        "C": "It enables granular per-workload traffic control that limits lateral movement after a compromise",
+        "D": "It centralizes all routing decisions into a single control plane device for efficiency"
+      },
+      "correct": "C",
+      "explanation": "The section states that microsegmentation is granular per-workload traffic control that limits lateral movement after a compromise, and becomes practical with SDN rather than relying on broad VLAN boundaries."
     },
     {
       "section": "SD-WAN and overlay networks",
       "type": "mc",
-      "question": "Which overlay network encapsulates Layer 2 Ethernet frames inside UDP packets to enable Layer 2 segments to span Layer 3 networks?",
+      "question": "How does SD-WAN improve upon traditional MPLS-based WAN designs?",
       "options": {
-        "A": "Software-Defined WAN (SD-WAN)",
-        "B": "Multiprotocol Label Switching (MPLS)",
-        "C": "Virtual Extensible LAN (VXLAN)",
-        "D": "Generic Routing Encapsulation (GRE)"
+        "A": "SD-WAN uses hardware encryption instead of software encryption for improved performance",
+        "B": "SD-WAN replaces MPLS entirely with a single high-speed leased-line service to all branches",
+        "C": "SD-WAN automatically detects and blocks malicious traffic before it reaches the MPLS backbone",
+        "D": "SD-WAN allows multiple link types with application-aware routing and is simpler than managing VPN configs"
       },
-      "correct": "C",
-      "explanation": "VXLAN encapsulates Layer 2 Ethernet frames inside UDP packets, enabling Layer 2 segments to span Layer 3 networks — critical for VM mobility and multi-tenant isolation in data centers. GRE wraps arbitrary protocols in IP packets but is not UDP-based."
+      "correct": "D",
+      "explanation": "The section states that SD-WAN lets organizations mix link types and route intelligently by policy, with application-aware routing, and is much cheaper and simpler than managing individual VPN configs at each branch."
+    },
+    {
+      "section": "SD-WAN and overlay networks",
+      "type": "mc",
+      "question": "What problem does VXLAN solve in data center and cloud environments?",
+      "options": {
+        "A": "VXLAN encapsulates Layer 2 frames in UDP packets, allowing Layer 2 segments to span Layer 3 networks",
+        "B": "VXLAN encrypts all traffic between virtual machines to prevent eavesdropping attacks",
+        "C": "VXLAN automatically assigns IP addresses to all virtual machines in the data center",
+        "D": "VXLAN routes packets more efficiently than traditional Layer 3 routing protocols do"
+      },
+      "correct": "A",
+      "explanation": "The section defines VXLAN as encapsulation of Layer 2 Ethernet frames inside UDP packets that lets Layer 2 segments span Layer 3 networks, and notes it is critical for VM mobility and multi-tenant isolation."
     },
     {
       "section": "IPv4, IPv6, and NAT",
       "type": "mc",
-      "question": "Why does the study guide describe NAT as 'security through obscurity'?",
+      "question": "What do the private IPv4 ranges 10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16 have in common?",
       "options": {
-        "A": "It filters malicious packets at boundaries",
-        "B": "It requires strong authentication to function",
-        "C": "It encrypts all internal network traffic",
-        "D": "It hides internal addresses but lacks true security controls"
+        "A": "They are used only on corporate WANs and cannot be used on LANs within a single office",
+        "B": "They are encrypted by default to prevent external access to internal networks",
+        "C": "They are assigned by DHCP servers and cannot be manually configured on devices",
+        "D": "They are not routable on the public internet and are reserved for internal use within organizations"
       },
       "correct": "D",
-      "explanation": "The study guide explicitly states that NAT hides internal IPs but is not a true security control and should never be the primary defense. It provides concealment, not enforcement of a security policy."
+      "explanation": "The section lists these three ranges as private ranges not routable on the public internet, implying they are reserved for internal organizational use."
+    },
+    {
+      "section": "IPv4, IPv6, and NAT",
+      "type": "mc",
+      "question": "What is the security limitation of using NAT as a defense mechanism?",
+      "options": {
+        "A": "NAT prevents all spoofing attacks by validating source IP addresses at the border router",
+        "B": "NAT provides security through obscurity by hiding internal IPs but is not a true security control",
+        "C": "NAT encrypts all traffic passing through the router to prevent interception of data",
+        "D": "NAT blocks all inbound traffic from the internet to internal networks automatically by default"
+      },
+      "correct": "B",
+      "explanation": "The section explicitly states that NAT is security through obscurity that hides internal IPs but is not a true security control and should never be the primary defense."
+    },
+    {
+      "section": "IPv4, IPv6, and NAT",
+      "type": "mc",
+      "question": "How does IPv6's larger address space change the security model compared to IPv4?",
+      "options": {
+        "A": "IPv6 gives every device a globally routable address, eliminating NAT and requiring stronger perimeter rules",
+        "B": "IPv6 uses shorter addresses that are harder for attackers to guess than IPv4 addresses",
+        "C": "IPv6 allows all internal devices to remain hidden behind NAT, improving security by default",
+        "D": "IPv6 automatically encrypts all traffic, eliminating the need for TLS or other encryption"
+      },
+      "correct": "A",
+      "explanation": "The section states that IPv6's vastly larger address space eliminates the need for NAT, meaning every device can have a globally routable address, which changes the security model and makes perimeter firewall rules even more critical."
     }
   ]
 }

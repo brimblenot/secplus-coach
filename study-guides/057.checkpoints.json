@@ -2,148 +2,237 @@
   "checkpoints": [
     {
       "section": "The guiding principle: minimal footprint",
-      "type": "text",
-      "question": "In your own words, what does 'minimal footprint' mean and why does it matter for security?",
-      "rubric": "A sound answer explains that minimal footprint means keeping only what is needed to do the system's job, with nothing extra. It should note that extra services, ports, accounts, or features are potential attack vectors.",
-      "explanation": "The section defines minimal footprint as running only what a system's role demands and explicitly states that every extra service, port, account, or feature is a door an attacker can try."
+      "type": "mc",
+      "question": "What is the core goal of the minimal footprint principle in system hardening?",
+      "options": {
+        "A": "A system should limit the number of users who can access administrator tools",
+        "B": "A system should run only the services, features, and accounts needed for its role",
+        "C": "A system should be as small and compact as possible to save disk space",
+        "D": "A system should be configured to reject all incoming network traffic by default"
+      },
+      "correct": "B",
+      "explanation": "Minimal footprint means removing what isn't needed, configuring only what's required, and running only the services the system's role demands. Every extra service, port, account, or feature is a potential attack vector."
     },
     {
       "section": "OS hardening",
       "type": "mc",
-      "question": "What is the primary difference between a host-based firewall and a perimeter firewall?",
+      "question": "Which of the following is a setting that locks an account after a small number of failed login attempts?",
       "options": {
-        "A": "A perimeter firewall uses deny-all-inbound rules, while a host-based firewall uses allow-all-inbound rules.",
-        "B": "A host-based firewall protects a single machine regardless of network, while a perimeter firewall filters traffic at the network edge.",
-        "C": "A perimeter firewall protects a single machine regardless of network, while a host-based firewall filters traffic at the network edge.",
-        "D": "A host-based firewall protects only Windows systems, while a perimeter firewall protects both Windows and Linux systems."
+        "A": "Default account disabling",
+        "B": "Password complexity requirement",
+        "C": "Account lockout policy",
+        "D": "Least privilege policy"
       },
-      "correct": "B",
-      "explanation": "The section explicitly contrasts the two: a host-based firewall 'controls traffic to and from a single machine, enforcing its rules no matter which network the machine is on,' while a perimeter firewall 'sits at the edge of a network and only filters traffic crossing that boundary' and offers no protection once a device leaves the office."
+      "correct": "C",
+      "explanation": "An account lockout policy blocks online brute-force attacks by locking an account after a few failed login attempts. The other options address different aspects of account security but not automated lockout behavior."
+    },
+    {
+      "section": "OS hardening",
+      "type": "mc",
+      "question": "What is the key difference between a host-based firewall and a perimeter firewall?",
+      "options": {
+        "A": "A host-based firewall blocks all traffic by default while a perimeter firewall allows all traffic by default",
+        "B": "A host-based firewall uses outbound rules while a perimeter firewall uses only inbound rules to control network access",
+        "C": "A host-based firewall requires manual rule updates while a perimeter firewall updates its rules automatically",
+        "D": "A host-based firewall controls traffic on individual machines while a perimeter firewall filters traffic at the network edge"
+      },
+      "correct": "D",
+      "explanation": "A host-based firewall enforces its rules on a single machine no matter which network it connects to, whereas a perimeter firewall sits at the network edge and offers no protection once a device leaves the office."
     },
     {
       "section": "Endpoint Detection and Response",
-      "type": "text",
-      "question": "How does EDR differ from traditional antivirus in the types of threats it can detect?",
-      "rubric": "A sound answer should note that EDR watches process behavior, detects injection, and uses machine learning to spot attack patterns without needing a known signature, whereas traditional antivirus only matches file hashes against a database of known signatures.",
-      "explanation": "The section states that antivirus 'only compares file hashes against a database of known-bad signatures' and 'cannot catch novel threats,' while EDR detects process injection, tracks connections, and applies machine learning to spot 'attack patterns without needing a matching signature.'"
+      "type": "mc",
+      "question": "How does EDR differ from traditional antivirus in detecting threats?",
+      "options": {
+        "A": "EDR analyzes process behavior and patterns while antivirus primarily matches known-bad file signatures for detection",
+        "B": "EDR scans files at execution time while antivirus monitors only network traffic for threats",
+        "C": "EDR requires manual signature updates while antivirus updates signatures automatically without intervention",
+        "D": "EDR blocks all unsigned files while antivirus allows any file from trusted vendors automatically"
+      },
+      "correct": "A",
+      "explanation": "EDR continuously monitors endpoint behavior, watches process execution trees, detects process injection, and uses machine learning to spot attack patterns without needing a signature match. Antivirus only compares file hashes against known-bad signatures."
     },
     {
       "section": "Data encryption",
       "type": "mc",
-      "question": "Which of the following best describes the relationship between full disk encryption and EFS?",
+      "question": "What does full disk encryption protect against?",
       "options": {
-        "A": "FDE encrypts the entire volume including the OS, while EFS encrypts only individual files or folders without encrypting the whole volume.",
-        "B": "Both FDE and EFS encrypt the entire volume, but FDE is used on Windows and EFS is used on Linux.",
-        "C": "Both FDE and EFS encrypt individual files only, but FDE uses TPM and EFS uses passwords.",
-        "D": "EFS encrypts the entire volume including the OS, while FDE encrypts only individual files or folders without encrypting the whole volume."
+        "A": "Eavesdropping on wireless communications that occur between connected devices",
+        "B": "Network-based attacks and malware downloads from untrusted sources online",
+        "C": "Brute-force attacks targeting user login passwords on network services",
+        "D": "Unauthorized access to data when a drive is stolen or the device is physically compromised"
       },
-      "correct": "A",
-      "explanation": "The section defines FDE as 'encrypt[ing] an entire storage volume — OS, files, everything' and EFS as encrypting 'individual files/folders without encrypting the whole volume.'"
+      "correct": "D",
+      "explanation": "Full disk encryption encrypts an entire storage volume so a stolen drive is unreadable without the decryption key. It protects physical access threats, not network attacks or wireless eavesdropping."
     },
     {
       "section": "Host-based IDS and IPS",
       "type": "mc",
       "question": "What is the key difference between a host-based IDS and a host-based IPS?",
       "options": {
-        "A": "A host-based IDS monitors network traffic, while a host-based IPS monitors system calls and file changes.",
-        "B": "A host-based IPS generates alerts when attack patterns are detected, while a host-based IDS takes automated blocking action.",
-        "C": "A host-based IDS generates alerts when attack patterns are detected, while a host-based IPS takes automated blocking action.",
-        "D": "A host-based IPS only works on Windows, while a host-based IDS works on all operating systems."
+        "A": "An IDS requires manual rule updates; an IPS updates rules automatically",
+        "B": "An IDS protects a single host; an IPS protects the entire network segment",
+        "C": "An IDS monitors OS-level activity and alerts; an IPS takes automated blocking action",
+        "D": "An IDS detects file changes; an IPS detects network connections only"
       },
       "correct": "C",
-      "explanation": "The section defines IDS as monitoring and generating alerts, and IPS as taking 'automated blocking action, such as terminating a process trying to modify a protected registry key.'"
+      "explanation": "A host-based IDS monitors for attack patterns and generates alerts, while a host-based IPS takes automated action such as terminating a malicious process or blocking a registry modification."
     },
     {
       "section": "Application hardening",
       "type": "mc",
-      "question": "Why should applications return generic error messages to users rather than detailed ones?",
+      "question": "Why should debug mode and diagnostic endpoints be disabled in production applications?",
       "options": {
-        "A": "Generic messages prevent database corruption, while detailed errors increase the risk of data loss.",
-        "B": "Generic messages make the application run faster, while detailed errors slow down processing.",
-        "C": "Detailed messages are required by law, but generic ones bypass compliance requirements.",
-        "D": "Generic messages prevent attackers from mapping the application, while detailed errors should be logged locally for troubleshooting."
-      },
-      "correct": "D",
-      "explanation": "The section states: 'Return generic error messages to users; log detailed errors locally (prevents attackers from mapping the app).'"
-    },
-    {
-      "section": "Application hardening",
-      "type": "mc",
-      "question": "What does the X-Frame-Options header prevent?",
-      "options": {
-        "A": "Connections from unencrypted HTTP protocols to a domain that supports HTTPS.",
-        "B": "Clickjacking attacks where a hidden frame tricks users into clicking something they cannot see.",
-        "C": "Requests using HTTP methods like TRACE, PUT, and DELETE on the web server.",
-        "D": "MIME-sniffing where browsers guess a file type instead of trusting the declared content type."
+        "A": "They slow down application performance and consume extra memory",
+        "B": "They expose sensitive internal details that attackers can exploit",
+        "C": "They prevent the application from accepting user input correctly",
+        "D": "They allow users to modify the application's source code without permission"
       },
       "correct": "B",
-      "explanation": "The section directly states that X-Frame-Options 'Prevents the page from loading inside an iframe, blocking clickjacking — an attack where a hidden frame tricks users into clicking something they can't see.'"
+      "explanation": "Debug mode and diagnostic endpoints often expose sensitive internals of the application, making them valuable targets for attackers trying to understand the system and find vulnerabilities."
     },
     {
-      "section": "Network device hardening",
-      "type": "text",
-      "question": "Why is changing default passwords the first priority when hardening network devices?",
-      "rubric": "A sound answer should indicate that vendor-default credentials are publicly documented and are among the first things attackers try.",
-      "explanation": "The section explicitly states: 'First priority: change all default passwords. Vendor-default credentials are publicly documented and are among the first things attackers try.'"
-    },
-    {
-      "section": "Network device hardening",
+      "section": "Application hardening",
       "type": "mc",
-      "question": "What is the purpose of BPDU Guard on switch access ports?",
+      "question": "What does the HTTP Strict Transport Security (HSTS) header instruct browsers to do?",
       "options": {
-        "A": "It blocks unauthorized switches from joining the STP topology, preventing network loops.",
-        "B": "It validates ARP packets to prevent attackers from redirecting traffic through their machine.",
-        "C": "It restricts management access to only specific trusted IP addresses.",
-        "D": "It prevents rogue DHCP servers from handing out false IP configuration."
+        "A": "Only connect to the domain via HTTPS instead of allowing unencrypted HTTP connections",
+        "B": "Refuse connections from countries outside a specified geographic region or location",
+        "C": "Cache responses longer to reduce server load and improve response times",
+        "D": "Block all POST requests that originate from untrusted or unknown sources"
       },
       "correct": "A",
-      "explanation": "The section defines BPDU Guard as blocking 'unauthorized switches from joining the STP topology on access ports,' where BPDU messages are used by STP 'to prevent network loops.'"
+      "explanation": "HSTS tells browsers to only connect via HTTPS for the specified domain, preventing downgrade attacks and eavesdropping on unencrypted connections."
+    },
+    {
+      "section": "Application hardening",
+      "type": "mc",
+      "question": "What is the purpose of the X-Frame-Options header?",
+      "options": {
+        "A": "It stops browsers from guessing a file's type instead of trusting the declared type",
+        "B": "It prevents the page from loading inside an iframe, blocking clickjacking attacks",
+        "C": "It restricts what resources a page may load and from where",
+        "D": "It tells the browser to cache the page for a specified duration"
+      },
+      "correct": "B",
+      "explanation": "X-Frame-Options prevents a page from loading inside an iframe, which blocks clickjacking attacks where a hidden frame tricks users into clicking something they cannot see."
+    },
+    {
+      "section": "Network device hardening",
+      "type": "mc",
+      "question": "Why should Telnet be replaced with SSH on network devices?",
+      "options": {
+        "A": "Telnet requires manual configuration while SSH configures automatically without user input",
+        "B": "Telnet only works over local networks while SSH works across the internet",
+        "C": "Telnet allows only read-only access while SSH allows full administrative control",
+        "D": "Telnet sends all data including passwords in cleartext while SSH encrypts the entire session"
+      },
+      "correct": "D",
+      "explanation": "Telnet transmits everything in cleartext, exposing passwords and commands to eavesdropping. SSH encrypts the entire session, protecting sensitive management traffic."
+    },
+    {
+      "section": "Network device hardening",
+      "type": "mc",
+      "question": "What does DHCP Snooping prevent on a network switch?",
+      "options": {
+        "A": "Rogue DHCP servers from handing out false IP configuration",
+        "B": "ARP poisoning attacks that redirect traffic through an attacker's machine",
+        "C": "Broadcast storms from overwhelming the switch's processing capacity",
+        "D": "Unauthorized switches from joining the Spanning Tree Protocol topology"
+      },
+      "correct": "A",
+      "explanation": "DHCP Snooping validates DHCP traffic to block rogue DHCP servers, which are unauthorized servers that can hand out false IP configuration and redirect traffic."
+    },
+    {
+      "section": "Network device hardening",
+      "type": "mc",
+      "question": "What does Dynamic ARP Inspection (DAI) protect against?",
+      "options": {
+        "A": "Devices from connecting to the network without valid credentials or authorization",
+        "B": "Rogue access points that impersonate legitimate wireless networks and devices",
+        "C": "Attackers from sending fake ARP replies to redirect traffic through their machine",
+        "D": "Unauthorized switches from joining the Spanning Tree Protocol topology and network"
+      },
+      "correct": "C",
+      "explanation": "DAI validates ARP packets to prevent ARP poisoning, where an attacker sends fake ARP replies to redirect traffic through their machine."
     },
     {
       "section": "Wireless hardening",
       "type": "mc",
-      "question": "Which wireless protocol uses the SAE handshake to resist offline dictionary attacks?",
+      "question": "Which wireless security protocol is the current standard and uses the SAE handshake?",
       "options": {
-        "A": "WPA2, which is acceptable with a 20+ character passphrase.",
-        "B": "WEP, which remains secure with modern encryption methods.",
-        "C": "WPA3, the current standard for wireless security.",
-        "D": "WPA, which was sufficient for early wireless networks."
+        "A": "WPA3, which uses SAE to resist offline dictionary attacks",
+        "B": "WEP, which is broken but still used for backward compatibility",
+        "C": "WPA2, which uses SAE and requires a 20-character passphrase",
+        "D": "WPA, which is acceptable for low-security environments"
       },
-      "correct": "C",
-      "explanation": "The section states that WPA3 is the 'Current standard; uses SAE — Simultaneous Authentication of Equals — handshake that resists offline dictionary attacks.'"
+      "correct": "A",
+      "explanation": "WPA3 is the current standard and uses the Simultaneous Authentication of Equals (SAE) handshake, which resists offline dictionary attacks and is more secure than WPA2."
     },
     {
       "section": "Wireless hardening",
-      "type": "text",
-      "question": "How does WPA2/WPA3-Enterprise with 802.1X differ from standard WPA2/WPA3 in terms of user management?",
-      "rubric": "A sound answer should explain that Enterprise uses per-user credentials via a RADIUS server, so revoking one user does not affect everyone else, whereas standard WPA2/WPA3 uses a shared passphrase.",
-      "explanation": "The section states that Enterprise 'uses 802.1X with a RADIUS server — a centralized authentication server — for per-user credentials; revoking one user doesn't affect everyone else,' contrasting the shared-passphrase model."
+      "type": "mc",
+      "question": "Why should WPS be disabled on wireless access points?",
+      "options": {
+        "A": "It prevents WPA3 from being used as the encryption standard",
+        "B": "It allows any device to connect without authentication credentials",
+        "C": "It broadcasts the network name and reveals the hardware vendor",
+        "D": "Its PIN-based method can be brute-forced in hours"
+      },
+      "correct": "D",
+      "explanation": "WPS relies on a PIN-based authentication method that can be brute-forced in a relatively short time, making it a security weakness that should be disabled."
+    },
+    {
+      "section": "Wireless hardening",
+      "type": "mc",
+      "question": "What does EAP-TLS use to defeat evil twin attacks on wireless networks?",
+      "options": {
+        "A": "A shared passphrase that only legitimate devices possess and can authenticate with",
+        "B": "Certificates that must be validated on both the client and access point that rogue APs cannot present",
+        "C": "A pre-shared key that changes automatically every hour without manual updates",
+        "D": "MAC address filtering to block unknown devices from connecting to the network"
+      },
+      "correct": "B",
+      "explanation": "EAP-TLS requires certificates on both the client and access point, so a rogue access point cannot impersonate a legitimate one because it cannot present a valid certificate."
     },
     {
       "section": "Mobile device hardening",
       "type": "mc",
-      "question": "What does disabling USB debugging prevent on mobile devices?",
+      "question": "What does MDM — Mobile Device Management — enable an organization to do?",
       "options": {
-        "A": "The device from connecting to Wi-Fi networks and cellular data.",
-        "B": "Users from backing up their data to cloud storage services.",
-        "C": "Mobile Device Management platforms from pushing security policies to the device.",
-        "D": "Granting privileged low-level access to the device, which is a security risk."
+        "A": "Automatically update applications without requiring user permission or notification",
+        "B": "Lock devices to a single carrier's network service for connectivity and billing",
+        "C": "Enforce security policies on devices and perform remote wipe when devices are compromised",
+        "D": "Monitor all cellular data usage and bill users for overages on their accounts"
       },
-      "correct": "D",
-      "explanation": "The section lists USB debugging as 'settings that grant privileged low-level access to the device' and recommends disabling it as part of hardening."
+      "correct": "C",
+      "explanation": "MDM is a platform that enforces security policies across mobile devices and enables remote wipe to erase data from a lost or compromised device."
     },
     {
       "section": "Hardening standards",
       "type": "mc",
-      "question": "What is the main difference between CIS Benchmarks Level 1 and Level 2?",
+      "question": "What are CIS Benchmarks?",
       "options": {
-        "A": "Level 1 balances strong security with minimal usability impact, while Level 2 prioritizes high security for sensitive environments with potential compatibility effects.",
-        "B": "Level 2 balances strong security with minimal usability impact, while Level 1 prioritizes high security for sensitive environments.",
-        "C": "Level 1 is for U.S. Department of Defense systems, while Level 2 is for commercial organizations.",
-        "D": "Level 1 is published by DISA, while Level 2 is published by the Center for Internet Security."
+        "A": "Free, consensus-developed configuration guides for specific operating systems and applications",
+        "B": "Commercial software products that patch systems automatically without administrator involvement",
+        "C": "Automated scanning tools designed to identify all vulnerabilities across a network",
+        "D": "Mandatory security standards that all companies must follow according to legal requirements"
       },
       "correct": "A",
-      "explanation": "The section defines Level 1 as 'Balanced — strong security with minimal usability/performance impact' and Level 2 as 'High security — for the most sensitive environments; some settings may affect compatibility.'"
+      "explanation": "CIS Benchmarks are free, consensus-developed configuration guides published by the Center for Internet Security that provide specific, testable settings for particular OS versions, applications, and cloud platforms."
+    },
+    {
+      "section": "Hardening standards",
+      "type": "mc",
+      "question": "Which of the following is a characteristic of Level 2 CIS Benchmarks?",
+      "options": {
+        "A": "They are optional and compliance is not required for any organization",
+        "B": "They enforce high security with some settings that may affect compatibility",
+        "C": "They apply only to Windows systems and not to Linux or macOS",
+        "D": "They provide balanced security with minimal usability and performance impact"
+      },
+      "correct": "B",
+      "explanation": "Level 2 CIS Benchmarks provide high security configurations intended for the most sensitive environments, with some settings that may affect system compatibility or usability."
     }
   ]
 }

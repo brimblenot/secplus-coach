@@ -3,95 +3,119 @@
     {
       "section": "Patch management",
       "type": "mc",
-      "question": "Which Windows patch tool is a cloud-based SaaS service that automates patching without requiring you to manage an on-premises server?",
+      "question": "Which Windows patch management solution is a cloud-based SaaS service that automates the full patching workflow without requiring you to manage an on-premises server?",
       "options": {
-        "A": "On-premises server for managing patches",
-        "B": "Cloud-based SaaS service for automated patching",
-        "C": "Automatic OS update mechanism built into Windows",
-        "D": "Enterprise tool for patch deployment"
+        "A": "WSUS downloads patches from Microsoft and distributes them on a controlled schedule",
+        "B": "Windows Update delivers patches automatically to individual endpoints via direct download",
+        "C": "MECM/SCCM is an enterprise platform that unifies OS deployment and patch management",
+        "D": "Windows Autopatch is a cloud-based SaaS service that automates patching without WSUS"
       },
-      "correct": "B",
-      "explanation": "Windows Autopatch is explicitly described as a cloud-based SaaS service that automates the full patching workflow without managing WSUS, whereas WSUS and MECM/SCCM are server-based tools that require internal management."
+      "correct": "D",
+      "explanation": "Windows Autopatch is explicitly defined as a cloud-based SaaS service that automates the full patching workflow without managing WSUS. The other options are on-premises or endpoint-focused solutions."
     },
     {
       "section": "Least privilege and elevation controls",
-      "type": "text",
-      "question": "Explain why daily work should use a standard user account rather than an admin account, and name the Windows mechanism that enforces this principle at the point of elevation.",
-      "rubric": "A sound answer states that a standard user account limits what malware can do if the account is compromised (minimizes damage), and names UAC (User Account Control) as the mechanism that prompts for confirmation or credentials before granting administrative elevation.",
-      "explanation": "The section establishes least privilege as using minimum permissions needed and describes UAC as the control that blocks silent privilege escalation by requiring confirmation before elevation, directly supporting this question."
+      "type": "mc",
+      "question": "What is the primary purpose of UAC (User Account Control) on Windows?",
+      "options": {
+        "A": "It prompts for confirmation or credentials before granting administrative elevation, blocking silent privilege escalation by malware",
+        "B": "It encrypts all user passwords stored in the system registry to prevent credential theft",
+        "C": "It logs all administrative commands to a file for audit purposes and forensic investigation",
+        "D": "It terminates any process attempting to run with elevated privileges without explicit user approval"
+      },
+      "correct": "A",
+      "explanation": "The section states that UAC is a mechanism that prompts for confirmation or credentials before granting administrative elevation, blocking silent privilege escalation by malware. This matches option A."
     },
     {
       "section": "File system permissions",
       "type": "mc",
-      "question": "On Linux, what is the purpose of the sticky bit when set on a directory like /tmp?",
+      "question": "On Linux, what is the primary function of the sticky bit when set on a directory?",
       "options": {
-        "A": "It prevents users from deleting files owned by other users",
-        "B": "It allows any user to execute files within the directory",
-        "C": "It encrypts all files stored in the directory automatically",
-        "D": "It grants the directory owner write access to all files inside"
+        "A": "It automatically grants the file owner's permissions to anyone who accesses files there",
+        "B": "It prevents users from deleting files owned by other users even if they have write access",
+        "C": "It encrypts all files in the directory transparently using the directory owner's certificate",
+        "D": "It allows any user to execute files within the directory without requiring execute permissions"
       },
-      "correct": "A",
-      "explanation": "The section explicitly states the sticky bit is set on directories so users can't delete files owned by others, using /tmp as the example."
+      "correct": "B",
+      "explanation": "The section explicitly states that the sticky bit is set on directories so users cannot delete files owned by others, with `/tmp` given as an example. Option B accurately describes this function."
     },
     {
       "section": "Disk encryption",
-      "type": "text",
-      "question": "How does BitLocker with TPM protect an encrypted drive when it is physically stolen and placed in another computer?",
-      "rubric": "A sound answer explains that the TPM chip stores the encryption key and validates pre-boot integrity, so the key remains inaccessible when the drive is moved to another machine, rendering the raw disk data unreadable.",
-      "explanation": "The section describes TPM as storing the key and validating pre-boot integrity, and uses the car analogy to illustrate why moving the drive to another machine fails—the key stays with the original hardware."
+      "type": "mc",
+      "question": "Which component does BitLocker use to store the encryption key and validate pre-boot integrity on Windows systems?",
+      "options": {
+        "A": "The LSASS process, which protects the key from unauthorized access using virtualization",
+        "B": "Active Directory, which manages encryption keys centrally for all domain-joined computers",
+        "C": "TPM (Trusted Platform Module), which stores the key and validates pre-boot system integrity",
+        "D": "A secure USB key that must be inserted during every system startup for decryption"
+      },
+      "correct": "C",
+      "explanation": "The section states that BitLocker uses TPM (Trusted Platform Module) for the most secure configuration, where the TPM is a dedicated chip that stores the key and validates pre-boot integrity."
     },
     {
       "section": "Application control",
       "type": "mc",
-      "question": "Which Windows application control solution runs at the kernel level and is therefore more tamper-resistant than the older Group Policy-based approach?",
+      "question": "How does WDAC (Windows Defender Application Control) differ from AppLocker in terms of tamper resistance?",
       "options": {
-        "A": "AppLocker with file hash rules",
-        "B": "Windows Defender antivirus exclusions",
-        "C": "Group Policy executable restrictions",
-        "D": "WDAC (Windows Defender Application Control)"
+        "A": "WDAC requires manual administrator approval for each application, while AppLocker runs automatically without user intervention",
+        "B": "AppLocker operates at the kernel level with stronger tamper resistance, while WDAC relies on user-mode enforcement",
+        "C": "WDAC operates at the kernel level and is tamper-resistant, while AppLocker uses Group Policy and is less tamper-resistant",
+        "D": "AppLocker enforces code integrity policies on executables and drivers, while WDAC only restricts file paths and digital publishers"
       },
-      "correct": "D",
-      "explanation": "The section states WDAC enforces code integrity policies at the kernel level and is tamper-resistant because it runs below user-mode, whereas AppLocker is explicitly called older and user-mode, making it less tamper-resistant."
+      "correct": "C",
+      "explanation": "The section states WDAC is kernel-level whitelisting making it tamper-resistant because it runs below user-mode, while AppLocker is older and Group Policy-based, making it less tamper-resistant than WDAC."
     },
     {
       "section": "Credential storage security",
       "type": "mc",
-      "question": "Which Windows security feature uses virtualization-based security to prevent credential extraction from LSASS even if an attacker has administrative access?",
+      "question": "What does Credential Guard do to prevent credential theft attacks like those performed by Mimikatz?",
       "options": {
-        "A": "Protected Users security group",
-        "B": "NTLM authentication restrictions",
-        "C": "Credential Guard",
-        "D": "Kerberos ticket lifetime limits"
+        "A": "It uses virtualization-based security to run a hypervisor-protected LSA instance separately",
+        "B": "It encrypts all passwords stored in the registry using AES-256 encryption by default",
+        "C": "It requires multi-factor authentication for any process attempting to access LSASS memory",
+        "D": "It logs all credential access attempts to audit files for forensic investigation purposes"
       },
-      "correct": "C",
+      "correct": "A",
       "explanation": "The section explicitly states that Credential Guard uses virtualization-based security to run a hypervisor-protected LSA instance that the main OS cannot directly access, preventing hash extraction even with admin access."
     },
     {
       "section": "Account management",
-      "type": "text",
-      "question": "What is a Privileged Access Workstation (PAW) and what problem does it solve in terms of administrative work?",
-      "rubric": "A sound answer states that a PAW is a dedicated hardened machine used only for admin tasks, which isolates privileged sessions from email and web browsing risks.",
-      "explanation": "The section defines PAW as dedicated hardened machines used only for admin tasks and explicitly states they isolate privileged sessions from email/web browsing risk."
+      "type": "mc",
+      "question": "What are PAWs (Privileged Access Workstations) designed to accomplish?",
+      "options": {
+        "A": "They are virtual machines running on the administrator's workstation to separate admin roles",
+        "B": "They are dedicated hardened machines used only for admin tasks to isolate privileged sessions",
+        "C": "They enforce multi-factor authentication for all administrative access by default always",
+        "D": "They restrict administrator accounts from using legacy authentication protocols like NTLM"
+      },
+      "correct": "B",
+      "explanation": "The section defines PAWs as dedicated hardened machines used only for admin tasks, isolating privileged sessions from email and web browsing risk. Option A matches this definition exactly."
     },
     {
       "section": "Registry security (Windows)",
       "type": "mc",
-      "question": "Which registry locations are commonly exploited by attackers to establish persistence mechanisms?",
+      "question": "Which registry locations are commonly monitored because attackers frequently use them to plant persistence mechanisms?",
       "options": {
-        "A": "HKLM\\System\\CurrentControlSet\\Services",
-        "B": "HKLM\\Software\\Classes\\CLSID",
-        "C": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
-        "D": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+        "A": "File association keys under HKLM\\Software\\Classes that control file type handlers",
+        "B": "Driver configuration keys located in HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog",
+        "C": "Network adapter settings stored in HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip",
+        "D": "Autorun keys like HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
       },
       "correct": "D",
-      "explanation": "The section explicitly identifies autorun keys like HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run as common locations where attackers plant persistence mechanisms."
+      "explanation": "The section explicitly identifies autorun keys (HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run) as common locations where attackers plant persistence mechanisms and should be monitored."
     },
     {
       "section": "Security audit policies",
-      "type": "text",
-      "question": "Name two categories of events that should be audited on Windows for security monitoring, and explain why auditing both successes and failures matters.",
-      "rubric": "A sound answer names at least two categories (such as account logon, account management, privilege use, process tracking, or system events) and explains that failures reveal attack attempts while successes create a baseline of normal activity.",
-      "explanation": "The section lists key categories to audit and explicitly states that failures reveal attack attempts and successes create a normal-activity baseline."
+      "type": "mc",
+      "question": "On Linux systems, which tool is used to configure kernel-level auditing rules and manage what system events are recorded?",
+      "options": {
+        "A": "auditctl, which is the command that manages audit rules and configures event logging",
+        "B": "aureport, which displays detailed information about individual system call events recorded",
+        "C": "auditd, which is the daemon that provides kernel-level auditing of system calls",
+        "D": "ausearch, which analyzes audit logs and generates reports from recorded system events"
+      },
+      "correct": "A",
+      "explanation": "The section states that auditctl manages rules for the auditd daemon, so it is the tool used to configure kernel-level auditing rules. While auditd is the daemon itself, auditctl is what configures it."
     }
   ]
 }

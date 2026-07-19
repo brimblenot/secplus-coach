@@ -3,55 +3,67 @@
     {
       "section": "How SQLi works at its core",
       "type": "mc",
-      "question": "In a SQL injection attack, what does the `--` symbol accomplish when included in user input?",
+      "question": "In a SQL injection attack, what happens when an attacker inputs ' OR 1=1 -- into a login field that uses string concatenation?",
       "options": {
-        "A": "It encrypts the input to hide malicious code",
-        "B": "It closes the current statement and starts a new one",
-        "C": "It marks everything after it as a comment to the database",
-        "D": "It escapes special characters to block query execution"
+        "A": "The application's input validation layer removes the SQL syntax before it reaches the database",
+        "B": "The database stores the malicious input and executes it the next time the query runs",
+        "C": "The WHERE clause always evaluates to true, causing the database to return all rows without valid credentials",
+        "D": "The database rejects the input because it detects the comment delimiter and stops processing"
       },
       "correct": "C",
-      "explanation": "The section explicitly states that `--` is a SQL comment delimiter that causes the database engine to ignore everything after it, allowing attackers to bypass subsequent conditions like password checks."
+      "explanation": "When concatenated directly into the query, the payload breaks out of the string and makes the WHERE clause always true, bypassing login. The comment delimiter then removes the password check entirely."
     },
     {
       "section": "The three SQLi families",
-      "type": "text",
-      "question": "Explain the core difference between in-band SQLi and blind SQLi in terms of how an attacker receives feedback.",
-      "rubric": "A sound answer states that in-band SQLi returns results directly over the same connection, while blind SQLi provides no direct database output and requires the attacker to infer data indirectly through behavioral differences or timing side channels.",
-      "explanation": "The section defines in-band as results traveling directly back over the same HTTP channel and blind as providing no direct output that must be inferred indirectly, making this the key distinguishing characteristic."
+      "type": "mc",
+      "question": "Which SQLi family requires the attacker to infer results through behavioral differences such as page loads versus blank pages?",
+      "options": {
+        "A": "Out-of-band SQLi that opens a separate connection to an attacker-controlled server",
+        "B": "Blind SQLi using boolean-based techniques to reconstruct data character by character",
+        "C": "In-band SQLi using error-based techniques to reveal database version information",
+        "D": "In-band SQLi using union-based techniques to append extra data from other tables"
+      },
+      "correct": "B",
+      "explanation": "Boolean-based blind SQLi sends true versus false conditions and watches for behavioral differences like page loads or blank pages to infer whether conditions were true, since no direct database output is shown."
     },
     {
       "section": "Authentication bypass",
       "type": "mc",
-      "question": "When an attacker submits the username `admin --` during login, what portion of the original WHERE clause is eliminated?",
+      "question": "What does the SQL comment delimiter -- accomplish when used in an authentication bypass attack with a payload like admin --?",
       "options": {
-        "A": "The password check is commented out and ignored",
-        "B": "The entire SELECT statement becomes invalid",
-        "C": "The username comparison is removed entirely",
-        "D": "The database rejects the query as malformed"
+        "A": "It tells the database engine to ignore everything after the delimiter, which removes the password requirement from the query",
+        "B": "It removes special characters from the username field to prevent SQL interpretation and execution",
+        "C": "It encodes the input so the database treats it as a string literal instead of executable SQL code",
+        "D": "It creates a new administrative user account with the injected username as the account name"
       },
       "correct": "A",
-      "explanation": "The section explains that the `--` comment delimiter causes the password check (`AND password = '...'`) to be commented out, leaving only the username authentication."
+      "explanation": "The -- delimiter is a SQL comment that causes the database to ignore all remaining query text, effectively removing the AND password condition from the authentication check."
     },
     {
       "section": "Beyond reading data",
       "type": "mc",
-      "question": "What is the defining characteristic of second-order SQL injection?",
+      "question": "What is the key difference between first-order and second-order SQL injection in terms of when the attack executes?",
       "options": {
-        "A": "It injects code into two user input fields at the same time",
-        "B": "It bypasses authentication, then modifies database records",
-        "C": "It requires two separate database servers to work",
-        "D": "Malicious input is stored safely, then runs later when retrieved"
+        "A": "First-order attacks read data directly while second-order attacks modify database schema using DDL commands",
+        "B": "First-order attacks target the authentication layer while second-order attacks target file system operations through database commands",
+        "C": "First-order attacks require parameterized queries for defense while second-order attacks only need input sanitization techniques",
+        "D": "First-order attacks execute immediately when malicious input enters a query, while second-order attacks execute later when stored input is retrieved"
       },
       "correct": "D",
-      "explanation": "The section defines second-order SQLi as malicious input safely stored on first insertion, then later executed when reused in a different query without sanitization, making the timing and location of execution the key feature."
+      "explanation": "Second-order SQLi stores malicious input safely on first insertion, then the attack fires later when that stored data is pulled out and used in a different query without proper sanitization."
     },
     {
       "section": "Defenses",
-      "type": "text",
-      "question": "Why is input sanitization alone insufficient as a defense against SQL injection, and what structural advantage do parameterized queries provide instead?",
-      "rubric": "A sound answer explains that sanitization attempts to scrub dangerous characters but can be bypassed through edge cases and encoding tricks, whereas parameterized queries structurally prevent user data from becoming executable SQL by separating code compilation from user input binding.",
-      "explanation": "The section contrasts sanitization as pattern-scrubbing that can be bypassed with parameterized queries, which compile the SQL structure before user input is considered, preventing input from ever being interpreted as syntax."
+      "type": "mc",
+      "question": "Why are parameterized queries considered more reliable than input sanitization for preventing SQL injection?",
+      "options": {
+        "A": "Parameterized queries separate code from data by compiling the structure first, while sanitization only attempts to remove suspicious characters",
+        "B": "Parameterized queries work with all database types while sanitization only works with MySQL and Microsoft SQL Server databases",
+        "C": "Parameterized queries require Web Application Firewall rules while sanitization can be implemented directly in the application code",
+        "D": "Parameterized queries suppress verbose error messages while sanitization allows database errors to be displayed to attackers"
+      },
+      "correct": "A",
+      "explanation": "Parameterized queries prevent user data from ever becoming executable SQL by binding it as a separate parameter after SQL structure is compiled, whereas sanitization can be bypassed through encoding tricks and edge cases."
     }
   ]
 }

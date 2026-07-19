@@ -3,108 +3,132 @@
     {
       "section": "Message-based vectors",
       "type": "mc",
-      "question": "Which of the following best describes why smishing is particularly effective?",
+      "question": "Which of the following best describes smishing and why it is effective as a threat vector?",
       "options": {
-        "A": "SMS messages can carry larger file attachments than email",
-        "B": "Text messages bypass email security filters entirely",
-        "C": "SMS requires the recipient to enable macros before running code",
-        "D": "Small screens make URL inspection difficult and texts feel urgent"
+        "A": "Smishing is phishing via email attachments; it carries malicious links that lead to credential-harvesting pages",
+        "B": "Smishing is phishing via SMS text message; small screens make URL inspection difficult and texts feel urgent",
+        "C": "Smishing is phishing via social media; it enables attackers to build fake profiles and gather personal details",
+        "D": "Smishing is phishing via instant messaging platforms; it allows attackers to impersonate colleagues and appear trustworthy"
       },
-      "correct": "D",
-      "explanation": "The section explicitly states that smishing is effective because small screens make URL inspection hard and texts feel urgent. The other options either introduce facts not in the section or contradict it."
+      "correct": "B",
+      "explanation": "The section explicitly defines smishing as phishing via SMS text message and identifies two reasons it is effective: small screens make URL inspection hard and texts feel urgent. The other options describe different threat vectors or communication channels."
     },
     {
       "section": "Image-based vectors",
-      "type": "text",
-      "question": "Explain how SVG files can be weaponized as an attack vector.",
-      "rubric": "A sound answer states that SVG is an XML-based image format that can contain embedded JavaScript, which a browser may execute when rendering the image, enabling XSS attacks.",
-      "explanation": "The section defines SVG as an XML document format capable of embedding JavaScript that browsers execute during rendering, making it suitable for injecting malicious scripts into web content."
+      "type": "mc",
+      "question": "What is steganography and how does it function as an attack vector?",
+      "options": {
+        "A": "Steganography is an XML-based image format containing embedded JavaScript used to enable cross-site scripting attacks on web browsers",
+        "B": "Steganography creates files that are simultaneously valid images and valid executable code, confusing format parsers during processing",
+        "C": "Steganography exploits rendering vulnerabilities in image file handlers to inject malicious scripts into web content served to users",
+        "D": "Steganography hides data or malicious code inside image files to conceal payloads and exfiltrate information without detection"
+      },
+      "correct": "D",
+      "explanation": "The section defines steganography as hiding data or malicious code inside an image file invisibly to conceal payloads or exfiltrate data. The other options describe SVG files, polyglot files, and XSS vulnerabilities respectively."
     },
     {
       "section": "File-based vectors",
       "type": "mc",
-      "question": "What trick do polyglot files use to evade detection?",
+      "question": "Which file type is capable of executing arbitrary commands when opened and has been used in sophisticated APT campaigns?",
       "options": {
-        "A": "They function as both valid images and executable code simultaneously",
-        "B": "They split payloads across multiple file extensions",
-        "C": "They embed macros in PDF documents",
-        "D": "They hide in ZIP archives with legitimate files"
+        "A": "LNK files, which are Windows shortcut files that can be crafted to execute arbitrary commands when opened",
+        "B": "PDF files that can contain embedded JavaScript or exploit vulnerabilities in PDF reader software",
+        "C": "ZIP archives that hide malicious files among hundreds of legitimate ones to evade detection",
+        "D": "VBA macros embedded in Microsoft Office documents that automate tasks when users enable them"
       },
       "correct": "A",
-      "explanation": "The section defines polyglot files as files valid as both image and executable code simultaneously, tricking format parsers that assume a file is only one type. Other options describe different file-based vectors."
+      "explanation": "The section specifically identifies LNK files as Windows shortcut files that can execute arbitrary commands when opened and notes their use in sophisticated APT campaigns. While other file types listed are vectors, only LNK files are explicitly connected to APT usage."
     },
     {
       "section": "Voice-based vectors",
       "type": "mc",
-      "question": "Which statement accurately describes caller ID spoofing?",
+      "question": "What is vishing and what technique does an attacker use to make calls appear to come from a trusted source?",
       "options": {
-        "A": "It exploits modem vulnerabilities in legacy systems",
-        "B": "It makes VoIP calls appear from any attacker-chosen number",
-        "C": "It uses recorded scripts to dial numbers automatically",
-        "D": "It requires physical access to the victim's phone line"
+        "A": "Vishing is automated spam delivered over IP networks using recorded social engineering scripts dialed to large numbers of targets",
+        "B": "Vishing is war dialing that systematically calls phone number ranges to locate active modems and identify exploitable network systems",
+        "C": "Vishing is voice phishing where attackers impersonate trusted entities via phone calls and use caller ID spoofing through VoIP systems",
+        "D": "Vishing exploits VoIP vulnerabilities to intercept phone calls and extract sensitive credentials from voice conversations and call audio"
       },
-      "correct": "B",
-      "explanation": "The section states that caller ID spoofing via VoIP makes calls appear to come from any number. Option A describes SPIT, option D describes war dialing, and option B is not stated in the section."
+      "correct": "C",
+      "explanation": "The section defines vishing as voice phishing where attackers impersonate trusted entities like banks or IT support, and identifies caller ID spoofing via VoIP as the technique used to appear legitimate. The other options describe SPIT, war dialing, and a different VoIP-related concept."
     },
     {
       "section": "Removable media vectors",
-      "type": "text",
-      "question": "Why does the USB Rubber Ducky bypass software controls that protect a system?",
-      "rubric": "A sound answer states that the Rubber Ducky disguises itself as a keyboard to the operating system, which trusts keyboard input, allowing pre-programmed keystrokes to execute commands that software controls cannot block.",
-      "explanation": "The section explains that HID emulation makes the device appear as a trusted keyboard, so the OS accepts its keystrokes as legitimate user input, bypassing software controls designed to block other attack vectors."
+      "type": "mc",
+      "question": "How does HID emulation function as a removable media threat vector?",
+      "options": {
+        "A": "HID emulation devices disguise themselves as keyboards to the OS, bypassing software controls and executing pre-programmed malicious keystrokes",
+        "B": "HID emulation devices allow insiders to copy sensitive data to a thumb drive and physically remove it from the network",
+        "C": "HID emulation devices intercept traffic and harvest credentials through malicious code hidden inside removable media files",
+        "D": "HID emulation devices scatter USB drives in parking lots hoping employees will plug them in and trigger auto-executing malware"
+      },
+      "correct": "A",
+      "explanation": "The section explains that HID emulation devices like the USB Rubber Ducky appear as trusted keyboards to the OS, then execute hundreds of pre-programmed malicious keystrokes per second, bypassing software controls. The other options describe baiting, data exfiltration, and a different threat vector."
     },
     {
       "section": "Vulnerable and unsupported software",
       "type": "mc",
-      "question": "What does end-of-life (EOL) status mean for a software system?",
+      "question": "What is the key vulnerability of unsupported systems that have reached end-of-life status?",
       "options": {
-        "A": "All users must uninstall the software immediately",
-        "B": "The software can no longer connect to the internet",
-        "C": "The vendor releases no more security patches for that product",
-        "D": "The software automatically deletes itself from the system"
+        "A": "Unsupported systems can be compromised through software backdoors inserted during the build or update delivery process",
+        "B": "Unsupported systems are permanently vulnerable because the vendor releases no more security patches once EOL is reached",
+        "C": "Unsupported systems are high-value targets because compromising the server affects every user session at once",
+        "D": "Unsupported systems are vulnerable to exploit kits that automatically test for known vulnerabilities in browsers and readers"
       },
-      "correct": "C",
-      "explanation": "The section defines EOL as the point when the vendor releases no more security patches, making systems permanently vulnerable. The other options are not supported by the section text."
+      "correct": "B",
+      "explanation": "The section explicitly states that unsupported systems past end-of-life have no more security patches released by the vendor, making them permanently vulnerable. The other options describe exploit kits, the threat level of web applications, and supply chain attacks respectively."
     },
     {
       "section": "Unsecured network vectors",
       "type": "mc",
-      "question": "What security advantage does WPA3 provide over WEP?",
+      "question": "What weakness makes WEP unsuitable as a wireless encryption standard?",
       "options": {
-        "A": "WPA3 monitors Bluetooth devices for unauthorized use",
-        "B": "WPA3 prevents WEP's cryptographic weaknesses allowing quick key recovery",
-        "C": "WPA3 encrypts traffic while WEP does not",
-        "D": "WPA3 blocks evil twin access points mimicking network names"
+        "A": "WEP is an old protocol that provides no encryption at all, allowing nearby attackers to passively sniff all traffic",
+        "B": "WEP is vulnerable to evil twin access points that mimic legitimate network names and intercept user connections",
+        "C": "WEP has cryptographic weaknesses that allow key recovery in minutes, making it now-broken and unsuitable",
+        "D": "WEP lacks port-based network authentication and cannot verify user identity before granting network access"
       },
-      "correct": "B",
-      "explanation": "The section states WEP has cryptographic weaknesses allowing key recovery in minutes and identifies WPA3 as the current strongest Wi-Fi encryption standard, making it superior to WEP. The other options either misstate WEP's capabilities or describe different controls."
+      "correct": "C",
+      "explanation": "The section specifically identifies WEP as an old, now-broken wireless encryption protocol with cryptographic weaknesses that allow key recovery in minutes. The other options describe open Wi-Fi, evil twin attacks, and 802.1X authentication respectively."
     },
     {
       "section": "Open ports and default credentials",
-      "type": "text",
-      "question": "Describe how an attacker might use Shodan and a default credential list together.",
-      "rubric": "A sound answer states that an attacker uses Shodan to find internet-connected devices running vulnerable software versions, then uses publicly available default credentials to gain administrative access with minimal effort.",
-      "explanation": "The section explicitly explains that combining a Shodan search with a default credential list allows attackers to gain administrative access to thousands of devices, and notes that default credentials are publicly documented."
+      "type": "mc",
+      "question": "What is Shodan and how do attackers use it as a reconnaissance tool?",
+      "options": {
+        "A": "Shodan is a public database of default credentials that attackers combine with network scanning to achieve administrative system access",
+        "B": "Shodan is a vulnerability assessment platform that tests internet-connected devices for known exploits and reports on their security",
+        "C": "Shodan is a port scanning tool that detects open service ports and identifies vulnerable network protocols on connected systems",
+        "D": "Shodan is an internet search engine indexing connected devices and their services; attackers use it to locate vulnerable software versions"
+      },
+      "correct": "D",
+      "explanation": "The section defines Shodan as an internet search engine that indexes internet-connected devices and their exposed services, and states that attackers use it to find vulnerable software versions. The other options describe credential databases, port scanning tools, and vulnerability assessment platforms respectively."
     },
     {
       "section": "Supply chain vectors",
       "type": "mc",
-      "question": "How did the 2013 Target breach begin?",
+      "question": "What is a software backdoor supply chain attack and which real-world example is cited in the section?",
       "options": {
-        "A": "Target employees were compromised through social media phishing",
-        "B": "Malicious code was inserted into Target's software build system",
-        "C": "Counterfeit networking equipment was installed during hardware delivery",
-        "D": "HVAC contractors with network access were pivoted through to reach point-of-sale systems"
+        "A": "A software backdoor supply chain attack adds malicious components during hardware manufacturing; the Cisco counterfeit switches case demonstrates this",
+        "B": "A software backdoor supply chain attack targets managed service providers whose broad network access enables attackers to perform lateral movement",
+        "C": "A software backdoor supply chain attack compromises build systems to inject malware into legitimate updates; SolarWinds Orion 2020 exemplifies this",
+        "D": "A software backdoor supply chain attack exploits third-party contractor access to networks and pivots into point-of-sale systems like the 2013 Target incident"
       },
-      "correct": "D",
-      "explanation": "The section states the 2013 Target breach began through HVAC contractors with network access, who were pivoted through to reach point-of-sale systems. Option A describes SolarWinds, not Target."
+      "correct": "C",
+      "explanation": "The section defines software backdoors as compromising build systems so malware is inserted into legitimate software updates delivered to customers, and specifically names the SolarWinds Orion 2020 attack as an example. The other options describe hardware tampering, MSP targeting, and the Target/HVAC contractor breach respectively."
     },
     {
       "section": "Social media vectors",
-      "type": "text",
-      "question": "How do attackers use social media to prepare for a spear-phishing attack?",
-      "rubric": "A sound answer states that attackers mine social media platforms to identify employees, map organizational structure, and gather personal details that make spear-phishing more convincing.",
-      "explanation": "The section explains that attackers gather reconnaissance from LinkedIn, Facebook, Instagram, and Twitter to identify targets and collect personal information that enhances the credibility of targeted phishing."
+      "type": "mc",
+      "question": "How do attackers use social media platforms as a threat vector?",
+      "options": {
+        "A": "Attackers mine social media to identify employees, map organizational structure, and gather personal details that support spear-phishing campaigns",
+        "B": "Attackers leverage social media to conduct caller ID spoofing and deliver voice phishing scripts to target employees at scale",
+        "C": "Attackers use social media to distribute malicious links that trigger exploit kits when clicked by unsuspecting users",
+        "D": "Attackers post fake profiles on social media to impersonate colleagues and distribute malicious files via instant messaging platforms"
+      },
+      "correct": "A",
+      "explanation": "The section states that attackers mine LinkedIn, Facebook, Instagram, and Twitter to identify employees, map organizational structure, and gather personal details that make spear-phishing convincing. The other options describe different attack vectors not specific to social media reconnaissance."
     }
   ]
 }

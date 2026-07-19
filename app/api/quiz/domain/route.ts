@@ -36,7 +36,7 @@ Model every question on the real CompTIA SY0-701 exam format:
 - Plausible distractors that represent common misconceptions or near-correct alternatives
 - Mix: recall (20%), comprehension (40%), application (40%)
 - No trick questions — every correct answer is clearly defensible
-- All four MC options must be within ±15 words of each other — the correct answer must NOT be the longest
+- All four MC options must be nearly identical in length and detail — within a few words of each other (the longest no more than ~1.15× the words of the shortest), carrying the same specificity. The correct answer must NOT be the longest or most detailed one, and no option may spell out more than the rest, so the answer cannot be spotted by picking the most thorough option
 
 STRICT SCOPE LOCK:
 - The lecture transcripts provided in the user message are the ONLY source of testable material. Test ONLY concepts, technologies, terms, and techniques that actually appear in those transcripts.
