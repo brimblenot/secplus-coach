@@ -1,0 +1,44 @@
+{
+  "checkpoints": [
+    {
+      "section": "The four categories of security controls",
+      "type": "mc",
+      "question": "Which of the following is an example of a technical control?",
+      "options": {
+        "A": "A written policy document that defines acceptable use of company systems",
+        "B": "A firewall that blocks unauthorized network traffic",
+        "C": "A perimeter fence surrounding the data center",
+        "D": "A security guard who patrols the building after hours"
+      },
+      "correct": "B",
+      "explanation": "A firewall is a technology-based mechanism that enforces security policy and is explicitly listed as a technical control example in the section. The other options represent managerial (A), operational (C), and physical (D) controls."
+    },
+    {
+      "section": "The six functional types of security controls",
+      "type": "text",
+      "question": "Explain the key difference between a preventive control and a deterrent control.",
+      "rubric": "A sound answer states that a preventive control mechanically or technically blocks an action from occurring, while a deterrent control discourages an attack by raising its perceived cost without necessarily stopping it. The example of a locked door versus a warning sign illustrates this distinction.",
+      "explanation": "The section explicitly contrasts these two types: preventive controls mechanically block actions, while deterrent controls discourage attempts by raising perceived cost. The door-lock versus warning-sign example directly illustrates this difference."
+    },
+    {
+      "section": "One control, multiple types",
+      "type": "mc",
+      "question": "A CCTV camera monitoring a server room is considered which functional types?",
+      "options": {
+        "A": "Preventive and corrective, because it stops attacks and restores systems",
+        "B": "Corrective and directive, because it restores operations and instructs staff",
+        "C": "Detective and deterrent, because it records activity and discourages attackers",
+        "D": "Detective only, because it records activity after events occur"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly states that a CCTV camera is both detective (records activity) and deterrent (visible cameras discourage attackers). It does not prevent or correct attacks."
+    },
+    {
+      "section": "Defense-in-depth",
+      "type": "text",
+      "question": "What is the core goal of a defense-in-depth security strategy?",
+      "rubric": "A sound answer states that defense-in-depth layers controls from multiple categories and types so that if one control fails, others remain to detect, compensate, or correct the issue. The key idea is that no single control is assumed to be sufficient.",
+      "explanation": "The section defines defense-in-depth as layering controls so that failure of one does not result in total compromise. This ensures redundancy across categories and functional types."
+    }
+  ]
+}

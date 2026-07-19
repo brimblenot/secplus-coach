@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getTranscript } from '@/lib/transcripts'
+import { getStoredGuide } from '@/lib/study-guides'
 import { getTopic, getWeakAreas, getCompletedCount, getAverageScore, updateTopicStatus } from '@/lib/db'
 import { STUDY_GUIDE_SYSTEM_PROMPT } from '@/lib/prompts'
 
@@ -20,14 +21,28 @@ export async function POST(req: NextRequest) {
     const topic = await getTopic(topicId)
     if (!topic) return NextResponse.json({ error: 'Topic not found' }, { status: 404 })
 
+    await updateTopicStatus(topicId, 'studying')
+
+    // Fast path: serve the pre-generated guide (scripts/build-study-guides.cjs →
+    // study-guides/{id}.md) verbatim — no transcript read, no Anthropic call. The
+    // live Sonnet generation below is only a fallback for topics not yet built.
+    const stored = getStoredGuide(topicId)
+    if (stored) {
+      return new Response(stored, {
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'X-Topic-Name': encodeURIComponent(topic.topic_name),
+          'X-Domain': String(topic.domain),
+        },
+      })
+    }
+
     const [transcript, weakAreas, completedTopics, avgScore] = await Promise.all([
       Promise.resolve(getTranscript(topicId)),
       getWeakAreas(),
       getCompletedCount(),
       getAverageScore(),
     ])
-
-    await updateTopicStatus(topicId, 'studying')
 
     // Non-streaming: the client buffers the whole guide before displaying it
     // anyway, so streaming bought no UX — but an error thrown mid-stream could

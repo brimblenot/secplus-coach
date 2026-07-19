@@ -1,0 +1,136 @@
+{
+  "checkpoints": [
+    {
+      "section": "What defines a threat actor",
+      "type": "mc",
+      "question": "Which of the following is NOT one of the five attributes used to characterize a threat actor?",
+      "options": {
+        "A": "Resources (funding available, from minimal to nation-state budget)",
+        "B": "Previous criminal convictions and arrest records",
+        "C": "Sophistication (skill level from script-user to exploit-developer)",
+        "D": "Location (inside or outside the organization)"
+      },
+      "correct": "B",
+      "explanation": "The five defining attributes are location, sophistication, resources, motivation, and intent. Criminal history is not listed as a characterizing attribute in the section."
+    },
+    {
+      "section": "Nation-state actors and APTs",
+      "type": "text",
+      "question": "Explain in one sentence why nation-state actors are able to conduct long, multi-stage campaigns against multiple targets simultaneously.",
+      "rubric": "A sound answer states that government-level funding allows them to hire elite developers and sustain operations over extended periods.",
+      "explanation": "The section explicitly states that government-level funding enables nation-states to hire elite developers, run long operations, and hit many targets at once."
+    },
+    {
+      "section": "Nation-state actors and APTs",
+      "type": "mc",
+      "question": "Which APT group is attributed to North Korea and was responsible for the Sony Pictures hack?",
+      "options": {
+        "A": "Lazarus Group, attributed to North Korea's Reconnaissance General Bureau",
+        "B": "Cozy Bear, attributed to Russia's SVR",
+        "C": "Fancy Bear, attributed to Russia's GRU",
+        "D": "APT41, attributed to China for espionage and financial cybercrime"
+      },
+      "correct": "A",
+      "explanation": "The table in the section lists Lazarus Group as attributed to North Korea and notes the Sony Pictures hack as a notable attack."
+    },
+    {
+      "section": "Nation-state actors and APTs",
+      "type": "mc",
+      "question": "Living off the Land (LotL) is an APT technique that uses built-in OS tools instead of custom malware. Which of the following is an example of a built-in Windows tool used in LotL attacks?",
+      "options": {
+        "A": "Mimikatz, a credential-dumping utility",
+        "B": "Metasploit, a custom exploitation framework",
+        "C": "PowerShell, a Windows scripting environment",
+        "D": "Cobalt Strike, a post-exploitation platform"
+      },
+      "correct": "C",
+      "explanation": "The section explicitly lists PowerShell as a built-in Windows scripting environment used in LotL techniques. The other tools are custom or third-party, not built-in OS tools."
+    },
+    {
+      "section": "Nation-state actors and APTs",
+      "type": "text",
+      "question": "What real-world impact did Stuxnet demonstrate about cyber operations?",
+      "rubric": "A sound answer states that Stuxnet proved cyber operations can cause physical destruction or kinetic effects in the real world, not just digital harm.",
+      "explanation": "The section describes Stuxnet as sabotaging Iranian nuclear centrifuges by altering motor speeds and hiding the attack, then explicitly notes it proved cyber operations can have real-world kinetic effects."
+    },
+    {
+      "section": "Script kiddies",
+      "type": "mc",
+      "question": "What is the primary limitation of a script kiddie when their pre-built exploit tool fails?",
+      "options": {
+        "A": "They must wait for the original tool author to release an update",
+        "B": "They do not have access to the internet to download new tools",
+        "C": "They are immediately tracked and arrested by law enforcement",
+        "D": "They lack the skill and understanding to diagnose or adapt the script"
+      },
+      "correct": "D",
+      "explanation": "The section states that if a script kiddie's script fails, they cannot diagnose or adapt because they don't understand how the tool works."
+    },
+    {
+      "section": "Hacktivists",
+      "type": "mc",
+      "question": "Which of the following best describes the primary motivation of a hacktivist?",
+      "options": {
+        "A": "Achieving notoriety and thrills without a specific cause",
+        "B": "Gathering intelligence on behalf of a nation-state government",
+        "C": "Financial profit through ransomware and data sales",
+        "D": "Political or ideological goals expressed through hacking as protest"
+      },
+      "correct": "D",
+      "explanation": "The section defines a hacktivist as politically or ideologically motivated and uses hacking as a form of protest, distinguishing this from other threat actor types."
+    },
+    {
+      "section": "Organized crime",
+      "type": "text",
+      "question": "Describe how the Ransomware-as-a-Service (RaaS) model divides labor and profit between the core group and affiliates.",
+      "rubric": "A sound answer states that the core group builds and maintains the ransomware platform while affiliates run actual attacks and split ransom payments.",
+      "explanation": "The section explicitly describes RaaS as a model where the core group handles the platform and affiliates conduct attacks while sharing revenue."
+    },
+    {
+      "section": "Insider threats",
+      "type": "mc",
+      "question": "Which of the following is a key control for mitigating insider threats?",
+      "options": {
+        "A": "Implementing firewall rules at the network perimeter to block traffic",
+        "B": "Installing antivirus software on all user endpoint devices",
+        "C": "Applying least privilege to grant only minimum required access",
+        "D": "Encrypting all data moving over the internet between systems"
+      },
+      "correct": "C",
+      "explanation": "The section lists least privilege as a key control alongside separation of duties, hiring vetting, and monitoring. Firewall rules and other external controls fail because insiders already have legitimate access."
+    },
+    {
+      "section": "Insider threats",
+      "type": "text",
+      "question": "Why are malicious insiders particularly difficult to stop using traditional perimeter security controls?",
+      "rubric": "A sound answer states that insiders already possess valid credentials and legitimate access, so perimeter defenses like firewalls are ineffective.",
+      "explanation": "The section explicitly notes that malicious insiders already have valid credentials and know where valuable data lives, so perimeter controls do not stop them."
+    },
+    {
+      "section": "Shadow IT",
+      "type": "mc",
+      "question": "What is the primary security risk created by shadow IT in an organization?",
+      "options": {
+        "A": "Unmanaged services lack patching, access controls, encryption standards, and monitoring",
+        "B": "It consumes too much bandwidth and slows network performance",
+        "C": "It requires employees to use weaker passwords than official systems",
+        "D": "It prevents the security team from issuing mandatory software updates"
+      },
+      "correct": "A",
+      "explanation": "The section states that shadow IT is not managed and therefore has no patching, access controls, encryption standards, or monitoring, creating a security blind spot."
+    },
+    {
+      "section": "The hat color system",
+      "type": "mc",
+      "question": "A security researcher probes a company's network without authorization, discovers a vulnerability, and demands payment in exchange for not publishing the flaw. Under the hat color system, what describes this behavior?",
+      "options": {
+        "A": "White hat, since a vulnerability was discovered and reported",
+        "B": "Gray hat, combining unauthorized probing with extortion demands",
+        "C": "Red hat, since the research was performed without disclosure",
+        "D": "Black hat, since the researcher demanded payment for silence"
+      },
+      "correct": "B",
+      "explanation": "The section defines gray hat as probing without authorization and notes that demanding payment becomes extortion, which matches the scenario."
+    }
+  ]
+}

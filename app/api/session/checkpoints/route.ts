@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { buildCheckpointsPrompt } from '@/lib/prompts'
 import { balanceQuizAnswers, enforceMCLengthParity } from '@/lib/quiz'
+import { getStoredCheckpoints } from '@/lib/study-guides'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -13,9 +14,18 @@ const SYSTEM_PROMPT = `You are a CompTIA Security+ SY0-701 study coach writing q
 
 export async function POST(req: NextRequest) {
   try {
-    const { guideContent, topicName } = await req.json()
+    const { guideContent, topicName, topicId } = await req.json()
     if (!guideContent || typeof guideContent !== 'string' || !guideContent.trim()) {
       return NextResponse.json({ error: 'Missing study guide content' }, { status: 400 })
+    }
+
+    // Fast path: serve pre-generated checkpoints (study-guides/{id}.checkpoints.json,
+    // already parity+balance processed at build time). Falls through to live Haiku
+    // generation when no topicId is given (e.g. the weak-area session, whose guide
+    // is generated on the fly) or the topic hasn't been built yet.
+    if (topicId) {
+      const stored = getStoredCheckpoints(topicId)
+      if (stored) return NextResponse.json(stored)
     }
 
     const response = await anthropic.messages.create({

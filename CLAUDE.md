@@ -19,6 +19,7 @@ npm run start      # Serve the production build
 npx tsc --noEmit   # Type check (no test suite exists)
 npm run db:init    # Create schema + apply column migrations + seed topics (node scripts/init-db.js)
 npm run flashcards:build  # ONE-TIME/offline: regenerate lib/flashcards.json from transcripts (node scripts/extract-acronyms.cjs)
+npm run guides:build      # ONE-TIME/offline: pre-generate all study guides + checkpoints into study-guides/ (node scripts/build-study-guides.cjs)
 ```
 
 Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_PASSWORD` in `.env.local`, then run `npm run db:init` once to create the schema in Supabase. **The app never creates or migrates the schema at request time** (see "Data Layer" below) — `db:init` is the only path that changes the database structure.
@@ -52,6 +53,7 @@ Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_
 - `lib/prompts.ts` — shared prompt builders (study guide, checkpoints, weak-area guide/quiz, domain final quiz, weak-area extraction, review quiz, review refresher)
 - `lib/quiz.ts` — MC post-processing: `balanceQuizAnswers()` (spreads the correct option evenly across A/B/C/D) and `enforceMCLengthParity()` (async: detects when the correct option is a length outlier and runs one bounded Haiku "editor" pass to rewrite all four options to matched length/detail without changing which is correct — fixes the "longest answer is the right one" tell). Routes call parity first, then balance.
 - `lib/transcripts.ts` — `getTranscript(topicId)` file loader
+- `lib/study-guides.ts` — `getStoredGuide(topicId)` / `getStoredCheckpoints(topicId)` loaders for the pre-generated `study-guides/{id}.md` + `{id}.checkpoints.json` (return `null` on a miss so callers fall back to live generation); mirrors `lib/transcripts.ts`
 - `app/components/GuideHelper.tsx` (+ `GuideHelper.module.css`) — floating **"Explain" helper**: a fixed launcher button that opens a chat popup, available any time a study guide is on screen (main study session + weak-area session). The student pastes/names a concept from the guide they didn't grasp and the helper explains it short-first, then offers to go deeper or re-explain differently. Backed by the low-cost Haiku route `/api/session/helper`. Entirely client-side/per-session (no persistence, like the flashcard drill). Distinct from the end-of-guide inline "ASK A QUESTION" chat, which uses `/api/session/chat` and only appears once all sections are revealed.
 - `lib/flashcards.json` — static flashcard deck (`{term, expansion, definition, domain, topicId, type?}`) served verbatim by `/api/flashcards`. Two kinds of card: **acronyms** (bootstrapped by `scripts/extract-acronyms.cjs`, then hand-curated down to genuine exam abbreviations — vendor/product/tool names, non-acronym algorithm names, general/non-security abbreviations, and specific IDs were pruned) and **ports** (`type: 'port'`, `domain: 0`, hand-authored: front = protocol, expansion = port number(s), definition = role). Hand-editable; re-running the extract script would re-introduce raw acronyms and need re-curation.
 
@@ -97,6 +99,8 @@ Transcripts are 121 `.txt` files named `{id}-{topic-name}...en.txt` (Professor M
 
 **Flashcard deck build (`scripts/extract-acronyms.cjs` → `lib/flashcards.json`):** a **one-time, offline** script (`npm run flashcards:build`) reads every transcript, asks Haiku (concurrency 5) to pull the acronyms each lecture actually uses (`{term, expansion, definition}`, scope-locked to that transcript), merges + dedupes by uppercased term across all lectures (first lecture to use it sets the `domain`/`topicId`; the richest definition wins), and writes the sorted static deck. It is NOT a runtime path — the deployed app never calls Claude for flashcards, it just serves the committed JSON. Re-run only to regenerate; the output is hand-reviewable/editable.
 
+**Study-guide + checkpoint pre-generation (`scripts/build-study-guides.cjs` → `study-guides/{id}.md` + `{id}.checkpoints.json`):** a **one-time, offline** script (`npm run guides:build`) that removes the biggest cost/latency source — the per-session live guide generation. For each of the 120 topics it generates the guide with **Sonnet** (same `STUDY_GUIDE_SYSTEM_PROMPT` + transcript as the live route, but **without** the per-request "STUDENT STATUS" block, so output is deterministic per topic) and the per-section checkpoints with **Haiku** (same `buildCheckpointsPrompt` + parity/balance post-processing as the live route), writing both as committed static files under `study-guides/`. Concurrency 5, resumable: it **skips topics whose output files already exist** unless `--force` is passed, and accepts a single 3-digit topic id to (re)build just one (`node scripts/build-study-guides.cjs 020 [--force]`). The prompts are copied verbatim into the script from `lib/prompts.ts` + the two routes — keep them in sync (re-run after any prompt/transcript change). Like the flashcard deck this is NOT a runtime path; at runtime `/api/session` + `/api/session/checkpoints` serve these files verbatim via `lib/study-guides.ts` and only call the LLM as a fallback for un-built topics. The `study-guides/` folder is read at request time via `fs` exactly like `transcripts/`, so it bundles/traces the same way on Vercel.
+
 ### Study Guide Format (`STUDY_GUIDE_SYSTEM_PROMPT` in `lib/prompts.ts`)
 
 Guides are written to be **skimmable and memorable**, not dense prose (an earlier "gloss every term inline, no bold, no lists" version read like a dictionary and caused burnout) — but they must still **actually explain each concept**, not just analogize it (a later version opened concepts with only an analogy, e.g. "Telnet is a glass phone booth," and never said what Telnet *is*). The current rules:
@@ -123,7 +127,7 @@ Target ~600–900 words. Consumed by `app/api/session/route.ts` (Sonnet, non-str
 
 ### Session Flow — checkpoint reading + quiz grading (`app/session/[id]/page.tsx`)
 
-1. **Guide loads**, then `/api/session/checkpoints` returns one comprehension check per `### ` section. The guide is parsed into sections client-side (`parseGuide`); the student reads **one section at a time** and must answer that section's checkpoint (MC or free-text, graded via `/api/quiz/grade`) before the next section reveals. Checkpoints are practice only — they score/flag nothing. If checkpoint generation fails, the whole guide is revealed unblocked.
+1. **Guide loads** (served instantly from the pre-generated `study-guides/{id}.md` when present; live Sonnet generation only as a fallback), then `/api/session/checkpoints` returns one comprehension check per `### ` section (also served from the pre-generated `{id}.checkpoints.json` when the client passes `topicId`; live Haiku only as a fallback — the weak-area session omits `topicId` so its dynamic guide always generates checkpoints live). The guide is parsed into sections client-side (`parseGuide`); the student reads **one section at a time** and must answer that section's checkpoint (MC or free-text, graded via `/api/quiz/grade`) before the next section reveals. Checkpoints are practice only — they score/flag nothing. If checkpoint generation fails, the whole guide is revealed unblocked.
 2. **Main quiz:** every question scored — MC auto-graded, free-text via `POST /api/quiz/grade` (kept per-index in `textResults`). First-pass score = correct / total.
 3. Any wrong answer of either type → `POST /api/quiz/second-chance` regenerates a same-type makeup question on the same concept (MC→MC, text→text).
 4. **Half credit:** each makeup answered correctly is worth 0.5 of a question (`finalScore = round((firstPassCorrect + 0.5·makeupCorrect) / total · 100)`).
@@ -184,8 +188,8 @@ All page styles are CSS Modules (`.module.css` per page). No Tailwind, no CSS-in
 | `GET /api/settings` | Read pace target dates (`finishTopicsBy`, `examDate`) | — |
 | `PATCH /api/settings` | Update either/both target dates (validates YYYY-MM-DD) | — |
 | `GET /api/flashcards` | Serve the static acronym deck (`?domain=N` filter); no LLM, no DB | — |
-| `POST /api/session` | Study guide (buffered, non-streaming) | Sonnet |
-| `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) | Haiku |
+| `POST /api/session` | Study guide (buffered, non-streaming) — serves pre-generated `study-guides/{id}.md` when present, else generates | Sonnet (fallback) |
+| `POST /api/session/checkpoints` | Per-section comprehension checks (scope-locked) — serves pre-generated `{id}.checkpoints.json` when `topicId` is passed, else generates | Haiku (fallback) |
 | `POST /api/session/chat` | In-lecture Q&A (end-of-guide inline chat) | Haiku (streaming) |
 | `POST /api/session/helper` | In-guide "Explain" helper popup — short-first concept explanations, offers to go deeper | Haiku (streaming) |
 | `POST /api/coach` | Dashboard coach chat | Sonnet (streaming) |

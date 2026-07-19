@@ -224,7 +224,7 @@ export default function SessionPage() {
       const res = await fetch('/api/session/checkpoints', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ guideContent: guideText, topicName: name }),
+        body: JSON.stringify({ guideContent: guideText, topicName: name, topicId }),
       })
       if (!res.ok) throw new Error('checkpoints failed')
       const data = await res.json()
