@@ -22,6 +22,8 @@ npm run flashcards:build  # ONE-TIME/offline: regenerate lib/flashcards.json fro
 npm run guides:build      # ONE-TIME/offline: pre-generate all study guides + checkpoints into study-guides/ (node scripts/build-study-guides.cjs)
 ```
 
+**Current state: the course is complete** — 120/120 topics `passed` and all five domain mastery quizzes passed. The student has taken and passed the real SY0-701 exam. This means the dashboard's "UP NEXT" CTA and the domain gate are both empty by design (`data.nextTopic &&` guards the CTA in `app/page.tsx`), `pace.perDay` is 0, and the app is effectively in review/practice mode: random quiz, flashcards, and the on-demand topic/section reviews are the live surfaces. Don't treat the missing next-topic card as a bug.
+
 Setup: put `ANTHROPIC_API_KEY`, `DATABASE_URL`, and (for the deployed app) `APP_PASSWORD` in `.env.local`, then run `npm run db:init` once to create the schema in Supabase. **The app never creates or migrates the schema at request time** (see "Data Layer" below) — `db:init` is the only path that changes the database structure.
 
 ## Architecture
