@@ -216,6 +216,9 @@ export default function Dashboard() {
     ? 'var(--green)'
     : pace.daysUntilExam <= 7 ? 'var(--red)' : pace.daysUntilExam <= 14 ? 'var(--amber)' : 'var(--green)'
 
+  // Course done + exam date reached: the countdown has nothing left to count.
+  const examPassed = !!pace && pace.topicsRemaining === 0 && pace.daysUntilExam === 0
+
   // Pace headline color: red if the finish date has passed with work left,
   // green if today's target is met (or nothing left), amber if still behind.
   const paceColor = !pace || pace.topicsRemaining === 0
@@ -231,7 +234,17 @@ export default function Dashboard() {
           <span className={styles.logoSub}>SY0-701 Coach</span>
         </div>
         <div className={styles.headerRight}>
-          {data.pace && (
+          {/* Once the course is finished and the exam date has passed, the
+              countdown is meaningless (it pins at a red "0d"), so show a
+              completion chip instead of nagging. */}
+          {data.pace && examPassed ? (
+            <span
+              className={styles.daysBadge}
+              style={{ color: 'var(--green)', borderColor: 'var(--green)' }}
+            >
+              CERTIFIED
+            </span>
+          ) : data.pace ? (
             <>
               <span className={styles.examDate}>Exam {fmtDate(data.pace.examDate)}</span>
               <span
@@ -244,7 +257,7 @@ export default function Dashboard() {
                 {data.pace.daysUntilExam}d
               </span>
             </>
-          )}
+          ) : null}
         </div>
       </header>
 
